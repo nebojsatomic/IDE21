@@ -15,7 +15,9 @@ https://www.youtube.com/watch?v=qgRPWqAuB8Q
 - cd to dir
 - Run in terminal docker-compose up
 
-After succesful building and running, you can access the front at localhost, and admin area at localhost/adm 
+After succesful building and running, you can access the front at http://localhost, and admin area at http://localhost/adm 
+
 Demo user:  proba
+
 Demo pass:  proba
 
