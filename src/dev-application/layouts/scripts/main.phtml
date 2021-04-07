@@ -1,0 +1,111 @@
+<?php
+/**
+ * CMS-IDE Visual CMS
+ *
+ * @category   Layouts
+ * @package    CMS-IDE
+ *  Copyright (C) 2010-2021  Nebojsa Tomic
+ *  
+ *  This file is part of CMS-IDE.
+ *     
+ *  CMS-IDE is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Lesser General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 3 of the License, or (at your option) any later version.
+ *
+ *  CMS-IDE is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public
+ *  License along with this library; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ *
+ * 
+ * 
+ */
+ ?>
+ <?php
+ //include browser recognition
+ //require()
+ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" xmlns:fb="http://www.facebook.com/2008/fbml" >
+    <head>
+
+        <meta name="keywords" content="<?php echo $this->meta_keywords;?>" />
+        <meta name="description" content="<?php echo $this->meta_description;?>" />
+        <meta name="generator" content="NeT" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Accept-Encoding" content="gzip, deflate" />       
+        <title><?php echo $this->title;?></title>
+    <!--themes for the objects-->
+    <link type="text/css" href="<?php echo $this->host;?>CSS/combinedAll.css" rel="stylesheet" />
+    <link type="text/css" href="<?php echo $this->host;?>CSS/themes.css" rel="stylesheet" />
+    <link rel="stylesheet" href="<?php echo $this->host;?>CSS/default.css?rnd=<?php echo rand();?>"  /><!--CSS written in admin panel-->        
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->host;?>favicon.ico" />
+    
+    <?php echo $this->headLink(); ?>    
+    <?php
+    if($this->staticFilesCSS != '') {
+    foreach($this->staticFilesCSS as $cssFile){
+    ?>
+    <link type="text/css" href="<?php echo $cssFile;?>" rel="stylesheet" />
+    <link rel="stylesheet" href="<?php echo $this->host;?>CSS/uniform/css/uniform.aristo.css" media="screen" />  
+    <?php
+    }
+    }
+    ?>
+    <script type="text/javascript" >
+        absoluteUrl = "<?php echo $this->host;?>";
+        templateId =  "<?php echo $this->template;?>";
+    </script> 
+    <script type="text/javascript" src="<?php echo $this->host;?>JS/cu3er/js/swfobject/swfobject.js"></script>
+    <script type="text/javascript" src="<?php echo $this->host;?>JS/jquery/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->host;?>JS/combinedAll.js" ></script>  
+    <script type="text/javascript" src="<?php echo $this->host;?>JS/slide/jsCycle.js" ></script>
+    <script type="text/javascript" src="<?php echo $this->host;?>JS/ga.js" ></script>   
+
+
+<script type="text/javascript" src="<?php echo $this->host;?>JS/js/easySlider1.5.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.5.3/jquery-ui.min.js" ></script>
+<script type="text/javascript" src="<?php echo $this->host;?>JS/js/cufon-yui.js"></script>
+<script type="text/javascript" src="<?php echo $this->host;?>JS/js/NaturalMed_italic_500.font.js"></script>
+<script type="text/javascript" src="<?php echo $this->host;?>JS/js/NaturalMedBold_italic_750.font.js"></script>
+<script type="text/javascript" src="<?php echo $this->host;?>JS/js/jquery.jcarousel.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->host;?>JS/js/cufon_replace.js"></script>
+
+ <script type="text/javascript" src="<?php echo $this->host;?>fancybox/jquery.fancybox-1.3.4.js"></script>
+<script type="text/javascript"  src="<?php echo $this->host;?>JS/uniform/jquery.uniform.js"></script>
+    </head>
+    <body style="background:<?php echo $this->templateBodyBackground;?>;">
+        <div class="top"></div>      
+        <div id ="container">                     
+           <div id="centerWrapper" class="wrapper">          
+              <div id="content" >
+                  <?php
+                      echo $this->layout()->content;
+                      //echo $this->layout()->ajaxContent ;
+                  ?>	
+              </div>          
+           </div>                       
+        </div>  
+        <?php
+        if(!empty($this->staticFilesJS) ){
+        foreach($this->staticFilesJS as $jsFile){
+        ?>
+         <script type="text/javascript" src="<?php echo $jsFile;?>"></script>
+        <?php
+        }
+        } else {
+        ?>
+        <script type="text/javascript" src="<?php echo $this->host;?>JS/main2.js?rnd=<?php echo rand();?>"></script>                    
+        <?php
+        }
+        ?>
+        <script type="text/javascript">
+            //$('select, input, textarea').livequery(function(){$(this).uniform();}); 
+        </script>
+    </body>   
+</html>

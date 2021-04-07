@@ -1,0 +1,11 @@
+<script type="text/javascript">
+    $('#setPermissionsForm_ManageAll').ajaxForm(function(data){
+        //alert(data);
+        //$('#allowedRolesDiv').html(data);
+        refreshManageAllPagesTable();//refresh table           
+        
+        ajaxEmitMessage(data + " allowed!");
+        setTimeout("clickMask()", 2000); //closing all
+        $('#dialogDiv').remove();  
+    }); 
+</script>

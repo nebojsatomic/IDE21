@@ -1,0 +1,55 @@
+SetOutputFilter DEFLATE
+# compress all text & html:
+#AddOutputFilterByType DEFLATE text/html text/plain text/xml
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE image/svg+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/atom_xml
+AddOutputFilterByType DEFLATE application/x-javascript
+AddOutputFilterByType DEFLATE application/x-httpd-php
+AddOutputFilterByType DEFLATE application/x-httpd-fastphp
+AddOutputFilterByType DEFLATE application/x-httpd-eruby
+AddOutputFilterByType DEFLATE text/html
+
+# Or, compress certain file types by extension:
+<Files *.css>
+SetOutputFilter DEFLATE
+</Files>
+
+<IfModule mod_deflate.c>
+<FilesMatch "\.(js|css)$">
+SetOutputFilter DEFLATE
+</FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresDefault A300
+ExpiresByType image/x-icon A2592000
+ExpiresByType application/x-javascript A7257600
+ExpiresByType text/css A7257600
+ExpiresByType image/gif A7257600
+ExpiresByType image/png A67257600
+ExpiresByType image/jpeg A7257600
+ExpiresByType text/plain A300
+ExpiresByType application/x-shockwave-flash A7257600
+ExpiresByType video/x-flv A7257600
+ExpiresByType application/pdf A7257600
+ExpiresByType text/html A300
+
+</IfModule>
+
+
+# Rewrite rules for Zend Framework
+
+# Rewrite rules for Zend Framework
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+
+
+RewriteRule ^(.*)$ index.php
+

@@ -1,0 +1,100 @@
+<?php
+/**
+ * CMS-IDE Visual CMS
+ *
+ * @category   Layouts
+ * @package    CMS-IDE
+ *  Copyright (C) 2010-2021  Nebojsa Tomic
+ *  
+ *  This file is part of CMS-IDE.
+ *     
+ *  CMS-IDE is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Lesser General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 3 of the License, or (at your option) any later version.
+ *
+ *  CMS-IDE is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public
+ *  License along with this library; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ *
+ * 
+ * 
+ */
+ ?>
+<div class="commentsDivWrapper" style="border:0px dotted #555555;padding:0px;width:100%;">
+
+    <div style="float:left; width:100%;"><h2 >COMMENTS:</h2></div>
+    
+    <?php
+    if(count($this->comments)){
+        $i = 1;
+        foreach ($this->comments as $comment){
+        
+        ?>
+        <div id="commentDiv_<?php echo $comment['commentsId'];?>">
+        <h3 style="max-width:250px;margin:0;padding:0;"><?php echo $comment['commentatorName'];?> says:</h3>
+        <div style="float:right">
+        <?php
+        for($noOfStars = 1; $noOfStars < 6;$noOfStars++){
+            if($comment['rating'] == $noOfStars){
+                $checked = 'checked';
+            } else {
+                $checked = '';    
+            }
+            //echo $comment['rating'];
+        ?>
+        <input name="star<?php echo $i;?>" type="radio" class="star" <?php echo $checked;?> disabled="disabled" /> 
+        <?php
+        }
+        ?>
+        
+        </div>
+        <br />
+        <p class="commentText" style="border:1px dotted #555555;padding:10px;">
+        
+        <?php echo $comment['comment'];?>
+        
+        </p>
+        <?php
+        //if administrator is watching
+        if($this->showDelete == true){
+        ?>
+        <a class="commentsDeleteLink" href="<?php echo $this->host;?>comments/delete-comment/id/<?php echo $comment['commentsId'];?>" rel="<?php echo $comment['commentsId'];?>">Delete</a>
+        <br />
+        <?php
+        }
+        ?>
+        
+        <div style="float:right"><?php echo $comment['date'];?></div><br />
+        </div>
+        <?php
+        $i++;
+        }
+    
+    } else {
+    ?>
+    <div style="float:left; width:100%;border:0px solid red;height:">
+    <?php
+        echo $this->translate->_("There are no comments yet for this content...");
+    
+    ?>
+    </div>
+    <?php
+    }
+    ?>
+    
+    
+    <br />
+    <br />
+    <div style="float:left;width:100%">
+      <?php
+      echo $this->form;
+      ?>
+    </div>
+
+</div>

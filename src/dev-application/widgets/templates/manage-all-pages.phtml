@@ -1,0 +1,129 @@
+<?php
+/**
+ * CMS-IDE Visual CMS
+ *
+ * @category   Layouts
+ * @package    CMS-IDE
+ *  Copyright (C) 2010-2021  Nebojsa Tomic
+ *  
+ *  This file is part of CMS-IDE.
+ *     
+ *  CMS-IDE is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Lesser General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 3 of the License, or (at your option) any later version.
+ *
+ *  CMS-IDE is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public
+ *  License along with this library; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ *
+ * 
+ * 
+ */
+ ?>
+<?php
+if(count($this->cols) > 1){
+?>
+<br />
+<div id="div_uta_<?php echo $this->tableId;?>" style="width:100%;">
+
+<?php
+
+//print_r($this->cols);
+//print_r($this->table);
+
+foreach ($this->cols as $col ) {
+$colone[] = $col['Field'];
+}
+?>
+<!--<a href="<?php echo $this->actions['add'];?>" class="navLinks uniTableAdmin a_add" value="<?php echo $this->tableId;?>"><?php echo $this->addTitle;?></a>
+-->
+<select id="paginationStep_<?php echo $this->tableId;?>" class="paginationStep" style="float:right;width:40px;">
+<option>-</option>
+<option>5</option>
+<option >10</option>
+<option>15</option>
+<option>25</option>
+</select>
+<div class="expanderFullScr" value="uta_<?php echo $this->tableId;?>" style="width:17px;height:17px;float:right;border:0px solid #e7e7e7;-moz-border-radius:3px;margin:2px;"></div>
+<div class="expanderDiv" value="uta_<?php echo $this->tableId;?>" style="width:17px;height:17px;float:right;border:0px solid #e7e7e7;-moz-border-radius:3px;margin:2px;"></div>
+<table id="uta_<?php echo $this->tableId;?>" value="<?php echo $this->tableId;?>" class="universalTableAdmin" cellspacing="0"  >
+    <?php
+    echo '<thead><tr>';
+    echo '<th><input type="checkbox" value="" id="chk_All_' . $this->tableId . '" class="chk_all" /></th>';
+        foreach ($colone as $kolona) {
+        echo "<th>" . ucwords(str_replace("_", " ", $kolona) ) . "</th>";
+        }
+        echo "<th>Action</th>";
+    echo '</tr></thead>';
+    ?>
+    <tbody>
+    <?php
+    foreach ($this->paginator as $data) {
+    ?>    
+    <tr id="<?php echo $data[$colone[0]]?>" class="utaNormal">
+        <td width="15px;"><input type="checkbox" value="<?php echo $data[$colone[0]]?>" id="chk_<?php echo $data[$colone[0]]?>" class="chk_page" /></td>
+
+        <?php
+        foreach ($colone as $kolona) {
+            if($kolona == "id"){
+                $pid = @$data[$kolona];
+            }
+            if($kolona == "published"){
+                if(@$data[$kolona] == '1'){
+                    echo '<td><a class="a_published publish" value="' . $pid . '" href=""></a></td>';
+                } else {
+                    echo '<td><a class="a_unpublished publish" value="' . $pid . '" href=""></a></td>';                
+                }
+                continue;            
+            }
+            if($kolona == "homepage"){
+                if(@$data[$kolona] == '1'){
+                    echo '<td><a class="a_published homepage" value="' . $pid . '" href=""></a></td>';
+                } else {
+                    echo '<td><a class="a_unpublished homepage" value="' . $pid . '" href=""></a></td>';                
+                }
+                continue;            
+            }
+            if($kolona == "check_access"){
+                if(@$data[$kolona] == '1'){
+                    echo '<td><a class="a_chkAccess1 access" value="' . $pid . '" href=""></a></td>';
+                } else {
+                    echo '<td><a class="a_chkAccess0 access" value="' . $pid . '" href=""></a></td>';                
+                }
+                continue;            
+            }
+        
+        ?>
+            <td><?php  echo substr(@$data[$kolona], 0, 30) ;?></td>
+        <?php
+        }
+        ?>
+        <td width="100px;"><a value="<?php echo $this->tableId;?>" id="preview_<?php echo $data[$colone[0]]?>" class="a_previewManage" href="<?php echo $this->host;?>pages/<?php echo $pid;?>" target="_blank" ></a> &nbsp;<a href="<?php echo $this->actions['delete'];?>" id="<?php echo $data[$colone[0]]?>" class="navLinks uniTableAdmin a_deleteManage" value="<?php echo $this->tableId;?>"></a></td>
+    </tr>
+    <?php
+    }
+    ?>
+    </tbody>
+</table>
+
+
+<?php //print_r($this->paginator);?>
+<?php echo($this->paginationControl($this->paginator, 'Sliding', 'paginator-managePages.phtml', array('params' => array('tableId' => $this->tableId, 'translate' => $this->translate) ) )); ?>
+
+
+<br />
+<?php echo $this->translate->_("With selected");?>:<br />
+<a href="" value="" class="deleteAll"><?php echo $this->translate->_("Delete");?></a>&nbsp;<a href="" value="" class="a_published publishAll"><?php echo $this->translate->_("Publish");?> </a>&nbsp;<a href="" value="" class="a_unpublished unpublishAll"><?php echo $this->translate->_("Unpublish");?></a>
+&nbsp;<a href="" value="" class="a_chkAccess1 restrictAll"><?php echo $this->translate->_("Restrict");?></a>&nbsp;<a href="" value="" class="a_chkAccess0 unrestrictAll"><?php echo $this->translate->_("Un-restrict");?></a>&nbsp;<a href="" value="" class="a_access setPermissionsAll"><?php echo $this->translate->_("Set permissions");?></a>&nbsp;<a href="" value="" class="a_ftp exportToFTP"><?php //echo $this->translate->_("Export Site To FTP");?></a>
+
+</div>
+<?php
+} else {
+    echo $this->translate->_("No content yet!");
+}

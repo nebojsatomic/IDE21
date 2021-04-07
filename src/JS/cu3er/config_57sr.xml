@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<cu3er>
+	<settings >
+	
+	<general />
+		<auto_play >
+          <defaults />
+          <tweenIn />
+          <tweenOut />
+          <tweenOver  />
+    </auto_play>
+      <description >
+          <defaults  heading_font="Arial"  heading_text_size="22"/>
+          <tweenIn time=".9" />
+          <tweenOut time="3.5" />
+          <tweenOver />
+      </description>
+    	<prev_button>
+			<defaults round_corners="35,35,35,35" y="40" />
+			<tweenIn y="40"/>
+			<tweenOver tint="0xFFFFFF" scaleX="1.1" scaleY="1.1" y="40" />
+			<tweenOut tint="0x000000" y="40" />
+		</prev_button>
+		
+    	<prev_symbol >
+			<tweenOver tint="0x000000" y="40"/>			
+      <tweenIn y="40"/>
+		</prev_symbol>
+
+		
+    	<next_button >
+			<defaults round_corners="35,35,35,35" y="40"/>			
+      <tweenIn y="40"/>
+			<tweenOver tint="0xFFFFFF"  scaleX="1.1" scaleY="1.1" y="40"/>
+			<tweenOut tint="0x000000" y="40"/>
+		</next_button>
+		
+    	<next_symbol >
+    	<tweenIn y="40"/>
+			<tweenOver tint="0x000000" y="40" />
+		</next_symbol>	
+ 
+			
+	</settings>    
+
+	<slides >
+	
+        <slide width="1200">
+            <url>http://localhost/quickstart/public/images/zf.jpg</url>
+       		<description>
+                <link>http://visualcms.co.cc</link>      
+                <heading>Superior Technology</heading>
+                <paragraph>This software uses proven code library from the founder of PHP... </paragraph>
+
+           </description>
+        </slide>
+		<!-- changing transition between first & second slide -->
+        <transition num="3" slicing="vertical" direction="down" shader="flat" />
+        <slide>
+       		<description>
+                <link>http://visualcms.co.cc</link>      
+                <heading>AJAX fantasy by default</heading>
+                <paragraph>All sites that CMS-IDE creates, use the best javascript library - jQuery...</paragraph>
+
+           </description>
+           <url>http://localhost/quickstart/public/images/12.jpg</url>
+        </slide>		
+		<!-- changing transition between second & third slide -->
+        <transition num="3" slicing="vertical" direction="down" shader="flat" />
+		<slide>
+            <url>http://localhost/quickstart/public/images/loginBg.jpg</url>
+       		<description>
+                <link>http://visualcms.co.cc</link>      
+                <heading>Totaly VISUAL admin panel</heading>
+                <paragraph>All content is visualy added to the page...</paragraph>
+
+           </description>
+        </slide>
+        <!-- transitions properties defined in transitions template -->
+        <transition num="3" slicing="vertical" direction="down" shader="flat" />
+		<slide>
+       		<url>http://localhost/quickstart/public/images/slide_4.jpg</url>
+       		<description>
+                <link>http://visualcms.co.cc</link>      
+                <heading>Maximum Extensibility</heading>
+                <paragraph>Let your site grow with you! Easy integration of what ever your company might need in the future...</paragraph>
+
+           </description>
+        </slide>
+        <transition num="3" slicing="vertical" direction="down" shader="flat" />
+        <slide>
+       		<url>http://localhost/quickstart/public/images/slide_5.jpg</url>
+       		<description>
+                <link>http://visualcms.co.cc</link>      
+                <heading>Ahead of events</heading>
+                <paragraph>In the World of competition enjoy quick and painless content manipulation...</paragraph>
+
+           </description>
+        </slide>
+        <transition num="3" slicing="vertical" direction="down" shader="flat" />				
+	</slides>
+</cu3er>
+

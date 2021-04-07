@@ -1,0 +1,58 @@
+<?php
+/**
+ * CMS-IDE Visual CMS
+ *
+ * @category   Layouts
+ * @package    CMS-IDE
+ *  Copyright (C) 2010-2021  Nebojsa Tomic
+ *  
+ *  This file is part of CMS-IDE.
+ *     
+ *  CMS-IDE is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Lesser General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 3 of the License, or (at your option) any later version.
+ *
+ *  CMS-IDE is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public
+ *  License along with this library; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ *
+ * 
+ * 
+ */
+ ?>
+<?php
+echo $this->output;
+?>
+<script type="text/javascript">
+$('body').livequery(function(){
+        bodyBg = "<?php echo  $this->bg ; ?>";
+        //alert(bodyBg);
+        bodyBgA = bodyBg.split(";");
+        bodyBgSize = bodyBgA[1] + ";" + bodyBgA[2] + ";" + bodyBgA[3] + ";" +bodyBgA[4] + ";";
+        if(bodyBgA[1]){
+                bodyBgSizeA = new Array;
+                bodyBgSizeA[0] = bodyBgA[1].replace(":100%", "");
+                bodyBgSizeA[1] = bodyBgA[1].replace("-moz-background-size:", "");
+        
+                bodyBgSizeA[2] = bodyBgA[2].replace(":100%", "");
+                bodyBgSizeA[3] = bodyBgA[2].replace("-webkit-background-size:", "");
+        
+                bodyBgSizeA[4] = bodyBgA[3].replace(":100%", "");
+                bodyBgSizeA[5] = bodyBgA[3].replace("-o-background-size:", "");
+        
+                bodyBgSizeA[6] = bodyBgA[4].replace(":100%", "");
+                bodyBgSizeA[7] = bodyBgA[4].replace("background-size:", "");
+        
+        }        
+
+    //$(this).css({background:"<?php echo str_replace(';', '', $this->bg);?>"});
+        //alert("<?php echo  $this->bg ; ?>");
+        //$('body').css({background:"<?php echo  $this->bg ; ?>"});
+});   
+</script>

@@ -1,0 +1,131 @@
+<?php
+
+/**
+
+ * CMS-IDE Visual CMS
+
+ *
+
+ * @category   Layouts
+
+ * @package    CMS-IDE
+
+ *  Copyright (C) 2010-2021  Nebojsa Tomic
+
+ *  
+
+ *  This file is part of CMS-IDE.
+
+ *     
+
+ *  CMS-IDE is free software; you can redistribute it and/or
+
+ *  modify it under the terms of the GNU Lesser General Public
+
+ *  License as published by the Free Software Foundation; either
+
+ *  version 3 of the License, or (at your option) any later version.
+
+ *
+
+ *  CMS-IDE is distributed in the hope that it will be useful,
+
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+
+ *  Lesser General Public License for more details.
+
+ *
+
+ *  You should have received a copy of the GNU Lesser General Public
+
+ *  License along with this library; if not, write to the Free Software
+
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+ *
+
+ * 
+
+ * 
+
+ */
+
+ ?>
+
+Weight:<div style="float:right">
+
+<a href="" class="a_weightUp navLinks help" title="Bring this menu item up"></a>&nbsp;
+
+<a href="" class="a_weightDw navLinks help" title="Bring this menu item down" ></a>
+
+</div>
+
+<?php echo $this->menuItemForm;
+
+?>
+
+<script type="text/javascript">
+
+$('.a_weightUp').click(function(){
+
+    ajaxEventDone("Changing the weight...");
+
+    $.post(absoluteUrl + "menu/change-weight/to/up/itid/" + $('#menuItemForm').attr("value"), function(data){
+
+        ajaxEmitMessage(data);
+
+        setTimeout("clickMask()", 1000);  
+
+        dontChangeMenuItemForm = 1;        
+
+        $('#chooseMenuForm').change();
+
+
+
+        //alert(data);
+
+    });
+
+});
+
+
+
+$('.a_weightDw').click(function(){
+
+    ajaxEventDone("Changing the weight...");
+
+    $.post(absoluteUrl + "menu/change-weight/to/down/itid/" + $('#menuItemForm').attr("value"), function(data){
+
+        ajaxEmitMessage(data);
+
+        setTimeout("clickMask()", 1000);  
+
+        dontChangeMenuItemForm = 1;        
+
+        $('#chooseMenuForm').change();
+
+
+
+        //alert(data);
+
+    });
+
+});
+
+
+
+$('#editMenuItemForm').ajaxForm(function(data){
+
+    //alert(data);
+
+    ajaxEmitMessage(data);
+
+    setTimeout("clickMask()", 1000);       
+
+    $('#chooseMenuForm').change();
+
+})
+
+</script>

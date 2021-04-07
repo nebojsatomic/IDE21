@@ -1,0 +1,145 @@
+#net_113_5_13_15_42_5{
+color:red;
+
+}
+                .fluid{
+	width:100% !important;
+} 
+               #net_111_3_29_20_10_12{
+
+
+}
+                #screen{
+	position:relative;
+	height:425px;
+	width:725px;
+	margin-top:40px;
+}
+	#screen .next, #screen .prev{
+		position:absolute;
+		top:200px;
+	}
+	#screen .prev{
+		left:10px;
+	}
+	#screen .next{
+		right:10px;
+	}
+	#navigation{
+		width:600px;
+		text-align:center;
+		margin-left:62px;
+	}
+		#net_110_5_17_14_6_47 #navigation ul{
+			margin-left:55px !important;
+			margin-left:35px;
+                        list-style:none;
+		}
+			#net_110_5_17_14_6_47 #navigation li{
+				float:left;
+				margin:0 20px;
+				padding:10px 20px;
+				background-color:#EEE;
+			}
+				#net_110_5_17_14_6_47 #navigation a{
+					color:#933;
+					font-weight:bolder;
+					text-decoration:none;
+				}
+	
+#net_110_5_17_14_6_47 #sections{
+	overflow:hidden;
+	background-color:white;
+	width:600px;
+	height:369px;
+	clear:left;
+	margin-left:62px;
+}
+	
+	#net_110_5_17_14_6_47 #sections ul{
+		width:3660px;
+background:none;
+list-style:none;border:0px;
+
+&nbsp;}
+	
+	#net_110_5_17_14_6_47 #sections li{
+			float:left;
+			padding:11px 30px;
+
+		}
+	#net_110_5_17_14_6_47 #sections li:hover{
+			float:left;
+			padding:11px 30px;
+background:none;color:green;
+
+		}
+
+	#net_110_5_17_14_6_47 #sections li.fallen{
+				margin-top:369px;
+			}
+			
+			#net_110_5_17_14_6_47 #sections p{
+				width:550px;
+				margin:16px 0;
+				font-size:85%;
+				line-height:1.4em;
+			}
+			
+			#net_110_5_17_14_6_47 #sections h2{
+				color:#993333;
+				margin:20px 0pt;
+			}
+			#sections a{
+				color:#777;
+				font-weight:bolder;
+				text-decoration:none;
+			}
+
+
+ #screen2{
+	position:relative;
+	width:900px;
+	margin:20px;
+}
+#screen2 #buttons{
+		border:1px solid #777;
+		margin-bottom:5px;
+		width:679px;
+	}
+	
+ #screen2 #buttons a{
+		margin:10px 10px;
+		color:#69C;
+	}
+ #screen2 .prev{
+		float:left;
+	}
+	#screen2 .next{
+		float:right;
+	}
+#slideshow{
+	overflow:hidden;
+	width:680px;
+	border:1px solid #777;
+}
+#slideshow ul{
+		width:3900px;
+		padding-left:225px;
+	}
+
+#slideshow li{
+			float:left;
+			margin:0 16px;
+			cursor:pointer;
+		}
+
+
+
+ #net_110_4_26_21_21_13{
+
+
+}
+                #div{} 
+a{}
+b{}

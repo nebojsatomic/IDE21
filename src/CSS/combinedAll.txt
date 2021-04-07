@@ -1,0 +1,12 @@
+    <link rel="stylesheet" href="<?php echo $this->host;?>CSS/jdMenu/blue/jquery.jdMenu.css"  />
+    <!--treeView-->
+    <link rel="stylesheet" href="<?php echo $this->host;?>CSS/treeView/jquery.treeview.css"  />
+    <link rel="stylesheet" href="<?php echo $this->host;?>CSS/treeView/screen.css" />
+    <!--lightBox-->
+    <link rel="stylesheet" href="<?php echo $this->host;?>CSS/lightbox/jquery.lightbox-0.5.css"  />
+    <!--color picker-->
+    <link rel="stylesheet" media="screen" type="text/css" href="<?php echo $this->host;?>CSS/colorpicker.css" />
+    <!--<link type="text/css" href="http://jqueryui.com/latest/themes/base/ui.all.css" rel="stylesheet" />-->
+    <!--<link type="text/css" href="<?php echo $this->host;?>CSS/jqUI/ui.all.css" rel="stylesheet" />-->
+    <!--comments-->
+    <link type="text/css" href="<?php echo $this->host;?>JS/comments/jquery.rating.css" rel="stylesheet" />

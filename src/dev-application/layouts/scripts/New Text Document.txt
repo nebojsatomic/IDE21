@@ -1,0 +1,10 @@
+[<!ATTLIST fb:fan
+   stream CDATA #IMPLIED
+   connections CDATA #IMPLIED
+   profile_id CDATA #IMPLIED
+>
+<!ATTLIST div
+   command CDATA #IMPLIED
+   cornerstyle CDATA #IMPLIED
+   objtype CDATA #IMPLIED
+>]

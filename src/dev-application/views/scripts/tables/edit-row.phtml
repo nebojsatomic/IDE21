@@ -1,0 +1,54 @@
+<?php
+/**
+ * CMS-IDE Visual CMS
+ *
+ * @category   Layouts
+ * @package    CMS-IDE
+ *  Copyright (C) 2010-2021  Nebojsa Tomic
+ *  
+ *  This file is part of CMS-IDE.
+ *     
+ *  CMS-IDE is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Lesser General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 3 of the License, or (at your option) any later version.
+ *
+ *  CMS-IDE is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public
+ *  License along with this library; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ *
+ * 
+ * 
+ */
+ ?>
+<?php
+echo $this->form;
+?>
+<script type="text/javascript">
+
+        
+        $('#editRowForm').ajaxForm(function(data){
+            $('#dialogDiv').remove();//removing the dialog  
+                      
+            //alert(data);
+            //json variables
+            jsin = eval("(" + data + ")" );
+            rowid = jsin["out"]["row"] ;
+            rowData = jsin["out"]["rowData"];            
+            tid = jsin["out"]["tableid"] ;
+                        
+            //alert( rowid + "_" + tid);
+            //updating table
+            $("#uta_" + tid + " tr[id^='" + rowid + "']").fadeOut(2000);
+            $("#uta_" + tid + " tr[id^='" + rowid + "']").html('<td>' + rowid + '</td>' + rowData + '<td><a value="'+ tid +'" id="edit_'+ rowid + '" class="navLinks uniTableAdmin a_edit" href="" ></a>&nbsp;<a href="" id="'+ rowid + '" class="navLinks uniTableAdmin a_delete" value="' + tid + '"></a></td>');
+            $("#uta_" + tid + " tr[id^='" + rowid + "']").fadeIn(1000);
+            ajaxEmitMessage(lang.Done);                  
+            setTimeout("$('#ajaxEventMask').click()", 1000);
+        }, "json");
+</script>    
+   

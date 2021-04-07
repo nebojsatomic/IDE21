@@ -1,0 +1,54 @@
+<?php
+/**
+ * CMS-IDE Visual CMS
+ *
+ * @category   Layouts
+ * @package    CMS-IDE
+ *  Copyright (C) 2010-2021  Nebojsa Tomic
+ *  
+ *  This file is part of CMS-IDE.
+ *     
+ *  CMS-IDE is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Lesser General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 3 of the License, or (at your option) any later version.
+ *
+ *  CMS-IDE is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public
+ *  License along with this library; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ *
+ * 
+ * 
+ */
+ ?>
+        <div id="cornerPropDiv" >
+            <select id="chooseCornerStyle" style="width:70px">
+            <option>round</option>
+            <option>dog</option>
+            <option>sharp</option>
+            <option>bevel</option>
+            <option>notch</option> 
+            <option>bite</option>
+            <option>cool</option>
+            <option>slide</option>
+            <option>fray</option>
+            <option>wicked</option>
+            <option>sculpt</option>
+            <option>long</option>                      
+            </select>
+            
+            <select id="chooseCornerOrientation"  style="width:70px">
+            <option></option>
+            <option>top</option>
+            <option>bottom</option>                    
+            </select>
+            Radius:<input type="text" id="cornerParamRadius" style="width:25px;" />px            
+            Container BG:<input type="text" id="cornerParamBg" style="width:55px;" />     
+            <br />
+            <input type="submit" value="Apply" id="cornerParamButton" />    
+        </div>

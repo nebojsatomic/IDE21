@@ -1,0 +1,54 @@
+<?php
+/**
+ * CMS-IDE Visual CMS
+ *
+ * @category   Layouts
+ * @package    CMS-IDE
+ *  Copyright (C) 2010-2021  Nebojsa Tomic
+ *  
+ *  This file is part of CMS-IDE.
+ *     
+ *  CMS-IDE is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Lesser General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 3 of the License, or (at your option) any later version.
+ *
+ *  CMS-IDE is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public
+ *  License along with this library; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ *
+ * 
+ * 
+ */
+ ?>
+<div class="cycleDiv">
+<?php
+$host = $this->host;
+//print_r($this->thumbs);
+$i =0;
+foreach ($this->thumbs as $key=>$thumb) {
+if($i== 0 || $i == 4 || $i == 8) {
+echo '<div class="cycleSlide" width="900px">';
+}
+    echo '<img class="cycleImage1" align="center" src="' . $host . 'images/' . $this->folder . '/' .  $thumb . '" />' ;
+if($i== 3 || $i == 7 || $i == 11) {
+echo '</div>';
+}
+$i++;
+}
+
+?>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.cycleDiv').cycle({
+    fx:      'fade', 
+    timeout: 4000 
+	});
+});
+</script>

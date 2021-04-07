@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<cu3er>
+	<settings >
+	
+	<general />
+		<auto_play >
+          <defaults />
+          <tweenIn />
+          <tweenOut />
+          <tweenOver  />
+    </auto_play>
+      <description >
+          <defaults  heading_font="Arial"  heading_text_size="22"/>
+          <tweenIn time=".9" />
+          <tweenOut time="3.5" />
+          <tweenOver />
+      </description>
+    	<prev_button>
+			<defaults round_corners="35,35,35,35" y="40" />
+			<tweenIn y="40"/>
+			<tweenOver tint="0xFFFFFF" scaleX="1.1" scaleY="1.1" y="40" />
+			<tweenOut tint="0x000000" y="40" />
+		</prev_button>
+		
+    	<prev_symbol >
+			<tweenOver tint="0x000000" y="40"/>			
+      <tweenIn y="40"/>
+		</prev_symbol>
+
+		
+    	<next_button >
+			<defaults round_corners="35,35,35,35" y="40"/>			
+      <tweenIn y="40"/>
+			<tweenOver tint="0xFFFFFF"  scaleX="1.1" scaleY="1.1" y="40"/>
+			<tweenOut tint="0x000000" y="40"/>
+		</next_button>
+		
+    	<next_symbol >
+    	<tweenIn y="40"/>
+			<tweenOver tint="0x000000" y="40" />
+		</next_symbol>	
+ 
+			
+	</settings>    
+
+	<slides >
+	
+        <slide width="1200">
+            <url>http://dev.cms-ide.net/public/images/cu3er_1/1.jpg</url>
+
+        </slide>
+		<!-- changing transition between first & second slide -->
+        <transition num="5" slicing="horizontal" direction="left" shader="flat" />
+        <slide>
+
+           <url>http://dev.cms-ide.net/public/images/cu3er_1/2.jpg</url>
+        </slide>		
+		<!-- changing transition between second & third slide -->
+        <transition num="5" slicing="horizontal" direction="left" shader="flat" />
+		<slide>
+            <url>http://dev.cms-ide.net/public/images/cu3er_1/3.jpg</url>
+
+        </slide>
+        <!-- transitions properties defined in transitions template -->
+        <transition num="5" slicing="horizontal" direction="left" shader="flat" />
+		<slide>
+       		<url>http://dev.cms-ide.net/public/images/cu3er_1/4.jpg</url>
+
+        </slide>
+        <transition num="5" slicing="horizontal" direction="left" shader="flat" />
+        <slide>
+       		<url>http://dev.cms-ide.net/public/images/cu3er_1/5.jpg</url>
+
+        </slide>
+        <transition num="5" slicing="horizontal" direction="left" shader="flat" />		
+	</slides>
+</cu3er>
+

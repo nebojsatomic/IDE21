@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<cu3er>
+	<settings >
+	
+	<general />
+		<auto_play >
+          <defaults />
+          <tweenIn />
+          <tweenOut />
+          <tweenOver  />
+    </auto_play>
+      <description >
+          <defaults  />
+          <tweenIn />
+          <tweenOut />
+          <tweenOver />
+      </description>
+    	<prev_button>
+			<defaults round_corners="35,35,35,35" y="40" />
+			<tweenIn y="40"/>
+			<tweenOver tint="0xFFFFFF" scaleX="1.1" scaleY="1.1" y="40" />
+			<tweenOut tint="0x000000" y="40" />
+		</prev_button>
+		
+    	<prev_symbol >
+			<tweenOver tint="0x000000" y="40"/>			
+      <tweenIn y="40"/>
+		</prev_symbol>
+
+		
+    	<next_button >
+			<defaults round_corners="35,35,35,35" y="40"/>			
+      <tweenIn y="40"/>
+			<tweenOver tint="0xFFFFFF"  scaleX="1.1" scaleY="1.1" y="40"/>
+			<tweenOut tint="0x000000" y="40"/>
+		</next_button>
+		
+    	<next_symbol >
+    	<tweenIn y="40"/>
+			<tweenOver tint="0x000000" y="40" />
+		</next_symbol>	
+ 
+			
+	</settings>    
+
+	<slides >
+	
+        <slide width="1200">
+            <url>http://localhost/quickstart/public/images/slide_1.jpg</url>
+       		<description>
+                <link>http://visualcms.co.cc</link>      
+                <heading>Prvi description</heading>
+                <paragraph>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod 
+                </paragraph>
+
+           </description>
+        </slide>
+		<!-- changing transition between first & second slide -->
+        <transition num="3" slicing="vertical" direction="down" shader="flat" />
+        <slide>
+       		<description>
+                <link>http://visualcms.co.cc</link>      
+                <heading>Ovo je drugi description</heading>
+                <paragraph>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy 
+                </paragraph>
+
+           </description>
+           <url>http://localhost/quickstart/public/images/slide_2.jpg</url>
+        </slide>		
+		<!-- changing transition between second & third slide -->
+        <transition num="3" slicing="vertical" direction="down" shader="flat" />
+		<slide>
+            <url>http://localhost/quickstart/public/images/slide_3.jpg</url>
+       		<description>
+                <link>http://visualcms.co.cc</link>      
+                <heading>Ovo je drugi description</heading>
+                <paragraph>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit 
+</paragraph>
+
+           </description>
+        </slide>
+        <!-- transitions properties defined in transitions template -->
+        <transition num="3" slicing="vertical" direction="down" shader="flat" />
+		<slide>
+       		<url>http://localhost/quickstart/public/images/slide_4.jpg</url>
+       		<description>
+                <link>http://visualcms.co.cc</link>      
+                <heading>Ovo je treci</heading>
+                <paragraph>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore 
+                </paragraph>
+
+           </description>
+        </slide>
+        <transition num="3" slicing="vertical" direction="down" shader="flat" />
+        <slide>
+       		<url>http://localhost/quickstart/public/images/slide_5.jpg</url>
+       		<description>
+                <link>http://visualcms.co.cc</link>      
+                <heading>Ovo je cetvrti</heading>
+                <paragraph>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+</paragraph>
+
+           </description>
+        </slide>
+        <transition num="3" slicing="vertical" direction="down" shader="flat" />				
+	</slides>
+</cu3er>
+
