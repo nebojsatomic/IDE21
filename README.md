@@ -9,7 +9,10 @@ https://www.youtube.com/watch?v=qgRPWqAuB8Q
 ( Watch from 2:00, first part is installation which is skipped in this Dockerized version )
 
 The base idea of the software is to be able to design the website in the admin panel, and do it in visual way, having the CMS in the background which will take care of the functionality, while the front should be 100% customizable right there in the admin panel, and being able to change the looks very quickly to something quite different with a few clicks, but also can add CSS and JS on the fly...
+
 Basically have the designer and the frontend developer in one person, from the admin panel.
+
+After that one person has designed and coded frontend, template is available for export, that template can be uploaded to some other installation of CMS-IDE, and that design which is created from the first admin can now take another admin and work on it to improve it in his own way.
 
 # INSTALLATION OF THIS VERSION
 
