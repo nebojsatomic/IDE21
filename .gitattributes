@@ -1,0 +1,4 @@
+# binary should not be modified.
+*.frm binary
+*.MYD binary
+*.MYI binary
