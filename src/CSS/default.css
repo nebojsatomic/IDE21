@@ -1,28 +1,3 @@
-/*THIS IS FROM default_admin.css- BEGIN*/
-
-/*THIS IS FROM default_admin.css- END*/
-
-
-/*THIS IS FROM default_admin2.css- BEGIN*/
-
-/*THIS IS FROM default_admin2.css- END*/
-
-
-/*THIS IS FROM default_admin3.css- BEGIN*/
-
-/*THIS IS FROM default_admin3.css- END*/
-
-
-/*THIS IS FROM default_firstadmin.css- BEGIN*/
-
-/*THIS IS FROM default_firstadmin.css- END*/
-
-
-/*THIS IS FROM default_gavrilo.css- BEGIN*/
-
-/*THIS IS FROM default_gavrilo.css- END*/
-
-
 /*THIS IS FROM default_nebojsa.css- BEGIN*/
 /*
 themes specific css styles which need to be applied for all
@@ -2014,6 +1989,16 @@ body { background:url(../img/bg_body.jpg) no-repeat center top #07060b; }
 /*THIS IS FROM default_nebojsa.css- END*/
 
 
+/*THIS IS FROM default_admin.css- BEGIN*/
+
+/*THIS IS FROM default_admin.css- END*/
+
+
+/*THIS IS FROM default_admin3.css- BEGIN*/
+
+/*THIS IS FROM default_admin3.css- END*/
+
+
 /*THIS IS FROM default_proba.css- BEGIN*/
 #net_113_5_13_15_42_5{
 color:red;
@@ -2078,7 +2063,7 @@ color:red;
 background:none;
 list-style:none;border:0px;
 
- }
+&nbsp;}
 	
 	#net_110_5_17_14_6_47 #sections li{
 			float:left;
@@ -2161,5 +2146,20 @@ background:none;color:green;
 a{}
 b{}
 /*THIS IS FROM default_proba.css- END*/
+
+
+/*THIS IS FROM default_firstadmin.css- BEGIN*/
+
+/*THIS IS FROM default_firstadmin.css- END*/
+
+
+/*THIS IS FROM default_admin2.css- BEGIN*/
+
+/*THIS IS FROM default_admin2.css- END*/
+
+
+/*THIS IS FROM default_gavrilo.css- BEGIN*/
+
+/*THIS IS FROM default_gavrilo.css- END*/
 
 
