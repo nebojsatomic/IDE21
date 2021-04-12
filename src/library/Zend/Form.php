@@ -1148,7 +1148,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
                 } else {
                     switch ($argc) {
                         case 0:
-                            continue;
+                            break;
                         case (1 <= $argc):
                             $type = array_shift($spec);
                         case (2 <= $argc):
@@ -1653,7 +1653,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
                 $order = null;
                 switch ($argc) {
                     case 0:
-                        continue;
+                        break;
                     case (1 <= $argc):
                         $subForm = array_shift($spec);
                     case (2 <= $argc):
@@ -1805,7 +1805,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             throw new Zend_Form_Exception('No valid elements specified for display group');
         }
 
-        $name = (string) $name;
+        @$name = (string) $name;
 
         if (is_array($options)) {
             $options['form']     = $this;

@@ -32,7 +32,7 @@
 
 $menu_items = $this->menu_items;
 
-//print_r($menu_items);
+print_r($menu_items);
 
 
 //print_r($this->menu);
@@ -44,7 +44,7 @@ $menu_items = $this->menu_items;
 
 
 //echo '<ul id="menu">';
-foreach($this->menus as $menus => $k) {
+foreach(@$this->menus as $menus => $k) {
             //if REWRITEURL
             if ($linkURLrewrite == 1) {
                 $link = $k['alias'] . ".html";

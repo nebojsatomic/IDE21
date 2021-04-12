@@ -820,15 +820,6 @@ class CreatorController extends NetActionController
                     'multioptions' => $creatorLangsArray,
                     'value' => $_COOKIE['cLang'],
                 )),
-                    /*'remember_me' => array('checkbox', array(
-                        'label' => 'Remember me',
-                        'decorators' => array(
-                                            array('ViewHelper'),
-                                            array('Errors'),
-                                            array('Label', array('separator'=> ' ')),
-                                            array('HtmlTag', array('tag' => 'dd', 'class'=>'ozimbo_checkbox')),
-                                        ),
-                        )),*/
 
                     'submit' => array('submit', array(
                         'label' => 'Login',

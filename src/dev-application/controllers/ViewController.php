@@ -926,7 +926,7 @@ class ViewController extends NetActionController
             $Tvars[] = $parts;
         }
 
-        if (count(@$Tvars)) {
+        if (@count(@$Tvars)) {
             foreach ($Tvars as $Tvarss) {
                 $i = 0;
 
@@ -947,7 +947,7 @@ class ViewController extends NetActionController
 
         $count = 0;
         $cHI = 0;
-        if (count(@$build)) {
+        if (@count(@$build)) {
             foreach ($build as $build_){
                 @$pattern = $matches[$count];
 
@@ -1276,7 +1276,7 @@ class ViewController extends NetActionController
                         if(file_exists(NET_PATH . "controllers/" . $ucwordsBlock . 'Controller.php') ){
                             require_once $ucwordsBlock . 'Controller.php';
                             $controller = $ucwordsBlock. "Controller";                        
-                            $output =  call_user_func_array($controller . "::" . $function, $params);//calling the appropriate function 
+                            $output =  @call_user_func_array($controller . "::" . $function, $params);//calling the appropriate function 
     
                             //$outputDB = str_replace('{liveblock:user:' . $build_[2] . '}', $output, $outputDB);
                             $outputDB = str_replace('{liveblock:' . $block . ':' . $build_[2] . $idsOut .'}', $output, $outputDB);
