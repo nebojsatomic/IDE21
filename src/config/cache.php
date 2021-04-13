@@ -88,6 +88,10 @@ return [
             'endpoint' => env('DYNAMODB_ENDPOINT'),
         ],
 
+        'none' => [
+            'driver' => 'null',
+        ],
+
     ],
 
     /*

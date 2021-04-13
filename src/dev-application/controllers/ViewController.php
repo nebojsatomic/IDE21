@@ -75,7 +75,7 @@ class ViewController extends NetActionController
         }
         $langCode = $this->_sesija->lang;
         
-
+echo 'AAA';
         //print_r($values);
         @$alias = $values['alias'];
         if ($alias != '') {

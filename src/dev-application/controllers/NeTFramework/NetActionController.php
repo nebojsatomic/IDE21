@@ -134,6 +134,8 @@ class NetActionController extends Zend_Controller_Action
     }
 */
     $request = Zend_Controller_Front::getInstance()->getRequest();
+
+    //print_r( $request->getParams());
     $this->_tblprefix = $config->tblprefix;
 
     $this->_host = $request->getScheme() . '://'  . $config->paths->host;

@@ -13,6 +13,9 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         // exclude routes that are passed to Zend framework
-        'creator/*'
+        'creator/*',
+        'pages/*',
+        'page/*',
+        'view/*'
     ];
 }

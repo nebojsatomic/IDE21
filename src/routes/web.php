@@ -21,7 +21,7 @@ Route::get('/aa', function () {
     return 'Hello World';
 });
 */
-#Route::get('/creator', [LegacyController::class, 'index'])
+Route::get('/pages/{pageid}', 'App\Http\Controllers\LPagesController@index' );
 
 // Legacy Framework Routes
 Route::any( "/{path?}", "App\Http\Controllers\LegacyController@index" )
