@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>IDE21 interface</title>
+</head>
+<body>
+	<a href="#" id="open-page">open page</a>
+	<script>
+		document.querySelector('#open-page').addEventListener('click', function(){
+			
+			window.parent.document.getElementById('openPage').click(); 
+		}, false );
+	</script>
+</body>
+</html>
