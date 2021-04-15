@@ -1,5 +1,5 @@
 #!/bin/bash
-
+apt update
 apt install zip
 ./composer.phar update
 cp ./.env.example ./.env
