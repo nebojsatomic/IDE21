@@ -1,6 +1,6 @@
 #!/bin/bash
 apt update
-apt install zip
+apt install -y zip
 ./composer.phar update
 cp ./.env.example ./.env
 chmod 777 -R storage # 777 should be removed, temporary do it like this
