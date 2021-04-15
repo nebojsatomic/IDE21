@@ -21,6 +21,8 @@ Route::get('/aa', function () {
     return 'Hello World';
 });
 */
+Route::get('/ide21_creator/interface', 'App\Http\Controllers\LInterfaceController@index' );
+
 Route::get('/pages/{pageid}', 'App\Http\Controllers\LPagesController@index' );
 
 // Legacy Framework Routes

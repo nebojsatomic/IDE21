@@ -503,83 +503,7 @@ $('.slideLinks[title^="0"]').livequery(function(){
  */
 ;(function($){var a='serialScroll',b='.'+a,c='bind',C=$[a]=function(b){$.scrollTo.window()[a](b)};C.defaults={duration:1e3,axis:'x',event:'click',start:0,step:1,lock:1,cycle:1,constant:1};$.fn[a]=function(y){y=$.extend({},C.defaults,y);var z=y.event,A=y.step,B=y.lazy;return this.each(function(){var j=y.target?this:document,k=$(y.target||this,j),l=k[0],m=y.items,o=y.start,p=y.interval,q=y.navigation,r;if(!B)m=w();if(y.force)t({},o);$(y.prev||[],j)[c](z,-A,s);$(y.next||[],j)[c](z,A,s);if(!l.ssbound)k[c]('prev'+b,-A,s)[c]('next'+b,A,s)[c]('goto'+b,t);if(p)k[c]('start'+b,function(e){if(!p){v();p=1;u()}})[c]('stop'+b,function(){v();p=0});k[c]('notify'+b,function(e,a){var i=x(a);if(i>-1)o=i});l.ssbound=1;if(y.jump)(B?k:w())[c](z,function(e){t(e,x(e.target))});if(q)q=$(q,j)[c](z,function(e){e.data=Math.round(w().length/q.length)*q.index(this);t(e,this)});function s(e){e.data+=o;t(e,this)};function t(e,a){if(!isNaN(a)){e.data=a;a=l}var c=e.data,n,d=e.type,f=y.exclude?w().slice(0,-y.exclude):w(),g=f.length,h=f[c],i=y.duration;if(d)e.preventDefault();if(p){v();r=setTimeout(u,y.interval)}if(!h){n=c<0?0:n=g-1;if(o!=n)c=n;else if(!y.cycle)return;else c=g-n-1;h=f[c]}if(!h||d&&o==c||y.lock&&k.is(':animated')||d&&y.onBefore&&y.onBefore.call(a,e,h,k,w(),c)===!1)return;if(y.stop)k.queue('fx',[]).stop();if(y.constant)i=Math.abs(i/A*(o-c));k.scrollTo(h,i,y).trigger('notify'+b,[c])};function u(){k.trigger('next'+b)};function v(){clearTimeout(r)};function w(){return $(m,l)};function x(a){if(!isNaN(a))return a;var b=w(),i;while((i=b.index(a))==-1&&a!=l)a=a.parentNode;return i}})}})(jQuery);/*THIS IS FROM view.js - END*/
 /*THIS IS FROM default_proba.js- BEGIN*/
-$('#net_113_5_13_15_42_5').livequery('dblclick', function(){
 
-
-});
-                // alert('hej');
-
- $('#net_111_3_29_20_10_12').livequery('click', function(){
-
-alert('ema');
-});
-               
-
- $('#screen').serialScroll({
-		target:'#sections',
-		items:'li', // Selector to the items ( relative to the matched elements, '#sections' in this case )
-		prev:'img.prev',// Selector to the 'prev' button (absolute!, meaning it's relative to the document)
-		next:'img.next',// Selector to the 'next' button (absolute too)
-		axis:'xy',// The default is 'y' scroll on both ways
-		navigation:'#navigation li a',
-		duration:700,// Length of the animation (if you scroll 2 axes and use queue, then each axis take half this time)
-		force:true, // Force a scroll to the element specified by 'start' (some browsers don't reset on refreshes)
-		
-		//queue:false,// We scroll on both axes, scroll both at the same time.
-		//event:'click',// On which event to react (click is the default, you probably won't need to specify it)
-		//stop:false,// Each click will stop any previous animations of the target. (false by default)
-		//lock:true, // Ignore events if already animating (true by default)		
-		//start: 0, // On which element (index) to begin ( 0 is the default, redundant in this case )		
-		//cycle:true,// Cycle endlessly ( constant velocity, true is the default )
-		//step:1, // How many items to scroll each time ( 1 is the default, no need to specify )
-		//jump:false, // If true, items become clickable (or w/e 'event' is, and when activated, the pane scrolls to them)
-		//lazy:false,// (default) if true, the plugin looks for the items on each event(allows AJAX or JS content, or reordering)
-		//interval:1000, // It's the number of milliseconds to automatically go to the next
-		//constant:true, // constant speed
-		
-		onBefore:function( e, elem, $pane, $items, pos ){
-			/**
-			 * 'this' is the triggered element 
-			 * e is the event object
-			 * elem is the element we'll be scrolling to
-			 * $pane is the element being scrolled
-			 * $items is the items collection at this moment
-			 * pos is the position of elem in the collection
-			 * if it returns false, the event will be ignored
-			 */
-			 //those arguments with a $ are jqueryfied, elem isn't.
-			e.preventDefault();
-			if( this.blur )
-				this.blur();
-		},
-		onAfter:function( elem ){
-			//'this' is the element being scrolled ($pane) not jqueryfied
-		}
-	});
-
-
- $('#slideshow').serialScroll({
-		items:'li',
-		prev:'#screen2 a.prev',
-		next:'#screen2 a.next',
-		offset:-230, //when scrolling to photo, stop 230 before reaching it (from the left)
-		start:1, //as we are centering it, start at the 2nd
-		duration:1200,
-		force:true,
-		stop:true,
-		lock:false,
-		cycle:false, //don't pull back once you reach the end
-		easing:'easeOutQuart', //use this easing equation for a funny effect
-		jump: true //click on the images to scroll to them
-	});
-
-$('#net_110_4_15_14_10_49').livequery('click', function(){
-$('#net_110_4_13_0_6_54').toggle(1500);
-
-});
-                $('#kjhlkjh').click(function(){
-//alert('ja');
-});
 /*THIS IS FROM default_proba.js- END*/
 
 
@@ -787,6 +711,13 @@ if($('#net_110_0_8_17_34_33').attr("id") ){
 /*THIS IS FROM default_admin.js- BEGIN*/
 
 /*THIS IS FROM default_admin.js- END*/
+
+
+/*THIS IS FROM .gitignore- BEGIN*/
+*
+!.gitignore
+
+/*THIS IS FROM .gitignore- END*/
 
 
 /*THIS IS FROM default_admin2.js- BEGIN*/
