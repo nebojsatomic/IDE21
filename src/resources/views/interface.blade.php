@@ -13,19 +13,20 @@
   <body>
 
     <div id="q-app">
-      <div class="">
+      <div class="bg-white">
         <q-layout view="hHh Lpr lff" container style="height: 100vh;" class="shadow-2 rounded-borders">
           <q-header elevated class="bg-black">
             <q-toolbar class="bg-grey-7 " style="min-height: 40px;">
               <q-btn flat @click="drawerLeft = !drawerLeft" round dense icon="arrow_back_ios_new" class="q-mr-sm"></q-btn>
               <q-separator dark vertical inset></q-separator>
-              <q-btn flat @click="drawerRight = !drawerRight" round dense icon="swap_horizontal_circle" class="q-ml-sm"></q-btn>
 
               <q-space></q-space>
               <q-avatar class="fixed-top-center" style="width: 40px;height: 40px;position: fixed;left: 50%;top: 0px;transform: translate(-50%);">
                 <img src="/images/IDE21_LOGO3.svg">
               </q-avatar>
 
+              <q-btn flat @click="goFullscreen" round dense icon="fullscreen" class="q-mr-sm"></q-btn>
+              <q-separator dark vertical inset></q-separator>
               <!-- WORKSPACE -->
               <q-btn-dropdown stretch flat label="WORKSPACE">
                 <q-list>
@@ -194,7 +195,35 @@
           return {
             drawerLeft: false,
             drawerRight: false,
-            tab: 'layers'
+            tab: 'layers',
+            goFullscreen : function() {
+
+                var qAppFS = document.getElementById("q-app");
+
+                function openFullscreen() {
+                  if (qAppFS.requestFullscreen) {
+                    qAppFS.requestFullscreen();
+                  } else if (qAppFS.webkitRequestFullscreen) { /* Safari */
+                    qAppFS.webkitRequestFullscreen();
+                  } else if (qAppFS.msRequestFullscreen) { /* IE11 */
+                    qAppFS.msRequestFullscreen();
+                  }
+                }
+
+                if((window.fullScreen) ||
+                   (window.innerWidth == screen.width && window.innerHeight == screen.height)) {
+
+                    document.exitFullscreen();
+
+                 } else {
+
+                    openFullscreen(); 
+                }
+            },
+            toggleDrawerLeft: function(drawerLeft) {
+                //drawerLeft = !drawerLeft
+            }
+
           }
         }
       });
@@ -203,7 +232,7 @@
       // optional
       window.quasarConfig = {
         brand: { // this will NOT work on IE 11
-          primary: '#e46262',
+          //primary: '#e46262',
           // ... or all other brand colors
         },
         framework: 'all',
