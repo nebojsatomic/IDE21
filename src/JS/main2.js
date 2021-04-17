@@ -1,12 +1,213 @@
+/*THIS IS FROM frontend.js - BEGIN*/
+//FRONTEND.JS
+//Js important for all modules and components
+
+//ajax-loader-fix
+$('#ajax-loader').livequery(function(){
+    $(this).css("background", absoluteUrl + "images/ajax-loader.gif");
+});
+    
+$('a:not(".lightbox")').livequery('click', function(){
+
+        contentUrl = $(this).attr("href");
+        if( $(this).attr("class") == "blankLink" ){
+            return true;
+        }    
+        if( $(this).attr("target") == "_blank" ){
+            return true;
+        } 
+    if (contentUrl.match("mailto:") == null){//ako nije mailto link  
+
+    if( $(this).attr("class") == "commentsDeleteLink" ){
+        //alert($(this).attr("title") );
+        $('#commentDiv_' + $(this).attr("rel") ).fadeOut(1500);
+        $.post($(this).attr("href"), function(data){
+            alert(data);
+        });
+        
+        return false; 
+    }
+
+        $('#ajax-loader').appendTo('#centerWrapper').fadeIn();
+        $('.ajax-loader').appendTo('#centerWrapper').fadeIn();
+    
+        //$('.draggable:not(".templateDiv")').fadeOut();
+        $('#Slideshow').fadeOut();
+        $('.dropShadow').fadeOut();
+        $('#banner ').fadeOut();
+
+        //Languages
+        if( $(this).attr("class") == "langLinks" ){
+            $.get(contentUrl, function(){
+                //alert(data);
+                //$("#content").css({display:"none"});
+                //$('#content').html(dat);
+
+                $.get( $(this).attr("value"), function(data){
+                    //resizeSite();
+                    //$('#content').html(data.output);
+                    //$('body').css({background:data.bodyBG.replace(/;/, '')});
+                        
+                    $('#content').html(data);
+                    
+                    $('#ajax-loader').fadeOut();      
+                    $('.ajax-loader').fadeOut();
+                    
+                    //podesavanje bannera u slideu
+                    $('.banners').css({top:"10px"});
+                    $('#banner ').css({overflow:"hidden"});
+                    
+                    //LB u slideu  mora opet
+                    $('.lb a').lightBox({
+                    	overlayOpacity: 0.6,
+                    	imageLoading: absoluteUrl + 'images/lightbox/loading.gif',
+                    	imageBtnClose: absoluteUrl + 'images/lightbox/close.gif',
+                    	imageBtnPrev: absoluteUrl + 'images/lightbox/prev.gif',
+                    	imageBtnNext: absoluteUrl + 'images/lightbox/next.gif'
+                    
+                    });
+                    
+                });
+            });           
+        //return true;
+        } else {
+            //ako nisu languages
+            $('#ajax-loader').appendTo('body');      
+                $('.ajax-loader').appendTo('body');
+            $.get(contentUrl, function(data){
+                //resizeSite();
+                      $('#content').html(data);
+                    $('#content').hide('explode', function(){
+                                                      $('#content').html(data);$('body').css({background: bodyBgA[0]});
+                                                      $('body').css("-moz-background-size", bodyBgSizeA[1]);
+                                                      $('body').css("-webkit-background-size" , bodyBgSizeA[3]);
+                                                      $('body').css("-o-background-size" , bodyBgSizeA[5]);
+                                                      $('body').css("background-size" , bodyBgSizeA[7]);
+                                                  }, 1000 ).show('blind',function(){$('#ajax-loader').fadeOut();$('.ajax-loader').fadeOut(); }, 1000);
+
+                //$('#content .draggable:not(".templateDiv")').css({display:"none"});
+                //$('#content .draggable:not(".templateDiv")').show(1500);
+           
+                setTimeout("$('#ajax-loader').fadeOut();$('.ajax-loader').fadeOut();", 1500);
+                
+                //podesavanje bannera u slideu
+                $('.banners').css({top:"10px"});
+                $('#banner ').css({overflow:"hidden"});
+                
+                //LB u slideu  mora opet
+                $('.lb a').lightBox({
+                	overlayOpacity: 0.6,
+                	imageLoading: absoluteUrl + 'images/lightbox/loading.gif',
+                	imageBtnClose: absoluteUrl + 'images/lightbox/close.gif',
+                	imageBtnPrev: absoluteUrl + 'images/lightbox/prev.gif',
+                	imageBtnNext: absoluteUrl + 'images/lightbox/next.gif'
+                
+                });
+            });        
+        
+        }
+
+        
+                
+        return false;
+        //return true;
+    } else {
+        return true;//ako je mailto
+    }
+        
+});
+
+
+
+
+
+
+//SEARCH
+$('input[type=submit]').livequery('click', function(){
+    $('#ajax-loader').fadeIn();
+    $('.ajax-loader').fadeIn();
+});
+
+$('#what').livequery('keypress', function (e) {
+
+    if (e.which == 13) {
+    $('#ajax-loader').fadeIn();
+    $('.ajax-loader').fadeIn();
+    //return false;
+    }
+});
+
+//if( $.browser.msie == false && $.browser.opera == false) {
+    $('form').livequery(function(){
+        $(this).ajaxForm(function(data){
+            $('#ajax-loader').fadeOut();
+            $('.ajax-loader').fadeOut();
+
+            $('#content').html(data);            
+            
+        });
+    });
+
+//}//if browser
+
+$('ul.jd_menu').jdMenu();
+
+
+
+
+
+//comentari ako je absolutno pozicioniranje
+if($('#commentsDivWrapper').css("position") == "absolute"){
+    $('#commentsDivWrapper').livequery(function(){
+        $(this).css({ display:"none", zIndex:"99999", width:"100%", maxWidth:"900px", position:"absolute", margin:"10px", top:$(document).height()  });
+        $(this).fadeIn(1500);
+    });
+    
+}
+
+
+//white backgrounds for content in net template
+$('.contentBg').livequery(function(){
+    $(this).css({paddingBottom:"40", border:"0px solid #555555", borderBottom:"0", height:$(document).height() - $(this).position().top -40 });
+    //$(this).css({paddingBottom:"40", border:"0px solid #555555", borderBottom:"0" });
+
+});
+
+//FOOTER
+//$('.footer').css({ top:$(document).height(), marginTop:"0"});
+$('.footer').livequery(function(){
+    if($('.contentBg').css("top") ){
+        $(this).css({ top:$('.contentBg').height() + $('.contentBg').position().top, margin:"0"});
+        //$(this).css({ top:$(document).height(), margin:"0"});
+    } else {
+        $(this).css({ top:$(document).height()});
+    }
+
+
+    //alert($('.contentBg').position().top);
+    $(this).show(); 
+});
+//shadows for the conteiner on the centered template
+if($('.footer').css("top") ){
+currentTop =  $('.footer').css("top").replace("px", "");
+footerHeight = $('.footer').css("height").replace("px", "");
+}
+//alert(currentTop + "-" +  );
+
+//treba videti odakle dolazi ovo -20
+$('.centerShadow').livequery(function(){
+    $(this).css({height:$(document).height()-20  });//for giving shadows to the divs which are wrapped inside centered template
+});
+
+$('.menuObj').livequery(function(){//making the menu div visible by default
+    $(this).css({overflow:"visible"});
+});
+
+/*THIS IS FROM frontend.js - END*/
+/*THIS IS FROM view.js - BEGIN*/
 //FROM MAIN PHTML
 //======================================================================
 $(document).ready(function(){
-    if($.browser.msie == true ){
-        $('body').append('<div id="ie_warn" style="z-index:999999;filter:alpha(opacity=70);position:absolute;top:0;left:0;width:100%;height:30px;background:lightyellow;color:red;font-family:Arial;text-transform:uppercase;"><div style="filter:alpha(opacity=100);padding:10px;width:800px;float:right;">Vi koristite Internet Explorer!   Da biste u potpunosti uživali u internet prezentacijama, preporučujemo Firefox ili Google Chrome!</div></div>');
-        $('#ie_warn').click(function(){
-            $(this).hide();    
-        });    
-    }
 
     if($.browser.msie == false ){
 
@@ -111,13 +312,39 @@ $('#banner').livequery(function(){
 i = 0;
 $('.cornered').livequery(function(){
     $(this).each(function(){
+
         contentOfThis = $(this).html();
-        $(this).html("");
-        $(this).css("padding", "0px");
+        //$(this).html("");
+        //$(this).css("padding", "0px");
         cornerParam = $(this).attr("cornerstyle");
         if (!cornerParam) {
             cornerParam = "";
         }
+
+    objClass = $(this).attr("class");
+   re = /corParams_\S*/;
+   if(objClass.match(re)){
+        var sdwMtch = "" + objClass.match(re);
+        var sdwStat = "" + sdwMtch.replace("corParams_(", "");
+
+        var sdwExpr = "" + sdwStat.replace(")", "");
+        cornerParam = "" + sdwExpr.replace(",", " ");
+    } else {
+        cornerParam = "";
+    }
+    var mySplitResult = cornerParam.split(",");
+    corParam = mySplitResult[1].replace(/px/g, '');
+    //background of the corner container
+//    re = /corBg_\S*/;
+/*    if(objClass.match(re)){
+        var sdwMtch = "" + objClass.match(re);
+        var sdwStat = "" + sdwMtch.replace("corBg_(", "");
+
+        var sdwExpr = "" + sdwStat.replace(")", "");
+        cornerBg = "" + sdwExpr;
+    } else {
+        cornerBg = "";
+    }
             
         $(this).append('<div id="cornerCont_' + i + '"></div>');
         //BG
@@ -125,15 +352,13 @@ $('.cornered').livequery(function(){
         $('#cornerCont_' + i).attr("style", $(this).attr("style") );
         $('#cornerCont_' + i).css({position:"relative", left:"0px", top:"0px"});
         
-        backgAttr = $(this).attr("backcolor");
+        backgAttr = cornerBg ;
         if (!backgAttr) {
             backgAttr = "#ffffff";
         }
-        //alert(backgAttr);
+
         $(this).css({background:backgAttr ,  margin:"0px", padding:"0px"});
-        
-        
-        
+
         $('#cornerCont_' + i).append('<div id="cornered_' + i + '"></div>')
         $('#cornerCont_' + i).corner(cornerParam);
         $('#cornered_' + i).html(contentOfThis);
@@ -142,6 +367,12 @@ $('.cornered').livequery(function(){
         //$(this).corner();
         
         i++;
+*/
+
+$(this).css("-moz-border-radius", corParam + "px"); 
+$(this).css("-webkit-border-radius", corParam + "px"); 
+$(this).css("border-radius", corParam + "px");    
+    
     });
 });
 
@@ -157,21 +388,63 @@ if($.browser.opera == false && $.browser.msie == false ) {//not supported opera 
         });
     });
 }
-if ($.browser.msie == true && $.browser.version != "8.0"){
+if ($.browser.msie == true ){
     $('.shadowed').each(function(){
         $('#' + $(this).attr("id") ).removeShadow();
     });
     $('.shadowed').dropShadow();
 }
 $('.shadowed').livequery(function(){
-    $(this).dropShadow();
+//$('.shadowed').each(function(){
+    idObj = $(this).attr("id");
+  
+    objClass = $('#' + idObj ).attr("class");
+    re = /dsParams_\S*/;
+    if(objClass.match(re)){
+        var sdwMtch = "" + objClass.match(re);
+        var sdwStat = "" + sdwMtch.replace("dsParams_(", "");
+        //alert(sdwStat.replace(")", ""));
+        var sdwExpr = "" + sdwStat.replace(")", "");
+
+        var names = sdwExpr.split(",");
+
+        for ( var i in names )
+        {
+            //alert( names[i] );
+            if(names[i].match("left:")){
+            Lleft = names[i].split("left:");
+            Rleft = parseInt(Lleft[1]);
+            }
+            if(names[i].match("top:")){    
+            Ltop = names[i].split("top:");
+            Rtop = parseInt(Ltop[1]);
+            }
+            if(names[i].match("blur:")){
+            Lblur = names[i].split("blur:");
+            Rblur = parseInt(Lblur[1]);
+            }
+            if(names[i].match("opacity:")){    
+            Lopacity = names[i].split("opacity:");
+            Ropacity = Lopacity[1];
+            }
+            if(names[i].match("color:")){
+            Lcolor = names[i].split("color:");
+            Rcolor = Lcolor[1];
+            }
+
+        } 
+        //actual dropping the shadow
+        //$('#' + idObj ).dropShadow({left:Rleft, top:Rtop, blur:Rblur, opacity:Ropacity, color:Rcolor });
+        $('#' + idObj ).css("-moz-box-shadow", Rleft + "px " + Rtop + "px " + Rblur + "px " + Rcolor);
+        $('#' + idObj ).css("-webkit-box-shadow", Rleft + "px " + Rtop + "px " + Rblur + "px " + Rcolor);
+        $('#' + idObj ).css("box-shadow", Rleft + "px " + Rtop + "px " + Rblur + "px " + Rcolor);
+        //$(this).dropShadow();
+    } else {
+        //alert(objClass);
+        $('#' + idObj ).dropShadow();
+    }
 });
-
-
-
-
-
-
+//});
 
 
 //slide links
@@ -204,209 +477,68 @@ $('.slideLinks[title^="0"]').livequery(function(){
 });
 
 
+//SERIAL SCROLL
+
+/**
+ * jQuery.ScrollTo - Easy element scrolling using jQuery.
+ * Copyright (c) 2007-2009 Ariel Flesler - aflesler(at)gmail(dot)com | http://flesler.blogspot.com
+ * Dual licensed under MIT and GPL.
+ * Date: 5/25/2009
+ * @author Ariel Flesler
+ * @version 1.4.2
+ *
+ * http://flesler.blogspot.com/2007/10/jqueryscrollto.html
+ */
+;(function(d){var k=d.scrollTo=function(a,i,e){d(window).scrollTo(a,i,e)};k.defaults={axis:'xy',duration:parseFloat(d.fn.jquery)>=1.3?0:1};k.window=function(a){return d(window)._scrollable()};d.fn._scrollable=function(){return this.map(function(){var a=this,i=!a.nodeName||d.inArray(a.nodeName.toLowerCase(),['iframe','#document','html','body'])!=-1;if(!i)return a;var e=(a.contentWindow||a).document||a.ownerDocument||a;return d.browser.safari||e.compatMode=='BackCompat'?e.body:e.documentElement})};d.fn.scrollTo=function(n,j,b){if(typeof j=='object'){b=j;j=0}if(typeof b=='function')b={onAfter:b};if(n=='max')n=9e9;b=d.extend({},k.defaults,b);j=j||b.speed||b.duration;b.queue=b.queue&&b.axis.length>1;if(b.queue)j/=2;b.offset=p(b.offset);b.over=p(b.over);return this._scrollable().each(function(){var q=this,r=d(q),f=n,s,g={},u=r.is('html,body');switch(typeof f){case'number':case'string':if(/^([+-]=)?\d+(\.\d+)?(px|%)?$/.test(f)){f=p(f);break}f=d(f,this);case'object':if(f.is||f.style)s=(f=d(f)).offset()}d.each(b.axis.split(''),function(a,i){var e=i=='x'?'Left':'Top',h=e.toLowerCase(),c='scroll'+e,l=q[c],m=k.max(q,i);if(s){g[c]=s[h]+(u?0:l-r.offset()[h]);if(b.margin){g[c]-=parseInt(f.css('margin'+e))||0;g[c]-=parseInt(f.css('border'+e+'Width'))||0}g[c]+=b.offset[h]||0;if(b.over[h])g[c]+=f[i=='x'?'width':'height']()*b.over[h]}else{var o=f[h];g[c]=o.slice&&o.slice(-1)=='%'?parseFloat(o)/100*m:o}if(/^\d+$/.test(g[c]))g[c]=g[c]<=0?0:Math.min(g[c],m);if(!a&&b.queue){if(l!=g[c])t(b.onAfterFirst);delete g[c]}});t(b.onAfter);function t(a){r.animate(g,j,b.easing,a&&function(){a.call(this,n,b)})}}).end()};k.max=function(a,i){var e=i=='x'?'Width':'Height',h='scroll'+e;if(!d(a).is('html,body'))return a[h]-d(a)[e.toLowerCase()]();var c='client'+e,l=a.ownerDocument.documentElement,m=a.ownerDocument.body;return Math.max(l[h],m[h])-Math.min(l[c],m[c])};function p(a){return typeof a=='object'?a:{top:a,left:a}}})(jQuery);
+
+/**
+ * jQuery[a] - Animated scrolling of series
+ * Copyright (c) 2007-2008 Ariel Flesler - aflesler(at)gmail(dot)com | http://flesler.blogspot.com
+ * Dual licensed under MIT and GPL.
+ * Date: 3/20/2008
+ * @author Ariel Flesler
+ * @version 1.2.1
+ *
+ * http://flesler.blogspot.com/2008/02/jqueryserialscroll.html
+ */
+;(function($){var a='serialScroll',b='.'+a,c='bind',C=$[a]=function(b){$.scrollTo.window()[a](b)};C.defaults={duration:1e3,axis:'x',event:'click',start:0,step:1,lock:1,cycle:1,constant:1};$.fn[a]=function(y){y=$.extend({},C.defaults,y);var z=y.event,A=y.step,B=y.lazy;return this.each(function(){var j=y.target?this:document,k=$(y.target||this,j),l=k[0],m=y.items,o=y.start,p=y.interval,q=y.navigation,r;if(!B)m=w();if(y.force)t({},o);$(y.prev||[],j)[c](z,-A,s);$(y.next||[],j)[c](z,A,s);if(!l.ssbound)k[c]('prev'+b,-A,s)[c]('next'+b,A,s)[c]('goto'+b,t);if(p)k[c]('start'+b,function(e){if(!p){v();p=1;u()}})[c]('stop'+b,function(){v();p=0});k[c]('notify'+b,function(e,a){var i=x(a);if(i>-1)o=i});l.ssbound=1;if(y.jump)(B?k:w())[c](z,function(e){t(e,x(e.target))});if(q)q=$(q,j)[c](z,function(e){e.data=Math.round(w().length/q.length)*q.index(this);t(e,this)});function s(e){e.data+=o;t(e,this)};function t(e,a){if(!isNaN(a)){e.data=a;a=l}var c=e.data,n,d=e.type,f=y.exclude?w().slice(0,-y.exclude):w(),g=f.length,h=f[c],i=y.duration;if(d)e.preventDefault();if(p){v();r=setTimeout(u,y.interval)}if(!h){n=c<0?0:n=g-1;if(o!=n)c=n;else if(!y.cycle)return;else c=g-n-1;h=f[c]}if(!h||d&&o==c||y.lock&&k.is(':animated')||d&&y.onBefore&&y.onBefore.call(a,e,h,k,w(),c)===!1)return;if(y.stop)k.queue('fx',[]).stop();if(y.constant)i=Math.abs(i/A*(o-c));k.scrollTo(h,i,y).trigger('notify'+b,[c])};function u(){k.trigger('next'+b)};function v(){clearTimeout(r)};function w(){return $(m,l)};function x(a){if(!isNaN(a))return a;var b=w(),i;while((i=b.index(a))==-1&&a!=l)a=a.parentNode;return i}})}})(jQuery);/*THIS IS FROM view.js - END*/
+/*THIS IS FROM default_proba.js- BEGIN*/
+
+/*THIS IS FROM default_proba.js- END*/
 
 
-//FRONTEND.JS
-//Js important for all modules and components
+/*THIS IS FROM default_nebojsa.js- BEGIN*/
+//LABORATORIJA ZVUKA
 
-//ajax-loader-fix
-$('#ajax-loader').livequery(function(){
-    $(this).css("background", absoluteUrl + "images/ajax-loader.gif");
-});
-    
-    $('a:not(".lightbox")').livequery('click', function(){
-        contentUrl = $(this).attr("href");
-        if( $(this).attr("class") == "blankLink" ){
-            return true;
-        }    
-    if (contentUrl.match("mailto:") == null){//ako nije mailto link  
-
-    if( $(this).attr("class") == "commentsDeleteLink" ){
-        //alert($(this).attr("title") );
-        $('#commentDiv_' + $(this).attr("rel") ).fadeOut(1500);
-        $.post($(this).attr("href"), function(data){
-            alert(data);
-        });
-        
-        return false; 
-    }
-
-        $('#ajax-loader').fadeIn();
-        $('.ajax-loader').fadeIn();
-    
-        //$('.draggable:not(".templateDiv")').fadeOut();
-        $('#Slideshow').fadeOut();
-        $('.dropShadow').fadeOut();
-        $('#banner ').fadeOut();
-
-        //Languages
-        if( $(this).attr("class") == "langLinks" ){
-            $.get(contentUrl, function(){
-                //alert(data);
-                //$("#content").css({display:"none"});
-                //$('#content').html(dat);
-
-                $.get( $(this).attr("value"), function(data){
-                    //resizeSite();
-                    //$('#content').html(data.output);
-                    //$('body').css({background:data.bodyBG.replace(/;/, '')});
-                        
-                    $('#content').html(data);
-                    
-                    $('#ajax-loader').fadeOut();      
-                    $('.ajax-loader').fadeOut();
-                    
-                    //podesavanje bannera u slideu
-                    $('.banners').css({top:"10px"});
-                    $('#banner ').css({overflow:"hidden"});
-                    
-                    //LB u slideu  mora opet
-                    $('.lb a').lightBox({
-                    	overlayOpacity: 0.6,
-                    	imageLoading: absoluteUrl + 'images/lightbox/loading.gif',
-                    	imageBtnClose: absoluteUrl + 'images/lightbox/close.gif',
-                    	imageBtnPrev: absoluteUrl + 'images/lightbox/prev.gif',
-                    	imageBtnNext: absoluteUrl + 'images/lightbox/next.gif'
-                    
-                    });
-                    
-                });
-            });           
-        //return true;
-        } else {
-            //ako nisu languages
-            $.get(contentUrl, function(data){
-                //resizeSite();
-                /*
-                if(data.output != 'undefined'){
-                    $('#content').html(data.output);
-                    $('body').css({background:data.bodyBG.replace(/;/, '')});
-                } else {
-                */
-                        
-                    $('#content').html(data);
-                /*
-                }
-                */
-                //$('#content .draggable:not(".templateDiv")').css({display:"none"});
-                //$('#content .draggable:not(".templateDiv")').show(1500);
-           
-                $('#ajax-loader').fadeOut();      
-                $('.ajax-loader').fadeOut();
-                
-                //podesavanje bannera u slideu
-                $('.banners').css({top:"10px"});
-                $('#banner ').css({overflow:"hidden"});
-                
-                //LB u slideu  mora opet
-                $('.lb a').lightBox({
-                	overlayOpacity: 0.6,
-                	imageLoading: absoluteUrl + 'images/lightbox/loading.gif',
-                	imageBtnClose: absoluteUrl + 'images/lightbox/close.gif',
-                	imageBtnPrev: absoluteUrl + 'images/lightbox/prev.gif',
-                	imageBtnNext: absoluteUrl + 'images/lightbox/next.gif'
-                
-                });
-            });        
-        
-        }
-
-        
-                
-        //return false;
-        return true;
-    } else {
-        return true;//ako je mailto
-    }
-        
-    });
-
-
-
-
-
-
-//SEARCH
-$('input[type=submit]').livequery('click', function(){
-    $('#ajax-loader').fadeIn();
-    $('.ajax-loader').fadeIn();
-});
-
-$('#what').livequery('keypress', function (e) {
-
-    if (e.which == 13) {
-    $('#ajax-loader').fadeIn();
-    $('.ajax-loader').fadeIn();
-    //return false;
-    }
-});
-
-//if( $.browser.msie == false && $.browser.opera == false) {
-    $('form').livequery(function(){
-        $(this).ajaxForm(function(data){
-            $('#ajax-loader').fadeOut();
-            $('.ajax-loader').fadeOut();
-
-            $('#content').html(data);            
-            
-        });
-    });
-
-//}//if browser
-
-$('ul.jd_menu').jdMenu();
-
-
-
-
-
-//comentari ako je absolutno pozicioniranje
-if($('#commentsDivWrapper').css("position") == "absolute"){
-    $('#commentsDivWrapper').livequery(function(){
-        $(this).css({ display:"none", zIndex:"99999", width:"100%", maxWidth:"900px", position:"absolute", margin:"10px", top:$(document).height()  });
-        $(this).fadeIn(1500);
-    });
-    
+if ($.browser.msie == true && $.browser.version != "8.0"){
+    $('#net_110_5_16_15_45_8').css({left:"0px"});
+    $('#net_110_5_16_16_27_13').css({left:"0px"});
 }
-
-
-//white backgrounds for content in net template
-$('.contentBg').livequery(function(){
-    $(this).css({paddingBottom:"40", border:"0px solid #555555", borderBottom:"0", height:$(document).height() - $(this).position().top -40 });
-    //$(this).css({paddingBottom:"40", border:"0px solid #555555", borderBottom:"0" });
-
+$('#net_110_5_16_16_27_13').addClass("footer");
+$('#net_110_5_16_16_27_13').appendTo('body');
+$('#net_110_5_16_14_58_19 ul li').livequery('click', function(){
+//alert($(this).children('a').attr("href") );
+document.location.href = $(this).children('a').attr("href");
 });
 
-//FOOTER
-//$('.footer').css({ top:$(document).height(), marginTop:"0"});
-$('.footer').livequery(function(){
-    $(this).css({ top:$('.contentBg').height() + $('.contentBg').position().top, margin:"0"});
-    //$(this).css({ top:$(document).height(), margin:"0"});
-
-
-    //alert($('.contentBg').position().top);
-    $(this).show(); 
+$('#net_110_5_16_14_58_19 ul li').livequery('mouseover', function(){
+$(this).removeClass("normalMenu");
+$(this).addClass("hoveredMenu");
 });
-//shadows for the conteiner on the centered template
-currentTop =  $('.footer').css("top").replace("px", "");
-footerHeight = $('.footer').css("height").replace("px", "");
-//alert(currentTop + "-" +  );
-
-//treba videti odakle dolazi ovo -20
-$('.centerShadow').livequery(function(){
-    $(this).css({height:$(document).height()-20  });//for giving shadows to the divs which are wrapped inside centered template
+$('#net_110_5_16_14_58_19 ul li').livequery('mouseout', function(){
+$(this).removeClass("hoveredMenu");
+$(this).addClass("normalMenu");
 });
 
-$('.menuObj').livequery(function(){//making the menu div visible by default
-    $(this).css({overflow:"visible"});
+//LABORATORIJA ZVUKA - END
+
+
+$('#net_109_9_25_14_5_11').livequery('click', function(){
+alert('ja');
 });
-
-
-
-
-
+               
 //DEFAULT.JS
-$('#net_109_9_1_18_16_14').cycle({fx:'scrollLeft',shuffle:{left:-200, top:-400}, speed:900, timeout:6000, easing: 'bounceout', delay: -4000 });
+//$('#net_109_9_1_18_16_14').cycle({fx:'scrollLeft',shuffle:{left:-200, top:-400}, speed:900, timeout:6000, easing: 'bounceout', delay: -4000 });
 //$('#net_109_9_1_20_22_43').cycle({fx:'scrollLeft',shuffle:{left:-200, top:-400}, speed:900, timeout:6000, easing: 'bounceout', delay: -4000 });
 //$('#net_109_9_1_20_27_6').cycle({fx:'scrollLeft',shuffle:{left:-200, top:-400}, speed:900, timeout:6000, easing: 'bounceout', delay: -4000 });
 
@@ -558,6 +690,72 @@ if($('#net_110_0_8_17_34_33').attr("id") ){
     });    
     
 
-} 
-       
+}
+
+	$(document).ready(function(){	
+		$(".slider-inner").easySlider();
+	});
+/*THIS IS FROM default_nebojsa.js- END*/
+
+
+/*THIS IS FROM default_firstadmin.js- BEGIN*/
+
+/*THIS IS FROM default_firstadmin.js- END*/
+
+
+/*THIS IS FROM default_admin3.js- BEGIN*/
+
+/*THIS IS FROM default_admin3.js- END*/
+
+
+/*THIS IS FROM default_admin.js- BEGIN*/
+
+/*THIS IS FROM default_admin.js- END*/
+
+
+/*THIS IS FROM .gitignore- BEGIN*/
+*
+!.gitignore
+
+/*THIS IS FROM .gitignore- END*/
+
+
+/*THIS IS FROM default_admin2.js- BEGIN*/
+
+/*THIS IS FROM default_admin2.js- END*/
+
+
+/*THIS IS FROM default_gavrilo.js- BEGIN*/
+//CYCLE plugin is loaded by deafult, to change what gets loaded edit main.phtml file in dev-application/layouts/scripts
+$('#net_113_5_14_9_55_33 p').livequery( function(){
+    $(this).cycle();
+
+});
+//ROTATE is not loaded by default, so we can add here plugins than we need               
+   // VERSION: 2.2 LAST UPDATE: 13.03.2012
+/* 
+ * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
+ * 
+ * Made by Wilq32, wilq32@gmail.com, Wroclaw, Poland, 01.2009
+ * Website: http://code.google.com/p/jqueryrotate/ 
+ */
+(function(j){for(var d,k=document.getElementsByTagName("head")[0].style,h=["transformProperty","WebkitTransform","OTransform","msTransform","MozTransform"],g=0;g<h.length;g++)void 0!==k[h[g]]&&(d=h[g]);var i="v"=="\v";jQuery.fn.extend({rotate:function(a){if(!(0===this.length||"undefined"==typeof a)){"number"==typeof a&&(a={angle:a});for(var b=[],c=0,f=this.length;c<f;c++){var e=this.get(c);if(!e.Wilq32||!e.Wilq32.PhotoEffect){var d=j.extend(!0,{},a),e=(new Wilq32.PhotoEffect(e,d))._rootObj;
+b.push(j(e))}else e.Wilq32.PhotoEffect._handleRotation(a)}return b}},getRotateAngle:function(){for(var a=[],b=0,c=this.length;b<c;b++){var f=this.get(b);f.Wilq32&&f.Wilq32.PhotoEffect&&(a[b]=f.Wilq32.PhotoEffect._angle)}return a},stopRotate:function(){for(var a=0,b=this.length;a<b;a++){var c=this.get(a);c.Wilq32&&c.Wilq32.PhotoEffect&&clearTimeout(c.Wilq32.PhotoEffect._timer)}}});Wilq32=window.Wilq32||{};Wilq32.PhotoEffect=function(){return d?function(a,b){a.Wilq32={PhotoEffect:this};this._img=this._rootObj=
+this._eventObj=a;this._handleRotation(b)}:function(a,b){this._img=a;this._rootObj=document.createElement("span");this._rootObj.style.display="inline-block";this._rootObj.Wilq32={PhotoEffect:this};a.parentNode.insertBefore(this._rootObj,a);if(a.complete)this._Loader(b);else{var c=this;jQuery(this._img).bind("load",function(){c._Loader(b)})}}}();Wilq32.PhotoEffect.prototype={_setupParameters:function(a){this._parameters=this._parameters||{};"number"!==typeof this._angle&&(this._angle=0);"number"===
+typeof a.angle&&(this._angle=a.angle);this._parameters.animateTo="number"===typeof a.animateTo?a.animateTo:this._angle;this._parameters.step=a.step||this._parameters.step||null;this._parameters.easing=a.easing||this._parameters.easing||function(a,c,f,e,d){return-e*((c=c/d-1)*c*c*c-1)+f};this._parameters.duration=a.duration||this._parameters.duration||1E3;this._parameters.callback=a.callback||this._parameters.callback||function(){};a.bind&&a.bind!=this._parameters.bind&&this._BindEvents(a.bind)},_handleRotation:function(a){this._setupParameters(a);
+this._angle==this._parameters.animateTo?this._rotate(this._angle):this._animateStart()},_BindEvents:function(a){if(a&&this._eventObj){if(this._parameters.bind){var b=this._parameters.bind,c;for(c in b)b.hasOwnProperty(c)&&jQuery(this._eventObj).unbind(c,b[c])}this._parameters.bind=a;for(c in a)a.hasOwnProperty(c)&&jQuery(this._eventObj).bind(c,a[c])}},_Loader:function(){return i?function(a){var b=this._img.width,c=this._img.height;this._img.parentNode.removeChild(this._img);this._vimage=this.createVMLNode("image");
+this._vimage.src=this._img.src;this._vimage.style.height=c+"px";this._vimage.style.width=b+"px";this._vimage.style.position="absolute";this._vimage.style.top="0px";this._vimage.style.left="0px";this._container=this.createVMLNode("group");this._container.style.width=b;this._container.style.height=c;this._container.style.position="absolute";this._container.setAttribute("coordsize",b-1+","+(c-1));this._container.appendChild(this._vimage);this._rootObj.appendChild(this._container);this._rootObj.style.position=
+"relative";this._rootObj.style.width=b+"px";this._rootObj.style.height=c+"px";this._rootObj.setAttribute("id",this._img.getAttribute("id"));this._rootObj.className=this._img.className;this._eventObj=this._rootObj;this._handleRotation(a)}:function(a){this._rootObj.setAttribute("id",this._img.getAttribute("id"));this._rootObj.className=this._img.className;this._width=this._img.width;this._height=this._img.height;this._widthHalf=this._width/2;this._heightHalf=this._height/2;var b=Math.sqrt(this._height*
+this._height+this._width*this._width);this._widthAdd=b-this._width;this._heightAdd=b-this._height;this._widthAddHalf=this._widthAdd/2;this._heightAddHalf=this._heightAdd/2;this._img.parentNode.removeChild(this._img);this._aspectW=(parseInt(this._img.style.width,10)||this._width)/this._img.width;this._aspectH=(parseInt(this._img.style.height,10)||this._height)/this._img.height;this._canvas=document.createElement("canvas");this._canvas.setAttribute("width",this._width);this._canvas.style.position="relative";
+this._canvas.style.left=-this._widthAddHalf+"px";this._canvas.style.top=-this._heightAddHalf+"px";this._canvas.Wilq32=this._rootObj.Wilq32;this._rootObj.appendChild(this._canvas);this._rootObj.style.width=this._width+"px";this._rootObj.style.height=this._height+"px";this._eventObj=this._canvas;this._cnv=this._canvas.getContext("2d");this._handleRotation(a)}}(),_animateStart:function(){this._timer&&clearTimeout(this._timer);this._animateStartTime=+new Date;this._animateStartAngle=this._angle;this._animate()},
+_animate:function(){var a=+new Date,b=a-this._animateStartTime>this._parameters.duration;if(b&&!this._parameters.animatedGif)clearTimeout(this._timer);else{(this._canvas||this._vimage||this._img)&&this._rotate(~~(10*this._parameters.easing(0,a-this._animateStartTime,this._animateStartAngle,this._parameters.animateTo-this._animateStartAngle,this._parameters.duration))/10);this._parameters.step&&this._parameters.step(this._angle);var c=this;this._timer=setTimeout(function(){c._animate.call(c)},10)}this._parameters.callback&&
+b&&(this._angle=this._parameters.animateTo,this._rotate(this._angle),this._parameters.callback.call(this._rootObj))},_rotate:function(){var a=Math.PI/180;return i?function(a){this._angle=a;this._container.style.rotation=a%360+"deg"}:d?function(a){this._angle=a;this._img.style[d]="rotate("+a%360+"deg)"}:function(b){this._angle=b;b=b%360*a;this._canvas.width=this._width+this._widthAdd;this._canvas.height=this._height+this._heightAdd;this._cnv.translate(this._widthAddHalf,this._heightAddHalf);this._cnv.translate(this._widthHalf,
+this._heightHalf);this._cnv.rotate(b);this._cnv.translate(-this._widthHalf,-this._heightHalf);this._cnv.scale(this._aspectW,this._aspectH);this._cnv.drawImage(this._img,0,0)}}()};i&&(Wilq32.PhotoEffect.prototype.createVMLNode=function(){document.createStyleSheet().addRule(".rvml","behavior:url(#default#VML)");try{return!document.namespaces.rvml&&document.namespaces.add("rvml","urn:schemas-microsoft-com:vml"),function(a){return document.createElement("<rvml:"+a+' class="rvml">')}}catch(a){return function(a){return document.createElement("<"+
+a+' xmlns="urn:schemas-microsoft.com:vml" class="rvml">')}}}())})(jQuery);
+//and then call rotate function
+$("#net_113_5_14_15_9_11").livequery(function(){
+    $(this).rotate(8);	
+});
+/*THIS IS FROM default_gavrilo.js- END*/
+
 

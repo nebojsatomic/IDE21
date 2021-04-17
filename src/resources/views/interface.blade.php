@@ -86,7 +86,7 @@
               </q-btn-dropdown>
 
               <q-separator dark vertical></q-separator>
-              <q-btn stretch flat label="LOGOUT"></q-btn>
+              <q-btn @click="() => emitMessageReqID('logout_a')" stretch flat label="LOGOUT"></q-btn>
               <q-separator dark vertical></q-separator>
               <q-btn flat round dense @click="drawerRight = !drawerRight" icon="arrow_forward_ios" class="q-ml-sm"></q-btn>
             </q-toolbar>
@@ -94,9 +94,7 @@
 
           <q-page-container>
             <q-page >
-              <p v-for="n in 1" :key="n">
-                <!--Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nihil praesentium molestias a adipisci, dolore vitae odit, quidem consequatur optio voluptates asperiores pariatur eos numquam rerum delectus commodi perferendis voluptate?-->
-              </p>
+              <iframe id="creator" src="/adm" title="Tools and properties" style="width: 100%;height: 100%; position: absolute; top: 0; left: 0; border: 0;"></iframe> 
             </q-page>
           </q-page-container>
 
@@ -174,17 +172,17 @@
       </q-scroll-area>
     </q-drawer>
 
-    <q-layout>
+    </q-layout>
 
     </div>
   </div>
-
 
   <!-- Add the following at the end of your body tag -->
 
   <script src="https://cdn.jsdelivr.net/npm/vue@^2.0.0/dist/vue.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/quasar@1.15.10/dist/quasar.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/quasar@1.15.10/dist/icon-set/material-icons-round.umd.min.js"></script>
+  <!--<script type="text/javascript" src="/JS/jquery/jquery-3.6.0.min.js"></script>-->
 
   <script>
       //Quasar.iconSet.set(Quasar.iconSet.materialIconsRound)
@@ -222,6 +220,11 @@
             },
             toggleDrawerLeft: function(drawerLeft) {
                 //drawerLeft = !drawerLeft
+            },
+            // function that is important for integration with the old admin; when the link in the new admin is clicked, the old admins link should receive the event
+            emitMessageReqID: function(elid) {
+              //console.log('should click: ' + elid);
+              document.getElementById('creator').contentWindow.postMessage(elid, '*');
             }
 
           }

@@ -840,7 +840,8 @@ class CreatorController extends NetActionController
         $this->_sesija->userId = "";
         $this->_sesija->superadmin = 0;
         $this->compileCSSandJS();
-        $this->_redirect($this->_hostRW);   
+        $config = new Zend_Config_Ini('config.ini', $this->_server);
+        $this->_redirect($this->_hostRW . $config->adminUrl . "/login");   
     
     }
 
