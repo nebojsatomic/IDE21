@@ -798,6 +798,7 @@ class CreatorController extends NetActionController
         asort($languageCodes);
 
         $creatorLangsArray = $languageCodes;//languages that are available for choosing
+        isset($_COOKIE['cLang']) ? $cL = $_COOKIE['cLang'] : $cL = 'en';
         
         $form = new Zend_Form(
             array(
@@ -818,7 +819,7 @@ class CreatorController extends NetActionController
                     'size' => '1',
                     'style' => 'margin:5px;width:90%;float:right;',
                     'multioptions' => $creatorLangsArray,
-                    'value' => $_COOKIE['cLang'],
+                    'value' =>  $cL ,
                 )),
 
                     'submit' => array('submit', array(

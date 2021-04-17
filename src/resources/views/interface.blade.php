@@ -200,7 +200,17 @@
                 var qAppFS = document.getElementById("q-app");
 
                 function openFullscreen() {
-                  if (qAppFS.requestFullscreen) {
+
+                  // Requesting fullscreen mode:
+                  Quasar.AppFullscreen.request()
+                    .then(() => { 
+                      // success!
+                    })
+                    .catch(err => { 
+                      // oh, no!!!
+                    });
+
+                if (qAppFS.requestFullscreen) {
                     qAppFS.requestFullscreen();
                   } else if (qAppFS.webkitRequestFullscreen) { /* Safari */
                     qAppFS.webkitRequestFullscreen();
