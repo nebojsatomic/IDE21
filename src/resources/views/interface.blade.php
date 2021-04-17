@@ -15,7 +15,7 @@
     <div id="q-app">
       <div class="bg-white">
         <q-layout view="hHh Lpr lff" container style="height: 100vh;" class="shadow-2 rounded-borders">
-          <q-header elevated class="bg-black">
+          <q-header elevated class="bg-black hidden">
             <q-toolbar class="bg-grey-7 " style="min-height: 40px;">
               <q-btn flat @click="drawerLeft = !drawerLeft" round dense icon="arrow_back_ios_new" class="q-mr-sm"></q-btn>
               <q-separator dark vertical inset></q-separator>
@@ -105,6 +105,7 @@
           :breakpoint="700"
           bordered
           content-class="bg-grey-3"
+          class="q-drawer hidden"
           >
           <q-scroll-area class="fit">
             <div class="">
@@ -182,7 +183,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@^2.0.0/dist/vue.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/quasar@1.15.10/dist/quasar.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/quasar@1.15.10/dist/icon-set/material-icons-round.umd.min.js"></script>
-  <!--<script type="text/javascript" src="/JS/jquery/jquery-3.6.0.min.js"></script>-->
+  <script type="text/javascript" src="/JS/jquery/jquery-3.6.0.min.js"></script>
 
   <script>
       //Quasar.iconSet.set(Quasar.iconSet.materialIconsRound)
@@ -225,11 +226,24 @@
             emitMessageReqID: function(elid) {
               //console.log('should click: ' + elid);
               document.getElementById('creator').contentWindow.postMessage(elid, '*');
+              if(elid == 'logout_a') {
+                $('.q-header').addClass('hidden');
+                $('.q-drawer').addClass('hidden');
+              }
             }
 
           }
         }
       });
+
+
+      window.addEventListener('message', function(message){
+        //console.log(message.data);
+        // if logged in to creator admin, show the new admin  
+        $('.q-header').removeClass('hidden');
+        $('.q-drawer').removeClass('hidden');
+      });
+
     </script>
     <script>
       // optional
