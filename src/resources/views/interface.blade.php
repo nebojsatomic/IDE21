@@ -8,12 +8,19 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/animate.css@^4.0.0/animate.min.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/quasar@1.15.10/dist/quasar.min.css" rel="stylesheet" type="text/css">
+    <style>
+      body {
+        background: #e0e0e0;
+      }
+    .qpage {padding-right: 280px !important; /* hide scroll bar on the right */}
+    </style>
+
   </head>
 
   <body>
 
     <div id="q-app">
-      <div class="bg-white">
+      <div class="">
         <q-layout view="hHh Lpr lff" container style="height: 100vh;" class="shadow-2 rounded-borders">
           <q-header elevated class="bg-black hidden">
             <q-toolbar class="bg-grey-7 " style="min-height: 40px;">
@@ -56,7 +63,7 @@
                 </q-list>
               </q-btn-dropdown>
 
-              <!-- ENGINE -->
+              <!-- ENGINE - in this phase - disabled --><!--
               <q-btn-dropdown stretch flat label="Frontend Engine">
                 <q-list>
                   <q-item v-for="n in 1" :key="`x.${n}`" clickable v-close-popup tabindex="0">
@@ -83,7 +90,7 @@
                     </q-item-section>
                   </q-item>
                 </q-list>
-              </q-btn-dropdown>
+              </q-btn-dropdown>-->
 
               <q-separator dark vertical></q-separator>
               <q-btn @click="() => emitMessageReqID('logout_a')" stretch flat label="LOGOUT"></q-btn>
@@ -92,7 +99,7 @@
             </q-toolbar>
           </q-header >
 
-          <q-page-container>
+          <q-page-container class="qpage">
             <q-page >
               <iframe id="creator" src="/adm" title="Tools and properties" style="width: 100%;height: 100%; position: absolute; top: 0; left: 0; border: 0;"></iframe> 
             </q-page>

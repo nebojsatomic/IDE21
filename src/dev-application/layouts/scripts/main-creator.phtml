@@ -36,7 +36,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />                
     <title><?php echo $this->title;?> - <?php echo $this->version;?> </title>		
     <style type="text/css">        
-        body{min-width:1280px;font-size:11px ;font-family:Arial;/* background:url(<?php echo $this->host;?>images/bgBody.png) no-repeat center;*/}
+        body{min-width:1280px;font-size:11px ;font-family:Arial;}
         li {font-size:11px ;font-family:Arial;}
         #rotate div.creatorDiv{font-size:12px;font-family:Arial;}        
         .draggable {cursor:pointer; position:absolute;width: auto; min-height: 25px;height:auto; background: transparent; padding: 0px;float:left;color: black; overflow:hidden;}
@@ -55,7 +55,7 @@
         span.ui-button-text{display:none !important;}
         #closeDialogDiv{width:18px;height:18px;background:url(<?php echo $this->host;?>images/interface/closeB.png) no-repeat;text-align:center;float:right;}
         #containerRadnePovrsine {width:100%;height:auto;}
-        #droppable { position:relative;z-index:2;top:0;width:70%; height: auto; min-height:900px;background: transparent;  padding: 0px; border:2px dotted lightblue;margin:0 auto;}
+        #droppable { position:relative;z-index:2;top:0;width:70%; height: auto; min-height:900px;background: white;  padding: 0px; border:2px dotted lightblue;margin:0 auto;}
         #droppable2 { position:relative;z-index:2;float:left;left:0;top:0;min-width: 100%;width:100%; height: auto; min-height:100%;background: blue;  padding: 0px; border:2px dotted lightblue;}
 
         #templateMask { position:absolute;z-index:2;top:0;width:70%; height: auto; min-height:900px;background: transparent;  padding: 0px; border:0px dotted red;margin:0 auto;}
@@ -265,7 +265,7 @@
         <?php echo $this->headScript(); ?>  
     
   </head>
-  <body style="font-size:11px ;font-family:Arial;">
+  <body style="font-size:11px ;font-family:Arial;background: transparent;">
     <div id="ajax-loader"></div> 
     <div id="dialogDiv"></div>     
     <div id ="container">          
