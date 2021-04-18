@@ -538,9 +538,9 @@ class NetActionController extends Zend_Controller_Action
         $host = NetActionController::$host;
 
         //session variables
-        $this->_sesija->table->$table->queryString = $justCols;
-        $this->_sesija->table->$table->addTitle = $addTitle;
-        $this->_sesija->table->$table->actions = $actions;
+        @$this->_sesija->table->$table->queryString = $justCols;
+        @$this->_sesija->table->$table->addTitle = $addTitle;
+        @$this->_sesija->table->$table->actions = $actions;
 
         if ($addTitle == null){
             $addTitle = $this->translate->_("Add a record");
