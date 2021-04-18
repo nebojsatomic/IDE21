@@ -113,7 +113,8 @@
               </q-btn-dropdown>-->
 
               <q-separator dark vertical></q-separator>
-              <q-btn @click="() => emitMessageReqID('logout_a')" stretch flat label="LOGOUT"></q-btn>
+              <!--<q-btn @click="() => emitMessageReqID('logout_a')" stretch flat label="LOGOUT"></q-btn>-->
+              <q-btn type="a" href="/creator/logout" stretch flat label="LOGOUT"></q-btn>
               <q-separator dark vertical></q-separator>
               <q-btn flat round dense @click="drawerRight = !drawerRight" icon="arrow_forward_ios" class="q-ml-sm"></q-btn>
             </q-toolbar>
