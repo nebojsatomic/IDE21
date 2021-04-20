@@ -1012,7 +1012,7 @@ class ViewController extends NetActionController
                  //if (@preg_match("/{language:flags}/", "{" . $build_[0] . ":flags}" )) {
                  if (@strstr( "{" . $build_[0] . ":flags}" , "{language:flags}")) {
 
-                        $langsEnabled = NetActionController::getEnabledLanguages();
+                        $langsEnabled = @NetActionController::getEnabledLanguages();
                         /*
                         $langQ = $db->fetchAll("SELECT * FROM languages WHERE enabled = '1'");
                         foreach ($langQ as $lang) {
@@ -1276,7 +1276,7 @@ class ViewController extends NetActionController
                         if(file_exists(NET_PATH . "controllers/" . $ucwordsBlock . 'Controller.php') ){
                             require_once $ucwordsBlock . 'Controller.php';
                             $controller = $ucwordsBlock. "Controller";                        
-                            $output =  call_user_func_array($controller . "::" . $function, $params);//calling the appropriate function 
+                            $output =  @call_user_func_array($controller . "::" . $function, $params);//calling the appropriate function 
     
                             //$outputDB = str_replace('{liveblock:user:' . $build_[2] . '}', $output, $outputDB);
                             $outputDB = str_replace('{liveblock:' . $block . ':' . $build_[2] . $idsOut .'}', $output, $outputDB);

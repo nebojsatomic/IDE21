@@ -220,9 +220,9 @@ tinyMCE.init({
          */                          
         function refreshManageAllPagesTable()
         {
-            //idCurrent = $('#paginationControl span.current').html();
+            idCurrent = $('#paginationControl span.current').html();
             //alert(idCurrent);
-            //if(!idCurrent){idCurrent = 1;}
+            if(!idCurrent){idCurrent = 1;}
             //idCurrent = 1;
             clicked = 0;
             $('#paginationControl a.pag_a').each(function(){
@@ -1017,10 +1017,11 @@ $(document).ready(function(){
               $('#pageKEYWORDS').attr("value", $('#pageKeywords').attr("value") );
               
               $('#pageImageC').attr("value", $('#pageImage').attr("value") );
+              console.log($('#pageTitle').attr("value") );
               $('#pageTitleC').attr("value", $('#pageTitle').attr("value") );
               $('#pageCategoryC').attr("value", $('#categoryNameAssign').attr("value") );
               
-              saveCSSandJS();
+              //saveCSSandJS();
               
               /*THIS WAS BEFORE CODEPRESS
               $('#pageCSSC').attr("value", $('#pageCSS').attr("value") );
@@ -1028,8 +1029,9 @@ $(document).ready(function(){
               */
               
               $('#pageCode').attr("action", absoluteUrl + "page/update/pageId/" + $('#pgID').html() + "/applytoall/" + applytoAllLangs );
-              $('#pageCode').ajaxSubmit(function(){
+              $('#pageCode').ajaxSubmit(function(data){
                   //alert("Page is updated!");
+                  alert(data);
                   ajaxEmitMessage(lang.Done);
                   setTimeout("$('#ajaxEventMask').click()", 1000);
                   //redrawMenus();
