@@ -220,9 +220,9 @@ tinyMCE.init({
          */                          
         function refreshManageAllPagesTable()
         {
-            //idCurrent = $('#paginationControl span.current').html();
+            idCurrent = $('#paginationControl span.current').html();
             //alert(idCurrent);
-            //if(!idCurrent){idCurrent = 1;}
+            if(!idCurrent){idCurrent = 1;}
             //idCurrent = 1;
             clicked = 0;
             $('#paginationControl a.pag_a').each(function(){
