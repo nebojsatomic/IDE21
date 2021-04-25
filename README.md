@@ -28,19 +28,15 @@ After succesful building and running, you can access the front at http://localho
 
 ( If you have error message that cache dir is not writable, then:
 
- $ docker ps
-
- copy CONTAINERID,
-
- $ docker exec -it CONTAINERID bash
-
- execute ./shell.sh inside container ) * this is temporary solution, problem exists on Linux only it seems
+- $ docker ps
+- copy CONTAINERID,
+- $ docker exec -it CONTAINERID bash
+- execute ./shell.sh inside container ) * this is temporary solution, problem exists on Linux only it seems
  
 
 For locahost/adm :
 
 Demo user:  proba
-
 Demo pass:  proba
 
 *  /adm can be changed to what ever path you want if you modify adminUrl variable inside src/dev-application/config/config.ini
