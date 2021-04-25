@@ -27,10 +27,15 @@ After that one person has designed and coded frontend, template is available for
 After succesful building and running, you can access the front at http://localhost, and admin area at http://localhost/adm 
 
 ( If you have error message that cache dir is not writable, then:
+
  $ docker ps
+
  copy CONTAINERID,
+
  $ docker exec -it CONTAINERID bash
+
  execute ./shell.sh inside container ) * this is temporary solution, problem exists on Linux only it seems
+ 
 
 For locahost/adm :
 
