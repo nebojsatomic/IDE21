@@ -926,7 +926,7 @@ class ViewController extends NetActionController
             $Tvars[] = $parts;
         }
 
-        if (count(@$Tvars)) {
+        if (@count(@$Tvars)) {
             foreach ($Tvars as $Tvarss) {
                 $i = 0;
 
@@ -947,7 +947,7 @@ class ViewController extends NetActionController
 
         $count = 0;
         $cHI = 0;
-        if (count(@$build)) {
+        if (@count(@$build)) {
             foreach ($build as $build_){
                 @$pattern = $matches[$count];
 
@@ -1222,7 +1222,7 @@ class ViewController extends NetActionController
             $Tvars[] = $parts;
         }
 
-        if (count(@$Tvars)) {
+        if (@count(@$Tvars)) {
             foreach ($Tvars as $Tvarss) {
                 $i = 0;
 
@@ -1243,7 +1243,7 @@ class ViewController extends NetActionController
 
         $count = 0;
         $cHI = 0;
-        if (count(@$build)) {
+        if (@count(@$build)) {
             foreach ($build as $build_){
                 @$pattern = $matches[$count];
                 /*
