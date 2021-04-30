@@ -64,7 +64,8 @@ class ImagesController extends NetActionController
     public function findexts ($filename)
     {
         $filename = strtolower($filename) ;
-        $exts = split("[/\\.]", $filename) ;
+        //$exts = split("[/\\.]", $filename) ;
+        $exts = explode(".", $filename) ;
         $n = count($exts)-1;
         $exts = $exts[$n];
         return $exts;
