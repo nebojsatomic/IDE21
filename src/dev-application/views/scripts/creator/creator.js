@@ -797,7 +797,7 @@ $(document).ready(function(){
 
 
   //Saving a new page
-  $('#savePageNew').click(function(){
+  $('#savePageNew').livequery('click', function(){
     boundCBval = $('#boundCB').val();
     //console.log($('#boundCB').val());
     if(boundCBval == 'on') {
@@ -842,7 +842,7 @@ $(document).ready(function(){
 
     saveCSSandJS();
 
-    $('#pageCode').attr("action", absoluteUrl + "page/save/"  );
+    $('#pageCode').attr("action", absoluteUrl + "page/save"  );
     $('#pageCode').ajaxSubmit(function(){
 
       ajaxEmitMessage(lang.Done);
@@ -946,7 +946,7 @@ $(document).ready(function(){
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     dialog();
 
-    $.get(absoluteUrl + "page/choose-page/", function(data){
+    $.get(absoluteUrl + "page/choose-page", function(data){
 
       $('#dialogDiv').html( data);
 
@@ -2132,7 +2132,7 @@ $('#addCategoryLink').livequery('click', function(){
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
-  $.get(absoluteUrl + "category/add-category/", function(data){
+  $.get(absoluteUrl + "category/add-category", function(data){
     //console.log(data);
     $('#dialogDiv').html( data);
   });
@@ -2292,7 +2292,7 @@ $('#addMenuLink').livequery('click', function(){
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
-  $.get(absoluteUrl + "menu/add-menu/", function(data){
+  $.get(absoluteUrl + "menu/add-menu", function(data){
     //console.log(data);
 
     $('#dialogDiv').html( data);

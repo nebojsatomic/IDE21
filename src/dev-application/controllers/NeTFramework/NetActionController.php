@@ -22,7 +22,7 @@
  *  License along with this library; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * 
+ *
  *
  */
 
@@ -647,9 +647,9 @@ class NetActionController extends Zend_Controller_Action
         $host = NetActionController::$hostRW;
 
         //session variables
-        $this->_sesija->table->$table->queryString = $justCols;
-        $this->_sesija->table->$table->addTitle = $addTitle;
-        $this->_sesija->table->$table->actions = $actions;
+        @$this->_sesija->table->$table->queryString = $justCols;
+        @$this->_sesija->table->$table->addTitle = $addTitle;
+        @$this->_sesija->table->$table->actions = $actions;
 
         if ($addTitle == null){
             $addTitle = "Add a record";
