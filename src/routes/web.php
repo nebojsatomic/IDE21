@@ -23,7 +23,7 @@ Route::get('/aa', function () {
 */
 Route::get('/ide21_creator/interface', 'App\Http\Controllers\LInterfaceController@index' );
 
-Route::get('/pages/{pageid}', 'App\Http\Controllers\LPagesController@index' );
+//Route::get('/pages/{pageid}', 'App\Http\Controllers\LPagesController@index' ); // disable temporary, use ZF1 website
 
 // Legacy Framework Routes
 Route::any( "/{path?}", "App\Http\Controllers\LegacyController@index" )
