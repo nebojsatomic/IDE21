@@ -2112,7 +2112,7 @@ $('#chooseModulesForm').livequery('change', function(){
 
   var val = $('#moduleName option:selected').text();
 
-  $.get(absoluteUrl + val + "/admin/", function(data){
+  $.get(absoluteUrl + val + "/admin", function(data){
     //console.log(data);
     $('#modulesSelected').html(data);
 
