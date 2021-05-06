@@ -1878,7 +1878,7 @@ $('#addFolderLink').livequery('click', function(){
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
-  $.get(absoluteUrl + "images/add-folder/", function(data){
+  $.get(absoluteUrl + "images/add-folder", function(data){
     //console.log(data);
     $('#dialogDiv').html(data);
   });
@@ -2967,7 +2967,7 @@ $('#langName').livequery('change', function(){
 
 //EMPTY CACHE
 $('#emptyCacheButton').livequery('click', function(){
-  $.post(absoluteUrl + "creator/clean-cache/", function(data) {
+  $.post(absoluteUrl + "creator/clean-cache", function(data) {
 
     ajaxEmitMessage(data);
     setTimeout("$('#ajaxEventMask').click()", 1000);
