@@ -1865,6 +1865,14 @@ $('#addImageLink').livequery('click', function(){
 
       $('#dialogDiv').html(data);
 
+      // ajax upload
+      $('#uploadImagesForm').ajaxForm(function(data){
+          $('#dialogDiv').remove();
+          $('#folderNames').change();
+          ajaxEmitMessage(lang.FileUploaded);
+          setTimeout("clickMask()", 1000); //closing all
+      });
+
     });
     $('#dialogDiv').show('slow');
   }
