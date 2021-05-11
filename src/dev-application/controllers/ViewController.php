@@ -75,7 +75,7 @@ class ViewController extends NetActionController
         }
         $langCode = $this->_sesija->lang;
         
-echo 'AAA';
+
         //print_r($values);
         @$alias = $values['alias'];
         if ($alias != '') {
@@ -1012,7 +1012,7 @@ echo 'AAA';
                  //if (@preg_match("/{language:flags}/", "{" . $build_[0] . ":flags}" )) {
                  if (@strstr( "{" . $build_[0] . ":flags}" , "{language:flags}")) {
 
-                        $langsEnabled = NetActionController::getEnabledLanguages();
+                        $langsEnabled = @NetActionController::getEnabledLanguages();
                         /*
                         $langQ = $db->fetchAll("SELECT * FROM languages WHERE enabled = '1'");
                         foreach ($langQ as $lang) {
@@ -1222,7 +1222,7 @@ echo 'AAA';
             $Tvars[] = $parts;
         }
 
-        if (count(@$Tvars)) {
+        if (@count(@$Tvars)) {
             foreach ($Tvars as $Tvarss) {
                 $i = 0;
 
@@ -1243,7 +1243,7 @@ echo 'AAA';
 
         $count = 0;
         $cHI = 0;
-        if (count(@$build)) {
+        if (@count(@$build)) {
             foreach ($build as $build_){
                 @$pattern = $matches[$count];
                 /*

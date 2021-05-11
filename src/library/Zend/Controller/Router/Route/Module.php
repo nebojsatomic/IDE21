@@ -236,7 +236,7 @@ class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_A
                     $url .= self::URI_DELIMITER . $arrayValue;
                 }
             } else {
-                if ($encode) $value = urlencode($value);
+                if ($encode) $value = @urlencode($value);
                 $url .= self::URI_DELIMITER . $key;
                 $url .= self::URI_DELIMITER . $value;
             }

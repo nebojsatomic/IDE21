@@ -16,6 +16,11 @@ class VerifyCsrfToken extends Middleware
         'creator/*',
         'pages/*',
         'page/*',
-        'view/*'
+        'view/*',
+        'images/*',
+        'menu/*',
+        'category/*',
+        'modules/*',
+        'tables/*'
     ];
 }

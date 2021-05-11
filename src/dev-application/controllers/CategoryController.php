@@ -5,9 +5,9 @@
  * @category   CategoryController
  * @package    CMS-IDE
  *  Copyright (C) 2010-2021  Nebojsa Tomic
- *  
+ *
  *  This file is part of CMS-IDE.
- *     
+ *
  *  CMS-IDE is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
  *  License as published by the Free Software Foundation; either
@@ -22,51 +22,51 @@
  *  License along with this library; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * 
- * 
+ *
+ *
  */
- 
+
 require_once 'ViewController.php';
 require_once 'NeTFramework/NetActionController.php';
 
 class CategoryController extends NetActionController
 {
-    
-    
+
+
     public function init()
     {
         define("NET_PATH_SITE", $this->_nps);
         define("NET_PATH", $this->_np);
-        
+
         $this->view->host = $this->_host;
-                        
-        
+
+
         $request = $this->getRequest();
         if ($request->isXmlHttpRequest()) {
             $this->_helper->layout()->disableLayout();
         }
         $this->_sesija = new Zend_Session_Namespace('net');
         $this->_checkAccess();
-            
+
     }
-    
-    
-    
+
+
+
     public function indexAction()
     {
-    
-    
+
+
     }
     /**
      *Shows category items in selected category
-     */         
+     */
 
     public function showCategoryItemsAction()
     {
         $this->_helper->layout()->disableLayout();
         $langAdmin = $this->_sesija->langAdmin;
         $translator = Zend_Registry::get('Zend_Translate');
-        
+
         $values = $this->_request->getParams();
       	$cid = $values['catid'];
         //MENUS tab
@@ -74,15 +74,15 @@ class CategoryController extends NetActionController
         $catNameQ = $this->_db->fetchAll("SELECT name_$langAdmin FROM categories WHERE category_id = ?", array($cid));
 
         if ($this->_request->isPost() && $form->isValid($_POST)) {
- 
+
         } else {
             $this->view->form = $form;
             $this->view->cid = $cid;
-                //$translatedCatName = $catNameQ[0]['name_' . $langAdmin ]; 
+                //$translatedCatName = $catNameQ[0]['name_' . $langAdmin ];
                 //if($cid == "0"){
                  //   $translatedCatName = $translator->_("Uncategorized");//if cat name = Uncategorized
                 //} else {
-                    $translatedCatName = @$catNameQ[0]['name_' . $langAdmin ]; 
+                    $translatedCatName = @$catNameQ[0]['name_' . $langAdmin ];
                 //}
             $this->view->catName = @$translatedCatName;
         }
@@ -90,12 +90,12 @@ class CategoryController extends NetActionController
 
     /*
     * Displays category items form
-    */    
+    */
     private function _showCategoryItemsForm($cid)
     {
       	$db = Zend_Registry::get('db');
       	$langCode = $this->_sesija->langAdmin ;
-      	
+
         $catItemsArray = $db->fetchAll("SELECT pages_$langCode.id, pages_$langCode.title FROM pages_$langCode LEFT JOIN category_items ON pages_$langCode.category = category_items.category_id WHERE category = ? ", array($cid));
         $catItemsArray2 = $db->fetchAll("SELECT *, pages_$langCode.id, pages_$langCode.title FROM category_items LEFT JOIN  pages_$langCode  ON pages_$langCode.id = category_items.content_id WHERE category_items.category_id = ? GROUP BY pages_$langCode.id DESC", array($cid));
         $catItemsArrayAll = array_merge($catItemsArray, $catItemsArray2 );
@@ -103,8 +103,8 @@ class CategoryController extends NetActionController
             foreach($catItemsArrayAll as $catItem){
                 $catItems[$catItem['id']] = $catItem['title'];
             }
-            
-            
+
+
             $form = new Zend_Form(array(
                 'action' => '',
                 'id' => 'catItemsForm',
@@ -117,22 +117,22 @@ class CategoryController extends NetActionController
                         'style' => "width:100%",
                         'multioptions' => $catItems,
                     ))
-    
-    
+
+
             )));
-    
+
             return $form;
-        }    
+        }
     }
 
     /*
     * Displays add category form
-    */    
+    */
     private function _addCategoryForm()
     {
 
         $form = new Zend_Form(array(
-            'action' => ViewController::$host . 'category/add-category/',
+            'action' => ViewController::$host . 'category/add-category',
             'id' => 'addCategoryForm',
             'method' => 'post',
             'elements' => array(
@@ -150,8 +150,8 @@ class CategoryController extends NetActionController
         )));
 
         return $form;
-    
-    }    
+
+    }
 
 
 
@@ -160,12 +160,12 @@ class CategoryController extends NetActionController
         $this->_helper->layout()->disableLayout();
         //CATEGORIES tab
         $formAddCategory = $this->_addCategoryForm();
-        
+
         if ($this->_request->isPost() && $formAddCategory->isValid($_POST)) {
             $values = $this->_request->getParams();
             //print_r($values);
             $categoryName = $values['newCategoryName'] ;
-            
+
             $this->_helper->viewRenderer->setNoRender();
             $db = Zend_Registry::get('db');
             $db->query("INSERT INTO categories(name) VALUES(?)", array($categoryName));
@@ -176,27 +176,27 @@ class CategoryController extends NetActionController
             $jsonOut['out']['name'] = $categoryName;
             $this->view->categoryName = $categoryName;
 
-            echo json_encode($jsonOut);       
+            echo json_encode($jsonOut);
         } else {
             $this->view->formAddCategory = $formAddCategory;
-        }    
-    
-    }    
+        }
+
+    }
 
 
     /*
     * Displays add category item form
-    */    
+    */
     private function _addCategoryItemForm($catid)
     {
         $langCode = $this->_sesija->langAdmin;
         $pages = $this->_db->fetchAll("SELECT id, title FROM pages_$langCode WHERE category != $catid");
-        
+
         $pageArray[0] = "--Select--";
         foreach ($pages as $result) {
-            $pageArray[$result['id']] = $result['title'];                
+            $pageArray[$result['id']] = $result['title'];
         }
-                
+
         $form = new Zend_Form(array(
             'action' => NetActionController::$host . 'category/add-category-item/catid/' . $catid,
             'id' => 'addCategoryItemForm',
@@ -217,13 +217,13 @@ class CategoryController extends NetActionController
         )));
 
         return $form;
-    
-    }    
+
+    }
 
 
     /*
     * Add category item
-    */  
+    */
 
     public function addCategoryItemAction()
     {
@@ -232,77 +232,77 @@ class CategoryController extends NetActionController
         $values = $this->_request->getParams();
         $catid = $values['catid'];
         $formAddCategoryItem = $this->_addCategoryItemForm($catid);
-        
+
         if ($this->_request->isPost() && $formAddCategoryItem->isValid($_POST)) {
             $values = $this->_request->getParams();
 
             $pageItem = $values['newCategoryItemName'] ;
-            
+
             if($pageItem != '0') {
                 $langs = NetActionController::getLanguages();
                 foreach ($langs as $lang) {
                     //$this->_db->query("UPDATE pages_$lang SET  category = ? WHERE id = ?", array( $catid, $pageItem));
-    
+
                 }
                 $this->_db->query("INSERT INTO category_items(content_id, category_id) VALUES (?, ?) ", array($pageItem, $catid) );
                 $pageName = $this->_db->fetchAll("SELECT title FROM pages_$langCode WHERE id = ?", array( $pageItem));
                 //clean the cache
                 $this->_cachedPages->clean(Zend_Cache::CLEANING_MODE_ALL);
-                $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL); 
-                                           
+                $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);
+
                 $this->_helper->viewRenderer->setNoRender();
-    
+
                 $jsonOut['out']['catItemId'] = $pageItem;
                 $jsonOut['out']['message'] = $this->_translateCreator->_("Category item added!");
                 $jsonOut['out']['name'] = $pageName[0]['title'];
                 $this->view->categoryItemName = $pageName[0]['title'];
-    
+
                 echo json_encode($jsonOut);
             }
-                  
+
         } else {
             $this->view->formAddCategoryItem = $formAddCategoryItem;
-        }    
-    
-    } 
+        }
+
+    }
     /*
     * Delete category
-    */  
+    */
 
     public function delCategoryAction()
     {
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
-        
+
         if($this->_sesija->superadmin != "1") {//SUPERADMIN ONLY
             echo $this->_translate->_("Only superadministrator can do this!");
-            return;        
+            return;
         }
-        
+
         $values = $this->_request->getParams();
         $categoryId = $values['id'];
-        if ($categoryId != "") {    
+        if ($categoryId != "") {
             $db = Zend_Registry::get('db');
             $db->query("DELETE FROM categories WHERE category_id =?", array($categoryId));
             //$db->query("DELETE FROM menu_items WHERE menu_id =?", array($categoryId));
-            
+
             $langs = NetActionController::getLanguages();
             foreach ($langs as $lang) {
                 $db->query("UPDATE pages_$lang SET category = ? WHERE category = ?", array('0', $categoryId));
-            } 
+            }
             echo $this->_translateCreator->_("Category deleted");
         }
-         
+
     }
     /*
     * Delete category item
-    */  
+    */
 
     public function delCategoryItemAction()
     {
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
-        
+
         $values = $this->_request->getParams();
         $categoryId = $values['catid'];
         $contentId = $values['catitid'];
@@ -312,7 +312,7 @@ class CategoryController extends NetActionController
         $this->_cachedPages->clean(Zend_Cache::CLEANING_MODE_ALL);
         $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);
         echo $this->_translateCreator->_('Category item deleted');
-    } 
+    }
 
     /**
      *Function for renaming the category
@@ -323,16 +323,16 @@ class CategoryController extends NetActionController
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
 
-        $langCode = $this->_sesija->langAdmin;        
+        $langCode = $this->_sesija->langAdmin;
         $values = $this->_request->getParams();
         $categoryId = $values['cid'];
         $categoryName = $values['cat_name_lng'];
-   
+
         $this->_db->query("UPDATE categories SET name_$langCode = ? WHERE category_id = ?", array($categoryName, $categoryId));
         //clean the cache
         $this->_cachedPages->clean(Zend_Cache::CLEANING_MODE_ALL);
         $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);
-        echo $this->_translateCreator->_("Category is renamed!"); 
-    }               
-    
-}    
+        echo $this->_translateCreator->_("Category is renamed!");
+    }
+
+}

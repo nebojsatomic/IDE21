@@ -5,9 +5,9 @@
  * @category   CreatorController
  * @package    CMS-IDE
  *  Copyright (C) 2010-2021  Nebojsa Tomic
- *  
+ *
  *  This file is part of CMS-IDE.
- *     
+ *
  *  CMS-IDE is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
  *  License as published by the Free Software Foundation; either
@@ -22,8 +22,8 @@
  *  License along with this library; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * 
- * 
+ *
+ *
  */
 
 require_once 'NeTFramework/NetActionController.php';
@@ -32,7 +32,7 @@ require_once 'ViewController.php';
 class CreatorController extends NetActionController
 {
 
-    
+
     public function init()
     {
         //$this->_checkAccess();
@@ -41,29 +41,29 @@ class CreatorController extends NetActionController
         $this->view->hostRW = $this->_hostRW;
 
         define("NET_PATH_SITE", $this->_nps);
-        define("NET_PATH", $this->_np);      
-    
+        define("NET_PATH", $this->_np);
+
     }
-    
-    
+
+
         public function countPageReq()
         {
 				//require_once 'Zend/Session/Namespace.php';
-				
+
 				$defaultNamespace = new Zend_Session_Namespace('Default');
-				
+
 				if (isset($defaultNamespace->numberOfPageRequests)) {
 				    $defaultNamespace->numberOfPageRequests++; // this will increment for each page load.
 				} else {
 				    $defaultNamespace->numberOfPageRequests = 1; // first time
 				}
-				
+
 				echo "Page requests this session: ", $defaultNamespace->numberOfPageRequests;
-        }	            
-        	
-        	
-        	
-        
+        }
+
+
+
+
 
     public function indexAction()
     {
@@ -72,26 +72,26 @@ class CreatorController extends NetActionController
         if(file_exists($this->_nps . '/JS/language/creator/' . $this->_sesija->creatorLang . '.js') ){
             $this->view->headScript()->appendFile($this->_host . '/JS/language/creator/' . $this->_sesija->creatorLang . '.js?rnd=' . rand(),'text/javascript');
         } else {
-            
-            $this->view->headScript()->appendFile($this->_host . '/JS/language/creator/en.js?rnd=' . rand(),'text/javascript');        
+
+            $this->view->headScript()->appendFile($this->_host . '/JS/language/creator/en.js?rnd=' . rand(),'text/javascript');
         }
         $this->_helper->layout->setLayoutPath(NET_PATH . 'layouts/scripts')->setLayout('mainCreator');
         $this->view->version = $this->_version;//NeT Objects Version info
         $this->view->translate = $this->_translate;
-        
+
         if($this->_sesija->langAdmin == ""){
             $this->_sesija->langAdmin = "en";
         }
         $langCode = $this->_sesija->langAdmin ;
         //$langCode = "en" ;
         /*
-        $adminLang = "en"; 
-        require_once 'Zend/Translate.php'; 
+        $adminLang = "en";
+        require_once 'Zend/Translate.php';
         $translator = new Zend_Translate('array', $this->_np . 'languages/'. $adminLang . '.php', $adminLang );
-        Zend_Registry::set('Zend_Translate', $translator); 
+        Zend_Registry::set('Zend_Translate', $translator);
         */
 
-        //$this->view->currentRole = $this->_application->currentRole; 
+        //$this->view->currentRole = $this->_application->currentRole;
 
         $db = Zend_Registry::get('db');
       	try{//when selected language has been deleted, it needs to check if the languge exists, and if not use default lang
@@ -102,12 +102,12 @@ class CreatorController extends NetActionController
             $this->_sesija->langAdmin = $langCode;
             $res = $db->fetchAll("SELECT id, output, title, image, description, keywords, template_id FROM " . $this->_tblprefix . "pages_$langCode");
           	$resTmpl = $db->fetchAll("SELECT id, output, title FROM " . $this->_tblprefix . "templates_$langCode WHERE defaultTemplate = '1'");
-        
+
         }
-      	      	
+
         if($res){
             Zend_Registry::set('pageTitle', $res[0]['title']);//setting the title
-            $this->view->output = $res[0];        
+            $this->view->output = $res[0];
 
         }
         $sortedArray = sort($res);
@@ -116,21 +116,21 @@ class CreatorController extends NetActionController
         $this->view->pageId = @$res[$count-1]['id']+1;
         $this->view->pageImage = @$res[0]['image'];
         $this->view->templateName = @$resTmpl[0]['title'];
-        $this->view->description = @$res[0]['description'];        
-        $this->view->keywords = @$res[0]['keywords'];  
+        $this->view->description = @$res[0]['description'];
+        $this->view->keywords = @$res[0]['keywords'];
 
         //tepmlate chooser
         $formChangeTemplate = $this->_changeTemplateForm();
-        $this->view->changeTemplate = $formChangeTemplate;        
+        $this->view->changeTemplate = $formChangeTemplate;
 
-        
+
         $formAssignMenu = $this->_menuAssignForm();
-        $this->view->formAssignPageToMenu = $formAssignMenu;        
+        $this->view->formAssignPageToMenu = $formAssignMenu;
 
         $formAssignCategory = $this->_categoryAssignForm();
-        $this->view->formAssignPageToCategory = $formAssignCategory;  
+        $this->view->formAssignPageToCategory = $formAssignCategory;
 
-        
+
         //MENUS tab
         $formChooseMenu = $this->_menusShowForm();
         $this->view->formChooseMenu = $formChooseMenu;
@@ -140,7 +140,7 @@ class CreatorController extends NetActionController
         $this->view->formChooseCategory = $formChooseCategory;
 
         //LANGUAGES
-        $languages = $this->renderToTable("languages", null, $this->_translate->_("Add new Language"), array('add'=>'creator/add-language/', 'edit'=>'creator/edit-language/', 'delete'=>'creator/delete-language/')); 
+        $languages = $this->renderToTable("languages", null, $this->_translate->_("Add new Language"), array('add'=>'creator/add-language', 'edit'=>'creator/edit-language/', 'delete'=>'creator/delete-language/')); 
         $this->view->languages = $languages;
         $langChooserAdmin = $this->_langChooserAdminForm();
         $this->view->langChooserAdmin = $langChooserAdmin;
@@ -152,44 +152,44 @@ class CreatorController extends NetActionController
         //IMAGES tab
         $formImagesFolder = $this->_imagesFoldersForm();
         $this->view->imagesFoldersForm = $formImagesFolder;
-        
+
         //LOAD CSS FILE
         $cssFile = file_get_contents( NET_PATH_SITE . "CSS/userCSS/default_" . $this->_sesija->loggedUser . ".css");
         $this->view->css = $cssFile;
         $this->_backupCSS($cssFile);//make secure all the css written so far for the logged user
-        
-        
+
+
         //LOAD JS FILE
-        $jsFile = file_get_contents( NET_PATH_SITE . "JS/userJS/default_" . $this->_sesija->loggedUser . ".js"); 
+        $jsFile = file_get_contents( NET_PATH_SITE . "JS/userJS/default_" . $this->_sesija->loggedUser . ".js");
         $this->view->js = $jsFile;
-        $this->_backupJS($jsFile);//make secure all the js written so far for the logged user 
+        $this->_backupJS($jsFile);//make secure all the js written so far for the logged user
 
         //LOAD SETTINGS
-        $settings = $this->renderToTable("settings", "id, settingName, description, value", $this->_translate->_("Add new Setting"), array('add' => '', 'edit' => '', 'delete' => 'creator/delete-setting/') ); 
+        $settings = $this->renderToTable("settings", "id, settingName, description, value", $this->_translate->_("Add new Setting"), array('add' => '', 'edit' => '', 'delete' => 'creator/delete-setting/') );
         $this->view->settings = $settings;
 
-                
-        
+
+
     }
     public function manageAllPagesAction()
     {
         $this->_checkAccess();
         // turn off layout and ViewRenderer
-        $this->_helper->layout()->disableLayout();        
+        $this->_helper->layout()->disableLayout();
 	      $this->_helper->viewRenderer->setNoRender();
-        $settings = $this->renderToTableManagePages("pages_" . $this->_sesija->langAdmin, "id, title, alias, image, homepage, check_access, published", "Add new Page", array('add' => '', 'edit' => '', 'delete' => 'creator/delete-page/') ); 
+        $settings = $this->renderToTableManagePages("pages_" . $this->_sesija->langAdmin, "id, title, alias, image, homepage, check_access, published", "Add new Page", array('add' => '', 'edit' => '', 'delete' => 'creator/delete-page/') );
         echo $settings;
-    } 
- 
- 
+    }
+
+
      private function _backupCSS($css)
     {
     $filename = NET_PATH_SITE . 'CSS/userCSS/default_' . $this->_sesija->loggedUser . '.css.bak';
     $somecontent = $css;
-    
+
     // Let's make sure the file exists and is writable first.
     //if (is_writable($filename)) {
-    
+
         // In our example we're opening $filename in append mode.
         // The file pointer is at the bottom of the file hence
         // that's where $somecontent will go when we fwrite() it.
@@ -198,36 +198,36 @@ class CreatorController extends NetActionController
              //return $message;
              exit;
         }
-    
+
         // Write $somecontent to our opened file.
         if (fwrite($handle, $somecontent) === FALSE) {
             //$message = "Cannot write to file ($filename)";
             //return $message;
             exit;
         }
-    
+
         $message =  "Success, wrote ($somecontent) to file ($filename)";
         return true;
         fclose($handle);
-    
+
     //} else {
     //    $message =  "The file $filename is not writable";
         //return $message;
     //}
-    
+
     //return $message;
     }
-    
-    
-    
+
+
+
     private function _backupJS($js)
     {
     $filename = NET_PATH_SITE . 'JS/userJS/default_' . $this->_sesija->loggedUser . '.js.bak';
     $somecontent = $js;
-    
+
     // Let's make sure the file exists and is writable first.
     //if (is_writable($filename)) {
-    
+
         // In our example we're opening $filename in append mode.
         // The file pointer is at the bottom of the file hence
         // that's where $somecontent will go when we fwrite() it.
@@ -235,36 +235,36 @@ class CreatorController extends NetActionController
              //echo "Cannot open file ($filename)";
              exit;
         }
-    
+
         // Write $somecontent to our opened file.
         if (fwrite($handle, $somecontent) === FALSE) {
             //echo "Cannot write to file ($filename)";
             exit;
         }
-    
+
         //echo "Success, wrote ($somecontent) to file ($filename)";
-    
+
         fclose($handle);
-    
+
     //} else {
         //echo "The file $filename is not writable";
     //}
-    
-    
+
+
     return true;
     }
-    
+
 
     public function chooseImageFolder()
     {
-        
-    
+
+
     }
 
 
     /*
     * Displays imagesFolders form
-    */    
+    */
     private function _imagesFoldersForm()
     {
 
@@ -294,28 +294,28 @@ class CreatorController extends NetActionController
                         'size' => '8',
                         'multioptions' => $folderArray,
                     )),
-    
+
             )));
-    
+
             return $form;
         }
-    
-    }    
+
+    }
 
 
-    
-    
+
+
     public function tableAction()
     {
         $this->_checkAccess();
         $values = $this->_request->getParams();
         print_r($values);
-    
+
     }
 
     /*
     * Displays categories form for assigning to the page
-    */    
+    */
     private function _categoryAssignForm()
     {
 
@@ -326,9 +326,9 @@ class CreatorController extends NetActionController
         $catArray[0] = "Uncategorized";
         foreach ($res as $result) {
             $catArray[$result['category_id']] = $result['name'];
-            
+
         }
-        if (!empty($catArray) ) {        
+        if (!empty($catArray) ) {
         $form = new Zend_Form(array(
             'action' => $this->view->host . 'page/assign-category/',
             'id' => 'assignPageCategoryForm',
@@ -345,17 +345,17 @@ class CreatorController extends NetActionController
                 )),
 
         )));
-        
+
         return $form;
         }
-    }    
+    }
 
 
 
 
     /*
     * Displays menus form for assign to the page
-    */    
+    */
     private function _menuAssignForm()
     {
 
@@ -366,9 +366,9 @@ class CreatorController extends NetActionController
         $pageArray['select'] = "--Select--";
         foreach ($res as $result) {
             $pageArray[$result['menu_id']] = $result['name'];
-            
+
         }
-        if (!empty($pageArray) ) {          
+        if (!empty($pageArray) ) {
         $form = new Zend_Form(array(
             'action' => $this->view->host . 'page/assign-menu/',
             'id' => 'assignPageMenuForm',
@@ -388,12 +388,12 @@ class CreatorController extends NetActionController
 
         return $form;
         }
-    }    
+    }
 
 
     /*
     * Displays menus form
-    */    
+    */
     private function _menusShowForm()
     {
 
@@ -404,9 +404,9 @@ class CreatorController extends NetActionController
         //$pageArray['select'] = "--Select--";
         foreach ($res as $result) {
             $pageArray[$result['menu_id']] = $result['name'];
-            
+
         }
-        if (!empty($pageArray) ) {          
+        if (!empty($pageArray) ) {
         $form = new Zend_Form(array(
             'action' => $this->view->host . 'page/choose-menu/',
             'id' => 'chooseMenuForm',
@@ -424,14 +424,14 @@ class CreatorController extends NetActionController
 
         return $form;
         }
-    
-    }    
+
+    }
 
 
 
     /*
     * Displays languages form for Creator
-    */    
+    */
     private function _langChooserAdminForm()
     {
 
@@ -446,9 +446,9 @@ class CreatorController extends NetActionController
                 $langSelected = $result['code'];
                 $this->_sesija->langAdmin = $result['code'];
             }
-            
+
         }
-        
+
         if (!empty($langArray) ) {
             $form = new Zend_Form(array(
                 'action' => $this->view->host . 'creator/change-language/',
@@ -465,12 +465,12 @@ class CreatorController extends NetActionController
                         'multioptions' => $langArray,
                         'value' => $langSelected,
                     )),
-    
+
             )));
-    
+
             return $form;
         }
-    
+
     }
 
 
@@ -478,25 +478,25 @@ class CreatorController extends NetActionController
     {
         $this->_checkAccess();
         // turn off layout and ViewRenderer
-        $this->_helper->layout()->disableLayout();        
+        $this->_helper->layout()->disableLayout();
 	      $this->_helper->viewRenderer->setNoRender();
-	      
+
         $values = $this->_request->getParams();
         $adminLang = $values['code'];
-        
+
         $this->_sesija->langAdmin = $adminLang;
         $this->_sesija->lang = $adminLang;//language on the site, so that is the same as selected in creator
 
-        Zend_Registry::set('langCreator', $this->_sesija->langAdmin ); 
+        Zend_Registry::set('langCreator', $this->_sesija->langAdmin );
         Zend_Registry::set('langCode', $this->_sesija->lang); //language on the site, so that is the same as selected in creator
-        echo $this->_translate->_("Language is changed!");     
-    
-    }  
+        echo $this->_translate->_("Language is changed!");
+
+    }
 
 
     /*
     * Displays categories form
-    */    
+    */
     private function _categoriesShowForm()
     {
 
@@ -507,9 +507,9 @@ class CreatorController extends NetActionController
         $categoryArray[0] = "Uncategorized";
         foreach ($res as $result) {
             $categoryArray[$result['category_id']] = $result['name'];
-            
+
         }
-        
+
         if (!empty($categoryArray) ) {
             $form = new Zend_Form(array(
                 'action' => $this->view->host . 'category/choose-category/',
@@ -523,18 +523,18 @@ class CreatorController extends NetActionController
                         'size' => '8',
                         'multioptions' => $categoryArray,
                     )),
-    
+
             )));
-    
+
             return $form;
         }
-    
-    }    
+
+    }
 
 
     /*
     * Displays modules form
-    */    
+    */
     private function _modulesShowForm()
     {
 
@@ -544,12 +544,12 @@ class CreatorController extends NetActionController
                //module does not exist in the db, so we need to insert
                $langCode = $this->_sesija->lang;
                $defaultTemplate = $this->_db->fetchAll("SELECT id FROM " . $this->_tblprefix . "templates_$langCode WHERE defaultTemplate = '1'" );
-                
-               $dbAdapter = Zend_Db_Table::getDefaultAdapter();         
+
+               $dbAdapter = Zend_Db_Table::getDefaultAdapter();
         //print_r($resDB);
         $res = array();
         if ($handle = opendir($this->_np . '/controllers')) {
-        
+
             /* loop over the controllers directory and find controller which is module. */
             $cCount = 0;
             while (false !== ($file = readdir($handle))) {
@@ -557,56 +557,56 @@ class CreatorController extends NetActionController
                 if($file == '.' || $file == '..' || $file == 'NeTFramework' ) {continue;}
                 require_once ($file);
                 if(method_exists(str_replace('.php', '', $file), 'isModule')){
-                $controllerName = str_replace('.php', '', $file); 
- 
+                $controllerName = str_replace('.php', '', $file);
+
                     $res[] = array('moduleId'=> $cCount, 'moduleName'=>str_replace('Controller.php', '', $file) );
                     $cCount++;
 
                 }
             }
-        
+
             closedir($handle);
         }
         //first make records from the db available
          $i = 0;
         foreach ($resDB as $resultDB) {
-            //$moduleArray[$result['moduleId']] = $result['moduleName']; 
-            //if(in_array($resDB[$i]['moduleName'],$res)) { 
-       
+            //$moduleArray[$result['moduleId']] = $result['moduleName'];
+            //if(in_array($resDB[$i]['moduleName'],$res)) {
+
             $moduleArray[$resDB[$i]['moduleId']] = $resDB[$i]['moduleName'];
             //}
-            $i++;   
+            $i++;
         }
         //then go through folder of controllers and insert in the db if the record doesnt exist
         $i=0;
         foreach ($res as $result) {
-            //$moduleArray[$result['moduleId']] = $result['moduleName'];            
+            //$moduleArray[$result['moduleId']] = $result['moduleName'];
             //$moduleArray[$resDB[$i]['moduleId']] = $resDB[$i]['moduleName'];
             if(in_array($result['moduleName'],$moduleArray ) && ($resDB[$i]['enabled'] == 1 || $resDB[$i]['enabled'] == 0  ) ) {
                 //$moduleArray[$i] = $result['moduleName'];
             } else {
- 
+
                $dbAdapter->insert($this->_tblprefix . 'modules',array(
               	'templateId'  => $defaultTemplate[0]['id'],
               	'moduleName' => $result['moduleName'],
               	'enabled' => 1 ));
-               
+
               $lastinsertid =  $dbAdapter->lastInsertId();
                $moduleArray[$lastinsertid] = $result['moduleName'];
             }
 
-        
-            
-            $i++;   
+
+
+            $i++;
         }
-            
+
         $i1 = 0;
-        foreach ($resDB as $resultDB) {       
+        foreach ($resDB as $resultDB) {
                   if($resultDB['enabled'] == 0  ){
-                 unset( $moduleArray[$resultDB['moduleId']] ); 
-            }  
-            $i1++;   
-        }        
+                 unset( $moduleArray[$resultDB['moduleId']] );
+            }
+            $i1++;
+        }
         if (!empty($moduleArray) ) {
             $form = new Zend_Form(array(
                 'action' => $this->_host . 'modules/choose-module/',
@@ -620,13 +620,13 @@ class CreatorController extends NetActionController
                         'size' => '8',
                         'multioptions' => $moduleArray,
                     )),
-    
+
             )));
-    
+
             return $form;
         }
-    
-    }    
+
+    }
 
 
 
@@ -636,21 +636,21 @@ class CreatorController extends NetActionController
     {
       	$db = Zend_Registry::get('db');
       	$langCode = $this->_sesija->langAdmin;
-      	
+
         $res = $db->fetchAll("SELECT id, title, defaultTemplate FROM " . $this->_tblprefix . "templates_$langCode");
         //$resTid = $db->fetchAll("SELECT template_id FROM pages WHERE defaultTemplate = '1'");
 
         //$templateArray['select'] = "--Select--";
         $templateArray[0] = $this->_translateCreator->_("--Select--");
         foreach ($res as $result) {
-            
+
             $templateArray[$result['id']] = $result['title'];
             if ($result['defaultTemplate'] == "1") {
                 $valueSelected = @$result['id'];
             }
-            
+
         }
-        if (!empty($templateArray) ) {          
+        if (!empty($templateArray) ) {
         $form = new Zend_Form(array(
             'action' => $this->view->host . 'page/change-template/',
             'id' => 'changeTemplateForm',
@@ -669,8 +669,8 @@ class CreatorController extends NetActionController
         )));
 
         return $form;
-        }    
-    } 
+        }
+    }
 
 
 
@@ -703,7 +703,7 @@ class CreatorController extends NetActionController
                 return;
             }
 
-            
+
             $username = $resultRow['username'];
             $userStatus = $db->fetchAll("SELECT userId, status FROM " . $this->_tblprefix . "users where username ='$username'");
 
@@ -728,7 +728,7 @@ class CreatorController extends NetActionController
                 $this->_application->currentRole = $role;
                 */
                 $roleId = $this->_db->fetchAll("SELECT " . $this->_tblprefix . "users.roleId, " . $this->_tblprefix . "users.status, " . $this->_tblprefix . "users.superadmin as superadmin, " . $this->_tblprefix . "roles.name as roleName, " . $this->_tblprefix . "roles.roleId as roleID FROM " . $this->_tblprefix . "users LEFT JOIN " . $this->_tblprefix . "roles ON " . $this->_tblprefix . "roles.roleId = " . $this->_tblprefix . "users.roleId WHERE username = ?", array($resultRow['username']));
-                
+
                 $this->_sesija->currentRole = $roleId[0]['roleName'];//current ROLE  //"administrator";
                 $this->_sesija->user = $resultRow['username'];
                 $this->_sesija->userId = $userStatus[0]['userId'];
@@ -742,15 +742,16 @@ class CreatorController extends NetActionController
 
 
             $config = new Zend_Config_Ini('config.ini', $this->_server);
-                               
+
                 if($this->_sesija->currentRole == "administrator"){
                     setcookie("cLang", $values['creatorLang'], time()+60*60*24*30, "/" );
                     $this->_sesija->creatorLang = $values['creatorLang'];
-                    $this->_redirect($this->_hostRW . $config->adminUrl);
+                    //$this->_redirect($this->_hostRW . $config->adminUrl);
+                    $this->_redirect($this->_hostRW . $config->newAdminUrl); // temporary
                 } else {
                     $this->_redirect($this->_hostRW . $config->adminUrl . "/login");
                 }
-                
+
                 //If remember_me is checked stay logged
                 /*
                 if ($values['remember_me'] == 1) {
@@ -789,16 +790,17 @@ class CreatorController extends NetActionController
         foreach ($languageCodes as $langK => $langV) {
             $lc = $langK;
             //ovde if file exists in languages/creator folder
-            if (file_exists( NET_PATH . "languages/creator/" .  "$lc.php")){                
+            if (file_exists( NET_PATH . "languages/creator/" .  "$lc.php")){
             } else {
                 unset($languageCodes[$lc]);
             } //ako fajl ne postoji unset array vrednost
-                    
+
         }
         asort($languageCodes);
 
         $creatorLangsArray = $languageCodes;//languages that are available for choosing
-        
+        isset($_COOKIE['cLang']) ? $cL = $_COOKIE['cLang'] : $cL = 'en';
+
         $form = new Zend_Form(
             array(
                 'method' => 'post',
@@ -818,7 +820,7 @@ class CreatorController extends NetActionController
                     'size' => '1',
                     'style' => 'margin:5px;width:90%;float:right;',
                     'multioptions' => $creatorLangsArray,
-                    'value' => $_COOKIE['cLang'],
+                    'value' =>  $cL ,
                 )),
 
                     'submit' => array('submit', array(
@@ -840,14 +842,15 @@ class CreatorController extends NetActionController
         $this->_sesija->userId = "";
         $this->_sesija->superadmin = 0;
         $this->compileCSSandJS();
-        $this->_redirect($this->_hostRW);   
-    
+        $config = new Zend_Config_Ini('config.ini', $this->_server);
+        $this->_redirect($this->_hostRW . $config->adminUrl . "/login");
+
     }
 
     public function compileCSSandJS()
     {
         $folderName = "userCSS";
-        $contentOfCSS = "";        
+        $contentOfCSS = "";
         if ($handle = opendir(NET_PATH_SITE . "CSS/" . $folderName )) {
             while (false !== ($file = readdir($handle))) {
                 if ($file != "." && $file != "..") {
@@ -866,18 +869,18 @@ class CreatorController extends NetActionController
                      return;
 
                 }
-            
+
                 // Write $somecontent to our opened file.
                 if (fwrite($handle, $contentOfCSS) === FALSE) {
                     $message = "Cannot write to file ";
                     return;
                 }
-                fclose($handle);            
-        }    
-        
+                fclose($handle);
+        }
+
         //NOW DO JS
         $folderName = "userJS";
-        $contentOfCSS = "";        
+        $contentOfCSS = "";
         //get contents of frontend and view js files
         if (file_exists(NET_PATH_SITE . "JS/" . "frontend.js")){
             $contentOfCSS .= '/*THIS IS FROM frontend.js - BEGIN*/' . "\n";
@@ -889,7 +892,7 @@ class CreatorController extends NetActionController
             $contentOfCSS .= file_get_contents( NET_PATH_SITE . "JS/" . "view.js" );
             $contentOfCSS .= '/*THIS IS FROM view.js - END*/' . "\n";
         }
-        
+
         if ($handle = opendir(NET_PATH_SITE . "JS/" . $folderName )) {
             while (false !== ($file = readdir($handle))) {
                 if ($file != "." && $file != "..") {
@@ -908,161 +911,161 @@ class CreatorController extends NetActionController
                      return;
 
                 }
-            
+
                 // Write $somecontent to our opened file.
                 if (fwrite($handle, $contentOfCSS) === FALSE) {
                     $message = "Cannot write to file ";
                     return;
                 }
-                fclose($handle);            
+                fclose($handle);
         }
     }
-    
+
     /**
      *Function for generating cache
-     */         
-    
+     */
+
     public function generateCacheAction()
     {
         $this->_checkAccess();
         // turn off layout and ViewRenderer
-        $this->_helper->layout()->disableLayout();        
+        $this->_helper->layout()->disableLayout();
 	      $this->_helper->viewRenderer->setNoRender();
 	      $roles = $this->getRoles();
-	      
-	      //$langCode = $this->_sesija->langAdmin; 
+
+	      //$langCode = $this->_sesija->langAdmin;
 	      $langs = $this->getLanguages();
 	      $i = 0;
-        
+
         // This cache doesn't expire, needs to be cleaned manually.
         $frontendOptions = array('caching' => true, 'lifetime' => null, 'ignore_user_abort' => true, 'automatic_serialization' => true);
         $backendOptions = array('cache_dir' => NET_PATH . 'cache/');
-        
+
         $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
-        
+
         foreach($langs as $langCode){
             $pages = $this->_db->fetchAll("SELECT " . $this->_tblprefix . "pages_$langCode.output as outputPage, " . $this->_tblprefix . "pages_$langCode.description, " . $this->_tblprefix . "templates_$langCode.output as outputTemplate, " . $this->_tblprefix . "pages_$langCode.title, " . $this->_tblprefix . "pages_$langCode.alias, " . $this->_tblprefix . "pages_$langCode.id, " . $this->_tblprefix . "pages_$langCode.template_id FROM " . $this->_tblprefix . "pages_$langCode LEFT JOIN " . $this->_tblprefix . "templates_$langCode ON " . $this->_tblprefix . "pages_$langCode.template_id = " . $this->_tblprefix . "templates_$langCode.id");
 
 
-            
+
             foreach($pages as $page){
                 $output = $page['outputPage'];
                 $outputTemplate = $page['outputTemplate'];
                 $id = $page['id'];
-               foreach($roles as $role){  
+               foreach($roles as $role){
                     if ($results = $cache->load('page' . $id . "_" . $langCode . "_" . $role)  ) {
                         continue;
-                    }//if this cache exists already , dont do unrequired queries                  
-                             
+                    }//if this cache exists already , dont do unrequired queries
+
                     $i++;
                     $out =  ViewController::_templatePrepare($output . $outputTemplate) ;
-                
-                    $cacheResult = array('output' => $out, 'title' => $page['title'], 'metaDesc' => $page['description']  );                
+
+                    $cacheResult = array('output' => $out, 'title' => $page['title'], 'metaDesc' => $page['description']  );
                     $cache->save($cacheResult, 'page' . $id . "_" . $langCode . "_" . $role );
                 }
-                
+
             }
         }
-        
+
    //print_r($pages);
-            
+
     echo $i;
-            
-    
-    }     
-    
+
+
+    }
+
     /**
      *Function for cleaning cache
-     */         
-    
+     */
+
     public function cleanCacheAction()
     {
         $this->_checkAccess();
         // turn off layout and ViewRenderer
-        $this->_helper->layout()->disableLayout();        
+        $this->_helper->layout()->disableLayout();
 	      $this->_helper->viewRenderer->setNoRender();
-        
+
         // This cache doesn't expire, needs to be cleaned manually.
         $frontendOptions = array('caching' => true, 'lifetime' => null, 'ignore_user_abort' => true, 'automatic_serialization' => true);
         $backendOptions = array('cache_dir' => NET_PATH . 'cache/');
-        
+
         $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
         $cache->clean(Zend_Cache::CLEANING_MODE_ALL);
         $this->_cachedPages->clean(Zend_Cache::CLEANING_MODE_ALL);
         $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);
-        echo $this->_translateCreator->_("Cache is cleaned!");        
-            
-    
-    }  
+        echo $this->_translateCreator->_("Cache is cleaned!");
+
+
+    }
 
     /**
      *Function for building search index
-     */         
-    
+     */
+
     public function buildSearchIndexAction()
     {
         $this->_checkAccess();
         // turn off layout and ViewRenderer
-        $this->_helper->layout()->disableLayout();        
+        $this->_helper->layout()->disableLayout();
 	      $this->_helper->viewRenderer->setNoRender();
 	      $roles = $this->getRoles();
 	      $i = 0;
-	      //$langCode = $this->_sesija->langAdmin; 
+	      //$langCode = $this->_sesija->langAdmin;
 	      $langs = $this->getLanguages();
-        
+
         // This cache doesn't expire, needs to be cleaned manually.
         $frontendOptions = array('caching' => true, 'lifetime' => null, 'ignore_user_abort' => true, 'automatic_serialization' => true);
         $backendOptions = array('cache_dir' => NET_PATH . 'cache/');
-        
+
         $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
 
         foreach($langs as $langCode){
             $pages = $this->_db->fetchAll("SELECT " . $this->_tblprefix . "pages_$langCode.output as outputPage, " . $this->_tblprefix . "pages_$langCode.description, " . $this->_tblprefix . "templates_$langCode.output as outputTemplate, " . $this->_tblprefix . "pages_$langCode.title, " . $this->_tblprefix . "pages_$langCode.alias, " . $this->_tblprefix . "pages_$langCode.id, " . $this->_tblprefix . "pages_$langCode.template_id FROM " . $this->_tblprefix . "pages_$langCode LEFT JOIN " . $this->_tblprefix . "templates_$langCode ON " . $this->_tblprefix . "pages_$langCode.template_id = " . $this->_tblprefix . "templates_$langCode.id");
-            
+
             foreach($pages as $page){
                 $output = $page['outputPage'];
                 $outputTemplate = $page['outputTemplate'];
                 $id = $page['id'];
-               
-                
+
+
                 foreach($roles as $role){
                     if (!$results = $cache->load('page' . $id . "_" . $langCode . "_" . $role)  ) {
                         continue;
-                    }//if this cache exists already , dont do unrequired queries                 
+                    }//if this cache exists already , dont do unrequired queries
                     $i++;
                     $out =  ViewController::_templatePrepare($output . $outputTemplate) ;
-                
-                    $cacheResult = array('output' => $out, 'title' => $page['title'], 'metaDesc' => $page['description']  );                
+
+                    $cacheResult = array('output' => $out, 'title' => $page['title'], 'metaDesc' => $page['description']  );
                     $cache->save($cacheResult, 'page' . $id . "_" . $langCode . "_" . $role );
                 }
             }
         }
-        
+
    //print_r($pages);
-            
+
     echo $i;
     }
 
     /**
      *Function for cleaning searchIndex cache
-     */         
-    
+     */
+
     public function cleanSearchIndex()
     {
         $this->_checkAccess();
         // turn off layout and ViewRenderer
-        $this->_helper->layout()->disableLayout();        
+        $this->_helper->layout()->disableLayout();
 	      $this->_helper->viewRenderer->setNoRender();
-        
+
         // This cache doesn't expire, needs to be cleaned manually.
         $frontendOptions = array('caching' => true, 'lifetime' => null, 'ignore_user_abort' => true, 'automatic_serialization' => true);
         $backendOptions = array('cache_dir' => NET_PATH . 'searchIndex/');
-        
+
         $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
         $cache->clean(Zend_Cache::CLEANING_MODE_ALL);
-        
-        //echo "Search Index is cleaned!";   
-    } 
+
+        //echo "Search Index is cleaned!";
+    }
 
 
     private function _addLanguageForm($languageCodes)
@@ -1085,7 +1088,7 @@ class CreatorController extends NetActionController
                 ))
               )));
           $form->addDisplayGroup(array('id'),'add_lang',array('legend' => $this->translator->_('Add new Language') ));
-                               
+
 
           return $form;
     }
@@ -1096,7 +1099,7 @@ class CreatorController extends NetActionController
         $this->_checkAccess();
         if($this->_sesija->superadmin != "1") {//SUPERADMIN ONLY
             echo $this->_translate->_("Only superadministrator can do this!");
-            return;        
+            return;
         }
         $this->_helper->layout()->disableLayout();
         $languageCodes = (array) parse_ini_file( NET_PATH . 'languages/languages.ini');
@@ -1119,7 +1122,7 @@ class CreatorController extends NetActionController
 
             //Do query
             $this->_db->query("INSERT INTO " . $this->_tblprefix . "languages (code, name, enabled, isDefault) VALUES (?, ?, ?, ?)", array($values['id'], $languageCodes[$values['id']], 1, 0) );
-            
+
             //get data into outfile from already created pages and templates for default language
             $tableName  = "pages_$defaultLang";
             $backupFile = NET_PATH . 'pages.sql';
@@ -1128,7 +1131,7 @@ class CreatorController extends NetActionController
             }
             $pagesTableArray = $this->_getDataFromTableInArray($tableName);
             //$this->_getDataFromTable($backupFile, $tableName);
-            
+
             //$query      = "SELECT * INTO OUTFILE '$backupFile' FROM $tableName";
             //$this->_db->query($query);
 
@@ -1141,7 +1144,7 @@ class CreatorController extends NetActionController
             //$this->_getDataFromTable($backupFile, $tableName);
             //$query      = "SELECT * INTO OUTFILE '$backupFile' FROM $tableName";
             //$this->_db->query($query);
-            
+
             $pageSql = 'CREATE TABLE ' . $this->_tblprefix . 'pages_' . $values['id'] . ' (
                   id int(10) NOT NULL auto_increment,
                   projectId int(10) NOT NULL default "1",
@@ -1166,7 +1169,7 @@ class CreatorController extends NetActionController
                   PRIMARY KEY  (id),
                   KEY alias (alias)
                 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;';
-             
+
              $templateSql = 'CREATE TABLE ' . $this->_tblprefix . 'templates_' . $values['id'] . ' (
                   id int(10) NOT NULL auto_increment,
                   projectId int(10) NOT NULL default "1",
@@ -1186,7 +1189,7 @@ class CreatorController extends NetActionController
                 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;';
             $this->_db->query($pageSql);
             $this->_db->query($templateSql);
-            
+
             //LOAD DATA TO NEW TABLES
             $tableName  = $this->_tblprefix . 'pages_' . $values['id'];
             $this->_fillTable($tableName, $pagesTableArray );//filling the new tables with the default content
@@ -1203,19 +1206,19 @@ class CreatorController extends NetActionController
 
                 //CREATE LANGUAGE FILE , SO THERE COULDN'T BE ANY TRANSLATION ERRORS
             $filename = NET_PATH . "languages/" . $values['id'] . ".php";
-            if(!file_exists($filename )){                
+            if(!file_exists($filename )){
                 if (!$handle = fopen($filename, 'w+') ) {
                      $message = "Cannot open file ";
                      //return;
                 }
                 $defaultLang = Zend_Registry::get('defaultLang');//content for the language file taken from default language file
-                $contentForLangFile = file_get_contents(NET_PATH . "languages/" . $defaultLang . ".php") ;          
+                $contentForLangFile = file_get_contents(NET_PATH . "languages/" . $defaultLang . ".php") ;
                 // Write $somecontent to our opened file.
                 if (fwrite($handle, $contentForLangFile) === FALSE) {
                     $message = "Cannot write to file ";
                     //return;
                 }
-                fclose($handle);  
+                fclose($handle);
             }
 
             // ALTER menu_items TABLE
@@ -1228,21 +1231,21 @@ class CreatorController extends NetActionController
 
             //put in tableregistry
             $this->_db->query("INSERT INTO " . $this->_tblprefix . "tableregistry  (tablePK ,name ,core) VALUES (?, ?, ?)", array('id', 'pages_' . $values['id'], 0) );
-            
-            $languages = $this->renderToTable($this->_tblprefix . "languages", null, "Add new Language", array('add'=>'creator/add-language/', 'edit'=>'creator/edit-language/', 'delete'=>'creator/delete-language/')); 
+
+            $languages = $this->renderToTable($this->_tblprefix . "languages", null, "Add new Language", array('add'=>'creator/add-language/', 'edit'=>'creator/edit-language/', 'delete'=>'creator/delete-language/'));
             $langComboFill = '<option label="' . $languageCodes[$values['id']] . '" value="' . $values['id'] . '"> ' . $languageCodes[$values['id']] . '</option>';
-            $this->view->data =  $languages; 
+            $this->view->data =  $languages;
         // turn off layout and ViewRenderer
-        $this->_helper->layout()->disableLayout();        
+        $this->_helper->layout()->disableLayout();
 	      $this->_helper->viewRenderer->setNoRender();
 	      //clean cache
         $this->cleanCache();
             //echo $languages;
             $jsonOut['out']['languages'] = $languages;
             $jsonOut['out']['message'] = "Language added!";
-            $jsonOut['out']['comboFill'] = $langComboFill;            
-            echo json_encode($jsonOut);       
-        } else {        
+            $jsonOut['out']['comboFill'] = $langComboFill;
+            echo json_encode($jsonOut);
+        } else {
             echo $form;
         }
 
@@ -1250,7 +1253,7 @@ class CreatorController extends NetActionController
 
     /**
      *This function should be removed from the code , since it is substituted with the _fillTable
-     */         
+     */
     private function _getDataFromTable($file, $table)
     {
             $desc = $this->_db->fetchAll("DESCRIBE $table");
@@ -1258,14 +1261,14 @@ class CreatorController extends NetActionController
             //print_r($desc);
             $srStr = "";
             foreach($sr as $srRow){
-                
+
                 foreach($desc as $field){
                     $str = str_replace("\t", "", $srRow[$field['Field']] );//remove all existing tabs if any
                     $srStr .=  str_replace("\n", "", $str) . "\t" ;
                 }
                 $srStr = rtrim(str_replace("\r", "",$srStr), "\t");
                 $srStr .= "\n" ;
-                
+
             }
                 $filename = $file;
                 if (!$handle = fopen($filename, 'w+') ) {
@@ -1273,29 +1276,29 @@ class CreatorController extends NetActionController
                     // return;
 
                 }
-            
+
                 // Write $somecontent to our opened file.
                 if (fwrite($handle, $srStr) === FALSE) {
                     $message = "Cannot write to file ";
                     //return;
-                }            
-                chmod($filename, 0666);    
-    
+                }
+                chmod($filename, 0666);
+
     }
-    
+
     private function _getDataFromTableInArray($table)
     {
         $desc = $this->_db->fetchAll("DESCRIBE $table");
         $tableQ = $this->_db->fetchAll("SELECT * FROM $table");
         $returnArray = array('desc'=>$desc, 'table'=>$tableQ);
-        
-        return $returnArray;    
-    }    
+
+        return $returnArray;
+    }
 
     /**
-     *Function for filling the new created table for the new language with 
-     *content that is already existing in other tables     
-     */         
+     *Function for filling the new created table for the new language with
+     *content that is already existing in other tables
+     */
     private function _fillTable($table, $array)
     {
         $rowNo = 0;
@@ -1313,19 +1316,19 @@ class CreatorController extends NetActionController
                 $plholders .= "?, ";//setup placehoslders
             }
             $plholders = rtrim($plholders, ", ");//remove last ","
-            $this->_db->query("INSERT INTO $table VALUES($plholders)",$insertData[$rowNo]); //       
-            //echo $plholders;                        
+            $this->_db->query("INSERT INTO $table VALUES($plholders)",$insertData[$rowNo]); //
+            //echo $plholders;
             $rowNo++;
         }
-           
-    } 
-    
+
+    }
+
     public function deleteLanguageAction()
     {
         $this->_checkAccess();
         if($this->_sesija->superadmin != "1") {
             echo $this->_translate->_("Only superadministrator can delete this!");
-            return;        
+            return;
         }
         // turn off ViewRenderer
         $this->_helper->viewRenderer->setNoRender();
@@ -1336,14 +1339,14 @@ class CreatorController extends NetActionController
             //Drop table
             $this->_db->query("DROP TABLE " . $this->_tblprefix . "pages_" . $result[0]['code']);
             $this->_db->query("DROP TABLE " . $this->_tblprefix . "templates_" . $result[0]['code']);
-            
+
             // Drop columns from menu_items
             $this->_db->query('ALTER TABLE ' . $this->_tblprefix . 'menu_items DROP COLUMN name_' . $result[0]['code']);
             $this->_db->query('ALTER TABLE ' . $this->_tblprefix . 'menu_items DROP COLUMN description_' . $result[0]['code']);
             $this->_db->query('ALTER TABLE ' . $this->_tblprefix . 'menu_items DROP COLUMN url_' . $result[0]['code']);
             // Drop columns from categories
             $this->_db->query('ALTER TABLE ' . $this->_tblprefix . 'categories DROP COLUMN name_' . $result[0]['code']);
-            
+
             $langName = $result[0]['name'];
             //Delete language from db
             $this->_db->query("DELETE FROM " . $this->_tblprefix . "languages WHERE id = ?", array($values['id']));
@@ -1354,38 +1357,38 @@ class CreatorController extends NetActionController
             echo $this->translate("The selected language has been deleted!");
             echo '<script type="text/javascript">$("#langName option:contains(' . "'" . $langName . "'" . ')").remove();</script>';//js for removing the lng frm combo
         } else {
-            echo $this->translate("No Language specified!");        
+            echo $this->translate("No Language specified!");
         }
     }
-    
+
     /**
      *function for deleting setting records
      *
-     */              
+     */
     public function deleteSettingAction()
     {
         $this->_checkAccess();
-        
+
         // turn off ViewRenderer
         $this->_helper->viewRenderer->setNoRender();
-                
+
         $values = $this->_request->getParams();
         $settingId = $values['id'];
-        
+
         if($this->_sesija->superadmin != "1") {
             echo $this->_translate->_("Only superadministrator can delete this!");
-            return;        
+            return;
         }
         if($settingId != "") {
             //Delete  from db
-            $this->_db->query("DELETE FROM " . $this->_tblprefix . "settings WHERE id = ? AND core < 1", array($settingId));        
+            $this->_db->query("DELETE FROM " . $this->_tblprefix . "settings WHERE id = ? AND core < 1", array($settingId));
             //clean cache
             $this->cleanCache();
         }
-    
+
     }
-    
-        
+
+
     public function paginateTableAction()
     {
         $values = $this->_request->getParams();
@@ -1393,15 +1396,15 @@ class CreatorController extends NetActionController
         $tableIdQ = $this->_db->fetchAll("SELECT name FROM " . $this->_tblprefix . "tableregistry WHERE id = ?", array($tid) );
         // turn off ViewRenderer
         $this->_helper->viewRenderer->setNoRender();
-        
+
         //vars
         $tableName = $tableIdQ[0]['name'];
         //print_r($this->_sesija->table);
         $queryTable = "" . $this->_sesija->table->$tableName->queryString;
         $addTitle = "" . $this->_sesija->table->$tableName->addTitle;
         $actions = $this->_sesija->table->$tableName->actions;
-                
-        $tablePaginated = $this->renderToTable($tableName, $queryTable, $addTitle, $actions );    
+
+        $tablePaginated = $this->renderToTable($tableName, $queryTable, $addTitle, $actions );
         echo $tablePaginated ;
     }
 
@@ -1412,34 +1415,34 @@ class CreatorController extends NetActionController
         $tableIdQ = $this->_db->fetchAll("SELECT name FROM " . $this->_tblprefix . "tableregistry WHERE id = ?", array($tid) );
         // turn off ViewRenderer
         $this->_helper->viewRenderer->setNoRender();
-        
+
         //vars
         $tableName = $tableIdQ[0]['name'];
         //print_r($this->_sesija->table);
         $queryTable = "" . $this->_sesija->table->$tableName->queryString;
         $addTitle = "" . $this->_sesija->table->$tableName->addTitle;
         $actions = $this->_sesija->table->$tableName->actions;
-                
-        $tablePaginated = $this->renderToTableManagePages($tableName, $queryTable, $addTitle, $actions );    
+
+        $tablePaginated = $this->renderToTableManagePages($tableName, $queryTable, $addTitle, $actions );
         echo $tablePaginated ;
     }
 
 
     public function changePaginationStepAction()
     {
-        $this->_checkAccess();   
+        $this->_checkAccess();
         // turn off ViewRenderer
         $this->_helper->viewRenderer->setNoRender();
         $values = $this->_request->getParams();
         $id = $values['pagid'];
         $psVal = $values['val'];
         $this->_sesija->$id = $psVal;
-        echo $id . "-" . $psVal;    
+        echo $id . "-" . $psVal;
     }
 
     public function setPermissionsAction()
     {
-        $this->_checkAccess();        
+        $this->_checkAccess();
         // turn off ViewRenderer
         //$this->_helper->viewRenderer->setNoRender();
         $this->_helper->layout()->disableLayout();
@@ -1450,7 +1453,7 @@ class CreatorController extends NetActionController
         $values = $this->_request->getParams();
         $rtype = $values['rtype'];
         $rid = $values['id'];
-        
+
         $form = $this->_setPermissionsForm($rtype, $rid);
         if ($this->_request->isPost() && $form->isValid($_POST) ) {
             $this->_helper->viewRenderer->setNoRender();
@@ -1463,34 +1466,34 @@ class CreatorController extends NetActionController
                     $roleForInsert = str_replace("role_", "", $strMatch);//role to be inserted
                     $roleName = $roleForInsert;
                     $roleForInsert = $rolesIds[$roleForInsert];//getting id of a role
-                    
+
                     $resource = $values['rtype']. ":" . $values['id'];//resource to be inserted
-                    
+
                     if($value == 1){//only if allow - insert into db
                         $rolesAllowed .= $roleName . ", ";
-                        $this->_db->query("DELETE FROM " . $this->_tblprefix . "access_rules WHERE  roleId = ? and resource = ?", array($roleForInsert, $resource));//first delete if this entry exists 
+                        $this->_db->query("DELETE FROM " . $this->_tblprefix . "access_rules WHERE  roleId = ? and resource = ?", array($roleForInsert, $resource));//first delete if this entry exists
                         $this->_db->query("INSERT INTO " . $this->_tblprefix . "access_rules(roleId, resource, rule) VALUES(?, ?, ?)", array($roleForInsert, $resource, 'allow'));//and then insert
                     }else {
-                        $this->_db->query("DELETE FROM " . $this->_tblprefix . "access_rules WHERE  roleId = ? and resource = ?", array($roleForInsert, $resource));//delete if deny (not checked)                     
+                        $this->_db->query("DELETE FROM " . $this->_tblprefix . "access_rules WHERE  roleId = ? and resource = ?", array($roleForInsert, $resource));//delete if deny (not checked)
                     }
 
                 } else {
                     //echo 'ja';//nothing
                 }
-                
+
             }
             $rolesAllowed = rtrim($rolesAllowed, ", ");
             $out = $rolesAllowed;
-            
+
             //clean Search Index and cache
             $frontendOptions = array('caching' => true, 'lifetime' => null, 'ignore_user_abort' => true, 'automatic_serialization' => true);
-            $backendOptions = array('cache_dir' => NET_PATH . 'searchIndex/');            
+            $backendOptions = array('cache_dir' => NET_PATH . 'searchIndex/');
             $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
 
             $frontendOptions = array('caching' => true, 'lifetime' => null, 'ignore_user_abort' => true, 'automatic_serialization' => true);
-            $backendOptions = array('cache_dir' => NET_PATH . 'cache/');            
+            $backendOptions = array('cache_dir' => NET_PATH . 'cache/');
             $cacheCache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
-                        
+
             $langs = NetActionController::getLanguages();
             $roles = $this->getRoles();
             foreach ($langs as $lang) {
@@ -1501,25 +1504,25 @@ class CreatorController extends NetActionController
                 }
             }
             $this->cleanCache();
-            echo $out;          
+            echo $out;
         } else {
             echo $form;
         }
-        
+
     }
 
     public function setCheckAccessAction()
     {
-        $this->_checkAccess();//this is for the admin only   
+        $this->_checkAccess();//this is for the admin only
         // turn off ViewRenderer
         $this->_helper->viewRenderer->setNoRender();
-        
+
         //request vars
         $values = $this->_request->getParams();
         $rtype =  $values['rtype'];
         $id =  $values['id'];
         $checkAccess = $values['chkacc'];
-        
+
         //if resource type is page
         if($rtype == "page"){
             $langs = NetActionController::getLanguages();
@@ -1527,19 +1530,19 @@ class CreatorController extends NetActionController
                 $this->_db->query("UPDATE " . $this->_tblprefix . "pages_$lang SET  check_access = ? WHERE id = ?", array($checkAccess, $id));
             }
         if($checkAccess == '0'){//ako nema provera accessa brisi iz access rulesa
-            //$this->_db->query("DELETE FROM access_rules WHERE resource = ?", array('page:' . $id ));//delete                    
+            //$this->_db->query("DELETE FROM access_rules WHERE resource = ?", array('page:' . $id ));//delete
 
-                                    
+
         }
             //clean Search Index and cache
             $frontendOptions = array('caching' => true, 'lifetime' => null, 'ignore_user_abort' => true, 'automatic_serialization' => true);
-            $backendOptions = array('cache_dir' => NET_PATH . 'searchIndex/');            
+            $backendOptions = array('cache_dir' => NET_PATH . 'searchIndex/');
             $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
 
             $frontendOptions = array('caching' => true, 'lifetime' => null, 'ignore_user_abort' => true, 'automatic_serialization' => true);
-            $backendOptions = array('cache_dir' => NET_PATH . 'cache/');            
+            $backendOptions = array('cache_dir' => NET_PATH . 'cache/');
             $cacheCache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
-                        
+
             $langs = NetActionController::getLanguages();
             $roles = $this->getRoles();
             foreach ($langs as $lang) {
@@ -1554,10 +1557,10 @@ class CreatorController extends NetActionController
         //$this->cleanSearchIndex();
         echo $this->_translateCreator->_("Page") . " " . $id . $this->_translateCreator->_(" access is set to ") . $checkAccess;
         }
-           
+
     }
-    
-    
+
+
     private function _setPermissionsForm($type, $id)
     {
 	       require_once('Zend/Form/Element/Checkbox.php');
@@ -1593,34 +1596,34 @@ class CreatorController extends NetActionController
                     $attr = "checked";
                     $roleName->setAttrib('checked', $attr);
                 } else {
-                   $attr = "";                
-                }                                             
+                   $attr = "";
+                }
             }
 
             if($role['name'] == "administrator") {continue;}//admin is alowed everything
             $form->addElements(array($roleName ));
-         } 
-        
-          
-          return $form;    
+         }
+
+
+          return $form;
     }
 
     /**
      *Function for changing the value of the unbound -
-     *should the created content be inside the content area defined in the template, 
-     *or absolutely positioned on the page          
-     */         
+     *should the created content be inside the content area defined in the template,
+     *or absolutely positioned on the page
+     */
     public function setBoundAction()
     {
-        $this->_checkAccess();        
+        $this->_checkAccess();
         // turn off ViewRenderer
         $this->_helper->viewRenderer->setNoRender();
         $this->_helper->layout()->disableLayout();
-        
+
         $values = $this->_request->getParams();
         $val = $values['val'];
-        $pageid = $values['page'];                        
-        
+        $pageid = $values['page'];
+
         $langs = NetActionController::getLanguages();
         foreach ($langs as $lang) {
             $this->_db->query("UPDATE " . $this->_tblprefix . "pages_$lang SET  unbounded = ? WHERE id = ?", array( $val, $pageid ));
@@ -1629,14 +1632,14 @@ class CreatorController extends NetActionController
         $this->cleanCache();
         echo $this->_translateCreator->_("Done!");
 
-        
+
     }
 
-    
-    
+
+
     public function backupSiteAction()
     {
-        $this->_checkAccess();        
+        $this->_checkAccess();
         // turn off ViewRenderer
         $this->_helper->viewRenderer->setNoRender();
         //ini_set('disable_functions', "");
@@ -1648,14 +1651,14 @@ class CreatorController extends NetActionController
             //print_r($desc);
             $srStr = "";
             foreach($sr as $srRow){
-                
+
                 foreach($desc as $field){
                     $str = str_replace("\t", "", $srRow[$field['Field']] );//remove all existing tabs if any
                     $srStr .=  str_replace("\n", "", $str) . "\t" ;
                 }
                 $srStr = rtrim(str_replace("\r", "",$srStr), "\t");
                 $srStr .= "\n" ;
-                
+
             }
                 $filename = NET_PATH . "backup.sql";
                 if (@!$handle = fopen($filename, 'w+') ) {
@@ -1663,18 +1666,18 @@ class CreatorController extends NetActionController
                     // return;
 
                 }
-            
+
                 // Write $somecontent to our opened file.
                 if (@fwrite($handle, $srStr) === FALSE) {
                     $message = "Cannot write to file ";
                     //return;
-                }            
+                }
                 chmod($filename, 0444);
-            
+
             echo "<b>" . $this->_translateCreator->_("System command is disabled , you need to do this manualy, (phpmyadmin)!") . "</b>";
             return;
         }
-        
+
         //$config = Zend_Registry::get('config');
         $config = new Zend_Config_Ini('config.ini', 'default');
         $host = $config->database->params->host;
@@ -1687,23 +1690,23 @@ class CreatorController extends NetActionController
             $host,
             $dbUsername,
             $dbPassword,
-            $dbName,           
+            $dbName,
             $file
         );
         system($command);
-        
+
         echo "Site backup is generated!";
-        
+
     }
-    
+
     /**
      *Function for adding cornerform
      *
      */
      public function cornerParamsAction()
      {
-     
-     }             
+
+     }
 
     /**
      *Function for adding shadow form
@@ -1711,6 +1714,6 @@ class CreatorController extends NetActionController
      */
      public function shadowParamsAction()
      {
-     
-     }    
+
+     }
 }
