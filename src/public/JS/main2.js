@@ -507,10 +507,3 @@ $('.slideLinks[title^="0"]').livequery(function(){
 /*THIS IS FROM default_proba.js- END*/
 
 
-/*THIS IS FROM .gitignore- BEGIN*/
-*
-!.gitignore
-
-/*THIS IS FROM .gitignore- END*/
-
-
