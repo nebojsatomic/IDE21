@@ -1,16 +1,15 @@
 version: '3'
 services:
     web: &web
-        #build: .
-        #image: nebojsatomic/5.6-apache-rw-mysqli:1.1
-        #image: php:7.4-apache
-        #image: php:apache
-        image: nebojsatomic/php7.4-rw-mysqli-pdo-gd:latest
+        build: .    
+        
+        #image: nebojsatomic/php7.4-rw-mysqli-pdo-gd:latest
+        #image: test:1.1
         ports:
             - '${APP_PORT:-80}:80'
-        volumes:
-            - './src:/var/www/html'
-        user: ${CURRENT_UID}
+        #volumes:
+        #    - './src:/var/www/html'
+        #user: ${CURRENT_UID}
         networks:
             - cmside2
         depends_on:

@@ -4,4 +4,4 @@ apt install -y zip
 ./composer.phar update
 cp ./.env.example ./.env
 
-chown -R www-data ./
+chown -R www-data .
