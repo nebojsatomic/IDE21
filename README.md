@@ -23,6 +23,7 @@ After that one person has designed and coded frontend, template is available for
 - Clone this repo
 - cd to dir
 - Run in terminal docker-compose up
+- ( laravel version needs composer to install dependencies, execute "docker-compose -f docker-compose-first-run.yaml up" and then "docker-compose up", or login into container and do it manually by executing ./laravel.sh )
 
 After succesful building and running, you can access the front at http://localhost, and admin area at http://localhost/adm 
 
@@ -37,6 +38,7 @@ After succesful building and running, you can access the front at http://localho
 For locahost/adm :
 
 Demo user:  proba
+
 Demo pass:  proba
 
 *  /adm can be changed to what ever path you want if you modify adminUrl variable inside src/dev-application/config/config.ini
