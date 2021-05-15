@@ -36,7 +36,7 @@ class CreatorController extends NetActionController
     public function init()
     {
         //$this->_checkAccess();
-        $this->view->title = "CMS-IDE Designer";
+        $this->view->title = "IDE21";
         $this->view->host = $this->_host;
         $this->view->hostRW = $this->_hostRW;
 
@@ -140,7 +140,7 @@ class CreatorController extends NetActionController
         $this->view->formChooseCategory = $formChooseCategory;
 
         //LANGUAGES
-        $languages = $this->renderToTable("languages", null, $this->_translate->_("Add new Language"), array('add'=>'creator/add-language', 'edit'=>'creator/edit-language/', 'delete'=>'creator/delete-language/')); 
+        $languages = $this->renderToTable("languages", null, $this->_translate->_("Add new Language"), array('add'=>'creator/add-language', 'edit'=>'creator/edit-language/', 'delete'=>'creator/delete-language/'));
         $this->view->languages = $languages;
         $langChooserAdmin = $this->_langChooserAdminForm();
         $this->view->langChooserAdmin = $langChooserAdmin;
@@ -746,8 +746,8 @@ class CreatorController extends NetActionController
                 if($this->_sesija->currentRole == "administrator"){
                     setcookie("cLang", $values['creatorLang'], time()+60*60*24*30, "/" );
                     $this->_sesija->creatorLang = $values['creatorLang'];
-                    //$this->_redirect($this->_hostRW . $config->adminUrl);
-                    $this->_redirect($this->_hostRW . $config->newAdminUrl); // temporary
+                    $this->_redirect($this->_hostRW . $config->adminUrl);
+                    //$this->_redirect($this->_hostRW . $config->newAdminUrl); // temporary
                 } else {
                     $this->_redirect($this->_hostRW . $config->adminUrl . "/login");
                 }
