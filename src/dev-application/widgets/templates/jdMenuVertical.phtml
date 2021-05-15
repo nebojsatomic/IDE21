@@ -44,7 +44,7 @@ $menu_items = $this->menu_items;
 
 
 //echo '<ul id="menu">';
-foreach($this->menus as $menus => $k) {
+foreach(@$this->menus as $menus => $k) {
             //if REWRITEURL
             if ($linkURLrewrite == 1) {
                 $link = $k['alias'] . ".html";
@@ -64,7 +64,7 @@ echo '<li  >';
 
 
         //if there is submenu generate submenu links//SUBLEVEL 1
-        if (count(@$menu_items[$k['item_id']])) {
+        if (@count(@$menu_items[$k['item_id']])) {
         
 
                 //echo '<div  class="submenu" id="submenu_'.$k['item_id'].'" style="display:none">';
@@ -81,7 +81,7 @@ echo '<li  >';
                             echo '<li id="'.$s['item_id'].'" ><a ' . $linkType. '="' . $host . $link . '"  target="' .$target . '" class="link"   >' . $s['name'] . '</a> ';
 
                                     //SUBLEVEL 2
-                                    if (count(@$menu_items[$s['item_id']])) {
+                                    if (@count(@$menu_items[$s['item_id']])) {
                                         //echo '<div  class="submenu2" id="submenu2_'.$s['item_id'].'" style="display:none">';
                                         echo '<ul>';                                    
                                         foreach($menu_items[$s['item_id']] as $sub2 => $s2) {
@@ -96,7 +96,7 @@ echo '<li  >';
                                             echo '<li id="'.$s2['item_id'].'" ><a ' . $linkType. '="' . $host . $link . '"  target="' .$target . '" class="link"   >' . $s2['name'] . '</a> ';
                                             
                                             //SUBLEVEL 3
-                                            if (count(@$menu_items[$s2['item_id']])) {                                        
+                                            if (@count(@$menu_items[$s2['item_id']])) {
                                                 //echo '<div  class="submenu3" id="submenu3_'.$s2['item_id'].'" style="display:none">';
                                                 echo '<ul>';                                    
                                                 foreach($menu_items[$s2['item_id']] as $sub3 => $s3) {

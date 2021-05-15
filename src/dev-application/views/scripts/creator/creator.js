@@ -797,7 +797,7 @@ $(document).ready(function(){
 
 
   //Saving a new page
-  $('#savePageNew').click(function(){
+  $('#savePageNew').livequery('click', function(){
     boundCBval = $('#boundCB').val();
     //console.log($('#boundCB').val());
     if(boundCBval == 'on') {
@@ -842,7 +842,7 @@ $(document).ready(function(){
 
     saveCSSandJS();
 
-    $('#pageCode').attr("action", absoluteUrl + "page/save/"  );
+    $('#pageCode').attr("action", absoluteUrl + "page/save"  );
     $('#pageCode').ajaxSubmit(function(){
 
       ajaxEmitMessage(lang.Done);
@@ -938,23 +938,23 @@ $(document).ready(function(){
 
   //Opening page
   $('#openPage').livequery('click', function(){
-
+    const openPageDialogUniqueId = Date.now();
     $('#openPageForm').remove();
-    $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv"></div>');
+    $('.dialogDiv').remove();
+    $('body').append('<div class="dialogDiv" id="dialogDiv_' + openPageDialogUniqueId + '" style="background: silver;"></div>');
     //$('#dialogDiv').draggable();
-    $('#dialogDiv').html( $('#adminAjaxLoader').html() );
-    dialog();
+    $('#dialogDiv_' + openPageDialogUniqueId).html( $('#adminAjaxLoader').html() );
+    //dialog();
+    $('#dialogDiv_'  + openPageDialogUniqueId ).dialog({modal:false, resizable: false, title:$('.currentTitle').text() });
+    $.get(absoluteUrl + "page/choose-page", function(data){
 
-    $.get(absoluteUrl + "page/choose-page/", function(data){
-
-      $('#dialogDiv').html( data);
+      $('#dialogDiv_' + openPageDialogUniqueId ).html( data);
 
     });
     $('#ajaxEventMask').remove();
 
     //onchange combo for page handling
-    $('#pageName').livequery('change', function(){
+    $('#dialogDiv_' + openPageDialogUniqueId + ' #pageName').livequery('change', function(){
       $('#templateMask').empty();
       $('#droppable').empty();
       //update data on the interface
@@ -964,8 +964,8 @@ $(document).ready(function(){
       //console.log(pgId)
       $('#pgID').html(pgId);
       $('#pageTitle').prop("value", pageTitle);
-
-      $.getJSON(absoluteUrl + "page/open/id/" + $(this).attr("value"), function(data){
+      const pageID = $(this).val();
+      $.getJSON(absoluteUrl + "page/open/id/" + pageID, function(data){
 
         $('#categoryNameAssign').prop("value" , data.category);
         $('#categoryNameAssign').prev('span').text($('#categoryNameAssign').find(":selected").text() );
@@ -1016,9 +1016,9 @@ $(document).ready(function(){
         ajaxEmitMessage(lang.PageOpened);
         setTimeout("$('#ajaxEventMask').click();$('#ajaxEventMessage').remove();", 1000);
       });
-      ajaxEventDone(lang.POpen);//sklanjanje maska
-      $('#dialogDiv').hide('slow').remove();//ovo je za removovanje dijaloga MUST
-      document.cookie = 'pageSelectedId=' +  pgId + ';  path=/'; //ovo treba namestiti
+      ajaxEventDone(lang.POpen);// remove the mask
+      $('#dialogDiv_' + openPageDialogUniqueId).hide('slow').remove();// removing the dialog MUST
+      document.cookie = 'pageSelectedId=' +  pgId + ';  path=/'; // temp
     });
 
     //refreshControls();
@@ -1172,7 +1172,7 @@ $(document).ready(function(){
   }else {
     $('#pageDisplayer').click();
     if(getCookie("pageSelectedId")){
-      loadPage(getCookie("pageSelectedId"));
+      //loadPage(getCookie("pageSelectedId")); // disable temp bcs it's making the page open twice on load
     }
   }
 });//end document ready
@@ -1865,6 +1865,14 @@ $('#addImageLink').livequery('click', function(){
 
       $('#dialogDiv').html(data);
 
+      // ajax upload
+      $('#uploadImagesForm').ajaxForm(function(data){
+          $('#dialogDiv').remove();
+          $('#folderNames').change();
+          ajaxEmitMessage(lang.FileUploaded);
+          setTimeout("clickMask()", 1000); //closing all
+      });
+
     });
     $('#dialogDiv').show('slow');
   }
@@ -1878,7 +1886,7 @@ $('#addFolderLink').livequery('click', function(){
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
-  $.get(absoluteUrl + "images/add-folder/", function(data){
+  $.get(absoluteUrl + "images/add-folder", function(data){
     //console.log(data);
     $('#dialogDiv').html(data);
   });
@@ -2112,7 +2120,7 @@ $('#chooseModulesForm').livequery('change', function(){
 
   var val = $('#moduleName option:selected').text();
 
-  $.get(absoluteUrl + val + "/admin/", function(data){
+  $.get(absoluteUrl + val + "/admin", function(data){
     //console.log(data);
     $('#modulesSelected').html(data);
 
@@ -2132,7 +2140,7 @@ $('#addCategoryLink').livequery('click', function(){
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
-  $.get(absoluteUrl + "category/add-category/", function(data){
+  $.get(absoluteUrl + "category/add-category", function(data){
     //console.log(data);
     $('#dialogDiv').html( data);
   });
@@ -2292,7 +2300,7 @@ $('#addMenuLink').livequery('click', function(){
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
-  $.get(absoluteUrl + "menu/add-menu/", function(data){
+  $.get(absoluteUrl + "menu/add-menu", function(data){
     //console.log(data);
 
     $('#dialogDiv').html( data);
@@ -2967,7 +2975,7 @@ $('#langName').livequery('change', function(){
 
 //EMPTY CACHE
 $('#emptyCacheButton').livequery('click', function(){
-  $.post(absoluteUrl + "creator/clean-cache/", function(data) {
+  $.post(absoluteUrl + "creator/clean-cache", function(data) {
 
     ajaxEmitMessage(data);
     setTimeout("$('#ajaxEventMask').click()", 1000);

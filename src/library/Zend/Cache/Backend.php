@@ -63,7 +63,7 @@ class Zend_Cache_Backend
      */
     public function __construct(array $options = array())
     {
-        while (list($name, $value) = each($options)) {
+        while (list($name, $value) = @each($options)) {
             $this->setOption($name, $value);
         }
     }
