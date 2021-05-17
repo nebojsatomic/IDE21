@@ -5,9 +5,9 @@
  * @category   Layouts
  * @package    CMS-IDE
  *  Copyright (C) 2010-2021  Nebojsa Tomic
- *  
+ *
  *  This file is part of CMS-IDE.
- *     
+ *
  *  CMS-IDE is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
  *  License as published by the Free Software Foundation; either
@@ -22,8 +22,8 @@
  *  License along with this library; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * 
- * 
+ *
+ *
  */
  ?>
 <?php
@@ -35,16 +35,15 @@ if ($pid == ""){
     $xmlFile = "config_" . $pid . ".xml";
 }
 ?>
-<!--<script type="text/javascript" src="<?php echo $this->host;?>JS/cu3er/js/swfobject/swfobject.js"></script>-->
-
+<!--
 <script type="text/javascript">
 		var flashvars = {};
-		flashvars.xml = absoluteUrl + "JS/cu3er/<?php echo $xmlFile;?>";
+		flashvars.xml = absoluteUrl + "js/cu3er/<?php echo $xmlFile;?>";
 		//flashvars.font = "font.swf";
 		var attributes = {};
 		attributes.wmode = "transparent";
 		attributes.id = "slider";
-		swfobject.embedSWF(absoluteUrl + "JS/cu3er/cu3er.swf", "cu3er-container", "850", "245", "9", absoluteUrl + "JS/cu3er/expressInstall.swf", flashvars, attributes);
+		swfobject.embedSWF(absoluteUrl + "js/cu3er/cu3er.swf", "cu3er-container", "850", "245", "9", absoluteUrl + "js/cu3er/expressInstall.swf", flashvars, attributes);
 </script>
 
 
@@ -53,3 +52,4 @@ if ($pid == ""){
         <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
     </a>
 </div>
+-->

@@ -5,9 +5,9 @@
  * @category   ViewController
  * @package    CMS-IDE
  *  Copyright (C) 2010-2021  Nebojsa Tomic
- *  
+ *
  *  This file is part of CMS-IDE.
- *     
+ *
  *  CMS-IDE is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
  *  License as published by the Free Software Foundation; either
@@ -22,10 +22,10 @@
  *  License along with this library; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * 
- * 
+ *
+ *
  */
- 
+
 require_once 'SearchController.php';
 require_once 'FormsController.php';
 
@@ -40,28 +40,28 @@ class ViewController extends NetActionController
     protected static $urlCurrent;
     protected static $pid;//page id
 
-   
+
     public function init()
     {
-        
+
         define("NET_PATH_SITE", $this->_nps);
         define("NET_PATH", $this->_np);
-      
-        
+
+
         $this->view->host = $this->_host;
         self::$host = NetActionController::$host;
         //$this->_sesija = new Zend_Session_Namespace('net');
         self::$lang = $this->_sesija->lang;
         NetActionController::$breadcrumbs = $this->_sesija->bcumbs;
 
-        
+
         $request = $this->getRequest();
         if ($request->isXmlHttpRequest()) {
             $this->_helper->layout()->disableLayout();
         }
-            
+
     }
-    
+
     public function indexAction()
     {
         $db = Zend_Registry::get('db');
@@ -69,32 +69,32 @@ class ViewController extends NetActionController
         $this->view->translate = $this->_translate;
         $commentsAuto = Zend_Registry::get('commentsAuto');//should comments be auto added to each page
         $values = $this->_request->getParams();
-        //setting lang code        
+        //setting lang code
         if(@$values['lng'] != ""){
-             $this->_sesija->lang = $values['lng'];        
+             $this->_sesija->lang = $values['lng'];
         }
         $langCode = $this->_sesija->lang;
-        
+
 
         //print_r($values);
         @$alias = $values['alias'];
         if ($alias != '') {
-            
+
             //this below is an unsuccessfull try to cache a query for the alias
             //if(!$result = $this->_cache->load('q_View_index_resID_' . str_replace("-", "", urlencode($alias)) )) {//caching this query
                 $resID = $db->fetchAll("SELECT id, check_access FROM pages_$langCode  WHERE alias = ?", array($alias));
                 $id = $resID[0]['id'];
-                
+
                 //$cachedresult = array('resID'=>$resID ,'id'=>$id);
                 //$this->_cache->save($cachedresult , 'q_View_index_resID_' . str_replace("-", "", urlencode($alias)) );
             //} else {
                 //$resID = $result['resID'];
                 //$id = $result['id'];
-            
+
             //}
-        
+
         } else {
-            @$id = $values['id'];        
+            @$id = $values['id'];
             $resID = $db->fetchAll("SELECT id, check_access FROM pages_$langCode  WHERE id = ?", array($id ));
         }
 
@@ -103,40 +103,40 @@ class ViewController extends NetActionController
             //do required queries for the page and template
             $res = $db->fetchAll("SELECT output, title, description, keywords, template_id, unbounded, published, pages_$langCode.dateChanged, pages_$langCode.userId, users.email, users.fullname FROM pages_$langCode LEFT JOIN users ON pages_$langCode.userId = users.userId WHERE pages_$langCode.id = ?", array($id));
             //if($values['ajax'] == "1") {
-            //    $resTemplate[0]['output'] = "";//if ajax call then emit just the content 
+            //    $resTemplate[0]['output'] = "";//if ajax call then emit just the content
             //} else {
                 $resTemplate = $db->fetchAll("SELECT output, bodyBg, staticFiles FROM templates_$langCode WHERE id = ?", array($res[0]['template_id']));
-                //$this->view->templateOut = 
+                //$this->view->templateOut =
             //}
             $cachedresult = array('res'=>$res ,'resTemplate'=>$resTemplate);
             $this->_cache->save($cachedresult , "q_View_index_$langCode" . "_$id" );
-        
+
         } else{
             $res = $result['res'];
-            $resTemplate = $result['resTemplate'];        
+            $resTemplate = $result['resTemplate'];
         }
         /*static files that needs to be loaded, for exported template to work*/
         $staticFiles = explode(';', @$resTemplate[0]['staticFiles']);
-        
+
         //if {html:} then turn the htmlawed off
         $mystring = $res[0]['output'];
         $mystring2 = @$resTemplate[0]['output'];
         $findme   = '{html:';
         $pos = strpos($mystring, $findme);
         $pos2 = strpos($mystring2, $findme);
-        
+
         if ($pos === false && $pos2 === false) {
             $htmlawedFeature = 1;
         } else {
             $htmlawedFeature = 0;
         }
-        
-        
+
+
         //$this->view->templateBodyBackground = "url(" . $this->_host . "images/templates/" . $res[0]['template_id'] . "/bodyBg.jpg) repeat-x";
         $this->view->templateBodyBackground = @$resTemplate[0]['bodyBg'];
-        $bodyBG = @$resTemplate[0]['bodyBg'];       
+        $bodyBG = @$resTemplate[0]['bodyBg'];
         $this->view->bg = @$resTemplate[0]['bodyBg'];
-        
+
         require_once(NET_PATH. 'includes/htmLawed/htmLawed.php');//require htmlLawed
         $config = array(
                  'comments'=>0,
@@ -148,11 +148,11 @@ class ViewController extends NetActionController
                  //'elements'=>'*-applet-iframe-script', // object, embed allowed
                  'schemes'=>'classid:clsid; href: aim, feed, file, ftp, gopher, http, https, irc, mailto, skype, news, nntp, sftp, ssh, telnet; style: *; *:file, http, https' // clsid allowed in classid
                 );//config for htmLawed
-                        
+
         //ACL
         $acl = Zend_Registry::get('acl');
         $curRole = Zend_Registry::get('currentRole');
-        $allowArray = Zend_Registry::get('aclAllow');  
+        $allowArray = Zend_Registry::get('aclAllow');
         if($resID[0]['check_access'] == '1') {
         //ACL in relation to page
             if (!$acl->has('page:' . $resID[0]['id'])) {
@@ -163,13 +163,13 @@ class ViewController extends NetActionController
                 $acl->allow($curRole, 'page:' . $resID[0]['id'] );//allow resource access if it is in allow array
             }
 
-                    
-            
+
+
                 if (!$acl->isAllowed($curRole, 'page:' .$resID[0]['id'] )) {
                     // no permission, move along now
                     $output = $translator->_("<b><h2>You dont have permission to access this content!</h2></b>");
                     $outputTemplate = ViewController::_templatePrepare($resTemplate[0]['output'], $output);
-            
+
                     $out = ViewController::_liveBlocksPrepare($outputTemplate);
                     //if htmlawed
                     if($htmlawedFeature == 1){
@@ -181,11 +181,11 @@ class ViewController extends NetActionController
                     return;
                 }
 
-        }               
-            //ACL END 
+        }
+            //ACL END
 
 
-        
+
         //if ($alias != '' ) {
         //    Zend_Registry::set('page' . utf8_encode($alias), $cache);
         //} else {
@@ -193,10 +193,10 @@ class ViewController extends NetActionController
             $this->_sesija->_urlCurrent = $this->_host . "pages/" .$id ;
             self::$urlCurrent = $this->_sesija->_urlCurrent;
        // }
-              	
+
         //if there is a page cached, load it
         if (!$results = $this->_cache->load('page' . $id . "_" . $langCode . "_" . $this->_sesija->currentRole)  ) {
-      
+
                 if(!$res || $res[0]['published'] != '1') {
                     Zend_Registry::set('pageTitle', "404");
                     $outputDB = '<b>404</b>';
@@ -205,7 +205,7 @@ class ViewController extends NetActionController
                     $meta_description = '404';
                     $meta_keywords = '404';
                     $this->_helper->layout->setLayoutPath(NET_PATH . 'layouts/scripts/errorPages')->setLayout('404');
-                    return;                   
+                    return;
                 } else {
                     Zend_Registry::set('pageTitle', $res[0]['title']);
                     $outputDB = $res[0]['output'];
@@ -223,10 +223,10 @@ class ViewController extends NetActionController
                     if($meta_keywords == "") {
                         $defKW= Zend_Registry::get('defaultKeywords');
                         $meta_keywords = $defKW;
-                    }                                     
+                    }
                 }
-                
-                $comments = '<div id="commentsDivWrapper" style="">{liveblock:comments:display:' . $id . '}</div>';                
+
+                $comments = '<div id="commentsDivWrapper" style="">{liveblock:comments:display:' . $id . '}</div>';
 
                 $output = ViewController::_templatePrepare($outputDB,null,null, $pageinfo );
                 if($commentsAuto == "1"){
@@ -239,7 +239,7 @@ class ViewController extends NetActionController
                     $comments = '<div id="commentsDivWrapper" style="position:absolute;display:none;">{liveblock:comments:display:' . $id . '}</div>';//comments disabled if absolute positioning for now
                     //$comments = '';
                 }
-                //if automatic comments display is set to 0, dont display comments 
+                //if automatic comments display is set to 0, dont display comments
                 if($commentsAuto == "0"){
                     $comments = '';
                 } else {
@@ -253,7 +253,7 @@ class ViewController extends NetActionController
 
                     //$output = str_replace('<div id="templateMask"/>', "" , $output);
                     $output = '<div id="contentDivWrapper" style="position:relative;">' . $output . "</div><br /><br />";
-                    
+
                     $outputTemplate = ViewController::_templatePrepare($outputDBtemplate, $output . $comments);
                     $out = ViewController::_liveBlocksPrepare($outputTemplate);
                     //if htmlawed
@@ -264,8 +264,8 @@ class ViewController extends NetActionController
                     }
                     //$this->view->output = htmLawed($out, $config) ;
                     $cachedOutput = $outputTemplate;
-                } else {                    
-                    $outputTemplate = ViewController::_templatePrepare($outputDBtemplate);              
+                } else {
+                    $outputTemplate = ViewController::_templatePrepare($outputDBtemplate);
                     $output = '<div class="contentArea">' . $output . "</div>";
                     $out = ViewController::_liveBlocksPrepare($outputTemplate . $output . $comments);
                     //if htmlawed
@@ -288,8 +288,8 @@ class ViewController extends NetActionController
                     $this->view->bodyBG = "transparent";
                 }
                 $this->view->meta_description = $meta_description;
-                $this->view->meta_keywords = $meta_keywords;        
-        
+                $this->view->meta_keywords = $meta_keywords;
+
 
                 $cacheResult = array('output' =>  $cachedOutput, 'title' => $title, 'bodyBG'=> $bodyBG, 'metaDesc' => $meta_description, 'metaKeywords' => $meta_keywords  );
 
@@ -297,8 +297,8 @@ class ViewController extends NetActionController
                 if($cacheEnabled == 1 ) {
                     $this->_cache->save($cacheResult, 'page' . $id . "_" . $langCode . "_" . $this->_sesija->currentRole);
                 }
-                
-        
+
+
         } else {
                     //display page from cache
                     //if htmlawed
@@ -317,10 +317,10 @@ class ViewController extends NetActionController
                     }
                     $this->view->meta_description = $results['metaDesc'];
                     $this->view->meta_keywords = $results['metaKeywords'];
-                    $this->view->translate = $translator;        
-        
+                    $this->view->translate = $translator;
+
         }
-                //static files for the template 
+                //static files for the template
                 if($staticFiles != ''){
                     $this->view->staticFilesCSS = array();
                     $this->view->staticFilesJS = array();
@@ -332,16 +332,16 @@ class ViewController extends NetActionController
                             $this->view->staticFilesCSS[] = $staticFile;
                         }
                     }
-                } 
-      
-        
+                }
+
+
     }
 
 
     public function renderTvAction()
-    {        
+    {
         $this->_helper->layout()->disableLayout();
-        
+
         $db = Zend_Registry::get('db');
         $values = $this->_request->getParams();
         $var = $values['var'];
@@ -351,12 +351,12 @@ class ViewController extends NetActionController
         //$pageName = $contentOutput[0]['title'];
         $front = Zend_Controller_Front::getInstance();
         //$front->getRequest()->setParam('creatorAct', 'true');
-        $front->getRequest()->setParam('langC', $this->_sesija->langAdmin);           
+        $front->getRequest()->setParam('langC', $this->_sesija->langAdmin);
         $output = ViewController::_templatePrepare($var);
 
 
-        $this->view->output = $output;      
-        
+        $this->view->output = $output;
+
     }
 
 
@@ -383,8 +383,8 @@ class ViewController extends NetActionController
         $langArray['langs'] = $langsEnabled;
         $langArray['host'] = $data['host'];
         $langArray['hostForImage'] = $host;
-        $langArray['returnUrl'] =  ViewController::$urlCurrent ;    
-        
+        $langArray['returnUrl'] =  ViewController::$urlCurrent ;
+
         $view->assign($langArray);
         $scriptName = "langChooser.phtml";
 
@@ -393,8 +393,8 @@ class ViewController extends NetActionController
         return $partialOutput;
 
     }
-    
-    
+
+
     public function changeLanguageAction()
     {
         //$this->_helper->layout()->disableLayout();
@@ -403,23 +403,23 @@ class ViewController extends NetActionController
         $values = $this->_request->getParams();
 
         $lang = $values['code'];
-        
+
         $this->changeLang($lang);
         Zend_Registry::set('langCode', $lang);
-        
+
         $request = $this->getRequest();
         if (!$request->isXmlHttpRequest()) {
             $budzedHost = str_replace('/quickstart/public/', "/", $this->_sesija->_urlCurrent );
             $budzedHost = str_replace('/public/', '/', $budzedHost);
             //$this->_redirect( $this->_sesija->_urlCurrent  );//if not ajax - redirect
             $this->_redirect( $budzedHost );//if not ajax - redirect
-        }        
-        
+        }
+
         //$this->_sesija->lang = $lang;
-        //$this->_redirect( $this->_sesija->_urlCurrent  ) ; 
-        //$this->view->returnUrl =  $this->_sesija->_urlCurrent ;    
-    
-    } 
+        //$this->_redirect( $this->_sesija->_urlCurrent  ) ;
+        //$this->view->returnUrl =  $this->_sesija->_urlCurrent ;
+
+    }
 
 
     /**
@@ -438,8 +438,8 @@ class ViewController extends NetActionController
         $acl = Zend_Registry::get('acl');
         $curRole = Zend_Registry::get('currentRole');
         $allowArray = Zend_Registry::get('aclAllow');
-        
-                
+
+
         $themePath = NET_PATH . "widgets/";
         $host = NetActionController::$host;
 
@@ -455,7 +455,7 @@ class ViewController extends NetActionController
                 if(@in_array('menu_item:' . $menuQR['item_id'], $allowArray[$curRole] ) ){
                     $acl->allow($curRole, 'menu_item:' . $menuQR['item_id'] );
                 }
-                    
+
                 if($menuQR['chkAccess'] == '1') {
                     if (!$acl->isAllowed($curRole, 'menu_item:' . $menuQR['item_id'] )) {
                         // no permission, move along now
@@ -471,18 +471,18 @@ class ViewController extends NetActionController
                 if(@in_array('page:' . $menuQR['cid'], $allowArray[$curRole] ) ){
                     $acl->allow($curRole, 'page:' . $menuQR['cid'] );
                 }
-                    
+
                 if($menuQR['check_access'] == '1') {
                     if (!$acl->isAllowed($curRole, 'page:' . $menuQR['cid'] )) {
                         // no permission, move along now
                         continue;
                     }
-                }                
+                }
                 //ACL END
 
                 if (($menuQR['parent_id'] == 0) ) {
                     $data['menus'][$menuQR['item_id']] = $menuQR;
-                    if ($orientation == "slide")  {  
+                    if ($orientation == "slide")  {
                         $data['menus'][$menuQR['item_id']]['output'] = ViewController::_templatePrepare($data['menus'][$menuQR['item_id']]['output']);
                     }
                     $hasItems = true;
@@ -494,7 +494,7 @@ class ViewController extends NetActionController
             if ($orientation == null) {
                 $scriptName = "jdMenu.phtml";
             } elseif ($orientation == "vertical")  {
-                $scriptName = "jdMenuVertical.phtml";                
+                $scriptName = "jdMenuVertical.phtml";
             } elseif ($orientation == "tree")  {
                 $front = Zend_Controller_Front::getInstance();
                 $req = $front->getRequest();
@@ -504,7 +504,7 @@ class ViewController extends NetActionController
                     $data['langC'] = "_" . $treeVals['langC'];
                 }
                 $scriptName = "treeView.phtml";
-            } elseif ($orientation == "slide")  {            
+            } elseif ($orientation == "slide")  {
                 $scriptName = "slide.phtml";
             }
 
@@ -518,7 +518,7 @@ class ViewController extends NetActionController
             //$view->assign($Menu);
             $view->assign($data);
 
-            
+
             $partialOutput = $view->render($scriptName);
 
             return $partialOutput;
@@ -540,7 +540,7 @@ class ViewController extends NetActionController
         $db = Zend_Registry::get('db');
         $urlRewrite = Zend_Registry::get('urlRewrite');
         $translator = Zend_Registry::get('Zend_Translate');
-        
+
         $themePath = NET_PATH . "widgets/";
         $host = NetActionController::$host;
 
@@ -558,7 +558,7 @@ class ViewController extends NetActionController
             //$view->assign($Menu);
             $view->assign($data);
 
-            
+
             $partialOutput = $view->render($scriptName);
 
             return $partialOutput;
@@ -587,8 +587,8 @@ class ViewController extends NetActionController
         $allowArray = Zend_Registry::get('aclAllow');
         $translator = Zend_Registry::get('Zend_Translate');
         $langCode = Zend_Registry::get('langCode');
-        
-                
+
+
         $themePath = NET_PATH . "widgets/";
         $host = NetActionController::$host;
         //$host = "http://localhost";
@@ -619,14 +619,14 @@ class ViewController extends NetActionController
         }
             //$Category['category'] = $catQ;
             $Category['category'] = $categoryArray;
-            
+
             if (!empty($resCat)){
                 if($resCat[0]['name_' . $langCode] != ""){
                     $translatedCatName = $resCat[0]['name_' . $langCode];//if cat name translation exists
                 } else {
                     $translatedCatName = $resCat[0]['name']; //no translation
                 }
-                
+
                 $Category['categoryName'] = $translator->_($translatedCatName);
             } else {
                 $Category['categoryName'] = $translator->_("Uncategorized");
@@ -637,35 +637,28 @@ class ViewController extends NetActionController
             $Category['translator'] = $translator;
             $Category['host'] = $data['host'];
             $Category['urlRewrite'] = $urlRewrite;
-            
+
             //$view->assign($host);
             $view->assign($Category);
             //$view->assign($CategoryName);
             //$view->assign($data);
 
-            
+
             if ($orientation == null) {
                 $scriptName = "categories.phtml";
             } elseif ($orientation == "oldest")  {
-                $scriptName = "categories.phtml";                
+                $scriptName = "categories.phtml";
             } elseif ($orientation == "latest")  {
                 $scriptName = "categories.phtml";
             } elseif ($orientation == "desc")  {
                 $scriptName = "categories-desc.phtml";
             }
-            
+
             $partialOutput = $view->render($scriptName);
 
             return $partialOutput;
 
-
-
     }
-
-
-
-
-
 
     /**
      *Render images folder
@@ -687,15 +680,15 @@ class ViewController extends NetActionController
         if ($handle = opendir(NET_PATH_SITE . 'images/' . $folder . '/')) {
             while (false !== ($file = readdir($handle))) {
                 if ($file != "." && $file != "..") {
-                    
+
                     if (preg_match("/thumb_/", $file) ) {
                         $ImagesArray['thumbs'][] = $file;
                     } elseif (preg_match("/Thumbs/", $file)) {
-                    
+
                     }else {
                         $ImagesArray['images'][] = $file;
                     }
-                    
+
                 }
             }
             closedir($handle);
@@ -715,7 +708,7 @@ class ViewController extends NetActionController
     /**
      *RENDEr cu3er slides, or other type of slides
      *
-     */              
+     */
     public static function slides()
     {
         $db = Zend_Registry::get('db');
@@ -725,32 +718,13 @@ class ViewController extends NetActionController
 
         $view = new Zend_View();
         $view->addScriptPath($themePath . "templates/slideWidget/");
-/*
-        if ($handle = opendir(NET_PATH_SITE . 'images/' . $folder . '/')) {
-            while (false !== ($file = readdir($handle))) {
-                if ($file != "." && $file != "..") {
-                    
-                    if (preg_match("/thumb_/", $file) ) {
-                        $ImagesArray['thumbs'][] = $file;
-                    } elseif (preg_match("/Thumbs/", $file)) {
-                    
-                    }else {
-                        $ImagesArray['images'][] = $file;
-                    }
-                    
-                }
-            }
-            closedir($handle);
-        }
 
-        $ImagesArray['folder'] = $folder;
-*/       
-        if(file_exists(NET_PATH_SITE . "JS/cu3er/config_" . self::$pid . ".xml")){
+        if(file_exists(NET_PATH_SITE . "js/cu3er/config_" . self::$pid . ".xml")){
             $xmlId['pid'] = self::$pid;
         } else {
-            $xmlId['pid'] = '';        
+            $xmlId['pid'] = '';
         }
-        
+
         $view->assign($xmlId);
 
         $scriptName = "slide.phtml";
@@ -783,7 +757,7 @@ class ViewController extends NetActionController
         $ImagesArray['image'] = $image;
         $ImagesArray['folder'] = $folder;
         $ImagesArray['host'] = $host;
-        
+
         $view->assign($ImagesArray);
         $scriptName = "image-single.phtml";
 
@@ -816,7 +790,7 @@ class ViewController extends NetActionController
 
         $bc['paths'] = $bcArray;
         $bc['host'] = $host;
-        
+
         $view->assign($bc);
         $scriptName = "breadcrumbs.phtml";
 
@@ -850,7 +824,7 @@ class ViewController extends NetActionController
         $bc['pageinfo'] = $pi;
         $bc['translate'] = $translate;
         $bc['host'] = $host;
-        
+
         $view->assign($bc);
         $scriptName = "pageinfo.phtml";
 
@@ -874,21 +848,21 @@ class ViewController extends NetActionController
         //Joomla! path
         $jPath = "http://localhost/joom159/";
         //$jPath = "http://localhost/joom159/index.php/Srebrna-voda/gsdfgas/flypage.tpl.html";
-        
+
         $db = Zend_Registry::get('db');
         $themePath = NET_PATH . "widgets/";
         $host = self::$host;
 
         $view = new Zend_View();
         $view->addScriptPath($themePath . "templates/");
-        
+
         $out = file_get_contents($jPath);
-        
+
         $jOut = $out;
 
 
         $JoomlaOutput['jOut'] = $jOut;
-        
+
         $view->assign($JoomlaOutput);
         $scriptName = "joomla.phtml";
 
@@ -898,7 +872,7 @@ class ViewController extends NetActionController
 
     }
 
-    
+
 
     /**
      *Preparing contents from database to be rendered
@@ -917,7 +891,7 @@ class ViewController extends NetActionController
         if ($langCode == "") {//OVO MORA DA SE SKLONI!!!!!
             $langCode = "sr";
         }
-        
+
         $replaceThis = preg_match_all('/[{].+[}]/', $outputDB, $matches);
         foreach ($matches[0] as $part) {
 
@@ -956,14 +930,14 @@ class ViewController extends NetActionController
                  if (@strstr( "{" . $build_[0] . "}", "{title}" )) {
                         $output = $title;
                         $outputDB = str_replace('{title}', $output, $outputDB);
-                }                 
+                }
 
                  //PAGE INFO HANDLE
                  //if (@preg_match("/{searchform}/", "{" . $build_[0] . "}" )) {
                  if (@strstr( "{" . $build_[0] . "}", "{pageinfo}" )) {
                         $output = ViewController::pageInfo($pageInfo);
                         $outputDB = str_replace('{pageinfo}', $output, $outputDB);
-                }                 
+                }
                  if (@strstr( "{" . $build_[0] . "}", "{adminurl}" )) {
 
                         $outputDB = str_replace('{adminurl}', '<a href="' . NetActionController::$hostRW . NetActionController::$adminUrl . '" target="_blank">Admin (FF!/Safari/Chrome)</a>' , $outputDB);
@@ -977,14 +951,14 @@ class ViewController extends NetActionController
                  //HTML PART HANDLE
                  if (@strstr( "{" . $build_[0], "{html" )) {
                         //$codeAll = $build_[1] . ":" . $build_[2];
-                        //$countBuild = count($build_);                        
+                        //$countBuild = count($build_);
                         $codeA = "";
                         foreach($build_ as $countedB){
-                            $codeA .= $countedB . ":";                      
+                            $codeA .= $countedB . ":";
                         }
                         $codeA = ltrim($codeA, "html:");
                         $codeA = rtrim($codeA, ":");
-                        $output = htmlspecialchars_decode($codeA );                        
+                        $output = htmlspecialchars_decode($codeA );
                         $output = str_replace('<br />', "", $output);
                         $output = str_replace('<br>', "\n", $output);
                         //$output = '<script type="text/javascript">document.write(' ."\n" . $output . ');</script>';
@@ -993,14 +967,14 @@ class ViewController extends NetActionController
                 }
                  //xHTML PART HANDLE - if this code block is to be xhtml purified
                  if (@strstr( "{" . $build_[0], "{x-html" )) {
-                      
+
                         $codeA = "";
                         foreach($build_ as $countedB){
-                            $codeA .= $countedB . ":";                      
+                            $codeA .= $countedB . ":";
                         }
                         $codeA = ltrim($codeA, "x-html:");
                         $codeA = rtrim($codeA, ":");
-                        $output = htmlspecialchars_decode($codeA );                        
+                        $output = htmlspecialchars_decode($codeA );
                         $output = str_replace('<br />', "", $output);
                         $output = str_replace('<br>', "\n", $output);
                         //$output = '<script type="text/javascript">document.write(' ."\n" . $output . ');</script>';
@@ -1018,14 +992,14 @@ class ViewController extends NetActionController
                         foreach ($langQ as $lang) {
                             $langsEnabled[] = $lang['code'];
                         }
-                        */                   
-                        
+                        */
+
                         $output = ViewController::showLanguageChooser($langsEnabled);
                         $outputDB = str_replace('{language:flags}', $output, $outputDB);
 
                 }
-                
-                
+
+
                 //MENU HANDLE
                  //if (@preg_match("/menu:display/", "{" . $build_[0] . ":" . $build_[1])) {
                  if (@strstr( $build_[0] . ":" . $build_[1], "menu:display" )) {
@@ -1036,11 +1010,11 @@ class ViewController extends NetActionController
                     //if ($orientation =! "slide") {
                         //$menuQ = $db->fetchAll("SELECT *, url_en as url,name_en as name,description_en as description FROM menu_items  WHERE menu_id = ?", array($menuId));
                     //} else {
-                        $menuQ = $db->fetchAll("SELECT *, menu_items.check_access as chkAccess, menu_items.content_id as cid, url_$langCode as url, name_$langCode as name, description_$langCode as description FROM menu_items LEFT JOIN pages_$langCode ON menu_items.content_id = pages_$langCode.id WHERE menu_id = ? AND pages_$langCode.published = '1' ORDER BY weight ASC", array($menuId));                    
+                        $menuQ = $db->fetchAll("SELECT *, menu_items.check_access as chkAccess, menu_items.content_id as cid, url_$langCode as url, name_$langCode as name, description_$langCode as description FROM menu_items LEFT JOIN pages_$langCode ON menu_items.content_id = pages_$langCode.id WHERE menu_id = ? AND pages_$langCode.published = '1' ORDER BY weight ASC", array($menuId));
                     //}
                     //print_r($menuQ );
                     if (!empty($menuQ)) {
-                        
+
                         $output = ViewController::displayMenu($menuQ, $orientation);
 
                         if ($orientation == "") {
@@ -1075,7 +1049,7 @@ class ViewController extends NetActionController
         //$catQ = $catQ + $catItemsArray2;
                     //print_r($menuQ );
                     if (!empty($catQ)) {
-                        
+
                         $output = ViewController::displayCategory($catQ, $orientation);
 
                         if ($orientation == "") {
@@ -1099,7 +1073,7 @@ class ViewController extends NetActionController
                  if (@strstr( "{" . $build_[0] . "}", "{cu3er}" )) {
                         $output = ViewController::slides();
                         $outputDB = str_replace('{cu3er}', $output, $outputDB);
-                } 
+                }
 
                 //DISPLAY IMAGES
                  //if (@preg_match("/images:display/", "{" . $build_[0] . ":" . $build_[1])) {
@@ -1107,14 +1081,14 @@ class ViewController extends NetActionController
 
                     $folder = trim($build_[2], '""');
                     $folder = trim($folder , "''");
-                    
+
                     @$image = trim($build_[3], "''");
 
                     //$menuQ = $db->fetchAll("SELECT *, url_en as url,name_en as name,description_en as description FROM menu_items  WHERE menu_id = ?", array($menuId));
 
                     //print_r($menuQ );
                     if (!empty($folder)) {
-                        
+
                         if (empty($image)) {
                             $output = ViewController::displayImages($folder);
                             $imageOut = "";
@@ -1141,9 +1115,9 @@ class ViewController extends NetActionController
 
                     $folder = trim($build_[2], '""');
                     $folder = trim($folder , "''");
-                    
+
                     $type= trim($build_[2], '""');
-                    
+
                     //print_r($menuQ );
                     if (!empty($type)) {
                         $output = ViewController::displayExternJoomla($type);
@@ -1195,7 +1169,7 @@ class ViewController extends NetActionController
         return $outputDB;
     }
 
-    
+
     /**
      *Preparing contents from liveblocks like login
      *and other modules
@@ -1213,7 +1187,7 @@ class ViewController extends NetActionController
         if ($langCode == "") {//OVO MORA DA SE SKLONI!!!!!
             $langCode = "sr";
         }
-        
+
         $replaceThis = preg_match_all('/[{].+[}]/', $outputDB, $matches);
         foreach ($matches[0] as $part) {
 
@@ -1261,10 +1235,10 @@ class ViewController extends NetActionController
                  if (@strstr( $build_[0] . ":" , "liveblock:")) {
                     $block = $build_[1];
                     @$params = $build_[3];
-                    
+
                     $function = $build_[2];// . "(" . $params . ")";
-                    
-                    
+
+
                     if($params != ""){//ako su dati parametri
                         $idsOut = ':' . $build_[3];
                     } else {
@@ -1275,20 +1249,20 @@ class ViewController extends NetActionController
                         $ucwordsBlock = ucwords($block);
                         if(file_exists(NET_PATH . "controllers/" . $ucwordsBlock . 'Controller.php') ){
                             require_once $ucwordsBlock . 'Controller.php';
-                            $controller = $ucwordsBlock. "Controller";                        
-                            $output =  @call_user_func_array($controller . "::" . $function, $params);//calling the appropriate function 
-    
+                            $controller = $ucwordsBlock. "Controller";
+                            $output =  @call_user_func_array($controller . "::" . $function, $params);//calling the appropriate function
+
                             //$outputDB = str_replace('{liveblock:user:' . $build_[2] . '}', $output, $outputDB);
                             $outputDB = str_replace('{liveblock:' . $block . ':' . $build_[2] . $idsOut .'}', $output, $outputDB);
                         } else {
-                            $outputDB = str_replace('{liveblock:' . $block . ':' . $build_[2] . $idsOut .'}', '{Functionality doesn\'t exist!}', $outputDB);                        
+                            $outputDB = str_replace('{liveblock:' . $block . ':' . $build_[2] . $idsOut .'}', '{Functionality doesn\'t exist!}', $outputDB);
                         }
                 }
 
                  //if php block encountered
                  if (@strstr( $build_[0] . ":" , "php:")) {
                     $block = $build_[1];
-                    
+
                     ob_start();
                     eval(strip_tags($block));
                     $output = ob_get_contents();
@@ -1310,27 +1284,21 @@ class ViewController extends NetActionController
         return $outputDB;
     }
 
-    public function evalPHP($code){
-    
-    }
-     
     public function bindViewCssAction()
     {
         //$this->_helper->layout()->disableLayout();
         //$this->_helper->viewRenderer->setNoRender();
         $values = $this->_request->getParams();
-        //print_r($values);
-        $this->view->headLink()->appendStylesheet($this->_host . 'quickstart/public/CSS/' . $values['id'] , $type = 'text/css');
+        $this->view->headLink()->appendStylesheet($this->_host . 'quickstart/public/css/' . $values['id'] , $type = 'text/css');
 
-    }   
+    }
     public function bindViewJsAction()
     {
         //$this->_helper->layout()->disableLayout();
         //$this->_helper->viewRenderer->setNoRender();
         $values = $this->_request->getParams();
-        //print_r($values);
-        $this->view->headScript()->appendScript($this->_host . 'quickstart/public/JS/' . $values['id'] , $type = 'text/css');
+        $this->view->headScript()->appendScript($this->_host . 'quickstart/public/js/' . $values['id'] , $type = 'text/css');
 
-    }     
-    
+    }
+
 }

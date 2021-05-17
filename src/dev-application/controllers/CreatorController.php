@@ -69,11 +69,11 @@ class CreatorController extends NetActionController
     {
 
         $this->_checkAccess();
-        if(file_exists($this->_nps . '/JS/language/creator/' . $this->_sesija->creatorLang . '.js') ){
-            $this->view->headScript()->appendFile($this->_host . '/JS/language/creator/' . $this->_sesija->creatorLang . '.js?rnd=' . rand(),'text/javascript');
+        if(file_exists($this->_nps . '/js/language/creator/' . $this->_sesija->creatorLang . '.js') ){
+            $this->view->headScript()->appendFile($this->_host . '/js/language/creator/' . $this->_sesija->creatorLang . '.js?rnd=' . rand(),'text/javascript');
         } else {
 
-            $this->view->headScript()->appendFile($this->_host . '/JS/language/creator/en.js?rnd=' . rand(),'text/javascript');
+            $this->view->headScript()->appendFile($this->_host . '/js/language/creator/en.js?rnd=' . rand(),'text/javascript');
         }
         $this->_helper->layout->setLayoutPath(NET_PATH . 'layouts/scripts')->setLayout('mainCreator');
         $this->view->version = $this->_version;//NeT Objects Version info
@@ -154,13 +154,13 @@ class CreatorController extends NetActionController
         $this->view->imagesFoldersForm = $formImagesFolder;
 
         //LOAD CSS FILE
-        $cssFile = file_get_contents( NET_PATH_SITE . "CSS/userCSS/default_" . $this->_sesija->loggedUser . ".css");
+        $cssFile = file_get_contents( NET_PATH_SITE . "css/userCSS/default_" . $this->_sesija->loggedUser . ".css");
         $this->view->css = $cssFile;
         $this->_backupCSS($cssFile);//make secure all the css written so far for the logged user
 
 
         //LOAD JS FILE
-        $jsFile = file_get_contents( NET_PATH_SITE . "JS/userJS/default_" . $this->_sesija->loggedUser . ".js");
+        $jsFile = file_get_contents( NET_PATH_SITE . "js/userJS/default_" . $this->_sesija->loggedUser . ".js");
         $this->view->js = $jsFile;
         $this->_backupJS($jsFile);//make secure all the js written so far for the logged user
 
@@ -184,7 +184,7 @@ class CreatorController extends NetActionController
 
      private function _backupCSS($css)
     {
-    $filename = NET_PATH_SITE . 'CSS/userCSS/default_' . $this->_sesija->loggedUser . '.css.bak';
+    $filename = NET_PATH_SITE . 'css/userCSS/default_' . $this->_sesija->loggedUser . '.css.bak';
     $somecontent = $css;
 
     // Let's make sure the file exists and is writable first.
@@ -222,7 +222,7 @@ class CreatorController extends NetActionController
 
     private function _backupJS($js)
     {
-    $filename = NET_PATH_SITE . 'JS/userJS/default_' . $this->_sesija->loggedUser . '.js.bak';
+    $filename = NET_PATH_SITE . 'js/userJS/default_' . $this->_sesija->loggedUser . '.js.bak';
     $somecontent = $js;
 
     // Let's make sure the file exists and is writable first.
@@ -851,19 +851,19 @@ class CreatorController extends NetActionController
     {
         $folderName = "userCSS";
         $contentOfCSS = "";
-        if ($handle = opendir(NET_PATH_SITE . "CSS/" . $folderName )) {
+        if ($handle = opendir(NET_PATH_SITE . "css/" . $folderName )) {
             while (false !== ($file = readdir($handle))) {
                 if ($file != "." && $file != "..") {
                     if( strpos($file, ".bak") === false ){
                         $contentOfCSS .= '/*THIS IS FROM ' . $file . '- BEGIN*/' . "\n";
-                        $contentOfCSS .= file_get_contents( NET_PATH_SITE . "CSS/" . $folderName . "/" . $file );
+                        $contentOfCSS .= file_get_contents( NET_PATH_SITE . "css/" . $folderName . "/" . $file );
                         $contentOfCSS .=  "\n" . '/*THIS IS FROM ' . $file . '- END*/' . "\n\n\n" ;
                     }
                 }
             }
             closedir($handle);
 
-                $filename = NET_PATH_SITE . "CSS/default.css";
+                $filename = NET_PATH_SITE . "css/default.css";
                 if (!$handle = fopen($filename, 'w+') ) {
                      $message = "Cannot open file ";
                      return;
@@ -882,30 +882,30 @@ class CreatorController extends NetActionController
         $folderName = "userJS";
         $contentOfCSS = "";
         //get contents of frontend and view js files
-        if (file_exists(NET_PATH_SITE . "JS/" . "frontend.js")){
+        if (file_exists(NET_PATH_SITE . "js/" . "frontend.js")){
             $contentOfCSS .= '/*THIS IS FROM frontend.js - BEGIN*/' . "\n";
-            $contentOfCSS .= file_get_contents( NET_PATH_SITE . "JS/" . "frontend.js" );
+            $contentOfCSS .= file_get_contents( NET_PATH_SITE . "js/" . "frontend.js" );
             $contentOfCSS .= '/*THIS IS FROM frontend.js - END*/' . "\n";
         }
-        if (file_exists(NET_PATH_SITE . "JS/" . "view.js")){
+        if (file_exists(NET_PATH_SITE . "js/" . "view.js")){
             $contentOfCSS .= '/*THIS IS FROM view.js - BEGIN*/' . "\n";
-            $contentOfCSS .= file_get_contents( NET_PATH_SITE . "JS/" . "view.js" );
+            $contentOfCSS .= file_get_contents( NET_PATH_SITE . "js/" . "view.js" );
             $contentOfCSS .= '/*THIS IS FROM view.js - END*/' . "\n";
         }
 
-        if ($handle = opendir(NET_PATH_SITE . "JS/" . $folderName )) {
+        if ($handle = opendir(NET_PATH_SITE . "js/" . $folderName )) {
             while (false !== ($file = readdir($handle))) {
                 if ($file != "." && $file != "..") {
                     if( strpos($file, ".bak") === false ){
                         $contentOfCSS .= '/*THIS IS FROM ' . $file . '- BEGIN*/' . "\n";
-                        $contentOfCSS .= file_get_contents( NET_PATH_SITE . "JS/" . $folderName . "/" . $file );
+                        $contentOfCSS .= file_get_contents( NET_PATH_SITE . "js/" . $folderName . "/" . $file );
                         $contentOfCSS .=  "\n" . '/*THIS IS FROM ' . $file . '- END*/' . "\n\n\n" ;
                     }
                 }
             }
             closedir($handle);
 
-                $filename = NET_PATH_SITE . "JS/main2.js";
+                $filename = NET_PATH_SITE . "js/main2.js";
                 if (!$handle = fopen($filename, 'w+') ) {
                      $message = "Cannot open file ";
                      return;

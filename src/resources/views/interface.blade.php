@@ -122,7 +122,7 @@
 
           <q-page-container class="qpage">
             <q-page >
-              <iframe id="creator" src="/adm" title="Tools and properties" style="width: 100%;height: 100%; position: absolute; top: 0; left: 0; border: 0;"></iframe> 
+              <iframe id="creator" src="/adm" title="Tools and properties" style="width: 100%;height: 100%; position: absolute; top: 0; left: 0; border: 0;"></iframe>
             </q-page>
           </q-page-container>
 
@@ -152,7 +152,7 @@
                   <q-tab name="layers" label="Layers"></q-tab>
                   <q-tab name="components" label="Components"></q-tab>
                   <q-tab name="options" label="Options"></q-tab>
-                  
+
                 </q-tabs>
 
                 <q-separator></q-separator>
@@ -167,7 +167,7 @@
                     <div class="text-h6">Components</div>
                     Here should come available components to be draged and dropped on the canvas
                   </q-tab-panel>
-                  
+
                   <q-tab-panel name="options">
                     <div class="text-h6">Options</div>
                     Here should come options from the old panel, apply to all languages, theme
@@ -254,7 +254,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@^2.0.0/dist/vue.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/quasar@1.15.10/dist/quasar.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/quasar@1.15.10/dist/icon-set/material-icons-round.umd.min.js"></script>
-  <script type="text/javascript" src="/JS/jquery/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="/js/jquery/jquery-3.6.0.min.js"></script>
 
   <script>
       //Quasar.iconSet.set(Quasar.iconSet.materialIconsRound)
@@ -275,10 +275,10 @@
 
                   // Requesting fullscreen mode:
                   Quasar.AppFullscreen.request()
-                    .then(() => { 
+                    .then(() => {
                       // success!
                     })
-                    .catch(err => { 
+                    .catch(err => {
                       // oh, no!!!
                     });
 
@@ -298,7 +298,7 @@
 
                  } else {
 
-                    openFullscreen(); 
+                    openFullscreen();
                 }
             },
             toggleDrawerLeft: function(drawerLeft) {

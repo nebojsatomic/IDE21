@@ -562,10 +562,10 @@ INSERT INTO `tableregistry` (`id`, `tablePK`, `name`, `core`) VALUES
 (10, 'id', 'pages_en', 0);
 
 INSERT INTO `templates_en` (`id`, `projectId`, `userId`, `dateChanged`, `title`, `alias`, `objectids`, `description`, `category`, `image`, `output`, `defaultTemplate`, `bodyBg`, `staticFiles`) VALUES
-(1, 1, 1, 1312481789, 'Template1-Blue', 'template1-blue', '', '', '', '', '', 1, 'url(images/backgrounds/vector_0298.jpg)  fixed;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%; no-repeat;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%;', 'CSS/themes.css');
+(1, 1, 1, 1312481789, 'Template1-Blue', 'template1-blue', '', '', '', '', '', 1, 'url(images/backgrounds/vector_0298.jpg)  fixed;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%; no-repeat;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%;', 'css/themes.css');
 
 INSERT INTO `templates_sr` (`id`, `projectId`, `userId`, `dateChanged`, `title`, `alias`, `objectids`, `description`, `category`, `image`, `output`, `defaultTemplate`, `bodyBg`, `staticFiles`) VALUES
-(1, 1, 1, 1312481789, 'Template1-Blue', 'template1-blue', '', '', '', '', '', 1, 'url(images/backgrounds/vector_0298.jpg)  fixed;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%; no-repeat;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%;', 'CSS/themes.css');
+(1, 1, 1, 1312481789, 'Template1-Blue', 'template1-blue', '', '', '', '', '', 1, 'url(images/backgrounds/vector_0298.jpg)  fixed;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%; no-repeat;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%;', 'css/themes.css');
 
 
 

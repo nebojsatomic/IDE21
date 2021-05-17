@@ -5,7 +5,7 @@ $data[] = "
 INSERT INTO `access_rules` (`ruleId`, `roleId`, `resource`, `rule`) VALUES
 (3, 1, 'page:10', 'allow');
 
-" ; 
+" ;
 */
 $data[] = "
 
@@ -37,14 +37,14 @@ INSERT INTO `languages` (`id`, `code`, `name`, `enabled`, `isDefault`, `weight`)
 (1, 'en', 'English', 1, 1, 2),
 (2, 'sr', 'Srpski', 1, 0, 1);
 
-" ; 
+" ;
 
 $data[] = "
 
 INSERT INTO `menus` (`menu_id`, `projectId`, `name`, `description`, `check_access`, `block_id`) VALUES
 (1, 1, 'First', 'This is the first menu', NULL, 0),
 (104, 1, 'Second', NULL, NULL, 0);
-" ; 
+" ;
 /*
 $data[] = "
 
@@ -66,7 +66,7 @@ INSERT INTO `menu_items` (`item_id`, `parent_id`, `menu_id`, `content_id`, `proj
 (15, 0, 105, 18, 1, 1, 0, 0, NULL, 'Media', '', 'view/index/id/18', '', NULL, ''),
 (16, 0, 105, 18, 1, 1, 0, 0, NULL, 'Press', '', 'view/index/id/18', '', NULL, '');
 
-" ; 
+" ;
 
 */
 $data[] = "
@@ -97,7 +97,7 @@ INSERT INTO `mod_forms_fields` (`id`, `form_id`, `name`, `type`, `enabled`, `wei
 (13, 2, 'Poruka', 2, 1, 0),
 (14, 2, 'Attachment', 1, 0, 0);
 
-" ; 
+" ;
 /*
 $data[] = "
 
@@ -108,7 +108,7 @@ INSERT INTO `pages_en` (`id`, `projectId`, `userId`, `dateChanged`, `title`, `al
 INSERT INTO `pages_sr` (`id`, `projectId`, `userId`, `dateChanged`, `title`, `alias`, `objectids`, `description`, `keywords`, `category`, `template_id`, `image`, `output`, `published`, `homepage`, `css`, `js`, `check_access`, `bounded`, `unbounded`) VALUES
 (1, 1, 1, 1312481789, 'Prva strana', 'prva-strana', '', '', '', '2', 11, '', '', 1, 0, '', '', NULL, 1, 0);
 
-" ; 
+" ;
 */
 $data[] = "
 
@@ -147,12 +147,12 @@ INSERT INTO `tableregistry` (`id`, `tablePK`, `name`, `core`) VALUES
 /*
 $data[] = "
 INSERT INTO `templates_en` (`id`, `projectId`, `userId`, `dateChanged`, `title`, `alias`, `objectids`, `description`, `category`, `image`, `output`, `defaultTemplate`, `bodyBg`, `staticFiles`) VALUES
-('', '', '', '', 'Template1-Blue', 'template1-blue', '', '', '', '', '', 1, 'url(images/backgrounds/vector_0298.jpg)  fixed;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%; no-repeat;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%;', 'CSS/themes.css');
+('', '', '', '', 'Template1-Blue', 'template1-blue', '', '', '', '', '', 1, 'url(images/backgrounds/vector_0298.jpg)  fixed;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%; no-repeat;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%;', 'css/themes.css');
 " ;
 
  $data[] = "
 INSERT INTO `templates_sr` (`id`, `projectId`, `userId`, `dateChanged`, `title`, `alias`, `objectids`, `description`, `category`, `image`, `output`, `defaultTemplate`, `bodyBg`, `staticFiles`) VALUES
-('', '', '', '', 'Template1-Blue', 'template1-blue', '', '', '', '', '', 1, 'url(images/backgrounds/vector_0298.jpg)  fixed;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%; no-repeat;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%;', 'CSS/themes.css');"; 
+('', '', '', '', 'Template1-Blue', 'template1-blue', '', '', '', '', '', 1, 'url(images/backgrounds/vector_0298.jpg)  fixed;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%; no-repeat;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%;', 'css/themes.css');"; 
 
 */
 $data[] = "
@@ -160,5 +160,5 @@ $data[] = "
 INSERT INTO `users` (`userId`, `username`, `fullname`, `password`, `email`, `created`, `login`, `status`, `timezone`, `languageId`, `picture`, `roleId`, `date_format`, `superadmin`) VALUES
 (1, 'nebojsa', 'NebojsaTomic', '4b8cb054ac14783fe1a0a8c0dc90937def450b46', 'email@ex.com', NULL, 1327679569, 1, 'UTC', 0, NULL, 4, NULL, 1),
 (19, 'proba', 'Proba1', '9f47b814230f7481deb45506283214aa58e923f9', 'email@ex.com', 1256571392, 1370937668, 1, '', 0, NULL, 4, '', 1);
-" ; 
+" ;
 ?>

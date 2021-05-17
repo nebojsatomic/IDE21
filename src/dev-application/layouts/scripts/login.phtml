@@ -1,32 +1,32 @@
 <?php
 /**
- * CMS-IDE Visual CMS
- *
- * @category   Layouts
- * @package    CMS-IDE
- *  Copyright (C) 2010-2021  Nebojsa Tomic
- *  
- *  This file is part of CMS-IDE.
- *     
- *  CMS-IDE is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Lesser General Public
- *  License as published by the Free Software Foundation; either
- *  version 3 of the License, or (at your option) any later version.
- *
- *  CMS-IDE is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Lesser General Public License for more details.
- *
- *  You should have received a copy of the GNU Lesser General Public
- *  License along with this library; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- *
- */
- ?>
- <!DOCTYPE html>
- <html>
- <head>
+* CMS-IDE Visual CMS
+*
+* @category   Layouts
+* @package    CMS-IDE
+*  Copyright (C) 2010-2021  Nebojsa Tomic
+*
+*  This file is part of CMS-IDE.
+*
+*  CMS-IDE is free software; you can redistribute it and/or
+*  modify it under the terms of the GNU Lesser General Public
+*  License as published by the Free Software Foundation; either
+*  version 3 of the License, or (at your option) any later version.
+*
+*  CMS-IDE is distributed in the hope that it will be useful,
+*  but WITHOUT ANY WARRANTY; without even the implied warranty of
+*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+*  Lesser General Public License for more details.
+*
+*  You should have received a copy of the GNU Lesser General Public
+*  License along with this library; if not, write to the Free Software
+*  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+*
+*/
+?>
+<!DOCTYPE html>
+<html>
+<head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="generator" content="NeT">
   <title>Creator Login</title>
@@ -34,21 +34,21 @@
 
   <style type="text/css">
 
-    #loginform fieldset {background: whitesmoke;opacity:0.9;margin-bottom:20px;border-radius: 5px;font-family:Arial;font-size:12px;padding:50px; border: 0.6px solid #d5d0cc; color: #747495;}
-    #loginform input {color:#000 !important;margin-bottom:5px;width: 115px; padding:5px; opacity:0.9;-moz-border-radius:15px;font-family:Arial;font-size:12px;color:white; background: #e5e5e5;}
-    #loginform input[type=submit]{ width: 100%; border-radius: 5px; border:1px solid #d5d0cc; text-transform: uppercase;padding-top: 10px; padding-bottom: 10px; background: whitesmoke; font-weight: bold; color: #747495 !important; }
+  #loginform fieldset {background: whitesmoke;opacity:0.9;margin-bottom:20px;border-radius: 5px;font-family:Arial;font-size:12px;padding:50px; border: 0.6px solid #d5d0cc; color: #747495;}
+  #loginform input {color:#000 !important;margin-bottom:5px;width: 115px; padding:5px; opacity:0.9;-moz-border-radius:15px;font-family:Arial;font-size:12px;color:white; background: #e5e5e5;}
+  #loginform input[type=submit]{ width: 100%; border-radius: 5px; border:1px solid #d5d0cc; text-transform: uppercase;padding-top: 10px; padding-bottom: 10px; background: whitesmoke; font-weight: bold; color: #747495 !important; }
 
-    #loginform dd {margin-left: 0;} 
+  #loginform dd {margin-left: 0;}
 
   </style>
-  <link rel="stylesheet" href="<?php echo $this->host;?>CSS/uniform/css/uniform.aristo.css" media="screen" />
-  <script type="text/javascript" src="<?php echo $this->host;?>JS/jquery/jquery-1.3.2.min.js"></script>   
-  <script type="text/javascript"  src="<?php echo $this->host;?>JS/uniform/jquery.uniform.js"></script>
+  <link rel="stylesheet" href="/css/uniform/css/uniform.aristo.css" media="screen" />
+  <script type="text/javascript" src="/js/jquery/jquery-1.3.2.min.js"></script>
+  <script type="text/javascript"  src="/js/uniform/jquery.uniform.js"></script>
 
 </head>
 <body>
   <div style="position:absolute;top: 30px;left:30px;width:200px;height: 200px;z-index:9;background:white;">
-    <img src="<?php echo $this->host;?>images/IDE21.png" height="100%" />
+    <img src="/images/IDE21.png" height="100%" />
   </div>
 
   <div style="position:absolute;;z-index:999999;margin:0 auto; left: 50%; top: 50%; transform: translate(-50%, -50%)">
@@ -57,7 +57,7 @@
     ?>
   </div>
   <script type="text/javascript" >
-    $("select, input").not("#submit").uniform();
-  </script> 
+  $("select, input").not("#submit").uniform();
+  </script>
 </body>
 </html>

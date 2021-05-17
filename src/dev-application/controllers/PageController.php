@@ -99,7 +99,7 @@ class PageController extends NetActionController
 
     private function _saveCSS($css)
     {
-    $filename = NET_PATH_SITE . 'CSS/userCSS/default_' . $this->_sesija->loggedUser . '.css';
+    $filename = NET_PATH_SITE . 'css/userCSS/default_' . $this->_sesija->loggedUser . '.css';
     $somecontent = rtrim($css);
     $somecontent = ltrim($somecontent);
 
@@ -138,7 +138,7 @@ class PageController extends NetActionController
 
     private function _saveJS($js)
     {
-    $filename = NET_PATH_SITE . 'JS/userJS/default_' . $this->_sesija->loggedUser . '.js';
+    $filename = NET_PATH_SITE . 'js/userJS/default_' . $this->_sesija->loggedUser . '.js';
     $somecontent = rtrim($js);
     $somecontent = ltrim($somecontent);
     // Let's make sure the file exists and is writable first.
@@ -254,19 +254,19 @@ class PageController extends NetActionController
     {
         $folderName = "userCSS";
         $contentOfCSS = "";
-        if ($handle = opendir(NET_PATH_SITE . "CSS/" . $folderName )) {
+        if ($handle = opendir(NET_PATH_SITE . "css/" . $folderName )) {
             while (false !== ($file = readdir($handle))) {
                 if ($file != "." && $file != "..") {
                     if( strpos($file, ".bak") === false ){
                         $contentOfCSS .= '/*THIS IS FROM ' . $file . '- BEGIN*/' . "\n";
-                        $contentOfCSS .= file_get_contents( NET_PATH_SITE . "CSS/" . $folderName . "/" . $file );
+                        $contentOfCSS .= file_get_contents( NET_PATH_SITE . "css/" . $folderName . "/" . $file );
                         $contentOfCSS .=  "\n" . '/*THIS IS FROM ' . $file . '- END*/' . "\n\n\n" ;
                     }
                 }
             }
             closedir($handle);
 
-                $filename = NET_PATH_SITE . "CSS/default.css";
+                $filename = NET_PATH_SITE . "css/default.css";
                 if (!$handle = fopen($filename, 'w+') ) {
                      $message = "Cannot open file ";
                      return;
@@ -285,30 +285,30 @@ class PageController extends NetActionController
         $folderName = "userJS";
         $contentOfCSS = "";
         //get contents of frontend and view js files
-        if (file_exists(NET_PATH_SITE . "JS/" . "frontend.js")){
+        if (file_exists(NET_PATH_SITE . "js/" . "frontend.js")){
             $contentOfCSS .= '/*THIS IS FROM frontend.js - BEGIN*/' . "\n";
-            $contentOfCSS .= file_get_contents( NET_PATH_SITE . "JS/" . "frontend.js" );
+            $contentOfCSS .= file_get_contents( NET_PATH_SITE . "js/" . "frontend.js" );
             $contentOfCSS .= '/*THIS IS FROM frontend.js - END*/' . "\n";
         }
-        if (file_exists(NET_PATH_SITE . "JS/" . "view.js")){
+        if (file_exists(NET_PATH_SITE . "js/" . "view.js")){
             $contentOfCSS .= '/*THIS IS FROM view.js - BEGIN*/' . "\n";
-            $contentOfCSS .= file_get_contents( NET_PATH_SITE . "JS/" . "view.js" );
+            $contentOfCSS .= file_get_contents( NET_PATH_SITE . "js/" . "view.js" );
             $contentOfCSS .= '/*THIS IS FROM view.js - END*/' . "\n";
         }
 
-        if ($handle = opendir(NET_PATH_SITE . "JS/" . $folderName )) {
+        if ($handle = opendir(NET_PATH_SITE . "js/" . $folderName )) {
             while (false !== ($file = readdir($handle))) {
                 if ($file != "." && $file != "..") {
                     if( strpos($file, ".bak") === false ){
                         $contentOfCSS .= '/*THIS IS FROM ' . $file . '- BEGIN*/' . "\n";
-                        $contentOfCSS .= file_get_contents( NET_PATH_SITE . "JS/" . $folderName . "/" . $file );
+                        $contentOfCSS .= file_get_contents( NET_PATH_SITE . "js/" . $folderName . "/" . $file );
                         $contentOfCSS .=  "\n" . '/*THIS IS FROM ' . $file . '- END*/' . "\n\n\n" ;
                     }
                 }
             }
             closedir($handle);
 
-                $filename = NET_PATH_SITE . "JS/main2.js";
+                $filename = NET_PATH_SITE . "js/main2.js";
                 if (!$handle = fopen($filename, 'w+') ) {
                      $message = "Cannot open file ";
                      return;
@@ -938,8 +938,8 @@ class PageController extends NetActionController
                // $fields .= '<' . $key . '><![CDATA[' . htmlspecialchars($value ). ']]</' . $key . '>' . "\n";
             }
             if($key == 'staticFiles') {
-              // $fields .= '<' . $key . '>' . $this->_host . 'CSS/userCSS/default_' . $this->_sesija->user . '.css;' . $this->_host . 'JS/userJS/default_' . $this->_sesija->user . '.js' . '</' . $key . '>' . "\n";
-               $fields .= '<' . $key . '>'  . '/CSS/themes.css;' .  '/CSS/default.css;'  . '/JS/main2.js' . '</' . $key . '>' . "\n";
+              // $fields .= '<' . $key . '>' . $this->_host . 'css/userCSS/default_' . $this->_sesija->user . '.css;' . $this->_host . 'js/userJS/default_' . $this->_sesija->user . '.js' . '</' . $key . '>' . "\n";
+               $fields .= '<' . $key . '>'  . '/css/themes.css;' .  '/css/default.css;'  . '/js/main2.js' . '</' . $key . '>' . "\n";
 
                continue;
             }

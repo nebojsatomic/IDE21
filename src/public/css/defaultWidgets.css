@@ -1,0 +1,82 @@
+.liMenu{
+width:auto;
+color:darkgreen;
+background: silver;
+list-style:none;
+padding-left:15px;
+padding-top:3px;
+
+}
+.liMenu a{
+color:darkgreen;
+text-decoration:none;
+width:100px;
+}
+.liMenu a:hover{
+color:green;
+text-decoration:none;
+
+}
+/*SUBMENU*/
+.submenu {
+width:auto;
+color:green;
+background: #cccccc;
+}
+
+.submenu ul{
+list-style:none;
+}
+.submenu a{
+color:green;
+text-decoration:none;
+width:100px;
+}
+.submenu a:hover{
+color:green;
+text-decoration:none;
+
+}
+
+/*SUBMENU2*/
+.submenu2{
+
+width:auto;
+color:green;
+background: #ccccff;
+list-style:none;
+
+}
+.submenu2 a{
+color:lightgreen;
+text-decoration:none;
+width:100px;
+}
+.submenu2 a:hover{
+color:green;
+text-decoration:none;
+
+}
+
+
+
+/*SUBMENU3*/
+.submenu3{
+
+width:auto;
+color:black;
+background: white;
+list-style:none;
+
+}
+.submenu3 a{
+color:lightgreen;
+text-decoration:none;
+width:100px;
+}
+.submenu3 a:hover{
+color:green;
+text-decoration:none;
+
+}
+
