@@ -22,18 +22,16 @@ After that one person has designed and coded frontend, template is available for
 - Install Docker
 - Clone this repo
 - cd to dir
-- Run in terminal docker-compose up
-- ( laravel version needs composer to install dependencies, execute "docker-compose -f docker-compose-first-run.yaml up" and then "docker-compose up", or login into container and do it manually by executing ./laravel.sh )
+- Run in terminal:
 
-After succesful building and running, you can access the front at http://localhost, and admin area at http://localhost/adm 
+  $ docker-compose -f docker-compose-first-run.yaml up
 
-( If you have error message that cache dir is not writable, then:
+  $ docker-compose up
 
-- $ docker ps
-- copy CONTAINERID,
-- $ docker exec -it CONTAINERID bash
-- execute ./shell.sh inside container ) * this is temporary solution, problem exists on Linux only it seems
- 
+  ( laravel version needs composer to install dependencies, execute "docker-compose -f docker-compose-first-run.yaml up" and then "docker-compose up", or login into container and do it manually by executing ./laravel.sh )
+
+After succesful building and running, you can access the front at http://localhost, and admin area at http://localhost/adm
+
 
 For locahost/adm :
 
