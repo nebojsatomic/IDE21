@@ -93,7 +93,7 @@ if($firstRun == true) {
 //END OF INSTALLATION PART
 
 /** Setting paths */
-$rootPath = $_SERVER['DOCUMENT_ROOT'];
+$rootPath = $_SERVER['DOCUMENT_ROOT'] . '/legacy';
 //echo $rootPath;
 set_include_path($rootPath . '/library' . PATH_SEPARATOR .
 $rootPath . '/dev-application/controllers' . PATH_SEPARATOR .
