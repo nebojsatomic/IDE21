@@ -33,19 +33,19 @@
                      <q-separator dark vertical inset></q-separator>
 
                      <q-btn-group rounded class="q-ml-sm tools-template hidden">
-                       <q-btn color="secondary" rounded glossy icon="edit"></q-btn>
-                       <q-btn color="secondary" rounded glossy icon="book"></q-btn>
-                       <q-btn color="secondary" rounded glossy icon-right="collections_bookmark" ></q-btn>
-                       <q-btn color="secondary" rounded glossy icon-right="file_upload" ></q-btn>
-                       <q-btn color="secondary" rounded glossy icon-right="file_download" ></q-btn>
-                       <q-btn color="red" rounded glossy icon-right="delete" ></q-btn>
+                       <q-btn color="secondary" rounded glossy icon="edit"><q-tooltip>Open template</q-tooltip></q-btn>
+                       <q-btn color="secondary" rounded glossy icon="book"><q-tooltip>Save template</q-tooltip></q-btn>
+                       <q-btn color="secondary" rounded glossy icon-right="collections_bookmark" ><q-tooltip>Save as a new template</q-tooltip></q-btn>
+                       <q-btn color="secondary" rounded glossy icon-right="file_upload" ><q-tooltip>Export template to zip file</q-tooltip></q-btn>
+                       <q-btn color="secondary" rounded glossy icon-right="file_download" ><q-tooltip>Install template from a zip file</q-tooltip></q-btn>
+                       <q-btn color="red" rounded glossy icon-right="delete" ><q-tooltip>Delete this template</q-tooltip></q-btn>
                      </q-btn-group>
 
                      <q-btn-group rounded class="q-ml-sm tools-page">
-                       <q-btn color="amber" rounded glossy icon="edit"></q-btn>
-                       <q-btn color="amber" rounded glossy icon="book"></q-btn>
-                       <q-btn color="amber" rounded glossy icon-right="collections_bookmark" ></q-btn>
-                       <q-btn color="red" rounded glossy icon-right="delete" ></q-btn>
+                       <q-btn color="amber" rounded glossy icon="edit"><q-tooltip>Open page</q-tooltip></q-btn>
+                       <q-btn color="amber" rounded glossy icon="book"><q-tooltip>Save page</q-tooltip></q-btn>
+                       <q-btn color="amber" rounded glossy icon-right="collections_bookmark" ><q-tooltip>Save as a new page</q-tooltip></q-btn>
+                       <q-btn color="red" rounded glossy icon-right="delete" ><q-tooltip>Delete this page</q-tooltip></q-btn>
                      </q-btn-group>
                       <!--<q-input standout="bg-teal text-white" v-model="templateName" label="Template name"></q-input>
                   </div>
@@ -58,7 +58,7 @@
                    <!--</div>
 
                    <div class="col">-->
-                     <q-btn flat @click="goFullscreen" round dense icon="fullscreen" class="q-mr-sm"></q-btn>
+                     <q-btn flat @click="goFullscreen" round dense icon="fullscreen" class="q-mr-sm"><q-tooltip>Toggle fullscreen</q-tooltip></q-btn>
 
                      <q-separator dark vertical inset></q-separator>
                      <!-- WORKSPACE -->
