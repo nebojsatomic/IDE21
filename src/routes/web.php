@@ -12,15 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/aa', function () {
-    return 'Hello World';
-});
-*/
 Route::get('/ide21_creator/interface', 'App\Http\Controllers\LInterfaceController@index' );
 
 //Route::get('/pages/{pageid}', 'App\Http\Controllers\LPagesController@index' ); // disable temporary, use ZF1 website

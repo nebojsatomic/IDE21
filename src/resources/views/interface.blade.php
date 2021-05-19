@@ -13,7 +13,7 @@
         background-color: #e0e0e0;
       }
       .qpage {
-        padding-right: 280px !important; /* hide scroll bar on the right */
+        /*padding-right: 280px !important;*//* hide scroll bar on the right */
       }
     </style>
 
@@ -26,97 +26,126 @@
         <q-layout view="hHh Lpr lff" container style="height: 100vh;" class="shadow-2 rounded-borders">
           <q-header elevated class="bg-black hidden">
             <q-toolbar class="bg-grey-7 " style="min-height: 40px;">
-              <q-btn flat @click="drawerLeft = !drawerLeft" round dense icon="arrow_back_ios_new" class="q-mr-sm"></q-btn>
-              <q-separator dark vertical inset></q-separator>
+               <!--<div class="q-pa-md">
+                 <div class="row">
+                   <div class="col">-->
+                     <q-btn flat @click="drawerLeft = !drawerLeft" round dense icon="arrow_back_ios_new" class="q-mr-sm"></q-btn>
+                     <q-separator dark vertical inset></q-separator>
 
-              <q-space></q-space>
-              <q-avatar class="fixed-top-center" style="width: 40px;height: 40px;position: fixed;left: 50%;top: 0px;transform: translate(-50%);">
-                <img src="/images/IDE21_LOGO3.svg">
-              </q-avatar>
+                     <q-btn-group rounded class="q-ml-sm tools-template hidden">
+                       <q-btn color="secondary" rounded glossy icon="edit"></q-btn>
+                       <q-btn color="secondary" rounded glossy icon="book"></q-btn>
+                       <q-btn color="secondary" rounded glossy icon-right="collections_bookmark" ></q-btn>
+                       <q-btn color="secondary" rounded glossy icon-right="file_upload" ></q-btn>
+                       <q-btn color="secondary" rounded glossy icon-right="file_download" ></q-btn>
+                       <q-btn color="red" rounded glossy icon-right="delete" ></q-btn>
+                     </q-btn-group>
 
-              <q-btn flat @click="goFullscreen" round dense icon="fullscreen" class="q-mr-sm"></q-btn>
-              <q-separator dark vertical inset></q-separator>
-              <!-- WORKSPACE -->
+                     <q-btn-group rounded class="q-ml-sm tools-page">
+                       <q-btn color="amber" rounded glossy icon="edit"></q-btn>
+                       <q-btn color="amber" rounded glossy icon="book"></q-btn>
+                       <q-btn color="amber" rounded glossy icon-right="collections_bookmark" ></q-btn>
+                       <q-btn color="red" rounded glossy icon-right="delete" ></q-btn>
+                     </q-btn-group>
+                      <!--<q-input standout="bg-teal text-white" v-model="templateName" label="Template name"></q-input>
+                  </div>
 
-              <q-select
-                label="WORKSPACE"
-                transition-show="flip-up"
-                transition-hide="flip-down"
-                filled
-                v-model="workspace.model"
-                :options="workspace.options"
-                style="width: 160px"
-                bg-color="gray-7"
-                color="white"
-                dark
-                square
-                @input="setValueForWorkspace(workspace.model)"
-              ></q-select>
+                   <div class="col">-->
+                     <q-space></q-space>
+                     <q-avatar class="fixed-top-center" style="width: 40px;height: 40px;position: fixed;left: 50%;top: 0px;transform: translate(-50%);">
+                       <img src="/images/IDE21_LOGO3.svg">
+                     </q-avatar>
+                   <!--</div>
 
-              <!--
-              <q-btn-dropdown stretch flat label="WORKSPACE" @input="setValueForWorkspace(this)">
-                <q-list>
-                  <q-item v-for="n in 1" :key="`x.${n}`" clickable v-close-popup tabindex="0">
-                    <q-item-section avatar>
-                      <q-avatar icon="article"  text-color="gray-7"></q-avatar>
-                    </q-item-section>
-                    <q-item-section>
-                      <q-item-label>Page</q-item-label>
-                    </q-item-section>
-                    <q-item-section side>
-                      <q-icon name="info"></q-icon>
-                    </q-item-section>
-                  </q-item>
-                  <q-separator inset spaced></q-separator>
-                  <q-item v-for="n in 1" :key="`x.${n}`" clickable v-close-popup tabindex="0">
-                    <q-item-section avatar>
-                      <q-avatar icon="web" text-color="gray-7"></q-avatar>
-                    </q-item-section>
-                    <q-item-section>
-                      <q-item-label>Template</q-item-label>
-                    </q-item-section>
-                    <q-item-section side>
-                      <q-icon name="info"></q-icon>
-                    </q-item-section>
-                  </q-item>
-                </q-list>
-              </q-btn-dropdown>
-              -->
+                   <div class="col">-->
+                     <q-btn flat @click="goFullscreen" round dense icon="fullscreen" class="q-mr-sm"></q-btn>
 
-              <!-- ENGINE - in this phase - disabled --><!--
-              <q-btn-dropdown stretch flat label="Frontend Engine">
-                <q-list>
-                  <q-item v-for="n in 1" :key="`x.${n}`" clickable v-close-popup tabindex="0">
-                    <q-item-section avatar>
-                      <q-avatar icon="folder" color="secondary" text-color="white"></q-avatar>
-                    </q-item-section>
-                    <q-item-section>
-                      <q-item-label>Vue.js</q-item-label>
-                    </q-item-section>
-                    <q-item-section side>
-                      <q-icon name="info"></q-icon>
-                    </q-item-section>
-                  </q-item>
-                  <q-separator inset spaced></q-separator>
-                  <q-item v-for="n in 1" :key="`y.${n}`" clickable v-close-popup tabindex="0">
-                    <q-item-section avatar>
-                      <q-avatar icon="assignment" color="primary" text-color="white"></q-avatar>
-                    </q-item-section>
-                    <q-item-section>
-                      <q-item-label>React</q-item-label>
-                    </q-item-section>
-                    <q-item-section side>
-                      <q-icon name="info"></q-icon>
-                    </q-item-section>
-                  </q-item>
-                </q-list>
-              </q-btn-dropdown>-->
+                     <q-separator dark vertical inset></q-separator>
+                     <!-- WORKSPACE -->
 
-              <q-separator dark vertical></q-separator>
-              <!--<q-btn @click="() => emitMessageReqID('logout_a')" stretch flat label="LOGOUT"></q-btn>-->
-              <q-btn type="a" href="/creator/logout" stretch flat label="LOGOUT"></q-btn>
-              <q-separator dark vertical></q-separator>
-              <q-btn flat round dense @click="drawerRight = !drawerRight" icon="arrow_forward_ios" class="q-ml-sm"></q-btn>
+                    <q-select
+                      label="WORKSPACE"
+                      transition-show="flip-up"
+                      transition-hide="flip-down"
+                      filled
+                      v-model="workspace.model"
+                      :options="workspace.options"
+                      style="width: 160px"
+                      bg-color="gray-7"
+                      color="white"
+                      dark
+                      square
+                      @input="setValueForWorkspace(workspace.model)"
+                    ></q-select>
+
+                    <!--
+                    <q-btn-dropdown stretch flat label="WORKSPACE" @input="setValueForWorkspace(this)">
+                      <q-list>
+                        <q-item v-for="n in 1" :key="`x.${n}`" clickable v-close-popup tabindex="0">
+                          <q-item-section avatar>
+                            <q-avatar icon="article"  text-color="gray-7"></q-avatar>
+                          </q-item-section>
+                          <q-item-section>
+                            <q-item-label>Page</q-item-label>
+                          </q-item-section>
+                          <q-item-section side>
+                            <q-icon name="info"></q-icon>
+                          </q-item-section>
+                        </q-item>
+                        <q-separator inset spaced></q-separator>
+                        <q-item v-for="n in 1" :key="`x.${n}`" clickable v-close-popup tabindex="0">
+                          <q-item-section avatar>
+                            <q-avatar icon="web" text-color="gray-7"></q-avatar>
+                          </q-item-section>
+                          <q-item-section>
+                            <q-item-label>Template</q-item-label>
+                          </q-item-section>
+                          <q-item-section side>
+                            <q-icon name="info"></q-icon>
+                          </q-item-section>
+                        </q-item>
+                      </q-list>
+                    </q-btn-dropdown>
+                    -->
+
+                    <!-- ENGINE - in this phase - disabled --><!--
+                    <q-btn-dropdown stretch flat label="Frontend Engine">
+                      <q-list>
+                        <q-item v-for="n in 1" :key="`x.${n}`" clickable v-close-popup tabindex="0">
+                          <q-item-section avatar>
+                            <q-avatar icon="folder" color="secondary" text-color="white"></q-avatar>
+                          </q-item-section>
+                          <q-item-section>
+                            <q-item-label>Vue.js</q-item-label>
+                          </q-item-section>
+                          <q-item-section side>
+                            <q-icon name="info"></q-icon>
+                          </q-item-section>
+                        </q-item>
+                        <q-separator inset spaced></q-separator>
+                        <q-item v-for="n in 1" :key="`y.${n}`" clickable v-close-popup tabindex="0">
+                          <q-item-section avatar>
+                            <q-avatar icon="assignment" color="primary" text-color="white"></q-avatar>
+                          </q-item-section>
+                          <q-item-section>
+                            <q-item-label>React</q-item-label>
+                          </q-item-section>
+                          <q-item-section side>
+                            <q-icon name="info"></q-icon>
+                          </q-item-section>
+                        </q-item>
+                      </q-list>
+                    </q-btn-dropdown>-->
+
+                    <q-separator dark vertical></q-separator>
+                    <!--<q-btn @click="() => emitMessageReqID('logout_a')" stretch flat label="LOGOUT"></q-btn>-->
+                    <q-btn type="a" href="/creator/logout" stretch flat label="LOGOUT"></q-btn>
+                    <q-separator dark vertical></q-separator>
+                    <q-btn flat round dense @click="drawerRight = !drawerRight" icon="arrow_forward_ios" class="q-ml-sm"></q-btn>
+
+                   <!--</div>
+                 </div>
+               </div>-->
             </q-toolbar>
           </q-header >
 
@@ -265,6 +294,7 @@
           return {
             drawerLeft: false,
             drawerRight: false,
+            templateName: '',
             tab: 'layers',
             tabRight: 'properties',
             goFullscreen : function() {
@@ -325,8 +355,12 @@
               //console.log(data);
               if(data == 'Template') {
                 document.getElementById('creator').contentWindow.postMessage('templateDisplayer', '*'); // send message to creator
+                $('.tools-page').addClass('hidden');
+                $('.tools-template').removeClass('hidden');
               } else {
                 document.getElementById('creator').contentWindow.postMessage('pageDisplayer', '*');
+                $('.tools-template').addClass('hidden');
+                $('.tools-page').removeClass('hidden');
               }
             },
 
