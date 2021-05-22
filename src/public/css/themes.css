@@ -3,16 +3,16 @@
 filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.myBackground.jpg', sizingMethod='scale');
 -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')";
 */
-        body{min-width:1080px;font-size:11px;font-family:Arial;background: #ffffff;}        
+        body{min-width:1080px;font-size:11px;font-family:Arial;background: #ffffff;}
         h1{font-size:20px;}
         #centerWrapper{position:relative;width:1080px;min-height:600px;margin:0 auto;border:0px solid red;}
         .draggable { position:absolute;width: auto; min-height: 25px;height:auto; background: transparent; padding: 0px;float:left;color: black; overflow:hidden;}
         .container {  padding: 0px; margin:0;width:100%;}
         #container {  padding: 0px; margin:0;}
-        .templateDiv {position:absolute;border:0px solid green;z-index:0;}        
-        #footer {float:left;width:100%;height:auto;}        
+        .templateDiv {position:absolute;border:0px solid green;z-index:0;}
+        #footer {float:left;width:100%;height:auto;}
         /*#ajax-loader{display:none;position:absolute;left: 860px; top: 340px;width:70px;height:70px;background:transparent url(<?php echo $this->host;?>images/ajax-loader.gif) no-repeat;z-index:999999;}*/
-        .ajax-loader{display:none;}    
+        .ajax-loader{display:none;}
         #banner{min-height:200px}
         #banner_current{display:none;}
         .objContent{}
@@ -22,18 +22,18 @@ filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.myBackground.jp
         .universalTableAdmin th {border:1px solid silver;background:white;}
         /*.universalTableAdmin tr {text-align:center;background:#f4f4f4;}*/
         .utaNormal {background:#f4f4f4;text-align:center;}
-        .utaHover {background:#cccccc;text-align:center;}                  
+        .utaHover {background:#cccccc;text-align:center;}
         .zend_form textarea{width:400px;height:150px;background:#f4f4f4;border:1px solid #555555;}
-        .zend_form input[type=text]{padding: 5px; border-radius: 5px 5px 5px 5px;width:100%;height:15px;background:#f4f4f4;border:1px solid #AAAAAA;}
+        .zend_form input[type=text]{padding: 5px; border-radius: 5px 5px 5px 5px;width:100%;height:30px;background:#f4f4f4;border:1px solid #AAAAAA;}
         .zend_form input[type=password]{padding: 5px; border-radius: 5px 5px 5px 5px;width:100%;height:15px;background:#f4f4f4;border:1px solid #555555;}
         .zend_form input[type=submit]{width:auto;height:auto;background:#555555;border:1px solid silver;color:white; padding: 5px; border-radius: 5px 5px 5px 5px;}
-        .zend_form input[type=submit]:hover{width:auto;background:#f4f4f4;border:1px solid silver;color:#555555;}              
+        .zend_form input[type=submit]:hover{width:auto;background:#f4f4f4;border:1px solid silver;color:#555555;}
         input{}
-        .loginFormNet input{width:140px;background:lightblue;opacity:0.8;border:1px solid #555555;padding:2px;padding-left:4px;}        
+        .loginFormNet input{width:140px;background:lightblue;opacity:0.8;border:1px solid #555555;padding:2px;padding-left:4px;}
         .contactForm textarea{width:400px;height:150px;background:#f4f4f4;border:1px solid #555555;}
         .contactForm input[type=text]{width:400px;height:15px;background:#f4f4f4;border:1px solid #555555;}
         .contactForm input[type=submit]{width:70px;height:25px;background:#555555;border:1px solid silver;color:white;}
-        .contactForm input[type=submit]:hover{width:70px;height:25px;background:#f4f4f4;border:1px solid silver;color:#555555;}        
+        .contactForm input[type=submit]:hover{width:70px;height:25px;background:#f4f4f4;border:1px solid silver;color:#555555;}
         .langLinks{color:white;}
         .langLinks:hover{color:#cccccc;}
         .OFvisible dl{overflow:visible;}
@@ -55,7 +55,7 @@ filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.myBackground.jp
         .install a:hover{color:#094979;}
         .install .ui-tooltip{box-shadow:2px 2px 2px  #0066cc;border:1px solid #0066cc;}
         .install button.jqTransformButton span span{color:#0066cc ;}
-        
+
 /*THIS SHOULDN'T BE MESSED WITH - END*/
 
 
@@ -144,14 +144,14 @@ background:#555555;
 color:black;
 }
 .silverTheme ul.jd_menu li.jdm_active {
-background:#cccccc;	
+background:#cccccc;
 color: #FFF;
-	
+
 	padding: 10px;
 	border: 0px dotted #4b6141;
 	border-left: 0px dotted #4b6141;
 	border-top: 0px dotted #4b6141;
-	
+
 }
 
 
@@ -334,12 +334,12 @@ background:#0d5713;
 color:#1d8d1d;
 }
 .greenTheme ul.jd_menu li.jdm_active {
-background:#25a825;	
-color: #FFF;	
+background:#25a825;
+color: #FFF;
 	padding: 10px;
 	border: 0px dotted #4b6141;
 	border-left: 0px dotted #4b6141;
-	border-top: 0px dotted #4b6141;	
+	border-top: 0px dotted #4b6141;
 }
 
 
@@ -494,12 +494,12 @@ background:#a72131;
 color:#1d8d1d;
 }
 .redTheme ul.jd_menu li.jdm_active {
-background:#cc1228;	
-color: #FFF;	
+background:#cc1228;
+color: #FFF;
 	padding: 10px;
 	border: 0px dotted #4b6141;
 	border-left: 0px dotted #4b6141;
-	border-top: 0px dotted #4b6141;	
+	border-top: 0px dotted #4b6141;
 }
 
 
@@ -654,12 +654,12 @@ background:#5865e7;
 color:#1d8d1d;
 }
 .blueTheme ul.jd_menu li.jdm_active {
-background:#9ea7fa;	
-color: #FFF;	
+background:#9ea7fa;
+color: #FFF;
 	padding: 10px;
 	border: 0px dotted #4b6141;
 	border-left: 0px dotted #4b6141;
-	border-top: 0px dotted #4b6141;	
+	border-top: 0px dotted #4b6141;
 }
 
 
@@ -775,12 +775,12 @@ background:#ffffff;
 color:#555555;
 }
 .whiteTheme ul.jd_menu li.jdm_active {
-background:#f4f4f4;	
-color: #555555;	
+background:#f4f4f4;
+color: #555555;
 	padding: 10px;
 	border: 0px dotted #4b6141;
 	border-left: 0px dotted #4b6141;
-	border-top: 0px dotted #4b6141;	
+	border-top: 0px dotted #4b6141;
 }
 
 
@@ -943,12 +943,12 @@ background:transparent;
 color:#ffffff;
 }
 .blackTheme ul.jd_menu li.jdm_active {
-background:#555555;	
-color: #ffffff;	
+background:#555555;
+color: #ffffff;
 	padding: 10px;
 	border: 0px dotted #4b6141;
 	border-left: 0px dotted #4b6141;
-	border-top: 0px dotted #4b6141;	
+	border-top: 0px dotted #4b6141;
 }
 
 

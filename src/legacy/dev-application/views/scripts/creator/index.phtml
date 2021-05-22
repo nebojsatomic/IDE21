@@ -40,7 +40,7 @@
 <div id="moveProps" class="help" title="<?php echo $this->translate->_("Click to move around properties dialog");?>">
   <button id="upB"></button> <button id="downB"></button>
 </div>
-<div id="logout"  class="help" title="<?php echo $this->translate->_("Click to logout");?>"><a id="logout_a" class="a_logout" href="<?php echo $this->host;?>creator/logout" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+<div id="logout"  class="help" title="<?php echo $this->translate->_("Click to logout");?>"><a id="logout_a" class="a_logout" href="<?php echo $this->host;?>creator/logout" ></a></div>
 <div id="penPointer"></div>
 <div id="downPointer"></div>
 
@@ -90,27 +90,34 @@
       </ul>
       <div id="fragment-1">
         <form id="objProperties" name="objProperties" objId="" action="<?php echo $this->host;?>save" method="post">
-          <table width="775px"  id="tableFr1">
-            <tr><td colspan="3">
-              <a href="" id="toggleVisibilityRowAnchor" class="navLinks a_content noAjaxEvent" title="<?php echo $this->translate->_("Toggle visibility for style, tinymce and meta");?>"><?php echo $this->translate->_("Object Editors");?></a>
+          <table id="tableFr1">
+            <tr>
+              <td >
+                <div style="width:70px;float:left;text-align:left;font-weight:bold;" ><?php echo $this->translate->_("Page ID");?>:</div> <div id="pgID" ><?php echo $this->pageId;?></div>
+              </td>
+              <td colspan="3">
+                <div style="width:auto;float:left;font-weight:bold;padding-left:5px;" ><?php echo $this->translate->_("ObjectID");?>:</div> <div style="width:auto" id="objIDshow"></div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <a href="" id="toggleVisibilityRowAnchor" class="navLinks a_content noAjaxEvent" title="<?php echo $this->translate->_("Toggle visibility for style, tinymce and meta");?>"><?php echo $this->translate->_("Object Editors");?></a>
 
-              <a id="previewButton" class="a_preview help" target="_blank" href="" title="<?php echo $this->translate->_("Click this to go to the page and see how it looks!");?>"><?php echo $this->translate->_("View Page");?></a>&nbsp;
-              <a id="emptyCacheButton" class="navLinks a_emptyCache help" href="" title="<?php echo $this->translate->_("Click this to empty the cache if you have made changes that require cache to be cleaned!");?>"><?php echo $this->translate->_("Empty Cache");?> </a>&nbsp;
-              <a id="backupSiteButton" class="navLinks a_backup help" href="" title="<?php echo $this->translate->_("Click here to have backup of the site in a folder that is created for that purpose.If system command is disabled then it must be done through phpMyAdmin...");?>"><?php echo $this->translate->_("Backup Site");?> </a>&nbsp;
+                <a id="previewButton" class="a_preview help" target="_blank" href="" title="<?php echo $this->translate->_("Click this to go to the page and see how it looks!");?>"><?php echo $this->translate->_("View Page");?></a>
+                <a id="emptyCacheButton" class="navLinks a_emptyCache help" href="" title="<?php echo $this->translate->_("Click this to empty the cache if you have made changes that require cache to be cleaned!");?>"><?php echo $this->translate->_("Empty Cache");?> </a>
+                <a id="backupSiteButton" class="navLinks a_backup help" href="" title="<?php echo $this->translate->_("Click here to have backup of the site in a folder that is created for that purpose.If system command is disabled then it must be done through phpMyAdmin...");?>"><?php echo $this->translate->_("Backup Site");?> </a>
 
-              <!--<a id="generateCacheButton" class="navLinks a_generateCache" style="display:block" href="" >Generate Cache </a>
-            -->
-          </td>
-          <td>
-            <div id="p_t_common" class="noAjaxEvent">
+                <!--<a id="generateCacheButton" class="navLinks a_generateCache" style="display:block" href="" >Generate Cache </a>
+              -->
+              </td>
+              <td style="float: right;">
+                <div id="p_t_common" class="noAjaxEvent">
+                  <span><?php echo $this->translate->_("Page");?></span><span><input style="width:20px;" id="pageDisplayer" class="noAjaxEvent help" type="radio" name="p_g" value="pageEditing" checked="checked" title="<?php echo $this->translate->_("Page creating Mode");?>" /></span>
+                  <span><?php echo $this->translate->_("Template");?></span><span><input style="width:20px;" id="templateDisplayer" class="noAjaxEvent help" type="radio" name="p_g" value="templateEditing" title="<?php echo $this->translate->_("Template creating Mode");?>" /></span>
+                </div>
 
-              <span><?php echo $this->translate->_("Page");?></span><span><input style="width:20px;" id="pageDisplayer" class="noAjaxEvent help" type="radio" name="p_g" value="pageEditing" checked="checked" title="<?php echo $this->translate->_("Page creating Mode");?>" /></span>
-              <span><?php echo $this->translate->_("Template");?></span><span><input style="width:20px;" id="templateDisplayer" class="noAjaxEvent help" type="radio" name="p_g" value="templateEditing" title="<?php echo $this->translate->_("Template creating Mode");?>" /></span>
-            </div>
-
-          </td>
-
-        </tr>
+              </td>
+            </tr>
 
         <tr valign="top" id="toggleVisibilityRow" style="display:none">
           <td align="left" >
@@ -148,17 +155,7 @@
             </td>
           </tr>
           <tr>
-            <td >
-              <div style="width:70px;float:left;text-align:left;font-weight:bold;" ><?php echo $this->translate->_("Page ID");?>:</div> <div id="pgID" ><?php echo $this->pageId;?></div>
-            </td>
-            <td>
-              <div style="width:auto;float:left;font-weight:bold;padding-left:5px;" ><?php echo $this->translate->_("ObjectID");?>:</div> <div style="width:auto" id="objIDshow"></div>
-            </td>
-          </tr>
-
-
-          <tr>
-            <td align="right" valign="bottom" width="150px" style="padding-right:10px;padding-top:30px;">
+            <td align="right" valign="bottom" width="150px" >
 
               <div style="width:100%;float:left;">
                 <div class="creatorDiv"><span class="cl"><?php echo $this->translate->_("ID Assistant");?></span><span><input id="tttoggle" type="checkbox" style="margin-right:0px;" /></span></div>
@@ -205,10 +202,10 @@
                 </span>
               </div>
               <div>
-                <span class="cl"><a href="" id="deletePage" class="navLinks a_delete" title="<?php echo $this->translate->_("Click to delete this page");?>" style="float:right;bottom:0;display:block;padding:5px;padding-top:15px;padding-left:0;" ><?php echo $this->translate->_("Delete This Page");?></a></span>
+                <span class="cl"><a href="" id="deletePage" class="navLinks a_delete" title="<?php echo $this->translate->_("Click to delete this page");?>" style="margin-top: 10px; line-height: 25px;" ><?php echo $this->translate->_("Delete This Page");?></a></span>
               </div>
             </td>
-            <td align="right" valign="bottom" width="140px" style="padding:10px;padding-top:30px;">
+            <td align="right" valign="bottom" width="140px" >
               <span class="cl"><?php echo $this->translate->_("Width");?>:</span><span><input id="objPropertiesWidth" name="objPropertiesWidth" type="text" value="" /></span>
               <span class="cl"><?php echo $this->translate->_("Height");?>:</span><span><input id="objPropertiesHeight" name="objPropertiesHeight" type="text" value="" /></span>
               <span class="cl"><?php echo $this->translate->_("Border");?>:</span><span><input id="objPropertiesBorder" name="objPropertiesBorder" type="text" value="" /></span>
@@ -222,24 +219,24 @@
               <span class="cl">class:</span><span><input id="objPropertiesClass" name="objPropertiesClass" type="text" value="" style="width:50px" /></span>
 
             </td>
-            <td align="right" valign="bottom" style="padding:10px;padding-top:30px;">
+            <td align="right" valign="bottom" >
 
-              <a href="" id="newPage" class="navLinks a_new" style="display:none" title="<?php echo $this->translate->_("Click to create new page");?>"><?php echo $this->translate->_("New Page");?></a>&nbsp;
+              <a href="" id="newPage" class="navLinks a_new" style="display:none" title="<?php echo $this->translate->_("Click to create new page");?>"><?php echo $this->translate->_("New Page");?></a>
               <a href="<?php echo $this->host;?>creator/manage-all-pages?height=450&width=900" id="manageAllPages" class="thickbox" title="<?php echo $this->translate->_("Manage All Pages");?>"><b><?php echo $this->translate->_("Manage All Pages");?></b></a><br />
               <a href="" id="openPage" class="navLinks a_open" title="<?php echo $this->translate->_("Click to open existing page");?>"><?php echo $this->translate->_("Open Page");?></a> |
-              <a href="" id="clearPage" class="navLinks a_clear noAjaxEvent" title="<?php echo $this->translate->_("Click to erase all objects");?>"><?php echo $this->translate->_("Clear");?></a>&nbsp;
+              <a href="" id="clearPage" class="navLinks a_clear noAjaxEvent" title="<?php echo $this->translate->_("Click to erase all objects");?>"><?php echo $this->translate->_("Clear");?></a>
               <a href="#" class="navLinks a_redraw noAjaxEvent" id="redraw" style="display:none;"><?php echo $this->translate->_("Redraw");?></a>
               <div id="pageEditing">
                 <a href="" id="saveThisPage" class="navLinks a_save" title="<?php echo $this->translate->_("Click to save work on this page");?>" style="float:left" ><?php echo $this->translate->_("Save Page");?></a>
                 <a href="" id="savePageNew" class="navLinks a_save_new" title="<?php echo $this->translate->_("Click to save this work as a new page");?>" style="float:left"><?php echo $this->translate->_("Save As New Page");?></a><br />
-                <div class="creatorDiv" style="float:left" ><input id="allLangCheck" type="checkbox" style="float:left;margin:0;margin-left:-15px;" /><?php echo $this->translate->_("Apply to all languages");?></div>
+                <div class="creatorDiv" style="float:left" ><input id="allLangCheck" type="checkbox"/><?php echo $this->translate->_("Apply to all languages");?></div>
                 <br />
-                <div id="restrictiveDiv" style="float:left;" ><input id="restrictiveCB" type="checkbox" style="float:left;margin:0;margin-left:-15px;"  /><?php echo $this->translate->_("Restrictive");?> &nbsp;
+                <div id="restrictiveDiv" style="float:left;" ><input id="restrictiveCB" type="checkbox"  /><?php echo $this->translate->_("Restrictive");?>
                   <a href="" style="display:none" id="openPagePermisions" class="navLinks a_access" title="<?php echo $this->translate->_("Click to set permissions for this page");?>"><?php echo $this->translate->_("Permissions");?></a>
                   <div id="allowedRolesDiv"></div>
                 </div>
                 <div id="boundDiv" style="float:left;" >
-                  <input id="boundCB" type="checkbox" checked="checked" style="float:left;margin:0;margin-left:-15px;" /><?php echo $this->translate->_("Relative to Content Area");?> &nbsp;
+                  <input id="boundCB" type="checkbox" checked="checked" /><?php echo $this->translate->_("Relative to Content Area");?>
                 </div>
 
                 <br />
@@ -248,8 +245,8 @@
                 <div id="templateChangerDiv" ><?php echo $this->changeTemplate;?></div>
 
 
-                <div style="width:100%;float:right;" ><?php echo $this->translate->_("Page Title");?>:<input id="pageTitle" type="text" name="pageTitle" value="Page <?php echo $this->pageId;?>" style="width:130px;float:right;"/></div><br />
-                <div style="width:100%;float:right;" ><?php echo $this->translate->_("Page Image");?>:<input id="pageImage" type="text" name="pageImage" value="<?php echo $this->pageImage;?>" style="width:130px;float:right;"/></div><br />
+                <div style="width:100%;float:right;" ><?php echo $this->translate->_("Page Title");?>:<input id="pageTitle" type="text" name="pageTitle" value="Page <?php echo $this->pageId;?>" style="width: 100%;float:right;"/></div><br />
+                <div style="width:100%;float:right;" ><?php echo $this->translate->_("Page Image");?>:<input id="pageImage" type="text" name="pageImage" value="<?php echo $this->pageImage;?>" style="width:100%;float:right;"/></div><br />
 
               </div>
 
@@ -257,7 +254,7 @@
                 <div style="width:70px;float:left;text-align:left;" ><?php echo $this->translate->_("Template ID");?>:</div> <div id="templateIDediting" ><?php echo $this->templateIdEdit;?></div><br />
                 <div style="width:100%;float:left;text-align:left;" ><?php echo $this->translate->_("Template name");?>:<input id="templateTitle" type="text" name="templateTitle" value="<?php echo $this->templateName;?>" style="width:100%"/></div><br />
 
-                <a href="" id="applyTemplate" class="navLinks a_edit" title="<?php echo $this->translate->_("Click to edit existing template");?>"><?php echo $this->translate->_("Edit template");?></a>&nbsp;
+                <a href="" id="applyTemplate" class="navLinks a_edit" title="<?php echo $this->translate->_("Click to edit existing template");?>"><?php echo $this->translate->_("Edit template");?></a>
                 <a href="" id="saveThisTemplate" class="navLinks a_save" title="<?php echo $this->translate->_("Click to save work on this template");?>"><?php echo $this->translate->_("Save Template");?></a><br />
                 <a href="" id="saveAsTemplate" class="navLinks a_save_new"  title="<?php echo $this->translate->_("Click to save this work as template");?>"><?php echo $this->translate->_("Save As New Template");?></a><br />
                 <div class="creatorDiv"><input id="allLangCheckTemplate" type="checkbox" /><?php echo $this->translate->_("Apply to all languages");?></div>
@@ -270,10 +267,10 @@
             </td>
 
 
-            <td align="right" valign="bottom" width="50px">
+            <td align="right" valign="bottom">
               <div style="display:none"><?php echo $this->translate->_("Container");?><input id="objContainer" type="checkbox" /></div>
               <?php echo $this->translate->_("Objects on this page");?>:
-              <select id="objList" size="4" style="width:190px;" class="help" title="<?php echo $this->translate->_("This is the list of all objects in this page/template");?>">
+              <select id="objList" size="4" class="help" title="<?php echo $this->translate->_("This is the list of all objects in this page/template");?>">
               </select>
 
               <br />
@@ -290,7 +287,7 @@
                 <br />
 
               </div>
-              BodyBg:<input id="template_bodyBg" name="template_bodyBg" type="text" value="" style="width:140px" /><br />
+              BodyBg:<input id="template_bodyBg" name="template_bodyBg" type="text" value="" /><br />
 
             </td>
           </tr>
@@ -335,7 +332,7 @@
       <div id="addMenuLinkDiv">
         <a id="addMenuLink" href="menu/add-menu" class="navLinks a_add" title="<?php echo $this->translate->_("Click to create new menu");?>"><?php echo $this->translate->_("Add a menu");?></a>
         <a id="delMenuLink" href="menu/del-menu" class="navLinks a_delete" title="<?php echo $this->translate->_("Click to delete menu");?>"><?php echo $this->translate->_("Delete menu");?></a>
-        |&nbsp;
+        |
         <a id="addMenuItemLink" href="menu/add-menu-item" class="navLinks a_add" title="<?php echo $this->translate->_("Click to add new menu item to this menu");?>"><?php echo $this->translate->_("Add a menu item");?></a>
 
 
@@ -379,7 +376,7 @@
         <div id="addCategoryLinkDiv">
           <a id="addCategoryLink" href="category/add-category" class="navLinks a_add" title="<?php echo $this->translate->_("Click to create new category");?>"><?php echo $this->translate->_("Add a category");?></a>
           <a id="delCategoryLink" href="category/del-category" class="navLinks a_delete" title="<?php echo $this->translate->_("Click to delete selected category");?>"><?php echo $this->translate->_("Delete category");?></a>
-          |&nbsp;
+          |
           <a id="addCategoryItemLink" href="category/add-category-item" class="navLinks a_add" title="<?php echo $this->translate->_("Click to add new category item to this category");?>"><?php echo $this->translate->_("Add a category item");?></a>
           <a id="delCategoryItemLink" href="category/del-category-item" class="navLinks a_delete" title="<?php echo $this->translate->_("Click to remove this category item");?>"><?php echo $this->translate->_("Remove category item");?></a>
 
@@ -425,7 +422,7 @@
       <div id="addModulesLinkDiv" >
         <!--<a id="installModulesLink" href="modules/install-module" class="navLinks a_add" title="<?php echo $this->translate->_("Click to install new module");?>">Install module</a>
         <a  id="delModulesLink" href="modules/del-module" class="navLinks a_delete" title="<?php echo $this->translate->_("Click to delete module");?>">Delete module</a>
-        |&nbsp;-->
+        |-->
         <a id="editModulesLink" href="modules/edit-module/id/" class="navLinks help a_edit" title="<?php echo $this->translate->_("Click to edit this module settings");?>"><?php echo $this->translate->_("Edit module");?></a>
         <a id="enableModulesLink" href="modules/enable-all-modules" class="navLinks help a_add" title="<?php echo $this->translate->_("Click to enable all available modules.");?>"><?php echo $this->translate->_("Enable all modules");?></a>
 
@@ -473,7 +470,7 @@
 
       <a id="addFolderLink" href="images/add-folder" class="navLinks a_add" title="<?php echo $this->translate->_("Click to create new folder for the images");?>"><?php echo $this->translate->_("Add a folder");?></a>
       <a id="delFolderLink" href="images/del-folder" class="navLinks a_delete" title="<?php echo $this->translate->_("Click to delete folder");?>"><?php echo $this->translate->_("Delete folder");?></a>
-      |&nbsp;
+      |
       <a id="addImageLink" href="images/add-image" class="navLinks a_add" title="<?php echo $this->translate->_("Click to add new image to this folder");?>"><?php echo $this->translate->_("Add images");?></a>
 
 

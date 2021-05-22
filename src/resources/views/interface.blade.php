@@ -20,7 +20,9 @@
   </head>
 
   <body>
-
+    <div id="app">
+      <!--<example-component></example-comonent>-->
+    </div>
     <div id="q-app">
       <div class="">
         <q-layout view="hHh Lpr lff" container style="height: 100vh;" class="shadow-2 rounded-borders">
@@ -410,5 +412,6 @@
         // ..and many more
       }
     </script>
+    <script type="text/javascript" src="/js/app.js"></script>
   </body>
   </html>

@@ -339,7 +339,6 @@ class CreatorController extends NetActionController
                     'label' => $this->_translate->_('Assign category to this page:'),
                     'class' => 'help',
                     'title' => $this->_translate->_('Put this page in a specific category'),
-                    'style' => 'width:190px;',
                     'size' => '1',
                     'multioptions' => $catArray,
                 )),
@@ -379,7 +378,6 @@ class CreatorController extends NetActionController
                     'label' => $this->_translate->_('Assign this page to menu:'),
                     'class' => 'help',
                     'title' => $this->_translate->_('Select the menu in which you would like to have this page'),
-                    'style' => 'width:190px;',
                     'size' => '1',
                     'multioptions' => $pageArray,
                 )),
@@ -661,7 +659,6 @@ class CreatorController extends NetActionController
                     'label' => '',
                     'class' => 'help',
                     'title' => $this->_translate->_('Change the template of this page'),
-                    'style' => 'width:180px',
                     'multioptions' => $templateArray,
                     'value' => @$valueSelected
                 )),
