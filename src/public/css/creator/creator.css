@@ -22,7 +22,7 @@ span.ui-button-text{display:none !important;}
 
 #templateMask { position:absolute;z-index:2;top:0;width:70%; height: auto; min-height:900px;background: transparent;  padding: 0px; border:0px dotted red;margin:0 auto;}
 
-#penPointer{display:none;position:absolute;top:0;left:0;width:65px;height:65px;z-index:199998;background:url(/images/interface/Pen.png) no-repeat;}
+#penPointer{display:none !important;position:absolute;top:0;left:0;width:65px;height:65px;z-index:199998;background:url(/images/interface/Pen.png) no-repeat;}
 #downPointer{display:none;position:absolute;top:0;left:0;width:65px;height:65px;z-index:199998;background:url(//images/interface/down.png) no-repeat;}
 #toolbox {float:left;width:100px;height:auto;}
 #toggleProperties {opacity:0.8;position:fixed;padding:5px;text-align:center;font-weight:bold;cursor:pointer;left:5px;top:5px;width:20px;height:20px;background:  url(/images/interface/toggleProperties.png) no-repeat center;z-index:999997; }
@@ -47,7 +47,7 @@ span.ui-button-text{display:none !important;}
 #contProperties {position:fixed;right:0;bottom:0px;z-index:199999;width:800px;height:auto;min-height:100px;border:0px solid green;}
 #contProperties *{font-size:13px!important;}
 #propertiesLeft {float:left;width:400px;border:0px solid green;display:none;}
-#properties {float:right;width:900px;height:300px;; display:none;}
+#properties { width:900px;height:300px; display:none; }
 #footer {float:left;width:100%;height:auto;}
 #tooltip{position:absolute;left:0;top:0;z-index:999999;background:#CCCCCC url(http://net.freehostrocket.com/images/ui-bg_highlight-soft_75_cccccc_1x100.png) repeat-x;width:200px;height:auto;min-height:50px;color:black;font-weight:bold;font-size:15px;;padding:20px;border:1px solid #555555;}
 #ajax-loader{display:none;position:absolute;left: 860px; top: 340px;width:70px;height:70px;background:transparent url(/images/ajax-loader.gif) no-repeat;z-index:999999;}
