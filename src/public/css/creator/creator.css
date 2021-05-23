@@ -8,11 +8,13 @@ li {font-size:11px ;}
 #fontBigger{width:30px;height:30px;background:transparent;}
 #fontSmaller{width:30px;height:30px;background:transparent;}
 #objProperties input{/*height:15px;*/width:50px;margin:1px; }
-#rotate{height:auto; background:silver;}
+#rotate{height:auto; }
 #rotate div{ height:auto; width: 100%;}
-#dialogDiv{display:none;position:relative;left:0 !important;top:0 !important;padding:15px 25px 15px 15px;width:500px;height:auto;background:silver;z-index:999999;border:1px solid #AAAAAA;}
+#dialogDiv{display:none;position:relative;left:0 !important;top:0 !important;padding:15px 25px 15px 15px;width:500px;height:auto;z-index:999999; background: #eee !important;}
+.dialogDiv { background: #eee !important; }
 .ui-dialog {z-index:999998;}
 .ui-dialog .ui-dialog-titlebar-close {height: 25px; margin: -10px 0 0;padding: 1px;position: absolute;right: 0.3em;top: 40%;width: 25px;}
+.ui-widget-header { border: 1px solid transparent !important; background: #eee !important; }
 .ui-widget-overlay {background: url("/images/ui-bg_flat_0_aaaaaa_40x100.png") repeat-x scroll 50% 50% #000000 !important;opacity: 0.5 !important;z-index: 999991 !important;}
 span.ui-button-text{display:none !important;}
 #closeDialogDiv{width:18px;height:18px;background:url(/images/interface/closeB.png) no-repeat;text-align:center;float:right;}
@@ -28,7 +30,7 @@ span.ui-button-text{display:none !important;}
 #toggleProperties {opacity:0.8;position:fixed;padding:5px;text-align:center;font-weight:bold;cursor:pointer;left:5px;top:5px;width:20px;height:20px;background:  url(/images/interface/toggleProperties.png) no-repeat center;z-index:999997; }
 #newItem {opacity:0.8;position:fixed;padding:5px;text-align:center;color:yellow;font-weight:bold;cursor:pointer;right:145px;top:5px;width:20px;height:20px;background:  url(/images/interface/add_box_black_24dp.svg) no-repeat center;;z-index:999997; }
 #cloneItem {opacity:0.8;position:fixed;padding:5px;text-align:center;color:yellow;font-weight:bold;cursor:pointer;right:110px;top:5px;width:20px;height:20px;background:  url(/images/interface/content_copy_black_24dp.svg) no-repeat center;;z-index:999997; }
-#moveProps {opacity:0.8;position:fixed;padding:5px;text-align:center;color:yellow;font-weight:bold;cursor:pointer;right:5px;top:38px;width:60px;height:20px;background:silver;z-index:999997; }
+#moveProps {opacity:0.8;position:fixed;padding:5px;text-align:center;color:yellow;font-weight:bold;cursor:pointer;right:5px;top:38px;width:60px;height:20px;z-index:999997; }
 #rightB {cursor:pointer;border:0;width:20px;height:15px;background:  url(/images/interface/arrow_right.png) no-repeat center;}
 #leftB {cursor:pointer;border:0;width:20px;height:15px;background:  url(/images/interface/arrow_left.png) no-repeat center;}
 #upB {cursor:pointer;border:0;width:20px;height:15px;background:  url(/images/interface/arrow_up.png) no-repeat center;}
@@ -151,8 +153,8 @@ input[type=submit]:hover{background:#f4f4f4;border:1px solid #cccccc;}
 div.selector span {padding-right:0px !important;padding-left:3px !important;margin-left: 0px;}
 #fragment-1 dd {display: block;float: right; position: relative;width: 100%;}
 #chooseLangAdminForm {display: block;float: right; position: absolute;right: 0; top: -15px;width: auto;}
-.cssjswrapp{background:silver; padding:30px;padding-top:20px;padding-bottom:20px;height:100%;display:block; position:relative;}
-.cssjswrapp2{background:silver; padding:10px;padding-top:20px;padding-bottom:20px;height:100%;display:block; position:relative;}
+.cssjswrapp{ background: #eee; padding:30px;padding-top:20px;padding-bottom:20px;height:100%;display:block; position:relative;}
+.cssjswrapp2{ background: #eee; padding:10px;padding-top:20px;padding-bottom:20px;height:100%;display:block; position:relative;}
 
 #imagesContainer, #imageFoldersShow {float:left;}
 .ui-dialog .ui-dialog-titlebar-close span {display: block;margin: -2px !important;width: 15px;}
@@ -160,11 +162,12 @@ div.selector span {padding-right:0px !important;padding-left:3px !important;marg
 .ui-dialog legend{margin-left:10px;float: left;margin-left: 5px;}
 .marginBottom5{margin-bottom:5px; float: left;}
 #addMenuItForm{float:left;}
-#dialogDivImages{background:silver;}
+#dialogDivImages{}
 #TB_window {z-index:999998 !important;}
 #TB_window a { height: 25px; display: inline-block; line-height: 25px; text-indent: 7px; margin-right: 10px;}
 #TB_window .universalTableAdmin a{ background-position: center;}
 
+#chooseLanguageSelect { position: fixed; right: 160px; top: 0; z-index: 9999;}
 #langName { margin-right: 1.4em; margin-top: 2px;}
 #rotate #manageAllPages {background: url(/images/interface/pages_black_24dp.svg) no-repeat; padding-left: 20px;}
 input#template_bodyBg, select#templateChanger, #tableFr1, #objList, #categoryNameAssign, #menuNameAssign {width: 100%;}

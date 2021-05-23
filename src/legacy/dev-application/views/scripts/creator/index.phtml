@@ -26,6 +26,7 @@
 *
 */
 ?>
+<div id="chooseLanguageSelect"><?php echo $this->langChooserAdmin;?></div>
 <div id ="contPreview" style="z-index:9999999;display:none;width:100%;height:auto;position:absolute;top:200px;;left:300px;background:white;"></div>
 <div id="templateMask"></div>
 <div id="toggleProperties"  class="help" title="<?php echo $this->translate->_("Click to toggle properties box");?>"></div>
@@ -45,7 +46,7 @@
 <div id="downPointer"></div>
 
 <div id="tooltip" style="display:none"></div>
-<div id="adminAjaxLoader"><img src="<?php echo $this->host;?>images/ajax-loader3.gif" /></div>
+<div id="adminAjaxLoader"><img src="<?php echo $this->host;?>images/ajax-loaderTable.gif" /></div>
 
 <!--form for saving and updating page-->
 <form id="pageCode" name="pageCode" objId="" style="display:none" action="<?php echo $this->host;?>page/save" method="post">
@@ -74,7 +75,7 @@
   </div>
 
   <div id="properties">
-    <div id="rotate">
+    <div id="rotate" class="bg-grey-3">
       <ul>
         <li class="help" description="<?php echo $this->translate->_("Contains properties of page and objects");?>"><a href="#fragment-1" id="poA"><span><?php echo $this->translate->_("Page/Object");?></span></a></li>
         <li class="help" description="<?php echo $this->translate->_("Contains Menu management");?>"><a href="#fragment-2" id="MenuA"><span><?php echo $this->translate->_("Menus");?></span></a></li>
@@ -86,7 +87,7 @@
         <li class="help" description="<?php echo $this->translate->_("JavaScript code - every administrator's code is compiled together in the main javascript file");?>"><a href="#fragment-8" id="JsA"><span>JS</span></a></li>
         <li class="help" description="<?php echo $this->translate->_("Site Settings");?>"><a href="#fragment-9" id="SettingsA"><span><?php echo $this->translate->_("Settings");?></span></a></li>
         <div style="float:right;width:auto;height:15px;background:transparent;font-weight:bold;"></div>
-        <?php echo $this->langChooserAdmin;?>
+
       </ul>
       <div id="fragment-1">
         <form id="objProperties" name="objProperties" objId="" action="<?php echo $this->host;?>save" method="post">
