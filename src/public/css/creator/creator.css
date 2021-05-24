@@ -8,8 +8,8 @@ li {font-size:11px ;}
 #fontBigger{width:30px;height:30px;background:transparent;}
 #fontSmaller{width:30px;height:30px;background:transparent;}
 #objProperties input{/*height:15px;*/width:50px;margin:1px; }
-#rotate{height:auto; }
-#rotate div{ height:auto; width: 100%;}
+#rotate{ height: 100vh; overflow-y: scroll; }
+#rotate div{ height:auto; width: 100%; text-align: left; }
 #dialogDiv{display:none;position:relative;left:0 !important;top:0 !important;padding:15px 25px 15px 15px;width:500px;height:auto;z-index:999999; background: #eee !important;}
 .dialogDiv { background: #eee !important; }
 .ui-dialog {z-index:999998;}
@@ -46,10 +46,10 @@ span.ui-button-text{display:none !important;}
 #newItem:hover {opacity:0.9;position:fixed;padding:5px;text-align:center;color:yellow;font-weight:bold;cursor:pointer;right:145px;top:5px;width:20px;height:20px;background:  url(/images/interface/add_box_black_24dp.svg) no-repeat center;;z-index:999997; }
 #logout:hover {opacity:0.9;position:fixed;padding:5px;text-align:center;color:yellow;font-weight:bold;cursor:pointer;right:5px;top:5px;width:20px;height:20px;background:  url(/images/interface/power_settings_new_black_24dp.svg) no-repeat center;z-index:999997; }
 #delButton:hover {opacity:0.9;position:fixed;padding:5px;text-align:center;color:yellow;font-weight:bold;cursor:pointer;right:40px;top:5px;width:20px;height:20px;background:  url(/images/interface/delete_forever_black_24dp.svg) no-repeat center;;z-index:999997; }
-#contProperties {position:fixed;right:0;bottom:0px;z-index:199999;width:800px;height:auto;min-height:100px;border:0px solid green;}
+#contProperties {position:fixed; right: -20px !important; bottom:0px;z-index:199999;width:800px;height:auto;min-height:100px;border:0px solid green;}
 #contProperties *{font-size:13px!important;}
 #propertiesLeft {float:left;width:400px;border:0px solid green;display:none;}
-#properties { width:900px;height:300px; display:none; }
+#properties { width:300px;height:100vh; display:none; }
 #footer {float:left;width:100%;height:auto;}
 #tooltip{position:absolute;left:0;top:0;z-index:999999;background:#CCCCCC url(http://net.freehostrocket.com/images/ui-bg_highlight-soft_75_cccccc_1x100.png) repeat-x;width:200px;height:auto;min-height:50px;color:black;font-weight:bold;font-size:15px;;padding:20px;border:1px solid #555555;}
 #ajax-loader{display:none;position:absolute;left: 860px; top: 340px;width:70px;height:70px;background:transparent url(/images/ajax-loader.gif) no-repeat;z-index:999999;}
@@ -152,9 +152,9 @@ input[type=submit]:hover{background:#f4f4f4;border:1px solid #cccccc;}
 
 div.selector span {padding-right:0px !important;padding-left:3px !important;margin-left: 0px;}
 #fragment-1 dd {display: block;float: right; position: relative;width: 100%;}
-#chooseLangAdminForm {display: block;float: right; position: absolute;right: 0; top: -15px;width: auto;}
-.cssjswrapp{ background: #eee; padding:30px;padding-top:20px;padding-bottom:20px;height:100%;display:block; position:relative;}
-.cssjswrapp2{ background: #eee; padding:10px;padding-top:20px;padding-bottom:20px;height:100%;display:block; position:relative;}
+#chooseLangAdminForm {display: block; float: left; width: 100%; padding-left: 20px; padding-right: 20px; }
+.cssjswrapp{ background: #eee; padding-top:20px;padding-bottom:20px;height:100%;display:block; position:relative;}
+.cssjswrapp2{ background: #eee; padding-top:20px;padding-bottom:20px;height:100%;display:block; position:relative;}
 
 #imagesContainer, #imageFoldersShow {float:left;}
 .ui-dialog .ui-dialog-titlebar-close span {display: block;margin: -2px !important;width: 15px;}
@@ -167,9 +167,11 @@ div.selector span {padding-right:0px !important;padding-left:3px !important;marg
 #TB_window a { height: 25px; display: inline-block; line-height: 25px; text-indent: 7px; margin-right: 10px;}
 #TB_window .universalTableAdmin a{ background-position: center;}
 
-#chooseLanguageSelect { position: fixed; right: 160px; top: 0; z-index: 9999;}
-#langName { margin-right: 1.4em; margin-top: 2px;}
+.ui-dialog fieldset { padding: 0 ; border: 0;}
+#chooseLanguageSelect { position: relative; float: left; margin-bottom: 20px;}
+#langName { width: 100%; }
 #rotate #manageAllPages {background: url(/images/interface/pages_black_24dp.svg) no-repeat; padding-left: 20px;}
 input#template_bodyBg, select#templateChanger, #tableFr1, #objList, #categoryNameAssign, #menuNameAssign {width: 100%;}
 #toggleProperties, #helpButton, #moveProps, #saveCssCodeA, #saveJsCodeA { display: none !important; }
+#newItem, #cloneItem, #updateContentButton, #delButton, #logout { display: none !important; }
 /*div.help, #contProperties {display: none;}*/

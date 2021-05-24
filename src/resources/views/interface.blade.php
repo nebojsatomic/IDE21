@@ -49,6 +49,16 @@
                        <q-btn color="amber" rounded glossy icon-right="collections_bookmark" ><q-tooltip>Save as a new page</q-tooltip></q-btn>
                        <q-btn color="red" rounded glossy icon-right="delete" ><q-tooltip>Delete this page</q-tooltip></q-btn>
                      </q-btn-group>
+
+                     <q-btn-group rounded class="q-ml-sm tools-objects">
+                       <q-btn color="blue-grey-10" rounded glossy icon="add_box"><q-tooltip>New object</q-tooltip></q-btn>
+                       <q-btn color="blue-grey-10" rounded glossy icon="content_copy"><q-tooltip>Clone selected object</q-tooltip></q-btn>
+                       <q-btn color="red" rounded glossy icon-right="delete" ><q-tooltip>Delete selected object</q-tooltip></q-btn>
+                     </q-btn-group>
+
+                     <q-btn-group rounded class="q-ml-sm tools-showalways">
+                       <q-btn color="blue-grey-10" rounded glossy icon="check_box_outline_blank"><q-tooltip>Empty cache</q-tooltip></q-btn>
+                     </q-btn-group>
                       <!--<q-input standout="bg-teal text-white" v-model="templateName" label="Template name"></q-input>
                   </div>
 
@@ -143,7 +153,7 @@
                     <!--<q-btn @click="() => emitMessageReqID('logout_a')" stretch flat label="LOGOUT"></q-btn>-->
                     <q-btn type="a" href="/creator/logout" stretch flat label="LOGOUT"></q-btn>
                     <q-separator dark vertical></q-separator>
-                    <q-btn flat round dense @click="drawerRight = !drawerRight" icon="arrow_forward_ios" class="q-ml-sm"></q-btn>
+                    <q-btn flat round dense @click="emitMessageReqID('toggleProperties')" icon="arrow_forward_ios" class="q-ml-sm"></q-btn>
 
                    <!--</div>
                  </div>
@@ -221,7 +231,9 @@
 
         </q-scroll-area>
       </q-drawer>
-      <q-drawer
+
+
+      <!--<q-drawer
       side="right"
       v-model="drawerRight"
       show-if-above
@@ -273,7 +285,7 @@
         </div>
       </div>
       </q-scroll-area>
-    </q-drawer>
+    </q-drawer>-->
 
     </q-layout>
 
@@ -350,7 +362,7 @@
             workspace: {
               model: 'Page',
               options: [
-                'Page', 'Template'
+                'Page', 'Template', 'CMS'
               ]
             },
             setValueForWorkspace : function(data) {
@@ -359,10 +371,14 @@
                 document.getElementById('creator').contentWindow.postMessage('templateDisplayer', '*'); // send message to creator
                 $('.tools-page').addClass('hidden');
                 $('.tools-template').removeClass('hidden');
-              } else {
+              } else if(data == 'Page'){
                 document.getElementById('creator').contentWindow.postMessage('pageDisplayer', '*');
                 $('.tools-template').addClass('hidden');
                 $('.tools-page').removeClass('hidden');
+              } else {
+                $('.tools-template').addClass('hidden');
+                $('.tools-page').addClass('hidden');
+                $('.tools-objects').addClass('hidden');
               }
             },
 
