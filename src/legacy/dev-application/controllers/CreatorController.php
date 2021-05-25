@@ -290,7 +290,6 @@ class CreatorController extends NetActionController
                     'folderNames' => array('select', array(
                         'required' => true,
                         'label' => 'Choose gallery:',
-                        'style' => 'width:200px;',
                         'size' => '8',
                         'multioptions' => $folderArray,
                     )),
@@ -656,7 +655,7 @@ class CreatorController extends NetActionController
             'elements' => array(
                 'templateChanger' => array('select', array(
                     'required' => true,
-                    'label' => '',
+                    'label' => $this->_translate->_('Change the template of this page'),
                     'class' => 'help',
                     'title' => $this->_translate->_('Change the template of this page'),
                     'multioptions' => $templateArray,

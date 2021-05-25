@@ -47,12 +47,14 @@
                        <q-btn @click="emitMessageReqID('openPage')" color="amber" rounded glossy icon="edit"><q-tooltip>Open page</q-tooltip></q-btn>
                        <q-btn @click="emitMessageReqID('saveThisPage')" color="amber" rounded glossy icon="book"><q-tooltip>Save page</q-tooltip></q-btn>
                        <q-btn @click="emitMessageReqID('savePageNew')" color="amber" rounded glossy icon-right="collections_bookmark" ><q-tooltip>Save as a new page</q-tooltip></q-btn>
+                       <!--<q-btn @click="emitMessageReqID('previewButton')" color="amber" rounded glossy icon="visibility"><q-tooltip>Open page</q-tooltip></q-btn>-->
                        <q-btn @click="emitMessageReqID('deletePage')" color="red" rounded glossy icon-right="delete" ><q-tooltip>Delete this page</q-tooltip></q-btn>
                      </q-btn-group>
 
                      <q-btn-group rounded class="q-ml-sm tools-objects">
                        <q-btn @click="emitMessageReqID('newItem')" color="blue-grey-10" rounded glossy icon="add_box"><q-tooltip>New object</q-tooltip></q-btn>
                        <q-btn @click="emitMessageReqID('cloneItem')" color="blue-grey-10" rounded glossy icon="content_copy"><q-tooltip>Clone selected object</q-tooltip></q-btn>
+                       <q-btn @click="emitMessageReqID('clearPage')" color="red" rounded glossy icon-right="layers_clear" ><q-tooltip>Delete all</q-tooltip></q-btn>
                        <q-btn @click="emitMessageReqID('delButton')" color="red" rounded glossy icon-right="delete" ><q-tooltip>Delete selected object</q-tooltip></q-btn>
                      </q-btn-group>
 

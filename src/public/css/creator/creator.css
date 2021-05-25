@@ -1,4 +1,4 @@
-body{min-width:1280px;font-size:13px ;}
+body{min-width:1280px;font-size:13px ; overflow-x: hidden;}
 li {font-size:11px ;}
 #rotate div.creatorDiv{width: 100%;}
 .draggable {cursor:pointer; position:absolute;width: auto; min-height: 25px;height:auto; background: transparent; padding: 0px;float:left;color: black; overflow:hidden;}
@@ -19,7 +19,7 @@ li {font-size:11px ;}
 span.ui-button-text{display:none !important;}
 #closeDialogDiv{width:18px;height:18px;background:url(/images/interface/closeB.png) no-repeat;text-align:center;float:right;}
 #containerRadnePovrsine {width:100%;height:auto;}
-#droppable { position:relative;z-index:2;top:0;width:70%; height: auto; min-height:900px;background: white;  padding: 0px; border:2px dotted lightblue;margin:0 auto;}
+#droppable { position:relative;z-index:2;top:0;width:70%; height: 80vh; /*min-height:900px;*/ background: white;  padding: 0px; border:2px dotted lightblue;margin:0 auto;}
 #droppable2 { position:relative;z-index:2;float:left;left:0;top:0;min-width: 100%;width:100%; height: auto; min-height:100%;background: blue;  padding: 0px; border:2px dotted lightblue;}
 
 #templateMask { position:absolute;z-index:2;top:0;width:70%; height: auto; min-height:900px;background: transparent;  padding: 0px; border:0px dotted red;margin:0 auto;}
@@ -143,7 +143,7 @@ input[type=submit]:hover{background:#f4f4f4;border:1px solid #cccccc;}
 #rotate #tree li.expandable div{background-position:-80px -2px;}
 #rotate #tree li.collapsable div{background-position:0px -111px;}
 #fragment-1 span {float: left;}
-#fragment-1 input {border-radius:5px;}
+#fragment-1 input {border-radius:2px;}
 #fragment-1 span.cl {clear:both;}
 #fragment-1 span.cl +span  {float: right;}
 
@@ -175,10 +175,14 @@ div.selector span {padding-right:0px !important;padding-left:3px !important;marg
 .workspace-cms #MenuA, .workspace-cms #CatA, .workspace-cms #LangA, .workspace-cms #ModA, .workspace-cms #SettingsA { display: block; }
 .workspace-cms #poA, .workspace-cms #CssA, .workspace-cms #JsA { display: none; }
 .ui-dialog fieldset { padding: 0 ; border: 0;}
+#rotate select {width: 100%;margin-bottom: 20px !important;}
+#rotate option { text-indent: 10px;}
 #chooseLanguageSelect { position: relative; float: left; margin-bottom: 20px;}
 #langName { width: 100%; }
 #rotate #manageAllPages {background: url(/images/interface/pages_black_24dp.svg) no-repeat; padding-left: 20px;}
 input#template_bodyBg, select#templateChanger, #tableFr1, #objList, #categoryNameAssign, #menuNameAssign {width: 100%;}
 #toggleProperties, #helpButton, #moveProps, #saveCssCodeA, #saveJsCodeA { display: none !important; }
 #newItem, #cloneItem, #updateContentButton, #delButton, #logout { display: none !important; }
+/* links in the zf1 admin panel which are required, but we do not want to see them as there are buttons in quasar available */
+#emptyCacheButton, #deletePage, #manageAllPages, #openPage, #clearPage, #saveThisPage, #savePageNew, #applyTemplate, #saveThisTemplate, #saveAsTemplate, #exportTemplate, #installTemplate, #deleteTemplate { display: none !important; }
 /*div.help, #contProperties {display: none;}*/
