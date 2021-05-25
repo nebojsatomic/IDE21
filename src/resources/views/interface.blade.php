@@ -35,29 +35,30 @@
                      <q-separator dark vertical inset></q-separator>
 
                      <q-btn-group rounded class="q-ml-sm tools-template hidden">
-                       <q-btn color="secondary" rounded glossy icon="edit"><q-tooltip>Open template</q-tooltip></q-btn>
-                       <q-btn color="secondary" rounded glossy icon="book"><q-tooltip>Save template</q-tooltip></q-btn>
-                       <q-btn color="secondary" rounded glossy icon-right="collections_bookmark" ><q-tooltip>Save as a new template</q-tooltip></q-btn>
-                       <q-btn color="secondary" rounded glossy icon-right="file_upload" ><q-tooltip>Export template to zip file</q-tooltip></q-btn>
-                       <q-btn color="secondary" rounded glossy icon-right="file_download" ><q-tooltip>Install template from a zip file</q-tooltip></q-btn>
-                       <q-btn color="red" rounded glossy icon-right="delete" ><q-tooltip>Delete this template</q-tooltip></q-btn>
+                       <q-btn @click="emitMessageReqID('applyTemplate')" color="secondary" rounded glossy icon="edit"><q-tooltip>Open template</q-tooltip></q-btn>
+                       <q-btn @click="emitMessageReqID('saveThisTemplate')" color="secondary" rounded glossy icon="book"><q-tooltip>Save template</q-tooltip></q-btn>
+                       <q-btn @click="emitMessageReqID('saveAsTemplate')" color="secondary" rounded glossy icon-right="collections_bookmark" ><q-tooltip>Save as a new template</q-tooltip></q-btn>
+                       <q-btn @click="emitMessageReqID('exportTemplate')" color="secondary" rounded glossy icon-right="file_upload" ><q-tooltip>Export template to zip file</q-tooltip></q-btn>
+                       <q-btn @click="emitMessageReqID('installTemplate')" color="secondary" rounded glossy icon-right="file_download" ><q-tooltip>Install template from a zip file</q-tooltip></q-btn>
+                       <q-btn @click="emitMessageReqID('deleteTemplate')" color="red" rounded glossy icon-right="delete" ><q-tooltip>Delete this template</q-tooltip></q-btn>
                      </q-btn-group>
 
                      <q-btn-group rounded class="q-ml-sm tools-page">
-                       <q-btn color="amber" rounded glossy icon="edit"><q-tooltip>Open page</q-tooltip></q-btn>
-                       <q-btn color="amber" rounded glossy icon="book"><q-tooltip>Save page</q-tooltip></q-btn>
-                       <q-btn color="amber" rounded glossy icon-right="collections_bookmark" ><q-tooltip>Save as a new page</q-tooltip></q-btn>
-                       <q-btn color="red" rounded glossy icon-right="delete" ><q-tooltip>Delete this page</q-tooltip></q-btn>
+                       <q-btn @click="emitMessageReqID('openPage')" color="amber" rounded glossy icon="edit"><q-tooltip>Open page</q-tooltip></q-btn>
+                       <q-btn @click="emitMessageReqID('saveThisPage')" color="amber" rounded glossy icon="book"><q-tooltip>Save page</q-tooltip></q-btn>
+                       <q-btn @click="emitMessageReqID('savePageNew')" color="amber" rounded glossy icon-right="collections_bookmark" ><q-tooltip>Save as a new page</q-tooltip></q-btn>
+                       <q-btn @click="emitMessageReqID('deletePage')" color="red" rounded glossy icon-right="delete" ><q-tooltip>Delete this page</q-tooltip></q-btn>
                      </q-btn-group>
 
                      <q-btn-group rounded class="q-ml-sm tools-objects">
-                       <q-btn color="blue-grey-10" rounded glossy icon="add_box"><q-tooltip>New object</q-tooltip></q-btn>
-                       <q-btn color="blue-grey-10" rounded glossy icon="content_copy"><q-tooltip>Clone selected object</q-tooltip></q-btn>
-                       <q-btn color="red" rounded glossy icon-right="delete" ><q-tooltip>Delete selected object</q-tooltip></q-btn>
+                       <q-btn @click="emitMessageReqID('newItem')" color="blue-grey-10" rounded glossy icon="add_box"><q-tooltip>New object</q-tooltip></q-btn>
+                       <q-btn @click="emitMessageReqID('cloneItem')" color="blue-grey-10" rounded glossy icon="content_copy"><q-tooltip>Clone selected object</q-tooltip></q-btn>
+                       <q-btn @click="emitMessageReqID('delButton')" color="red" rounded glossy icon-right="delete" ><q-tooltip>Delete selected object</q-tooltip></q-btn>
                      </q-btn-group>
 
                      <q-btn-group rounded class="q-ml-sm tools-showalways">
-                       <q-btn color="blue-grey-10" rounded glossy icon="check_box_outline_blank"><q-tooltip>Empty cache</q-tooltip></q-btn>
+                       <q-btn @click="emitMessageReqID('emptyCacheButton')" color="blue-grey-10" rounded glossy icon="check_box_outline_blank"><q-tooltip>Empty cache</q-tooltip></q-btn>
+                       <q-btn @click="emitMessageReqID('manageAllPages')" color="blue-grey-10" rounded glossy icon="pages"><q-tooltip>Manage All pages</q-tooltip></q-btn>
                      </q-btn-group>
                       <!--<q-input standout="bg-teal text-white" v-model="templateName" label="Template name"></q-input>
                   </div>
@@ -166,7 +167,7 @@
               <iframe id="creator" src="/adm" title="Tools and properties" style="width: 100%;height: 100%; position: absolute; top: 0; left: 0; border: 0;"></iframe>
             </q-page>
           </q-page-container>
-
+      <!--
           <q-drawer
           v-model="drawerLeft"
           show-if-above
@@ -231,7 +232,7 @@
 
         </q-scroll-area>
       </q-drawer>
-
+    -->
 
       <!--<q-drawer
       side="right"
@@ -370,12 +371,17 @@
               if(data == 'Template') {
                 document.getElementById('creator').contentWindow.postMessage('templateDisplayer', '*'); // send message to creator
                 $('.tools-page').addClass('hidden');
+
                 $('.tools-template').removeClass('hidden');
+                $('.tools-objects').removeClass('hidden');
               } else if(data == 'Page'){
                 document.getElementById('creator').contentWindow.postMessage('pageDisplayer', '*');
                 $('.tools-template').addClass('hidden');
+
                 $('.tools-page').removeClass('hidden');
+                $('.tools-objects').removeClass('hidden');
               } else {
+                document.getElementById('creator').contentWindow.postMessage('workspace-cms', '*');
                 $('.tools-template').addClass('hidden');
                 $('.tools-page').addClass('hidden');
                 $('.tools-objects').addClass('hidden');

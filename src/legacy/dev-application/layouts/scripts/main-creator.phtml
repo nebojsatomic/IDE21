@@ -122,7 +122,13 @@
 
   window.addEventListener('message', function(message){
     //console.log(message.data);
-    $('#' + message.data).get(0).click();
+    if(message.data == 'workspace-cms') {
+      $('#contProperties').addClass(message.data);
+      $('#MenuA').click();
+    } else {
+      $('#' + message.data).get(0).click();
+      $('#contProperties').removeClass('workspace-cms');
+    }
   });
   </script>
 </body>
