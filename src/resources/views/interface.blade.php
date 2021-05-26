@@ -67,9 +67,10 @@
 
                    <div class="col">-->
                      <q-space></q-space>
-                     <q-avatar class="fixed-top-center" style="width: 40px;height: 40px;position: fixed;left: 50%;top: 0px;transform: translate(-50%);">
-                       <img src="/images/IDE21_LOGO3.svg">
+                     <q-avatar class="fixed-top-center">
+                       <img src="/images/IDE21_LOGO3.svg" style="position: absolute; width: 60px; height: 60px;">
                      </q-avatar>
+                     <q-space></q-space>
                    <!--</div>
 
                    <div class="col">-->

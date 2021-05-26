@@ -241,8 +241,8 @@ function templateReopenAfterLanguage()
     $(".draggable").draggable({
       drag:function() {
         id = $(this).attr("id");
-      }
-      //containment: 'parent'
+      },
+      containment: 'parent'
     });
 
 
@@ -340,8 +340,8 @@ function loadTemplate(idT){
     $(".draggable").draggable({
       drag:function() {
         id = $(this).attr("id");
-      }
-      //containment: 'parent'
+      },
+      containment: 'parent'
     });
 
 
@@ -420,7 +420,7 @@ function loadPage(idP){
 
 
     refreshControls();
-
+    $('#droppable').resizable({autohide:true, handles: 'all'});
   });
 
   document.cookie = 'pageSelectedId=' + idP + ';  path=/'; //ovo treba namestiti
@@ -622,7 +622,7 @@ $(document).ready(function(){
     containment: 'parent'
   });
   $(".draggable").each(function(){
-    $('#' +$(this).attr("id") ).resizable();
+    $('#' +$(this).attr("id") ).resizable({containment: 'parent'});
   });
   $("#droppable").droppable({
     drop: function() {
@@ -714,6 +714,7 @@ $(document).ready(function(){
     $('#net_' + newObjId  ).resizable({
       autoHide: true,
       handles: 'all',
+      containment: "parent",
       stop: function() {
         $( '#' + $(this).attr("id") ).dblclick();
       }
@@ -723,7 +724,9 @@ $(document).ready(function(){
       drag:function() {
         id = $(this).attr("id");
       },
-      containment: 'parent'
+      containment: 'parent',
+      snap: true,
+      snapMode: 'both'
     });
 
 
@@ -766,6 +769,7 @@ $(document).ready(function(){
     $('#net_' + newObjId  ).resizable({
       autoHide: true,
       handles: 'all',
+      containment: "parent",
       stop: function() {
         $( '#' + $(this).attr("id") ).dblclick();
       }
