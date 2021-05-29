@@ -44,7 +44,7 @@
 <div id="penPointer"></div>
 <div id="downPointer"></div>
 
-<div id="tooltip" style="display:none"></div>
+<div id="tooltip" class="bg-grey-3" style="display:none"></div>
 <div id="adminAjaxLoader"><img src="<?php echo $this->host;?>images/ajax-loaderTable.gif" /></div>
 
 <!--form for saving and updating page-->
@@ -87,6 +87,21 @@
         <li class="help" description="<?php echo $this->translate->_("Site Settings");?>"><a href="#fragment-9" id="SettingsA"><span><?php echo $this->translate->_("Settings");?></span></a></li>
       </ul>
       <div id="chooseLanguageSelect"><?php echo $this->langChooserAdmin;?></div></li>
+      <div id="viewport-settings" class="row q-pa-md ">
+        <div class="row text-uppercase text-bold"><label>Viewport</label></div>
+        <div class="row">
+          <input id="viewport_width" type="text" value="" placeholder="Width - Default 60%" />
+        </div>
+        <div class="row">
+          <input id="viewport_height" type="text" value="" placeholder="Height - Default 80vh" />
+        </div>
+        <div class="row">
+          <input id="viewport_scale" type="text" value="" placeholder="Scale - Default 1" />
+        </div>
+        <div class="row text-grey-9">
+          <label>( * resize viewport to set values, or type in )</label>
+        </div>
+      </div>
 
       <div id="fragment-1">
         <form id="objProperties" name="objProperties" objId="" action="<?php echo $this->host;?>save" method="post">

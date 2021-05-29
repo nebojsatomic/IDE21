@@ -1,8 +1,11 @@
 body{min-width:1280px;font-size:13px ; overflow-x: hidden;}
 li {font-size:11px ;}
 #rotate div.creatorDiv{width: 100%;}
-.draggable {cursor:pointer; position:absolute;width: auto; min-height: 25px;height:auto; background: transparent; padding: 0px;float:left;color: black; overflow:hidden; max-width: 100%; max-height: 100%;}
-.draggable:hover {cursor:move; opacity:0.7;}
+.draggable {
+  cursor:pointer;
+  /*position:relative !important; resize: both;*/
+  width: auto; min-height: 25px;height:auto; background: transparent; padding: 0px;float:left;color: black; overflow:hidden; max-width: 100%; max-height: 100%;}
+.draggable:hover {cursor:move; opacity:0.9;}
 .container {  padding: 0px; }
 .templateDiv {position:absolute;border:0px solid green;z-index:0;}
 #fontBigger{width:30px;height:30px;background:transparent;}
@@ -19,7 +22,27 @@ li {font-size:11px ;}
 span.ui-button-text{display:none !important;}
 #closeDialogDiv{width:18px;height:18px;background:url(/images/interface/closeB.png) no-repeat;text-align:center;float:right;}
 #containerRadnePovrsine {width:100%;height:auto;}
-#droppable { position:relative;z-index:2;top:0;width:70%; height: 80vh; /*min-height:900px;*/ background: white;  padding: 0px; border:2px dotted lightblue;margin:0 auto;}
+#droppable {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 0.3fr 2.4fr 0.3fr;
+  gap: 1px 1px;
+  grid-template-areas:
+    "header header header header header header header header header header header header"
+    "sidebar main main main main main main main main main main main"
+    "footer footer footer footer footer footer footer footer footer footer footer footer";
+    /*resize: both;*/
+    overflow: hidden;
+  position:relative !important;z-index:2;top:0;width:60%; height: 80vh; /*min-height:900px;*/ background: white;  padding: 0px; padding-bottom: 10px; border:2px dotted lightblue;margin:0 auto; margin-top: 50px;
+}
+.header { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.main { grid-area: main; }
+.footer { grid-area: footer; }
+.grid-item {
+  width: 100%;
+  height: 100%;
+}
 #droppable2 { position:relative;z-index:2;float:left;left:0;top:0;min-width: 100%;width:100%; height: auto; min-height:100%;background: blue;  padding: 0px; border:2px dotted lightblue;}
 
 #templateMask { position:absolute;z-index:2;top:0;width:70%; height: auto; min-height:900px;background: transparent;  padding: 0px; border:0px dotted red;margin:0 auto;}
@@ -51,7 +74,7 @@ span.ui-button-text{display:none !important;}
 #propertiesLeft {float:left;width:400px;border:0px solid green;display:none;}
 #properties { width:310px;height:100vh; display:none; }
 #footer {float:left;width:100%;height:auto;}
-#tooltip{position:absolute;left:0;top:0;z-index:999999;background:#CCCCCC url(http://net.freehostrocket.com/images/ui-bg_highlight-soft_75_cccccc_1x100.png) repeat-x;width:200px;height:auto;min-height:50px;color:black;font-weight:bold;font-size:15px;;padding:20px;border:1px solid #555555;}
+#tooltip{position:absolute;left:0;top:0;z-index:999999;width:230px;height:auto;min-height:50px;color:black;font-weight:bold;font-size:15px;border-bottom-right-radius: 3px;padding:20px;}
 #ajax-loader{display:none;position:absolute;left: 860px; top: 340px;width:70px;height:70px;background:transparent url(/images/ajax-loader.gif) no-repeat;z-index:999999;}
 .ajax-loader{display:none;}
 #adminAjaxLoader {display:none;width:70px;height:70px;background:transparent;margin:0 auto;}
@@ -106,7 +129,7 @@ span.ui-button-text{display:none !important;}
 #banner{min-height:200px}
 #banner_current{display:none;}
 .activeObject{opacity:1;border:1px solid red;}
-.inactiveObject{opacity:0.2;filter:alpha(opacity=20)}
+.inactiveObject{opacity:0.8 !important;}
 .universalTableAdmin {border:1px solid #555555;width:100%;margin-bottom: 10px;margin-top: 10px;}
 .universalTableAdmin th {border:1px solid silver;background:white;text-align:center;height: 20px;}
 .universalTableAdmin td{text-align:center;}

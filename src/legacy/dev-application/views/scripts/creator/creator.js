@@ -242,7 +242,9 @@ function templateReopenAfterLanguage()
       drag:function() {
         id = $(this).attr("id");
       },
-      containment: 'parent'
+      containment: 'parent',
+      snap: true,
+      snapMode: 'both'
     });
 
 
@@ -341,7 +343,9 @@ function loadTemplate(idT){
       drag:function() {
         id = $(this).attr("id");
       },
-      containment: 'parent'
+      containment: 'parent',
+      snap: true,
+      snapMode: 'both'
     });
 
 
@@ -363,7 +367,7 @@ function loadTemplate(idT){
 
 function loadPage(idP){
   $('#templateMask').empty();
-  $('#droppable').empty();
+  //$('#droppable').empty();
 
   $('#pgID').html(idP);
 
@@ -409,7 +413,9 @@ function loadPage(idP){
       drag:function() {
         id = $(this).attr("id");
       },
-      containment: 'parent'
+      containment: 'parent',
+      snap: true,
+      snapMode: 'both'
     });
 
     $('#objList').html("");
@@ -420,7 +426,8 @@ function loadPage(idP){
 
 
     refreshControls();
-    $('#droppable').resizable({autohide:true, handles: 'all'});
+    $('#droppable').resizable('destroy');
+    $('#droppable').resizable({autohide:true});
   });
 
   document.cookie = 'pageSelectedId=' + idP + ';  path=/'; //ovo treba namestiti
@@ -440,7 +447,7 @@ $(document).ready(function(){
     $('#helpDiv').hide();
   }
 
-  $('#droppable').resizable({autohide:true});
+  //$('#droppable').resizable({autohide:true});
   $('#templateMask').css({left:$('#droppable').offset().left + "px"});
 
   //when clickin on a link that starts an ajax action
@@ -619,7 +626,9 @@ $(document).ready(function(){
       id = $(this).prop("id");
       //console.log(id);
     },
-    containment: 'parent'
+    containment: 'parent',
+    snap: true,
+    snapMode: 'both'
   });
   $(".draggable").each(function(){
     $('#' +$(this).attr("id") ).resizable({containment: 'parent'});
@@ -703,7 +712,7 @@ $(document).ready(function(){
       droppableContainer = "#droppable";
     }
 
-    $(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" style="position:absolute;border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
+    $(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" onclick="$(this).focus();" contenteditable="true" style="position:absolute;border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
 
     //IF CONTAINER ON, THEN ADD class IN THE CURRENT OBJECT, ELSE the same
     if (objContainer == 1) {
@@ -757,7 +766,7 @@ $(document).ready(function(){
       droppableContainer = "#droppable";
     }
 
-    $(droppableContainer).append("\n" + '<div class="draggable ' + $('#' + $('#objIDshow').html() ).attr('class') + '" id="net_'+newObjId+'" style="z-index:' + zIndexCounter + $('#' + $('#objIDshow').html() ).attr('style') + ';">' + $('#' + $('#objIDshow').html() ).html() + "\n" + '</div>'+ "\n");
+    $(droppableContainer).append("\n" + '<div contenteditable="true" onclick="$(this).focus();" class="draggable ' + $('#' + $('#objIDshow').html() ).attr('class') + '" id="net_'+newObjId+'" style="z-index:' + zIndexCounter + $('#' + $('#objIDshow').html() ).attr('style') + ';">' + $('#' + $('#objIDshow').html() ).html() + "\n" + '</div>'+ "\n");
 
     //IF CONTAINER ON, THEN ADD class IN THE CURRENT OBJECT, ELSE the same
     if (objContainer == 1) {
@@ -780,7 +789,9 @@ $(document).ready(function(){
       drag:function() {
         id = $(this).attr("id");
       },
-      containment: 'parent'
+      containment: 'parent',
+      snap: true,
+      snapMode: 'both'
     });
 
 
@@ -826,9 +837,9 @@ $(document).ready(function(){
       }
 
     });
-    $('#droppable').resizable('destroy');
+    //$('#droppable').resizable('destroy');
     strCodeP =  $('#droppable').html();
-    $('#droppable').resizable({autohide: true});
+    //$('#droppable').resizable({autohide: true});
     //mozilla crap
     strCodeP = strCodeP.replace(/(-moz-background-clip:)\s(border;)/g, '');
     strCodeP = strCodeP.replace(/(-moz-background-origin:)\s(padding;)/g, '');
@@ -909,9 +920,9 @@ $(document).ready(function(){
       $(this).remove();
     });
 
-    $('#droppable').resizable('destroy');//OVO JE RANIJE RADILO, pre jquery 1.9, prveriti da ne pravi problem na drugom mestu
+    //$('#droppable').resizable('destroy');//OVO JE RANIJE RADILO, pre jquery 1.9, prveriti da ne pravi problem na drugom mestu
     strCodeP =  $('#droppable').html();
-    $('#droppable').resizable({autohide: true});
+    //$('#droppable').resizable({autohide: true});
     //mozilla crap
     strCodeP = strCodeP.replace(/(-moz-background-clip:)\s(border;)/g, '');
     strCodeP = strCodeP.replace(/(-moz-background-origin:)\s(padding;)/g, '');
@@ -1006,7 +1017,9 @@ $(document).ready(function(){
           drag:function() {
             id = $(this).attr("id");
           },
-          containment: 'parent'
+          containment: 'parent',
+          snap: true,
+          snapMode: 'both'
         });
 
         $('#objList').html("");
@@ -1019,6 +1032,8 @@ $(document).ready(function(){
         refreshControls();
         ajaxEmitMessage(lang.PageOpened);
         setTimeout("$('#ajaxEventMask').click();$('#ajaxEventMessage').remove();", 1000);
+
+        //$('#droppable').resizable();
       });
       ajaxEventDone(lang.POpen);// remove the mask
       $('#dialogDiv_' + openPageDialogUniqueId).hide('slow').remove();// removing the dialog MUST
@@ -1052,10 +1067,10 @@ $(document).ready(function(){
       }
 
     });
-    $('#droppable').resizable('destroy');
+    //$('#droppable').resizable('destroy');
     $('#templateMask').appendTo($('body'));
     strCodeT =  $('#templateMask').html() + $('#droppable').html();
-    $('#droppable').resizable({autohide: true});
+    //$('#droppable').resizable({autohide: true});
     $('#templateMask').appendTo($('#droppable')).css({left: "0px"});
 
     //mozilla crap
@@ -1104,10 +1119,10 @@ $(document).ready(function(){
     });
 
     //$('.ui-resizable-handle').remove();
-    $('#droppable').resizable('destroy');
+    //$('#droppable').resizable('destroy');
     $('#templateMask').appendTo($('body'));
     strCodeT =  $('#templateMask').html() + $('#droppable').html();
-    $('#droppable').resizable({autohide: true});
+    //$('#droppable').resizable({autohide: true});
     $('#templateMask').appendTo($('#droppable')).css({left: "0px"});
 
     //mozilla crap
@@ -1179,6 +1194,18 @@ $(document).ready(function(){
       //loadPage(getCookie("pageSelectedId")); // disable temp bcs it's making the page open twice on load
     }
   }
+
+  // on resizing viewport
+  $('#droppable').livequery('resize', function(){
+    var dW = $(this).width();
+    var dH = $(this).height();
+    $('#viewport_width').val(dW + 'px');
+    $('#viewport_height').val(dH + 'px');
+
+    //$('#tooltip').html('Width: ' + dW + 'px;<br>Height: ' + dH + 'px;').show();
+  });
+  $('#droppable').draggable().resizable();
+
 });//end document ready
 
 
@@ -2006,6 +2033,7 @@ $('#showFolderImages').livequery('change', function(){
     $('#setBodyBgImage').show();
 
   });
+  $('#dialogDivImages').closest('.ui-dialog').css({top: 0, left: 0});
 
 });
 //INSERT IMAGE;
@@ -2949,7 +2977,9 @@ $('#langName').livequery('change', function(){
             drag:function() {
               id = $(this).attr("id");
             },
-            containment: 'parent'
+            containment: 'parent',
+            snap: true,
+            snapMode: 'both'
           });
 
           $('#objList').html("");
