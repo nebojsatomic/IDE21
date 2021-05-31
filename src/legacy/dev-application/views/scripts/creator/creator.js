@@ -1224,7 +1224,7 @@ $(document).ready(function(){
   });
   $('#viewport_scale').change(function(){
     var dS = $(this).val();
-    $('#droppable').css({scale: dS });
+    $('#droppable').css({transform:"translate(-" + (100 - dS*100) + "%, -" + (100 - dS*100) + "%)", scale: dS });
   });
   // on resizing viewport
   $('#droppable').livequery('resize', function(){

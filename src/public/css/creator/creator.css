@@ -207,6 +207,7 @@ div.selector span {padding-right:0px !important;padding-left:3px !important;marg
 input#template_bodyBg, select#templateChanger, #tableFr1, #objList, #categoryNameAssign, #menuNameAssign {width: 100%;}
 #toggleProperties, #helpButton, #moveProps, #saveCssCodeA, #saveJsCodeA { display: none !important; }
 #newItem, #cloneItem, #updateContentButton, #delButton, #logout { display: none !important; }
+#viewport_scale { display: none !important; }
 /* links in the zf1 admin panel which are required, but we do not want to see them as there are buttons in quasar available */
 #emptyCacheButton, #deletePage, #manageAllPages, #openPage, #clearPage, #saveThisPage, #savePageNew, #applyTemplate, #saveThisTemplate, #saveAsTemplate, #exportTemplate, #installTemplate, #deleteTemplate { display: none !important; }
 /*div.help, #contProperties {display: none;}*/
