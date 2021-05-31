@@ -33,6 +33,7 @@ span.ui-button-text{display:none !important;}
     "footer footer footer footer footer footer footer footer footer footer footer footer";
     /*resize: both;*/
     overflow: hidden;
+    /*overflow-y: auto;*/
   position:relative !important;z-index:2;top:0;width:60%; height: 80vh; /*min-height:900px;*/ background: white;  padding: 0px; padding-bottom: 10px; border:2px dotted lightblue;margin:0 auto; margin-top: 50px;
 }
 .header { grid-area: header; }
@@ -45,7 +46,7 @@ span.ui-button-text{display:none !important;}
 }
 #droppable2 { position:relative;z-index:2;float:left;left:0;top:0;min-width: 100%;width:100%; height: auto; min-height:100%;background: blue;  padding: 0px; border:2px dotted lightblue;}
 
-#templateMask { position:absolute;z-index:2;top:0;width:70%; height: auto; min-height:900px;background: transparent;  padding: 0px; border:0px dotted red;margin:0 auto;}
+#templateMask { position:absolute;z-index:2;top:0;width:100%; height: auto; min-height:100%;background: transparent;  padding: 0px; border:0px dotted red;margin:0 auto;}
 
 #penPointer{display:none !important;position:absolute;top:0;left:0;width:65px;height:65px;z-index:199998;background:url(/images/interface/Pen.png) no-repeat;}
 #downPointer{display:none;position:absolute;top:0;left:0;width:65px;height:65px;z-index:199998;background:url(//images/interface/down.png) no-repeat;}

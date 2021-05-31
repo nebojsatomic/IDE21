@@ -359,6 +359,8 @@ function loadTemplate(idT){
     ajaxEmitMessage(lang.Done);
     setTimeout("$('#ajaxEventMask').click()", 1000);
 
+    $('#droppable').resizable('destroy');
+    $('#droppable').resizable({autohide:true});
   });
 
   $('#templateIDediting').html(idT);
@@ -710,6 +712,7 @@ $(document).ready(function(){
       droppableContainer = '#' + $('#objIDshow').html();
     } else {
       droppableContainer = "#droppable";
+      //droppableContainer = "#containerRadnePovrsine";
     }
 
     $(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" onclick="$(this).focus();" contenteditable="true" style="position:absolute;border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
@@ -733,11 +736,25 @@ $(document).ready(function(){
       drag:function() {
         id = $(this).attr("id");
       },
+      //helper:"clone",
       containment: 'parent',
       snap: true,
       snapMode: 'both'
     });
 
+/*
+    $('#droppable .draggable').droppable({
+      drop:function(event, ui) {
+        console.log(event);
+        console.log(ui);
+
+        var parentTop = $(this).position().top;
+        var parentLeft = $(this).position().left;
+        console.log(parentLeft, parentTop);
+          ui.draggable.detach().appendTo($(this));
+      }
+    });
+*/
 
     refreshControls();
     $('#net_' + newObjId  ).dblclick();
@@ -764,6 +781,7 @@ $(document).ready(function(){
       droppableContainer = '#' + $('#objIDshow').html();
     } else {
       droppableContainer = "#droppable";
+      //droppableContainer = "#containerRadnePovrsine";
     }
 
     $(droppableContainer).append("\n" + '<div contenteditable="true" onclick="$(this).focus();" class="draggable ' + $('#' + $('#objIDshow').html() ).attr('class') + '" id="net_'+newObjId+'" style="z-index:' + zIndexCounter + $('#' + $('#objIDshow').html() ).attr('style') + ';">' + $('#' + $('#objIDshow').html() ).html() + "\n" + '</div>'+ "\n");
@@ -1033,7 +1051,8 @@ $(document).ready(function(){
         ajaxEmitMessage(lang.PageOpened);
         setTimeout("$('#ajaxEventMask').click();$('#ajaxEventMessage').remove();", 1000);
 
-        //$('#droppable').resizable();
+        $('#droppable').resizable('destroy');
+        $('#droppable').resizable({autohide:true});
       });
       ajaxEventDone(lang.POpen);// remove the mask
       $('#dialogDiv_' + openPageDialogUniqueId).hide('slow').remove();// removing the dialog MUST
@@ -1195,6 +1214,18 @@ $(document).ready(function(){
     }
   }
 
+  $('#viewport_width').change(function(){
+    var dW = $(this).val();
+    $('#droppable').width(dW)
+  });
+  $('#viewport_height').change(function(){
+    var dH = $(this).val();
+    $('#droppable').height(dH)
+  });
+  $('#viewport_scale').change(function(){
+    var dS = $(this).val();
+    $('#droppable').css({scale: dS });
+  });
   // on resizing viewport
   $('#droppable').livequery('resize', function(){
     var dW = $(this).width();
