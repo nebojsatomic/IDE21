@@ -51,6 +51,14 @@ span.ui-button-text{display:none !important;}
   min-height: auto !important;
   /*overflow-y: visible !important;*/
 }
+.grid-item2 {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: auto !important;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+}
 #droppable2 { position:relative;z-index:2;float:left;left:0;top:0;min-width: 100%;width:100%; height: auto; min-height:100%;background: blue;  padding: 0px; border:2px dotted lightblue;}
 
 #templateMask { position:absolute;z-index:2;top:0;width:100%; height: auto; min-height:100%;background: transparent;  padding: 0px; border:0px dotted red;margin:0 auto;}

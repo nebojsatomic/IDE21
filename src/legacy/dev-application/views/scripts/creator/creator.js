@@ -436,9 +436,126 @@ function loadPage(idP){
 }
 
 
+function randomRgbaString (alpha) {
+  let r = Math.floor(Math.random() * 255)
+  let g = Math.floor(Math.random() * 255)
+  let b = Math.floor(Math.random() * 255)
+  let a = alpha
+  return `rgba(${r},${g},${b},${a})`
+}
 
 
 $(document).ready(function(){
+  let layoutData = Array();
+  $('#convert-to-layout').click(function(){
+    
+    //$('#droppable').width($('#droppable .draggable').width()); // todo
+
+    $('#droppable .draggable').each(function(k, v){
+      let gtcIndex =  parseFloat( $('#droppable').width()/$('#' + $(this).attr('id')).width() ).toFixed(2);
+      let gtrIndex =  parseFloat( $('#droppable').height()/$('#' + $(this).attr('id')).height() ).toFixed(2);
+      let giClassName = $(this).text();
+      let elID = $(this).attr('id');
+      layoutData[k] = { elID, giClassName, gtcIndex, gtrIndex };
+
+      let colors = [];
+      for (let i = 0; i < 10; i++) colors.push(randomRgbaString(1));
+
+      $(this).css({ backgroundColor: colors[1] });
+      //$(this).css({backgroundColor: colors[1], position: 'relative', left:'auto', top:'auto' });
+      //$(this).css({backgroundColor: colors[1] }).addClass('grid-item ' + giClassName);
+
+      console.log($(this).attr('id'), $('#droppable').width() + ':' + $('#' + $(this).attr('id')).width() + 'x' + $('#' + $(this).attr('id')).height(), gtcIndex, gtrIndex );
+    });
+    setTimeout(function() {
+      console.log(layoutData);
+      let highestGtcIndex = 0;
+      let highestGtrIndex = 0;
+      let numberOfRows = 0;
+      $.each(layoutData, function(k, v){
+        console.log(1/v.gtcIndex);
+        console.log(v.gtrIndex);
+        if(highestGtcIndex < parseFloat(v.gtcIndex) ) { highestGtcIndex = v.gtcIndex }
+        if(highestGtrIndex < parseFloat(v.gtrIndex) ) { highestGtrIndex = v.gtrIndex }
+
+        console.log(layoutData[k-1]);
+        if(typeof layoutData[k-1] != 'undefined' && parseInt(layoutData[k-1].gtrIndex) == parseInt(v.gtrIndex)) {
+          console.log(v.giClassName, 'same row');
+          layoutData[k-1].sameRow = 1;
+          layoutData[k].sameRow = 1;
+        } else {
+          layoutData[k].sameRow = 0;
+        }
+
+        numberOfRows = parseFloat(numberOfRows + (1/parseFloat(v.gtcIndex)) );
+      });
+
+      console.log(layoutData);
+      console.log('highest number for columns:' + parseInt(highestGtcIndex) );
+      console.log('highest number for rows:' + highestGtrIndex);
+      console.log('number of rows :' + numberOfRows);
+
+      let gridTemplateColumnsVal = '';
+      let gridTemplateAreas = '';
+      for(i = 0; i < parseInt(highestGtcIndex); ++i) {
+        gridTemplateColumnsVal = gridTemplateColumnsVal + "1fr ";
+      }
+      console.log(gridTemplateColumnsVal);
+
+      let gridTemplateRowsVal = '';
+      let rowIncluded = 0;
+      let areaName = '';
+      for(i = 0; i < layoutData.length; ++i) {
+        console.log(layoutData[i].gtrIndex);
+        console.log(layoutData[i].sameRow);
+        if( layoutData[i].sameRow == 0  ) {
+          gridTemplateRowsVal = gridTemplateRowsVal + parseFloat(highestGtrIndex/layoutData[i].gtrIndex).toFixed(2)/numberOfRows + "fr ";
+          areaName = ' ' + layoutData[i].giClassName ;
+          gridTemplateAreas = gridTemplateAreas + '"' + areaName.repeat(parseFloat( highestGtcIndex/layoutData[i].gtcIndex) ) + '"';
+
+          if(typeof layoutData[i-1] != 'undefined' && parseInt(layoutData[i-1].sameRow) == 1 ) {
+            console.log(layoutData[i-1]);
+            console.log('should add another "');
+            let regex = new RegExp(layoutData[i-1].giClassName);
+            gridTemplateAreas = gridTemplateAreas.replace(regex, regex + '"');
+            gridTemplateAreas = gridTemplateAreas.replace(/[/]/g, '');
+          }
+
+          //$('#droppable').width($('#' + layoutData[i].elID).width()); // todo
+
+        } else {
+          if( rowIncluded == 0) {
+            gridTemplateRowsVal = gridTemplateRowsVal + parseFloat(highestGtrIndex/layoutData[i].gtrIndex).toFixed(2)/numberOfRows + "fr ";
+            areaName = ' ' + layoutData[i].giClassName;
+            gridTemplateAreas = gridTemplateAreas + '"' + areaName.repeat(parseFloat( highestGtcIndex/layoutData[i].gtcIndex) ) ;
+
+            rowIncluded = 1;
+          } else {
+            areaName = ' ' + layoutData[i].giClassName ;
+            gridTemplateAreas = gridTemplateAreas +  areaName.repeat(parseFloat( highestGtcIndex/layoutData[i].gtcIndex) ) ;
+
+            continue;
+          }
+
+        }
+
+        gridTemplateAreas = gridTemplateAreas.replace(/["]\s/g, '"');
+        gridTemplateAreas = gridTemplateAreas.replace(/["]/g, "'");
+      }
+
+      console.log(gridTemplateRowsVal);
+      console.log(gridTemplateAreas);
+
+      $('body').append(`<div id="layout-container" style="display: grid; grid-template-columns: ` + gridTemplateColumnsVal +`;grid-template-rows:` + gridTemplateRowsVal + `; grid-template-areas: ` + gridTemplateAreas + `; position: absolute; top: 0px; left: 0px; width: 385px; height: 620px; background: #66a04d; resize: both; overflow: hidden; ">` + $('#droppable').html() + `</div>`);
+
+      $('#layout-container .draggable').each(function() {
+        $(this).addClass('grid-item2');
+        $(this).css({ gridArea: $(this).text() });
+      });
+
+    }, 500);
+  });
+
   //idCurrent = 1;
   drOff = $('#droppable').position().left;//variabla potrebna za strelicu i pero
 
