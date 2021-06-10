@@ -3,9 +3,9 @@
 filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.myBackground.jpg', sizingMethod='scale');
 -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')";
 */
-        body{min-width:1080px;font-size:11px;font-family:Arial;background: #ffffff;}
+body{margin: 0; padding: 0; /*min-width:1080px;font-size:11px;font-family:Arial;background: #ffffff;*/}
         h1{font-size:20px;}
-        #centerWrapper{position:relative;width:1080px;min-height:600px;margin:0 auto;border:0px solid red;}
+        #centerWrapper{position:relative; /*width:1080px;min-height:600px;*/ margin:0 auto;border:0px solid red;}
         .draggable { position:absolute;width: auto; min-height: 25px;height:auto; background: transparent; padding: 0px;float:left;color: black; overflow:hidden;}
         .container {  padding: 0px; margin:0;width:100%;}
         #container {  padding: 0px; margin:0;}

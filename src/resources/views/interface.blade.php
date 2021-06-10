@@ -36,6 +36,7 @@
 
                      <q-btn-group rounded class="q-ml-sm tools-template hidden">
                        <q-btn @click="emitMessageReqID('applyTemplate')" color="secondary" rounded glossy icon="edit"><q-tooltip>Open template</q-tooltip></q-btn>
+                       <q-btn @click="emitMessageReqID('openPage')" color="amber" rounded glossy icon="edit"><q-tooltip>Open page</q-tooltip></q-btn>
                        <q-btn @click="emitMessageReqID('saveThisTemplate')" color="secondary" rounded glossy icon="book"><q-tooltip>Save template</q-tooltip></q-btn>
                        <q-btn @click="emitMessageReqID('saveAsTemplate')" color="secondary" rounded glossy icon-right="collections_bookmark" ><q-tooltip>Save as a new template</q-tooltip></q-btn>
                        <q-btn @click="emitMessageReqID('exportTemplate')" color="secondary" rounded glossy icon-right="file_upload" ><q-tooltip>Export template to zip file</q-tooltip></q-btn>

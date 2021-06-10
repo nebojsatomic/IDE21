@@ -371,6 +371,16 @@ function loadPage(idP){
   $('#templateMask').empty();
   //$('#droppable').empty();
 
+  // set viewport size
+  if(getCookie("viewportSizeW")){
+    $('#droppable').width(getCookie("viewportSizeW"));
+    $('#viewport_width').val(getCookie("viewportSizeW"));
+  }
+  if(getCookie("viewportSizeH")){
+    $('#droppable').height(getCookie("viewportSizeH"));
+    $('#viewport_height').val(getCookie("viewportSizeH"));
+  }
+
   $('#pgID').html(idP);
 
   $.getJSON(absoluteUrl + "page/open/id/" + idP, function(data){
@@ -444,11 +454,48 @@ function randomRgbaString (alpha) {
   return `rgba(${r},${g},${b},${a})`
 }
 
+function setNewLayoutCss(layout_id, style_id) {
+
+  console.log(codepressOff);
+  if(codepressOff == false) {//IF codepress is turned on
+    pageCSS.toggleEditor();
+  }
+
+  oldCss = $('#pageCSS').attr("value");
+
+  if(codepressOff == true) {//IF codepress is turned off
+    oldCss_cp = oldCss;
+  } else {
+    oldCss_cp = $('#pageCSS_cp').attr("value");
+  }
+
+  //newPageCss = "\n#" + layout_id + '{' + "\n\n\n" + $('#' + style_id).text() + '}' + "\n" + oldCss;
+  newPageCss = "\n" + oldCss + "\n" + $('#' + style_id).text() ;
+  console.log(newPageCss);
+
+  if(codepressOff == true) {//IF codepress is turned off
+     newPageCss_cp = newPageCss;
+   } else {
+     newPageCss_cp = "\n"  + oldCss_cp + "\n" + $('#' + style_id).text() ;
+   }
+
+   $('#pageCSS').attr("value", newPageCss);
+   if(codepressOff == true) {//IF codepress is turned off
+
+   } else {
+     $('#pageCSS_cp').attr("value", newPageCss_cp);//cp is for codepress
+   }
+
+   if(codepressOff == false) {//IF codepress is turned on
+     pageCSS.toggleEditor();
+   }
+
+}
 
 $(document).ready(function(){
   let layoutData = Array();
   $('#convert-to-layout').click(function(){
-    
+
     //$('#droppable').width($('#droppable .draggable').width()); // todo
 
     $('#droppable .draggable').each(function(k, v){
@@ -461,7 +508,9 @@ $(document).ready(function(){
       let colors = [];
       for (let i = 0; i < 10; i++) colors.push(randomRgbaString(1));
 
-      $(this).css({ backgroundColor: colors[1] });
+      //$(this).css({ border: '1px solid ' + colors[1] });
+      $(this).css({backgroundColor: colors[1] });
+
       //$(this).css({backgroundColor: colors[1], position: 'relative', left:'auto', top:'auto' });
       //$(this).css({backgroundColor: colors[1] }).addClass('grid-item ' + giClassName);
 
@@ -505,6 +554,7 @@ $(document).ready(function(){
       let gridTemplateRowsVal = '';
       let rowIncluded = 0;
       let areaName = '';
+      let areaNames = Array();
       for(i = 0; i < layoutData.length; ++i) {
         console.log(layoutData[i].gtrIndex);
         console.log(layoutData[i].sameRow);
@@ -512,6 +562,8 @@ $(document).ready(function(){
           gridTemplateRowsVal = gridTemplateRowsVal + parseFloat(highestGtrIndex/layoutData[i].gtrIndex).toFixed(2)/numberOfRows + "fr ";
           areaName = ' ' + layoutData[i].giClassName ;
           gridTemplateAreas = gridTemplateAreas + '"' + areaName.repeat(parseFloat( highestGtcIndex/layoutData[i].gtcIndex) ) + '"';
+
+          areaNames.push(areaName);
 
           if(typeof layoutData[i-1] != 'undefined' && parseInt(layoutData[i-1].sameRow) == 1 ) {
             console.log(layoutData[i-1]);
@@ -529,30 +581,63 @@ $(document).ready(function(){
             areaName = ' ' + layoutData[i].giClassName;
             gridTemplateAreas = gridTemplateAreas + '"' + areaName.repeat(parseFloat( highestGtcIndex/layoutData[i].gtcIndex) ) ;
 
+            areaNames.push(areaName);
+
             rowIncluded = 1;
           } else {
             areaName = ' ' + layoutData[i].giClassName ;
             gridTemplateAreas = gridTemplateAreas +  areaName.repeat(parseFloat( highestGtcIndex/layoutData[i].gtcIndex) ) ;
 
+            areaNames.push(areaName);
+
             continue;
           }
-
+          if(typeof layoutData[i+1] != 'undefined' && parseInt(layoutData[i+1].sameRow) == 0 ) {
+            console.log(layoutData[i+1]);
+            console.log('should add another "');
+            let regex = new RegExp(layoutData[i+1].giClassName);
+            gridTemplateAreas = gridTemplateAreas.replace(regex, regex + '"');
+            gridTemplateAreas = gridTemplateAreas.replace(/[/]/g, '');
+          }
         }
 
-        gridTemplateAreas = gridTemplateAreas.replace(/["]\s/g, '"');
+        gridTemplateAreas = gridTemplateAreas.replace(/["]\s/g, "'");
         gridTemplateAreas = gridTemplateAreas.replace(/["]/g, "'");
       }
 
-      console.log(gridTemplateRowsVal);
+      console.log(gridTemplateRowsVal); // fr values of the row heights
+      gridTemplateRowsVal = "minmax(auto, max-content);" // temp set this until figuring out a better way
+
       console.log(gridTemplateAreas);
 
-      $('body').append(`<div id="layout-container" style="display: grid; grid-template-columns: ` + gridTemplateColumnsVal +`;grid-template-rows:` + gridTemplateRowsVal + `; grid-template-areas: ` + gridTemplateAreas + `; position: absolute; top: 0px; left: 0px; width: 385px; height: 620px; background: #66a04d; resize: both; overflow: hidden; ">` + $('#droppable').html() + `</div>`);
+      $('body').append(`<div id="layout-container" style="">` + $('#droppable').html() + `</div>`);
+
+      let layoutCSS = `#layout-container { display: grid; grid-template-columns: ` + gridTemplateColumnsVal +`;grid-template-rows:` + gridTemplateRowsVal + `; grid-template-areas: ` + gridTemplateAreas + `; position: relative; top: 0px; left: 0px; width:100%; height:  100% !important; min-height: ` + $('#droppable').height() + `px; background: #fff; overflow: hidden; }`;
+      let addCss = `.grid-item2 { width: 100% !important; height: auto !important;position: relative !important; left: auto !important; top: auto !important; word-wrap: anywhere; }`;
+
+      $('head').append(`<style id="layout-preview-css-head" type="text/css">` + layoutCSS + addCss + `</style>`);
+
+      setNewLayoutCss('layout-container', 'layout-preview-css-head');
+
+      //mobile template areas
+      let mGridTemplateAreas = "#layout-container { grid-template-columns: 1fr; grid-template-rows: minmax(auto, max-content); grid-template-areas:" + areaNames.toString() + '; }';
+      console.log(mGridTemplateAreas);
+      //$('head').append('<style type="text/css">' + mGridTemplateAreas + '</style>');
 
       $('#layout-container .draggable').each(function() {
+        let currID = $(this).attr('id');
+        console.log( $('#droppable #' + currID).css('minHeight'));
         $(this).addClass('grid-item2');
+        $(this).css({minHeight: $('#droppable #' + currID).height() + 'px' });
         $(this).css({ gridArea: $(this).text() });
       });
-
+      setTimeout(function(){
+        $('#droppable').html('');
+        $('#layout-container').appendTo('#droppable');
+        $('#droppable').resizable('destroy');
+        $('#droppable').resizable({ autohide: true });
+        //$('#layout-container').remove();
+      }, 300);
     }, 500);
   });
 
@@ -1333,11 +1418,13 @@ $(document).ready(function(){
 
   $('#viewport_width').change(function(){
     var dW = $(this).val();
-    $('#droppable').width(dW)
+    $('#droppable').width(dW);
+    document.cookie = 'viewportSizeW=' +  dW + ';  path=/';
   });
   $('#viewport_height').change(function(){
     var dH = $(this).val();
-    $('#droppable').height(dH)
+    $('#droppable').height(dH);
+    document.cookie = 'viewportSizeH=' +  dH + ';  path=/';
   });
   $('#viewport_scale').change(function(){
     var dS = $(this).val();

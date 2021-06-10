@@ -23,23 +23,24 @@ span.ui-button-text{display:none !important;}
 #closeDialogDiv{width:18px;height:18px;background:url(/images/interface/closeB.png) no-repeat;text-align:center;float:right;}
 #containerRadnePovrsine {width:100%;height:auto;}
 #droppable {
-  display: grid;
+  /*display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 0.3fr 2.4fr 0.3fr;
   gap: 1px 1px;
   grid-template-areas:
     "header header header header header header header header header header header header"
     "sidebar main main main main main main main main main main main"
-    "footer footer footer footer footer footer footer footer footer footer footer footer";
+    "footer footer footer footer footer footer footer footer footer footer footer footer";*/
     /*resize: both;*/
     overflow: hidden;
+
     /*overflow-y: auto;*/
   position:relative !important;z-index:2;top:0;
   width:60%; height: 80vh; /*min-height:900px;*/
   /*height: auto;*/
   background: white;  padding: 0px; padding-bottom: 10px; border:2px dotted lightblue;margin:0 auto; margin-top: 50px;
 }
-.header { grid-area: header; }
+/*.header { grid-area: header; }
 .sidebar { grid-area: sidebar; }
 .main { grid-area: main; }
 .footer { grid-area: footer; }
@@ -49,19 +50,19 @@ span.ui-button-text{display:none !important;}
   top: 0 !important;
   left: 0 !important;
   min-height: auto !important;
-  /*overflow-y: visible !important;*/
-}
+}*/
 .grid-item2 {
     width: 100% !important;
-    height: 100% !important;
-    min-height: auto !important;
+    height: auto !important;
+    /*min-height: auto !important;*/
     position: relative !important;
     left: auto !important;
     top: auto !important;
+    word-wrap: anywhere;
 }
 #droppable2 { position:relative;z-index:2;float:left;left:0;top:0;min-width: 100%;width:100%; height: auto; min-height:100%;background: blue;  padding: 0px; border:2px dotted lightblue;}
 
-#templateMask { position:absolute;z-index:2;top:0;width:100%; height: auto; min-height:100%;background: transparent;  padding: 0px; border:0px dotted red;margin:0 auto;}
+#templateMask { position:absolute;z-index:2;top:0;width:100%; height: auto; height: 100%; min-height:100%;background: transparent;  padding: 0px; border:0px dotted red;margin:0 auto;}
 
 #penPointer{display:none !important;position:absolute;top:0;left:0;width:65px;height:65px;z-index:199998;background:url(/images/interface/Pen.png) no-repeat;}
 #downPointer{display:none;position:absolute;top:0;left:0;width:65px;height:65px;z-index:199998;background:url(//images/interface/down.png) no-repeat;}
