@@ -612,7 +612,7 @@ $(document).ready(function(){
 
       $('body').append(`<div id="layout-container" style="">` + $('#droppable').html() + `</div>`);
 
-      let layoutCSS = `#layout-container { display: grid; grid-template-columns: ` + gridTemplateColumnsVal +`;grid-template-rows:` + gridTemplateRowsVal + `; grid-template-areas: ` + gridTemplateAreas + `; position: relative; top: 0px; left: 0px; width:100%; height:  100% !important; min-height: ` + $('#droppable').height() + `px; background: #fff; overflow: hidden; }`;
+      let layoutCSS = `#layout-container { display: grid; grid-template-columns: ` + gridTemplateColumnsVal +`;grid-template-rows:` + gridTemplateRowsVal + `; grid-template-areas: ` + gridTemplateAreas + `; position: relative; top: 0px; left: 0px; width:100%; height:  auto !important; min-height: 100vh; background: #fff; overflow: hidden; }`;
       let addCss = `.grid-item2 { width: 100% !important; height: auto !important;position: relative !important; left: auto !important; top: auto !important; word-wrap: anywhere; }`;
 
       $('head').append(`<style id="layout-preview-css-head" type="text/css">` + layoutCSS + addCss + `</style>`);
