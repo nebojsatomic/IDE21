@@ -498,6 +498,8 @@ function wrapGridAreas(area) {
 
 $(document).ready(function(){
   let layoutData = Array();
+  let mGridTemplateAreasForViewport = Array();
+
   $('#convert-to-layout').click(function(){
 
     //$('#droppable').width($('#droppable .draggable').width()); // todo
@@ -626,7 +628,11 @@ $(document).ready(function(){
 
       let mGridTemplateAreas = "@media(max-width: 768px) { #layout-container { grid-template-columns: 1fr; grid-template-rows: minmax(auto, max-content); grid-template-areas:" + wrappedMobileAreas + '; } }'; // set css for mobile grid
       console.log(mGridTemplateAreas);
-      //$('head').append('<style type="text/css">' + mGridTemplateAreas + '</style>');
+
+      mGridTemplateAreasForViewport['default'] = { 'layout-container' : `display: grid; grid-template-columns: ` + gridTemplateColumnsVal +`;grid-template-rows:` + gridTemplateRowsVal + `; grid-template-areas: ` + gridTemplateAreas + `; position: relative; top: 0px; left: 0px; width:100%; height:  auto !important; min-height: 100vh; background: #fff; overflow: hidden;` }
+
+      mGridTemplateAreasForViewport[768] = {'layout-container' : `display: grid; grid-template-columns: 1fr; grid-template-rows: minmax(auto, max-content); grid-template-areas:` + wrappedMobileAreas + `;`}
+      //$('head').append('<style id="media-queries-768" type="text/css">' + mGridTemplateAreasForViewport[768]['layout-container'] + '</style>');
 
       $('head').append(`<style id="layout-preview-css-head" type="text/css">` + layoutCSS + addCss + mGridTemplateAreas + `</style>`);
 
@@ -1444,8 +1450,16 @@ $(document).ready(function(){
     var dH = $(this).height();
     $('#viewport_width').val(dW + 'px');
     $('#viewport_height').val(dH + 'px');
+    let mobileBreakPoint = 768;
 
-    //$('#tooltip').html('Width: ' + dW + 'px;<br>Height: ' + dH + 'px;').show();
+    if($('#droppable').width() < mobileBreakPoint) {
+      console.log($('#droppable').width());
+      console.log( mGridTemplateAreasForViewport);
+      $('#layout-container').attr('style', mGridTemplateAreasForViewport[768]['layout-container'] );
+    } else {
+      $('#layout-container').attr('style', mGridTemplateAreasForViewport['default']['layout-container'] );
+    }
+
   });
   $('#droppable').draggable().resizable();
 
