@@ -492,6 +492,10 @@ function setNewLayoutCss(layout_id, style_id) {
 
 }
 
+function wrapGridAreas(area) {
+  return `'` + area + `'`;
+}
+
 $(document).ready(function(){
   let layoutData = Array();
   $('#convert-to-layout').click(function(){
@@ -615,14 +619,18 @@ $(document).ready(function(){
       let layoutCSS = `#layout-container { display: grid; grid-template-columns: ` + gridTemplateColumnsVal +`;grid-template-rows:` + gridTemplateRowsVal + `; grid-template-areas: ` + gridTemplateAreas + `; position: relative; top: 0px; left: 0px; width:100%; height:  auto !important; min-height: 100vh; background: #fff; overflow: hidden; }`;
       let addCss = `.grid-item2 { width: 100% !important; height: auto !important;position: relative !important; left: auto !important; top: auto !important; word-wrap: anywhere; }`;
 
-      $('head').append(`<style id="layout-preview-css-head" type="text/css">` + layoutCSS + addCss + `</style>`);
+      //mobile template areas, set just one break point ftb , 768px
+      let wrappedMobileAreas = areaNames.map(wrapGridAreas) ; // generate grid-template-areas
+      wrappedMobileAreas = wrappedMobileAreas.toString().replace(/,/g, '');
+      wrappedMobileAreas = wrappedMobileAreas.toString().replace(/'\s/g, "'");// clean up
 
-      setNewLayoutCss('layout-container', 'layout-preview-css-head');
-
-      //mobile template areas
-      let mGridTemplateAreas = "#layout-container { grid-template-columns: 1fr; grid-template-rows: minmax(auto, max-content); grid-template-areas:" + areaNames.toString() + '; }';
+      let mGridTemplateAreas = "@media(max-width: 768px) { #layout-container { grid-template-columns: 1fr; grid-template-rows: minmax(auto, max-content); grid-template-areas:" + wrappedMobileAreas + '; } }'; // set css for mobile grid
       console.log(mGridTemplateAreas);
       //$('head').append('<style type="text/css">' + mGridTemplateAreas + '</style>');
+
+      $('head').append(`<style id="layout-preview-css-head" type="text/css">` + layoutCSS + addCss + mGridTemplateAreas + `</style>`);
+
+      setNewLayoutCss('layout-container', 'layout-preview-css-head');
 
       $('#layout-container .draggable').each(function() {
         let currID = $(this).attr('id');
