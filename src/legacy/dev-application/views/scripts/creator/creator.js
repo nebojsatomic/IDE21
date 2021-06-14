@@ -35,6 +35,11 @@ let ide21 = {
       'default': '',
       768: ''
     }
+  },
+  legacy: {
+    saveCSSandJS: function(){
+      console.log('should save css and js');
+    }
   }
 }
 
@@ -1333,6 +1338,7 @@ $(document).ready(function(){
     $('#templateTitleC').attr("value", $('#templateTitle').attr("value") );//name templatea
     $('#templateBodyBgC').attr("value", $('#template_bodyBg').attr("value") );//body BG templatea
 
+    ide21.legacy.saveCSSandJS();
 
     $('#templateCode').attr("action", absoluteUrl + "page/save-as-template");
     $('#templateCode').ajaxSubmit(function(){
@@ -1384,6 +1390,8 @@ $(document).ready(function(){
     $('#templateTitleC').attr("value", $('#templateTitle').attr("value") );//name templatea
     $('#templateBodyBgC').attr("value", $('#template_bodyBg').attr("value") );//body BG templatea
     $('#templateDefaultC').attr("value", $('#templateDefaultCB').prop("checked") );//template default
+
+    ide21.legacy.saveCSSandJS();
 
     $('#templateCode').attr("action", absoluteUrl + "page/update-template/templateId/" + $('#templateIDediting').html() + "/applytoall/" + applytoAllLangsTemplate );
     $('#templateCode').ajaxSubmit(function(){
@@ -1469,7 +1477,7 @@ $(document).ready(function(){
     if($('#droppable').width() < mobileBreakPoint) {
       console.log($('#droppable').width());
       console.log( ide21.layout.mGridTemplateAreasForViewport[768]);
-      
+
       $('#layout-container').attr('style', ide21.layout.mGridTemplateAreasForViewport[768] );
     } else {
       $('#layout-container').attr('style', ide21.layout.mGridTemplateAreasForViewport['default'] );
