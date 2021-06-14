@@ -25,6 +25,19 @@
 *
 *
 */
+
+// define
+let ide21 = {
+  layout: {
+    currentLayoutID: 'layout-container',
+    currentLayoutStyle: '',
+    mGridTemplateAreasForViewport: {
+      'default': '',
+      768: ''
+    }
+  }
+}
+
 jQuery.extend({
   handleError: function( s, xhr, status, e ) {
     // If a local callback was specified, fire it
@@ -629,9 +642,10 @@ $(document).ready(function(){
       let mGridTemplateAreas = "@media(max-width: 768px) { #layout-container { grid-template-columns: 1fr; grid-template-rows: minmax(auto, max-content); grid-template-areas:" + wrappedMobileAreas + '; } }'; // set css for mobile grid
       console.log(mGridTemplateAreas);
 
-      mGridTemplateAreasForViewport['default'] = { 'layout-container' : `display: grid; grid-template-columns: ` + gridTemplateColumnsVal +`;grid-template-rows:` + gridTemplateRowsVal + `; grid-template-areas: ` + gridTemplateAreas + `; position: relative; top: 0px; left: 0px; width:100%; height:  auto !important; min-height: 100vh; background: #fff; overflow: hidden;` }
+      ide21.layout.mGridTemplateAreasForViewport['default'] = `display: grid; grid-template-columns: ` + gridTemplateColumnsVal +`;grid-template-rows:` + gridTemplateRowsVal + `; grid-template-areas: ` + gridTemplateAreas + `; position: relative; top: 0px; left: 0px; width:100%; height:  auto !important; min-height: 100vh; background: #fff; overflow: hidden;`
 
-      mGridTemplateAreasForViewport[768] = {'layout-container' : `display: grid; grid-template-columns: 1fr; grid-template-rows: minmax(auto, max-content); grid-template-areas:` + wrappedMobileAreas + `;`}
+      ide21.layout.mGridTemplateAreasForViewport[768] = `display: grid; grid-template-columns: 1fr; grid-template-rows: minmax(auto, max-content); grid-template-areas:` + wrappedMobileAreas + `;`
+
       //$('head').append('<style id="media-queries-768" type="text/css">' + mGridTemplateAreasForViewport[768]['layout-container'] + '</style>');
 
       $('head').append(`<style id="layout-preview-css-head" type="text/css">` + layoutCSS + addCss + mGridTemplateAreas + `</style>`);
@@ -1454,10 +1468,11 @@ $(document).ready(function(){
 
     if($('#droppable').width() < mobileBreakPoint) {
       console.log($('#droppable').width());
-      console.log( mGridTemplateAreasForViewport);
-      $('#layout-container').attr('style', mGridTemplateAreasForViewport[768]['layout-container'] );
+      console.log( ide21.layout.mGridTemplateAreasForViewport[768]);
+      
+      $('#layout-container').attr('style', ide21.layout.mGridTemplateAreasForViewport[768] );
     } else {
-      $('#layout-container').attr('style', mGridTemplateAreasForViewport['default']['layout-container'] );
+      $('#layout-container').attr('style', ide21.layout.mGridTemplateAreasForViewport['default'] );
     }
 
   });
