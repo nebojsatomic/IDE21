@@ -28,13 +28,21 @@
 
 // define
 let ide21 = {
+  viewport: {
+    size: {
+      'default': '1200x768'
+    }
+  },
   layout: {
     currentLayoutID: 'layout-container',
     currentLayoutStyle: '',
     mGridTemplateAreasForViewport: {
       'default': '',
       768: ''
-    }
+    },
+    maxWidth: '100%'
+  },
+  objects: {
   },
   legacy: {
     saveCSSandJS: function(){
@@ -337,7 +345,9 @@ function loadTemplate(idT){
 
           $('body').css(splRule[0], splRule[1]);
         }
-        if(k == 0) {$('body').css("background" , v);}
+        if(k == 0) {
+          $('#droppable').css("background" , v);
+        }
 
       })
 
@@ -636,7 +646,7 @@ $(document).ready(function(){
 
       $('body').append(`<div id="layout-container" style="">` + $('#droppable').html() + `</div>`);
 
-      let layoutCSS = `#layout-container { display: grid; grid-template-columns: ` + gridTemplateColumnsVal +`;grid-template-rows:` + gridTemplateRowsVal + `; grid-template-areas: ` + gridTemplateAreas + `; position: relative; top: 0px; left: 0px; width:100%; height:  auto !important; min-height: 100vh; background: #fff; overflow: hidden; }`;
+      let layoutCSS = `#layout-container { display: grid; grid-template-columns: ` + gridTemplateColumnsVal +`;grid-template-rows:` + gridTemplateRowsVal + `; grid-template-areas: ` + gridTemplateAreas + `; position: relative; top: 0px; left: 0px; width:100%; height:  auto !important; min-height: 100vh; background: #fff; overflow: hidden; margin:0 auto; }`;
       let addCss = `.grid-item2 { width: 100% !important; height: auto !important;position: relative !important; left: auto !important; top: auto !important; word-wrap: anywhere; }`;
 
       //mobile template areas, set just one break point ftb , 768px
@@ -2329,8 +2339,9 @@ $('#insertImage').click(function(){
 $('#setBodyBgImage').click(function(){
   if($('#bgSelect').val() == "BODY") {
     $('#template_bodyBg').attr("value" , "url(" + $('#imagePathShow').text() + ")" );
-    $('#template_bodyBg').change();
-    $('.body2be').attr("src" , $('#imagePathShow').text() );
+    //$('#template_bodyBg').change();
+    //$('.body2be').attr("src" , $('#imagePathShow').text() );
+    $('#droppable').css({ backgroundImage: 'url(' + $('#imagePathShow').text() + ')' });
   }
   if($('#bgSelect').val() == "SHEET") {
     $('.sheet').css("background" , "url(" + $('#imagePathShow').text() + ")" );
