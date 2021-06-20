@@ -528,6 +528,35 @@ $(document).ready(function(){
   let layoutData = Array();
   let mGridTemplateAreasForViewport = Array();
 
+  $.get(absoluteUrl + 'css/default.css', function(response){
+    response = response.replace('/*THIS IS FROM default_proba.css- BEGIN*/', '').replace('/*THIS IS FROM default_proba.css- END*/', '').replace(/\n/g, '');
+    ide21.existingStyle = response.split("}");
+    ide21.style = {};
+    console.log(response);
+    console.log(ide21.existingStyle);
+
+    ide21.existingStyle.map(function(currentValue, index, arr){
+      let getSelector = currentValue.split("{");
+      console.log(getSelector);
+      const selectorId = getSelector[0].replace(/(\s)/g, '');
+      const mediaTest = new RegExp('@media');
+      //console.log(mediaTest.test(getSelector[0]));
+      if( mediaTest.test(selectorId) == true ) {
+        console.log('here handle media query');
+        //console.log(getSelector[2]);
+        ide21.existingStyle.mediaQueries = response.match(/@media\([a-z]*[-][a-z]*[:][\s]*[\d]*[a-z]*[\s]*\)[\s]*\{(.*?)\}[\s]*\}/g);
+        console.log(ide21.existingStyle.mediaQueries);
+        //ide21.style[selectorId] = [{ id: getSelector[1] , css: getSelector[2] }];
+      } else {
+        console.log(selectorId);
+        ide21.style[selectorId] = getSelector[1];
+      }
+      console.log(ide21.style);
+      //console.log(currentValue);
+    });
+
+  });
+
   $('#convert-to-layout').click(function(){
 
     //$('#droppable').width($('#droppable .draggable').width()); // todo
