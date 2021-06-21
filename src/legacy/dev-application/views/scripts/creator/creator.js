@@ -530,30 +530,33 @@ $(document).ready(function(){
 
   $.get(absoluteUrl + 'css/default.css', function(response){
     response = response.replace('/*THIS IS FROM default_proba.css- BEGIN*/', '').replace('/*THIS IS FROM default_proba.css- END*/', '').replace(/\n/g, '');
-    ide21.existingStyle = response.split("}");
+    let responseWithoutMediaQueries = response.replace(/@media\((.*?)\)[\s]*\{(.*?)\}[\s]*\}/g, '');
+    //console.log('without media queries', responseWithoutMediaQueries);
+    ide21.existingStyle = responseWithoutMediaQueries.split("}");
     ide21.style = {};
-    console.log(response);
-    console.log(ide21.existingStyle);
+
+    //console.log(ide21.existingStyle);
 
     ide21.existingStyle.map(function(currentValue, index, arr){
       let getSelector = currentValue.split("{");
-      console.log(getSelector);
+      //console.log(getSelector);
       const selectorId = getSelector[0].replace(/(\s)/g, '');
-      const mediaTest = new RegExp('@media');
-      //console.log(mediaTest.test(getSelector[0]));
-      if( mediaTest.test(selectorId) == true ) {
-        console.log('here handle media query');
-        //console.log(getSelector[2]);
-        ide21.existingStyle.mediaQueries = response.match(/@media\([a-z]*[-][a-z]*[:][\s]*[\d]*[a-z]*[\s]*\)[\s]*\{(.*?)\}[\s]*\}/g);
-        console.log(ide21.existingStyle.mediaQueries);
-        //ide21.style[selectorId] = [{ id: getSelector[1] , css: getSelector[2] }];
-      } else {
-        console.log(selectorId);
-        ide21.style[selectorId] = getSelector[1];
-      }
-      console.log(ide21.style);
-      //console.log(currentValue);
+      //console.log(selectorId);
+      ide21.style[selectorId] = getSelector[1];
+
+      //console.log(ide21.style);
     });
+
+    // media queries inside default.css
+    const mediaTest = new RegExp('@media');
+    if( mediaTest.test(response) == true ) {
+      //console.log('here handle media queries');
+      ide21.style.mediaQueries = response.match(/@media\((.*?)\)[\s]*\{(.*?)\}[\s]*\}/g);
+      //console.log(ide21.style.mediaQueries);
+    }
+
+    // final viewport style object
+    console.log(ide21.style);
 
   });
 
@@ -711,6 +714,13 @@ $(document).ready(function(){
         //$('#layout-container').remove();
       }, 300);
     }, 500);
+  });
+
+  // set layout options on change
+  $('#layout_max_width').on('change', function(){
+
+    $('#layout-container').css({ maxWidth: $('#layout_max_width').val() });
+    //console.log('change');
   });
 
   //idCurrent = 1;
