@@ -1,6 +1,0 @@
-services:
-  - docker
-script:
-  - docker-compose up -d
-after_success:
-  - docker-compose down
