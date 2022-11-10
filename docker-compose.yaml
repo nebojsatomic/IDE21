@@ -13,8 +13,8 @@ services:
         depends_on:
             - mysqldb
     mysqldb:
-        image: 'mysql:5.6'
-        #image: 'mysql'
+        #image: 'mysql:5.6'
+        image: 'mariadb:10.9.3'
         ports:
             - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
