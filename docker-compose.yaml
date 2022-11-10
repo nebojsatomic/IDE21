@@ -2,7 +2,7 @@ version: '3'
 services:
     web: &web
         #build: .
-        image: nebojsatomic/ide21:1.0
+        image: registry.gitlab.com/nebojsatomic/ide21:latest
         ports:
             - '${APP_PORT:-80}:80'
         volumes:
