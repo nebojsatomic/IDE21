@@ -23,8 +23,8 @@ docker-build:
   script:
     - |
       if [[ "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH" ]]; then
-        tag=""
-        echo "Running on default branch '$CI_DEFAULT_BRANCH': tag = 'latest'"
+        tag=":1.2"
+        echo "Running on default branch '$CI_DEFAULT_BRANCH': tag = '1.2'"
       else
         tag=":$CI_COMMIT_REF_SLUG"
         echo "Running on branch '$CI_COMMIT_BRANCH': tag = $tag"
