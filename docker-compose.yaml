@@ -1,8 +1,8 @@
 version: '3'
 services:
     web: &web
-        #build: .
-        image: registry.gitlab.com/nebojsatomic/ide21:1.2
+        #build: . registry.gitlab.com/nebojsatomic/ide21:1.2
+        image: nebojsatomic/ide21:1.0
         pull_policy: build
         ports:
             - '${APP_PORT:-80}:80'
