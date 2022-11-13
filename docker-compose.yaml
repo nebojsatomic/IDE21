@@ -15,7 +15,7 @@ services:
             - mysqldb
     mysqldb:
         #image: 'mysql:5.6'
-        image: 'mariadb:10.9.3'
+        image: 'mariadb:10.8'
         ports:
             - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
