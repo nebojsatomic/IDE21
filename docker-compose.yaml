@@ -25,7 +25,7 @@ services:
             MYSQL_PASSWORD: 'nebojsa'
             MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
         volumes:
-            - '${MYSQL_DATA_PATH}:/var/lib/mysql'
+            - '${MYSQL_DATA_PATH:-./data}:/var/lib/mysql'
         networks:
             - cmside2
 networks:
