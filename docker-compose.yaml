@@ -1,13 +1,13 @@
 version: '3'
 services:
     web: &web
-        #build: . registry.gitlab.com/nebojsatomic/ide21:1.2
-        image: registry.gitlab.com/nebojsatomic/ide21:portainer-fix
+        build: .
+        #image: registry.gitlab.com/nebojsatomic/ide21:portainer-fix
         pull_policy: build
         ports:
             - '${APP_PORT:-80}:80'
-        volumes:
-            - 'ide21src:/var/www/html'
+        #volumes:
+        #    - 'ide21src:/var/www/html'
         #user: ${CURRENT_UID}
         networks:
             - cmside2
