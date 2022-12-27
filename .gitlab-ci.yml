@@ -40,7 +40,7 @@ docker-build:
       exists:
         - Dockerfile
 bridge:
-  variable:
+  variables:
     SHA256_VALUE: ":$CI_COMMIT_REF_SLUG"
   stage: bridge
   trigger: ide21/demo
