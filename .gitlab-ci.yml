@@ -36,3 +36,6 @@ docker-build:
     - if: $CI_COMMIT_BRANCH
       exists:
         - Dockerfile
+bridge:
+  stage: bridge
+  trigger: ide21/demo
