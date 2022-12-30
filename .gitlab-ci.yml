@@ -41,7 +41,7 @@ docker-build:
         - Dockerfile
 bridge:
   variables:
-    SHA256_VALUE: "@sha256:$CI_COMMIT_REF_SLUG"
+    SHA256_VALUE: "@sha256:$CI_COMMIT_SHA"
   stage: bridge
   trigger: ide21/demo
   
