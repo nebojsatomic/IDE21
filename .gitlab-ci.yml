@@ -34,7 +34,8 @@ docker-build:
       fi
     - docker build --pull -t "$CI_REGISTRY_IMAGE${tag}" .
     - docker push "$CI_REGISTRY_IMAGE${tag}"
-    - export CI_DOCKER_IM_REF = docker images --no-trunc --quiet "$CI_REGISTRY_IMAGE${tag}" 
+    - CI_DOCKER_IM_REF=$(docker images --no-trunc --quiet "$CI_REGISTRY_IMAGE${tag}") 
+    - export $CI_DOCKER_IM_REF
     - echo $CI_DOCKER_IM_REF
   # Run this job in a branch where a Dockerfile exists
   rules:
@@ -43,7 +44,7 @@ docker-build:
         - Dockerfile
 bridge:
   variables:
-    SHA256_VALUE: "@sha256:$CI_COMMIT_SHA"
+    SHA256_VALUE: "@sha256:$CI_DOCKER_IM_REF"
   stage: bridge
   trigger: ide21/demo
   
