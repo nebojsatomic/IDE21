@@ -34,7 +34,7 @@ docker-build:
       fi
     - docker build --pull -t "$CI_REGISTRY_IMAGE${tag}" .
     - docker push "$CI_REGISTRY_IMAGE${tag}"
-    - docker images --no-trunc --quiet "$CI_REGISTRY_IMAGE${tag}" | export CI_DOCKER_IM_REF
+    - export CI_DOCKER_IM_REF = docker images --no-trunc --quiet "$CI_REGISTRY_IMAGE${tag}" 
     - echo $CI_DOCKER_IM_REF
   # Run this job in a branch where a Dockerfile exists
   rules:
