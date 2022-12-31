@@ -37,14 +37,16 @@ docker-build:
     - CI_DOCKER_IM_REF=$(docker images --no-trunc --quiet "$CI_REGISTRY_IMAGE${tag}") 
     - export CI_DOCKER_IM_REF
     - ls -la
-    - cd /builds/nebojsatomic/IDE21
-    - echo -n $CI_DOCKER_IM_REF >> build.env
-    - sed -i 's/sha256://' ./build.env
+    #- cd /builds/nebojsatomic/IDE21
+    - mkdir build
+    - echo -n $CI_DOCKER_IM_REF >> ./build/build.env
+    - sed -i 's/sha256://' ./build/build.env
     - ls -la
-    - cat ./build.env
+    - cat ./build/build.env
   artifacts:
-    reports:
-      dotenv: build.env
+    paths: [build/]
+    #reports:
+      #dotenv: build.env
   # Run this job in a branch where a Dockerfile exists
   rules:
     - if: $CI_COMMIT_BRANCH
