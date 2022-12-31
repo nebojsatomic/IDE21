@@ -59,7 +59,4 @@ bridge:
   trigger: ide21/demo
   needs:
     - job: docker-build
-  artifacts:
-    untracked: false
-    when: on_success
-    expire_in: 30 days
+      artifacts: true
