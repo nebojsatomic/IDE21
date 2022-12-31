@@ -39,11 +39,12 @@ docker-build:
     - ls -la
     - cd /builds/nebojsatomic/IDE21
     - echo $CI_DOCKER_IM_REF >> build.env
+    - sed -i 's/sha256://' ./build.env
     - ls -la
     - cat ./build.env
-  #artifacts:
-    #reports:
-      #dotenv: build.env
+  artifacts:
+    reports:
+      dotenv: build.env
   # Run this job in a branch where a Dockerfile exists
   rules:
     - if: $CI_COMMIT_BRANCH
