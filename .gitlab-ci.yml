@@ -36,7 +36,10 @@ docker-build:
     - docker push "$CI_REGISTRY_IMAGE${tag}"
     - CI_DOCKER_IM_REF=$(docker images --no-trunc --quiet "$CI_REGISTRY_IMAGE${tag}") 
     - export CI_DOCKER_IM_REF
+    - ls -la
+    - cd /builds/nebojsatomic/IDE21
     - echo $CI_DOCKER_IM_REF >> build.env
+    - ls -la
   #artifacts:
     #reports:
       #dotenv: build.env
