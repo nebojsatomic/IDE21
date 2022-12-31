@@ -38,7 +38,7 @@ docker-build:
     - export CI_DOCKER_IM_REF
     - ls -la
     - cd /builds/nebojsatomic/IDE21
-    - echo $CI_DOCKER_IM_REF >> build.env
+    - echo -n $CI_DOCKER_IM_REF >> build.env
     - sed -i 's/sha256://' ./build.env
     - ls -la
     - cat ./build.env
