@@ -37,7 +37,7 @@ docker-build:
     - docker build --pull -t "$CI_REGISTRY_IMAGE${tag}" .
     - docker push "$CI_REGISTRY_IMAGE${tag}"
     - CI_DOCKER_IM=$(docker inspect --format='{{index .RepoDigests 0}}' "$CI_REGISTRY_IMAGE${tag}")
-    - echo CI_DOCKER_IM
+    - echo $CI_DOCKER_IM
     - CI_DOCKER_IM_REF=$(docker images --no-trunc --quiet "$CI_REGISTRY_IMAGE${tag}") 
     - export CI_DOCKER_IM_REF
     - ls -la
