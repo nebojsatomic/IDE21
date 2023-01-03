@@ -56,7 +56,7 @@ docker-build:
         - Dockerfile
 bridge:
   variables:
-    SHA256_VALUE: $DOCKER_IM_REF
+    SHA256_VALUE: "sha256:$CI_DOCKER_IM_REF"
   stage: bridge
   trigger: ide21/demo
   needs:
