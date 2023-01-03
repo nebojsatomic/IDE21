@@ -47,8 +47,8 @@ docker-build:
     - cat ./build/build.env
   artifacts:
     paths: [build/]
-    #reports:
-      #dotenv: ./build/build.env
+    reports:
+      dotenv: ./build/build.env
   # Run this job in a branch where a Dockerfile exists
   rules:
     - if: $CI_COMMIT_BRANCH
