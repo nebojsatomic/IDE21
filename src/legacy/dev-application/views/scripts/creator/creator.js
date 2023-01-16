@@ -1133,7 +1133,7 @@ $(document).ready(function(){
     $('body').append('<div id="dialogDiv"></div>');
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     dialog();
-    $.get(absoluteUrl + "page/choose-template/", function(data){
+    $.get(absoluteUrl + "page/choose-template", function(data){
       $('#dialogDiv').html(data);
       $('#ajaxEventMask').remove();
 
@@ -1591,7 +1591,7 @@ $('#aParamCorner').livequery('click', function(){
     $('body').append('<div id="dialogDiv"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
-    $.get(absoluteUrl + "creator/corner-params/" , function(data){
+    $.get(absoluteUrl + "creator/corner-params" , function(data){
       $('#dialogDiv').html( data  );
       //filling the values
       idObj = $('#objIDshow').html();
@@ -1709,7 +1709,7 @@ $('#aParamShadow').livequery('click', function(){
     $('body').append('<div id="dialogDiv"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
-    $.get(absoluteUrl + "creator/shadow-params/" , function(data){
+    $.get(absoluteUrl + "creator/shadow-params" , function(data){
       //making the dialog
       $('#dialogDiv').html( data  );
       //filling the values
@@ -2989,7 +2989,7 @@ $('#generateCacheButton').livequery('click', function(){
   if (confir == true) {
     ajaxEvent();
 
-    $.post(absoluteUrl + "creator/generate-cache/", function(data) {
+    $.post(absoluteUrl + "creator/generate-cache", function(data) {
       //$('#clearPage').click();
       ajaxEmitMessage(data);
       setTimeout("$('#ajaxEventMask').click()", 1000);
@@ -3663,7 +3663,7 @@ $('#installTemplate').click(function(){
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   // $('#dialogDiv').show();
 
-  $.get(absoluteUrl + "page/install-template/", function(data){
+  $.get(absoluteUrl + "page/install-template", function(data){
     $('#dialogDiv').html( data);
     //console.log(data);
     $('#ajaxEventMask').remove();
