@@ -8,8 +8,8 @@ services:
             - '${APP_PORT:-80}:80'
             - '${APP_PORT_HTTPS:-443}:443'
         volumes:
-            - ./src:/var/www/html
-        #    - 'ide21src:/var/www/html'
+            #- ./src:/var/www/html
+            - 'ide21src:/var/www/html'
         #user: ${CURRENT_UID}
         networks:
             - cmside2
