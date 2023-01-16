@@ -1,9 +1,9 @@
 version: '3'
 services:
     web: &web
-        build: .
-        #image: registry.gitlab.com/nebojsatomic/ide21:demo
-        #pull_policy: always
+        #build: .
+        image: registry.gitlab.com/nebojsatomic/ide21:demo
+        pull_policy: always
         ports:
             - '${APP_PORT:-80}:80'
             - '${APP_PORT_HTTPS:-443}:443'
