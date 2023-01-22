@@ -64,3 +64,4 @@ bridge:
   needs:
     - job: docker-build
       artifacts: true
+  only: demo
