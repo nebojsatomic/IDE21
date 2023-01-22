@@ -143,6 +143,11 @@ class NetActionController extends Zend_Controller_Action
     $this->_hostRW = $request->getScheme() . '://'  . $config->paths->hostRW;
     self::$hostRW = $request->getScheme() . '://' . $config->paths->hostRW;
 
+    $this->_host = 'https://'  . $config->paths->host;
+    self::$host = 'https://'  . $config->paths->host;
+    $this->_hostRW = 'https://'  . $config->paths->hostRW;
+    self::$hostRW = 'https://' . $config->paths->hostRW;
+
     $this->_nps = $config->paths->nps;
     self::$nps = $config->paths->nps;
 
