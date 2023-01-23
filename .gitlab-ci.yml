@@ -64,8 +64,5 @@ bridge:
   needs:
     - job: docker-build
       artifacts: true
-  environment:
-    name: demo
-    url: $DEMO_URL
   only:
     - demo
