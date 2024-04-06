@@ -23,14 +23,7 @@ After that one person has designed and coded frontend, template is available for
 - cd to dir
 - replace certificates in apache2 folder with your own if you do not want just to try this out; apache2 folder and its contents enables https on localhost
 - Run in terminal:
-
-  $ docker-compose -f docker-compose-first-run.yaml up
-
-  then
-
   $ docker-compose up
-
-  ( laravel version needs composer to install dependencies, execute "docker-compose -f docker-compose-first-run.yaml up" and then "docker-compose up", or login into container and do it manually by executing ./laravel.sh )
 
 After succesful building and running, you can access the front at https://localhost, and admin area at https://localhost/adm
 
