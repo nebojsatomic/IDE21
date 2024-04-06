@@ -43,7 +43,7 @@ Demo pass:  proba
 
 *  /adm can be changed to what ever path you want if you modify adminUrl variable inside src/dev-application/config/config.ini
 
-If you consider furter use of IDE21, set your own configuration for the database in docker-compose.yaml, and config files inside dev-application, do not use this default configuration, naturally.
+If you consider further use of IDE21, set your own configuration for the database in docker-compose.yaml, and config files inside dev-application, do not use this default configuration, naturally.
 
 
 # IF YOU WOULD LIKE TO CONTRIBUTE
