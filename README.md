@@ -1,5 +1,4 @@
-
-![path849](https://user-images.githubusercontent.com/1038256/114278999-ab6cab00-9a32-11eb-8ecb-4f7e3cd6ee29.png)
+![ide21logo](https://github.com/nebojsatomic/IDE21/assets/1038256/aaddf2a1-f4e9-435d-864e-68963a132859)
 
 # IDE21
 Restarting CMS-IDE project from 2013, powered by Docker, which made the task of installing this software trivial. It needs a fat rewriting, since the technology used in it is ancient, Zend Framework 1... Though for use on local it could also serve as an experimental design tool which exports HTML...
@@ -22,15 +21,18 @@ After that one person has designed and coded frontend, template is available for
 - Install Docker
 - Clone this repo
 - cd to dir
+- replace certificates in apache2 folder with your own if you do not want just to try this out; apache2 folder and its contents enables https on localhost
 - Run in terminal:
 
   $ docker-compose -f docker-compose-first-run.yaml up
+
+  then
 
   $ docker-compose up
 
   ( laravel version needs composer to install dependencies, execute "docker-compose -f docker-compose-first-run.yaml up" and then "docker-compose up", or login into container and do it manually by executing ./laravel.sh )
 
-After succesful building and running, you can access the front at http://localhost, and admin area at http://localhost/adm
+After succesful building and running, you can access the front at https://localhost, and admin area at https://localhost/adm
 
 
 For locahost/adm :
@@ -40,6 +42,8 @@ Demo user:  proba
 Demo pass:  proba
 
 *  /adm can be changed to what ever path you want if you modify adminUrl variable inside src/dev-application/config/config.ini
+
+If you consider furter use of IDE21, set your own configuration for the database in docker-compose.yaml, and config files inside dev-application, do not use this default configuration, naturally.
 
 
 # IF YOU WOULD LIKE TO CONTRIBUTE
