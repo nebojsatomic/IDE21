@@ -1,5 +1,5 @@
 FROM php:7.4-apache
-RUN apt update && apt install -y zlib1g-dev libpng-dev nano && rm -rf /var/lib/apt/lists/*
+RUN apt update && apt install -y zlib1g-dev libpng-dev zip nano && rm -rf /var/lib/apt/lists/*
 RUN a2enmod rewrite
 RUN a2enmod ssl
 
@@ -14,7 +14,12 @@ WORKDIR /var/www/html
 
 COPY ./src .
 
-RUN ["bash", "-c", "./laravel.sh"]
+RUN chown -R www-data /var/www/html/storage
+RUN chown -R www-data /var/www/html/public
+
+RUN ./composer.phar update
+RUN cp ./.env.example ./.env
+
 
 VOLUME /var/www/html
 
