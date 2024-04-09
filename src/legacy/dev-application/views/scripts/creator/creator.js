@@ -617,7 +617,6 @@ $(document).ready(function(){
     drag:function() {
       //$(this).clone();
       id = $(this).prop("id");
-      //console.log(id);
     },
     containment: 'parent'
   });
@@ -626,6 +625,7 @@ $(document).ready(function(){
   });
   $("#droppable").droppable({
     drop: function() {
+      if(typeof id === "undefined") return;
       $('#objList').attr("value", $('#' + id).attr("id"));
 
       if(id == 'pageJS') {return;}
@@ -1075,7 +1075,7 @@ $(document).ready(function(){
     ajaxEventDone('Saving template...');//sklanjanje maska
   });
 
-  //Saving a template TREBA DORADJIVATI JOS
+  //Saving a template - needs more work
   $('#saveThisTemplate').click(function(){
 
     $(".draggable:not('.templateDiv')").each(function(){
