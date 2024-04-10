@@ -353,7 +353,7 @@ class NetActionController extends Zend_Controller_Action
      *inside db
      *
      */
-    public function getEnabledLanguages()
+    public static function getEnabledLanguages()
     {
         $db = Zend_Registry::get('db');
         $langQ = $db->fetchAll("SELECT * FROM languages WHERE enabled = '1' ORDER BY weight");
@@ -537,15 +537,16 @@ class NetActionController extends Zend_Controller_Action
      */
     public function renderToTable($table, $justCols = null, $addTitle = null, $actions = null)
     {
+        echo 'table' . $table;
         $db = Zend_Registry::get('db');
         $urlRewrite = Zend_Registry::get('urlRewrite');
         $themePath = NET_PATH . "widgets/";
         $host = NetActionController::$host;
 
         //session variables
-        @$this->_sesija->table->$table->queryString = $justCols;
-        @$this->_sesija->table->$table->addTitle = $addTitle;
-        @$this->_sesija->table->$table->actions = $actions;
+        //@$this->_sesija->table->$table->queryString = $justCols;
+        //@$this->_sesija->table->$table->addTitle = $addTitle;
+        //@$this->_sesija->table->$table->actions = $actions;
 
         if ($addTitle == null){
             $addTitle = $this->translate->_("Add a record");
@@ -652,9 +653,9 @@ class NetActionController extends Zend_Controller_Action
         $host = NetActionController::$hostRW;
 
         //session variables
-        @$this->_sesija->table->$table->queryString = $justCols;
-        @$this->_sesija->table->$table->addTitle = $addTitle;
-        @$this->_sesija->table->$table->actions = $actions;
+        //@$this->_sesija->table->$table->queryString = $justCols;
+        //@$this->_sesija->table->$table->addTitle = $addTitle;
+        //@$this->_sesija->table->$table->actions = $actions;
 
         if ($addTitle == null){
             $addTitle = "Add a record";
