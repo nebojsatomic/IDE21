@@ -17,6 +17,7 @@ https://www.youtube.com/watch?v=qgRPWqAuB8Q
 
 ( Watch from 2:00, first part is installation which is skipped in this Dockerized version )
 
+There will be new videos produced soon, with User tutorials.
 
 # INSTALLATION OF THIS VERSION
 
