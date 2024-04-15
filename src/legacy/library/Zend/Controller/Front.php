@@ -14,9 +14,9 @@
  *
  * @category   Zend
  * @package    Zend_Controller
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Front.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 
@@ -32,7 +32,7 @@ require_once 'Zend/Controller/Plugin/Broker.php';
 /**
  * @category   Zend
  * @package    Zend_Controller
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Controller_Front
@@ -71,7 +71,7 @@ class Zend_Controller_Front
      * controllers
      * @var array
      */
-    protected $_invokeParams = array();
+    protected $_invokeParams = [];
 
     /**
      * Subdirectory within a module containing controllers; defaults to 'controllers'
@@ -174,7 +174,7 @@ class Zend_Controller_Front
                     break;
                 case '_controllerDir':
                 case '_invokeParams':
-                    $this->{$name} = array();
+                    $this->{$name} = [];
                     break;
                 case '_plugins':
                     $this->{$name} = new Zend_Controller_Plugin_Broker();
@@ -220,7 +220,7 @@ class Zend_Controller_Front
      *
      * @param string $directory
      * @param string $module Optional argument; module with which to associate directory. If none provided, assumes 'default'
-     * @return Zend_Controller_Front
+     * @return $this
      * @throws Zend_Controller_Exception if directory not found or readable
      */
     public function addControllerDirectory($directory, $module = null)
@@ -238,7 +238,7 @@ class Zend_Controller_Front
      * @param string|array $directory Path to Zend_Controller_Action controller
      * classes or array of such paths
      * @param  string $module Optional module name to use with string $directory
-     * @return Zend_Controller_Front
+     * @return $this
      */
     public function setControllerDirectory($directory, $module = null)
     {
@@ -281,13 +281,13 @@ class Zend_Controller_Front
      * will be used as the controller directory path.
      *
      * @param  string $path
-     * @return Zend_Controller_Front
+     * @return $this
      */
     public function addModuleDirectory($path)
     {
         try{
             $dir = new DirectoryIterator($path);
-        } catch(Exception $e) {
+        } catch(Throwable $e) {
             require_once 'Zend/Controller/Exception.php';
             throw new Zend_Controller_Exception("Directory $path not readable", 0, $e);
         }
@@ -341,7 +341,7 @@ class Zend_Controller_Front
      * Set the directory name within a module containing controllers
      *
      * @param  string $name
-     * @return Zend_Controller_Front
+     * @return $this
      */
     public function setModuleControllerDirectoryName($name = 'controllers')
     {
@@ -364,7 +364,7 @@ class Zend_Controller_Front
      * Set the default controller (unformatted string)
      *
      * @param string $controller
-     * @return Zend_Controller_Front
+     * @return $this
      */
     public function setDefaultControllerName($controller)
     {
@@ -387,7 +387,7 @@ class Zend_Controller_Front
      * Set the default action (unformatted string)
      *
      * @param string $action
-     * @return Zend_Controller_Front
+     * @return $this
      */
     public function setDefaultAction($action)
     {
@@ -410,7 +410,7 @@ class Zend_Controller_Front
      * Set the default module name
      *
      * @param string $module
-     * @return Zend_Controller_Front
+     * @return $this
      */
     public function setDefaultModule($module)
     {
@@ -438,7 +438,7 @@ class Zend_Controller_Front
      *
      * @param string|Zend_Controller_Request_Abstract $request
      * @throws Zend_Controller_Exception if invalid request class
-     * @return Zend_Controller_Front
+     * @return $this
      */
     public function setRequest($request)
     {
@@ -480,7 +480,7 @@ class Zend_Controller_Front
      *
      * @param string|Zend_Controller_Router_Interface $router
      * @throws Zend_Controller_Exception if invalid router class
-     * @return Zend_Controller_Front
+     * @return $this
      */
     public function setRouter($router)
     {
@@ -537,7 +537,7 @@ class Zend_Controller_Front
      * If a null value is passed, this can be used as well for autodiscovery (default).
      *
      * @param string $base
-     * @return Zend_Controller_Front
+     * @return $this
      * @throws Zend_Controller_Exception for non-string $base
      */
     public function setBaseUrl($base = null)
@@ -577,7 +577,7 @@ class Zend_Controller_Front
      * call the action method of the controller.
      *
      * @param Zend_Controller_Dispatcher_Interface $dispatcher
-     * @return Zend_Controller_Front
+     * @return $this
      */
     public function setDispatcher(Zend_Controller_Dispatcher_Interface $dispatcher)
     {
@@ -612,7 +612,7 @@ class Zend_Controller_Front
      *
      * @param string|Zend_Controller_Response_Abstract $response
      * @throws Zend_Controller_Exception if invalid response class
-     * @return Zend_Controller_Front
+     * @return $this
      */
     public function setResponse($response)
     {
@@ -648,7 +648,7 @@ class Zend_Controller_Front
      *
      * @param string $name
      * @param mixed $value
-     * @return Zend_Controller_Front
+     * @return $this
      */
     public function setParam($name, $value)
     {
@@ -661,7 +661,7 @@ class Zend_Controller_Front
      * Set parameters to pass to action controller constructors
      *
      * @param array $params
-     * @return Zend_Controller_Front
+     * @return $this
      */
     public function setParams(array $params)
     {
@@ -701,13 +701,13 @@ class Zend_Controller_Front
      * only that parameter; if an array of parameter names is provided, clears
      * each.
      *
-     * @param null|string|array single key or array of keys for params to clear
-     * @return Zend_Controller_Front
+     * @param null|string|array $name single key or array of keys for params to clear
+     * @return $this
      */
     public function clearParams($name = null)
     {
         if (null === $name) {
-            $this->_invokeParams = array();
+            $this->_invokeParams = [];
         } elseif (is_string($name) && isset($this->_invokeParams[$name])) {
             unset($this->_invokeParams[$name]);
         } elseif (is_array($name)) {
@@ -726,7 +726,7 @@ class Zend_Controller_Front
      *
      * @param  Zend_Controller_Plugin_Abstract $plugin
      * @param  int $stackIndex Optional; stack index for plugin
-     * @return Zend_Controller_Front
+     * @return $this
      */
     public function registerPlugin(Zend_Controller_Plugin_Abstract $plugin, $stackIndex = null)
     {
@@ -738,7 +738,7 @@ class Zend_Controller_Front
      * Unregister a plugin.
      *
      * @param  string|Zend_Controller_Plugin_Abstract $plugin Plugin class or object to unregister
-     * @return Zend_Controller_Front
+     * @return $this
      */
     public function unregisterPlugin($plugin)
     {
@@ -848,7 +848,7 @@ class Zend_Controller_Front
         /**
          * Instantiate default request object (HTTP version) if none provided
          */
-        if (null !== $request) {
+        if ($request !== null) {
             $this->setRequest($request);
         } elseif ((null === $request) && (null === ($request = $this->getRequest()))) {
             require_once 'Zend/Controller/Request/Http.php';
@@ -859,7 +859,7 @@ class Zend_Controller_Front
         /**
          * Set base URL of request object, if available
          */
-        if (is_callable(array($this->_request, 'setBaseUrl'))) {
+        if (is_callable([$this->_request, 'setBaseUrl'])) {
             if (null !== $this->_baseUrl) {
                 $this->_request->setBaseUrl($this->_baseUrl);
             }
@@ -868,7 +868,7 @@ class Zend_Controller_Front
         /**
          * Instantiate default response object (HTTP version) if none provided
          */
-        if (null !== $response) {
+        if ($response !== null) {
             $this->setResponse($response);
         } elseif ((null === $this->_response) && (null === ($this->_response = $this->getResponse()))) {
             require_once 'Zend/Controller/Response/Http.php';
@@ -909,7 +909,7 @@ class Zend_Controller_Front
 
             try {
                 $router->route($this->_request);
-            }  catch (Exception $e) {
+            }  catch (Throwable $e) {
                 if ($this->throwExceptions()) {
                     throw $e;
                 }
@@ -952,7 +952,7 @@ class Zend_Controller_Front
                  */
                 try {
                     $dispatcher->dispatch($this->_request, $this->_response);
-                } catch (Exception $e) {
+                } catch (Throwable $e) {
                     if ($this->throwExceptions()) {
                         throw $e;
                     }
@@ -964,7 +964,7 @@ class Zend_Controller_Front
                  */
                 $this->_plugins->postDispatch($this->_request);
             } while (!$this->_request->isDispatched());
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             if ($this->throwExceptions()) {
                 throw $e;
             }
@@ -977,7 +977,7 @@ class Zend_Controller_Front
          */
         try {
             $this->_plugins->dispatchLoopShutdown();
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             if ($this->throwExceptions()) {
                 throw $e;
             }

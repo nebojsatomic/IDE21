@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: SegmentMerger.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /** Zend_Search_Lucene_Index_SegmentInfo */
@@ -28,7 +28,7 @@ require_once 'Zend/Search/Lucene/Index/SegmentInfo.php';
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Search_Lucene_Index_SegmentMerger
@@ -52,7 +52,7 @@ class Zend_Search_Lucene_Index_SegmentMerger
      *
      * @var array Zend_Search_Lucene_Index_SegmentInfo
      */
-    private $_segmentInfos = array();
+    private $_segmentInfos = [];
 
     /**
      * Flag to signal, that merge is already done
@@ -67,7 +67,7 @@ class Zend_Search_Lucene_Index_SegmentMerger
      *
      * @var array
      */
-    private $_fieldsMap = array();
+    private $_fieldsMap = [];
 
 
 
@@ -182,7 +182,7 @@ class Zend_Search_Lucene_Index_SegmentMerger
 
             for ($count = 0; $count < $segmentInfo->count(); $count++) {
                 $fieldCount = $fdtFile->readVInt();
-                $storedFields = array();
+                $storedFields = [];
 
                 for ($count2 = 0; $count2 < $fieldCount; $count2++) {
                     $fieldNum = $fdtFile->readVInt();
@@ -240,7 +240,7 @@ class Zend_Search_Lucene_Index_SegmentMerger
 
         $this->_writer->initializeDictionaryFiles();
 
-        $termDocs = array();
+        $termDocs = [];
         while (($segmentInfo = $segmentInfoQueue->pop()) !== null) {
             // Merge positions array
             $termDocs += $segmentInfo->currentTermPositions();
@@ -255,7 +255,7 @@ class Zend_Search_Lucene_Index_SegmentMerger
                 if (count($termDocs) > 0) {
                     $this->_writer->addTerm($segmentInfo->currentTerm(), $termDocs);
                 }
-                $termDocs = array();
+                $termDocs = [];
             }
 
             $segmentInfo->nextTerm();

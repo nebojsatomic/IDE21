@@ -14,9 +14,9 @@
  *
  * @category   Zend
  * @package    Zend_Oauth
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Plaintext.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /** Zend_Oauth_Signature_SignatureAbstract */
@@ -25,7 +25,7 @@ require_once 'Zend/Oauth/Signature/SignatureAbstract.php';
 /**
  * @category   Zend
  * @package    Zend_Oauth
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Oauth_Signature_Plaintext extends Zend_Oauth_Signature_SignatureAbstract
@@ -43,7 +43,7 @@ class Zend_Oauth_Signature_Plaintext extends Zend_Oauth_Signature_SignatureAbstr
         if ($this->_tokenSecret === null) {
             return $this->_consumerSecret . '&';
         }
-        $return = implode('&', array($this->_consumerSecret, $this->_tokenSecret));
-        return $return;
+
+        return implode('&', [$this->_consumerSecret, $this->_tokenSecret]);
     }
 }

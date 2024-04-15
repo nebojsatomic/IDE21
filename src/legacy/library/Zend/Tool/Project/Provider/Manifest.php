@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Tool
  * @subpackage Framework
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Manifest.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /**
@@ -28,7 +28,7 @@ require_once 'Zend/Tool/Framework/Manifest/ProviderManifestable.php';
 /**
  * @category   Zend
  * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Provider_Manifest implements
@@ -44,7 +44,7 @@ class Zend_Tool_Project_Provider_Manifest implements
     {
         // the order here will represent what the output will look like when iterating a manifest
 
-        return array(
+        return [
             // top level project & profile providers
             'Zend_Tool_Project_Provider_Profile',
             'Zend_Tool_Project_Provider_Project',
@@ -70,6 +70,6 @@ class Zend_Tool_Project_Provider_Manifest implements
             // provider within project provider
             'Zend_Tool_Project_Provider_ProjectProvider',
 
-        );
+        ];
     }
 }

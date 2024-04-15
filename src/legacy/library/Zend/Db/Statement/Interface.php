@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Statement
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Interface.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /**
@@ -26,7 +26,7 @@
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Statement
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_Db_Statement_Interface
@@ -110,7 +110,7 @@ interface Zend_Db_Statement_Interface
      * @return bool
      * @throws Zend_Db_Statement_Exception
      */
-    public function execute(array $params = array());
+    public function execute(array $params = []);
 
     /**
      * Fetches a row from the result set.
@@ -137,7 +137,7 @@ interface Zend_Db_Statement_Interface
      * Returns a single column from the next row of a result set.
      *
      * @param int $col OPTIONAL Position of the column to fetch.
-     * @return string
+     * @return string|false|null
      * @throws Zend_Db_Statement_Exception
      */
     public function fetchColumn($col = 0);
@@ -150,7 +150,7 @@ interface Zend_Db_Statement_Interface
      * @return mixed One object instance of the specified class.
      * @throws Zend_Db_Statement_Exception
      */
-    public function fetchObject($class = 'stdClass', array $config = array());
+    public function fetchObject($class = 'stdClass', array $config = []);
 
     /**
      * Retrieve a statement attribute.

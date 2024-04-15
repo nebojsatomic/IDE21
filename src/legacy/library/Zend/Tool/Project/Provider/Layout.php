@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Tool
  * @subpackage Framework
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Layout.php 24408 2011-08-26 22:05:35Z adamlundrigan $
+ * @version    $Id$
  */
 
 /**
@@ -28,7 +28,7 @@ require_once 'Zend/Tool/Project/Provider/Abstract.php';
 /**
  * @category   Zend
  * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Provider_Layout extends Zend_Tool_Project_Provider_Abstract implements Zend_Tool_Framework_Provider_Pretendable
@@ -53,10 +53,10 @@ class Zend_Tool_Project_Provider_Layout extends Zend_Tool_Project_Provider_Abstr
             $layoutScriptsDirectory = $layoutDirectory->createResource('layoutScriptsDirectory');
         }
 
-        $layoutScriptFile = $layoutScriptsDirectory->search('layoutScriptFile', array('layoutName' => 'layout'));
+        $layoutScriptFile = $layoutScriptsDirectory->search('layoutScriptFile', ['layoutName' => 'layout']);
 
         if ($layoutScriptFile == false) {
-            $layoutScriptFile = $layoutScriptsDirectory->createResource('layoutScriptFile', array('layoutName' => 'layout'));
+            $layoutScriptFile = $layoutScriptsDirectory->createResource('layoutScriptFile', ['layoutName' => 'layout']);
         }
 
         return $layoutScriptFile;
@@ -86,7 +86,7 @@ class Zend_Tool_Project_Provider_Layout extends Zend_Tool_Project_Provider_Abstr
             $applicationConfigResource->create();
 
             $this->_registry->getResponse()->appendContent('A layout entry has been added to the application config file.');
-            
+
             $layoutScriptFile = self::createResource($profile);
             if (!$layoutScriptFile->exists()) {
                 $layoutScriptFile->create();

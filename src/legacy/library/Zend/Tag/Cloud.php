@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Tag
  * @subpackage Cloud
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Cloud.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /**
@@ -28,7 +28,7 @@ require_once 'Zend/Tag/Item.php';
 /**
  * @category   Zend
  * @package    Zend_Tag
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tag_Cloud
@@ -66,10 +66,10 @@ class Zend_Tag_Cloud
      *
      * @var array
      */
-    protected $_skipOptions = array(
+    protected $_skipOptions = [
         'options',
         'config',
-    );
+    ];
 
     /**
      * Create a new tag cloud with options
@@ -327,7 +327,7 @@ class Zend_Tag_Cloud
             $pathPrefix = 'Zend/Tag/Cloud/Decorator/';
 
             require_once 'Zend/Loader/PluginLoader.php';
-            $this->_pluginLoader = new Zend_Loader_PluginLoader(array($prefix => $pathPrefix));
+            $this->_pluginLoader = new Zend_Loader_PluginLoader([$prefix => $pathPrefix]);
         }
 
         return $this->_pluginLoader;
@@ -385,9 +385,8 @@ class Zend_Tag_Cloud
         }
 
         $tagsResult  = $this->getTagDecorator()->render($tags);
-        $cloudResult = $this->getCloudDecorator()->render($tagsResult);
 
-        return $cloudResult;
+        return $this->getCloudDecorator()->render($tagsResult);
     }
 
     /**
@@ -398,12 +397,12 @@ class Zend_Tag_Cloud
     public function __toString()
     {
         try {
-            $result = $this->render();
-            return $result;
+            return $this->render();
         } catch (Exception $e) {
             $message = "Exception caught by tag cloud: " . $e->getMessage()
                      . "\nStack Trace:\n" . $e->getTraceAsString();
             trigger_error($message, E_USER_WARNING);
+
             return '';
         }
     }

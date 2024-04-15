@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Formatter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Xml.php 24237 2011-07-13 18:22:20Z matthew $
+ * @version    $Id$
  */
 
 /** Zend_Log_Formatter_Abstract */
@@ -27,9 +27,9 @@ require_once 'Zend/Log/Formatter/Abstract.php';
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Formatter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Xml.php 24237 2011-07-13 18:22:20Z matthew $
+ * @version    $Id$
  */
 class Zend_Log_Formatter_Xml extends Zend_Log_Formatter_Abstract
 {
@@ -55,16 +55,16 @@ class Zend_Log_Formatter_Xml extends Zend_Log_Formatter_Abstract
      * @param array|Zend_Config $options
      * @return void
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         } elseif (!is_array($options)) {
             $args = func_get_args();
 
-            $options = array(
-                'rootElement' => array_shift($args)
-            );
+            $options = [
+            	'rootElement' => array_shift($args)
+            ];
 
             if (count($args)) {
                 $options['elementMap'] = array_shift($args);
@@ -92,10 +92,10 @@ class Zend_Log_Formatter_Xml extends Zend_Log_Formatter_Abstract
     }
 
     /**
-     * Factory for Zend_Log_Formatter_Xml classe
-     *
-     * @param array|Zend_Config $options
-     * @return Zend_Log_Formatter_Xml
+	 * Factory for Zend_Log_Formatter_Xml classe
+	 *
+	 * @param array|Zend_Config $options
+	 * @return Zend_Log_Formatter_Xml
      */
     public static function factory($options)
     {
@@ -135,7 +135,7 @@ class Zend_Log_Formatter_Xml extends Zend_Log_Formatter_Abstract
         if ($this->_elementMap === null) {
             $dataToInsert = $event;
         } else {
-            $dataToInsert = array();
+            $dataToInsert = [];
             foreach ($this->_elementMap as $elementName => $fieldKey) {
                 $dataToInsert[$elementName] = $event[$fieldKey];
             }
@@ -146,8 +146,8 @@ class Zend_Log_Formatter_Xml extends Zend_Log_Formatter_Abstract
         $elt = $dom->appendChild(new DOMElement($this->_rootElement));
 
         foreach ($dataToInsert as $key => $value) {
-            if (empty($value) 
-                || is_scalar($value) 
+            if (empty($value)
+                || is_scalar($value)
                 || (is_object($value) && method_exists($value,'__toString'))
             ) {
                 if($key == "message") {

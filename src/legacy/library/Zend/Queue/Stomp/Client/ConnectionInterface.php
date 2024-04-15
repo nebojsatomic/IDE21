@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Stomp
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: ConnectionInterface.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /**
@@ -26,16 +26,15 @@
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Stomp
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_Queue_Stomp_Client_ConnectionInterface
 {
     /**
-     * @param  string  $scheme ['tcp', 'udp']
-     * @param  string  host
-     * @param  integer port
-     * @param  string  class - create a connection with this class; class must support Zend_Queue_Stomp_Client_Connection_Interface
+     * @param  string $scheme ['tcp', 'udp']
+     * @param  string $host host
+     * @param  integer $port port
      * @return boolean
      */
     public function open($scheme, $host, $port);

@@ -14,9 +14,9 @@
  *
  * @category   Zend
  * @package    Zend_Reflection
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Param.php 24405 2011-08-26 17:33:02Z ralph $
+ * @version    $Id$
  */
 
 /** Zend_Reflection_Docblock_Tag */
@@ -25,7 +25,7 @@ require_once 'Zend/Reflection/Docblock/Tag.php';
 /**
  * @category   Zend
  * @package    Zend_Reflection
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Reflection_Docblock_Tag_Param extends Zend_Reflection_Docblock_Tag
@@ -47,7 +47,7 @@ class Zend_Reflection_Docblock_Tag_Param extends Zend_Reflection_Docblock_Tag
      */
     public function __construct($tagDocblockLine)
     {
-        $matches = array();
+        $matches = [];
 
         if (!preg_match('#^@(\w+)\s+([^\s]+)(?:\s+(\$\S+))?(?:\s+(.*))?#s', $tagDocblockLine, $matches)) {
             require_once 'Zend/Reflection/Exception.php';

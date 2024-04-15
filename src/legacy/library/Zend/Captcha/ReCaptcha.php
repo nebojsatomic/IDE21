@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -35,9 +35,9 @@ require_once 'Zend/Service/ReCaptcha.php';
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: ReCaptcha.php 24242 2011-07-14 13:44:06Z matthew $
+ * @version    $Id$
  */
 class Zend_Captcha_ReCaptcha extends Zend_Captcha_Base
 {
@@ -61,14 +61,14 @@ class Zend_Captcha_ReCaptcha extends Zend_Captcha_Base
      *
      * @var array
      */
-    protected $_serviceParams = array();
+    protected $_serviceParams = [];
 
     /**
      * Options defined by the service
      *
      * @var array
      */
-    protected $_serviceOptions = array();
+    protected $_serviceOptions = [];
 
     /**#@+
      * Error codes
@@ -82,11 +82,11 @@ class Zend_Captcha_ReCaptcha extends Zend_Captcha_Base
      * Error messages
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $_messageTemplates = [
         self::MISSING_VALUE => 'Missing captcha fields',
         self::ERR_CAPTCHA   => 'Failed to validate captcha',
         self::BAD_CAPTCHA   => 'Captcha value is wrong: %value%',
-    );
+    ];
 
     /**
      * Retrieve ReCaptcha Private key
@@ -135,8 +135,7 @@ class Zend_Captcha_ReCaptcha extends Zend_Captcha_Base
     /**
      * Constructor
      *
-     * @param  array|Zend_Config $options
-     * @return void
+     * @param array|Zend_Config $options
      */
     public function __construct($options = null)
     {
@@ -215,7 +214,8 @@ class Zend_Captcha_ReCaptcha extends Zend_Captcha_Base
      * Validate captcha
      *
      * @see    Zend_Validate_Interface::isValid()
-     * @param  mixed $value
+     * @param  mixed      $value
+     * @param  array|null $context
      * @return boolean
      */
     public function isValid($value, $context = null)
@@ -265,7 +265,7 @@ class Zend_Captcha_ReCaptcha extends Zend_Captcha_Base
         if ($element instanceof Zend_Form_Element) {
             $name = $element->getBelongsTo();
         }
-        return $this->getService()->getHTML($name);
+        return $this->getService()->getHtml($name);
     }
 
     /**

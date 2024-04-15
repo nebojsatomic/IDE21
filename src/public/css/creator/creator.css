@@ -136,8 +136,8 @@ input[type=submit]:hover{-moz-border-radius:5px;-webkit-border-radius:5px;backgr
 .pagback{text-decoration:none;background:transparent url(/images/interface/a_previous.png) no-repeat;padding-left:20px;cursor:pointer;color:#3d4752 }
 #rotate #tree div{margin-left:-15px;margin-right:0px;padding:0px;width:15px;height:15px;background-image:url(/images/treeview-default.gif);}
 
-#rotate #tree li.expandable div{background-position:-80px -2px;}
-#rotate #tree li.collapsable div{background-position:0px -111px;}
+/*#rotate #tree li.expandable div{background-position:-80px -2px;}
+#rotate #tree li.collapsable div{background-position:0px -111px;}*/
 #fragment-1 span {float: left;}
 #fragment-1 input {border-radius:5px;}
 #fragment-1 span.cl {clear:both;}

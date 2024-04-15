@@ -14,9 +14,9 @@
  *
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Alpha.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /**
@@ -31,7 +31,7 @@ require_once 'Zend/Locale.php';
 /**
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Filter_Alpha implements Zend_Filter_Interface
@@ -91,7 +91,7 @@ class Zend_Filter_Alpha implements Zend_Filter_Interface
         if (null === self::$_meansEnglishAlphabet) {
             $this->_locale = new Zend_Locale('auto');
             self::$_meansEnglishAlphabet = in_array($this->_locale->getLanguage(),
-                                                    array('ja', 'ko', 'zh')
+                                                    ['ja', 'ko', 'zh']
                                                     );
         }
 
@@ -111,7 +111,7 @@ class Zend_Filter_Alpha implements Zend_Filter_Interface
      * Sets the allowWhiteSpace option
      *
      * @param boolean $allowWhiteSpace
-     * @return Zend_Filter_Alpha Provides a fluent interface
+     * @return $this
      */
     public function setAllowWhiteSpace($allowWhiteSpace)
     {

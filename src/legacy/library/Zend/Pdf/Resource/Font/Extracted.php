@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Pdf
  * @subpackage Fonts
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Extracted.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 
@@ -32,7 +32,7 @@ require_once 'Zend/Pdf/Resource/Font.php';
  *
  * @package    Zend_Pdf
  * @subpackage Fonts
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Pdf_Resource_Font_Extracted extends Zend_Pdf_Resource_Font
@@ -74,7 +74,7 @@ class Zend_Pdf_Resource_Font_Extracted extends Zend_Pdf_Resource_Font
         switch ($fontDictionary->Subtype->value) {
             case 'Type0':
                 // Composite type 0 font
-                if (count($fontDictionary->DescendantFonts->items) != 1) {
+                if (count($fontDictionary->DescendantFonts->items) !== 1) {
                     // Multiple descendant fonts are not supported
                     require_once 'Zend/Pdf/Exception.php';
                     throw new Zend_Pdf_Exception(self::TYPE_NOT_SUPPORTED);

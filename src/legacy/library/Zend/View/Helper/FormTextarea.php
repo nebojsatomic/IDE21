@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: FormTextarea.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 
@@ -33,7 +33,7 @@ require_once 'Zend/View/Helper/FormElement.php';
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_View_Helper_FormTextarea extends Zend_View_Helper_FormElement
@@ -93,12 +93,10 @@ class Zend_View_Helper_FormTextarea extends Zend_View_Helper_FormElement
         }
 
         // build the element
-        $xhtml = '<textarea name="' . $this->view->escape($name) . '"'
+        return '<textarea name="' . $this->view->escape($name) . '"'
                 . ' id="' . $this->view->escape($id) . '"'
                 . $disabled
                 . $this->_htmlAttribs($attribs) . '>'
                 . $this->view->escape($value) . '</textarea>';
-
-        return $xhtml;
     }
 }

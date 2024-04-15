@@ -16,9 +16,9 @@
  * @category   Zend
  * @package    Zend_OpenId
  * @subpackage Zend_OpenId_Consumer
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: File.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /**
@@ -32,7 +32,7 @@ require_once "Zend/OpenId/Consumer/Storage.php";
  * @category   Zend
  * @package    Zend_OpenId
  * @subpackage Zend_OpenId_Consumer
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_OpenId_Consumer_Storage_File extends Zend_OpenId_Consumer_Storage
@@ -139,7 +139,7 @@ class Zend_OpenId_Consumer_Storage_File extends Zend_OpenId_Consumer_Storage
                 fclose($lock);
                 return false;
             }
-            $data = serialize(array($url, $handle, $macFunc, $secret, $expires));
+            $data = serialize([$url, $handle, $macFunc, $secret, $expires]);
             fwrite($f, $data);
             if (function_exists('symlink')) {
                 @unlink($name2);
@@ -344,7 +344,7 @@ class Zend_OpenId_Consumer_Storage_File extends Zend_OpenId_Consumer_Storage
                 fclose($lock);
                 return false;
             }
-            $data = serialize(array($id, $realId, $server, $version, $expires));
+            $data = serialize([$id, $realId, $server, $version, $expires]);
             fwrite($f, $data);
             fclose($f);
             fclose($lock);
