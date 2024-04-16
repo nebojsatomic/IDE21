@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Abstract.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 
@@ -39,11 +39,30 @@ require_once 'Zend/Db/Statement/Pdo.php';
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
 {
+    /**
+     * Transaction in BC mode for php >= 8 flag
+     * 
+     * Bring back behavior of PDO::rollback()/PDO::commit() 
+     * after an implicit commit like php before ver  8 
+     * (Don't throw PDOException with message 'There is no active transaction' )
+     * 
+     * @see https://github.com/php/php-src/commit/990bb34891c83d12c5129fd781893704f948f2f4
+     */
+    public static $isTransactionInBackwardCompatibleMode = true;
+    public static $isPdoStringifyFetchesBackwardCompatiblePhp8 = true;
+
+
+    /**
+     * PDO type.
+     *
+     * @var string
+     */
+    protected $_pdoType = null;
 
     /**
      * Default class name for a DB statement.
@@ -141,7 +160,17 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
              * @see Zend_Db_Adapter_Exception
              */
             require_once 'Zend/Db/Adapter/Exception.php';
-            throw new Zend_Db_Adapter_Exception($e->getMessage(), $e->getCode(), $e);
+
+            $message = $e->getMessage();
+            if ($e->getPrevious() !== null && preg_match('~^SQLSTATE\[HY000\] \[\d{1,4}\]\s$~', $message)) {
+                // See https://bugs.php.net/bug.php?id=76604
+                $message .= $e->getPrevious()->getMessage();
+            }
+
+            /**
+             * @see Zend_Db_Adapter_Exception
+             */
+            throw new Zend_Db_Adapter_Exception($message, $e->getCode(), $e);
         }
 
     }
@@ -215,10 +244,10 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
      *
      * @param string|Zend_Db_Select $sql The SQL statement with placeholders.
      * @param array $bind An array of data to bind to the placeholders.
-     * @return Zend_Db_Statement_Pdo
+     * @return PDOStatement|Zend_Db_Statement|Zend_Db_Statement_Interface
      * @throws Zend_Db_Adapter_Exception To re-throw PDOException.
      */
-    public function query($sql, $bind = array())
+    public function query($sql, $bind = [])
     {
         if (empty($bind) && $sql instanceof Zend_Db_Select) {
             $bind = $sql->getBind();
@@ -293,7 +322,7 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
             return $value;
         }
         $this->_connect();
-        return $this->_connection->quote($value);
+        return $this->_connection->quote((string) $value);
     }
 
     /**
@@ -311,6 +340,9 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
     protected function _commit()
     {
         $this->_connect();
+        if ( self::$isTransactionInBackwardCompatibleMode && !$this->_connection->inTransaction() ) {
+            return;
+        }
         $this->_connection->commit();
     }
 
@@ -319,6 +351,9 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
      */
     protected function _rollBack() {
         $this->_connect();
+        if ( self::$isTransactionInBackwardCompatibleMode && !$this->_connection->inTransaction() ) {
+            return;
+        }
         $this->_connection->rollBack();
     }
 
@@ -398,4 +433,3 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
         }
     }
 }
-

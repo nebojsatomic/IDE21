@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Service_ShortUrl
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: $
  */
@@ -29,7 +29,7 @@ require_once 'Zend/Service/ShortUrl/AbstractShortener.php';
  *
  * @category   Zend
  * @package    Zend_Service_ShortUrl
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_ShortUrl_IsGd extends Zend_Service_ShortUrl_AbstractShortener
@@ -78,7 +78,7 @@ class Zend_Service_ShortUrl_IsGd extends Zend_Service_ShortUrl_AbstractShortener
 
         $this->getHttpClient()->resetParameters(true);
         $this->getHttpClient()->setUri($shortenedUrl);
-        $this->getHttpClient()->setConfig(array('maxredirects' => 0));
+        $this->getHttpClient()->setConfig(['maxredirects' => 0]);
 
         $response = $this->getHttpClient()->request();
         if ($response->isError()) {

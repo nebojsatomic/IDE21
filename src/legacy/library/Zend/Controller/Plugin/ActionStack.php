@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Plugins
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,9 +32,9 @@ require_once 'Zend/Registry.php';
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Plugins
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: ActionStack.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
 {
@@ -51,12 +51,12 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
      * Valid keys for stack items
      * @var array
      */
-    protected $_validKeys = array(
+    protected $_validKeys = [
         'module',
         'controller',
         'action',
         'params'
-    );
+    ];
 
     /**
      * Flag to determine whether request parameters are cleared between actions, or whether new parameters
@@ -86,14 +86,14 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
             $key = $this->getRegistryKey();
         }
 
-        $registry[$key] = array();
+        $registry[$key] = [];
     }
 
     /**
      * Set registry object
      *
      * @param  Zend_Registry $registry
-     * @return Zend_Controller_Plugin_ActionStack
+     * @return $this
      */
     public function setRegistry(Zend_Registry $registry)
     {
@@ -125,7 +125,7 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
      * Set registry key
      *
      * @param  string $key
-     * @return Zend_Controller_Plugin_ActionStack
+     * @return $this
      */
     public function setRegistryKey($key)
     {
@@ -137,7 +137,7 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
      *  Set clearRequestParams flag
      *
      *  @param  bool $clearRequestParams
-     *  @return Zend_Controller_Plugin_ActionStack
+     *  @return $this
      */
     public function setClearRequestParams($clearRequestParams)
     {
@@ -163,15 +163,15 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
     public function getStack()
     {
         $registry = $this->getRegistry();
-        $stack    = $registry[$this->getRegistryKey()];
-        return $stack;
+
+        return $registry[$this->getRegistryKey()];
     }
 
     /**
      * Save stack to registry
      *
      * @param  array $stack
-     * @return Zend_Controller_Plugin_ActionStack
+     * @return $this
      */
     protected function _saveStack(array $stack)
     {
@@ -184,7 +184,7 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
      * Push an item onto the stack
      *
      * @param  Zend_Controller_Request_Abstract $next
-     * @return Zend_Controller_Plugin_ActionStack
+     * @return $this
      */
     public function pushStack(Zend_Controller_Request_Abstract $next)
     {

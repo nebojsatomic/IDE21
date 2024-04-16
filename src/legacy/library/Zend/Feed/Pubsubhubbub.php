@@ -14,9 +14,9 @@
  *
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Pubsubhubbub.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /**
@@ -47,7 +47,7 @@ require_once 'Zend/Feed/Abstract.php';
 /**
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Pubsubhubbub
@@ -147,7 +147,7 @@ class Zend_Feed_Pubsubhubbub
     public static function urlencode($string)
     {
         $rawencoded = rawurlencode($string);
-        $rfcencoded = str_replace('%7E', '~', $rawencoded);
-        return $rfcencoded;
+
+        return str_replace('%7E', '~', $rawencoded);
     }
 }

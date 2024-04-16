@@ -14,9 +14,9 @@
  *
  * @category   Zend
  * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Xml.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /**
@@ -32,7 +32,7 @@ require_once 'Zend/Config/Xml.php';
 /**
  * @category   Zend
  * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Config_Writer_Xml extends Zend_Config_Writer_FileAbstract
@@ -72,9 +72,7 @@ class Zend_Config_Writer_Xml extends Zend_Config_Writer_FileAbstract
         $dom = dom_import_simplexml($xml)->ownerDocument;
         $dom->formatOutput = true;
 
-        $xmlString = $dom->saveXML();
-
-        return $xmlString;
+        return $dom->saveXML();
     }
 
     /**

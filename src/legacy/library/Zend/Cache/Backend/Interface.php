@@ -15,16 +15,16 @@
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Backend
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Interface.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 
 /**
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Backend
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_Cache_Backend_Interface
@@ -67,7 +67,7 @@ interface Zend_Cache_Backend_Interface
      * @param  int   $specificLifetime If != false, set a specific lifetime for this cache record (null => infinite lifetime)
      * @return boolean true if no problem
      */
-    public function save($data, $id, $tags = array(), $specificLifetime = false);
+    public function save($data, $id, $tags = [], $specificLifetime = false);
 
     /**
      * Remove a cache record
@@ -94,6 +94,6 @@ interface Zend_Cache_Backend_Interface
      * @param  array  $tags Array of tags
      * @return boolean true if no problem
      */
-    public function clean($mode = Zend_Cache::CLEANING_MODE_ALL, $tags = array());
+    public function clean($mode = Zend_Cache::CLEANING_MODE_ALL, $tags = []);
 
 }

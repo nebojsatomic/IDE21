@@ -14,9 +14,9 @@
  *
  * @category   Zend
  * @package    Zend_Version
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Version.php 24483 2011-09-29 15:31:19Z matthew $
+ * @version    $Id$
  */
 
 /**
@@ -24,7 +24,7 @@
  *
  * @category   Zend
  * @package    Zend_Version
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 final class Zend_Version
@@ -32,7 +32,7 @@ final class Zend_Version
     /**
      * Zend Framework version identification - see compareVersion()
      */
-    const VERSION = '1.11.11';
+    const VERSION = '1.23.5';
 
     /**
      * The latest stable version Zend Framework available
@@ -69,10 +69,21 @@ final class Zend_Version
         if (null === self::$_latestVersion) {
             self::$_latestVersion = 'not available';
 
-            $handle = fopen('http://framework.zend.com/api/zf-version', 'r');
-            if (false !== $handle) {
-                self::$_latestVersion = stream_get_contents($handle);
-                fclose($handle);
+            $opts = [
+                'http' => [
+                    'method' => 'GET',
+                    'header' => [
+                        'User-Agent: PHP'
+                    ]
+                ]
+            ];
+            $context = stream_context_create($opts);
+            $content = file_get_contents('https://api.github.com/repos/Shardj/zf1-future/releases/latest', false, $context);
+
+            if (false !== $content) {
+                $releaseName = explode('-', json_decode($content, true)['name']);
+
+                self::$_latestVersion = array_pop($releaseName);
             }
         }
 

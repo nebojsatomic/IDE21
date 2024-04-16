@@ -14,9 +14,9 @@
  *
  * @category   Zend
  * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Ini.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /**
@@ -27,7 +27,7 @@ require_once 'Zend/Config/Writer/FileAbstract.php';
 /**
  * @category   Zend
  * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Config_Writer_Ini extends Zend_Config_Writer_FileAbstract
@@ -119,14 +119,14 @@ class Zend_Config_Writer_Ini extends Zend_Config_Writer_FileAbstract
      * Add a branch to an INI string recursively
      *
      * @param  Zend_Config $config
-     * @return void
+     * @return string
      */
-    protected function _addBranch(Zend_Config $config, $parents = array())
+    protected function _addBranch(Zend_Config $config, $parents = [])
     {
         $iniString = '';
 
         foreach ($config as $key => $value) {
-            $group = array_merge($parents, array($key));
+            $group = array_merge($parents, [$key]);
 
             if ($value instanceof Zend_Config) {
                 $iniString .= $this->_addBranch($value, $group);
@@ -167,13 +167,13 @@ class Zend_Config_Writer_Ini extends Zend_Config_Writer_FileAbstract
      * on the top of config.
      *
      * @see    http://framework.zend.com/issues/browse/ZF-6289
-     * @param  Zend_Config
+     * @param  Zend_Config $config
      * @return Zend_Config
      */
     protected function _sortRootElements(Zend_Config $config)
     {
         $configArray = $config->toArray();
-        $sections = array();
+        $sections = [];
 
         // remove sections from config array
         foreach ($configArray as $key => $value) {

@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Amf
  * @subpackage Parse
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: MysqlResult.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /**
@@ -26,7 +26,7 @@
  *
  * @package    Zend_Amf
  * @subpackage Parse
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Amf_Parse_Resource_MysqlResult
@@ -36,12 +36,12 @@ class Zend_Amf_Parse_Resource_MysqlResult
      *
      * Key => Value is Mysql type (exact string) => PHP type
      */
-    static public $fieldTypes = array(
+    static public $fieldTypes = [
         "int" => "int",
         "timestamp" => "int",
         "year" => "int",
         "real" => "float",
-    );
+    ];
     /**
      * Parse resource into array
      *
@@ -49,9 +49,9 @@ class Zend_Amf_Parse_Resource_MysqlResult
      * @return array
      */
     public function parse($resource) {
-        $result = array();
+        $result = [];
         $fieldcnt = mysql_num_fields($resource);
-        $fields_transform = array();
+        $fields_transform = [];
         for($i=0;$i<$fieldcnt;$i++) {
             $type = mysql_field_type($resource, $i);
             if(isset(self::$fieldTypes[$type])) {

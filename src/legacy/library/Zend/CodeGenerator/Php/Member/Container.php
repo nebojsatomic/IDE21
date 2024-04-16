@@ -15,22 +15,22 @@
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @subpackage PHP
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Container.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /**
  * @category   Zend
  * @package    Zend_CodeGenerator
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
 {
 
     /**#@+
-     * @param const string
+     * @var const string
      */
     const TYPE_PROPERTY = 'property';
     const TYPE_METHOD   = 'method';
@@ -49,7 +49,7 @@ class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
     public function __construct($type = self::TYPE_PROPERTY)
     {
         $this->_type = $type;
-        parent::__construct(array(), self::ARRAY_AS_PROPS);
+        parent::__construct([], self::ARRAY_AS_PROPS);
     }
 
 }

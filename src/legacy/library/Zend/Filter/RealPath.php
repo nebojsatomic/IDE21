@@ -14,9 +14,9 @@
  *
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: RealPath.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /**
@@ -27,7 +27,7 @@ require_once 'Zend/Filter/Interface.php';
 /**
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Filter_RealPath implements Zend_Filter_Interface
@@ -117,7 +117,7 @@ class Zend_Filter_RealPath implements Zend_Filter_Interface
             $path = getcwd() . DIRECTORY_SEPARATOR . $path;
         }
 
-        $stack = array();
+        $stack = [];
         $parts = explode(DIRECTORY_SEPARATOR, $path);
         foreach ($parts as $dir) {
             if (strlen($dir) && $dir !== '.') {

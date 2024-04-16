@@ -14,9 +14,9 @@
  *
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: CompressAbstract.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /**
@@ -29,11 +29,16 @@ require_once 'Zend/Filter/Compress/CompressInterface.php';
  *
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Filter_Compress_CompressAbstract implements Zend_Filter_Compress_CompressInterface
 {
+    /**
+     * @var mixed|array<string, mixed>
+     */
+    protected $_options;
+
     /**
      * Class constructor
      *
@@ -73,7 +78,7 @@ abstract class Zend_Filter_Compress_CompressAbstract implements Zend_Filter_Comp
      * Sets all or one option
      *
      * @param  array $options
-     * @return Zend_Filter_Compress_Bz2
+     * @return Zend_Filter_Compress_CompressAbstract
      */
     public function setOptions(array $options)
     {

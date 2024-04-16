@@ -14,9 +14,9 @@
  *
  * @category   Zend
  * @package    Zend_Oauth
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Token.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /** Zend_Oauth_Http_Utility */
@@ -25,7 +25,7 @@ require_once 'Zend/Oauth/Http/Utility.php';
 /**
  * @category   Zend
  * @package    Zend_Oauth
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Oauth_Token
@@ -43,7 +43,7 @@ abstract class Zend_Oauth_Token
      *
      * @var array
      */
-    protected $_params = array();
+    protected $_params = [];
 
     /**
      * OAuth response object
@@ -250,7 +250,7 @@ abstract class Zend_Oauth_Token
      */
     protected function _parseParameters(Zend_Http_Response $response)
     {
-        $params = array();
+        $params = [];
         $body   = $response->getBody();
         if (empty($body)) {
             return;
@@ -270,7 +270,7 @@ abstract class Zend_Oauth_Token
      */
     public function __sleep()
     {
-        return array('_params');
+        return ['_params'];
     }
 
     /**

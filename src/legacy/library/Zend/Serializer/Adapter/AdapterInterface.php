@@ -15,16 +15,16 @@
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: AdapterInterface.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /**
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_Serializer_Adapter_AdapterInterface
@@ -35,7 +35,7 @@ interface Zend_Serializer_Adapter_AdapterInterface
      * @param  array|Zend_Config $opts Serializer options
      * @return void
      */
-    public function __construct($opts = array());
+    public function __construct($opts = []);
 
     /**
      * Set serializer options
@@ -78,7 +78,7 @@ interface Zend_Serializer_Adapter_AdapterInterface
      * @return string
      * @throws Zend_Serializer_Exception
      */
-    public function serialize($value, array $options = array());
+    public function serialize($value, array $options = []);
 
     /**
      * Creates a PHP value from a stored representation.
@@ -88,5 +88,5 @@ interface Zend_Serializer_Adapter_AdapterInterface
      * @return mixed
      * @throws Zend_Serializer_Exception
      */
-    public function unserialize($serialized, array $options = array());
+    public function unserialize($serialized, array $options = []);
 }

@@ -15,9 +15,9 @@
  *
  * @category   Zend
  * @package    Zend_Db
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Db.php 24417 2011-08-28 10:15:47Z padraic $
+ * @version    $Id$
  */
 
 
@@ -26,7 +26,7 @@
  *
  * @category   Zend
  * @package    Zend_Db
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Db
@@ -196,7 +196,7 @@ class Zend_Db
      * @return Zend_Db_Adapter_Abstract
      * @throws Zend_Db_Exception
      */
-    public static function factory($adapter, $config = array())
+    public static function factory($adapter, $config = [])
     {
         if ($config instanceof Zend_Config) {
             $config = $config->toArray();

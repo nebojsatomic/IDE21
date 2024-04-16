@@ -891,7 +891,8 @@ class ViewController extends NetActionController
         if ($langCode == "") {//OVO MORA DA SE SKLONI!!!!!
             $langCode = "sr";
         }
-
+$Tvars = array();
+$build = array();
         $replaceThis = preg_match_all('/[{].+[}]/', $outputDB, $matches);
         foreach ($matches[0] as $part) {
 
@@ -986,7 +987,7 @@ class ViewController extends NetActionController
                  //if (@preg_match("/{language:flags}/", "{" . $build_[0] . ":flags}" )) {
                  if (@strstr( "{" . $build_[0] . ":flags}" , "{language:flags}")) {
 
-                        $langsEnabled = @NetActionController::getEnabledLanguages();
+                        $langsEnabled = NetActionController::getEnabledLanguages();
                         /*
                         $langQ = $db->fetchAll("SELECT * FROM languages WHERE enabled = '1'");
                         foreach ($langQ as $lang) {
@@ -1110,27 +1111,6 @@ class ViewController extends NetActionController
 
 
 
-                //EXTERN Joomla!!
-                 if (@preg_match("/extern:joomla/", "{" . $build_[0] . ":" . $build_[1])) {
-
-                    $folder = trim($build_[2], '""');
-                    $folder = trim($folder , "''");
-
-                    $type= trim($build_[2], '""');
-
-                    //print_r($menuQ );
-                    if (!empty($type)) {
-                        $output = ViewController::displayExternJoomla($type);
-                        $imageOut = "";
-
-                        $outputDB = str_replace('{extern:joomla:' . $build_[2] . $imageOut . '}', $output, $outputDB);
-
-                    } else {
-                        $outputDB = str_replace('{extern:joomla:' . $build_[2] . $imageOut . '}', '<b style="color:red;">{images:' . $build_[2] . '}Doesn\'t exist or it is empty!</b>', $outputDB);
-                    }
-
-
-                }
 
 
                  //MODULE 'FORM'
@@ -1220,6 +1200,7 @@ class ViewController extends NetActionController
         if (@count(@$build)) {
             foreach ($build as $build_){
                 @$pattern = $matches[$count];
+                $params = array();
                 /*
                  //BREADCRUMB HANDLE
                  //if (@preg_match("/{searchform}/", "{" . $build_[0] . "}" )) {
@@ -1234,16 +1215,20 @@ class ViewController extends NetActionController
                  //if liveblock encountered
                  if (@strstr( $build_[0] . ":" , "liveblock:")) {
                     $block = $build_[1];
-                    @$params = $build_[3];
+                    if( isset($build_[3]) ) $params = $build_[3];
 
                     $function = $build_[2];// . "(" . $params . ")";
 
 
-                    if($params != ""){//ako su dati parametri
-                        $idsOut = ':' . $build_[3];
-                    } else {
-                        $idsOut = '';
-                    }
+                    //if($params != ""){//ako su dati parametri
+                        if( isset($build_[3]) ) { 
+                            $idsOut = ':' . $build_[3];
+                        } else {
+                            $idsOut = '';
+                        }
+                    //} else {
+                    //    $idsOut = '';
+                    //}
 
                         //require_once 'UserController.php';
                         $ucwordsBlock = ucwords($block);
