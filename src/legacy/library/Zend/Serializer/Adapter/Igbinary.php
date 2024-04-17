@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Igbinary.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /** @see Zend_Serializer_Adapter_AdapterAbstract */
@@ -27,7 +27,7 @@ require_once 'Zend/Serializer/Adapter/AdapterAbstract.php';
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Serializer_Adapter_Igbinary extends Zend_Serializer_Adapter_AdapterAbstract
@@ -44,7 +44,7 @@ class Zend_Serializer_Adapter_Igbinary extends Zend_Serializer_Adapter_AdapterAb
      * @return void
      * @throws Zend_Serializer_Exception If igbinary extension is not present
      */
-    public function __construct($opts = array())
+    public function __construct($opts = [])
     {
         if (!extension_loaded('igbinary')) {
             require_once 'Zend/Serializer/Exception.php';
@@ -66,7 +66,7 @@ class Zend_Serializer_Adapter_Igbinary extends Zend_Serializer_Adapter_AdapterAb
      * @return string
      * @throws Zend_Serializer_Exception on igbinary error
      */
-    public function serialize($value, array $opts = array())
+    public function serialize($value, array $opts = [])
     {
         $ret = igbinary_serialize($value);
         if ($ret === false) {
@@ -85,7 +85,7 @@ class Zend_Serializer_Adapter_Igbinary extends Zend_Serializer_Adapter_AdapterAb
      * @return mixed
      * @throws Zend_Serializer_Exception on igbinary error
      */
-    public function unserialize($serialized, array $opts = array())
+    public function unserialize($serialized, array $opts = [])
     {
         $ret = igbinary_unserialize($serialized);
         if ($ret === null && $serialized !== self::$_serializedNull) {

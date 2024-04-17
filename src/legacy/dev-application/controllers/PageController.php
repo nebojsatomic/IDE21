@@ -90,9 +90,11 @@ class PageController extends NetActionController
 
         $db = Zend_Registry::get('db');
         $langs = NetActionController::getLanguages();
+
+        // IGNORE added to SQL because mariadb doesn't allow skipping the values for some columns, with IGNORE it inserts NULL in those columns and makes no error
         foreach ($langs as $lang) {
-            //$db->query("INSERT INTO pages_$langCode(title, alias, category, output) VALUES(?, ?, ?, ?)", array($title, $alias, $categoryId, $output));
-            $db->query("INSERT INTO pages_$lang(userId, title, alias, category, output, description, keywords, unbounded) VALUES(?, ?, ?, ?, ?, ?, ?, ?)", array($this->_sesija->userId, $title, $alias, $categoryId, $output, $description, $keywords, '0'));
+            //$db->query("INSERT IGNORE INTO pages_$langCode(title, alias, category, output) VALUES(?, ?, ?, ?)", array($title, $alias, $categoryId, $output));
+            $db->query("INSERT IGNORE INTO pages_$lang(userId, title, alias, category, output, description, keywords, unbounded) VALUES(?, ?, ?, ?, ?, ?, ?, ?)", array($this->_sesija->userId, $title, $alias, $categoryId, $output, $description, $keywords, '0'));
 
         }
     }
@@ -218,13 +220,13 @@ class PageController extends NetActionController
         //check if the page already exists in the table, and if it does, update, else insert new row
         $checkExistance = $db->fetchAll("SELECT * FROM pages_$langCode WHERE id = ?", array($pageID) );
         if(!empty($checkExistance) ){
-            $db->query("UPDATE pages_$langCode SET title = ?, image = ?, alias = ?, category = ?, output = ?, description = ?, keywords = ?, dateChanged = ? WHERE id = ?", array($title, $image, $alias, $categoryId, $output, $description, $keywords, time(), $pageID));
+            $db->query("UPDATE IGNORE pages_$langCode SET title = ?, image = ?, alias = ?, category = ?, output = ?, description = ?, keywords = ?, dateChanged = ? WHERE id = ?", array($title, $image, $alias, $categoryId, $output, $description, $keywords, time(), $pageID));
 
             //update category for all langs and cleaning cache
             $langs = NetActionController::getLanguages();
             $roles = $this->getRoles();
             foreach ($langs as $lang) {
-                $db->query("UPDATE pages_$lang SET  category = ? WHERE id = ?", array( $categoryId, $pageID));
+                $db->query("UPDATE IGNORE pages_$lang SET  category = ? WHERE id = ?", array( $categoryId, $pageID));
                 //cleaning cache
                 foreach($roles as $role){
                     $cache->remove('page'. $pageID . "_" . $lang . "_" . $role);
@@ -234,13 +236,13 @@ class PageController extends NetActionController
             //Ako je promena za sve jezike
             if($changePageInAllLangs == "yes"){
                 foreach ($langs as $lang) {
-                    $db->query("UPDATE pages_$lang SET output = ?, image = ?, dateChanged = ? WHERE id = ?", array($output, $image, time(), $pageID));
+                    $db->query("UPDATE IGNORE pages_$lang SET output = ?, image = ?, dateChanged = ? WHERE id = ?", array($output, $image, time(), $pageID));
                 }
             }
         } else {//page doesen't exist, insert
             $langs = NetActionController::getLanguages();
             foreach ($langs as $lang) {//do this task for each language
-                $db->query("INSERT INTO pages_$lang(userId, title, image, alias, category, output, description, keywords, unbounded, dateChanged) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array($this->_sesija->userId, $title, $image, $alias, $categoryId, $output, $description, $keywords, '0', time()) );
+                $db->query("INSERT IGNORE INTO pages_$lang(userId, title, image, alias, category, output, description, keywords, unbounded, dateChanged) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array($this->_sesija->userId, $title, $image, $alias, $categoryId, $output, $description, $keywords, '0', time()) );
             }
         }
         $this->compileCSSandJS();
@@ -417,7 +419,7 @@ class PageController extends NetActionController
     {
         // turn off layout and ViewRenderer
         $this->_helper->layout()->disableLayout();
-	      $this->_helper->viewRenderer->setNoRender();
+	    $this->_helper->viewRenderer->setNoRender();
 
         //get Languages
         $langs = NetActionController::getLanguages();
@@ -430,7 +432,7 @@ class PageController extends NetActionController
 
             //delete from pages of all langs
             foreach($langs as $lang){
-                $this->_db->query("UPDATE pages_$lang SET  published = ? WHERE id = ?", array( $publishedBool, $pageID));
+                $this->_db->query("UPDATE IGNORE pages_$lang SET  published = ? WHERE id = ?", array( $publishedBool, $pageID));
 
             }
             if($publishedBool == "1"){
@@ -469,7 +471,7 @@ class PageController extends NetActionController
             foreach($langs as $lang){
                 //set value for published to all selected items in manage all pages table
                 foreach($pidsArray as $item){
-                    $this->_db->query("UPDATE pages_$lang SET  published = ? WHERE id = ?", array( $publishedBool, $item));
+                    $this->_db->query("UPDATE IGNORE pages_$lang SET  published = ? WHERE id = ?", array( $publishedBool, $item));
                 }
             }
             if($publishedBool == "1"){
@@ -570,7 +572,7 @@ class PageController extends NetActionController
 
             //delete from pages of all langs
             foreach($langs as $lang){
-                $this->_db->query("UPDATE pages_$lang SET  check_access = ? WHERE id = ?", array( $accBool, $pageID));
+                $this->_db->query("UPDATE IGNORE pages_$lang SET  check_access = ? WHERE id = ?", array( $accBool, $pageID));
 
             }
             if($accBool == "1"){
@@ -605,7 +607,7 @@ class PageController extends NetActionController
             foreach($langs as $lang){
                 //set value for published to all selected items in manage all pages table
                 foreach($pidsArray as $item){
-                    $this->_db->query("UPDATE pages_$lang SET  check_access = ? WHERE id = ?", array( $publishedBool, $item));
+                    $this->_db->query("UPDATE IGNORE pages_$lang SET  check_access = ? WHERE id = ?", array( $publishedBool, $item));
                 }
             }
             if($publishedBool == "1"){
@@ -647,12 +649,12 @@ class PageController extends NetActionController
 
             //set homepage  0 where was set 1 until now
             foreach($langs as $lang){
-                $this->_db->query("UPDATE pages_$lang SET  homepage = '0' WHERE homepage = '1'");
+                $this->_db->query("UPDATE IGNORE pages_$lang SET  homepage = '0' WHERE homepage = '1'");
 
             }
             //set homepage  pages of all langs
             foreach($langs as $lang){
-                $this->_db->query("UPDATE pages_$lang SET  homepage = '1' WHERE id = ?", array($pageID));
+                $this->_db->query("UPDATE IGNORE pages_$lang SET  homepage = '1' WHERE id = ?", array($pageID));
 
             }
             //clean cache
@@ -692,7 +694,7 @@ class PageController extends NetActionController
                 //delete from templates of all langs
                 $this->_db->query("DELETE FROM templates_$lang WHERE id = ?", array($tempID));
                 //update pages with this template id to default template
-                $this->_db->query("UPDATE pages_$lang SET template_id = ? WHERE template_id  = ?", array($defaultTempl[0]['id'], $tempID));
+                $this->_db->query("UPDATE IGNORE pages_$lang SET template_id = ? WHERE template_id  = ?", array($defaultTempl[0]['id'], $tempID));
             }
             //$this->_db->query("DELETE FROM menu_items WHERE content_id = ?", array($pageID));
 
@@ -727,8 +729,8 @@ class PageController extends NetActionController
         //FOR each language insert template
         $langs = NetActionController::getLanguages();
         foreach ($langs as $lang) {
-            //$db->query("INSERT INTO templates_$langCode(title, alias, output) VALUES(?, ?, ?)", array($title, $alias, $output));
-            $db->query("INSERT INTO templates_$lang(userId, title, alias, output) VALUES(?, ?, ?, ?)", array($this->_sesija->userId, $title, $alias, $output));
+            //$db->query("INSERT IGNORE INTO templates_$langCode(title, alias, output) VALUES(?, ?, ?)", array($title, $alias, $output));
+            $db->query("INSERT IGNORE INTO templates_$lang(userId, title, alias, output) VALUES(?, ?, ?, ?)", array($this->_sesija->userId, $title, $alias, $output));
         }
     }
 
@@ -739,12 +741,11 @@ class PageController extends NetActionController
     {
         // turn off layout and ViewRenderer
         $this->_helper->layout()->disableLayout();
-	      $this->_helper->viewRenderer->setNoRender();
+	    $this->_helper->viewRenderer->setNoRender();
 
         $values = $this->_request->getParams();
         $langCode = $this->_sesija->langAdmin;
 
-        //print_r($values);
         $title = $values['templateTitleC'];
         $alias = strtolower( str_replace(" ", "-", $values['templateTitleC']) );
         $alias = str_replace(".", "", $alias);//remove dots
@@ -754,7 +755,6 @@ class PageController extends NetActionController
         $bodybg = $values['templateBodyBgC'];
         $templateID = $values['templateId'];
         $defaultTemplate = $values['templateDefaultC'];
-        //$templateID = "8";
 
         @$categoryId = $values['templateCategoryC'];
 
@@ -763,24 +763,24 @@ class PageController extends NetActionController
         $db = Zend_Registry::get('db');
         if($defaultTemplate == true){
             foreach ($langs as $lang) {
-                $db->query("UPDATE templates_$lang SET defaultTemplate = '0'");
-                $db->query("UPDATE templates_$lang SET defaultTemplate = '1' WHERE id = ?", array($templateID));
+                $db->query("UPDATE IGNORE templates_$lang SET defaultTemplate = '0'");
+                $db->query("UPDATE IGNORE templates_$lang SET defaultTemplate = '1' WHERE id = ?", array($templateID));
             }
 
         }
 
-        $db->query("UPDATE templates_$langCode SET title = ?, alias = ?, category = ?, output = ? WHERE id = ?", array($title, $alias, $categoryId, $output, $templateID));
+        $db->query("UPDATE IGNORE templates_$langCode SET title = ?, alias = ?, category = ?, output = ? WHERE id = ?", array($title, $alias, $categoryId, $output, $templateID));
 
         //Ako je promena za sve jezike
         $changeTemplateInAllLangs = $values['applytoall'];//if update should affect all languages
 
         if($changeTemplateInAllLangs == "yes"){
             foreach ($langs as $lang) {
-                $db->query("UPDATE templates_$lang SET output = ? WHERE id = ?", array($output,$templateID));
+                $db->query("UPDATE IGNORE templates_$lang SET output = ? WHERE id = ?", array($output,$templateID));
             }
         }
         foreach ($langs as $lang) {
-            $db->query("UPDATE templates_$lang SET bodyBg = ? WHERE id = ?", array($bodybg, $templateID));
+            $db->query("UPDATE IGNORE templates_$lang SET bodyBg = ? WHERE id = ?", array($bodybg, $templateID));
         }
         //clean the cache
         $this->_cachedPages->clean(Zend_Cache::CLEANING_MODE_ALL);
@@ -799,13 +799,10 @@ class PageController extends NetActionController
 
         if ($this->_request->isPost() && $form->isValid($_POST)) {
             $values = $this->_request->getParams();
-            //print_r($values);
 
         } else {
             $this->view->form = $form->render();
         }
-
-
 
     }
 
@@ -820,14 +817,10 @@ class PageController extends NetActionController
 
         if ($this->_request->isPost() && $form->isValid($_POST)) {
             $values = $this->_request->getParams();
-            //print_r($values);
 
         } else {
             $this->view->form = $form->render();
         }
-
-
-
     }
 
     /**
@@ -844,12 +837,12 @@ class PageController extends NetActionController
 
         // turn off layout and ViewRenderer
         $this->_helper->layout()->disableLayout();
-	      $this->_helper->viewRenderer->setNoRender();
-        //echo "ja";
+	    $this->_helper->viewRenderer->setNoRender();
+
         $langs = NetActionController::getLanguages();
 
         foreach ($langs as $lang) {
-            $db->query("UPDATE pages_$lang SET template_id = ? WHERE id = ?", array($templateId, $pageId));
+            $db->query("UPDATE IGNORE pages_$lang SET template_id = ? WHERE id = ?", array($templateId, $pageId));
         }
         //clean cache
         $this->cleanCache();
@@ -863,7 +856,7 @@ class PageController extends NetActionController
     public function openAction()
     {
         $this->_helper->layout()->disableLayout();
-	      $this->_helper->viewRenderer->setNoRender();
+	    $this->_helper->viewRenderer->setNoRender();
         $langCode = $this->_sesija->langAdmin ;
 
         $db = Zend_Registry::get('db');
@@ -1124,7 +1117,7 @@ class PageController extends NetActionController
             //print_r($xml);
             $langs = NetActionController::getLanguages();
             foreach ($langs as $lang) {
-                $db->query("INSERT INTO templates_$lang(userId, title, output, bodyBg, staticFiles) VALUES(?, ?, ?, ?, ?)", array($this->_sesija->userId, $xml->title,  $xml->output, $xml->bodyBg,  $xml->staticFiles));
+                $db->query("INSERT IGNORE INTO templates_$lang(userId, title, output, bodyBg, staticFiles) VALUES(?, ?, ?, ?, ?)", array($this->_sesija->userId, $xml->title,  $xml->output, $xml->bodyBg,  $xml->staticFiles));
 
             }
             echo 'Template installed!';
@@ -1278,7 +1271,7 @@ class PageController extends NetActionController
                         if($value == 1){//only if allow - insert into db
                             $rolesAllowed .= $roleName . ", ";
                             $this->_db->query("DELETE FROM access_rules WHERE  roleId = ? and resource = ?", array($roleForInsert, $resource));//first delete if this entry exists
-                            $this->_db->query("INSERT INTO access_rules(roleId, resource, rule) VALUES(?, ?, ?)", array($roleForInsert, $resource, 'allow'));//and then insert
+                            $this->_db->query("INSERT IGNORE INTO access_rules(roleId, resource, rule) VALUES(?, ?, ?)", array($roleForInsert, $resource, 'allow'));//and then insert
                         }else {
                             $this->_db->query("DELETE FROM access_rules WHERE  roleId = ? and resource = ?", array($roleForInsert, $resource));//delete if deny (not checked)
                         }

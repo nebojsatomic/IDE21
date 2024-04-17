@@ -1,15 +1,16 @@
 version: '3'
 services:
     web: &web
-        #build: .
-        image: registry.gitlab.com/nebojsatomic/ide21:demo
+        build: .
+        #image: registry.gitlab.com/nebojsatomic/ide21:demo
+        image: web
         #pull_policy: always
         ports:
             - '${APP_PORT:-80}:80'
             - '${APP_PORT_HTTPS:-443}:443'
         volumes:
-            #- ./src:/var/www/html
-            - 'ide21src:/var/www/html'
+            #- ./src:/var/www/html # uncomment this if you want to use src folder inside running container, development use 
+            - 'ide21src:/var/www/html' #otherwise use named volume, for production use
         #user: ${CURRENT_UID}
         networks:
             - cmside2

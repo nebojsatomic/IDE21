@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Pdf
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: Style.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
@@ -31,6 +31,9 @@ require_once 'Zend/Pdf/Element/Name.php';
 require_once 'Zend/Pdf/Element/Null.php';
 require_once 'Zend/Pdf/Element/Numeric.php';
 require_once 'Zend/Pdf/Element/String.php';
+require_once 'Zend/Pdf/Resource/GraphicsState.php';
+require_once 'Zend/Pdf/Resource/Font.php';
+require_once 'Zend/Pdf/Resource/Image.php';
 
 
 /**
@@ -38,11 +41,18 @@ require_once 'Zend/Pdf/Element/String.php';
  * page object at specified place.
  *
  * @package    Zend_Pdf
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Pdf_Canvas_Abstract implements Zend_Pdf_Canvas_Interface
 {
+    /**
+     * Page dictionary (refers to an indirect Zend_Pdf_Element_Dictionary object).
+     *
+     * @var Zend_Pdf_Element_Reference|Zend_Pdf_Element_Object
+     */
+    protected $_dictionary;
+
     /**
      * Drawing instructions
      *
@@ -218,7 +228,7 @@ abstract class Zend_Pdf_Canvas_Abstract implements Zend_Pdf_Canvas_Interface
 
         require_once 'Zend/Pdf/Page.php';
         if ($pattern === Zend_Pdf_Page::LINE_DASHING_SOLID) {
-            $pattern = array();
+            $pattern = [];
             $phase   = 0;
         }
 
@@ -432,8 +442,13 @@ abstract class Zend_Pdf_Canvas_Abstract implements Zend_Pdf_Canvas_Interface
         $yC = new Zend_Pdf_Element_Numeric($y);
 
         if ($startAngle !== null) {
-            if ($startAngle != 0) { $startAngle = fmod($startAngle, M_PI*2); }
-            if ($endAngle   != 0) { $endAngle   = fmod($endAngle,   M_PI*2); }
+            if ($startAngle != 0) {
+                $startAngle = fmod($startAngle, M_PI*2);
+            }
+
+            if ($endAngle != 0) {
+                $endAngle = fmod($endAngle,   M_PI*2);
+            }
 
             if ($startAngle > $endAngle) {
                 $endAngle += M_PI*2;
@@ -643,8 +658,13 @@ abstract class Zend_Pdf_Canvas_Abstract implements Zend_Pdf_Canvas_Interface
         $yC = new Zend_Pdf_Element_Numeric($y);
 
         if ($startAngle !== null) {
-            if ($startAngle != 0) { $startAngle = fmod($startAngle, M_PI*2); }
-            if ($endAngle   != 0) { $endAngle   = fmod($endAngle,   M_PI*2); }
+            if ($startAngle != 0) {
+                $startAngle = fmod($startAngle, M_PI * 2);
+            }
+
+            if ($endAngle != 0) {
+                $endAngle = fmod($endAngle, M_PI * 2);
+            }
 
             if ($startAngle > $endAngle) {
                 $endAngle += M_PI*2;
@@ -910,7 +930,7 @@ abstract class Zend_Pdf_Canvas_Abstract implements Zend_Pdf_Canvas_Interface
         $this->_addProcSet('PDF');
 
         if(!is_array($radius)) {
-            $radius = array($radius, $radius, $radius, $radius);
+            $radius = [$radius, $radius, $radius, $radius];
         } else {
             for ($i = 0; $i < 4; $i++) {
                 if(!isset($radius[$i])) {

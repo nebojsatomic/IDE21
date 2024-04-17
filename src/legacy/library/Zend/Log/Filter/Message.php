@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Filter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Message.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /** Zend_Log_Filter_Abstract */
@@ -27,9 +27,9 @@ require_once 'Zend/Log/Filter/Abstract.php';
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Filter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Message.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 class Zend_Log_Filter_Message extends Zend_Log_Filter_Abstract
 {
@@ -63,9 +63,9 @@ class Zend_Log_Filter_Message extends Zend_Log_Filter_Abstract
     static public function factory($config)
     {
         $config = self::_parseConfig($config);
-        $config = array_merge(array(
+        $config = array_merge([
             'regexp' => null
-        ), $config);
+        ], $config);
 
         return new self(
             $config['regexp']

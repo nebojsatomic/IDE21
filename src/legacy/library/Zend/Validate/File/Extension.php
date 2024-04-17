@@ -14,9 +14,9 @@
  *
  * @category  Zend
  * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id: Extension.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version   $Id$
  */
 
 /**
@@ -29,7 +29,7 @@ require_once 'Zend/Validate/Abstract.php';
  *
  * @category  Zend
  * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_File_Extension extends Zend_Validate_Abstract
@@ -43,10 +43,10 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected $_messageTemplates = [
         self::FALSE_EXTENSION => "File '%value%' has a false extension",
         self::NOT_FOUND       => "File '%value%' is not readable or does not exist",
-    );
+    ];
 
     /**
      * Internal list of extensions
@@ -64,15 +64,14 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
     /**
      * @var array Error message template variables
      */
-    protected $_messageVariables = array(
+    protected $_messageVariables = [
         'extension' => '_extension'
-    );
+    ];
 
     /**
      * Sets validator options
      *
-     * @param  string|array|Zend_Config $options
-     * @return void
+     * @param string|array|Zend_Config $options
      */
     public function __construct($options)
     {
@@ -85,7 +84,7 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
             $this->setCase($case);
         }
 
-        if (is_array($options) and isset($options['case'])) {
+        if (is_array($options) && isset($options['case'])) {
             $this->setCase($options['case']);
             unset($options['case']);
         }
@@ -107,7 +106,7 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
      * Sets the case to use
      *
      * @param  boolean $case
-     * @return Zend_Validate_File_Extension Provides a fluent interface
+     * @return $this
      */
     public function setCase($case)
     {
@@ -122,20 +121,20 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
      */
     public function getExtension()
     {
-        $extension = explode(',', $this->_extension);
-
-        return $extension;
+        return empty($this->_extension) === FALSE
+            ? explode(',', $this->_extension)
+            : [];
     }
 
     /**
      * Sets the file extensions
      *
      * @param  string|array $extension The extensions to validate
-     * @return Zend_Validate_File_Extension Provides a fluent interface
+     * @return $this
      */
     public function setExtension($extension)
     {
-        $this->_extension = null;
+        $this->_extension = '';
         $this->addExtension($extension);
         return $this;
     }
@@ -144,7 +143,7 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
      * Adds the file extensions
      *
      * @param  string|array $extension The extensions to add for validation
-     * @return Zend_Validate_File_Extension Provides a fluent interface
+     * @return $this
      */
     public function addExtension($extension)
     {
@@ -196,6 +195,12 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
             $info['extension'] = substr($file['name'], strrpos($file['name'], '.') + 1);
         } else {
             $info = pathinfo($value);
+            if (!array_key_exists('extension', $info)) {
+                // From the manual at http://php.net/pathinfo:
+                // "If the path does not have an extension, no extension element
+                // will be returned (see second example below)."
+                return false;
+            }
         }
 
         $extensions = $this->getExtension();

@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Backend
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: TwoLevels.php 24254 2011-07-22 12:04:41Z mabe $
+ * @version    $Id$
  */
 
 
@@ -35,7 +35,7 @@ require_once 'Zend/Cache/Backend.php';
 /**
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Backend
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -72,23 +72,29 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
      * =====> (boolean) fast_backend_autoload :
      * - See Zend_Cache::factory() method
      *
+     * =====> (boolean) auto_fill_fast_cache
+     * - If true, automatically fill the fast cache when a cache record was not found in fast cache, but did
+     *   exist in slow cache. This can be usefull when a non-persistent cache like APC or Memcached got
+     *   purged for whatever reason.
+     *
      * =====> (boolean) auto_refresh_fast_cache
      * - If true, auto refresh the fast cache when a cache record is hit
      *
      * @var array available options
      */
-    protected $_options = array(
+    protected $_options = [
         'slow_backend' => 'File',
         'fast_backend' => 'Apc',
-        'slow_backend_options' => array(),
-        'fast_backend_options' => array(),
+        'slow_backend_options' => [],
+        'fast_backend_options' => [],
         'stats_update_factor' => 10,
         'slow_backend_custom_naming' => false,
         'fast_backend_custom_naming' => false,
         'slow_backend_autoload' => false,
         'fast_backend_autoload' => false,
+        'auto_fill_fast_cache' => true,
         'auto_refresh_fast_cache' => true
-    );
+    ];
 
     /**
      * Slow Backend
@@ -118,7 +124,7 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
      * @throws Zend_Cache_Exception
      * @return void
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         parent::__construct($options);
 
@@ -187,25 +193,34 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
      * @param  int   $priority         integer between 0 (very low priority) and 10 (maximum priority) used by some particular backends
      * @return boolean true if no problem
      */
-    public function save($data, $id, $tags = array(), $specificLifetime = false, $priority = 8)
+    public function save($data, $id, $tags = [], $specificLifetime = false, $priority = 8)
     {
+        $this->_log('Calling two level save', Zend_Log::DEBUG);
         $usage = $this->_getFastFillingPercentage('saving');
+        $this->_log('Fast filling usage percentage on save: (' . gettype($usage) . ') ' . var_export($usage, true), Zend_Log::DEBUG);
         $boolFast = true;
         $lifetime = $this->getLifetime($specificLifetime);
         $preparedData = $this->_prepareData($data, $lifetime, $priority);
         if (($priority > 0) && (10 * $priority >= $usage)) {
+            $this->_log('Saving in fast and slow cache', Zend_Log::DEBUG);
             $fastLifetime = $this->_getFastLifetime($lifetime, $priority);
-            $boolFast = $this->_fastBackend->save($preparedData, $id, array(), $fastLifetime);
+            $boolFast = $this->_fastBackend->save($preparedData, $id, [], $fastLifetime);
+            $this->_log($boolFast ? 'Saving in fast cache is OK' : 'Saving in fast cache is not OK', Zend_Log::DEBUG);
             $boolSlow = $this->_slowBackend->save($preparedData, $id, $tags, $lifetime);
+            $this->_log($boolSlow ? 'Saving in slow cache is OK' : 'Saving in slow cache is not OK', Zend_Log::DEBUG);
         } else {
+            $this->_log('Saving in slow cache only', Zend_Log::DEBUG);
             $boolSlow = $this->_slowBackend->save($preparedData, $id, $tags, $lifetime);
+            $this->_log($boolSlow ? 'Saving in slow cache is OK' : 'Saving in slow cache is not OK', Zend_Log::DEBUG);
             if ($boolSlow === true) {
+                $this->_log('Purging from fast cache on save', Zend_Log::DEBUG);
                 $boolFast = $this->_fastBackend->remove($id);
                 if (!$boolFast && !$this->_fastBackend->test($id)) {
                     // some backends return false on remove() even if the key never existed. (and it won't if fast is full)
                     // all we care about is that the key doesn't exist now
                     $boolFast = true;
                 }
+                $this->_log($boolFast ? 'Successfully purged from fast cache on save' : 'Failed to purge from fast cache on save', Zend_Log::DEBUG);
             }
         }
 
@@ -223,17 +238,41 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
      */
     public function load($id, $doNotTestCacheValidity = false)
     {
-        $res = $this->_fastBackend->load($id, $doNotTestCacheValidity);
-        if ($res === false) {
-            $res = $this->_slowBackend->load($id, $doNotTestCacheValidity);
-            if ($res === false) {
+        $this->_log('Calling two level load', Zend_Log::DEBUG);
+        $resultFast = $this->_fastBackend->load($id, $doNotTestCacheValidity);
+        $array = null;
+        $isFastResult = is_string($resultFast);
+        if ($isFastResult) {
+            $array = unserialize($resultFast, ['allowed_classes' => false]);
+        }
+        if (!is_array($array)) {
+            if ($isFastResult) {
+                // If the fast result data is not an array, it means it got corrupted somehow at rest.
+                // Remove it before trying the slow one.
+                $this->_fastBackend->remove($id);
+            }
+            $resultSlow = $this->_slowBackend->load($id, $doNotTestCacheValidity);
+            if (!is_string($resultSlow)) {
                 // there is no cache at all for this id
                 return false;
             }
+            $array = unserialize($resultSlow, ['allowed_classes' => false]);
+            if (!is_array($array)) {
+                // If the slow result data is not an array, it means it got corrupted somehow at rest.
+                // Remove it and return false.
+                $this->_slowBackend->remove($id);
+                return false;
+            }
+            $isFastResult = false;
         }
-        $array = unserialize($res);
+
+        //In case no cache entry was found in the FastCache (or was corrupted) and auto-filling is enabled, copy data to FastCache
+        if (!$isFastResult && $this->_options['auto_fill_fast_cache']) {
+            $preparedData = $this->_prepareData($array['data'], $array['lifetime'], $array['priority']);
+            $this->_fastBackend->save($preparedData, $id, [], $array['lifetime']);
+        }
         // maybe, we have to refresh the fast cache ?
-        if ($this->_options['auto_refresh_fast_cache']) {
+        elseif ($this->_options['auto_refresh_fast_cache']) {
             if ($array['priority'] == 10) {
                 // no need to refresh the fast cache with priority = 10
                 return $array['data'];
@@ -244,7 +283,7 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
             if (($array['priority'] > 0) && (10 * $array['priority'] >= $usage)) {
                 // we can refresh the fast cache
                 $preparedData = $this->_prepareData($array['data'], $array['lifetime'], $array['priority']);
-                $this->_fastBackend->save($preparedData, $id, array(), $newFastLifetime);
+                $this->_fastBackend->save($preparedData, $id, [], $newFastLifetime);
             }
         }
         return $array['data'];
@@ -281,7 +320,7 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
      * @throws Zend_Cache_Exception
      * @return boolean true if no problem
      */
-    public function clean($mode = Zend_Cache::CLEANING_MODE_ALL, $tags = array())
+    public function clean($mode = Zend_Cache::CLEANING_MODE_ALL, $tags = [])
     {
         switch($mode) {
             case Zend_Cache::CLEANING_MODE_ALL:
@@ -352,7 +391,7 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
      * @param array $tags array of tags
      * @return array array of matching cache ids (string)
      */
-    public function getIdsMatchingTags($tags = array())
+    public function getIdsMatchingTags($tags = [])
     {
         return $this->_slowBackend->getIdsMatchingTags($tags);
     }
@@ -365,7 +404,7 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
      * @param array $tags array of tags
      * @return array array of not matching cache ids (string)
      */
-    public function getIdsNotMatchingTags($tags = array())
+    public function getIdsNotMatchingTags($tags = [])
     {
         return $this->_slowBackend->getIdsNotMatchingTags($tags);
     }
@@ -378,7 +417,7 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
      * @param array $tags array of tags
      * @return array array of any matching cache ids (string)
      */
-    public function getIdsMatchingAnyTags($tags = array())
+    public function getIdsMatchingAnyTags($tags = [])
     {
         return $this->_slowBackend->getIdsMatchingAnyTags($tags);
     }
@@ -438,18 +477,18 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
     public function getCapabilities()
     {
         $slowBackendCapabilities = $this->_slowBackend->getCapabilities();
-        return array(
+        return [
             'automatic_cleaning' => $slowBackendCapabilities['automatic_cleaning'],
             'tags' => $slowBackendCapabilities['tags'],
             'expired_read' => $slowBackendCapabilities['expired_read'],
             'priority' => $slowBackendCapabilities['priority'],
             'infinite_lifetime' => $slowBackendCapabilities['infinite_lifetime'],
             'get_list' => $slowBackendCapabilities['get_list']
-        );
+        ];
     }
 
     /**
-     * Prepare a serialized array to store datas and metadatas informations
+     * Prepare a serialized array to store data and metadata information
      *
      * @param string $data data to store
      * @param int $lifetime original lifetime
@@ -462,12 +501,12 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
         if ($lt === null) {
             $lt = 9999999999;
         }
-        return serialize(array(
+        return serialize([
             'data' => $data,
             'lifetime' => $lifetime,
             'expire' => time() + $lt,
             'priority' => $priority
-        ));
+        ]);
     }
 
     /**
@@ -512,13 +551,14 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
     private function _getFastFillingPercentage($mode)
     {
 
-        if ($mode == 'saving') {
+        if ($mode === 'saving') {
             // mode saving
             if ($this->_fastBackendFillingPercentage === null) {
                 $this->_fastBackendFillingPercentage = $this->_fastBackend->getFillingPercentage();
             } else {
                 $rand = rand(1, $this->_options['stats_update_factor']);
-                if ($rand == 1) {
+
+                if ($rand === 1) {
                     // we force a refresh
                     $this->_fastBackendFillingPercentage = $this->_fastBackend->getFillingPercentage();
                 }

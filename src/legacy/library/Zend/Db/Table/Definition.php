@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Table
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Definition.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /**
@@ -26,7 +26,7 @@
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Table
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Db_Table_Definition
@@ -35,7 +35,7 @@ class Zend_Db_Table_Definition
     /**
      * @var array
      */
-    protected $_tableConfigs = array();
+    protected $_tableConfigs = [];
 
     /**
      * __construct()
@@ -55,7 +55,7 @@ class Zend_Db_Table_Definition
      * setConfig()
      *
      * @param Zend_Config $config
-     * @return Zend_Db_Table_Definition
+     * @return $this
      */
     public function setConfig(Zend_Config $config)
     {
@@ -67,7 +67,7 @@ class Zend_Db_Table_Definition
      * setOptions()
      *
      * @param array $options
-     * @return Zend_Db_Table_Definition
+     * @return $this
      */
     public function setOptions(Array $options)
     {
@@ -80,7 +80,7 @@ class Zend_Db_Table_Definition
     /**
      * @param string $tableName
      * @param array  $tableConfig
-     * @return Zend_Db_Table_Definition
+     * @return $this
      */
     public function setTableConfig($tableName, array $tableConfig)
     {

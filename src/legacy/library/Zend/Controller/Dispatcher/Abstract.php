@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Dispatcher
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Abstract.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /** Zend_Controller_Dispatcher_Interface */
@@ -27,7 +27,7 @@ require_once 'Zend/Controller/Dispatcher/Interface.php';
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Dispatcher
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Dispatcher_Interface
@@ -61,7 +61,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      * controllers
      * @var array
      */
-    protected $_invokeParams = array();
+    protected $_invokeParams = [];
 
     /**
      * Path delimiter character
@@ -79,14 +79,14 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      * Word delimiter characters
      * @var array
      */
-    protected $_wordDelimiter = array('-', '.');
+    protected $_wordDelimiter = ['-', '.'];
 
     /**
      * Constructor
      *
      * @return void
      */
-    public function __construct(array $params = array())
+    public function __construct(array $params = [])
     {
         $this->setParams($params);
     }
@@ -173,7 +173,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      * single string or an array of strings.
      *
      * @param string|array $spec
-     * @return Zend_Controller_Dispatcher_Abstract
+     * @return $this
      */
     public function setWordDelimiter($spec)
     {
@@ -187,7 +187,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      * Retrieve the path delimiter character(s) used in
      * controller names
      *
-     * @return array
+     * @return string
      */
     public function getPathDelimiter()
     {
@@ -201,7 +201,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      * an array of strings.
      *
      * @param string $spec
-     * @return Zend_Controller_Dispatcher_Abstract
+     * @return $this
      */
     public function setPathDelimiter($spec)
     {
@@ -231,7 +231,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
     {
         // preserve directories
         if (!$isAction) {
-            $segments = explode($this->getPathDelimiter(), $unformatted);
+            $segments = explode($this->getPathDelimiter(), (string) $unformatted);
         } else {
             $segments = (array) $unformatted;
         }
@@ -264,7 +264,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      * Set front controller instance
      *
      * @param Zend_Controller_Front $controller
-     * @return Zend_Controller_Dispatcher_Abstract
+     * @return $this
      */
     public function setFrontController(Zend_Controller_Front $controller)
     {
@@ -277,7 +277,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      *
      * @param string $name
      * @param mixed $value
-     * @return Zend_Controller_Dispatcher_Abstract
+     * @return $this
      */
     public function setParam($name, $value)
     {
@@ -290,7 +290,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      * Set parameters to pass to action controller constructors
      *
      * @param array $params
-     * @return Zend_Controller_Dispatcher_Abstract
+     * @return $this
      */
     public function setParams(array $params)
     {
@@ -330,13 +330,13 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      * only that parameter; if an array of parameter names is provided, clears
      * each.
      *
-     * @param null|string|array single key or array of keys for params to clear
-     * @return Zend_Controller_Dispatcher_Abstract
+     * @param null|string|array $name single key or array of keys for params to clear
+     * @return $this
      */
     public function clearParams($name = null)
     {
         if (null === $name) {
-            $this->_invokeParams = array();
+            $this->_invokeParams = [];
         } elseif (is_string($name) && isset($this->_invokeParams[$name])) {
             unset($this->_invokeParams[$name]);
         } elseif (is_array($name)) {
@@ -354,7 +354,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      * Set response object to pass to action controllers
      *
      * @param Zend_Controller_Response_Abstract|null $response
-     * @return Zend_Controller_Dispatcher_Abstract
+     * @return $this
      */
     public function setResponse(Zend_Controller_Response_Abstract $response = null)
     {
@@ -376,7 +376,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      * Set the default controller (minus any formatting)
      *
      * @param string $controller
-     * @return Zend_Controller_Dispatcher_Abstract
+     * @return $this
      */
     public function setDefaultControllerName($controller)
     {
@@ -398,7 +398,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      * Set the default action (minus any formatting)
      *
      * @param string $action
-     * @return Zend_Controller_Dispatcher_Abstract
+     * @return $this
      */
     public function setDefaultAction($action)
     {
@@ -420,7 +420,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      * Set the default module
      *
      * @param string $module
-     * @return Zend_Controller_Dispatcher_Abstract
+     * @return $this
      */
     public function setDefaultModule($module)
     {

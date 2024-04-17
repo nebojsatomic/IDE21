@@ -81,7 +81,7 @@ class MenuController extends NetActionController
 
             $this->_helper->viewRenderer->setNoRender();
             $db = Zend_Registry::get('db');
-            $db->query("INSERT INTO menus(name) VALUES(?)", array($menuName));
+            $db->query("INSERT IGNORE INTO menus(name) VALUES(?)", array($menuName));
             $menuItemId = $db->lastInsertId();
             //echo "Menu $menuName added!";
             $jsonOut['out']['menuItemId'] = $menuItemId;
@@ -126,7 +126,7 @@ class MenuController extends NetActionController
             }
 
             $db = Zend_Registry::get('db');
-            $db->query("INSERT INTO menu_items(parent_id, menu_id, content_id, name_$langAdmin, description_$langAdmin, url_$langAdmin ) VALUES(?, ?, ?, ?, ?, ?)", array($menuParentId, $menuID, $contentID, $menuTitle, $descr, 'view/index/id/' . $contentID));
+            $db->query("INSERT IGNORE INTO menu_items(parent_id, menu_id, content_id, name_$langAdmin, description_$langAdmin, url_$langAdmin ) VALUES(?, ?, ?, ?, ?, ?)", array($menuParentId, $menuID, $contentID, $menuTitle, $descr, 'view/index/id/' . $contentID));
             echo "Menu Item $menuTitle added!";
 
         } else {
@@ -200,7 +200,7 @@ class MenuController extends NetActionController
                     $menuParentId = 0;
                 }
                 if($menuTitle != ""){
-                    $this->_db->query("INSERT INTO menu_items(parent_id, menu_id, content_id, name_$langAdmin, description_$langAdmin, url_$langAdmin ) VALUES(?, ?, ?, ?, ?, ?)", array($menuParentId, $menuID, $contentID, $menuTitle, $descr, 'view/index/id/' . $contentID));
+                    $this->_db->query("INSERT IGNORE INTO menu_items(parent_id, menu_id, content_id, name_$langAdmin, description_$langAdmin, url_$langAdmin ) VALUES(?, ?, ?, ?, ?, ?)", array($menuParentId, $menuID, $contentID, $menuTitle, $descr, 'view/index/id/' . $contentID));
                     //echo "Page " . $values['menuItemPage'] . "-" . $mID;
                     echo $this->_translateCreator->_("Page is added to this menu!");
                 } else {
@@ -223,7 +223,7 @@ class MenuController extends NetActionController
                     $menuParentId = 0;
                 }
                 if($menuTitle != ""){
-                    $this->_db->query("INSERT INTO menu_items(parent_id, menu_id, content_id, name_en, description_en, url_en) VALUES(?, ?, ?, ?, ?, ?)", array($menuParentId, $menuID, '0', $menuTitle, $descr, $moduleName[0]['moduleName'] . '/'));
+                    $this->_db->query("INSERT IGNORE INTO menu_items(parent_id, menu_id, content_id, name_en, description_en, url_en) VALUES(?, ?, ?, ?, ?, ?)", array($menuParentId, $menuID, '0', $menuTitle, $descr, $moduleName[0]['moduleName'] . '/'));
                     //echo "Module " . $values['menuItemModule'] . "-" . $mID;
                     echo "Module is added to this menu!";
                 } else {
@@ -377,9 +377,9 @@ class MenuController extends NetActionController
             // }
 
             $db = Zend_Registry::get('db');
-            $db->query("UPDATE menu_items SET parent_id = ?, content_id = ?, name_" . $langCode . " = ?, description_" . $langCode . " = ?, url_" . $langCode . " = ?  WHERE item_id = ?", array($menuParentId, $contentID, $menuTitle, $descr, 'view/index/id/' . $contentID, $menuItemID));
+            $db->query("UPDATE IGNORE  menu_items SET parent_id = ?, content_id = ?, name_" . $langCode . " = ?, description_" . $langCode . " = ?, url_" . $langCode . " = ?  WHERE item_id = ?", array($menuParentId, $contentID, $menuTitle, $descr, 'view/index/id/' . $contentID, $menuItemID));
             $this->cleanCache();
-            //$db->query("INSERT INTO menu_items(parent_id, menu_id, content_id, name_en, description_en, url_en) VALUES(?, ?, ?, ?, ?, ?)", array($menuParentId, $menuID, '15', $menuTitle, $descr, 'view/index/id/' . $contentID));
+            //$db->query("INSERT IGNORE INTO menu_items(parent_id, menu_id, content_id, name_en, description_en, url_en) VALUES(?, ?, ?, ?, ?, ?)", array($menuParentId, $menuID, '15', $menuTitle, $descr, 'view/index/id/' . $contentID));
             echo $this->_translateCreator->_("Menu item") . " $menuTitle " . $this->_translateCreator->_("edited!");
 
         } else {
@@ -678,11 +678,11 @@ class MenuController extends NetActionController
             foreach($parentQ as $item){
                 if($item['item_id'] == $id){
                 $i = $i -1;
-                $this->_db->query("UPDATE menu_items SET weight = $i  WHERE weight = $i AND parent_id = ? AND menu_id = ? AND item_id != ?", array($idQ[0]['parent_id'], $idQ[0]['menu_id'], $item['item_id']));
-                $this->_db->query("UPDATE menu_items SET weight = $i +1  WHERE item_id = ?", array($item['item_id']));
+                $this->_db->query("UPDATE IGNORE menu_items SET weight = $i  WHERE weight = $i AND parent_id = ? AND menu_id = ? AND item_id != ?", array($idQ[0]['parent_id'], $idQ[0]['menu_id'], $item['item_id']));
+                $this->_db->query("UPDATE IGNORE menu_items SET weight = $i +1  WHERE item_id = ?", array($item['item_id']));
                 $i--;
                 } else {
-                $this->_db->query("UPDATE menu_items SET weight = $i WHERE item_id = ?", array($item['item_id']));
+                $this->_db->query("UPDATE IGNORE menu_items SET weight = $i WHERE item_id = ?", array($item['item_id']));
                 }
             $i++;
             }
@@ -692,11 +692,11 @@ class MenuController extends NetActionController
             foreach($parentQ as $item){
                 if($item['item_id'] == $id){
                 $i = $i -1;
-                $this->_db->query("UPDATE menu_items SET weight = $i +1 WHERE weight = $i AND parent_id = ? AND menu_id = ?", array($idQ[0]['parent_id'], $idQ[0]['menu_id']));
-                $this->_db->query("UPDATE menu_items SET weight = $i WHERE item_id = ?", array($item['item_id']));
+                $this->_db->query("UPDATE IGNORE menu_items SET weight = $i +1 WHERE weight = $i AND parent_id = ? AND menu_id = ?", array($idQ[0]['parent_id'], $idQ[0]['menu_id']));
+                $this->_db->query("UPDATE IGNORE menu_items SET weight = $i WHERE item_id = ?", array($item['item_id']));
                 $i++;
                 } else {
-                $this->_db->query("UPDATE menu_items SET weight = $i WHERE item_id = ?", array($item['item_id']));
+                $this->_db->query("UPDATE IGNORE menu_items SET weight = $i WHERE item_id = ?", array($item['item_id']));
                 }
             $i++;
             }

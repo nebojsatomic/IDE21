@@ -14,9 +14,9 @@
  *
  * @category   Zend
  * @package    Zend_Search_Lucene
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: LockManager.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /** Zend_Search_Lucene_Storage_Directory */
@@ -30,7 +30,7 @@ require_once 'Zend/Search/Lucene/Storage/File.php';
  *
  * @category   Zend
  * @package    Zend_Search_Lucene
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Search_Lucene_LockManager
@@ -211,7 +211,7 @@ class Zend_Search_Lucene_LockManager
      * Returns lock object on success and false otherwise (doesn't block execution)
      *
      * @param Zend_Search_Lucene_Storage_Directory $lockDirectory
-     * @return mixed
+     * @return false|Zend_Search_Lucene_Storage_File
      */
     public static function obtainOptimizationLock(Zend_Search_Lucene_Storage_Directory $lockDirectory)
     {
