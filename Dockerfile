@@ -1,4 +1,5 @@
 FROM php:8.3-apache
+
 RUN apt update && apt install -y zlib1g-dev libpng-dev zip nano && rm -rf /var/lib/apt/lists/*
 RUN a2enmod rewrite
 RUN a2enmod ssl
@@ -12,11 +13,11 @@ RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install gd
 WORKDIR /var/www/html
 
-COPY ./src .
+RUN useradd -ms /bin/bash ide21
 
-RUN chown -R www-data /var/www/html/storage
-RUN chown -R www-data /var/www/html/public
+COPY --chown=ide21:ide21 ./src .
 
+USER ide21
 RUN ./composer.phar update
 RUN cp ./.env.example ./.env
 
