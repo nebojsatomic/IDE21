@@ -75,7 +75,7 @@ require_once 'Zend/Form/Element/Captcha.php';
             $replyToComment = '0';
             $rating = $values['star0'];
             //Do query
-            $this->_db->query("INSERT INTO comments (pageId, contentType, commentatorName, commentatorEmail, comment, status, replyToComment) VALUES (?, ?, ?, ?, ?, ?, ?)", array($pageId, $contentType, $this->_sesija->user, $commentatorEmail, $comment, $status, $replyToComment) );
+            $this->_db->query("INSERT IGNORE INTO comments (pageId, contentType, commentatorName, commentatorEmail, comment, status, replyToComment) VALUES (?, ?, ?, ?, ?, ?, ?)", array($pageId, $contentType, $this->_sesija->user, $commentatorEmail, $comment, $status, $replyToComment) );
             
             //rating
             if ((isset($values['pid'])) && (isset($values['star0']))) {
@@ -95,7 +95,7 @@ require_once 'Zend/Form/Element/Captcha.php';
 
             }            
             
-            //$this->_db->query("INSERT INTO comments_ratings (pageId, contentType, commentatorName, commentatorEmail, comment, status, replyToComment) VALUES (?, ?, ?, ?, ?, ?, ?)", array($pageId, $contentType, $commentatorName, $commentatorEmail, $comment, $status, $replyToComment) );
+            //$this->_db->query("INSERT IGNORE INTO comments_ratings (pageId, contentType, commentatorName, commentatorEmail, comment, status, replyToComment) VALUES (?, ?, ?, ?, ?, ?, ?)", array($pageId, $contentType, $commentatorName, $commentatorEmail, $comment, $status, $replyToComment) );
 
 
             $content = $translator->_('<h2>Thank You for Your comment!</h2>');

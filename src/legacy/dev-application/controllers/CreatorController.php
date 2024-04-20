@@ -1121,7 +1121,7 @@ class CreatorController extends NetActionController
             $langName =  $languageCodes[$values['id']];
 
             //Do query
-            $this->_db->query("INSERT INTO " . $this->_tblprefix . "languages (code, name, enabled, isDefault) VALUES (?, ?, ?, ?)", array($values['id'], $languageCodes[$values['id']], 1, 0) );
+            $this->_db->query("INSERT IGNORE INTO " . $this->_tblprefix . "languages (code, name, enabled, isDefault) VALUES (?, ?, ?, ?)", array($values['id'], $languageCodes[$values['id']], 1, 0) );
 
             //get data into outfile from already created pages and templates for default language
             $tableName  = "pages_$defaultLang";
@@ -1222,15 +1222,15 @@ class CreatorController extends NetActionController
             }
 
             // ALTER menu_items TABLE
-            $this->_db->query('ALTER TABLE ' . $this->_tblprefix . 'menu_items ADD COLUMN name_' . $values['id'] . ' varchar(60) NOT NULL;');
-            $this->_db->query('ALTER TABLE ' . $this->_tblprefix . 'menu_items ADD COLUMN description_' . $values['id'] . ' text;');
-            $this->_db->query('ALTER TABLE ' . $this->_tblprefix . 'menu_items ADD COLUMN url_' . $values['id'] . ' varchar(255) NOT NULL;');
+            $this->_db->query('ALTER IGNORE TABLE ' . $this->_tblprefix . 'menu_items ADD COLUMN name_' . $values['id'] . ' varchar(60) NOT NULL;');
+            $this->_db->query('ALTER IGNORE TABLE ' . $this->_tblprefix . 'menu_items ADD COLUMN description_' . $values['id'] . ' text;');
+            $this->_db->query('ALTER IGNORE TABLE ' . $this->_tblprefix . 'menu_items ADD COLUMN url_' . $values['id'] . ' varchar(255) NOT NULL;');
 
             // ALTER categories TABLE
-            $this->_db->query('ALTER TABLE ' . $this->_tblprefix . 'categories ADD COLUMN name_' . $values['id'] . ' varchar(60) NOT NULL;');
+            $this->_db->query('ALTER IGNORE TABLE ' . $this->_tblprefix . 'categories ADD COLUMN name_' . $values['id'] . ' varchar(60) NOT NULL;');
 
             //put in tableregistry
-            $this->_db->query("INSERT INTO " . $this->_tblprefix . "tableregistry  (tablePK ,name ,core) VALUES (?, ?, ?)", array('id', 'pages_' . $values['id'], 0) );
+            $this->_db->query("INSERT IGNORE INTO " . $this->_tblprefix . "tableregistry  (tablePK ,name ,core) VALUES (?, ?, ?)", array('id', 'pages_' . $values['id'], 0) );
 
             $languages = $this->renderToTable($this->_tblprefix . "languages", null, "Add new Language", array('add'=>'creator/add-language/', 'edit'=>'creator/edit-language/', 'delete'=>'creator/delete-language/'));
             $langComboFill = '<option label="' . $languageCodes[$values['id']] . '" value="' . $values['id'] . '"> ' . $languageCodes[$values['id']] . '</option>';
@@ -1316,7 +1316,7 @@ class CreatorController extends NetActionController
                 $plholders .= "?, ";//setup placehoslders
             }
             $plholders = rtrim($plholders, ", ");//remove last ","
-            $this->_db->query("INSERT INTO $table VALUES($plholders)",$insertData[$rowNo]); //
+            $this->_db->query("INSERT IGNORE INTO $table VALUES($plholders)",$insertData[$rowNo]); //
             //echo $plholders;
             $rowNo++;
         }
@@ -1341,11 +1341,11 @@ class CreatorController extends NetActionController
             $this->_db->query("DROP TABLE " . $this->_tblprefix . "templates_" . $result[0]['code']);
 
             // Drop columns from menu_items
-            $this->_db->query('ALTER TABLE ' . $this->_tblprefix . 'menu_items DROP COLUMN name_' . $result[0]['code']);
-            $this->_db->query('ALTER TABLE ' . $this->_tblprefix . 'menu_items DROP COLUMN description_' . $result[0]['code']);
-            $this->_db->query('ALTER TABLE ' . $this->_tblprefix . 'menu_items DROP COLUMN url_' . $result[0]['code']);
+            $this->_db->query('ALTER IGNORE TABLE ' . $this->_tblprefix . 'menu_items DROP COLUMN name_' . $result[0]['code']);
+            $this->_db->query('ALTER IGNORE TABLE ' . $this->_tblprefix . 'menu_items DROP COLUMN description_' . $result[0]['code']);
+            $this->_db->query('ALTER IGNORE TABLE ' . $this->_tblprefix . 'menu_items DROP COLUMN url_' . $result[0]['code']);
             // Drop columns from categories
-            $this->_db->query('ALTER TABLE ' . $this->_tblprefix . 'categories DROP COLUMN name_' . $result[0]['code']);
+            $this->_db->query('ALTER IGNORE TABLE ' . $this->_tblprefix . 'categories DROP COLUMN name_' . $result[0]['code']);
 
             $langName = $result[0]['name'];
             //Delete language from db
@@ -1472,7 +1472,7 @@ class CreatorController extends NetActionController
                     if($value == 1){//only if allow - insert into db
                         $rolesAllowed .= $roleName . ", ";
                         $this->_db->query("DELETE FROM " . $this->_tblprefix . "access_rules WHERE  roleId = ? and resource = ?", array($roleForInsert, $resource));//first delete if this entry exists
-                        $this->_db->query("INSERT INTO " . $this->_tblprefix . "access_rules(roleId, resource, rule) VALUES(?, ?, ?)", array($roleForInsert, $resource, 'allow'));//and then insert
+                        $this->_db->query("INSERT IGNORE INTO " . $this->_tblprefix . "access_rules(roleId, resource, rule) VALUES(?, ?, ?)", array($roleForInsert, $resource, 'allow'));//and then insert
                     }else {
                         $this->_db->query("DELETE FROM " . $this->_tblprefix . "access_rules WHERE  roleId = ? and resource = ?", array($roleForInsert, $resource));//delete if deny (not checked)
                     }
@@ -1527,7 +1527,7 @@ class CreatorController extends NetActionController
         if($rtype == "page"){
             $langs = NetActionController::getLanguages();
             foreach ($langs as $lang) {//updating check access in all languages
-                $this->_db->query("UPDATE " . $this->_tblprefix . "pages_$lang SET  check_access = ? WHERE id = ?", array($checkAccess, $id));
+                $this->_db->query("UPDATE IGNORE " . $this->_tblprefix . "pages_$lang SET  check_access = ? WHERE id = ?", array($checkAccess, $id));
             }
         if($checkAccess == '0'){//ako nema provera accessa brisi iz access rulesa
             //$this->_db->query("DELETE FROM access_rules WHERE resource = ?", array('page:' . $id ));//delete
@@ -1626,7 +1626,7 @@ class CreatorController extends NetActionController
 
         $langs = NetActionController::getLanguages();
         foreach ($langs as $lang) {
-            $this->_db->query("UPDATE " . $this->_tblprefix . "pages_$lang SET  unbounded = ? WHERE id = ?", array( $val, $pageid ));
+            $this->_db->query("UPDATE IGNORE " . $this->_tblprefix . "pages_$lang SET  unbounded = ? WHERE id = ?", array( $val, $pageid ));
 
         }
         $this->cleanCache();

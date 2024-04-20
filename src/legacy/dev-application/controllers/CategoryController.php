@@ -168,7 +168,7 @@ class CategoryController extends NetActionController
 
             $this->_helper->viewRenderer->setNoRender();
             $db = Zend_Registry::get('db');
-            $db->query("INSERT INTO categories(name) VALUES(?)", array($categoryName));
+            $db->query("INSERT IGNORE INTO categories(name) VALUES(?)", array($categoryName));
             $catItemId = $db->lastInsertId();
             //echo "Menu $menuName added!";
             $jsonOut['out']['catItemId'] = $catItemId;
@@ -241,10 +241,10 @@ class CategoryController extends NetActionController
             if($pageItem != '0') {
                 $langs = NetActionController::getLanguages();
                 foreach ($langs as $lang) {
-                    //$this->_db->query("UPDATE pages_$lang SET  category = ? WHERE id = ?", array( $catid, $pageItem));
+                    //$this->_db->query("UPDATE IGNORE pages_$lang SET  category = ? WHERE id = ?", array( $catid, $pageItem));
 
                 }
-                $this->_db->query("INSERT INTO category_items(content_id, category_id) VALUES (?, ?) ", array($pageItem, $catid) );
+                $this->_db->query("INSERT IGNORE INTO category_items(content_id, category_id) VALUES (?, ?) ", array($pageItem, $catid) );
                 $pageName = $this->_db->fetchAll("SELECT title FROM pages_$langCode WHERE id = ?", array( $pageItem));
                 //clean the cache
                 $this->_cachedPages->clean(Zend_Cache::CLEANING_MODE_ALL);
@@ -288,7 +288,7 @@ class CategoryController extends NetActionController
 
             $langs = NetActionController::getLanguages();
             foreach ($langs as $lang) {
-                $db->query("UPDATE pages_$lang SET category = ? WHERE category = ?", array('0', $categoryId));
+                $db->query("UPDATE IGNORE pages_$lang SET category = ? WHERE category = ?", array('0', $categoryId));
             }
             echo $this->_translateCreator->_("Category deleted");
         }
@@ -328,7 +328,7 @@ class CategoryController extends NetActionController
         $categoryId = $values['cid'];
         $categoryName = $values['cat_name_lng'];
 
-        $this->_db->query("UPDATE categories SET name_$langCode = ? WHERE category_id = ?", array($categoryName, $categoryId));
+        $this->_db->query("UPDATE IGNORE categories SET name_$langCode = ? WHERE category_id = ?", array($categoryName, $categoryId));
         //clean the cache
         $this->_cachedPages->clean(Zend_Cache::CLEANING_MODE_ALL);
         $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);
