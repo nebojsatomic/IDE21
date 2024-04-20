@@ -1145,7 +1145,7 @@ $(document).ready(function(){
 
   $('#templateName').livequery('change', function(){
     //console.log('e');
-    loadTemplate( $(this).attr("value"));
+    loadTemplate( $(this).val());
 
     // ajaxEventDone(lang.TOpen);//sklanjanje maska
     $('#templateIDediting').html($(this).attr("value"));
@@ -1508,9 +1508,9 @@ $('#chooseImageFolderForm').change(function(){
 
   if (imageSelectionActive == 1 || putImagesInThisObj == 1) {
     ajaxEvent();
-    selFolder = $('#' + $(this).attr("id") + " option:selected").attr("value");//selected menu
+    selFolder = $('#' + $(this).attr("id") + " option:selected").val();//selected menu
     selValueFolder = $('#' + $(this).attr("id") + " option:selected").attr("label");
-    selectedImage = $('#imageNames').attr("value");
+    selectedImage = $('#imageNames').val();
 
     //console.log("You have chosen " + selFolder + " to display in this object!");
     ajaxEventDone("You have chosen " + selFolder + " to display in this object!");
@@ -1921,7 +1921,7 @@ $('#delFolderLink').click(function(){
 //When folder is chosen show images in that folder
 $('#folderNames').livequery('change', function(){
   $('#imagesShow').html( $('#adminAjaxLoader').html() );
-  var val = $('#folderNames').attr("value");
+  var val = $('#folderNames').val();
   $.get(absoluteUrl + "images/show-images/fname/" + val , function(data){
     //console.log(data);
     $('#imagesShow').html(data);
@@ -1935,9 +1935,9 @@ $('#showFolderImages').livequery('change', function(){
 
   if (imageSelectionActive == 1 || putImagesInThisObj == 1) {
     ajaxEvent();
-    selFolder = $('#folderNames').attr("value");//selected folder
+    selFolder = $('#folderNames').val();//selected folder
     selValueFolder = $('#folderNames').attr("label");
-    selectedImage = $('#imageNames').attr("value");
+    selectedImage = $('#imageNames').val();
     imagePath = absoluteUrl + "images/" + selFolder + "/" + selectedImage;
     $('#imagePathShow').html(imagePath);
 
@@ -1992,8 +1992,8 @@ $('#showFolderImages').livequery('change', function(){
 
   $('#imageDetails').html( $('#adminAjaxLoader').html() );
   //console.log('ja');
-  var val = $('#imageNames').attr("value");
-  var valFolder = $('#folderNames').attr("value");
+  var val = $('#imageNames').val();
+  var valFolder = $('#folderNames').val();
   $.get(absoluteUrl + "images/show-image-details/fname/" + valFolder + "/imname/" + val , function(data){
     //console.log(data);
     $('#imageDetails').html(data);
