@@ -46,7 +46,7 @@ class ImagesController extends NetActionController
         }
         $this->_sesija = new Zend_Session_Namespace('net');
         $this->_checkAccess();
-        /*ovo treba skloniti , tu je samo da bi se mogle videti slike */
+
         //$this->_helper->layout()->disableLayout();
         //$this->_helper->viewRenderer->setNoRender();
 

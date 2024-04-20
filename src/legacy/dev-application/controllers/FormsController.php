@@ -558,10 +558,10 @@ class FormsController extends NetActionController
         $db = Zend_Registry::get('db');
         
         if ($action == "add") {
-            $insert = $db->query("INSERT INTO mod_forms(name, message, contact) VALUES(?, ?, ?)", array($name, $message, $contact) );	      
+            $insert = $db->query("INSERT IGNORE INTO mod_forms(name, message, contact) VALUES(?, ?, ?)", array($name, $message, $contact) );	      
 	      }
 	      if ($action == "edit") {
-            $edit = $db->query("UPDATE mod_forms SET name = ?, message = ?, contact = ? WHERE id = ?", array($name, $message, $contact, $formId) );	      
+            $edit = $db->query("UPDATE IGNORE mod_forms SET name = ?, message = ?, contact = ? WHERE id = ?", array($name, $message, $contact, $formId) );	      
 	      }
 	      if ($action == "del") {
             $delete = $db->query("DELETE FROM mod_forms WHERE id = ?", array($formId) );	      
@@ -593,10 +593,10 @@ class FormsController extends NetActionController
         $db = Zend_Registry::get('db');
         
         if ($action == "add") {
-            $insert = $db->query("INSERT INTO mod_forms_fields (form_id, name, type, enabled) VALUES(?, ?, ?, ?)", array($formId , $name, $type, $enabled) );	      
+            $insert = $db->query("INSERT IGNORE INTO mod_forms_fields (form_id, name, type, enabled) VALUES(?, ?, ?, ?)", array($formId , $name, $type, $enabled) );	      
 	      }
 	      if ($action == "edit") {
-            $edit = $db->query("UPDATE mod_forms_fields SET form_id = ?, name = ?, type = ?, enabled = ? WHERE id = ?", array($formId , $name, $type, $enabled, $Id ) );	      
+            $edit = $db->query("UPDATE IGNORE mod_forms_fields SET form_id = ?, name = ?, type = ?, enabled = ? WHERE id = ?", array($formId , $name, $type, $enabled, $Id ) );	      
 	      }
 	      if ($action == "del") {
             $delete = $db->query("DELETE FROM mod_forms_fields WHERE id = ?", array($Id) );	      

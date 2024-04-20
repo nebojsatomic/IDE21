@@ -136,7 +136,7 @@ require_once 'Zend/Form/Element/Captcha.php';
 
                   $data = array($values['username'], $values['fullName'], sha1($values['password']), $values['email'], $stat,
                                 '', '', '', $roleName);
-                  $db->query("INSERT INTO users (username, fullname, password, email, created, status, timezone, date_format, languageId, roleId)
+                  $db->query("INSERT IGNORE INTO users (username, fullname, password, email, created, status, timezone, date_format, languageId, roleId)
                                       VALUES(?, ?, ?, ?, UNIX_TIMESTAMP(), ?, ?, ?, ?, ?)", $data);
 
 
@@ -833,7 +833,7 @@ require_once 'Zend/Form/Element/Captcha.php';
                 }
                 $updateData[] = $this->_sesija->user;
 
-                $this->_db->query("UPDATE users SET fullname = ?, email = ? $additionalSql WHERE username = ?", $updateData);
+                $this->_db->query("UPDATE IGNORE users SET fullname = ?, email = ? $additionalSql WHERE username = ?", $updateData);
 
                 $content = $this->translator->_("Your account has been updated.") . $form;          
             }            
@@ -1099,7 +1099,7 @@ require_once 'Zend/Form/Element/Captcha.php';
 
                   $data = array($values['username'], $values['fullName'], sha1($values['password']), $values['email'], $stat,
                                 '', '', '', $roleName);
-                  $db->query("INSERT INTO users (username, fullname, password, email, created, status, timezone, date_format, languageId, roleId)
+                  $db->query("INSERT IGNORE INTO users (username, fullname, password, email, created, status, timezone, date_format, languageId, roleId)
                                       VALUES(?, ?, ?, ?, UNIX_TIMESTAMP(), ?, ?, ?, ?, ?)", $data);
 
 

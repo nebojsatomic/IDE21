@@ -130,18 +130,15 @@ class TablesController extends NetActionController
             }
             $subsString = rtrim($subsString, ", ");//brisanje sa zadnje strane nepotrebnog '?'
                 
-            $insert = $db->query("INSERT INTO $tableName ($arrayOfColsForQ) VALUES($subsString)", $colVar );	      
+            $insert = $db->query("INSERT IGNORE INTO $tableName ($arrayOfColsForQ) VALUES($subsString)", $colVar );
             $rowId = $db->lastInsertId();
             $this->_helper->viewRenderer->setNoRender();
             $jsonOut = array("out" => array("row" => $rowId, "tableid" => $values['tableid'], "rowData" => $rowdata) );
             echo json_encode($jsonOut);
-            //print_r($values);
-            //print_r($arrayOfCols);
-	          
 
             //$this->view->form  = $form;
 	      }
-        //print_r($values) ;  
+ 
     }    
 
 
@@ -239,7 +236,7 @@ class TablesController extends NetActionController
             }
             $subsString = rtrim($subsString, ", ");//brisanje sa zadnje strane nepotrebnog '?'
  
-            $update = $db->query("UPDATE $tableName SET $subsString WHERE $tablePK = $rowId ", $colVar );//DODATI ZA PK RAZLICIT OD id	      
+            $update = $db->query("UPDATE IGNORE $tableName SET $subsString WHERE $tablePK = $rowId ", $colVar );//DODATI ZA PK RAZLICIT OD id	      
             //print_r($values);
             //print_r($arrayOfCols);
     	      
