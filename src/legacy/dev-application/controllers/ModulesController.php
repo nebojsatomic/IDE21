@@ -63,7 +63,7 @@ class ModulesController extends NetActionController
     // turn off ViewRenderer
     $this->_helper->viewRenderer->setNoRender();
 
-    $this->_db->query("UPDATE " . $this->_tblprefix . "modules SET  enabled = ?", array('1'));
+    $this->_db->query("UPDATE IGNORE " . $this->_tblprefix . "modules SET  enabled = ?", array('1'));
     echo 'All modules enabled, reload page to see changes';
 
   }
@@ -89,7 +89,7 @@ class ModulesController extends NetActionController
         $tId = $values['template_id'];
         $enabled = $values['enabled_mod'];
         if($tId != ""){
-          $this->_db->query("UPDATE modules SET  templateId = ?, enabled = ? WHERE moduleId = ?", array($tId, $enabled, $id));
+          $this->_db->query("UPDATE IGNORE modules SET  templateId = ?, enabled = ? WHERE moduleId = ?", array($tId, $enabled, $id));
           echo $this->_translate->_("Module settings are updated!");
         }
         //print_r($values);
