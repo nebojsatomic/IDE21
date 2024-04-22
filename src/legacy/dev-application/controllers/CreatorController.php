@@ -459,7 +459,7 @@ class CreatorController extends NetActionController
                         'required' => true,
                         'label' => '',
                         'style' => 'float:right;',
-                        'class' => 'help',
+                        'class' => 'help select select-info w-full max-w-xs',
                         'title' => $this->_translate->_('Choose the language of the pages on which you want to work'),
                         'size' => '1',
                         'multioptions' => $langArray,
@@ -809,22 +809,26 @@ class CreatorController extends NetActionController
                 'elements' => array(
                     'username' => array('text', array(
                         'required' => true,
+						'class' => 'input input-bordered w-full max-w-x',
                         'label' => 'Username:'
                     )),
                     'password' => array('password', array(
                         'required' => true,
+						'class' => 'input input-bordered w-full max-w-x',
                         'label' => 'Password:',
                     )),
                 'creatorLang' => array('select', array(
                     'required' => true,
                     'size' => '1',
-                    'style' => 'margin:5px;width:90%;float:right;',
+                    /*'style' => 'margin:5px;width:90%;float:right;',*/
+					'class' => 'select select-bordered w-full max-w-x',
                     'multioptions' => $creatorLangsArray,
                     'value' =>  $cL ,
                 )),
 
                     'submit' => array('submit', array(
                         'label' => 'Login',
+						'class' => 'btn btn-primary w-full',
                         'order' => 100,
                     ))
                 ),

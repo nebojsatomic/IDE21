@@ -941,7 +941,7 @@ $(document).ready(function(){
     const openPageDialogUniqueId = Date.now();
     $('#openPageForm').remove();
     $('.dialogDiv').remove();
-    $('body').append('<div class="dialogDiv" id="dialogDiv_' + openPageDialogUniqueId + '" style="background: silver;"></div>');
+    $('body').append('<div class="dialogDiv bg-primary text-primary-content" id="dialogDiv_' + openPageDialogUniqueId + '" ></div>');
     //$('#dialogDiv').draggable();
     $('#dialogDiv_' + openPageDialogUniqueId).html( $('#adminAjaxLoader').html() );
     //dialog();
@@ -1130,7 +1130,7 @@ $(document).ready(function(){
   $('#applyTemplate').click(function(){
     $('#dialogDiv').remove();
 
-    $('body').append('<div id="dialogDiv"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     dialog();
     $.get(absoluteUrl + "page/choose-template", function(data){
@@ -1588,7 +1588,7 @@ $('#aParamCorner').livequery('click', function(){
   if($('#cornerCheck').prop('checked') ){
     ajaxEvent();
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     $.get(absoluteUrl + "creator/corner-params" , function(data){
@@ -1706,7 +1706,7 @@ $('#aParamShadow').livequery('click', function(){
   if($('#shadowCheck').prop('checked') ){
     ajaxEvent();
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     $.get(absoluteUrl + "creator/shadow-params" , function(data){
@@ -1856,7 +1856,7 @@ $('#addImageLink').livequery('click', function(){
   } else {
     ajaxEvent();
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -1882,7 +1882,7 @@ $('#addImageLink').livequery('click', function(){
 //Add FOLDER
 $('#addFolderLink').livequery('click', function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -1977,13 +1977,13 @@ $('#showFolderImages').livequery('change', function(){
   $('#imagePathShow').html(imagePath);
 
   if($( "#dialogDivImages" ).length == 0){
-    $('body').append('<div id="dialogDivImages"><div id="imageDetails"></div></div>');
+    $('body').append('<div id="dialogDivImages" class="bg-primary text-primary-content"><div id="imageDetails"></div></div>');
     $( "#dialogDivImages" ).dialog({modal:false, resizable: true, position: ['center','center'], title:"Image Details" , maxHeight:$(window).height() });
     $('#imageDetails').appendTo($('#dialogDivImages') );
   }
   if($('#imageDetails').length == 0){
     $('#dialogDivImages').remove();
-    $('body').append('<div id="dialogDivImages"><div id="imageDetails"></div></div>');
+    $('body').append('<div id="dialogDivImages" class="bg-primary text-primary-content"><div id="imageDetails"></div></div>');
     $( "#dialogDivImages" ).dialog({modal:false, resizable: true, position: ['center','center'], title:"Image Details" , maxHeight:$(window).height() });
     $('#dialogDivImages') .append('<div id="mageDetails"></div>');
   } else{
@@ -2136,7 +2136,7 @@ $('#categoryNameAssign').livequery('change', function(){
 //Add CATEGORY
 $('#addCategoryLink').livequery('click', function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -2181,7 +2181,7 @@ $('#addCategoryItemLink').livequery('click', function(){
   hrefVal = $(this).attr("href");
   if(selCategory != ""){
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     $.get(absoluteUrl + hrefVal +"/catid/" + selCategory, function(data){
@@ -2296,7 +2296,7 @@ $('#chooseCategoryForm').change(function(){
 //Add A MENU
 $('#addMenuLink').livequery('click', function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -2348,7 +2348,7 @@ $('#chooseMenuForm').change(function(){
 //Add MENU ITEM
 $('#addMenuItemLink').livequery('click', function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   mid = $('#menuName').attr("value");
@@ -2511,7 +2511,7 @@ $('#menuNameAssign').livequery('change', function(){
 
   menuSelected = $('#' + $(this).attr("id") + " option:selected").attr("value");
   if (menuSelected != "select"){
-    $('body').append('<div id="dialogDiv"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -2776,7 +2776,7 @@ $('a.uniTableAdmin').livequery('click', function(){
 
     //$('#addRowForm').remove();
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -3126,7 +3126,7 @@ $('#restrictiveCB').livequery('click', function(){
 $('#openPagePermisions').livequery('click', function(){
   $('#permissionsForm').remove();
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   pageId = $('#pgID').html();
@@ -3425,7 +3425,7 @@ $('.setPermissionsAll').livequery('click',function(){
     }
   });
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv" style="z-index:999999 !important;"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content" style="z-index:999999 !important;"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   $.get(absoluteUrl + "page/set-permissions/pids/" + ar , function(data) {
@@ -3446,7 +3446,7 @@ $('.exportToFTP').livequery('click',function(){
       ar.push($(this).attr('value'));
     }
   });
-  $('body').append('<div id="dialogDiv" style="z-index:9999999"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content" style="z-index:9999999"></div>');
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   $.get(absoluteUrl + "exportsite/export-pages/pids/" + ar , function(data) {
     $('#dialogDiv').html(data);
@@ -3503,7 +3503,7 @@ $('#rotate select').each(function(){
 //editModules link - dealing with module settings
 $('#editModulesLink').livequery('click', function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   $('#dialogDiv').show();
@@ -3642,7 +3642,7 @@ fsButton3.addEventListener('click', function() {
 //Exporting a template for use on another server
 $('#exportTemplate').click(function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -3658,7 +3658,7 @@ $('#exportTemplate').click(function(){
 //Installing exported template
 $('#installTemplate').click(function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   // $('#dialogDiv').show();

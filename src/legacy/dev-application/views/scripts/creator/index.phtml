@@ -67,6 +67,7 @@
   <textarea id="templateCodeHtml" name="templateCodeHtml"></textarea>
 </form>
 
+
 <div id="contProperties">
   <div id="propertiesLeft">
     <h2><?php echo $this->translate->_("Welcome to NeT.Objects!");?></h2>
@@ -74,19 +75,20 @@
   </div>
 
   <div id="properties">
-    <div id="rotate">
-      <ul>
-        <li class="help" description="<?php echo $this->translate->_("Contains properties of page and objects");?>"><a href="#fragment-1" id="poA"><span><?php echo $this->translate->_("Page/Object");?></span></a></li>
-        <li class="help" description="<?php echo $this->translate->_("Contains Menu management");?>"><a href="#fragment-2" id="MenuA"><span><?php echo $this->translate->_("Menus");?></span></a></li>
-        <li class="help" description="<?php echo $this->translate->_("Contains Categories management");?>"><a href="#fragment-3" id="CatA"><span><?php echo $this->translate->_("Categories");?></span></a></li>
-        <li class="help" description="<?php echo $this->translate->_("Installed and enabled languages on the site");?>"><a href="#fragment-4" id="LangA"><span><?php echo $this->translate->_("Languages");?></span></a></li>
-        <li class="help" description="<?php echo $this->translate->_("Installed and enabled modules on the site");?>"><a href="#fragment-5" id="ModA"><span><?php echo $this->translate->_("Modules");?></span></a></li>
-        <li class="help" description="<?php echo $this->translate->_("Galleries and Images on the site");?>"><a href="#fragment-6" id="ImagesA"><span><?php echo $this->translate->_("Images");?></span></a></li>
-        <li class="help" description="<?php echo $this->translate->_("CSS code - every administrator's code is compiled together in the main css file");?>"><a href="#fragment-7" id="CssA"><span>CSS</span></a></li>
-        <li class="help" description="<?php echo $this->translate->_("JavaScript code - every administrator's code is compiled together in the main javascript file");?>"><a href="#fragment-8" id="JsA"><span>JS</span></a></li>
-        <li class="help" description="<?php echo $this->translate->_("Site Settings");?>"><a href="#fragment-9" id="SettingsA"><span><?php echo $this->translate->_("Settings");?></span></a></li>
-        <div style="float:right;width:auto;height:15px;background:transparent;font-weight:bold;"></div>
-        <?php echo $this->langChooserAdmin;?>
+    <div id="rotate" class="card bg-primary text-primary-content" data-theme="">
+      <ul class="tabs tabs-boxed">
+        <li role="tab" class="help tab" description="<?php echo $this->translate->_("Contains properties of page and objects");?>"><a href="#fragment-1" id="poA"><span><?php echo $this->translate->_("Page/Object");?></span></a></li>
+        <li role="tab"  class="help tab" description="<?php echo $this->translate->_("Contains Menu management");?>"><a href="#fragment-2" id="MenuA"><span><?php echo $this->translate->_("Menus");?></span></a></li>
+        <li role="tab"  class="help tab" description="<?php echo $this->translate->_("Contains Categories management");?>"><a href="#fragment-3" id="CatA"><span><?php echo $this->translate->_("Categories");?></span></a></li>
+        <li role="tab"  class="help tab" description="<?php echo $this->translate->_("Installed and enabled languages on the site");?>"><a href="#fragment-4" id="LangA"><span><?php echo $this->translate->_("Languages");?></span></a></li>
+        <li role="tab"  class="help tab" description="<?php echo $this->translate->_("Installed and enabled modules on the site");?>"><a href="#fragment-5" id="ModA"><span><?php echo $this->translate->_("Modules");?></span></a></li>
+        <li role="tab"  class="help tab" description="<?php echo $this->translate->_("Galleries and Images on the site");?>"><a href="#fragment-6" id="ImagesA"><span><?php echo $this->translate->_("Images");?></span></a></li>
+        <li role="tab"  class="help tab" description="<?php echo $this->translate->_("CSS code - every administrator's code is compiled together in the main css file");?>"><a href="#fragment-7" id="CssA"><span>CSS</span></a></li>
+        <li role="tab"  class="help tab" description="<?php echo $this->translate->_("JavaScript code - every administrator's code is compiled together in the main javascript file");?>"><a href="#fragment-8" id="JsA"><span>JS</span></a></li>
+        <li role="tab"  class="help tab" description="<?php echo $this->translate->_("Site Settings");?>"><a href="#fragment-9" id="SettingsA"><span><?php echo $this->translate->_("Settings");?></span></a></li>
+        <div class="absolute top-0 left-150" >
+          <?php echo $this->langChooserAdmin;?>
+        </div>
       </ul>
       <div id="fragment-1">
         <form id="objProperties" name="objProperties" objId="" action="<?php echo $this->host;?>save" method="post">

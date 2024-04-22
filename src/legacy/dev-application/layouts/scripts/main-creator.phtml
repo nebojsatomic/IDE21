@@ -37,9 +37,9 @@
   <link rel="stylesheet" href="/css/jdMenu/blue/jquery.jdMenu.css" type="text/css" />
   <link rel="stylesheet" href="/css/default.css" type="text/css" /><!--CSS written in admin panel-->
   <link rel="stylesheet" href="/css/backend.css" type="text/css" /><!--CSS written for the admin panel-->
-  <!--TABLE GRID STYLES-->
+  <!--TABLE GRID STYLES
   <link rel="stylesheet" type="text/css" media="screen" href="/js/jqgrid/themes/redmond/jquery-ui-1.7.1.custom.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="/js/jqgrid/themes/ui.jqgrid.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/js/jqgrid/themes/ui.jqgrid.css" />-->
   <!--treeView-->
   <link rel="stylesheet" href="/css/treeView/jquery.treeview.css" type="text/css" />
   <link rel="stylesheet" href="/css/treeView/screen.css" type="text/css" />
@@ -59,6 +59,11 @@
   <!-- Add fancyBox
   <link rel="stylesheet" href="<?php echo $this->host;?>fancybox/2/jquery.fancybox.css" type="text/css" media="screen" />-->
 
+
+  <link href="/daisy/daisyui.full.min.css" rel="stylesheet" type="text/css" />
+  <script src="/daisy/daisyui.tailwind.3.4.3.js"></script>
+
+  
   <script type="text/javascript" >
   absoluteUrl = "<?php echo $this->hostRW;?>";
   absoluteUrl2 = "<?php echo $this->host;?>";
@@ -94,8 +99,21 @@
   <?php echo $this->headScript(); ?>
 </head>
 <body style="font-size:11px ;font-family:Arial;background: transparent;">
+  <div class="dropdown mb-72 absolute top-0 left-10">
+    <div tabindex="0" role="button" class="btn m-1">
+      Theme
+      <svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg>
+    </div>
+    <ul tabindex="0" class="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-52">
+      <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="System" value="default"/></li>
+      <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Nord" value="nord"/></li>
+      <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Retro" value="retro"/></li>
+      <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Valentine" value="valentine"/></li>
+      <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Aqua" value="aqua"/></li>
+    </ul>
+  </div>
   <div id="ajax-loader"></div>
-  <div id="dialogDiv"></div>
+  <div id="dialogDiv" class="bg-primary text-primary-content"></div>
   <div id ="container">
     <div id="content">
       <?php

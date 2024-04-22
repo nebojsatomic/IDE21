@@ -26,7 +26,7 @@ filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.myBackground.jp
         .zend_form textarea{width:400px;height:150px;background:#f4f4f4;border:1px solid #555555;}
         .zend_form input[type=text]{padding: 5px; border-radius: 5px 5px 5px 5px;width:100%;height:15px;background:#f4f4f4;border:1px solid #AAAAAA;}
         .zend_form input[type=password]{padding: 5px; border-radius: 5px 5px 5px 5px;width:100%;height:15px;background:#f4f4f4;border:1px solid #555555;}
-        .zend_form input[type=submit]{width:auto;height:auto;background:#555555;border:1px solid silver;color:white; padding: 5px; border-radius: 5px 5px 5px 5px;}
+        .zend_form input[type=submit]{width:auto;height:auto;/* background:#555555; */border:1px solid silver;color:white;padding: 5px;border-radius: 5px 5px 5px 5px;}
         .zend_form input[type=submit]:hover{width:auto;background:#f4f4f4;border:1px solid silver;color:#555555;}              
         input{}
         .loginFormNet input{width:140px;background:lightblue;opacity:0.8;border:1px solid #555555;padding:2px;padding-left:4px;}        
