@@ -26,7 +26,7 @@
 ?>
 <?php require("css_browser_selector.php"); ?>
 <!DOCTYPE html>
-<html lang="en" class="<?php echo css_browser_selector() ?>">
+<html lang="en" class="<?php echo css_browser_selector() ?>" data-theme="nord">
 <head>
   <meta name="keywords" content="<?php echo $this->meta_description;?>" />
   <meta name="description" content="<?php echo $this->meta_description;?>" />
@@ -109,7 +109,6 @@
       <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Nord" value="nord"/></li>
       <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Retro" value="retro"/></li>
       <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Valentine" value="valentine"/></li>
-      <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Aqua" value="aqua"/></li>
     </ul>
   </div>
   <div id="ajax-loader"></div>

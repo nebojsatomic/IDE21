@@ -54,11 +54,11 @@ li {
     background: transparent;
 }
 
-#objProperties input {
+/*#objProperties input {
     height: 15px;
     width: 50px;
     margin: 1px;
-}
+}*/
 
 #rotate {
     height: auto;
@@ -551,15 +551,15 @@ span.ui-button-text {
 
 .a_delete {
     text-decoration: none;
-    background: transparent url(/images/interface/note_delete.gif) no-repeat;
-    padding-left: 20px;
-    cursor: pointer;
+    /*background: transparent url(/images/interface/note_delete.gif) no-repeat;
+    padding-left: 20px;*/
+    /*cursor: pointer;
     color: #555555;
     font-family: Arial;
-    font-size: 12px;
+    font-size: 12px;*/
 }
 
-.a_preview {
+/*.a_preview {
     text-decoration: none;
     background: transparent url(/images/interface/image.gif) no-repeat;
     padding-left: 20px;
@@ -567,7 +567,7 @@ span.ui-button-text {
     color: #555555;
     font-family: Arial;
     font-size: 12px;
-}
+}*/
 
 .a_refresh {
     text-decoration: none;
@@ -579,7 +579,7 @@ span.ui-button-text {
     font-size: 12px;
 }
 
-.a_save {
+/*.a_save {
     text-decoration: none;
     background: transparent url(/images/interface/save.gif) no-repeat;
     padding-left: 20px;
@@ -587,9 +587,9 @@ span.ui-button-text {
     color: #555555 ;
     font-family: Arial;
     font-size: 12px;
-}
+}*/
 
-.a_save_new {
+/*.a_save_new {
     text-decoration: none;
     background: transparent url(/images/interface/save_new.gif) no-repeat;
     padding-left: 20px;
@@ -597,7 +597,7 @@ span.ui-button-text {
     color: #555555 ;
     font-family: Arial;
     font-size: 12px;
-}
+}*/
 
 .a_new {
     text-decoration: none;
@@ -609,7 +609,7 @@ span.ui-button-text {
     font-size: 12px;
 }
 
-.a_open {
+/*.a_open {
     text-decoration: none;
     background: transparent url(/images/interface/open.gif) no-repeat;
     padding-left: 20px;
@@ -617,7 +617,7 @@ span.ui-button-text {
     color: #555555 ;
     font-family: Arial;
     font-size: 12px;
-}
+}*/
 
 .a_edit {
     text-decoration: none;
@@ -639,7 +639,7 @@ span.ui-button-text {
     font-size: 12px;
 }
 
-.a_content {
+/*.a_content {
     text-decoration: none;
     background: transparent url(/images/interface/content.gif) no-repeat;
     padding-left: 25px;
@@ -647,7 +647,7 @@ span.ui-button-text {
     color: #555555;
     font-family: Arial;
     font-size: 12px;
-}
+}*/
 
 .a_generateCache {
     text-decoration: none;
@@ -659,7 +659,7 @@ span.ui-button-text {
     font-size: 12px;
 }
 
-.a_emptyCache {
+/*.a_emptyCache {
     text-decoration: none;
     background: transparent url(/images/interface/empty_cache.gif) no-repeat;
     padding-left: 25px;
@@ -667,9 +667,9 @@ span.ui-button-text {
     color: #555555;
     font-family: Arial;
     font-size: 12px;
-}
+}*/
 
-.a_backup {
+/*.a_backup {
     text-decoration: none;
     background: transparent url(/images/interface/backup.png) no-repeat 0px -2px;
     padding-left: 25px;
@@ -677,7 +677,7 @@ span.ui-button-text {
     color: #555555;
     font-family: Arial;
     font-size: 12px;
-}
+}*/
 
 .a_access {
     text-decoration: none;
@@ -785,7 +785,7 @@ span.ui-button-text {
     text-decoration: none;
     color: white
 }
-
+/*
 .a_delete:hover {
     text-decoration: none;
     background: transparent url(/images/interface/note_delete.gif) no-repeat;
@@ -793,14 +793,14 @@ span.ui-button-text {
     cursor: pointer;
     color: #3d4752
 }
-
-.a_preview:hover {
+*/
+/*.a_preview:hover {
     text-decoration: none;
     background: transparent url(/images/interface/image.gif) no-repeat;
     padding-left: 20px;
     cursor: pointer;
     color: #3d4752
-}
+}*/
 
 .a_refresh:hover {
     text-decoration: none;
@@ -810,7 +810,7 @@ span.ui-button-text {
     color: #3d4752
 }
 
-.a_save:hover {
+/*.a_save:hover {
     text-decoration: none;
     background: transparent url(/images/interface/save.gif) no-repeat;
     padding-left: 20px;
@@ -824,7 +824,7 @@ span.ui-button-text {
     padding-left: 20px;
     cursor: pointer;
     color: #3d4752
-}
+}*/
 
 .a_new:hover {
     text-decoration: none;
@@ -834,13 +834,13 @@ span.ui-button-text {
     color: #3d4752 ;
 }
 
-.a_open:hover {
+/*.a_open:hover {
     text-decoration: none;
     background: transparent url(/images/interface/open.gif) no-repeat;
     padding-left: 20px;
     cursor: pointer;
     color: #3d4752
-}
+}*/
 
 .a_edit:hover {
     text-decoration: none;
@@ -850,13 +850,13 @@ span.ui-button-text {
     color: #3d4752
 }
 
-.a_content:hover {
+/*.a_content:hover {
     text-decoration: none;
-    /* background: transparent url(/images/interface/content.gif) no-repeat; */
+     background: transparent url(/images/interface/content.gif) no-repeat; 
     padding-left: 25px;
     cursor: pointer;
     color: #3d4752
-}
+}*/
 
 .a_add:hover {
     text-decoration: none;
@@ -874,21 +874,21 @@ span.ui-button-text {
     color: #3d4752 ;
 }
 
-.a_emptyCache:hover {
+/*.a_emptyCache:hover {
     text-decoration: none;
     background: transparent url(/images/interface/empty_cache.gif) no-repeat ;
     padding-left: 25px;
     cursor: pointer;
     color: #3d4752 ;
-}
+}*/
 
-.a_backup:hover {
+/*.a_backup:hover {
     text-decoration: none;
     background: transparent url(/images/interface/backup.png) no-repeat 0px -2px;
     padding-left: 25px;
     cursor: pointer;
     color: #3d4752 ;
-}
+}*/
 
 .a_access:hover {
     text-decoration: none;
@@ -1065,9 +1065,9 @@ input[type=checkbox] {
 }
 
 #rotate select {
-    background: #E6E6E6;
+    /*background: #E6E6E6;
     border: 1px solid #cccccc;
-    width: 180px;
+    width: 180px;*/
     font-size: 12px;
     font-family: Arial;
 }
@@ -1106,13 +1106,13 @@ input[type=submit]:hover {
     border: 1px solid #cccccc;
 }
 
-#rotate #langName {
+/*#rotate #langName {
     background: rgb(196, 213, 230) none repeat scroll 0% 0%;
     text-align: left;
     border-radius: 15px;
     width: auto;
     min-width: 100px;
-}
+}*/
 
 .pagnext {
     text-decoration: none;
@@ -1145,9 +1145,9 @@ input[type=submit]:hover {
     float: left;
 }
 
-#fragment-1 input {
+/*#fragment-1 input {
     border-radius: 5px;
-}
+}*/
 
 #fragment-1 span.cl {
     clear: both;
@@ -1173,21 +1173,21 @@ div.selector span {
     margin-left: 0px;
 }
 
-#fragment-1 dd {
+/*#fragment-1 dd {
     display: block;
     float: right;
     position: relative;
     width: auto;
-}
+}*/
 
-#chooseLangAdminForm {
+/*#chooseLangAdminForm {
     display: block;
     float: right;
     position: absolute;
     right: 0;
     top: -15px;
     width: auto;
-}
+}*/
 
 .cssjswrapp {
     /* background:silver; */
@@ -1214,7 +1214,7 @@ div.selector span {
 
 .ui-dialog .ui-dialog-titlebar-close span {
     display: block;
-    margin: -2px !important;
+    /*margin: -2px !important;*/
     width: 15px;
 }
 
@@ -1237,9 +1237,9 @@ div.selector span {
     float: left;
 }
 
-#dialogDivImages {
+/*#dialogDivImages {
     background: silver;
-}
+}*/
 
 #TB_window {
     z-index: 999998 !important;

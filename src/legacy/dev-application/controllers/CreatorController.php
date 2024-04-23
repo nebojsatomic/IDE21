@@ -337,7 +337,7 @@ class CreatorController extends NetActionController
                 'categoryNameAssign' => array('select', array(
                     'required' => true,
                     'label' => $this->_translate->_('Assign category to this page:'),
-                    'class' => 'help',
+                    'class' => 'help select select-xs w-full max-w-xs mb-2',
                     'title' => $this->_translate->_('Put this page in a specific category'),
                     'style' => 'width:190px;',
                     'size' => '1',
@@ -377,7 +377,7 @@ class CreatorController extends NetActionController
                 'menuNameAssign' => array('select', array(
                     'required' => true,
                     'label' => $this->_translate->_('Assign this page to menu:'),
-                    'class' => 'help',
+                    'class' => 'help select select-xs w-full max-w-xs mb-2',
                     'title' => $this->_translate->_('Select the menu in which you would like to have this page'),
                     'style' => 'width:190px;',
                     'size' => '1',
@@ -457,9 +457,9 @@ class CreatorController extends NetActionController
                 'elements' => array(
                     'langName' => array('select', array(
                         'required' => true,
-                        'label' => '',
-                        'style' => 'float:right;',
-                        'class' => 'help select select-info w-full max-w-xs',
+                        'label' => 'Template/Page language',
+                        /*'style' => 'float:right;',*/
+                        'class' => 'help select select-xs w-full max-w-xs mb-2',
                         'title' => $this->_translate->_('Choose the language of the pages on which you want to work'),
                         'size' => '1',
                         'multioptions' => $langArray,
@@ -658,10 +658,10 @@ class CreatorController extends NetActionController
             'elements' => array(
                 'templateChanger' => array('select', array(
                     'required' => true,
-                    'label' => '',
-                    'class' => 'help',
+                    'label' => 'Select the template for this page',
+                    'class' => 'help select select-xs w-full max-w-xs mb-2',
                     'title' => $this->_translate->_('Change the template of this page'),
-                    'style' => 'width:180px',
+                    /*'style' => 'width:180px',*/
                     'multioptions' => $templateArray,
                     'value' => @$valueSelected
                 )),
