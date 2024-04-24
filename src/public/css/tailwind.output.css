@@ -2868,6 +2868,11 @@ input.tab:checked + .tab-content,
   padding: 0px;
 }
 
+[type="checkbox"].checkbox-sm {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
 .input-sm {
   height: 2rem;
   padding-left: 0.75rem;
@@ -2914,6 +2919,11 @@ input.tab:checked + .tab-content,
   border-start-start-radius: 0;
   border-end-end-radius: inherit;
   border-start-end-radius: inherit;
+}
+
+[type="radio"].radio-sm {
+  height: 1.25rem;
+  width: 1.25rem;
 }
 
 .select-xs {
@@ -3135,12 +3145,26 @@ input.tab:checked + .tab-content,
   z-index: 1;
 }
 
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
+
 .\!-m-px {
   margin: -1px !important;
 }
 
 .m-1 {
   margin: 0.25rem;
+}
+
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .mb-10 {
@@ -3177,6 +3201,10 @@ input.tab:checked + .tab-content,
 
 .inline {
   display: inline;
+}
+
+.flex {
+  display: flex;
 }
 
 .table {
@@ -3220,12 +3248,32 @@ input.tab:checked + .tab-content,
   height: 100vh;
 }
 
+.h-full {
+  height: 100%;
+}
+
+.h-52 {
+  height: 13rem;
+}
+
+.h-6 {
+  height: 1.5rem;
+}
+
+.h-40 {
+  height: 10rem;
+}
+
 .max-h-2 {
   max-height: 0.5rem;
 }
 
 .max-h-5 {
   max-height: 1.25rem;
+}
+
+.min-h-60 {
+  min-height: 15rem;
 }
 
 .\!w-px {
@@ -3282,12 +3330,36 @@ input.tab:checked + .tab-content,
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .place-items-center {
   place-items: center;
 }
 
+.content-stretch {
+  align-content: stretch;
+}
+
+.items-center {
+  align-items: center;
+}
+
 .justify-start {
   justify-content: flex-start;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
 }
 
 .self-end {
@@ -3377,8 +3449,24 @@ input.tab:checked + .tab-content,
   padding: 0.5rem;
 }
 
+.pt-4 {
+  padding-top: 1rem;
+}
+
+.pl-3 {
+  padding-left: 0.75rem;
+}
+
 .align-\[-0\.125em\] {
   vertical-align: -0.125em;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-black {
+  font-weight: 900;
 }
 
 .lowercase {

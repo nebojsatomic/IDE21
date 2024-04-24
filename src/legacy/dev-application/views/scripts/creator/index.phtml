@@ -97,76 +97,70 @@
       </ul>
       <div id="fragment-1">
         <form id="objProperties" name="objProperties" objId="" action="<?php echo $this->host;?>save" method="post">
-          <table id="tableFr1">
-            <tr>
-              <td colspan="3">
-              <a href="" id="toggleVisibilityRowAnchor" class="navLinks a_content noAjaxEvent btn btn-secondary btn-xs mb-4 " title="<?php echo $this->translate->_("Toggle visibility for style, tinymce and meta");?>"><?php echo $this->translate->_("Object Editors");?></a>
+        
+        <div class="grid">  
+            <div class="flex item-strech gap-2">
+              <a href="" id="toggleVisibilityRowAnchor" class="navLinks a_content noAjaxEvent btn btn-secondary btn-xs mb-2 " title="<?php echo $this->translate->_("Toggle visibility for style, tinymce and meta");?>"><?php echo $this->translate->_("Object Editors");?></a>
 
-              <a id="previewButton" class="a_preview help btn btn-secondary btn-xs mb-4" target="_blank" href="" title="<?php echo $this->translate->_("Click this to go to the page and see how it looks!");?>"><?php echo $this->translate->_("View Page");?></a>
-              <a id="emptyCacheButton" class="navLinks a_emptyCache help btn btn-secondary btn-xs mb-4" href="" title="<?php echo $this->translate->_("Click this to empty the cache if you have made changes that require cache to be cleaned!");?>"><?php echo $this->translate->_("Empty Cache");?> </a>
-              <a id="backupSiteButton" class="navLinks a_backup help btn btn-secondary btn-xs mb-4" href="" title="<?php echo $this->translate->_("Click here to have backup of the site in a folder that is created for that purpose.If system command is disabled then it must be done through phpMyAdmin...");?>"><?php echo $this->translate->_("Backup Site");?> </a>
+              <a id="previewButton" class="a_preview help btn btn-secondary btn-xs mb-2" target="_blank" href="" title="<?php echo $this->translate->_("Click this to go to the page and see how it looks!");?>"><?php echo $this->translate->_("View Page");?></a>
+              <a id="emptyCacheButton" class="navLinks a_emptyCache help btn btn-secondary btn-xs mb-2" href="" title="<?php echo $this->translate->_("Click this to empty the cache if you have made changes that require cache to be cleaned!");?>"><?php echo $this->translate->_("Empty Cache");?> </a>
+              <a id="backupSiteButton" class="navLinks a_backup help btn btn-secondary btn-xs mb-2" href="" title="<?php echo $this->translate->_("Click here to have backup of the site in a folder that is created for that purpose.If system command is disabled then it must be done through phpMyAdmin...");?>"><?php echo $this->translate->_("Backup Site");?> </a>
 
-              <div class="card w-full"></div>
+              <!--<a id="generateCacheButton" class="navLinks a_generateCache" style="display:block" href="" >Generate Cache </a>-->
 
-              <!--<a id="generateCacheButton" class="navLinks a_generateCache" style="display:block" href="" >Generate Cache </a>
-            -->
-          </td>
-          <td>
-            <div id="p_t_common" class="noAjaxEvent">
+            <div id="p_t_common" class="noAjaxEvent flex item-strech gap-2 items-center h-6">
 
-              <span><?php echo $this->translate->_("Page");?></span><span><input style="width:20px;" id="pageDisplayer" class="noAjaxEvent help" type="radio" name="p_g" value="pageEditing" checked="checked" title="<?php echo $this->translate->_("Page creating Mode");?>" /></span>
-              <span><?php echo $this->translate->_("Template");?></span><span><input style="width:20px;" id="templateDisplayer" class="noAjaxEvent help" type="radio" name="p_g" value="templateEditing" title="<?php echo $this->translate->_("Template creating Mode");?>" /></span>
+              <span><?php echo $this->translate->_("Page");?></span><span><input id="pageDisplayer" class="noAjaxEvent help radio-sm" type="radio" name="p_g" value="pageEditing" checked="checked" title="<?php echo $this->translate->_("Page creating Mode");?>" /></span>
+              <span><?php echo $this->translate->_("Template");?></span><span><input  id="templateDisplayer" class="noAjaxEvent help radio-sm" type="radio" name="p_g" value="templateEditing" title="<?php echo $this->translate->_("Template creating Mode");?>" /></span>
             </div>
+        </div>
+        <div id="toggleVisibilityRow" class="grid grid-cols-4 place-items-strech gap-4" style="display:none">
 
-          </td>
-
-        </tr>
-
-        <tr id="toggleVisibilityRow" style="display:none">
-          <td>
-            <?php echo $this->translate->_("Style for this object");?>:<br />
-              <textarea id="objPropertiesCSS" name="objPropertiesCSS" style="height:232px;" class="help" title="<?php echo $this->translate->_("Style for this object");?>">
+            <div class="h-52">
+              <?php echo $this->translate->_("Style for this object");?>:
+              <textarea id="objPropertiesCSS" name="objPropertiesCSS" class="help textarea min-h-60" title="<?php echo $this->translate->_("Style for this object");?>">
               </textarea>
-            </td>
-
-            <td colspan="2">
-              <br />
+            </div>
+            <div class="col-span-2 pt-4">
               <textarea id="objPropertiesHtmlTiny" name="objPropertiesHtmlTiny" style="height:100px;">
               </textarea>
-            </td>
+            </div>
 
-            <td>
-              <div id="descKeyDiv">
-                DESCRIPTION:
-                <textarea id="pageDescription" name="pageDescription" style="width:190px;height:100px;" class="help" title="<?php echo $this->translate->_("Here write the description for your page, which will make it Search Engine Optimized...");?>">
-                  <?php echo $this->description;?>
-                </textarea>
+            <div class="self-top pl-3">
+              <div id="descKeyDiv" class="content-stretch">
+                <div>
+                  DESCRIPTION:
+                  <textarea id="pageDescription" name="pageDescription" class="help textarea h-40" title="<?php echo $this->translate->_("Here write the description for your page, which will make it Search Engine Optimized...");?>">
+                    <?php echo $this->description;?>
+                  </textarea>
+                </div>
 
-                KEYWORDS:
-                <textarea id="pageKeywords" name="pageKeywords" style="width:190px;height:110px;" class="help" title="<?php echo $this->translate->_("Here write the keywords for your page, which will make it Search Engine Optimized...");?>">
-                  <?php echo $this->keywords;?>
-                </textarea>
+                <div>
+                  KEYWORDS:
+                  <textarea id="pageKeywords" name="pageKeywords"class="help textarea" title="<?php echo $this->translate->_("Here write the keywords for your page, which will make it Search Engine Optimized...");?>">
+                    <?php echo $this->keywords;?>
+                  </textarea>
+                </div>
               </div>
-            </td>
-          </tr>
-          <tr>
-            <td >
-              <div style="width:70px;float:left;text-align:left;font-weight:bold;" ><?php echo $this->translate->_("Page ID");?>:</div> <div id="pgID" ><?php echo $this->pageId;?></div>
-            </td>
-            <td>
+            </div>
+          </div>
+
+          <div class="flex item-strech gap-2 my-2">
+              <div class="font-black" ><?php echo $this->translate->_("Page ID");?>:</div><div id="pgID" ><?php echo $this->pageId;?>
+                
+              </div>
+
               <div style="width:auto;float:left;font-weight:bold;padding-left:5px;" ><?php echo $this->translate->_("ObjectID");?>:</div> <div style="width:auto" id="objIDshow"></div>
-            </td>
-          </tr>
+          </div>
 
 
-          <tr>
-            <td>
-
+          <div class="grid grid-cols-4 place-items-strech gap-4" >
+            <div class="">
               <div style="width:100%;float:left;">
-                <div class="creatorDiv"><span class="cl"><?php echo $this->translate->_("ID Assistant");?></span><span><input id="tttoggle" type="checkbox" style="margin-right:0px;" /></span></div>
-                <div class="creatorDiv"><span class="cl"><?php echo $this->translate->_("Show hidden");?>:</span><span><input id="showFooterCheck" name="showFooterCheck" type="checkbox" style="margin-right:-0px;" /></span></div>
-                <div class="creatorDiv"><span class="cl"><?php echo $this->translate->_("Shadow");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent" id="aParamShadow" title="<?php echo $this->translate->_("Click to set shadow params");?>"></a><input id="shadowCheck" type="checkbox" style="margin-right:0px;" /></span></div>
-                <div class="creatorDiv"><span class="cl"><?php echo $this->translate->_("Corner");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent" id="aParamCorner" title="<?php echo $this->translate->_("Click to set corner params");?>"></a><input id="cornerCheck" type="checkbox" style="margin-right:0px;"  /></span></div>
+                <div class="creatorDiv"><span class="cl"><?php echo $this->translate->_("ID Assistant");?></span><span><input id="tttoggle" type="checkbox"  class="checkbox-sm" /></span></div>
+                <div class="creatorDiv"><span class="cl"><?php echo $this->translate->_("Show hidden");?>:</span><span><input id="showFooterCheck" name="showFooterCheck" type="checkbox" class="checkbox-sm" /></span></div>
+                <div class="creatorDiv"><span class="cl"><?php echo $this->translate->_("Shadow");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent" id="aParamShadow" title="<?php echo $this->translate->_("Click to set shadow params");?>"></a><input id="shadowCheck" type="checkbox" class="checkbox-sm"  /></span></div>
+                <div class="creatorDiv"><span class="cl"><?php echo $this->translate->_("Corner");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent" id="aParamCorner" title="<?php echo $this->translate->_("Click to set corner params");?>"></a><input id="cornerCheck" type="checkbox" class="checkbox-sm"  /></span></div>
               </div>
 
               <div id="fontCont" style="display:none;">
@@ -209,8 +203,9 @@
               <div class="">
                 <a href="" id="deletePage" class="navLinks a_delete btn btn-error btn-sm mt-2 text-content-secondary p-2 max-h-2" title="<?php echo $this->translate->_("Click to delete this page");?>"><?php echo $this->translate->_("Delete This Page");?></a>
               </div>
-            </td>
-            <td>
+
+            </div>
+            <div class="">            
               <span class="cl"><?php echo $this->translate->_("Width");?>:</span><span><input id="objPropertiesWidth" name="objPropertiesWidth"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
               <span class="cl"><?php echo $this->translate->_("Height");?>:</span><span><input id="objPropertiesHeight" name="objPropertiesHeight"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
               <span class="cl"><?php echo $this->translate->_("Border");?>:</span><span><input id="objPropertiesBorder" name="objPropertiesBorder"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
@@ -223,9 +218,8 @@
               <span class="cl">BgImage:</span><span><input id="objPropertiesBackgroundImage" name="objPropertiesBackgroundImage"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" style="width:50px" /></span>
               <span class="cl">class:</span><span><input id="objPropertiesClass" name="objPropertiesClass"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" style="width:50px" /></span>
 
-            </td>
-            <td >
-
+            </div>
+            <div class="">
               <a href="" id="newPage" class="navLinks a_new" style="display:none" title="<?php echo $this->translate->_("Click to create new page");?>"><?php echo $this->translate->_("New Page");?></a>
               <a href="<?php echo $this->host;?>creator/manage-all-pages?height=450&width=900" id="manageAllPages" class="thickbox btn btn-secondary btn-sm mb-4" title="<?php echo $this->translate->_("Manage All Pages");?>"><b><?php echo $this->translate->_("Manage All Pages");?></b></a><br />
               <a href="" id="openPage" class="navLinks a_open btn btn-secondary btn-xs mb-2" title="<?php echo $this->translate->_("Click to open existing page");?>"><?php echo $this->translate->_("Open Page");?></a>
@@ -237,21 +231,21 @@
 
                 <div class="card w-full">
                   
-                  <div class="creatorDiv" style="float:left" ><input id="allLangCheck" type="checkbox" style="float:left;margin:0;margin-left:-15px;" /><?php echo $this->translate->_("Apply to all languages");?></div>
+                  <div class="creatorDiv" style="float:left" ><input id="allLangCheck" type="checkbox" class="checkbox-sm" /><?php echo $this->translate->_("Apply to all languages");?></div>
                   
-                  <div id="restrictiveDiv" style="float:left;" ><input id="restrictiveCB" type="checkbox" style="float:left;margin:0;margin-left:-15px;"  /><?php echo $this->translate->_("Restrictive");?> 
+                  <div id="restrictiveDiv" style="float:left;" ><input id="restrictiveCB" type="checkbox" class="checkbox-sm"  /><?php echo $this->translate->_("Restrictive");?> 
                     <a href="" style="display:none" id="openPagePermisions" class="navLinks a_access" title="<?php echo $this->translate->_("Click to set permissions for this page");?>"><?php echo $this->translate->_("Permissions");?></a>
                     <div id="allowedRolesDiv"></div>
                   </div>
 
                   <div id="boundDiv">
-                    <input id="boundCB" type="checkbox" checked="checked" style="float:left;margin:0;margin-left:-15px;" /><?php echo $this->translate->_("Relative to Content Area");?> 
+                    <input id="boundCB" type="checkbox" checked="checked" class="checkbox-sm" /><?php echo $this->translate->_("Relative to Content Area");?> 
                   </div>
 
                 </div>
 
                 <div style="width:70px;float:left;display:none;" ><?php echo $this->translate->_("Template ID");?>:</div> <div id="templateID" style="display:none;"><?php echo $this->templateId;?></div>
-                <!--template changer-->
+                
                 <div id="templateChangerDiv" class="card w-full"><?php echo $this->changeTemplate;?></div>
 
 
@@ -279,10 +273,8 @@
                 <a href="" id="installTemplate" class="navLinks a_save" title="<?php echo $this->translate->_("Click to install exported template");?>"><?php echo $this->translate->_("Install Template");?></a><br />
                 <a href="" id="deleteTemplate" class="navLinks a_delete" title="<?php echo $this->translate->_("Click to delete this template");?>"><?php echo $this->translate->_("Delete This Template");?></a>
               </div>
-            </td>
-
-
-            <td>
+            </div>
+            <div class="">
               <div class="card" >
                 <?php echo $this->langChooserAdmin;?>
               </div>
@@ -307,12 +299,10 @@
 
               </div>
               BodyBg:<input id="template_bodyBg" name="template_bodyBg" type="text" value="" class="input input-sm w-full max-w-xs" /><br />
+          </div>
 
-            </td>
-          </tr>
-
-        </table>
-
+        </div>
+      </div><!-- end container div holding Page/Object-->
       </form>
 
     </div>
