@@ -113,6 +113,11 @@
               <span><?php echo $this->translate->_("Page");?></span><span><input id="pageDisplayer" class="noAjaxEvent help radio-sm" type="radio" name="p_g" value="pageEditing" checked="checked" title="<?php echo $this->translate->_("Page creating Mode");?>" /></span>
               <span><?php echo $this->translate->_("Template");?></span><span><input  id="templateDisplayer" class="noAjaxEvent help radio-sm" type="radio" name="p_g" value="templateEditing" title="<?php echo $this->translate->_("Template creating Mode");?>" /></span>
             </div>
+
+            <div class="w-32" >
+              <?php echo $this->langChooserAdmin;?>
+            </div>
+
         </div>
         <div id="toggleVisibilityRow" class="grid grid-cols-4 place-items-strech gap-4" style="display:none">
 
@@ -156,11 +161,11 @@
 
           <div class="grid grid-cols-4 place-items-strech gap-4" >
             <div class="">
-              <div style="width:100%;float:left;">
-                <div class="creatorDiv"><span class="cl"><?php echo $this->translate->_("ID Assistant");?></span><span><input id="tttoggle" type="checkbox"  class="checkbox-sm" /></span></div>
-                <div class="creatorDiv"><span class="cl"><?php echo $this->translate->_("Show hidden");?>:</span><span><input id="showFooterCheck" name="showFooterCheck" type="checkbox" class="checkbox-sm" /></span></div>
-                <div class="creatorDiv"><span class="cl"><?php echo $this->translate->_("Shadow");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent" id="aParamShadow" title="<?php echo $this->translate->_("Click to set shadow params");?>"></a><input id="shadowCheck" type="checkbox" class="checkbox-sm"  /></span></div>
-                <div class="creatorDiv"><span class="cl"><?php echo $this->translate->_("Corner");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent" id="aParamCorner" title="<?php echo $this->translate->_("Click to set corner params");?>"></a><input id="cornerCheck" type="checkbox" class="checkbox-sm"  /></span></div>
+              <div>
+                <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("ID Assistant");?></span><span><input id="tttoggle" type="checkbox"  class="checkbox-sm float-right" /></span></div>
+                <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("Show hidden");?>:</span><span><input id="showFooterCheck" name="showFooterCheck" type="checkbox" class="checkbox-sm float-right" /></span></div>
+                <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("Shadow");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent" id="aParamShadow" title="<?php echo $this->translate->_("Click to set shadow params");?>"></a><input id="shadowCheck" type="checkbox" class="checkbox-sm float-right"  /></span></div>
+                <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("Corner");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent" id="aParamCorner" title="<?php echo $this->translate->_("Click to set corner params");?>"></a><input id="cornerCheck" type="checkbox" class="checkbox-sm float-right"  /></span></div>
               </div>
 
               <div id="fontCont" style="display:none;">
@@ -205,7 +210,7 @@
               </div>
 
             </div>
-            <div class="">            
+            <div class="grid grid-cols-2 h-64 items-strech">            
               <span class="cl"><?php echo $this->translate->_("Width");?>:</span><span><input id="objPropertiesWidth" name="objPropertiesWidth"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
               <span class="cl"><?php echo $this->translate->_("Height");?>:</span><span><input id="objPropertiesHeight" name="objPropertiesHeight"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
               <span class="cl"><?php echo $this->translate->_("Border");?>:</span><span><input id="objPropertiesBorder" name="objPropertiesBorder"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
@@ -214,9 +219,9 @@
               <span class="cl">PosY:</span><span><input id="objPropertiesY" name="objPropertiesY"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
               <span class="cl">Z-Index:</span><span><input id="objPropertiesZ" name="objPropertiesZ"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
 
-              <span class="cl">BgColor:</span><span><input id="objPropertiesBackground" name="objPropertiesBackground"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" style="width:50px" /></span>
-              <span class="cl">BgImage:</span><span><input id="objPropertiesBackgroundImage" name="objPropertiesBackgroundImage"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" style="width:50px" /></span>
-              <span class="cl">class:</span><span><input id="objPropertiesClass" name="objPropertiesClass"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" style="width:50px" /></span>
+              <span class="cl">BgColor:</span><span><input id="objPropertiesBackground" name="objPropertiesBackground"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
+              <span class="cl">BgImage:</span><span><input id="objPropertiesBackgroundImage" name="objPropertiesBackgroundImage"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
+              <span class="cl">class:</span><span><input id="objPropertiesClass" name="objPropertiesClass"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
 
             </div>
             <div class="">
@@ -246,11 +251,11 @@
 
                 <div style="width:70px;float:left;display:none;" ><?php echo $this->translate->_("Template ID");?>:</div> <div id="templateID" style="display:none;"><?php echo $this->templateId;?></div>
                 
-                <div id="templateChangerDiv" class="card w-full"><?php echo $this->changeTemplate;?></div>
+                <div id="templateChangerDiv" class="card w-full mt-2"><?php echo $this->changeTemplate;?></div>
 
 
-                <div><?php echo $this->translate->_("Page Title");?>:<input id="pageTitle" type="text" name="pageTitle" value="Page <?php echo $this->pageId;?>" /></div><br />
-                <div><?php echo $this->translate->_("Page Image");?>:<input id="pageImage" type="text" name="pageImage" value="<?php echo $this->pageImage;?>" /></div><br />
+                <div class="page-title"><?php echo $this->translate->_("Page Title");?>:<input id="pageTitle" class="w-full h-5" type="text" name="pageTitle" value="Page <?php echo $this->pageId;?>" /></div><br />
+                <div class="page-image"><?php echo $this->translate->_("Page Image");?>:<input id="pageImage" class="w-full h-5" type="text" name="pageImage" value="<?php echo $this->pageImage;?>" /></div><br />
 
               </div>
 
@@ -275,10 +280,6 @@
               </div>
             </div>
             <div class="">
-              <div class="card" >
-                <?php echo $this->langChooserAdmin;?>
-              </div>
-
               <div style="display:none"><?php echo $this->translate->_("Container");?><input id="objContainer" type="checkbox" /></div>
               <?php echo $this->translate->_("Objects on this page");?>:
               <select id="objList" size="4" class="help select w-full h-24 p-1 mb-2" title="<?php echo $this->translate->_("This is the list of all objects in this page/template");?>">

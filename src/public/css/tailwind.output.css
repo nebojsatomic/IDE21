@@ -3149,17 +3149,20 @@ input.tab:checked + .tab-content,
   grid-column: span 2 / span 2;
 }
 
+.col-span-3 {
+  grid-column: span 3 / span 3;
+}
+
+.float-right {
+  float: right;
+}
+
 .\!-m-px {
   margin: -1px !important;
 }
 
 .m-1 {
   margin: 0.25rem;
-}
-
-.my-4 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
 }
 
 .my-2 {
@@ -3240,16 +3243,8 @@ input.tab:checked + .tab-content,
   height: 6rem;
 }
 
-.h-8 {
-  height: 2rem;
-}
-
-.h-screen {
-  height: 100vh;
-}
-
-.h-full {
-  height: 100%;
+.h-40 {
+  height: 10rem;
 }
 
 .h-52 {
@@ -3260,8 +3255,24 @@ input.tab:checked + .tab-content,
   height: 1.5rem;
 }
 
-.h-40 {
-  height: 10rem;
+.h-8 {
+  height: 2rem;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.h-4 {
+  height: 1rem;
+}
+
+.h-5 {
+  height: 1.25rem;
+}
+
+.h-64 {
+  height: 16rem;
 }
 
 .max-h-2 {
@@ -3300,6 +3311,10 @@ input.tab:checked + .tab-content,
   width: 100%;
 }
 
+.w-32 {
+  width: 8rem;
+}
+
 .min-w-64 {
   min-width: 16rem;
 }
@@ -3330,12 +3345,12 @@ input.tab:checked + .tab-content,
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
-.grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .place-items-center {
@@ -3449,20 +3464,16 @@ input.tab:checked + .tab-content,
   padding: 0.5rem;
 }
 
-.pt-4 {
-  padding-top: 1rem;
-}
-
 .pl-3 {
   padding-left: 0.75rem;
 }
 
-.align-\[-0\.125em\] {
-  vertical-align: -0.125em;
+.pt-4 {
+  padding-top: 1rem;
 }
 
-.font-bold {
-  font-weight: 700;
+.align-\[-0\.125em\] {
+  vertical-align: -0.125em;
 }
 
 .font-black {

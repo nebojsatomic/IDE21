@@ -1033,10 +1033,10 @@ input[type=checkbox] {
 }
 
 #rotate input {
-    border: 1px solid #cccccc;
+    /*border: 1px solid #cccccc;
     background: #E6E6E6;
     font-size: 12px;
-    font-family: Arial;
+    font-family: Arial;*/
 }
 
 #rotate label {
@@ -1141,23 +1141,24 @@ input[type=submit]:hover {
 
 /*#rotate #tree li.expandable div{background-position:-80px -2px;}
 #rotate #tree li.collapsable div{background-position:0px -111px;}*/
-#fragment-1 span {
+
+/*#fragment-1 span {
     float: left;
-}
+}*/
 
 /*#fragment-1 input {
     border-radius: 5px;
 }*/
 
-#fragment-1 span.cl {
+/*#fragment-1 span.cl {
     clear: both;
-}
+}*/
 
-#fragment-1 span.cl +span {
+/*#fragment-1 span.cl +span {
     float: right;
-}
+}*/
 
-#fragment-1 #tableFr1 td {
+/*#fragment-1 #tableFr1 td {
     vertical-align: top;
     text-align: left;
 }
@@ -1165,7 +1166,9 @@ input[type=submit]:hover {
 #fragment-1 .mceLayout tbody tr {
     display: table;
     margin-bottom: 0px;
-}
+}*/
+
+#langName-label { display:none; }
 
 div.selector span {
     padding-right: 0px !important;
