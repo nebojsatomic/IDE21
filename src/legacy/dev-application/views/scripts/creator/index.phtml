@@ -37,9 +37,9 @@
 <div id="delButton" class="help" title="<?php echo $this->translate->_("Click to delete selected object");?>"></div>
 <div id="newItem" class="help" title="<?php echo $this->translate->_("Click to create new object on this page");?>"></div>
 <div id="cloneItem" class="help" title="<?php echo $this->translate->_("Click to create clone object");?>"></div>
-<div id="moveProps" class="help" title="<?php echo $this->translate->_("Click to move around properties dialog");?>">
+<!-- <div id="moveProps" class="help" title="<?php echo $this->translate->_("Click to move around properties dialog");?>">
   <button id="upB"></button> <button id="downB"></button>
-</div>
+</div> -->
 <div id="logout"  class="help" title="<?php echo $this->translate->_("Click to logout");?>"><a id="logout_a" class="a_logout" href="<?php echo $this->host;?>creator/logout" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
 <div id="penPointer"></div>
 <div id="downPointer"></div>
@@ -75,14 +75,14 @@
 </form>
 
 
-<div id="contProperties">
+<div id="contProperties" class="mx-auto inset-x-0">
   <div id="propertiesLeft">
     <h2><?php echo $this->translate->_("Welcome to NeT.Objects!");?></h2>
     <p><?php echo $this->translate->_("Drag & Drop items from toolbox to create objects on the page");?></p>
   </div>
 
   <div id="properties">
-    <div id="rotate" class="card bg-primary text-primary-content" data-theme="">
+    <div id="rotate" class="card bg-primary text-primary-content shadow-lg" data-theme="">
       <ul class="tabs tabs-boxed">
         <li role="tab" class="help tab" description="<?php echo $this->translate->_("Contains properties of page and objects");?>"><a href="#fragment-1" id="poA"><span><?php echo $this->translate->_("Page/Object");?></span></a></li>
         <li role="tab"  class="help tab" description="<?php echo $this->translate->_("Contains Menu management");?>"><a href="#fragment-2" id="MenuA"><span><?php echo $this->translate->_("Menus");?></span></a></li>
@@ -99,7 +99,7 @@
         <form id="objProperties" name="objProperties" objId="" action="<?php echo $this->host;?>save" method="post">
         
         <div class="grid">  
-            <div class="flex item-strech gap-2">
+            <div class="flex item-strech gap-2 justify-between">
               <a href="" id="toggleVisibilityRowAnchor" class="navLinks a_content noAjaxEvent btn btn-secondary btn-xs mb-2 " title="<?php echo $this->translate->_("Toggle visibility for style, tinymce and meta");?>"><?php echo $this->translate->_("Object Editors");?></a>
 
               <a id="previewButton" class="a_preview help btn btn-secondary btn-xs mb-2" target="_blank" href="" title="<?php echo $this->translate->_("Click this to go to the page and see how it looks!");?>"><?php echo $this->translate->_("View Page");?></a>
@@ -160,8 +160,8 @@
 
 
           <div class="grid grid-cols-4 place-items-strech gap-4" >
-            <div class="">
-              <div>
+            <div class="grid gap-y-1 content-start">
+              <div class="grid mt-1 gap-y-1 h-24">
                 <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("ID Assistant");?></span><span><input id="tttoggle" type="checkbox"  class="checkbox-sm float-right" /></span></div>
                 <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("Show hidden");?>:</span><span><input id="showFooterCheck" name="showFooterCheck" type="checkbox" class="checkbox-sm float-right" /></span></div>
                 <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("Shadow");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent" id="aParamShadow" title="<?php echo $this->translate->_("Click to set shadow params");?>"></a><input id="shadowCheck" type="checkbox" class="checkbox-sm float-right"  /></span></div>
@@ -173,7 +173,7 @@
                 <a id="fontBigger" style="width:30px;height:30px;"><img src="<?php echo $this->host;?>images/interface/fontPlus.png" /></a><a id="fontSmaller" style="width:30px;height:30px;"><img src="<?php echo $this->host;?>images/interface/fontMinus.png" /></a>
               </div>
 
-              <div class="">
+              <div class="mt-4">
                 <?php echo $this->translate->_("Type");?>:
               
                 <select id="objType" class="help select  select-xs mt-1 w-full max-w-xs"  description="<?php echo $this->translate->_("Choose the type of the selected object, after you do it, follow the instructions");?>">
@@ -192,7 +192,7 @@
                 </select>
               </div>
 
-              <div class="">
+              <div class="mt-4">
                 <?php echo $this->translate->_("Theme");?>:
                 <select id="objTheme" class="help select  select-xs mt-1 w-full max-w-xs" description="<?php echo $this->translate->_("Choose the theme for the selected object");?>">
                   <option value="no">None</option>
@@ -205,7 +205,7 @@
                 </select>
               </div>
 
-              <div class="">
+              <div class="mt-4">
                 <a href="" id="deletePage" class="navLinks a_delete btn btn-error btn-sm mt-2 text-content-secondary p-2 max-h-2" title="<?php echo $this->translate->_("Click to delete this page");?>"><?php echo $this->translate->_("Delete This Page");?></a>
               </div>
 
@@ -259,24 +259,26 @@
 
               </div>
 
-              <div id="templateEditing" style="display:none;">
-                <div style="width:70px;float:left;text-align:left;" >
-                  <?php echo $this->translate->_("Template ID");?>:</div> 
-                <div id="templateIDediting" ><?php echo $this->templateIdEdit;?></div>
+              <div id="templateEditing" class="grid gap-y-1" style="display:none;">
+                <div>
+                  <div style="width:70px;float:left;text-align:left;" >
+                    <?php echo $this->translate->_("Template ID");?>:</div> 
+                  <div id="templateIDediting" ><?php echo $this->templateIdEdit;?></div>
+                </div>
                 <div style="width:100%;float:left;text-align:left;" >
                   <?php echo $this->translate->_("Template name");?>:
                   <input id="templateTitle" type="text" name="templateTitle" value="<?php echo $this->templateName;?>" class="input input-bordered input-sm w-full max-w-xs" />
                 </div>
 
-                <a href="" id="applyTemplate" class="navLinks a_edit" title="<?php echo $this->translate->_("Click to edit existing template");?>"><?php echo $this->translate->_("Edit template");?></a>
-                <a href="" id="saveThisTemplate" class="navLinks a_save" title="<?php echo $this->translate->_("Click to save work on this template");?>"><?php echo $this->translate->_("Save Template");?></a><br />
-                <a href="" id="saveAsTemplate" class="navLinks a_save_new"  title="<?php echo $this->translate->_("Click to save this work as template");?>"><?php echo $this->translate->_("Save As New Template");?></a><br />
-                <div class="creatorDiv"><input id="allLangCheckTemplate" type="checkbox" /><?php echo $this->translate->_("Apply to all languages");?></div>
-                <div id="DefaultTemplateChangerDiv" ><input id="templateDefaultCB" type="checkbox" name="templateDefaultCB" /><?php echo $this->translate->_("Default Template");?></div>
+                <a href="" id="applyTemplate" class="navLinks a_edit btn btn-secondary btn-xs" title="<?php echo $this->translate->_("Click to edit existing template");?>"><?php echo $this->translate->_("Edit template");?></a>
+                <a href="" id="saveThisTemplate" class="navLinks a_save btn btn-secondary btn-xs" title="<?php echo $this->translate->_("Click to save work on this template");?>"><?php echo $this->translate->_("Save Template");?></a><br />
+                <a href="" id="saveAsTemplate" class="navLinks a_save_new btn btn-secondary btn-xs"  title="<?php echo $this->translate->_("Click to save this work as template");?>"><?php echo $this->translate->_("Save As New Template");?></a><br />
+                <div class="creatorDiv"><input id="allLangCheckTemplate" class="checkbox-sm" type="checkbox" /><?php echo $this->translate->_("Apply to all languages");?></div>
+                <div id="DefaultTemplateChangerDiv" ><input id="templateDefaultCB" class="checkbox-sm" type="checkbox" name="templateDefaultCB" /><?php echo $this->translate->_("Default Template");?></div>
 
-                <a href="" id="exportTemplate" class="navLinks a_edit" title="<?php echo $this->translate->_("Click to export this template for use on another installation.");?>"><?php echo $this->translate->_("Export template");?></a><br />
-                <a href="" id="installTemplate" class="navLinks a_save" title="<?php echo $this->translate->_("Click to install exported template");?>"><?php echo $this->translate->_("Install Template");?></a><br />
-                <a href="" id="deleteTemplate" class="navLinks a_delete" title="<?php echo $this->translate->_("Click to delete this template");?>"><?php echo $this->translate->_("Delete This Template");?></a>
+                <a href="" id="exportTemplate" class="navLinks a_edit btn btn-secondary btn-xs" title="<?php echo $this->translate->_("Click to export this template for use on another installation.");?>"><?php echo $this->translate->_("Export template");?></a><br />
+                <a href="" id="installTemplate" class="navLinks a_save btn btn-secondary btn-xs" title="<?php echo $this->translate->_("Click to install exported template");?>"><?php echo $this->translate->_("Install Template");?></a><br />
+                <a href="" id="deleteTemplate" class="navLinks a_delete btn btn-sm btn-secondary btn-error" title="<?php echo $this->translate->_("Click to delete this template");?>"><?php echo $this->translate->_("Delete This Template");?></a>
               </div>
             </div>
             <div class="">

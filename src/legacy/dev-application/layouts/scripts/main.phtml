@@ -27,7 +27,7 @@
 */
 ?>
 <!DOCTYPE html>
-<html>
+<html data-theme="retro">
 <head>
   <meta name="keywords" content="<?php echo $this->meta_keywords;?>" />
   <meta name="description" content="<?php echo $this->meta_description;?>" />
@@ -51,6 +51,9 @@
     }
   }
   ?>
+  <link href="/css/tailwind.output.css" rel="stylesheet" type="text/css" />
+  <script src="/daisy/daisyui.tailwind.3.4.3.js"></script>
+
   <script type="text/javascript" >
   absoluteUrl = "<?php echo $this->host;?>";
   templateId =  "<?php echo $this->template;?>";

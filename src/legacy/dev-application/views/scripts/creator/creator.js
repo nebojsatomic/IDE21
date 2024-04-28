@@ -595,7 +595,7 @@ $(document).ready(function(){
 
   propPos = "visible" ;
   $('#propertiesLeft').fadeOut(4000);
-  $('#contProperties').css({width:"auto", right:"0px", bottom:"0px"});
+  //$('#contProperties').css({width:"auto", right:"0px", bottom:"0px"});
   $('#toggleProperties').livequery('click', function(){
 
     if(propPos == "hidden") {
@@ -669,6 +669,7 @@ $(document).ready(function(){
     $('#' + $(this).attr("value") ).dblclick();
   });
   //MOVING AROUND PROPERTIES BOX
+/*
   $("#rightB").click(function(){
     $("#contProperties").animate({"right": "-=100px"}, "slow");
   });
@@ -683,7 +684,7 @@ $(document).ready(function(){
   $("#downB").click(function(){
     $("#contProperties").animate({"top": "+=100px"}, "slow");
   });
-
+*/
   //CREATING NEW OBJECT!
   $('#newItem').livequery('click', function(){
     var now = new Date();
