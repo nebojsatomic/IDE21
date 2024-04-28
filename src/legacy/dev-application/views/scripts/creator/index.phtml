@@ -28,20 +28,55 @@
 ?>
 <div id ="contPreview" style="z-index:9999999;display:none;width:100%;height:auto;position:absolute;top:200px;;left:300px;background:white;"></div>
 <div id="templateMask"></div>
-<div id="toggleProperties"  class="help" title="<?php echo $this->translate->_("Click to toggle properties box");?>"></div>
+<div id="toggleProperties"  class="help fixed w-6 h-6 left-3 top-3 cursor-pointer" title="<?php echo $this->translate->_("Click to toggle properties box");?>">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-current bg-primary text-white rounded-full">
+  <path d="M3.53 2.47a.75.75 0 0 0-1.06 1.06l18 18a.75.75 0 1 0 1.06-1.06l-18-18ZM22.676 12.553a11.249 11.249 0 0 1-2.631 4.31l-3.099-3.099a5.25 5.25 0 0 0-6.71-6.71L7.759 4.577a11.217 11.217 0 0 1 4.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113Z" />
+  <path d="M15.75 12c0 .18-.013.357-.037.53l-4.244-4.243A3.75 3.75 0 0 1 15.75 12ZM12.53 15.713l-4.243-4.244a3.75 3.75 0 0 0 4.244 4.243Z" />
+  <path d="M6.75 12c0-.619.107-1.213.304-1.764l-3.1-3.1a11.25 11.25 0 0 0-2.63 4.31c-.12.362-.12.752 0 1.114 1.489 4.467 5.704 7.69 10.675 7.69 1.5 0 2.933-.294 4.242-.827l-2.477-2.477A5.25 5.25 0 0 1 6.75 12Z" />
+</svg>
 
-<div class="help" id="updateContentButton"  title="<?php echo $this->translate->_("Click this to update the content of the selected object") . " after editing in tinyMCE.";?>"> <a id="tinySave" href=""  class="navLinks a_refresh noAjaxEvent help" title="<?php echo $this->translate->_("Click this to update the content of the selected object");?>"></a></div>
+</div>
+
+<div id="updateContentButton" class="help fixed w-6 h-6 left-3 top-36 cursor-pointer" title="<?php echo $this->translate->_("Click this to update the content of the selected object") . " after editing in tinyMCE.";?>"> <a id="tinySave" href=""  class="navLinks a_refresh noAjaxEvent help" title="<?php echo $this->translate->_("Click this to update the content of the selected object");?>">
+  <svg class="w-6 h-6 fill-current bg-primary text-white rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+    <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd" />
+  </svg>
+</a></div>
 <div id="helpButton" class="help" title="<?php echo $this->translate->_("Click to toggle help");?>"></div>
 <div id="helpDiv"  title=""><?php echo $this->translate->_("NeT.Creator Help");?></div>
 
-<div id="delButton" class="help" title="<?php echo $this->translate->_("Click to delete selected object");?>"></div>
-<div id="newItem" class="help" title="<?php echo $this->translate->_("Click to create new object on this page");?>"></div>
-<div id="cloneItem" class="help" title="<?php echo $this->translate->_("Click to create clone object");?>"></div>
+<div id="delButton" class="help fixed w-6 h-6 left-3 top-28 cursor-pointer" title="<?php echo $this->translate->_("Click to delete selected object");?>">
+  <svg class="w-6 h-6 fill-current bg-primary text-white rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" >
+    <path fill-rule="evenodd" d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875ZM9.75 14.25a.75.75 0 0 0 0 1.5H15a.75.75 0 0 0 0-1.5H9.75Z" clip-rule="evenodd" />
+    <path d="M14.25 5.25a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25Z" />
+  </svg>
+</div>
+<div id="newItem" class="help fixed w-6 h-6 left-3 top-12 cursor-pointer" title="<?php echo $this->translate->_("Click to create new object on this page");?>">
+  <svg class="w-6 h-6 fill-current bg-primary text-white rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+    <path fill-rule="evenodd" d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875ZM12.75 12a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V18a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V12Z" clip-rule="evenodd" />
+    <path d="M14.25 5.25a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25Z" />
+  </svg>
+</div>
+<div id="cloneItem" class="help fixed w-6 h-6 left-3 top-20 cursor-pointer" title="<?php echo $this->translate->_("Click to create clone object");?>">
+  <svg class="w-6 h-6 fill-current bg-primary text-white rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+    <path fill-rule="evenodd" d="M17.663 3.118c.225.015.45.032.673.05C19.876 3.298 21 4.604 21 6.109v9.642a3 3 0 0 1-3 3V16.5c0-5.922-4.576-10.775-10.384-11.217.324-1.132 1.3-2.01 2.548-2.114.224-.019.448-.036.673-.051A3 3 0 0 1 13.5 1.5H15a3 3 0 0 1 2.663 1.618ZM12 4.5A1.5 1.5 0 0 1 13.5 3H15a1.5 1.5 0 0 1 1.5 1.5H12Z" clip-rule="evenodd" />
+    <path d="M3 8.625c0-1.036.84-1.875 1.875-1.875h.375A3.75 3.75 0 0 1 9 10.5v1.875c0 1.036.84 1.875 1.875 1.875h1.875A3.75 3.75 0 0 1 16.5 18v2.625c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 0 1 3 20.625v-12Z" />
+    <path d="M10.5 10.5a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963 5.23 5.23 0 0 0-3.434-1.279h-1.875a.375.375 0 0 1-.375-.375V10.5Z" />
+  </svg>
+</div>
 <!-- <div id="moveProps" class="help" title="<?php echo $this->translate->_("Click to move around properties dialog");?>">
   <button id="upB"></button> <button id="downB"></button>
 </div> -->
-<div id="logout"  class="help" title="<?php echo $this->translate->_("Click to logout");?>"><a id="logout_a" class="a_logout" href="<?php echo $this->host;?>creator/logout" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
-<div id="penPointer"></div>
+<div id="logout" class="help fixed w-6 h-6 left-3 top-48 cursor-pointer" title="<?php echo $this->translate->_("Click to logout");?>"><a id="logout_a" class="a_logout" href="<?php echo $this->host;?>creator/logout" >
+  <svg class="w-6 h-6 fill-current bg-primary text-white rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+    <path fill-rule="evenodd" d="M16.5 3.75a1.5 1.5 0 0 1 1.5 1.5v13.5a1.5 1.5 0 0 1-1.5 1.5h-6a1.5 1.5 0 0 1-1.5-1.5V15a.75.75 0 0 0-1.5 0v3.75a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V5.25a3 3 0 0 0-3-3h-6a3 3 0 0 0-3 3V9A.75.75 0 1 0 9 9V5.25a1.5 1.5 0 0 1 1.5-1.5h6ZM5.78 8.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 0 0 0 1.06l3 3a.75.75 0 0 0 1.06-1.06l-1.72-1.72H15a.75.75 0 0 0 0-1.5H4.06l1.72-1.72a.75.75 0 0 0 0-1.06Z" clip-rule="evenodd" />
+  </svg>
+</a></div>
+<div id="penPointer" class="p-2 bg-primary text-white rounded-full">
+  <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z" />
+  </svg>
+</div>
 <div id="downPointer"></div>
 
 <div id="tooltip" style="display:none"></div>
@@ -164,8 +199,17 @@
               <div class="grid mt-1 gap-y-1 h-24">
                 <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("ID Assistant");?></span><span><input id="tttoggle" type="checkbox"  class="checkbox-sm float-right" /></span></div>
                 <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("Show hidden");?>:</span><span><input id="showFooterCheck" name="showFooterCheck" type="checkbox" class="checkbox-sm float-right" /></span></div>
-                <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("Shadow");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent" id="aParamShadow" title="<?php echo $this->translate->_("Click to set shadow params");?>"></a><input id="shadowCheck" type="checkbox" class="checkbox-sm float-right"  /></span></div>
-                <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("Corner");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent" id="aParamCorner" title="<?php echo $this->translate->_("Click to set corner params");?>"></a><input id="cornerCheck" type="checkbox" class="checkbox-sm float-right"  /></span></div>
+                <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("Shadow");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent" id="aParamShadow" title="<?php echo $this->translate->_("Click to set shadow params");?>">
+                  <svg class="w-4 h-4 fill-current bg-secondary text-white rounded-full inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M16.5 6a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v7.5a3 3 0 0 0 3 3v-6A4.5 4.5 0 0 1 10.5 6h6Z" />
+                    <path d="M18 7.5a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-7.5a3 3 0 0 1-3-3v-7.5a3 3 0 0 1 3-3H18Z" />
+                  </svg>
+                </a><input id="shadowCheck" type="checkbox" class="checkbox-sm float-right"  /></span></div>
+                <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("Corner");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent content-center h-6 inline-block" id="aParamCorner" title="<?php echo $this->translate->_("Click to set corner params");?>">
+                  <svg class="w-4 h-4 fill-current text-white rounded" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" >
+                    <path d="M6 3a3 3 0 0 0-3 3v1.5a.75.75 0 0 0 1.5 0V6A1.5 1.5 0 0 1 6 4.5h1.5a.75.75 0 0 0 0-1.5H6ZM16.5 3a.75.75 0 0 0 0 1.5H18A1.5 1.5 0 0 1 19.5 6v1.5a.75.75 0 0 0 1.5 0V6a3 3 0 0 0-3-3h-1.5ZM12 8.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5ZM4.5 16.5a.75.75 0 0 0-1.5 0V18a3 3 0 0 0 3 3h1.5a.75.75 0 0 0 0-1.5H6A1.5 1.5 0 0 1 4.5 18v-1.5ZM21 16.5a.75.75 0 0 0-1.5 0V18a1.5 1.5 0 0 1-1.5 1.5h-1.5a.75.75 0 0 0 0 1.5H18a3 3 0 0 0 3-3v-1.5Z" />
+                  </svg>
+                </a><input id="cornerCheck" type="checkbox" class="checkbox-sm float-right"  /></span></div>
               </div>
 
               <div id="fontCont" style="display:none;">

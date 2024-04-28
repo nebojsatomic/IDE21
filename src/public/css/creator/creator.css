@@ -167,12 +167,12 @@ span.ui-button-text {
 #penPointer {
   display: none;
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 65px;
-  height: 65px;
+  /*top: 0;
+  left: 0;*/
+  /*width: 65px;
+  height: 65px;*/
   z-index: 199998;
-  background: url(/images/interface/Pen.png) no-repeat;
+  /*background: url(/images/interface/Pen.png) no-repeat;*/
 }
 
 #downPointer {
@@ -193,8 +193,8 @@ span.ui-button-text {
 }
 
 #toggleProperties {
-  opacity: 0.8;
-  position: fixed;
+  /*opacity: 0.8;*/
+  /*position: fixed;
   padding: 5px;
   text-align: center;
   font-weight: bold;
@@ -202,16 +202,16 @@ span.ui-button-text {
   left: 5px;
   top: 5px;
   width: 20px;
-  height: 20px;
-  background: silver url(/images/interface/toggleProperties.png) no-repeat center;
+  height: 20px;*/
+  /*background: silver url(/images/interface/toggleProperties.png) no-repeat center;*/
   z-index: 999997;
-  border: 1px solid #e7e7e7;
+/*  border: 1px solid #e7e7e7;
   -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  -webkit-border-radius: 5px;*/
 }
 
 #newItem {
-  opacity: 0.8;
+  /*opacity: 0.8;
   position: fixed;
   padding: 5px;
   text-align: center;
@@ -222,15 +222,15 @@ span.ui-button-text {
   top: 5px;
   width: 20px;
   height: 20px;
-  background: silver url(/images/interface/add.gif) no-repeat center;
+  background: silver url(/images/interface/add.gif) no-repeat center;*/
   ;z-index: 999997;
-  border: 1px solid #e7e7e7;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  /*border: 1px solid #e7e7e7;*/
+/*  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;*/
 }
 
 #cloneItem {
-  opacity: 0.8;
+  /*opacity: 0.8;
   position: fixed;
   padding: 5px;
   text-align: center;
@@ -241,11 +241,8 @@ span.ui-button-text {
   top: 38px;
   width: 20px;
   height: 20px;
-  background: silver url(/images/interface/add.gif) no-repeat center;
-  ;z-index: 999997;
-  border: 1px solid #e7e7e7;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  background: silver url(/images/interface/add.gif) no-repeat center;*/
+  z-index: 999997;
 }
 
 #moveProps {
@@ -304,7 +301,7 @@ span.ui-button-text {
 }
 
 #logout {
-  opacity: 0.8;
+  /*opacity: 0.8;
   position: fixed;
   padding: 5px;
   text-align: center;
@@ -315,15 +312,12 @@ span.ui-button-text {
   top: 5px;
   width: 20px;
   height: 20px;
-  background: silver url(/images/interface/logout.gif) no-repeat center;
+  background: silver url(/images/interface/logout.gif) no-repeat center;*/
   z-index: 999997;
-  border: 1px solid #e7e7e7;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
 }
 
 #delButton {
-  opacity: 0.8;
+  /*opacity: 0.8;
   position: fixed;
   padding: 5px;
   text-align: center;
@@ -332,13 +326,13 @@ span.ui-button-text {
   cursor: pointer;
   right: 45px;
   top: 5px;
-  width: 20px;
+  /*width: 20px;
   height: 20px;
-  background: silver url(/images/interface/note_delete.gif) no-repeat center;
+  background: silver url(/images/interface/note_delete.gif) no-repeat center;*/
   ;z-index: 999997;
-  border: 1px solid #e7e7e7;
+  /*border: 1px solid #e7e7e7;
   -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  -webkit-border-radius: 5px;*/
 }
 
 #helpButton {
@@ -381,23 +375,21 @@ span.ui-button-text {
 }
 
 #updateContentButton {
-  border: 1px solid #E7E7E7;
+  /*border: 1px solid #E7E7E7;
   color: yellow;
   cursor: pointer;
   font-weight: bold;
   height: 20px;
   opacity: 0.8;
-  padding: 5px;
-  position: fixed;
-  right: 125px;
-  text-align: center;
-  top: 40px;
-  width: 20px;
+  padding: 5px;*/
+  /*position: fixed;
+  right: 0;
+  top: 0px;*/
   z-index: 999997;
 }
 
 #toggleProperties:hover {
-  opacity: 0.9;
+/*  opacity: 0.9;
   position: fixed;
   padding: 5px;
   text-align: center;
@@ -407,15 +399,15 @@ span.ui-button-text {
   top: 5;
   width: 20px;
   height: 20px;
-  background: silver url(/images/interface/toggleProperties.png) no-repeat center;
+  background: silver url(/images/interface/toggleProperties.png) no-repeat center;*/
   z-index: 999997;
-  border: 1px solid #e7e7e7;
+/*  border: 1px solid #e7e7e7;
   -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  -webkit-border-radius: 5px;*/
 }
 
 #newItem:hover {
-  opacity: 0.9;
+/*  opacity: 0.9;
   position: fixed;
   padding: 5px;
   text-align: center;
@@ -428,13 +420,13 @@ span.ui-button-text {
   height: 20px;
   background: silver url(/images/interface/add.gif) no-repeat center;
   ;z-index: 999997;
-  border: 1px solid #e7e7e7;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  border: 1px solid #e7e7e7;*/
+/*  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;*/
 }
 
 #logout:hover {
-  opacity: 0.9;
+/*  opacity: 0.9;
   position: fixed;
   padding: 5px;
   text-align: center;
@@ -446,14 +438,11 @@ span.ui-button-text {
   width: 20px;
   height: 20px;
   background: silver url(/images/interface/logout.gif) no-repeat center;
-  z-index: 999997;
-  border: 1px solid #e7e7e7;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  z-index: 999997;*/
 }
 
 #delButton:hover {
-  opacity: 0.9;
+  /*opacity: 0.9;
   position: fixed;
   padding: 5px;
   text-align: center;
@@ -468,7 +457,7 @@ span.ui-button-text {
   ;z-index: 999997;
   border: 1px solid #e7e7e7;
   -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  -webkit-border-radius: 5px;*/
 }
 
 #contProperties {
@@ -574,13 +563,13 @@ span.ui-button-text {
 }*/
 
 .a_refresh {
-  text-decoration: none;
+  /*text-decoration: none;
   background: transparent url(/images/interface/refresh.gif) no-repeat;
   padding-left: 20px;
   cursor: pointer;
   color: #555555 ;
   font-family: Arial;
-  font-size: 12px;
+  font-size: 12px;*/
 }
 
 /*.a_save {
@@ -807,11 +796,11 @@ span.ui-button-text {
 }*/
 
 .a_refresh:hover {
-  text-decoration: none;
+  /*text-decoration: none;
   background: transparent url(/images/interface/refresh.gif) no-repeat;
   padding-left: 20px;
   cursor: pointer;
-  color: #3d4752
+  color: #3d4752*/
 }
 
 /*.a_save:hover {
@@ -921,11 +910,11 @@ span.ui-button-text {
 }
 
 .a_params {
-  text-decoration: none;
+/*  text-decoration: none;
   background: transparent url(/images/interface/params.png) no-repeat ;
   padding-right: 16px;
   cursor: pointer;
-  color: #3d4752 ;
+  color: #3d4752 ;*/
 }
 
 .a_clear:hover {
