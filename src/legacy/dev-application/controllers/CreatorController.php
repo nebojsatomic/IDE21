@@ -413,7 +413,7 @@ class CreatorController extends NetActionController
                 'menuName' => array('select', array(
                     'required' => true,
                     'label' => $this->_translate->_('Available menus:'),
-                    'style' => 'width:200px;',
+                    'class' => 'select min-h-32 w-full px-2',
                     'size' => '8',
                     'multioptions' => $pageArray,
                 )),

@@ -358,39 +358,40 @@
     <!--MENUS-->
 
     <div id="fragment-2">
-      <div id="menuFormContainer" style="float:left;width:100%;" >
-        <div id="menuShow" style="width:180px;float:left;margin-bottom: 10px;">
-          <?php echo $this->translate->_("Put in this object");?> <input id="putInThis" type="checkbox" />
-          <br />
-          <?php echo $this->translate->_("Display Type");?>:
-          <form id="menuDisplayType">
-            <input type="radio" name="displaytype" value="" checked="checked">Horizontal
-            <input type="radio" name="displaytype" value=":vertical">Vertical
-            <input type="radio" name="displaytype" value=":tree">Tree
-            <input type="radio" name="displaytype" value=":slide">Slide
-          </form>
+      <div id="menuFormContainer" class="grid md:grid-cols-3 gap-4 min-h-96 md:divide-x divide-dashed">
+        <div id="menuShow" class="grid gap-2 content-start">
+          
+          <div>
+            <?php echo $this->translate->_("Put in this object");?> <input id="putInThis" class="checkbox-sm" type="checkbox" />
+          </div>
 
-          <br />
+          <div>
+            <?php echo $this->translate->_("Display Type");?>:
+            <form id="menuDisplayType">
+              <input class="radio-sm" type="radio" name="displaytype" value="" checked="checked">Horizontal
+              <input class="radio-sm" type="radio" name="displaytype" value=":vertical">Vertical
+              <input class="radio-sm" type="radio" name="displaytype" value=":tree">Tree
+              <input class="radio-sm" type="radio" name="displaytype" value=":slide">Slide
+            </form>
+          </div>
 
-          <?php echo $this->formChooseMenu;?>
+          <div>
+            <?php echo $this->formChooseMenu;?>
+          </div>
+          <div id="addMenuLinkDiv">
+            <a id="addMenuLink" href="menu/add-menu" class="navLinks a_add btn btn-xs" title="<?php echo $this->translate->_("Click to create new menu");?>"><?php echo $this->translate->_("Add a menu");?></a>
+            <a id="delMenuLink" href="menu/del-menu" class="navLinks a_delete btn btn-xs btn-error" title="<?php echo $this->translate->_("Click to delete menu");?>"><?php echo $this->translate->_("Delete menu");?></a>
+            <a id="addMenuItemLink" href="menu/add-menu-item" class="navLinks a_add btn btn-xs" title="<?php echo $this->translate->_("Click to add new menu item to this menu");?>"><?php echo $this->translate->_("Add a menu item");?></a>
+
+          </div>
+
         </div>
-        <div id="menuSelected" style="width:200px;height:100%;float:left;margin-left: 40px;margin-right: 20px;"></div>
-
-        <div id="menuSelectedForm" style="width:180px;float:left;margin-bottom:10px;margin-left: 40px;margin-right: 20px;">
+        <div id="menuSelected" class="grid gap-2 md:pl-4 content-start"></div>
+        <div id="menuSelectedForm" class="grid gap-2 md:pl-4 content-start">
           <a id="editMenuItem" style="display:none">Edit</a>
-          <a id="deleteMenuItem" class="a_delete" style="display:none" title="<?php echo $this->translate->_("Click to delete this menu item");?>"><?php echo $this->translate->_("Delete this item");?> </a>
+          <a id="deleteMenuItem" class="a_delete btn btn-xs btn-error max-w-48" style="display:none" title="<?php echo $this->translate->_("Click to delete this menu item");?>"><?php echo $this->translate->_("Delete this item");?> </a>
           <div id="menuItemForm"></div>
-
-
         </div>
-
-      </div>
-      <div id="addMenuLinkDiv">
-        <a id="addMenuLink" href="menu/add-menu" class="navLinks a_add" title="<?php echo $this->translate->_("Click to create new menu");?>"><?php echo $this->translate->_("Add a menu");?></a>
-        <a id="delMenuLink" href="menu/del-menu" class="navLinks a_delete" title="<?php echo $this->translate->_("Click to delete menu");?>"><?php echo $this->translate->_("Delete menu");?></a>
-        |
-        <a id="addMenuItemLink" href="menu/add-menu-item" class="navLinks a_add" title="<?php echo $this->translate->_("Click to add new menu item to this menu");?>"><?php echo $this->translate->_("Add a menu item");?></a>
-
 
       </div>
 

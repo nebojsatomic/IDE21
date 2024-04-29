@@ -422,14 +422,14 @@ class MenuController extends NetActionController
                     'menuItemNameDisplayed' => array('text', array(
                         'required' => true,
                         'label' => $this->_translateCreator->_('Set Title'),
-                        'style' => 'width:200px;',
+                        'class' => 'input input-sm w-full text-primary',
                         'value' => $mi[0]['name'. "_" . $langCode]
                     )),
 
                     'menuItemParentId' => array('select', array(
                         'required' => false,
                         'label' => $this->_translateCreator->_('Choose Parent'),
-                        'style' => 'width:200px;',
+                        'class' =>'select select-xs w-full max-w-xs',
                         'size' => '1',
                         'multioptions' => $pageArray,
                         'value' => $mi[0]['parent_id']
@@ -438,13 +438,13 @@ class MenuController extends NetActionController
                     'menuItemDescriptionDisplayed' => array('textarea', array(
                         'required' => false,
                         'label' => $this->_translateCreator->_('Set Description'),
-                        'style' => 'width:200px;height:120px;',
+                        'class' => 'textarea w-full h-40',
                         'value' => $mi[0]['description'. "_" . $langCode]
                     )),
                     'contentId' => array('select', array(
                         'required' => false,
                         'label' => $this->_translateCreator->_('Choose Content'),
-                        'style' => 'width:200px;',
+                        'class' =>'select select-xs w-full max-w-xs',
                         'size' => '1',
                         'multioptions' => $contArray,
                         'value' => $mi[0]['content_id']
@@ -455,6 +455,7 @@ class MenuController extends NetActionController
                     )),
                     'editMenuItemSubmit' => array('submit', array(
                         'order' => 100,
+                        'class' => 'btn btn-xs text-primary',
                         'label' => $this->_translateCreator->_('Save'),
                         'value' => $this->_translateCreator->_('Submit')
                     ))
