@@ -400,43 +400,45 @@
     <!--Categories-->
 
     <div id="fragment-3">
-      <div id="categoryFormContainer" style="float:left;width:100%; margin-bottom: 10px;" >
-        <?php echo $this->translate->_("Put in this object");?> <input id="putCategoryInThis" type="checkbox" />
-        <br />
-        <div id="categoryShow" style="width:250px;float:left;">
+      <div id="categoryFormContainer" class="grid md:grid-cols-3 gap-4 md:divide-x divide-dashed" >
+        <div class="grid gap-2 content-start">
+          <div>
+            <?php echo $this->translate->_("Put in this object");?> <input id="putCategoryInThis" class="checkbox-sm" type="checkbox" />
+          </div>
 
-          <?php echo $this->formChooseCategory;?>
+          <div id="categoryShow">
+            <?php echo $this->formChooseCategory;?>
+          </div>
+          
+          <div id="addCategoryLinkDiv" class="grid gap-2">
+            <a id="addCategoryLink" href="category/add-category" class="navLinks a_add btn btn-xs" title="<?php echo $this->translate->_("Click to create new category");?>"><?php echo $this->translate->_("Add a category");?></a>
+            <a id="delCategoryLink" href="category/del-category" class="navLinks a_delete btn btn-xs btn-error" title="<?php echo $this->translate->_("Click to delete selected category");?>"><?php echo $this->translate->_("Delete category");?></a>
+            <a id="addCategoryItemLink" href="category/add-category-item" class="navLinks a_add btn btn-xs" title="<?php echo $this->translate->_("Click to add new category item to this category");?>"><?php echo $this->translate->_("Add a category item");?></a>
+            <a id="delCategoryItemLink" href="category/del-category-item" class="navLinks a_delete btn btn-xs btn-error" title="<?php echo $this->translate->_("Click to remove this category item");?>"><?php echo $this->translate->_("Remove category item");?></a>
+          </div>
+
         </div>
-        <div id="categorySelected" style="width:250px;height:100%;float:left;"></div>
 
-        <div id="categorySelectedForm" style="width:250px;float:right;">
+        <div class="grid gap-2 md:pl-4 content-start">
+          <div id="categorySelected" class=""></div>
+          
+        </div>
+
+        <div id="categorySelectedForm" class="grid gap-2 md:pl-4 content-start">
           <div id="CatNameDivContainer">
             <form id="catNameForm" enctype="application/x-www-form-urlencoded" action="" method="post">
               <dl class="zend_form">
                 <dt><label for="catItems" class="optional"><?php echo $this->translate->_("Category Name Translation");?>:</label></dt>
                 <dd>
-                  <input type="text" value="" name="cat_name_lng" style="width:100%;" />
-                  <input type="submit" value="Save" style="float:right;" />
+                  <input type="text" value="" name="cat_name_lng" class="input input-sm w-full"/>
+                  <input type="submit" value="Save" class="btn btn-xs mt-2" />
                 </dd></dl>
               </form>
             </div>
             <a id="editcategoryItem" style="display:none"><?php echo $this->translate->_("Edit");?></a>
             <a id="deleteCategoryItem" class="a_delete" style="display:none" title="<?php echo $this->translate->_("Click to delete this category item");?>"><?php echo $this->translate->_("Delete this category item");?> </a>
             <div id="categoryItemForm"></div>
-
-
           </div>
-
-        </div>
-
-
-        <div id="addCategoryLinkDiv">
-          <a id="addCategoryLink" href="category/add-category" class="navLinks a_add" title="<?php echo $this->translate->_("Click to create new category");?>"><?php echo $this->translate->_("Add a category");?></a>
-          <a id="delCategoryLink" href="category/del-category" class="navLinks a_delete" title="<?php echo $this->translate->_("Click to delete selected category");?>"><?php echo $this->translate->_("Delete category");?></a>
-          |
-          <a id="addCategoryItemLink" href="category/add-category-item" class="navLinks a_add" title="<?php echo $this->translate->_("Click to add new category item to this category");?>"><?php echo $this->translate->_("Add a category item");?></a>
-          <a id="delCategoryItemLink" href="category/del-category-item" class="navLinks a_delete" title="<?php echo $this->translate->_("Click to remove this category item");?>"><?php echo $this->translate->_("Remove category item");?></a>
-
 
         </div>
 

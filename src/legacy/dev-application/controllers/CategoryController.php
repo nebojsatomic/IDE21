@@ -114,7 +114,7 @@ class CategoryController extends NetActionController
                         'required' => false,
                         'size' =>8,
                         'label' => $this->_translateCreator->_('Pages in this category'),
-                        'style' => "width:100%",
+                        'class' => "select min-h-32 w-full px-2",
                         'multioptions' => $catItems,
                     ))
 

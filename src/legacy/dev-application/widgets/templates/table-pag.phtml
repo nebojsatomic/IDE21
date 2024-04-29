@@ -32,9 +32,9 @@
     $colone[] = $col['Field'];
   }
   ?>
-  <a href="<?php echo @$this->actions['add'];?>" class="navLinks uniTableAdmin a_add" value="<?php echo $this->tableId;?>"><?php echo $this->translate->_($this->addTitle);?></a>
+  <a href="<?php echo @$this->actions['add'];?>" class="navLinks uniTableAdmin a_add btn btn-xs" value="<?php echo $this->tableId;?>"><?php echo $this->translate->_($this->addTitle);?></a>
 
-  <select id="paginationStep_<?php echo $this->tableId;?>" class="paginationStep" style="float:right;width:40px;">
+  <select id="paginationStep_<?php echo $this->tableId;?>" class="paginationStep select select-xs" style="float:right;width:40px;">
     <option>-</option>
     <option>5</option>
     <option >10</option>

@@ -495,8 +495,6 @@ class CreatorController extends NetActionController
     */
     private function _categoriesShowForm()
     {
-
-
       	$db = Zend_Registry::get('db');
         $res = $db->fetchAll("SELECT category_id, name FROM " . $this->_tblprefix . "categories");
 
@@ -515,7 +513,7 @@ class CreatorController extends NetActionController
                     'categoryName' => array('select', array(
                         'required' => true,
                         'label' => $this->_translate->_('Available categories:'),
-                        'style' => 'width:200px;',
+                        'class' => 'select min-h-32 w-full px-2',
                         'size' => '8',
                         'multioptions' => $categoryArray,
                     )),
