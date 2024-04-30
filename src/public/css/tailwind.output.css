@@ -3022,6 +3022,18 @@ input.tab:checked + .tab-content,
   margin-inline-start: -1px;
 }
 
+.table-xs :not(thead):not(tfoot) tr {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.table-xs :where(th, td) {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
 .tooltip {
   position: relative;
   display: inline-block;
@@ -3133,12 +3145,45 @@ input.tab:checked + .tab-content,
   position: relative;
 }
 
-.left-10 {
-  left: 2.5rem;
+.inset-x-0 {
+  left: 0px;
+  right: 0px;
+}
+
+.left-14 {
+  left: 3.5rem;
+}
+
+.left-3 {
+  left: 0.75rem;
 }
 
 .top-0 {
   top: 0px;
+}
+
+.top-12 {
+  top: 3rem;
+}
+
+.top-20 {
+  top: 5rem;
+}
+
+.top-28 {
+  top: 7rem;
+}
+
+.top-3 {
+  top: 0.75rem;
+}
+
+.top-36 {
+  top: 9rem;
+}
+
+.top-48 {
+  top: 12rem;
 }
 
 .z-\[1\] {
@@ -3165,9 +3210,19 @@ input.tab:checked + .tab-content,
   margin: 0.25rem;
 }
 
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+}
+
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .mb-10 {
@@ -3192,6 +3247,10 @@ input.tab:checked + .tab-content,
 
 .mt-2 {
   margin-top: 0.5rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
 }
 
 .block {
@@ -3243,8 +3302,16 @@ input.tab:checked + .tab-content,
   height: 6rem;
 }
 
+.h-4 {
+  height: 1rem;
+}
+
 .h-40 {
   height: 10rem;
+}
+
+.h-5 {
+  height: 1.25rem;
 }
 
 .h-52 {
@@ -3255,24 +3322,16 @@ input.tab:checked + .tab-content,
   height: 1.5rem;
 }
 
+.h-64 {
+  height: 16rem;
+}
+
 .h-8 {
   height: 2rem;
 }
 
 .h-screen {
   height: 100vh;
-}
-
-.h-4 {
-  height: 1rem;
-}
-
-.h-5 {
-  height: 1.25rem;
-}
-
-.h-64 {
-  height: 16rem;
 }
 
 .max-h-2 {
@@ -3283,12 +3342,24 @@ input.tab:checked + .tab-content,
   max-height: 1.25rem;
 }
 
+.min-h-32 {
+  min-height: 8rem;
+}
+
 .min-h-60 {
   min-height: 15rem;
 }
 
+.min-h-96 {
+  min-height: 24rem;
+}
+
 .\!w-px {
   width: 1px !important;
+}
+
+.w-10 {
+  width: 2.5rem;
 }
 
 .w-16 {
@@ -3299,8 +3370,20 @@ input.tab:checked + .tab-content,
   width: 0.5rem;
 }
 
+.w-32 {
+  width: 8rem;
+}
+
+.w-4 {
+  width: 1rem;
+}
+
 .w-52 {
   width: 13rem;
+}
+
+.w-6 {
+  width: 1.5rem;
 }
 
 .w-8 {
@@ -3311,12 +3394,12 @@ input.tab:checked + .tab-content,
   width: 100%;
 }
 
-.w-32 {
-  width: 8rem;
-}
-
 .min-w-64 {
   min-width: 16rem;
+}
+
+.max-w-48 {
+  max-width: 12rem;
 }
 
 .max-w-xs {
@@ -3337,6 +3420,10 @@ input.tab:checked + .tab-content,
   animation: spin 1s linear infinite;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .resize {
   resize: both;
 }
@@ -3345,16 +3432,24 @@ input.tab:checked + .tab-content,
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
-.grid-cols-4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .place-items-center {
   place-items: center;
+}
+
+.content-center {
+  align-content: center;
+}
+
+.content-start {
+  align-content: flex-start;
 }
 
 .content-stretch {
@@ -3369,12 +3464,24 @@ input.tab:checked + .tab-content,
   justify-content: flex-start;
 }
 
+.justify-between {
+  justify-content: space-between;
+}
+
 .gap-2 {
   gap: 0.5rem;
 }
 
 .gap-4 {
   gap: 1rem;
+}
+
+.gap-y-1 {
+  row-gap: 0.25rem;
+}
+
+.divide-dashed > :not([hidden]) ~ :not([hidden]) {
+  border-style: dashed;
 }
 
 .self-end {
@@ -3389,8 +3496,16 @@ input.tab:checked + .tab-content,
   overflow: hidden !important;
 }
 
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
 .\!whitespace-nowrap {
   white-space: nowrap !important;
+}
+
+.rounded {
+  border-radius: 0.25rem;
 }
 
 .rounded-box {
@@ -3464,12 +3579,21 @@ input.tab:checked + .tab-content,
   padding: 0.5rem;
 }
 
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
 .pl-3 {
   padding-left: 0.75rem;
 }
 
 .pt-4 {
   padding-top: 1rem;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .align-\[-0\.125em\] {
@@ -3488,9 +3612,19 @@ input.tab:checked + .tab-content,
   font-style: italic;
 }
 
+.text-primary {
+  --tw-text-opacity: 1;
+  color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity)));
+}
+
 .text-primary-content {
   --tw-text-opacity: 1;
   color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -3510,6 +3644,12 @@ input.tab:checked + .tab-content,
 .shadow-2xl {
   --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
   --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-lg {
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -3550,6 +3690,20 @@ input.tab:checked + .tab-content,
 @media (min-width: 768px) {
   .md\:m-10 {
     margin: 2.5rem;
+  }
+
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:divide-x > :not([hidden]) ~ :not([hidden]) {
+    --tw-divide-x-reverse: 0;
+    border-right-width: calc(1px * var(--tw-divide-x-reverse));
+    border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
+  }
+
+  .md\:pl-4 {
+    padding-left: 1rem;
   }
 }
 

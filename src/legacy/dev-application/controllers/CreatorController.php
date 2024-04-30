@@ -610,7 +610,7 @@ class CreatorController extends NetActionController
                     'moduleName' => array('select', array(
                         'required' => true,
                         'label' => $this->_translate->_('Available modules:'),
-                        'style' => 'width:200px;',
+                        'class' => 'select min-h-32 w-full px-2 help',
                         'size' => '8',
                         'multioptions' => $moduleArray,
                     )),

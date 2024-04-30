@@ -946,21 +946,21 @@ span.ui-button-text {
 }
 
 .universalTableAdmin {
-  border: 1px solid #555555;
+/*  border: 1px solid #555555;
   width: 100%;
   margin-bottom: 10px;
-  margin-top: 10px;
+  margin-top: 10px;*/
 }
 
 .universalTableAdmin th {
-  border: 1px solid silver;
+/*  border: 1px solid silver;
   background: white;
   text-align: center;
-  height: 20px;
+  height: 20px;*/
 }
 
 .universalTableAdmin td {
-  text-align: center;
+  /*text-align: center;*/
 }
 
 #rotate div.expanderDiv {
@@ -979,14 +979,14 @@ span.ui-button-text {
 }
 
 #rotate .fsbutton {
-  height: 20px;
+/*  height: 20px;
   width: 20px;
   display: block;
   background: transparent url(/images/interface/expanderFullScr.gif) no-repeat;
-  cursor: pointer;
+  cursor: pointer;*/
 }
 
-.utaNormal {
+/*.utaNormal {
   background: #f4f4f4;
   text-align: center;
 }
@@ -994,11 +994,9 @@ span.ui-button-text {
 .utaHover {
   background: #cccccc;
   text-align: center;
-}
+}*/
 
 input {
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
   border: 1px solid #cccccc;
   background: #E6E6E6;
   font-size: 12px;
@@ -1190,12 +1188,12 @@ div.selector span {
 }
 
 .cssjswrapp2 {
-  padding: 10px;
+/*  padding: 10px;
   padding-top: 20px;
   padding-bottom: 20px;
   height: 100%;
   display: block;
-  position: relative;
+  position: relative;*/
 }
 
 #imagesContainer, #imageFoldersShow {

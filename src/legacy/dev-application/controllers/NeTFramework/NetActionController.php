@@ -537,7 +537,6 @@ class NetActionController extends Zend_Controller_Action
      */
     public function renderToTable($table, $justCols = null, $addTitle = null, $actions = null)
     {
-        echo 'table' . $table;
         $db = Zend_Registry::get('db');
         $urlRewrite = Zend_Registry::get('urlRewrite');
         $themePath = NET_PATH . "widgets/";

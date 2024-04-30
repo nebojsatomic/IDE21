@@ -452,21 +452,26 @@
       </div>
 
       <!--Modules-->
-      <div id="fragment-5" style="">
-        <div id="fragment-5wrapper" class="cssjswrapp2" style="">
+      <div id="fragment-5">
+        <div id="fragment-5wrapper" class="cssjswrapp2">
 
-          <div id="modulesFormContainer" style="width:100%;" >
-            <a id="fsbutton3" class="help fsbutton" href="#"> </a>
-            <div id="modulesShow" style="width:100%;float:left;margin-bottom: 10px;">
-              <div style="display:none;"><?php echo $this->translate->_("Put in this object");?> <input id="putModulesInThis" type="checkbox" /></div>
-              <br />
+          <div id="modulesFormContainer" class="grid gap-4">
+            <div>
+              <a id="fsbutton3" class="help fsbutton" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                  <path fill-rule="evenodd" d="M15 3.75a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0V5.56l-3.97 3.97a.75.75 0 1 1-1.06-1.06l3.97-3.97h-2.69a.75.75 0 0 1-.75-.75Zm-12 0A.75.75 0 0 1 3.75 3h4.5a.75.75 0 0 1 0 1.5H5.56l3.97 3.97a.75.75 0 0 1-1.06 1.06L4.5 5.56v2.69a.75.75 0 0 1-1.5 0v-4.5Zm11.47 11.78a.75.75 0 1 1 1.06-1.06l3.97 3.97v-2.69a.75.75 0 0 1 1.5 0v4.5a.75.75 0 0 1-.75.75h-4.5a.75.75 0 0 1 0-1.5h2.69l-3.97-3.97Zm-4.94-1.06a.75.75 0 0 1 0 1.06L5.56 19.5h2.69a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 1 1.5 0v2.69l3.97-3.97a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
+                </svg>
+              </a>
+            </div>
+
+            <div id="modulesShow">
+              <div style="display:none;"><?php echo $this->translate->_("Put in this object");?> <input id="putModulesInThis" class="checkbox-sm" type="checkbox" /></div>
+
               <?php echo $this->formChooseModules;?>
-
             </div>
 
 
-            <div id="modulesSelected" style="width:100%;height:100%;float:left;">
-
+            <div id="modulesSelected">
             </div>
 
             <!--<div id="modulesSelectedForm" style="width:250px;float:right;">
@@ -482,8 +487,8 @@
         <!--<a id="installModulesLink" href="modules/install-module" class="navLinks a_add" title="<?php echo $this->translate->_("Click to install new module");?>">Install module</a>
         <a  id="delModulesLink" href="modules/del-module" class="navLinks a_delete" title="<?php echo $this->translate->_("Click to delete module");?>">Delete module</a>
         |-->
-        <a id="editModulesLink" href="modules/edit-module/id/" class="navLinks help a_edit" title="<?php echo $this->translate->_("Click to edit this module settings");?>"><?php echo $this->translate->_("Edit module");?></a>
-        <a id="enableModulesLink" href="modules/enable-all-modules" class="navLinks help a_add" title="<?php echo $this->translate->_("Click to enable all available modules.");?>"><?php echo $this->translate->_("Enable all modules");?></a>
+        <a id="editModulesLink" href="modules/edit-module/id/" class="navLinks help a_edit btn btn-xs" title="<?php echo $this->translate->_("Click to edit this module settings");?>"><?php echo $this->translate->_("Edit module");?></a>
+        <a id="enableModulesLink" href="modules/enable-all-modules" class="navLinks help a_add btn btn-xs" title="<?php echo $this->translate->_("Click to enable all available modules.");?>"><?php echo $this->translate->_("Enable all modules");?></a>
 
       </div>
 
@@ -541,34 +546,39 @@
   <!--CSS-->
   <div id="fragment-7">
     <div id="fragment-7wrapper" class="cssjswrapp">
-      <a href="#" class="help fsbutton" id="fsbutton" >  </a>
-      <div style="width:100%">
+      <a href="#" class="help fsbutton" id="fsbutton" >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path fill-rule="evenodd" d="M15 3.75a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0V5.56l-3.97 3.97a.75.75 0 1 1-1.06-1.06l3.97-3.97h-2.69a.75.75 0 0 1-.75-.75Zm-12 0A.75.75 0 0 1 3.75 3h4.5a.75.75 0 0 1 0 1.5H5.56l3.97 3.97a.75.75 0 0 1-1.06 1.06L4.5 5.56v2.69a.75.75 0 0 1-1.5 0v-4.5Zm11.47 11.78a.75.75 0 1 1 1.06-1.06l3.97 3.97v-2.69a.75.75 0 0 1 1.5 0v4.5a.75.75 0 0 1-.75.75h-4.5a.75.75 0 0 1 0-1.5h2.69l-3.97-3.97Zm-4.94-1.06a.75.75 0 0 1 0 1.06L5.56 19.5h2.69a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 1 1.5 0v2.69l3.97-3.97a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
+        </svg>
+      </a>
+      <div>
         <div><?php echo $this->translate->_("Choose Object");?>:</div>
         <select id="objListForCss" size="1" style="width:200px;" ></select>
         <!--<?php echo $this->translate->_("Choose class");?>:
-        <select id="eventListForCss" size="1" style="width:200px;" ></select>-->
-        <a id="addCssCodeA" class="navLinks a_add noAjaxEvent"><?php echo $this->translate->_("Add Code");?></a>
+          <select id="eventListForCss" size="1" style="width:200px;" ></select>-->
+          <a id="addCssCodeA" class="navLinks a_add noAjaxEvent"><?php echo $this->translate->_("Add Code");?></a>
 
+        </div>
+        <a id="saveCssCodeA" class="navLinks a_save" style="float:right;margin-bottom:10px;"><?php echo $this->translate->_("Save This Code");?></a>
+        <p>
+          <br />
+          <textarea id="pageCSS" name="pageCSS" style="height:100%;width:100%;min-height:200px;" class="codepress css">
+            <?php echo $this->css;?>
+
+          </textarea><br />
+        </p>
       </div>
-      <a id="saveCssCodeA" class="navLinks a_save" style="float:right;margin-bottom:10px;"><?php echo $this->translate->_("Save This Code");?></a>
-      <p>
-        <br />
-        <textarea id="pageCSS" name="pageCSS" style="height:100%;width:100%;min-height:200px;" class="codepress css">
-          <?php echo $this->css;?>
-
-        </textarea><br />
-      </p>
-      <br />
-
 
     </div>
-
-  </div>
 
   <!--JS-->
   <div id="fragment-8">
     <div id="fragment-8wrapper" class="cssjswrapp">
-      <a href="#" class="help fsbutton" id="fsbutton2" > </a>
+      <a href="#" class="help fsbutton" id="fsbutton2" >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path fill-rule="evenodd" d="M15 3.75a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0V5.56l-3.97 3.97a.75.75 0 1 1-1.06-1.06l3.97-3.97h-2.69a.75.75 0 0 1-.75-.75Zm-12 0A.75.75 0 0 1 3.75 3h4.5a.75.75 0 0 1 0 1.5H5.56l3.97 3.97a.75.75 0 0 1-1.06 1.06L4.5 5.56v2.69a.75.75 0 0 1-1.5 0v-4.5Zm11.47 11.78a.75.75 0 1 1 1.06-1.06l3.97 3.97v-2.69a.75.75 0 0 1 1.5 0v4.5a.75.75 0 0 1-.75.75h-4.5a.75.75 0 0 1 0-1.5h2.69l-3.97-3.97Zm-4.94-1.06a.75.75 0 0 1 0 1.06L5.56 19.5h2.69a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 1 1.5 0v2.69l3.97-3.97a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
+        </svg>
+      </a>
       <div style="width:100%;display: block;float: left;position:relative;">
         <div style="width:auto;display:block;float:left;margin-top:10px;margin-bottom:10px;">
           <div><?php echo $this->translate->_("Choose Object");?>:</div>
