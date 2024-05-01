@@ -290,7 +290,7 @@ class CreatorController extends NetActionController
                     'folderNames' => array('select', array(
                         'required' => true,
                         'label' => 'Choose gallery:',
-                        'style' => 'width:200px;',
+                        'class' => 'select min-h-32 w-full px-2',
                         'size' => '8',
                         'multioptions' => $folderArray,
                     )),

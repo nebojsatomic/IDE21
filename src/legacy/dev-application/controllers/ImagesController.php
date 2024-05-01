@@ -376,7 +376,7 @@ class ImagesController extends NetActionController
                     'imageNames' => array('select', array(
                         'required' => true,
                         'label' => $this->_translateCreator->_('Choose image'),
-                        'style' => 'width:200px;',
+                        'class' => 'select min-h-32 w-full px-2',
                         'size' => '8',
                         'multioptions' => $folderArray,
                     )),

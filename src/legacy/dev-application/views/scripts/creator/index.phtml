@@ -26,7 +26,7 @@
 *
 */
 ?>
-<div id ="contPreview" style="z-index:9999999;display:none;width:100%;height:auto;position:absolute;top:200px;;left:300px;background:white;"></div>
+<div id ="contPreview" class="hidden w-full h-auto absolute top-52 left-72 bg-white" style="z-index: 9999999;"></div><!-- z-index must be like this for now, since a lot of interaction with droppables relies on the order of elements, it should be rewritten to something more sensible, for all elements in the admin panel -->
 <div id="templateMask"></div>
 <div id="toggleProperties"  class="help fixed w-6 h-6 left-3 top-3 cursor-pointer" title="<?php echo $this->translate->_("Click to toggle properties box");?>">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-current bg-primary text-white rounded-full">
@@ -497,49 +497,47 @@
 
   <!--Images-->
   <div id="fragment-6">
-    <div id="imagesContainer" style="float:left;width:100%;margin-bottom:10px;" >
-      <?php echo $this->translate->_("Put Image(s) in this object");?> <input id="putImagesInThis" type="checkbox" />
-      <!--<?php echo $this->translate->_("Single Image");?><input id="putSingleImageInThis" type="checkbox" />-->
+    <div id="imagesContainer" class="grid md:grid-cols-3 gap-4 md:divide-x divide-dashed">
 
-      <br />
       <!--Images on this site:-->
-      <div id="imageFoldersShow" style="width:250px;float:left;border:0px solid red;">
-
-
-        <?php echo $this->imagesFoldersForm;?>
-
-
-      </div>
-      <div id="imagesShow" style="width:250px;float:left;border:0px solid red;">
-
-      </div>
-
-      <div  style="width: 200px;text-align: left;float:left;">
-        <a id="deleteImage" class="a_delete marginBottom5" style="display:none" title="<?php echo $this->translate->_("Click to delete this image");?>"><?php echo $this->translate->_("Delete this image");?> </a>
-
-        <a id="insertImage" class="a_add marginBottom5" style="display:none" title="<?php echo $this->translate->_("Click to insert this image");?>"><?php echo $this->translate->_("Insert this image");?> </a>
-
-        <a id="setBodyBgImage" class="a_add marginBottom5" style="display:none" title="<?php echo $this->translate->_("Click to set background");?>"><?php echo $this->translate->_("Set background");?> </a>
-
-        <select id="bgSelect" class="help" title="<?php echo $this->translate->_("For this to work, set appropriate classes to the objects, lowercase (HEADER = header) except for the BODY, body is always there." );?>"><option>BODY</option><option>HEADER</option><option>SHEET</option><option>LEFTCOLUMN</option><option>RIGHTCOLUMN</option><option>FOOTER</option></select>
-        <input type="checkbox" name="NR" value="repeat" id="NR" /> no-repeat<input type="checkbox" name="fixedBg" value="fixed"  id="fixedBg" /> Fixed
-
-        <!--Image path:--><div id="imagePathShow" style="display:none;"></div>
-        <div id="imageDetails" style="width:250px;float:right;border:0px solid red;">
-
+      <div id="imageFoldersShow" class="grid gap-2 content-start">
+        <div>
+          <?php echo $this->imagesFoldersForm;?>
+        </div>
+        <div id="addFolderLinkDiv" >
+          <a id="addFolderLink" href="images/add-folder" class="navLinks a_add btn btn-xs" title="<?php echo $this->translate->_("Click to create new folder for the images");?>"><?php echo $this->translate->_("Add a folder");?></a>
+          <a id="delFolderLink" href="images/del-folder" class="navLinks a_delete btn btn-xs btn-error" title="<?php echo $this->translate->_("Click to delete folder");?>"><?php echo $this->translate->_("Delete folder");?></a>
+          <a id="addImageLink" href="images/add-image" class="navLinks a_add btn btn-xs" title="<?php echo $this->translate->_("Click to add new image to this folder");?>"><?php echo $this->translate->_("Add images");?></a>
         </div>
       </div>
+      <div id="imagesShow" class="grid gap-2 md:pl-4 content-start">
+
+      </div>
+
+      <div class="grid gap-2 md:pl-4 content-start">
+        <a id="deleteImage" class="a_delete marginBottom5 btn btn-xs btn-error" style="display:none" title="<?php echo $this->translate->_("Click to delete this image");?>"><?php echo $this->translate->_("Delete this image");?> </a>
+
+        <a id="insertImage" class="a_add marginBottom5 btn btn-xs" style="display:none" title="<?php echo $this->translate->_("Click to insert this image");?>"><?php echo $this->translate->_("Insert this image");?> </a>
+
+        <a id="setBodyBgImage" class="a_add marginBottom5 btn btn-xs" style="display:none" title="<?php echo $this->translate->_("Click to set background");?>"><?php echo $this->translate->_("Set background");?> </a>
+
+        <div>
+          <?php echo $this->translate->_("Put image(s) in the selected object");?> <input id="putImagesInThis" class="checkbox-sm" type="checkbox" /> into the
+          <!--<?php echo $this->translate->_("Single Image");?><input id="putSingleImageInThis" type="checkbox" />-->
+        </div>
+
+        <select id="bgSelect" class="help select select-xs w-full" title="<?php echo $this->translate->_("For this to work, set appropriate classes to the objects, lowercase (HEADER = header) except for the BODY, body is always there." );?>"><option>BODY</option><option>HEADER</option><option>SHEET</option><option>LEFTCOLUMN</option><option>RIGHTCOLUMN</option><option>FOOTER</option></select>
+        
+        <div>
+          <input type="checkbox" class="checkbox-sm" name="NR" value="repeat" id="NR" /> no-repeat
+          <input type="checkbox" class="checkbox-sm" name="fixedBg" value="fixed"  id="fixedBg" /> Fixed
+        </div>
+
+        <!--Image path:-->
+        <div id="imagePathShow"></div>
+        <div id="imageDetails"></div>
+      </div>
     </div>
-    <div id="addFolderLinkDiv" >
-
-      <a id="addFolderLink" href="images/add-folder" class="navLinks a_add" title="<?php echo $this->translate->_("Click to create new folder for the images");?>"><?php echo $this->translate->_("Add a folder");?></a>
-      <a id="delFolderLink" href="images/del-folder" class="navLinks a_delete" title="<?php echo $this->translate->_("Click to delete folder");?>"><?php echo $this->translate->_("Delete folder");?></a>
-      |
-      <a id="addImageLink" href="images/add-image" class="navLinks a_add" title="<?php echo $this->translate->_("Click to add new image to this folder");?>"><?php echo $this->translate->_("Add images");?></a>
-
-
-    </div>
-
   </div>
 
 

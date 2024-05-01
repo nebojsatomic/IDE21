@@ -1197,7 +1197,7 @@ div.selector span {
 }
 
 #imagesContainer, #imageFoldersShow {
-  float: left;
+  /*float: left;*/
 }
 
 .ui-dialog .ui-dialog-titlebar-close span {
