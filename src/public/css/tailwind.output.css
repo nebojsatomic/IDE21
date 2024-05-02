@@ -3145,17 +3145,20 @@ input.tab:checked + .tab-content,
   position: relative;
 }
 
-.inset-x-0 {
-  left: 0px;
-  right: 0px;
-}
-
 .left-14 {
   left: 3.5rem;
 }
 
 .left-3 {
   left: 0.75rem;
+}
+
+.left-72 {
+  left: 18rem;
+}
+
+.right-0 {
+  right: 0px;
 }
 
 .top-0 {
@@ -3186,16 +3189,24 @@ input.tab:checked + .tab-content,
   top: 12rem;
 }
 
+.top-52 {
+  top: 13rem;
+}
+
 .z-\[1\] {
   z-index: 1;
 }
 
-.col-span-2 {
-  grid-column: span 2 / span 2;
-}
-
 .col-span-3 {
   grid-column: span 3 / span 3;
+}
+
+.col-span-9 {
+  grid-column: span 9 / span 9;
+}
+
+.col-span-1 {
+  grid-column: span 1 / span 1;
 }
 
 .float-right {
@@ -3208,11 +3219,6 @@ input.tab:checked + .tab-content,
 
 .m-1 {
   margin: 0.25rem;
-}
-
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .my-2 {
@@ -3330,6 +3336,10 @@ input.tab:checked + .tab-content,
   height: 2rem;
 }
 
+.h-auto {
+  height: auto;
+}
+
 .h-screen {
   height: 100vh;
 }
@@ -3386,6 +3396,10 @@ input.tab:checked + .tab-content,
   width: 1.5rem;
 }
 
+.w-72 {
+  width: 18rem;
+}
+
 .w-8 {
   width: 2rem;
 }
@@ -3430,6 +3444,10 @@ input.tab:checked + .tab-content,
 
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-12 {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
 .grid-cols-2 {
@@ -3480,10 +3498,6 @@ input.tab:checked + .tab-content,
   row-gap: 0.25rem;
 }
 
-.divide-dashed > :not([hidden]) ~ :not([hidden]) {
-  border-style: dashed;
-}
-
 .self-end {
   align-self: flex-end;
 }
@@ -3498,6 +3512,10 @@ input.tab:checked + .tab-content,
 
 .overflow-x-auto {
   overflow-x: auto;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
 }
 
 .\!whitespace-nowrap {
@@ -3555,6 +3573,11 @@ input.tab:checked + .tab-content,
   background-color: var(--fallback-s,oklch(var(--s)/var(--tw-bg-opacity)));
 }
 
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
 .fill-current {
   fill: currentColor;
 }
@@ -3588,8 +3611,16 @@ input.tab:checked + .tab-content,
   padding-left: 0.75rem;
 }
 
+.pt-28 {
+  padding-top: 7rem;
+}
+
 .pt-4 {
   padding-top: 1rem;
+}
+
+.pl-1 {
+  padding-left: 0.25rem;
 }
 
 .text-center {
@@ -3690,20 +3721,6 @@ input.tab:checked + .tab-content,
 @media (min-width: 768px) {
   .md\:m-10 {
     margin: 2.5rem;
-  }
-
-  .md\:grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .md\:divide-x > :not([hidden]) ~ :not([hidden]) {
-    --tw-divide-x-reverse: 0;
-    border-right-width: calc(1px * var(--tw-divide-x-reverse));
-    border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
-  }
-
-  .md\:pl-4 {
-    padding-left: 1rem;
   }
 }
 

@@ -3706,7 +3706,7 @@ $('input[type="checkbox"]').livequery(function(){
 
 });
 
-$('#contProperties').draggable();
+//$('#contProperties').draggable(); // remove dragging of the properties in daisyui upgrade
 
 $('#enableModulesLink').click(function(){
   url = $(this).attr('href');

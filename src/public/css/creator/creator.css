@@ -1,5 +1,5 @@
 body {
-  min-width: 1280px;
+  /*min-width: 1280px;*/
   font-size: 11px ;
   font-family: Arial;
 }
@@ -61,14 +61,13 @@ li {
 }*/
 
 #rotate {
-  height: auto;
+  min-height: 100vh;
+  height:auto;
   font: 12px normal Arial;
-  /* background:silver; */
 }
 
 #rotate div {
-  /*height: auto;*/
-  /*font: 12px normal Arial;*/
+
 }
 
 #dialogDiv {
@@ -465,10 +464,9 @@ span.ui-button-text {
   /*right: 0;*/
   bottom: 0px;
   z-index: 199999;
-  width: 800px;
+  /*width: 800px;*/
   height: auto;
   min-height: 100px;
-  border: 0px solid green;
 }
 
 #contProperties * {
@@ -476,8 +474,9 @@ span.ui-button-text {
   font-size: 12px!important;
 }
 
-#contProperties .ui-tabs .ui-tabs-nav {
+#contProperties #tabs-navigation {
   padding: 0.25rem;
+  position: fixed;
 }
 
 #propertiesLeft {
@@ -488,12 +487,12 @@ span.ui-button-text {
 }
 
 #properties {
-  float: right;
+  /*float: right;
   width: 800px;
   height: 300px;
   font-family: Arial;
   font-size: 12px;
-  display: none;
+  display: none;*/
 }
 
 #footer {
