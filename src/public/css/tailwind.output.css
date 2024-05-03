@@ -3197,6 +3197,10 @@ input.tab:checked + .tab-content,
   z-index: 1;
 }
 
+.col-span-1 {
+  grid-column: span 1 / span 1;
+}
+
 .col-span-3 {
   grid-column: span 3 / span 3;
 }
@@ -3205,8 +3209,8 @@ input.tab:checked + .tab-content,
   grid-column: span 9 / span 9;
 }
 
-.col-span-1 {
-  grid-column: span 1 / span 1;
+.row-start-auto {
+  grid-row-start: auto;
 }
 
 .float-right {
@@ -3306,6 +3310,10 @@ input.tab:checked + .tab-content,
 
 .h-24 {
   height: 6rem;
+}
+
+.h-28 {
+  height: 7rem;
 }
 
 .h-4 {
@@ -3452,6 +3460,10 @@ input.tab:checked + .tab-content,
 
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .grid-cols-4 {
@@ -3617,10 +3629,6 @@ input.tab:checked + .tab-content,
 
 .pt-4 {
   padding-top: 1rem;
-}
-
-.pl-1 {
-  padding-left: 0.25rem;
 }
 
 .text-center {
