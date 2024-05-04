@@ -89,6 +89,13 @@ li {
   z-index: 999998;
 }
 
+.ui-resizable-se, .ui-resizable-se:hover {
+  position: absolute;
+  cursor: se-resize;
+  right: 0;
+  bottom: 0;
+}
+
 .ui-dialog .ui-dialog-titlebar-close {
   height: 25px;
   margin: -10px 0 0;
@@ -1224,9 +1231,10 @@ div.selector span {
   float: left;
 }
 
-/*#dialogDivImages {
-    background: silver;
-}*/
+#dialogDivImages { /* temp fix, should be resolved differently */
+  width: 100% !important;
+  height:100% !important;
+}
 
 #TB_window {
   z-index: 999998 !important;

@@ -1978,13 +1978,13 @@ $('#showFolderImages').livequery('change', function(){
   $('#imagePathShow').html(imagePath);
 
   if($( "#dialogDivImages" ).length == 0){
-    $('body').append('<div id="dialogDivImages" class="bg-primary text-primary-content"><div id="imageDetails"></div></div>');
+    $('body').append('<div id="dialogDivImages" class="bg-primary text-primary-content w-full h-full"><div id="imageDetails"></div></div>');
     $( "#dialogDivImages" ).dialog({modal:false, resizable: true, position: ['center','center'], title:"Image Details" , maxHeight:$(window).height() });
     $('#imageDetails').appendTo($('#dialogDivImages') );
   }
   if($('#imageDetails').length == 0){
     $('#dialogDivImages').remove();
-    $('body').append('<div id="dialogDivImages" class="bg-primary text-primary-content"><div id="imageDetails"></div></div>');
+    $('body').append('<div id="dialogDivImages" class="bg-primary text-primary-content w-full h-full"><div id="imageDetails"></div></div>');
     $( "#dialogDivImages" ).dialog({modal:false, resizable: true, position: ['center','center'], title:"Image Details" , maxHeight:$(window).height() });
     $('#dialogDivImages') .append('<div id="mageDetails"></div>');
   } else{
@@ -2804,7 +2804,7 @@ $('a.uniTableAdmin').livequery('click', function(){
     //var rowId = "5";
     $('#editRowForm').remove();
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     $.get(absoluteUrl + "tables/edit-row/tableid/" + tableid + "/rowid/" + rowId, function(data){
