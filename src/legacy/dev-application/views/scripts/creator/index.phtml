@@ -26,52 +26,58 @@
 *
 */
 ?>
-<div id ="contPreview" class="hidden w-full h-auto absolute top-52 left-72 bg-white" style="z-index: 9999999;"></div><!-- z-index must be like this for now, since a lot of interaction with droppables relies on the order of elements, it should be rewritten to something more sensible, for all elements in the admin panel -->
-<div id="templateMask"></div>
-<div id="toggleProperties"  class="help fixed w-6 h-6 left-3 top-3 cursor-pointer" title="<?php echo $this->translate->_("Click to toggle properties box");?>">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-current bg-primary text-white rounded-full">
-  <path d="M3.53 2.47a.75.75 0 0 0-1.06 1.06l18 18a.75.75 0 1 0 1.06-1.06l-18-18ZM22.676 12.553a11.249 11.249 0 0 1-2.631 4.31l-3.099-3.099a5.25 5.25 0 0 0-6.71-6.71L7.759 4.577a11.217 11.217 0 0 1 4.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113Z" />
-  <path d="M15.75 12c0 .18-.013.357-.037.53l-4.244-4.243A3.75 3.75 0 0 1 15.75 12ZM12.53 15.713l-4.243-4.244a3.75 3.75 0 0 0 4.244 4.243Z" />
-  <path d="M6.75 12c0-.619.107-1.213.304-1.764l-3.1-3.1a11.25 11.25 0 0 0-2.63 4.31c-.12.362-.12.752 0 1.114 1.489 4.467 5.704 7.69 10.675 7.69 1.5 0 2.933-.294 4.242-.827l-2.477-2.477A5.25 5.25 0 0 1 6.75 12Z" />
-</svg>
+
+<div id="contPropertiesLeft">
+  <div id ="contPreview" class="hidden w-full h-auto absolute top-52 left-72 bg-white" style="z-index: 9999999;"></div><!-- z-index must be like this for now, since a lot of interaction with droppables relies on the order of elements, it should be rewritten to something more sensible, for all elements in the admin panel -->
+  <div id="templateMask"></div>
+  <div id="toggleProperties"  class="help fixed w-6 h-6 left-3 top-3 cursor-pointer" title="<?php echo $this->translate->_("Click to toggle properties box");?>">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-current bg-primary text-white rounded-full">
+      <path d="M3.53 2.47a.75.75 0 0 0-1.06 1.06l18 18a.75.75 0 1 0 1.06-1.06l-18-18ZM22.676 12.553a11.249 11.249 0 0 1-2.631 4.31l-3.099-3.099a5.25 5.25 0 0 0-6.71-6.71L7.759 4.577a11.217 11.217 0 0 1 4.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113Z" />
+      <path d="M15.75 12c0 .18-.013.357-.037.53l-4.244-4.243A3.75 3.75 0 0 1 15.75 12ZM12.53 15.713l-4.243-4.244a3.75 3.75 0 0 0 4.244 4.243Z" />
+      <path d="M6.75 12c0-.619.107-1.213.304-1.764l-3.1-3.1a11.25 11.25 0 0 0-2.63 4.31c-.12.362-.12.752 0 1.114 1.489 4.467 5.704 7.69 10.675 7.69 1.5 0 2.933-.294 4.242-.827l-2.477-2.477A5.25 5.25 0 0 1 6.75 12Z" />
+    </svg>
+
+  </div>
+
+  <div id="updateContentButton" class="help fixed w-6 h-6 left-3 top-36 cursor-pointer" title="<?php echo $this->translate->_("Click this to update the content of the selected object") . " after editing in tinyMCE.";?>"> <a id="tinySave" href=""  class="navLinks a_refresh noAjaxEvent help" title="<?php echo $this->translate->_("Click this to update the content of the selected object");?>">
+    <svg class="w-6 h-6 fill-current bg-primary text-white rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+      <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd" />
+    </svg>
+  </a></div>
+  <div id="helpButton" class="help" title="<?php echo $this->translate->_("Click to toggle help");?>"></div>
+  <div id="helpDiv"  title=""><?php echo $this->translate->_("NeT.Creator Help");?></div>
+
+  <div id="delButton" class="help fixed w-6 h-6 left-3 top-28 cursor-pointer" title="<?php echo $this->translate->_("Click to delete selected object");?>">
+    <svg class="w-6 h-6 fill-current bg-primary text-white rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" >
+      <path fill-rule="evenodd" d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875ZM9.75 14.25a.75.75 0 0 0 0 1.5H15a.75.75 0 0 0 0-1.5H9.75Z" clip-rule="evenodd" />
+      <path d="M14.25 5.25a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25Z" />
+    </svg>
+  </div>
+  <div id="newItem" class="help fixed w-6 h-6 left-3 top-12 cursor-pointer" title="<?php echo $this->translate->_("Click to create new object on this page");?>">
+    <svg class="w-6 h-6 fill-current bg-primary text-white rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+      <path fill-rule="evenodd" d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875ZM12.75 12a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V18a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V12Z" clip-rule="evenodd" />
+      <path d="M14.25 5.25a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25Z" />
+    </svg>
+  </div>
+  <div id="cloneItem" class="help fixed w-6 h-6 left-3 top-20 cursor-pointer" title="<?php echo $this->translate->_("Click to create clone object");?>">
+    <svg class="w-6 h-6 fill-current bg-primary text-white rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+      <path fill-rule="evenodd" d="M17.663 3.118c.225.015.45.032.673.05C19.876 3.298 21 4.604 21 6.109v9.642a3 3 0 0 1-3 3V16.5c0-5.922-4.576-10.775-10.384-11.217.324-1.132 1.3-2.01 2.548-2.114.224-.019.448-.036.673-.051A3 3 0 0 1 13.5 1.5H15a3 3 0 0 1 2.663 1.618ZM12 4.5A1.5 1.5 0 0 1 13.5 3H15a1.5 1.5 0 0 1 1.5 1.5H12Z" clip-rule="evenodd" />
+      <path d="M3 8.625c0-1.036.84-1.875 1.875-1.875h.375A3.75 3.75 0 0 1 9 10.5v1.875c0 1.036.84 1.875 1.875 1.875h1.875A3.75 3.75 0 0 1 16.5 18v2.625c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 0 1 3 20.625v-12Z" />
+      <path d="M10.5 10.5a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963 5.23 5.23 0 0 0-3.434-1.279h-1.875a.375.375 0 0 1-.375-.375V10.5Z" />
+    </svg>
+  </div>
+  <!-- <div id="moveProps" class="help" title="<?php echo $this->translate->_("Click to move around properties dialog");?>">
+    <button id="upB"></button> <button id="downB"></button>
+  </div> -->
+  <div id="logout" class="help fixed w-6 h-6 left-3 top-48 cursor-pointer" title="<?php echo $this->translate->_("Click to logout");?>"><a id="logout_a" class="a_logout" href="<?php echo $this->host;?>creator/logout" >
+    <svg class="w-6 h-6 fill-current bg-primary text-white rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+      <path fill-rule="evenodd" d="M16.5 3.75a1.5 1.5 0 0 1 1.5 1.5v13.5a1.5 1.5 0 0 1-1.5 1.5h-6a1.5 1.5 0 0 1-1.5-1.5V15a.75.75 0 0 0-1.5 0v3.75a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V5.25a3 3 0 0 0-3-3h-6a3 3 0 0 0-3 3V9A.75.75 0 1 0 9 9V5.25a1.5 1.5 0 0 1 1.5-1.5h6ZM5.78 8.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 0 0 0 1.06l3 3a.75.75 0 0 0 1.06-1.06l-1.72-1.72H15a.75.75 0 0 0 0-1.5H4.06l1.72-1.72a.75.75 0 0 0 0-1.06Z" clip-rule="evenodd" />
+    </svg>
+  </a>
+  </div>
 
 </div>
 
-<div id="updateContentButton" class="help fixed w-6 h-6 left-3 top-36 cursor-pointer" title="<?php echo $this->translate->_("Click this to update the content of the selected object") . " after editing in tinyMCE.";?>"> <a id="tinySave" href=""  class="navLinks a_refresh noAjaxEvent help" title="<?php echo $this->translate->_("Click this to update the content of the selected object");?>">
-  <svg class="w-6 h-6 fill-current bg-primary text-white rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-    <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd" />
-  </svg>
-</a></div>
-<div id="helpButton" class="help" title="<?php echo $this->translate->_("Click to toggle help");?>"></div>
-<div id="helpDiv"  title=""><?php echo $this->translate->_("NeT.Creator Help");?></div>
-
-<div id="delButton" class="help fixed w-6 h-6 left-3 top-28 cursor-pointer" title="<?php echo $this->translate->_("Click to delete selected object");?>">
-  <svg class="w-6 h-6 fill-current bg-primary text-white rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" >
-    <path fill-rule="evenodd" d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875ZM9.75 14.25a.75.75 0 0 0 0 1.5H15a.75.75 0 0 0 0-1.5H9.75Z" clip-rule="evenodd" />
-    <path d="M14.25 5.25a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25Z" />
-  </svg>
-</div>
-<div id="newItem" class="help fixed w-6 h-6 left-3 top-12 cursor-pointer" title="<?php echo $this->translate->_("Click to create new object on this page");?>">
-  <svg class="w-6 h-6 fill-current bg-primary text-white rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-    <path fill-rule="evenodd" d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875ZM12.75 12a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V18a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V12Z" clip-rule="evenodd" />
-    <path d="M14.25 5.25a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25Z" />
-  </svg>
-</div>
-<div id="cloneItem" class="help fixed w-6 h-6 left-3 top-20 cursor-pointer" title="<?php echo $this->translate->_("Click to create clone object");?>">
-  <svg class="w-6 h-6 fill-current bg-primary text-white rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-    <path fill-rule="evenodd" d="M17.663 3.118c.225.015.45.032.673.05C19.876 3.298 21 4.604 21 6.109v9.642a3 3 0 0 1-3 3V16.5c0-5.922-4.576-10.775-10.384-11.217.324-1.132 1.3-2.01 2.548-2.114.224-.019.448-.036.673-.051A3 3 0 0 1 13.5 1.5H15a3 3 0 0 1 2.663 1.618ZM12 4.5A1.5 1.5 0 0 1 13.5 3H15a1.5 1.5 0 0 1 1.5 1.5H12Z" clip-rule="evenodd" />
-    <path d="M3 8.625c0-1.036.84-1.875 1.875-1.875h.375A3.75 3.75 0 0 1 9 10.5v1.875c0 1.036.84 1.875 1.875 1.875h1.875A3.75 3.75 0 0 1 16.5 18v2.625c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 0 1 3 20.625v-12Z" />
-    <path d="M10.5 10.5a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963 5.23 5.23 0 0 0-3.434-1.279h-1.875a.375.375 0 0 1-.375-.375V10.5Z" />
-  </svg>
-</div>
-<!-- <div id="moveProps" class="help" title="<?php echo $this->translate->_("Click to move around properties dialog");?>">
-  <button id="upB"></button> <button id="downB"></button>
-</div> -->
-<div id="logout" class="help fixed w-6 h-6 left-3 top-48 cursor-pointer" title="<?php echo $this->translate->_("Click to logout");?>"><a id="logout_a" class="a_logout" href="<?php echo $this->host;?>creator/logout" >
-  <svg class="w-6 h-6 fill-current bg-primary text-white rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-    <path fill-rule="evenodd" d="M16.5 3.75a1.5 1.5 0 0 1 1.5 1.5v13.5a1.5 1.5 0 0 1-1.5 1.5h-6a1.5 1.5 0 0 1-1.5-1.5V15a.75.75 0 0 0-1.5 0v3.75a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V5.25a3 3 0 0 0-3-3h-6a3 3 0 0 0-3 3V9A.75.75 0 1 0 9 9V5.25a1.5 1.5 0 0 1 1.5-1.5h6ZM5.78 8.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 0 0 0 1.06l3 3a.75.75 0 0 0 1.06-1.06l-1.72-1.72H15a.75.75 0 0 0 0-1.5H4.06l1.72-1.72a.75.75 0 0 0 0-1.06Z" clip-rule="evenodd" />
-  </svg>
-</a></div>
 <div id="penPointer" class="p-2 bg-primary text-white rounded-full">
   <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
     <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z" />
@@ -141,7 +147,7 @@
           <form id="objProperties" name="objProperties" objId="" action="<?php echo $this->host;?>save" method="post">
 
             <div class="grid">  
-              <div class="item-strech gap-2 justify-between">
+              <div class="grid gap-2">
                 <a href="" id="toggleVisibilityRowAnchor" class="navLinks a_content noAjaxEvent btn btn-secondary btn-xs mb-2 " title="<?php echo $this->translate->_("Toggle visibility for style, tinymce and meta");?>"><?php echo $this->translate->_("Object Editors");?></a>
 
                 <a id="previewButton" class="a_preview help btn btn-secondary btn-xs mb-2" target="_blank" href="" title="<?php echo $this->translate->_("Click this to go to the page and see how it looks!");?>"><?php echo $this->translate->_("View Page");?></a>
@@ -156,33 +162,34 @@
                   <span><?php echo $this->translate->_("Template");?></span><span><input  id="templateDisplayer" class="noAjaxEvent help radio-sm" type="radio" name="p_g" value="templateEditing" title="<?php echo $this->translate->_("Template creating Mode");?>" /></span>
                 </div>
 
-                <div class="w-32" >
+                <div class="" >
                   <?php echo $this->langChooserAdmin;?>
                 </div>
 
               </div>
-              <div id="toggleVisibilityRow" class="grid place-items-strech gap-4" style="display:none">
+              <div id="toggleVisibilityRow" class="grid gap-4" style="display:none">
 
-                <div class="h-52">
+                <div class="flex flex-col h-52 my-4">
                   <?php echo $this->translate->_("Style for this object");?>:
                   <textarea id="objPropertiesCSS" name="objPropertiesCSS" class="help textarea min-h-60" title="<?php echo $this->translate->_("Style for this object");?>">
                   </textarea>
                 </div>
-                <div class="pt-4">
+                <!-- tinyMCE should be replaced -->
+                <div class="flex flex-col h-52 my-4 hidden">
                   <textarea id="objPropertiesHtmlTiny" name="objPropertiesHtmlTiny" style="height:100px;">
                   </textarea>
                 </div>
 
-                <div class="self-top pl-3">
-                  <div id="descKeyDiv" class="content-stretch">
-                    <div>
+                <div class="">
+                  <div id="descKeyDiv" class="">
+                    <div class="flex flex-col my-4">
                       DESCRIPTION:
                       <textarea id="pageDescription" name="pageDescription" class="help textarea h-40" title="<?php echo $this->translate->_("Here write the description for your page, which will make it Search Engine Optimized...");?>">
                         <?php echo $this->description;?>
                       </textarea>
                     </div>
 
-                    <div>
+                    <div class="flex flex-col my-4">
                       KEYWORDS:
                       <textarea id="pageKeywords" name="pageKeywords"class="help textarea" title="<?php echo $this->translate->_("Here write the keywords for your page, which will make it Search Engine Optimized...");?>">
                         <?php echo $this->keywords;?>
@@ -277,13 +284,13 @@
                 <span class="cl">class:</span><span><input id="objPropertiesClass" name="objPropertiesClass"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
 
               </div>
-              <div class="">
+              <div class="grid gap-2">
                 <a href="" id="newPage" class="navLinks a_new" style="display:none" title="<?php echo $this->translate->_("Click to create new page");?>"><?php echo $this->translate->_("New Page");?></a>
                 <a href="<?php echo $this->host;?>creator/manage-all-pages?height=450&width=900" id="manageAllPages" class="thickbox btn btn-secondary btn-sm mb-4" title="<?php echo $this->translate->_("Manage All Pages");?>"><b><?php echo $this->translate->_("Manage All Pages");?></b></a><br />
                 <a href="" id="openPage" class="navLinks a_open btn btn-secondary btn-xs mb-2" title="<?php echo $this->translate->_("Click to open existing page");?>"><?php echo $this->translate->_("Open Page");?></a>
                 <a href="" id="clearPage" class="navLinks a_clear noAjaxEvent btn btn-secondary btn-xs mb-2" title="<?php echo $this->translate->_("Click to erase all objects");?>"><?php echo $this->translate->_("Clear");?></a>
                 <a href="#" class="navLinks a_redraw noAjaxEvent btn btn-secondary btn-xs mb-2" id="redraw" style="display:none;"><?php echo $this->translate->_("Redraw");?></a>
-                <div id="pageEditing">
+                <div id="pageEditing" class="grid gap-2">
                   <a href="" id="saveThisPage" class="navLinks a_save btn btn-secondary btn-xs mb-2" title="<?php echo $this->translate->_("Click to save work on this page");?>"><?php echo $this->translate->_("Save Page");?></a>
                   <a href="" id="savePageNew" class="navLinks a_save_new btn btn-secondary btn-xs mb-2" title="<?php echo $this->translate->_("Click to save this work as a new page");?>"><?php echo $this->translate->_("Save As New Page");?></a>
 
@@ -307,8 +314,8 @@
                 <div id="templateChangerDiv" class="card w-full mt-2"><?php echo $this->changeTemplate;?></div>
 
 
-                <div class="page-title"><?php echo $this->translate->_("Page Title");?>:<input id="pageTitle" class="w-full h-5" type="text" name="pageTitle" value="Page <?php echo $this->pageId;?>" /></div><br />
-                <div class="page-image"><?php echo $this->translate->_("Page Image");?>:<input id="pageImage" class="w-full h-5" type="text" name="pageImage" value="<?php echo $this->pageImage;?>" /></div><br />
+                <div class="page-title"><?php echo $this->translate->_("Page Title");?>:<input id="pageTitle" class="input input-sm w-full h-5" type="text" name="pageTitle" value="Page <?php echo $this->pageId;?>" /></div><br />
+                <div class="page-image"><?php echo $this->translate->_("Page Image");?>:<input id="pageImage" class="input input-sm w-full h-5" type="text" name="pageImage" value="<?php echo $this->pageImage;?>" /></div><br />
 
               </div>
 
@@ -385,7 +392,7 @@
             <div>
               <?php echo $this->formChooseMenu;?>
             </div>
-            <div id="addMenuLinkDiv">
+            <div id="addMenuLinkDiv" class="grid gap-2">
               <a id="addMenuLink" href="menu/add-menu" class="navLinks a_add btn btn-xs" title="<?php echo $this->translate->_("Click to create new menu");?>"><?php echo $this->translate->_("Add a menu");?></a>
               <a id="delMenuLink" href="menu/del-menu" class="navLinks a_delete btn btn-xs btn-error" title="<?php echo $this->translate->_("Click to delete menu");?>"><?php echo $this->translate->_("Delete menu");?></a>
               <a id="addMenuItemLink" href="menu/add-menu-item" class="navLinks a_add btn btn-xs" title="<?php echo $this->translate->_("Click to add new menu item to this menu");?>"><?php echo $this->translate->_("Add a menu item");?></a>
@@ -393,10 +400,10 @@
             </div>
 
           </div>
-          <div id="menuSelected" class="grid gap-2 content-start"></div>
+          <div id="menuSelected" class="grid gap-2 content-start bg-neutral-content"></div>
           <div id="menuSelectedForm" class="grid gap-2 content-start">
             <a id="editMenuItem" style="display:none">Edit</a>
-            <a id="deleteMenuItem" class="a_delete btn btn-xs btn-error max-w-48" style="display:none" title="<?php echo $this->translate->_("Click to delete this menu item");?>"><?php echo $this->translate->_("Delete this item");?> </a>
+            <a id="deleteMenuItem" class="a_delete btn btn-xs btn-error" style="display:none" title="<?php echo $this->translate->_("Click to delete this menu item");?>"><?php echo $this->translate->_("Delete this item");?> </a>
             <div id="menuItemForm"></div>
           </div>
 
@@ -462,9 +469,9 @@
         <div id="fragment-5">
           <div id="fragment-5wrapper" class="cssjswrapp2">
 
-            <div id="modulesFormContainer" class="grid gap-4">
-              <div>
-                <a id="fsbutton3" class="help fsbutton" href="#">
+            <div id="modulesFormContainer" class="grid gap-4 overflow-auto">
+              <div class="w-8">
+                <a id="fsbutton3" class="help fsbutton w-8" href="#">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                     <path fill-rule="evenodd" d="M15 3.75a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0V5.56l-3.97 3.97a.75.75 0 1 1-1.06-1.06l3.97-3.97h-2.69a.75.75 0 0 1-.75-.75Zm-12 0A.75.75 0 0 1 3.75 3h4.5a.75.75 0 0 1 0 1.5H5.56l3.97 3.97a.75.75 0 0 1-1.06 1.06L4.5 5.56v2.69a.75.75 0 0 1-1.5 0v-4.5Zm11.47 11.78a.75.75 0 1 1 1.06-1.06l3.97 3.97v-2.69a.75.75 0 0 1 1.5 0v4.5a.75.75 0 0 1-.75.75h-4.5a.75.75 0 0 1 0-1.5h2.69l-3.97-3.97Zm-4.94-1.06a.75.75 0 0 1 0 1.06L5.56 19.5h2.69a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 1 1.5 0v2.69l3.97-3.97a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
                   </svg>
@@ -511,7 +518,7 @@
         <div>
           <?php echo $this->imagesFoldersForm;?>
         </div>
-        <div id="addFolderLinkDiv" >
+        <div id="addFolderLinkDiv" class="grid gap-2">
           <a id="addFolderLink" href="images/add-folder" class="navLinks a_add btn btn-xs" title="<?php echo $this->translate->_("Click to create new folder for the images");?>"><?php echo $this->translate->_("Add a folder");?></a>
           <a id="delFolderLink" href="images/del-folder" class="navLinks a_delete btn btn-xs btn-error" title="<?php echo $this->translate->_("Click to delete folder");?>"><?php echo $this->translate->_("Delete folder");?></a>
           <a id="addImageLink" href="images/add-image" class="navLinks a_add btn btn-xs" title="<?php echo $this->translate->_("Click to add new image to this folder");?>"><?php echo $this->translate->_("Add images");?></a>
@@ -550,70 +557,68 @@
 
   <!--CSS-->
   <div id="fragment-7">
-    <div id="fragment-7wrapper" class="cssjswrapp bg-primary">
-      <a href="#" class="help fsbutton" id="fsbutton" >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-          <path fill-rule="evenodd" d="M15 3.75a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0V5.56l-3.97 3.97a.75.75 0 1 1-1.06-1.06l3.97-3.97h-2.69a.75.75 0 0 1-.75-.75Zm-12 0A.75.75 0 0 1 3.75 3h4.5a.75.75 0 0 1 0 1.5H5.56l3.97 3.97a.75.75 0 0 1-1.06 1.06L4.5 5.56v2.69a.75.75 0 0 1-1.5 0v-4.5Zm11.47 11.78a.75.75 0 1 1 1.06-1.06l3.97 3.97v-2.69a.75.75 0 0 1 1.5 0v4.5a.75.75 0 0 1-.75.75h-4.5a.75.75 0 0 1 0-1.5h2.69l-3.97-3.97Zm-4.94-1.06a.75.75 0 0 1 0 1.06L5.56 19.5h2.69a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 1 1.5 0v2.69l3.97-3.97a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
-        </svg>
-      </a>
-      <div>
-        <div><?php echo $this->translate->_("Choose Object");?>:</div>
-        <select id="objListForCss" size="1" style="width:200px;" ></select>
+    <div id="fragment-7wrapper" class="cssjswrapp bg-primary grid content-start p-2">
+      <div class="grid gap-2">
+        <div class="w-8">
+          <a href="#" class="help fsbutton w-8" id="fsbutton" >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+              <path fill-rule="evenodd" d="M15 3.75a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0V5.56l-3.97 3.97a.75.75 0 1 1-1.06-1.06l3.97-3.97h-2.69a.75.75 0 0 1-.75-.75Zm-12 0A.75.75 0 0 1 3.75 3h4.5a.75.75 0 0 1 0 1.5H5.56l3.97 3.97a.75.75 0 0 1-1.06 1.06L4.5 5.56v2.69a.75.75 0 0 1-1.5 0v-4.5Zm11.47 11.78a.75.75 0 1 1 1.06-1.06l3.97 3.97v-2.69a.75.75 0 0 1 1.5 0v4.5a.75.75 0 0 1-.75.75h-4.5a.75.75 0 0 1 0-1.5h2.69l-3.97-3.97Zm-4.94-1.06a.75.75 0 0 1 0 1.06L5.56 19.5h2.69a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 1 1.5 0v2.69l3.97-3.97a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
+            </svg>
+          </a>
+        </div>
+        <div>
+          <div><?php echo $this->translate->_("Choose Object");?>:</div>
+          <select id="objListForCss" class="select select-xs w-full" size="1"></select>
         <!--<?php echo $this->translate->_("Choose class");?>:
-          <select id="eventListForCss" size="1" style="width:200px;" ></select>-->
-          <a id="addCssCodeA" class="navLinks a_add noAjaxEvent"><?php echo $this->translate->_("Add Code");?></a>
+          <select id="eventListForCss" size="1"></select>-->
+          <a id="addCssCodeA" class="navLinks a_add noAjaxEvent btn btn-xs mt-2"><?php echo $this->translate->_("Add Code");?></a>
 
         </div>
-        <a id="saveCssCodeA" class="navLinks a_save" style="float:right;margin-bottom:10px;"><?php echo $this->translate->_("Save This Code");?></a>
-        <p>
-          <br />
-          <textarea id="pageCSS" name="pageCSS" style="height:100%;width:100%;min-height:200px;" class="codepress css">
+        <div class="grid">
+          <textarea id="pageCSS" name="pageCSS" class="codepress css min-h-96">
             <?php echo $this->css;?>
-
-          </textarea><br />
-        </p>
+          </textarea>
+          <a id="saveCssCodeA" class="navLinks a_save btn btn-xs max-w-xs mt-2"><?php echo $this->translate->_("Save This Code");?></a>
+        </div>
+      </div>
       </div>
 
     </div>
 
     <!--JS-->
     <div id="fragment-8">
-      <div id="fragment-8wrapper" class="cssjswrapp bg-primary">
-        <a href="#" class="help fsbutton" id="fsbutton2" >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-            <path fill-rule="evenodd" d="M15 3.75a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0V5.56l-3.97 3.97a.75.75 0 1 1-1.06-1.06l3.97-3.97h-2.69a.75.75 0 0 1-.75-.75Zm-12 0A.75.75 0 0 1 3.75 3h4.5a.75.75 0 0 1 0 1.5H5.56l3.97 3.97a.75.75 0 0 1-1.06 1.06L4.5 5.56v2.69a.75.75 0 0 1-1.5 0v-4.5Zm11.47 11.78a.75.75 0 1 1 1.06-1.06l3.97 3.97v-2.69a.75.75 0 0 1 1.5 0v4.5a.75.75 0 0 1-.75.75h-4.5a.75.75 0 0 1 0-1.5h2.69l-3.97-3.97Zm-4.94-1.06a.75.75 0 0 1 0 1.06L5.56 19.5h2.69a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 1 1.5 0v2.69l3.97-3.97a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
-          </svg>
-        </a>
-        <div style="width:100%;display: block;float: left;position:relative;">
-          <div style="width:auto;display:block;float:left;margin-top:10px;margin-bottom:10px;">
+      <div id="fragment-8wrapper" class="cssjswrapp bg-primary grid content-start p-2">
+        <div class="w-8">
+          <a href="#" class="help fsbutton w-8" id="fsbutton2" >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+              <path fill-rule="evenodd" d="M15 3.75a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0V5.56l-3.97 3.97a.75.75 0 1 1-1.06-1.06l3.97-3.97h-2.69a.75.75 0 0 1-.75-.75Zm-12 0A.75.75 0 0 1 3.75 3h4.5a.75.75 0 0 1 0 1.5H5.56l3.97 3.97a.75.75 0 0 1-1.06 1.06L4.5 5.56v2.69a.75.75 0 0 1-1.5 0v-4.5Zm11.47 11.78a.75.75 0 1 1 1.06-1.06l3.97 3.97v-2.69a.75.75 0 0 1 1.5 0v4.5a.75.75 0 0 1-.75.75h-4.5a.75.75 0 0 1 0-1.5h2.69l-3.97-3.97Zm-4.94-1.06a.75.75 0 0 1 0 1.06L5.56 19.5h2.69a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 1 1.5 0v2.69l3.97-3.97a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
+            </svg>
+          </a>
+        </div>
+        <div>
+          <div>
             <div><?php echo $this->translate->_("Choose Object");?>:</div>
-            <select id="objListForJs" size="1" style="width:200px;" ></select>
+            <select id="objListForJs" class="select select-xs w-full" size="1"></select>
           </div>
-          <div  style="width:auto;display:block;float:left;margin-top:10px;margin-bottom:10px;">
+          <div class="grid gap-2">
             <div><?php echo $this->translate->_("Choose event");?>:</div>
-            <select id="eventListForJs" size="1" style="width:200px;" >
+            <select id="eventListForJs" class="select select-xs w-full" size="1">
               <option>click</option>
               <option>dblclick</option>
               <option>mouseover</option>
               <option>mouseout</option>
             </select>
           </div>
-          <a id="addJsCodeA" class="navLinks a_add noAjaxEvent" style="position:absolute;bottom:10px;"><?php echo $this->translate->_("Add Code");?></a>
+          <a id="addJsCodeA" class="navLinks a_add noAjaxEvent btn btn-xs mt-2 mb-4"><?php echo $this->translate->_("Add Code");?></a>
         </div>
 
-
-        <a id="saveJsCodeA" class="navLinks a_save" style="float:right;margin-bottom:10px;"><?php echo $this->translate->_("Save This Code");?></a>
-
-
-        <p>
-          <br />
-          <textarea id="pageJS" name="pageJS" style="height:100%;width:100%;min-height:200px;" class="codepress javascript">
+        <div class="grid gap-2">
+          <textarea id="pageJS" name="pageJS" class="codepress javascript min-h-96">
             <?php echo $this->js;?>
 
           </textarea><br />
-
-        </p>
-        <br />
+          <a id="saveJsCodeA" class="navLinks a_save btn btn-xs max-w-xs"><?php echo $this->translate->_("Save This Code");?></a>
+        </div>
 
       </div>
     </div>

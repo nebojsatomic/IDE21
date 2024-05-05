@@ -466,6 +466,11 @@ span.ui-button-text {
   -webkit-border-radius: 5px;*/
 }
 
+#contPropertiesLeft {
+  position: fixed;
+  z-index: 199999; /* for now let it be the same as #contProperties */
+}
+
 #contProperties {
   position: fixed;
   /*right: 0;*/

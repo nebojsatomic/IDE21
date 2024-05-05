@@ -52,6 +52,8 @@ function dialog(){
 
   $( "#dialogDiv" ).dialog({modal:false, resizable: false, title:$('.currentTitle').text() });
 }
+
+/* //tinyMCE should be replaced */
 //tinyMCE INIT
 tinyMCE.init({
   // add these two lines for absolute urls
@@ -104,13 +106,14 @@ function ajaxEvent(){
 }
 message = "";
 function ajaxEventDone(message){
-  $('body').append('<div id="ajaxEventMessage"  style="position:fixed;display:none;top:0; left:0;opacity:0.9;background:white;margin:20% 40%;padding:30px;width:300px;height:50px;border-radius:10px;z-index:999999;">' +  message + '<img src="'+ absoluteUrl2 +'images/ajax-loader2.gif" style="float:right;" /></div>');
+  //$('body').append('<div id="ajaxEventMessage"  style="position:fixed;display:none;top:0; left:0;opacity:0.9;background:white;margin:20% 40%;padding:30px;width:300px;height:50px;border-radius:10px;z-index:999999;">' +  message + '<img src="'+ absoluteUrl2 +'images/ajax-loader2.gif" style="float:right;" /></div>');
+  $('body').append('<div id="ajaxEventMessage" role="alert" class="fixed inset-0 w-72 h-24 mx-auto my-auto alert alert-success bg-primary"   style="display:none;opacity:0.9;z-index:999999;"><svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>' +  message + '</span></div>');
   $('#ajaxEventMessage').fadeIn(1000);
   setTimeout("$('#ajaxEventMessage').fadeOut()", 2000);
 }
 
 function ajaxEmitMessage(emitMessage){
-  $('#ajaxEventMessage').html(  emitMessage + '<img src="'+ absoluteUrl2 +'images/interface/ajaxDone.png" style="float:right;" />');
+  $('#ajaxEventMessage').html( '<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>' + emitMessage + '</span>');
   setTimeout("$('#ajaxEventMessage').fadeOut()", 1000);
 }
 
@@ -704,7 +707,7 @@ $(document).ready(function(){
       droppableContainer = "#droppable";
     }
 
-    $(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" style="position:absolute;border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
+    $(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" style="position:absolute;border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent" contenteditable >NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
 
     //IF CONTAINER ON, THEN ADD class IN THE CURRENT OBJECT, ELSE the same
     if (objContainer == 1) {
@@ -3524,9 +3527,20 @@ $('#ftpform').livequery(function(){
 });
 
 $('#objList option').livequery('dblclick', function(){
-  //console.log('a');
   //$('#objPropertiesHtmlTiny_fullscreen').click();
   tinyMCE.execCommand('mceFullScreen');
+});
+
+/* tinyMCE should be replaced with something new, atm do this fix */
+$('#penPointer').livequery('click', function(){
+  tinyMCE.execCommand('mceFullScreen');
+  /*$('body').livequery('click', function(){
+    setTimeout(function(){//set timeout to detect out of fullscreen
+      if($('#mce_fullscreen').length < 1 ) {
+        $('#tinySave').trigger('click'); // trigger update of the el in the template/page
+      }
+    }, 500);
+  });*/
 });
 
 //FULSCREEN ZA CODEPRESS
