@@ -1053,10 +1053,11 @@ class PageController extends NetActionController
                         'label' => 'Choose revision:',
                         'multioptions' => $reverse,
                         //'value' =>  $reverse[$_POST['templateXMLNames']],
-                        'style' => 'width:auto;',
+                        'class' => 'select select-xs w-full',
                     )),
                 'installTemplateSubmit' => array('submit', array(
                     'order' => 100,
+                    'class' => 'btn btn-xs btn-secondary',
                     'label' => $this->_translateCreator->_('Install'),
                     'value' => $this->_translateCreator->_('Submit')
                 ))
@@ -1143,10 +1144,11 @@ class PageController extends NetActionController
                 'uploadTemplateName' => array('file', array(
                     'required' => true,
                     'label' => $this->_translateCreator->_('Browse a template'),
-                    'style' => 'width:100%;'
+                    'class' => 'input input-sm w-full'
                 )),
                 'uploadImageSubmit' => array('submit', array(
                     'order' => 100,
+                    'class' => 'btn btn-xs btn-secondary',
                     'label' => $this->_translateCreator->_('Upload'),
                     'value' => $this->_translateCreator->_('Submit')
                 ))
@@ -1182,7 +1184,7 @@ class PageController extends NetActionController
                 'pageName' => array('select', array(
                     'required' => true,
                     'label' => $this->_translateCreator->_('Choose page'),
-                    'style' => 'width:100%',
+                    'class' => 'select select-xs w-full',
                     'multioptions' => $pageArray,
                 )),
 
@@ -1222,7 +1224,7 @@ class PageController extends NetActionController
                 'templateName' => array('select', array(
                     'required' => true,
                     'label' => $this->_translateCreator->_('Choose template'),
-                    'style' => 'width:100%',
+                    'class' => 'select select-xs w-full',
                     'multioptions' => $templateArray,
                 )),
 

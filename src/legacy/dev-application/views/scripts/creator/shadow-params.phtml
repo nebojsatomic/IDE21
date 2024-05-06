@@ -26,10 +26,12 @@
  * 
  */
  ?>
-Left: <input style="z-index: 18; position: relative;"  id="shdwLeft" size="1" value="4" type="text">
-Top: <input style="z-index: 20; position: relative;"  id="shdwTop" size="1" value="4" type="text">
-Blur: <input style="z-index: 22; position: relative;"  id="shdwBlur" size="1" value="2" type="text">
-Opacity: <input style="z-index: 24; position: relative;"  id="shdwOpacity" size="2" value="0.5" type="text">
-Color: <input style="z-index: 26; position: relative;"  id="shdwColor" size="6" value="black" type="text">
-<br />
-<input  id="shadowParamButton" value="Apply" type="button">
+ <div class="grid grid-cols-2 gap-2 items-center">
+ 	Left: <input id="shdwLeft" class="input input-sm" size="1" value="4" type="text">
+ 	Top: <input  id="shdwTop" class="input input-sm" size="1" value="4" type="text">
+ 	Blur: <input id="shdwBlur" class="input input-sm" size="1" value="2" type="text">
+ 	Opacity: <input id="shdwOpacity" class="input input-sm" size="2" value="0.5" type="text">
+ 	Color: <input id="shdwColor" class="input input-sm" size="6" value="black" type="text">
+
+ 	<input  id="shadowParamButton" class="btn btn-xs btn-secondary col-span-2" value="Apply" type="button">
+ </div>

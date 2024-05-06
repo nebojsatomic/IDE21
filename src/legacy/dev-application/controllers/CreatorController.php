@@ -1075,12 +1075,13 @@ class CreatorController extends NetActionController
                 'id' => array('select', array(
                     'required' => true,
                     'label' => '',
-                    'style' => 'width:100%;',
+                    'class' => 'select select-xs w-full',
                     'multioptions' => $languageCodes,
                 )),
 		          'submit' => array('submit', array(
                     'label' => 'Add',
                     'order' => 100,
+                    'class' => 'btn btn-xs btn-secondary w-full',
                     'value' => 'Submit'
                 ))
               )));
@@ -1572,11 +1573,13 @@ class CreatorController extends NetActionController
          $form = new Zend_Form(array(
              'method' => 'post',
              'id' => 'setPermissionsForm',
-	           'action' => $this->_host . 'creator/set-permissions/rtype/' . $type . "/id/" . $id,
+             'class' => 'grid items-center',
+	         'action' => $this->_host . 'creator/set-permissions/rtype/' . $type . "/id/" . $id,
              'elements' => array(
 
 		          'submitB' => array('submit', array(
                     'label' => 'Save',
+                    'class' => 'btn btn-xs btn-secondary',
                     'order' => 100,
                     'value' => 'Submit'
                 ))
@@ -1592,9 +1595,12 @@ class CreatorController extends NetActionController
                 if ($role['roleId'] ==  $rule['roleId']){
                     $attr = "checked";
                     $roleName->setAttrib('checked', $attr);
+
                 } else {
                    $attr = "";
+                   
                 }
+                $roleName->setAttrib('class', 'checkbox-sm');
             }
 
             if($role['name'] == "administrator") {continue;}//admin is alowed everything

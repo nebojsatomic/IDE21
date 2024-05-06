@@ -164,6 +164,7 @@ class TablesController extends NetActionController
         foreach ($colone['imena'] as $kolona) {
                 $elements[$kolona] = array('text', array(
                         'label' => $this->_translateCreator->_(ucfirst($kolona)),
+                        'class' => 'input input-sm w-full',
                         'required' => true
                     ),
                 );
@@ -172,6 +173,7 @@ class TablesController extends NetActionController
 
            $elements['submitbut'] = array('submit', array(
                     'label' => 'Submit',
+                    'class' => 'btn btn-xs btn-secondary w-full',
                     'order' => 100
                     ));
 
@@ -280,7 +282,7 @@ class TablesController extends NetActionController
             $sel = $this->_sesija->table->$tableName->queryString;
             $resValues = $db->fetchAll("SELECT  $sel FROM $tableName WHERE $tablePK = ?", array($rowid) );//TREBA UBACITI ZA RAZLICITI P.KEY
             $justColsArray = explode(", ", $sel);
-//print_r($justColsArray);
+
             $i = 0;
             foreach ($resDescribe as $col ) {
                 if (!in_array($col['Field'], $justColsArray) ){
@@ -291,7 +293,7 @@ class TablesController extends NetActionController
                     $coloneToBe['imena'][] = $justColsArray[$i];
                     $coloneString .= $justColsArray[$i] . ", ";
                 }
- //echo       $coloneString;         
+        
                 $i++;
             }
             $colone = $coloneToBe;
@@ -302,6 +304,7 @@ class TablesController extends NetActionController
         foreach ($colone['imena'] as $kolona) {
                 $elements[$kolona] = array('text', array(
                         'label' => $this->_translateCreator->_(ucfirst($kolona)) ,
+                        'class' => 'input input-sm w-full',
                         'value' => $resValues[0][$kolona],
                         'required' => true
                     ),
@@ -311,6 +314,7 @@ class TablesController extends NetActionController
 
            $elements['submitbut'] = array('submit', array(
                     'label' => $this->_translateCreator->_('Submit'),
+                    'class' => 'btn btn-xs btn-secondary w-full',
                     'order' => 100
                     ));
 
