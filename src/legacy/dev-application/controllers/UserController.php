@@ -983,28 +983,29 @@ require_once 'Zend/Form/Element/Captcha.php';
                 'fullName' => array('text', array(
                     'required' => true,
                     'label' => $this->translator->_('Full Name'),
-
+                    'class' => 'input input-sm w-full',
                     'size' => 60,
                 )),
                 'username' => array('text', array(
                     'required' => true,
+                    'class' => 'input input-sm w-full',
                     'label' => $this->translator->_('Username'),
-
                 )),
                 'password' => array('password', array(
                     'required' => true,
+                    'class' => 'input input-sm w-full',
                     'label' => $this->translator->_('Password'),
-
                 )),
                 'repeatPassword' => array('password', array(
                     'required' => true,
+                    'class' => 'input input-sm w-full',
                     'label' => $this->translator->_('Repeat Password'),
 
                 )),
                 'email' => array('text', array(
                     'required' => true,
                     'label' => 'E-Mail:',
-
+                    'class' => 'input input-sm w-full',
                     'size' => 60,
                     'validators' => array('EmailAddress'),
                 )),
@@ -1027,6 +1028,7 @@ require_once 'Zend/Form/Element/Captcha.php';
                 */
                 'submit' => array('submit', array(
                     'label' => 'Register user',
+                    'class' => 'btn btn-xs btn-secondary w-full',
                     'order' => 100,
                 ))
             ),

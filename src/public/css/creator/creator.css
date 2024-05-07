@@ -132,7 +132,7 @@ span.ui-button-text {
   top: 0;
   width: 70%;
   height: auto;
-  min-height: 900px;
+  min-height: 100vh;
   background: white;
   padding: 0px;
   border: 2px dotted lightblue;

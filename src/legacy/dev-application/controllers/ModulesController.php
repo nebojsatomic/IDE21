@@ -129,13 +129,14 @@ class ModulesController extends NetActionController
           'template_id' => array('select', array(
             'required' => true,
             'label' => 'Template:',
-            'style' => 'width:200px;',
+            'class' => 'select select-xs w-full',
             'multioptions' => $templateArray,
             'value' => @$selValue
           )),
           'submit' => array('submit', array(
             'label' => 'Save',
             'order' => 100,
+            'class' => 'btn btn-xs btn-secondary w-full',
             'value' => $this->_translate->_('Submit')
           ))
         )));
@@ -147,6 +148,7 @@ class ModulesController extends NetActionController
           } else {
             $attr = "";
           }
+          $enabledMod->setAttrib('class', 'checkbox-sm');
           //$enabledValue = $result['enabled'];
         }
         $form->addElements(array($enabledMod ));
