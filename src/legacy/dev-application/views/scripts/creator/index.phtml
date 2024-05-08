@@ -85,7 +85,7 @@
 </div>
 <div id="downPointer"></div>
 
-<div id="tooltip" style="display:none"></div>
+<div id="tooltip" class="rounded bg-primary" style="display:none"></div>
 <div id="adminAjaxLoader"><div
   class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
   role="status">
@@ -148,13 +148,6 @@
 
             <div class="grid">  
               <div class="grid gap-2">
-                <a href="" id="toggleVisibilityRowAnchor" class="navLinks a_content noAjaxEvent btn btn-secondary btn-xs mb-2 " title="<?php echo $this->translate->_("Toggle visibility for style, tinymce and meta");?>"><?php echo $this->translate->_("Object Editors");?></a>
-
-                <a id="previewButton" class="a_preview help btn btn-secondary btn-xs mb-2" target="_blank" href="" title="<?php echo $this->translate->_("Click this to go to the page and see how it looks!");?>"><?php echo $this->translate->_("View Page");?></a>
-                <a id="emptyCacheButton" class="navLinks a_emptyCache help btn btn-secondary btn-xs mb-2" href="" title="<?php echo $this->translate->_("Click this to empty the cache if you have made changes that require cache to be cleaned!");?>"><?php echo $this->translate->_("Empty Cache");?> </a>
-                <a id="backupSiteButton" class="navLinks a_backup help btn btn-secondary btn-xs mb-2" href="" title="<?php echo $this->translate->_("Click here to have backup of the site in a folder that is created for that purpose.If system command is disabled then it must be done through phpMyAdmin...");?>"><?php echo $this->translate->_("Backup Site");?> </a>
-
-                <!--<a id="generateCacheButton" class="navLinks a_generateCache" style="display:block" href="" >Generate Cache </a>-->
 
                 <div id="p_t_common" class="noAjaxEvent flex item-strech gap-2 items-center h-6">
 
@@ -166,10 +159,21 @@
                   <?php echo $this->langChooserAdmin;?>
                 </div>
 
+                <div class="">
+                  <div style="display:none"><?php echo $this->translate->_("Container");?><input id="objContainer" type="checkbox" /></div>
+                <?php echo $this->translate->_("Objects on this page");?>:
+                <select id="objList" size="4" class="help select w-full h-24 p-1 mb-2" title="<?php echo $this->translate->_("This is the list of all objects in this page/template");?>">
+                </select>
+                </div>
+
+                
+                <a href="" id="toggleVisibilityRowAnchor" class="navLinks a_content noAjaxEvent btn btn-secondary btn-xs mb-2 " title="<?php echo $this->translate->_("Toggle visibility for style, tinymce and meta");?>"><?php echo $this->translate->_("Object Editors");?></a>
+                <a href="" id="clearPage" class="navLinks a_clear noAjaxEvent btn btn-secondary btn-xs mb-2" title="<?php echo $this->translate->_("Click to erase all objects");?>"><?php echo $this->translate->_("Clear");?></a>
+
               </div>
               <div id="toggleVisibilityRow" class="grid gap-4" style="display:none">
 
-                <div class="flex flex-col h-52 my-4">
+                <div class="flex flex-col min-h-52 my-2">
                   <?php echo $this->translate->_("Style for this object");?>:
                   <textarea id="objPropertiesCSS" name="objPropertiesCSS" class="help textarea min-h-60" title="<?php echo $this->translate->_("Style for this object");?>">
                   </textarea>
@@ -182,14 +186,14 @@
 
                 <div class="">
                   <div id="descKeyDiv" class="">
-                    <div class="flex flex-col my-4">
+                    <div class="flex flex-col my-2">
                       DESCRIPTION:
                       <textarea id="pageDescription" name="pageDescription" class="help textarea h-40" title="<?php echo $this->translate->_("Here write the description for your page, which will make it Search Engine Optimized...");?>">
                         <?php echo $this->description;?>
                       </textarea>
                     </div>
 
-                    <div class="flex flex-col my-4">
+                    <div class="flex flex-col my-2">
                       KEYWORDS:
                       <textarea id="pageKeywords" name="pageKeywords"class="help textarea" title="<?php echo $this->translate->_("Here write the keywords for your page, which will make it Search Engine Optimized...");?>">
                         <?php echo $this->keywords;?>
@@ -213,16 +217,16 @@
             <div class="grid place-items-strech gap-4" >
               <div class="grid gap-y-1 content-start">
                 <div class="grid mt-1 gap-y-1 h-24">
-                  <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl"><?php echo $this->translate->_("ID Assistant");?></span><span><input id="tttoggle" type="checkbox"  class="checkbox-sm float-right" /></span></div>
-                  <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl"><?php echo $this->translate->_("Show hidden");?>:</span><span><input id="showFooterCheck" name="showFooterCheck" type="checkbox" class="checkbox-sm float-right" /></span></div>
-                  <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl"><?php echo $this->translate->_("Shadow");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent currentTitle" id="aParamShadow" title="<?php echo $this->translate->_("Click to set shadow params");?>">
+                  <div class="creatorDiv grid grid-cols-2 items-strech"><span class="cl"><?php echo $this->translate->_("ID Assistant");?></span><span><input id="tttoggle" type="checkbox"  class="checkbox-sm float-right" /></span></div>
+                  <div class="creatorDiv grid grid-cols-2 items-strech"><span class="cl"><?php echo $this->translate->_("Show hidden");?>:</span><span><input id="showFooterCheck" name="showFooterCheck" type="checkbox" class="checkbox-sm float-right" /></span></div>
+                  <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("Shadow");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent currentTitle" id="aParamShadow" title="<?php echo $this->translate->_("Click to set shadow params");?>">
                     <svg class="w-4 h-4 fill-current bg-secondary text-white rounded-full inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M16.5 6a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v7.5a3 3 0 0 0 3 3v-6A4.5 4.5 0 0 1 10.5 6h6Z" />
                       <path d="M18 7.5a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-7.5a3 3 0 0 1-3-3v-7.5a3 3 0 0 1 3-3H18Z" />
                     </svg>
                     <div class="hidden">Shadow</div>
                   </a><input id="shadowCheck" type="checkbox" class="checkbox-sm float-right"  /></span></div>
-                  <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl"><?php echo $this->translate->_("Corner");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent currentTitle content-center h-6 inline-block" id="aParamCorner" title="<?php echo $this->translate->_("Click to set corner params");?>">
+                  <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("Corner");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent currentTitle content-center h-6 inline-block" id="aParamCorner" title="<?php echo $this->translate->_("Click to set corner params");?>">
                     <svg class="w-4 h-4 fill-current text-white rounded" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" >
                       <path d="M6 3a3 3 0 0 0-3 3v1.5a.75.75 0 0 0 1.5 0V6A1.5 1.5 0 0 1 6 4.5h1.5a.75.75 0 0 0 0-1.5H6ZM16.5 3a.75.75 0 0 0 0 1.5H18A1.5 1.5 0 0 1 19.5 6v1.5a.75.75 0 0 0 1.5 0V6a3 3 0 0 0-3-3h-1.5ZM12 8.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5ZM4.5 16.5a.75.75 0 0 0-1.5 0V18a3 3 0 0 0 3 3h1.5a.75.75 0 0 0 0-1.5H6A1.5 1.5 0 0 1 4.5 18v-1.5ZM21 16.5a.75.75 0 0 0-1.5 0V18a1.5 1.5 0 0 1-1.5 1.5h-1.5a.75.75 0 0 0 0 1.5H18a3 3 0 0 0 3-3v-1.5Z" />
                     </svg>
@@ -266,31 +270,28 @@
                     <option value="black">Black</option>
                   </select>
                 </div>
-
-                <div class="mt-4">
-                  <a href="" id="deletePage" class="navLinks a_delete btn btn-error btn-sm mt-2 text-content-secondary p-2 max-h-2" title="<?php echo $this->translate->_("Click to delete this page");?>"><?php echo $this->translate->_("Delete This Page");?></a>
-                </div>
-
               </div>
-              <div class="grid grid-cols-2 h-64 items-strech">            
-                <span class="cl"><?php echo $this->translate->_("Width");?>:</span><span><input id="objPropertiesWidth" name="objPropertiesWidth"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
-                <span class="cl"><?php echo $this->translate->_("Height");?>:</span><span><input id="objPropertiesHeight" name="objPropertiesHeight"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
-                <span class="cl"><?php echo $this->translate->_("Border");?>:</span><span><input id="objPropertiesBorder" name="objPropertiesBorder"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
 
-                <span class="cl">PosX:</span><span><input id="objPropertiesX" name="objPropertiesX"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
-                <span class="cl">PosY:</span><span><input id="objPropertiesY" name="objPropertiesY"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
-                <span class="cl">Z-Index:</span><span><input id="objPropertiesZ" name="objPropertiesZ"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
+              <div class="grid grid-cols-4 h-64 items-strech">
+                <span class="cl col-span-3"><?php echo $this->translate->_("Width");?>:</span><span><input id="objPropertiesWidth" name="objPropertiesWidth"class="input w-16 max-w-xs max-h-5 p-0" type="text" value="" /></span>
+                <span class="cl col-span-3"><?php echo $this->translate->_("Height");?>:</span><span><input id="objPropertiesHeight" name="objPropertiesHeight"class="input w-16 max-w-xs max-h-5 p-0" type="text" value="" /></span>
+                <span class="cl col-span-3"><?php echo $this->translate->_("Border");?>:</span><span><input id="objPropertiesBorder" name="objPropertiesBorder"class="input w-16 max-w-xs max-h-5 p-0" type="text" value="" /></span>
 
-                <span class="cl">BgColor:</span><span><input id="objPropertiesBackground" name="objPropertiesBackground"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
-                <span class="cl">BgImage:</span><span><input id="objPropertiesBackgroundImage" name="objPropertiesBackgroundImage"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
-                <span class="cl">class:</span><span><input id="objPropertiesClass" name="objPropertiesClass"class="input w-16 max-w-xs max-h-5 m-1 p-0" type="text" value="" /></span>
+                <span class="cl col-span-3">PosX:</span><span><input id="objPropertiesX" name="objPropertiesX"class="input w-16 max-w-xs max-h-5 p-0" type="text" value="" /></span>
+                <span class="cl col-span-3">PosY:</span><span><input id="objPropertiesY" name="objPropertiesY"class="input w-16 max-w-xs max-h-5 p-0" type="text" value="" /></span>
+                <span class="cl col-span-3">Z-Index:</span><span><input id="objPropertiesZ" name="objPropertiesZ"class="input w-16 max-w-xs max-h-5 p-0" type="text" value="" /></span>
+
+                <span class="cl col-span-3">BgColor:</span><span><input id="objPropertiesBackground" name="objPropertiesBackground"class="input w-16 max-w-xs max-h-5 p-0" type="text" value="" /></span>
+                <span class="cl col-span-3">BgImage:</span><span><input id="objPropertiesBackgroundImage" name="objPropertiesBackgroundImage"class="input w-16 max-w-xs max-h-5 p-0" type="text" value="" /></span>
+                <span class="cl col-span-3">class:</span><span><input id="objPropertiesClass" name="objPropertiesClass"class="input w-16 max-w-xs max-h-5 p-0" type="text" value="" /></span>
 
               </div>
               <div class="grid gap-2">
                 <a href="" id="newPage" class="navLinks a_new" style="display:none" title="<?php echo $this->translate->_("Click to create new page");?>"><?php echo $this->translate->_("New Page");?></a>
-                <a href="<?php echo $this->host;?>creator/manage-all-pages?height=450&width=900" id="manageAllPages" class="thickbox btn btn-secondary btn-sm mb-4" title="<?php echo $this->translate->_("Manage All Pages");?>"><b><?php echo $this->translate->_("Manage All Pages");?></b></a><br />
+                <a href="<?php echo $this->host;?>creator/manage-all-pages?height=450&width=900" id="manageAllPages" class="thickbox btn btn-secondary btn-sm mb-4" title="<?php echo $this->translate->_("Manage All Pages");?>"><b><?php echo $this->translate->_("Manage All Pages");?></b></a>
+
+                <a id="previewButton" class="a_preview help btn btn-secondary btn-xs mb-2" target="_blank" href="" title="<?php echo $this->translate->_("Click this to go to the page and see how it looks!");?>"><?php echo $this->translate->_("View Page");?></a>
                 <a href="" id="openPage" class="navLinks a_open btn btn-secondary btn-xs mb-2" title="<?php echo $this->translate->_("Click to open existing page");?>"><?php echo $this->translate->_("Open Page");?></a>
-                <a href="" id="clearPage" class="navLinks a_clear noAjaxEvent btn btn-secondary btn-xs mb-2" title="<?php echo $this->translate->_("Click to erase all objects");?>"><?php echo $this->translate->_("Clear");?></a>
                 <a href="#" class="navLinks a_redraw noAjaxEvent btn btn-secondary btn-xs mb-2" id="redraw" style="display:none;"><?php echo $this->translate->_("Redraw");?></a>
                 <div id="pageEditing" class="grid gap-2">
                   <a href="" id="saveThisPage" class="navLinks a_save btn btn-secondary btn-xs mb-2" title="<?php echo $this->translate->_("Click to save work on this page");?>"><?php echo $this->translate->_("Save Page");?></a>
@@ -310,6 +311,7 @@
                   </div>
 
                 </div>
+                <a href="" id="deletePage" class="navLinks a_delete btn btn-error btn-sm mt-2 text-content-secondary p-2 max-h-2" title="<?php echo $this->translate->_("Click to delete this page");?>"><?php echo $this->translate->_("Delete This Page");?></a>
 
                 <div style="display:none;" class="font-black" ><?php echo $this->translate->_("Template ID");?>:</div> <div id="templateID" style="display:none;"><?php echo $this->templateId;?></div>
                 
@@ -343,13 +345,8 @@
                   <a href="" id="deleteTemplate" class="navLinks a_delete btn btn-sm btn-secondary btn-error" title="<?php echo $this->translate->_("Click to delete this template");?>"><?php echo $this->translate->_("Delete This Template");?></a>
                 </div>
               </div>
-              <div class="">
-                <div style="display:none"><?php echo $this->translate->_("Container");?><input id="objContainer" type="checkbox" /></div>
-                <?php echo $this->translate->_("Objects on this page");?>:
-                <select id="objList" size="4" class="help select w-full h-24 p-1 mb-2" title="<?php echo $this->translate->_("This is the list of all objects in this page/template");?>">
-                </select>
 
-                <br />
+              <div class="grid gap-2">
                 <div id="assignPageToCategory">
                   <?php echo $this->formAssignPageToCategory;?>
                 </div>
@@ -362,7 +359,12 @@
                   <div>BodyH:<input id="bodyHeight" name="bodyHeight" type="text" value="" /></div>
 
                 </div>
-                BodyBg:<input id="template_bodyBg" name="template_bodyBg" type="text" value="" class="input input-sm w-full max-w-xs" /><br />
+                BodyBg:<input id="template_bodyBg" name="template_bodyBg" type="text" value="" class="input input-sm w-full max-w-xs" />
+
+                <a id="emptyCacheButton" class="navLinks a_emptyCache help btn btn-secondary btn-xs mb-2" href="" title="<?php echo $this->translate->_("Click this to empty the cache if you have made changes that require cache to be cleaned!");?>"><?php echo $this->translate->_("Empty Cache");?> </a>
+                <a id="backupSiteButton" class="navLinks a_backup help btn btn-secondary btn-xs mb-2" href="" title="<?php echo $this->translate->_("Click here to have backup of the site in a folder that is created for that purpose.If system command is disabled then it must be done through phpMyAdmin...");?>"><?php echo $this->translate->_("Backup Site");?> </a>
+
+                <!--<a id="generateCacheButton" class="navLinks a_generateCache" style="display:block" href="" >Generate Cache </a>-->
               </div>
 
             </div>

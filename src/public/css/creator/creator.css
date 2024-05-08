@@ -515,15 +515,12 @@ span.ui-button-text {
   left: 0;
   top: 0;
   z-index: 999999;
-  background: #CCCCCC url(http://net.freehostrocket.com/images/ui-bg_highlight-soft_75_cccccc_1x100.png) repeat-x;
-  -moz-border-radius: 5px;
   width: 200px;
   height: auto;
   min-height: 50px;
-  color: black;
   font-weight: bold;
   font-size: 15px;
-  ;padding: 20px;
+  padding: 20px;
   border: 1px solid #555555;
 }
 
