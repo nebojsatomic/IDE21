@@ -27,7 +27,7 @@
 */
 ?>
 
-<div id="contPropertiesLeft">
+<div id="contPropertiesLeft" class="fixed bg-primary shadow-lg w-12 h-screen">
   <div id ="contPreview" class="hidden w-full h-auto absolute top-52 left-72 bg-white" style="z-index: 9999999;"></div><!-- z-index must be like this for now, since a lot of interaction with droppables relies on the order of elements, it should be rewritten to something more sensible, for all elements in the admin panel -->
   <div id="templateMask"></div>
   <div id="toggleProperties"  class="help fixed w-6 h-6 left-3 top-3 cursor-pointer" title="<?php echo $this->translate->_("Click to toggle properties box");?>">
@@ -123,15 +123,15 @@
     </div>
   </div>
 
-  <div id="contProperties" class="col-span-3 w-76 h-screen top-0 right-0 overflow-y-auto">
+  <div id="contProperties" class="col-span-3 w-full md:w-72 h-screen top-0 right-0 overflow-y-auto">
     <div id="propertiesLeft">
       <h2><?php echo $this->translate->_("Welcome to NeT.Objects!");?></h2>
       <p><?php echo $this->translate->_("Drag & Drop items from toolbox to create objects on the page");?></p>
     </div>
 
-    <div id="properties" class="w-72">
+    <div id="properties" class="w-full md:w-72">
       <div id="rotate" class="bg-primary text-primary-content shadow-lg pt-28">
-        <ul id="tabs-navigation" class="tabs tabs-boxed fixed grid grid-cols-3 top-0 w-72 h-28">
+        <ul id="tabs-navigation" class="tabs tabs-boxed fixed grid grid-cols-3 top-0 w-full md:w-72 h-28">
           <li role="tab" class="help tab row-start-auto" description="<?php echo $this->translate->_("Contains properties of page and objects");?>"><a href="#fragment-1" id="poA" title="Object properties on a Page or a  Template"><span><?php echo $this->translate->_("Objects");?></span></a></li>
           <li role="tab"  class="help tab row-start-auto" description="<?php echo $this->translate->_("Contains Menu management");?>"><a href="#fragment-2" id="MenuA"><span><?php echo $this->translate->_("Menus");?></span></a></li>
           <li role="tab"  class="help tab row-start-auto" description="<?php echo $this->translate->_("Contains Categories management");?>"><a href="#fragment-3" id="CatA"><span><?php echo $this->translate->_("Categories");?></span></a></li>
@@ -242,7 +242,7 @@
                 <div class="mt-4">
                   <?php echo $this->translate->_("Type");?>:
 
-                  <select id="objType" class="help select  select-xs mt-1 w-full max-w-xs"  description="<?php echo $this->translate->_("Choose the type of the selected object, after you do it, follow the instructions");?>">
+                  <select id="objType" class="help select  select-xs mt-1 w-full"  description="<?php echo $this->translate->_("Choose the type of the selected object, after you do it, follow the instructions");?>">
                     <option class="Text" >Text</option>
                     <option class="Menu" >Menu</option>
                     <option class="category" >Category</option>
@@ -260,7 +260,7 @@
 
                 <div class="mt-4">
                   <?php echo $this->translate->_("Theme");?>:
-                  <select id="objTheme" class="help select  select-xs mt-1 w-full max-w-xs" description="<?php echo $this->translate->_("Choose the theme for the selected object");?>">
+                  <select id="objTheme" class="help select  select-xs mt-1 w-full" description="<?php echo $this->translate->_("Choose the theme for the selected object");?>">
                     <option value="no">None</option>
                     <option value="silver">Silver</option>
                     <option value="green">Green</option>
@@ -272,18 +272,18 @@
                 </div>
               </div>
 
-              <div class="grid grid-cols-4 h-64 items-strech">
-                <span class="cl col-span-3"><?php echo $this->translate->_("Width");?>:</span><span><input id="objPropertiesWidth" name="objPropertiesWidth"class="input w-16 max-w-xs max-h-5 p-0" type="text" value="" /></span>
-                <span class="cl col-span-3"><?php echo $this->translate->_("Height");?>:</span><span><input id="objPropertiesHeight" name="objPropertiesHeight"class="input w-16 max-w-xs max-h-5 p-0" type="text" value="" /></span>
-                <span class="cl col-span-3"><?php echo $this->translate->_("Border");?>:</span><span><input id="objPropertiesBorder" name="objPropertiesBorder"class="input w-16 max-w-xs max-h-5 p-0" type="text" value="" /></span>
+              <div class="grid grid-cols-4 h-64 items-strech justify-items-end">
+                <span class="cl col-span-3 justify-self-start"><?php echo $this->translate->_("Width");?>:</span><span><input id="objPropertiesWidth" name="objPropertiesWidth"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
+                <span class="cl col-span-3 justify-self-start"><?php echo $this->translate->_("Height");?>:</span><span><input id="objPropertiesHeight" name="objPropertiesHeight"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
+                <span class="cl col-span-3 justify-self-start"><?php echo $this->translate->_("Border");?>:</span><span><input id="objPropertiesBorder" name="objPropertiesBorder"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
 
-                <span class="cl col-span-3">PosX:</span><span><input id="objPropertiesX" name="objPropertiesX"class="input w-16 max-w-xs max-h-5 p-0" type="text" value="" /></span>
-                <span class="cl col-span-3">PosY:</span><span><input id="objPropertiesY" name="objPropertiesY"class="input w-16 max-w-xs max-h-5 p-0" type="text" value="" /></span>
-                <span class="cl col-span-3">Z-Index:</span><span><input id="objPropertiesZ" name="objPropertiesZ"class="input w-16 max-w-xs max-h-5 p-0" type="text" value="" /></span>
+                <span class="cl col-span-3 justify-self-start">PosX:</span><span><input id="objPropertiesX" name="objPropertiesX"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
+                <span class="cl col-span-3 justify-self-start">PosY:</span><span><input id="objPropertiesY" name="objPropertiesY"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
+                <span class="cl col-span-3 justify-self-start">Z-Index:</span><span><input id="objPropertiesZ" name="objPropertiesZ"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
 
-                <span class="cl col-span-3">BgColor:</span><span><input id="objPropertiesBackground" name="objPropertiesBackground"class="input w-16 max-w-xs max-h-5 p-0" type="text" value="" /></span>
-                <span class="cl col-span-3">BgImage:</span><span><input id="objPropertiesBackgroundImage" name="objPropertiesBackgroundImage"class="input w-16 max-w-xs max-h-5 p-0" type="text" value="" /></span>
-                <span class="cl col-span-3">class:</span><span><input id="objPropertiesClass" name="objPropertiesClass"class="input w-16 max-w-xs max-h-5 p-0" type="text" value="" /></span>
+                <span class="cl col-span-3 justify-self-start">BgColor:</span><span><input id="objPropertiesBackground" name="objPropertiesBackground"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
+                <span class="cl col-span-3 justify-self-start">BgImage:</span><span><input id="objPropertiesBackgroundImage" name="objPropertiesBackgroundImage"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
+                <span class="cl col-span-3 justify-self-start">class:</span><span><input id="objPropertiesClass" name="objPropertiesClass"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
 
               </div>
               <div class="grid gap-2">
@@ -331,7 +331,7 @@
                   </div>
                   <div>
                     <?php echo $this->translate->_("Template name");?>:
-                    <input id="templateTitle" type="text" name="templateTitle" value="<?php echo $this->templateName;?>" class="input input-bordered input-sm w-full max-w-xs" />
+                    <input id="templateTitle" type="text" name="templateTitle" value="<?php echo $this->templateName;?>" class="input input-bordered input-sm w-full" />
                   </div>
 
                   <a href="" id="applyTemplate" class="navLinks a_edit btn btn-secondary btn-xs" title="<?php echo $this->translate->_("Click to edit existing template");?>"><?php echo $this->translate->_("Edit template");?></a>
@@ -359,7 +359,7 @@
                   <div>BodyH:<input id="bodyHeight" name="bodyHeight" type="text" value="" /></div>
 
                 </div>
-                BodyBg:<input id="template_bodyBg" name="template_bodyBg" type="text" value="" class="input input-sm w-full max-w-xs" />
+                BodyBg:<input id="template_bodyBg" name="template_bodyBg" type="text" value="" class="input input-sm w-full" />
 
                 <a id="emptyCacheButton" class="navLinks a_emptyCache help btn btn-secondary btn-xs mb-2" href="" title="<?php echo $this->translate->_("Click this to empty the cache if you have made changes that require cache to be cleaned!");?>"><?php echo $this->translate->_("Empty Cache");?> </a>
                 <a id="backupSiteButton" class="navLinks a_backup help btn btn-secondary btn-xs mb-2" href="" title="<?php echo $this->translate->_("Click here to have backup of the site in a folder that is created for that purpose.If system command is disabled then it must be done through phpMyAdmin...");?>"><?php echo $this->translate->_("Backup Site");?> </a>
