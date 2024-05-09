@@ -471,17 +471,20 @@ $(document).ready(function(){
   $('#tinySave').click(function(){
     var ed = tinyMCE.get('objPropertiesHtmlTiny');
     newContent = tinyMCE.get('objPropertiesHtmlTiny').getContent();
-    $('#' + $('#objIDshow').html() + ' p.objContent').each(function(){
-      $(this).remove();
-    });
 
-    $('#' + $('#objIDshow').html() ).resizable('destroy');//stop resizable
+    if($('#objIDshow').html() != '') { // only if object is selected
+      $('#' + $('#objIDshow').html() + ' p.objContent').each(function(){
+        $(this).remove();
+      });
 
-    $('#' + $('#objIDshow').html()).html(newContent + "\n\n\n");//update html of the object
+      $('#' + $('#objIDshow').html() ).resizable('destroy');//stop resizable
 
-    $('#' + $('#objIDshow').html() ).dblclick();
+      $('#' + $('#objIDshow').html()).html(newContent + "\n\n\n");//update html of the object
 
-    $('#' + $('#objIDshow').html() ).resizable({autohide:true});//resizable again
+      $('#' + $('#objIDshow').html() ).dblclick();
+
+      $('#' + $('#objIDshow').html() ).resizable({autohide:true});//resizable again
+    }
   });
 
 
@@ -602,16 +605,13 @@ $(document).ready(function(){
   $('#toggleProperties').livequery('click', function(){
 
     if(propPos == "hidden") {
-      $('#properties').animate({marginRight:0 });
-      $('#properties').fadeIn(1500);
+      $('#contProperties').animate({marginRight:0 });
+      $('#contProperties').css({display: "grid"}).animate({marginRight:0 });
       propPos = "visible" ;
     } else {
-      $('#properties').fadeOut(1500);
-      $('#properties').animate({marginRight:-($('#properties').width()-5 )});
+      $('#contProperties').animate({marginRight:-($('#properties').width()-5 )}).css({display: "none"});
       propPos = "hidden" ;
     }
-
-
 
   });
 

@@ -469,7 +469,8 @@ span.ui-button-text {
 }
 
 #contProperties {
-  position: fixed;
+  /*position: fixed;*/
+  position: absolute;
   /*right: 0;*/
   bottom: 0px;
   z-index: 199999;
@@ -486,6 +487,7 @@ span.ui-button-text {
 #contProperties #tabs-navigation {
   padding: 0.25rem;
   position: fixed;
+  z-index: 9;
 }
 
 #propertiesLeft {
