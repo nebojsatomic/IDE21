@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#TB_ajaxContent {
+  @apply bg-primary;
+  height: 100% !important; /* override values set with javascript from thickbox.js */
+  width: 100% !important;
+}
+#TB_window a:link {
+	@apply btn-primary 
+}
+
