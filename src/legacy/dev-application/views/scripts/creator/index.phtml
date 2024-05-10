@@ -65,22 +65,22 @@
 </form>
 
 <div class="grid grid-cols-12 relative">
-  <div id="containerRadnePovrsine" class="col-span-9">
-    <div id="droppable" class="">
+  <div id="containerRadnePovrsine" class="col-span-12 md:col-span-8 lg:col-span-9">
+    <div id="droppable" class="w-4/5 overflow-auto">
     </div>
-    <div id="droppable_" class="">
+    <div id="droppable_" class="w-4/5">
     </div>
   </div>
 
-  <div id="contProperties" class="col-span-3 w-full md:w-72 h-screen top-0 right-0 overflow-y-auto pb-40 md:pb-12">
+  <div id="contProperties" class="absolute md:relative col-span-4 lg:col-span-3 w-full  h-screen top-0 right-0 pb-40 md:pb-12">
     <div id="propertiesLeft">
       <h2><?php echo $this->translate->_("Welcome to NeT.Objects!");?></h2>
       <p><?php echo $this->translate->_("Drag & Drop items from toolbox to create objects on the page");?></p>
     </div>
 
-    <div id="properties" class="w-full md:w-72">
-      <div id="rotate" class="md:pt-28 bg-primary text-primary-content shadow-lg">
-        <ul id="tabs-navigation" class="tabs tabs-boxed fixed grid grid-cols-3 bottom-0 md:top-12 md:bottom-auto w-full md:w-72 h-28">
+    <div id="properties" class="w-full h-screen overflow-auto">
+      <div id="rotate" class="md:pt-28 pb-40 bg-primary text-primary-content shadow-lg rounded-none">
+        <ul id="tabs-navigation" class="tabs tabs-boxed fixed grid grid-cols-3 bottom-11 md:top-0 md:bottom-auto w-full h-28">
           <li role="tab" class="help tab row-start-auto" description="<?php echo $this->translate->_("Contains properties of page and objects");?>"><a href="#fragment-1" id="poA" title="Object properties on a Page or a  Template"><span><?php echo $this->translate->_("Objects");?></span></a></li>
           <li role="tab"  class="help tab row-start-auto" description="<?php echo $this->translate->_("Contains Menu management");?>"><a href="#fragment-2" id="MenuA"><span><?php echo $this->translate->_("Menus");?></span></a></li>
           <li role="tab"  class="help tab row-start-auto" description="<?php echo $this->translate->_("Contains Categories management");?>"><a href="#fragment-3" id="CatA"><span><?php echo $this->translate->_("Categories");?></span></a></li>

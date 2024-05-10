@@ -444,7 +444,8 @@ $(document).ready(function(){
   }
 
   $('#droppable').resizable({autohide:true});
-  $('#templateMask').css({left:$('#droppable').offset().left + "px"});
+  //$('#templateMask').css({left:$('#droppable').offset().left + "px"});
+  //$('#templateMask').appendTo($('#droppable')).css({left: "0px"});
 
   //when clickin on a link that starts an ajax action
   $('.navLinks:not(".noAjaxEvent")').livequery('click', function(){

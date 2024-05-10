@@ -337,7 +337,7 @@ class CreatorController extends NetActionController
                 'categoryNameAssign' => array('select', array(
                     'required' => true,
                     'label' => $this->_translate->_('Assign category to this page:'),
-                    'class' => 'help select select-xs w-full max-w-xs mb-2',
+                    'class' => 'help select select-xs w-full mb-2',
                     'title' => $this->_translate->_('Put this page in a specific category'),
                     'size' => '1',
                     'multioptions' => $catArray,
@@ -376,7 +376,7 @@ class CreatorController extends NetActionController
                 'menuNameAssign' => array('select', array(
                     'required' => true,
                     'label' => $this->_translate->_('Assign this page to menu:'),
-                    'class' => 'help select select-xs w-full max-w-xs mb-2',
+                    'class' => 'help select select-xs w-full mb-2',
                     'title' => $this->_translate->_('Select the menu in which you would like to have this page'),
                     'size' => '1',
                     'multioptions' => $pageArray,
@@ -653,7 +653,7 @@ class CreatorController extends NetActionController
                 'templateChanger' => array('select', array(
                     'required' => true,
                     'label' => 'Select the template for this page',
-                    'class' => 'help select select-xs w-full max-w-xs mb-2',
+                    'class' => 'help select select-xs w-full mb-2',
                     'title' => $this->_translate->_('Change the template of this page'),
                     /*'style' => 'width:180px',*/
                     'multioptions' => $templateArray,
