@@ -7,7 +7,13 @@
   height: 100% !important; /* override values set with javascript from thickbox.js */
   width: 100% !important;
 }
-#TB_window a:link {
-	@apply btn-primary 
+#TB_window a, #TB_window a:visited, #TB_window a:link {
+	@apply btn-primary text-base-content;
+}
+#TB_window a:hover {
+  @apply text-neutral;
+}
+#TB_window a.btn:hover {
+  @apply text-white;
 }
 

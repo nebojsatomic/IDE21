@@ -1201,18 +1201,6 @@ html {
     }
   }
 
-  .btn-outline.btn-accent:hover {
-    --tw-text-opacity: 1;
-    color: var(--fallback-ac,oklch(var(--ac)/var(--tw-text-opacity)));
-  }
-
-  @supports (color: color-mix(in oklab, black, black)) {
-    .btn-outline.btn-accent:hover {
-      background-color: color-mix(in oklab, var(--fallback-a,oklch(var(--a)/1)) 90%, black);
-      border-color: color-mix(in oklab, var(--fallback-a,oklch(var(--a)/1)) 90%, black);
-    }
-  }
-
   .btn-outline.btn-error:hover {
     --tw-text-opacity: 1;
     color: var(--fallback-erc,oklch(var(--erc)/var(--tw-text-opacity)));
@@ -1867,10 +1855,6 @@ input.tab:checked + .tab-content,
     --btn-color: var(--fallback-s);
   }
 
-  .btn-accent {
-    --btn-color: var(--fallback-a);
-  }
-
   .btn-error {
     --btn-color: var(--fallback-er);
   }
@@ -1885,11 +1869,6 @@ input.tab:checked + .tab-content,
   .btn-outline.btn-secondary.btn-active {
     background-color: color-mix(in oklab, var(--fallback-s,oklch(var(--s)/1)) 90%, black);
     border-color: color-mix(in oklab, var(--fallback-s,oklch(var(--s)/1)) 90%, black);
-  }
-
-  .btn-outline.btn-accent.btn-active {
-    background-color: color-mix(in oklab, var(--fallback-a,oklch(var(--a)/1)) 90%, black);
-    border-color: color-mix(in oklab, var(--fallback-a,oklch(var(--a)/1)) 90%, black);
   }
 
   .btn-outline.btn-error.btn-active {
@@ -1919,10 +1898,6 @@ input.tab:checked + .tab-content,
     --btn-color: var(--s);
   }
 
-  .btn-accent {
-    --btn-color: var(--a);
-  }
-
   .btn-error {
     --btn-color: var(--er);
   }
@@ -1932,12 +1907,6 @@ input.tab:checked + .tab-content,
   --tw-text-opacity: 1;
   color: var(--fallback-sc,oklch(var(--sc)/var(--tw-text-opacity)));
   outline-color: var(--fallback-s,oklch(var(--s)/1));
-}
-
-.btn-accent {
-  --tw-text-opacity: 1;
-  color: var(--fallback-ac,oklch(var(--ac)/var(--tw-text-opacity)));
-  outline-color: var(--fallback-a,oklch(var(--a)/1));
 }
 
 .btn-error {
@@ -1992,16 +1961,6 @@ input.tab:checked + .tab-content,
 .btn-outline.btn-secondary.btn-active {
   --tw-text-opacity: 1;
   color: var(--fallback-sc,oklch(var(--sc)/var(--tw-text-opacity)));
-}
-
-.btn-outline.btn-accent {
-  --tw-text-opacity: 1;
-  color: var(--fallback-a,oklch(var(--a)/var(--tw-text-opacity)));
-}
-
-.btn-outline.btn-accent.btn-active {
-  --tw-text-opacity: 1;
-  color: var(--fallback-ac,oklch(var(--ac)/var(--tw-text-opacity)));
 }
 
 .btn-outline.btn-error {
@@ -3319,6 +3278,11 @@ input.tab:checked + .tab-content,
   margin: -1px !important;
 }
 
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -3548,6 +3512,10 @@ input.tab:checked + .tab-content,
   min-width: 16rem;
 }
 
+.max-w-16 {
+  max-width: 4rem;
+}
+
 .max-w-xs {
   max-width: 20rem;
 }
@@ -3635,16 +3603,16 @@ input.tab:checked + .tab-content,
   justify-items: end;
 }
 
+.gap-1 {
+  gap: 0.25rem;
+}
+
 .gap-2 {
   gap: 0.5rem;
 }
 
 .gap-4 {
   gap: 1rem;
-}
-
-.gap-1 {
-  gap: 0.25rem;
 }
 
 .gap-y-1 {
@@ -3685,6 +3653,12 @@ input.tab:checked + .tab-content,
 
 .overflow-y-auto {
   overflow-y: auto;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .\!whitespace-nowrap {
@@ -3834,11 +3808,6 @@ input.tab:checked + .tab-content,
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.text-neutral {
-  --tw-text-opacity: 1;
-  color: var(--fallback-n,oklch(var(--n)/var(--tw-text-opacity)));
-}
-
 .underline {
   text-decoration-line: underline;
 }
@@ -3896,25 +3865,25 @@ input.tab:checked + .tab-content,
 }
 
 @media (hover: hover) {
-  .btn-outline#TB_window a:link:hover {
+  .btn-outline#TB_window a:hover,.btn-outline #TB_window a:visited:hover,.btn-outline #TB_window a:link:hover {
     --tw-text-opacity: 1;
     color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
   }
 
   @supports (color: color-mix(in oklab, black, black)) {
-    .btn-outline#TB_window a:link:hover {
+    .btn-outline#TB_window a:hover,.btn-outline #TB_window a:visited:hover,.btn-outline #TB_window a:link:hover {
       background-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
       border-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
     }
   }
 
-  .btn-outline#TB_window a:link:hover {
+  .btn-outline#TB_window a:hover,.btn-outline #TB_window a:visited:hover,.btn-outline #TB_window a:link:hover {
     --tw-text-opacity: 1;
     color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
   }
 
   @supports (color: color-mix(in oklab, black, black)) {
-    .btn-outline#TB_window a:link:hover {
+    .btn-outline#TB_window a:hover,.btn-outline #TB_window a:visited:hover,.btn-outline #TB_window a:link:hover {
       background-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
       border-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
     }
@@ -3922,38 +3891,53 @@ input.tab:checked + .tab-content,
 }
 
 @supports not (color: oklch(0% 0 0)) {
-  #TB_window a:link {
+  #TB_window a, #TB_window a:visited, #TB_window a:link {
     --btn-color: var(--fallback-p);
   }
 }
 
 @supports (color: color-mix(in oklab, black, black)) {
-  .btn-outline#TB_window a:link.btn-active {
+  .btn-outline#TB_window a.btn-active,.btn-outline #TB_window a:visited.btn-active,.btn-outline #TB_window a:link.btn-active {
     background-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
     border-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
   }
 }
 
-#TB_window a:link {
+#TB_window a, #TB_window a:visited, #TB_window a:link {
   --tw-text-opacity: 1;
   color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
   outline-color: var(--fallback-p,oklch(var(--p)/1));
 }
 
 @supports (color: oklch(0% 0 0)) {
-  #TB_window a:link {
+  #TB_window a, #TB_window a:visited, #TB_window a:link {
     --btn-color: var(--p);
   }
 }
 
-.btn-outline#TB_window a:link {
+.btn-outline#TB_window a,.btn-outline #TB_window a:visited,.btn-outline #TB_window a:link {
   --tw-text-opacity: 1;
   color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity)));
 }
 
-.btn-outline#TB_window a:link.btn-active {
+.btn-outline#TB_window a.btn-active,.btn-outline #TB_window a:visited.btn-active,.btn-outline #TB_window a:link.btn-active {
   --tw-text-opacity: 1;
   color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
+}
+
+#TB_window a, #TB_window a:visited, #TB_window a:link {
+  --tw-text-opacity: 1;
+  color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
+}
+
+#TB_window a:hover {
+  --tw-text-opacity: 1;
+  color: var(--fallback-n,oklch(var(--n)/var(--tw-text-opacity)));
+}
+
+#TB_window a.btn:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 @media (min-width: 768px) {
@@ -4048,6 +4032,10 @@ input.tab:checked + .tab-content,
 }
 
 @media (min-width: 640px) {
+  .sm\:max-w-24 {
+    max-width: 6rem;
+  }
+
   .sm\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -4066,8 +4054,9 @@ input.tab:checked + .tab-content,
     margin: 2.5rem;
   }
 
-  .md\:m-4 {
-    margin: 1rem;
+  .md\:my-4 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 
   .md\:flex {
