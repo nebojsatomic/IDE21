@@ -54,12 +54,6 @@ li {
   background: transparent;
 }
 
-/*#objProperties input {
-    height: 15px;
-    width: 50px;
-    margin: 1px;
-}*/
-
 #rotate {
   min-height: 100vh;
   height:auto;
@@ -75,7 +69,6 @@ li {
   position: relative;
   left: 0 !important;
   top: 0 !important;
-  /*padding: 15px 25px 15px 15px;*/
   width: 500px;
   height: auto;
   z-index: 999999;
@@ -170,12 +163,7 @@ span.ui-button-text {
 #penPointer {
   display: none;
   position: absolute;
-  /*top: 0;
-  left: 0;*/
-  /*width: 65px;
-  height: 65px;*/
   z-index: 199998;
-  /*background: url(/images/interface/Pen.png) no-repeat;*/
 }
 
 #downPointer {
@@ -196,49 +184,14 @@ span.ui-button-text {
 }
 
 #toggleProperties {
-  /*opacity: 0.8;*/
-  /*position: fixed;
-  padding: 5px;
-  text-align: center;
-  font-weight: bold;
-  cursor: pointer;
-  left: 5px;
-  top: 5px;
-  width: 20px;
-  height: 20px;*/
-  /*background: silver url(/images/interface/toggleProperties.png) no-repeat center;*/
   z-index: 999997;
 }
 
 #newItem {
-  /*opacity: 0.8;
-  position: fixed;
-  padding: 5px;
-  text-align: center;
-  color: yellow;
-  font-weight: bold;
-  cursor: pointer;
-  right: 85px;
-  top: 5px;
-  width: 20px;
-  height: 20px;
-  background: silver url(/images/interface/add.gif) no-repeat center;*/
-  ;z-index: 999997;
+  z-index: 999997;
 }
 
 #cloneItem {
-  /*opacity: 0.8;
-  position: fixed;
-  padding: 5px;
-  text-align: center;
-  color: yellow;
-  font-weight: bold;
-  cursor: pointer;
-  right: 85px;
-  top: 38px;
-  width: 20px;
-  height: 20px;
-  background: silver url(/images/interface/add.gif) no-repeat center;*/
   z-index: 999997;
 }
 
@@ -293,148 +246,50 @@ span.ui-button-text {
 }
 
 #logout {
-  /*opacity: 0.8;
-  position: fixed;
-  padding: 5px;
-  text-align: center;
-  color: yellow;
-  font-weight: bold;
-  cursor: pointer;
-  right: 5px;
-  top: 5px;
-  width: 20px;
-  height: 20px;
-  background: silver url(/images/interface/logout.gif) no-repeat center;*/
   z-index: 999997;
 }
 
 #delButton {
-  /*opacity: 0.8;
-  position: fixed;
-  padding: 5px;
-  text-align: center;
-  color: yellow;
-  font-weight: bold;
-  cursor: pointer;
-  right: 45px;
-  top: 5px;
-  /*width: 20px;
-  height: 20px;
-  background: silver url(/images/interface/note_delete.gif) no-repeat center;*/
   ;z-index: 999997;
 }
 
 #helpButton {
-  /* opacity:0.8; */
   position: fixed;
-  /* padding:5px; */
-  /* text-align:center; */
-  /* color:yellow; */
-  /* font-weight:bold; */
-  /* cursor:pointer; */
   right: 125px;
   top: 5px;
-  /* width:20px; */
-  /* height:20px; */
-  /* background:silver url(/images/interface/help.png) no-repeat center; */
-  /* z-index:999997; */
 }
 
 #helpDiv {
   opacity: 0.8;
   display: none;
-  /* position:fixed; */
-  /* padding:5px; */
   text-align: center;
   color: white;
   font-size: 15px;
-  /* cursor:pointer; */
-  /* right:165px; */
   top: 5px;
   width: 500px;
   height: 50px;
-  /* background:silver; */
+
   z-index: 999997;
 }
 
 #updateContentButton {
-  /*border: 1px solid #E7E7E7;
-  color: yellow;
-  cursor: pointer;
-  font-weight: bold;
-  height: 20px;
-  opacity: 0.8;
-  padding: 5px;*/
-  /*position: fixed;
-  right: 0;
-  top: 0px;*/
   z-index: 999997;
 }
 
 #toggleProperties:hover {
-/*  opacity: 0.9;
-  position: fixed;
-  padding: 5px;
-  text-align: center;
-  font-weight: bold;
-  cursor: pointer;
-  left: 5;
-  top: 5;
-  width: 20px;
-  height: 20px;
-  background: silver url(/images/interface/toggleProperties.png) no-repeat center;*/
   z-index: 999997;
 }
 
 #newItem:hover {
-/*  opacity: 0.9;
-  position: fixed;
-  padding: 5px;
-  text-align: center;
-  color: yellow;
-  font-weight: bold;
-  cursor: pointer;
-  right: 85px;
-  top: 5px;
-  width: 20px;
-  height: 20px;
-  background: silver url(/images/interface/add.gif) no-repeat center;
-  ;z-index: 999997;
-  border: 1px solid #e7e7e7;*/
+
 }
 
 #logout:hover {
-/*  opacity: 0.9;
-  position: fixed;
-  padding: 5px;
-  text-align: center;
-  color: yellow;
-  font-weight: bold;
-  cursor: pointer;
-  right: 5px;
-  top: 5px;
-  width: 20px;
-  height: 20px;
-  background: silver url(/images/interface/logout.gif) no-repeat center;
-  z-index: 999997;*/
+
 }
 
 #delButton:hover {
-  /*opacity: 0.9;
-  position: fixed;
-  padding: 5px;
-  text-align: center;
-  color: yellow;
-  font-weight: bold;
-  cursor: pointer;
-  right: 45px;
-  top: 5px;
-  width: 20px;
-  height: 20px;
-  background: silver url(/images/interface/note_delete.gif) no-repeat center;
-  ;z-index: 999997;
-  border: 1px solid #e7e7e7;
-*/
+
 }
 
 #contPropertiesLeft {
@@ -443,12 +298,9 @@ span.ui-button-text {
 }
 
 #contProperties {
-  /*position: fixed;*/
   position: absolute;
-  /*right: 0;*/
   bottom: 0px;
   z-index: 199999;
-  /*width: 800px;*/
   height: auto;
   min-height: 100px;
 }
@@ -472,12 +324,7 @@ span.ui-button-text {
 }
 
 #properties {
-  /*float: right;
-  width: 800px;
-  height: 300px;
-  font-family: Arial;
-  font-size: 12px;
-  display: none;*/
+
 }
 
 #footer {
@@ -525,53 +372,8 @@ span.ui-button-text {
 
 .a_delete {
   text-decoration: none;
-    /*background: transparent url(/images/interface/note_delete.gif) no-repeat;
-    padding-left: 20px;*/
-    /*cursor: pointer;
-    color: #555555;
-    font-family: Arial;
-    font-size: 12px;*/
-  }
-
-/*.a_preview {
-    text-decoration: none;
-    background: transparent url(/images/interface/image.gif) no-repeat;
-    padding-left: 20px;
-    cursor: pointer;
-    color: #555555;
-    font-family: Arial;
-    font-size: 12px;
-}*/
-
-.a_refresh {
-  /*text-decoration: none;
-  background: transparent url(/images/interface/refresh.gif) no-repeat;
-  padding-left: 20px;
-  cursor: pointer;
-  color: #555555 ;
-  font-family: Arial;
-  font-size: 12px;*/
 }
 
-/*.a_save {
-    text-decoration: none;
-    background: transparent url(/images/interface/save.gif) no-repeat;
-    padding-left: 20px;
-    cursor: pointer;
-    color: #555555 ;
-    font-family: Arial;
-    font-size: 12px;
-}*/
-
-/*.a_save_new {
-    text-decoration: none;
-    background: transparent url(/images/interface/save_new.gif) no-repeat;
-    padding-left: 20px;
-    cursor: pointer;
-    color: #555555 ;
-    font-family: Arial;
-    font-size: 12px;
-}*/
 
 .a_new {
   text-decoration: none;
@@ -583,45 +385,13 @@ span.ui-button-text {
   font-size: 12px;
 }
 
-/*.a_open {
-    text-decoration: none;
-    background: transparent url(/images/interface/open.gif) no-repeat;
-    padding-left: 20px;
-    cursor: pointer;
-    color: #555555 ;
-    font-family: Arial;
-    font-size: 12px;
-}*/
-
 .a_edit {
-/*  text-decoration: none;
-  background: transparent url(/images/interface/edit.gif) no-repeat;
-  padding-left: 20px;
-  cursor: pointer;
-  color: #555555;
-  font-family: Arial;
-  font-size: 12px;*/
+
 }
 
 .a_add {
-  /*text-decoration: none;
-  background: transparent url(/images/interface/add.gif) no-repeat;
-  padding-left: 20px;
-  cursor: pointer;
-  color: #555555 ;
-  font-family: Arial;
-  font-size: 12px;*/
-}
 
-/*.a_content {
-    text-decoration: none;
-    background: transparent url(/images/interface/content.gif) no-repeat;
-    padding-left: 25px;
-    cursor: pointer;
-    color: #555555;
-    font-family: Arial;
-    font-size: 12px;
-}*/
+}
 
 .a_generateCache {
   text-decoration: none;
@@ -633,115 +403,37 @@ span.ui-button-text {
   font-size: 12px;
 }
 
-/*.a_emptyCache {
-    text-decoration: none;
-    background: transparent url(/images/interface/empty_cache.gif) no-repeat;
-    padding-left: 25px;
-    cursor: pointer;
-    color: #555555;
-    font-family: Arial;
-    font-size: 12px;
-}*/
-
-/*.a_backup {
-    text-decoration: none;
-    background: transparent url(/images/interface/backup.png) no-repeat 0px -2px;
-    padding-left: 25px;
-    cursor: pointer;
-    color: #555555;
-    font-family: Arial;
-    font-size: 12px;
-}*/
-
 .a_access {
-/*  text-decoration: none;
-  background: transparent url(/images/interface/access.png) no-repeat ;
-  padding-left: 25px;
-  cursor: pointer;
-  color: #555555;
-  font-family: Arial;
-  font-size: 12px;*/
-}
 
-/*.a_ftp {
-  text-decoration: none;
-  background: transparent url(/images/interface/package_go.png) no-repeat ;
-  padding-left: 25px;
-  cursor: pointer;
-  color: #555555;
-  font-family: Arial;
-  font-size: 12px;
-}*/
+}
 
 /*manage all pages style*/
 .a_published {
-/*  text-decoration: none;
-  background: transparent url(/images/interface/published.png) no-repeat ;
-  padding-left: 25px;
-  cursor: pointer;
-  color: #555555;
-  font-family: Arial;
-  font-size: 12px;*/
+
 }
 
 .a_unpublished {
-/*  text-decoration: none;
-  background: transparent url(/images/interface/unpublished.png) no-repeat ;
-  padding-left: 25px;
-  cursor: pointer;
-  color: #555555;
-  font-family: Arial;
-  font-size: 12px;*/
+
 }
 
 .a_previewManage {
-/*  text-decoration: none;
-  background: transparent url(/images/interface/eye.png) no-repeat;
-  padding-left: 20px;
-  cursor: pointer;
-  color: #555555;
-  font-family: Arial;
-  font-size: 12px;*/
+
 }
 
 .a_deleteManage {
-/*  text-decoration: none;
-  background: transparent url(/images/interface/bin.png) no-repeat;
-  padding-left: 20px;
-  cursor: pointer;
-  color: #555555;
-  font-family: Arial;
-  font-size: 12px;*/
+
 }
 
 .a_chkAccess1 {
-  /*text-decoration: none;
-  background: transparent url(/images/interface/key.png) no-repeat;
-  padding-left: 20px;
-  cursor: pointer;
-  color: #555555;
-  font-family: Arial;
-  font-size: 12px;*/
+
 }
 
 .a_chkAccess0 {
-  /*text-decoration: none;
-  background: transparent url(/images/interface/group.png) no-repeat;
-  padding-left: 20px;
-  cursor: pointer;
-  color: #555555;
-  font-family: Arial;
-  font-size: 12px;*/
+
 }
 
 .deleteAll {
-/*  text-decoration: none;
-  background: transparent url(/images/interface/bin.png) no-repeat;
-  padding-left: 20px;
-  cursor: pointer;
-  color: #555555;
-  font-family: Arial;
-  font-size: 12px;*/
+
 }
 
 .a_clear {
@@ -759,46 +451,12 @@ span.ui-button-text {
   text-decoration: none;
   color: white
 }
-/*
-.a_delete:hover {
-    text-decoration: none;
-    background: transparent url(/images/interface/note_delete.gif) no-repeat;
-    padding-left: 20px;
-    cursor: pointer;
-    color: #3d4752
-}
-*/
-/*.a_preview:hover {
-    text-decoration: none;
-    background: transparent url(/images/interface/image.gif) no-repeat;
-    padding-left: 20px;
-    cursor: pointer;
-    color: #3d4752
-}*/
+
+
 
 .a_refresh:hover {
-  /*text-decoration: none;
-  background: transparent url(/images/interface/refresh.gif) no-repeat;
-  padding-left: 20px;
-  cursor: pointer;
-  color: #3d4752*/
-}
 
-/*.a_save:hover {
-    text-decoration: none;
-    background: transparent url(/images/interface/save.gif) no-repeat;
-    padding-left: 20px;
-    cursor: pointer;
-    color: #3d4752
 }
-
-.a_save_new:hover {
-    text-decoration: none;
-    background: transparent url(/images/interface/save_new.gif) no-repeat;
-    padding-left: 20px;
-    cursor: pointer;
-    color: #3d4752
-}*/
 
 .a_new:hover {
   text-decoration: none;
@@ -808,93 +466,33 @@ span.ui-button-text {
   color: #3d4752 ;
 }
 
-/*.a_open:hover {
-    text-decoration: none;
-    background: transparent url(/images/interface/open.gif) no-repeat;
-    padding-left: 20px;
-    cursor: pointer;
-    color: #3d4752
-}*/
-
 .a_edit:hover {
-/*  text-decoration: none;
-  background: transparent url(/images/interface/edit.gif) no-repeat;
-  padding-left: 20px;
-  cursor: pointer;
-  color: #3d4752*/
+
 }
 
-/*.a_content:hover {
-    text-decoration: none;
-     background: transparent url(/images/interface/content.gif) no-repeat; 
-    padding-left: 25px;
-    cursor: pointer;
-    color: #3d4752
-}*/
-
 .a_add:hover {
-/*  text-decoration: none;
-  background: transparent url(/images/interface/add.gif) no-repeat;
-  padding-left: 20px;
-  cursor: pointer;
-  color: #3d4752 ;*/
+
 }
 
 .a_generateCache:hover {
-/*  text-decoration: none;
-  background: transparent url(/images/interface/generate_cache.gif) no-repeat;
-  padding-left: 25px;
-  cursor: pointer;
-  color: #3d4752 ;*/
+
 }
 
-/*.a_emptyCache:hover {
-    text-decoration: none;
-    background: transparent url(/images/interface/empty_cache.gif) no-repeat ;
-    padding-left: 25px;
-    cursor: pointer;
-    color: #3d4752 ;
-}*/
-
-/*.a_backup:hover {
-    text-decoration: none;
-    background: transparent url(/images/interface/backup.png) no-repeat 0px -2px;
-    padding-left: 25px;
-    cursor: pointer;
-    color: #3d4752 ;
-}*/
 
 .a_access:hover {
-/*  text-decoration: none;
-  background: transparent url(/images/interface/access.png) no-repeat ;
-  cursor: pointer;
-  color: #3d4752 ;*/
+
 }
 
 .a_weightUp {
-/*  text-decoration: none;
-  background: transparent url(/images/interface/arrow_up.png) no-repeat 0px -2px;
-  padding-right: 25px;
-  cursor: pointer;
-  color: #3d4752 ;
-  margin-right: 30px;*/
+
 }
 
 .a_weightDw {
-/*  text-decoration: none;
-  background: transparent url(/images/interface/arrow_down.png) no-repeat ;
-  padding-right: 25px;
-  cursor: pointer;
-  color: #3d4752 ;
-  margin-right: 35px;*/
+
 }
 
 .a_params {
-/*  text-decoration: none;
-  background: transparent url(/images/interface/params.png) no-repeat ;
-  padding-right: 16px;
-  cursor: pointer;
-  color: #3d4752 ;*/
+
 }
 
 .a_clear:hover {
@@ -926,21 +524,15 @@ span.ui-button-text {
 }
 
 .universalTableAdmin {
-/*  border: 1px solid #555555;
-  width: 100%;
-  margin-bottom: 10px;
-  margin-top: 10px;*/
+
 }
 
 .universalTableAdmin th {
-/*  border: 1px solid silver;
-  background: white;
-  text-align: center;
-  height: 20px;*/
+
 }
 
 .universalTableAdmin td {
-  /*text-align: center;*/
+
 }
 
 #rotate div.expanderDiv {
@@ -959,22 +551,8 @@ span.ui-button-text {
 }
 
 #rotate .fsbutton {
-/*  height: 20px;
-  width: 20px;
-  display: block;
-  background: transparent url(/images/interface/expanderFullScr.gif) no-repeat;
-  cursor: pointer;*/
-}
 
-/*.utaNormal {
-  background: #f4f4f4;
-  text-align: center;
 }
-
-.utaHover {
-  background: #cccccc;
-  text-align: center;
-}*/
 
 input {
   border: 1px solid #cccccc;
@@ -1004,78 +582,55 @@ input[type=checkbox] {
 }
 
 #rotate input {
-    /*border: 1px solid #cccccc;
-    background: #E6E6E6;
-    font-size: 12px;
-    font-family: Arial;*/
-  }
 
-  #rotate label {
-    font-size: 12px;
-    font-family: Arial;
-  }
+}
 
-  #rotate div label {
-    font-size: 12px;
-    font-family: Arial;
-  }
+#rotate label {
+  font-size: 12px;
+  font-family: Arial;
+}
 
-  #rotate div div {
-    font-size: 12px;
-    font-family: Arial;
-  }
+#rotate div label {
+  font-size: 12px;
+  font-family: Arial;
+}
 
-  #rotate div a {
-    font-size: 12px;
-    font-family: Arial;
-  }
+#rotate div div {
+  font-size: 12px;
+  font-family: Arial;
+}
 
-  #rotate textarea {
-    background: #E6E6E6;
-    border: 1px solid #cccccc;
-  }
+#rotate div a {
+  font-size: 12px;
+  font-family: Arial;
+}
 
-  #rotate select {
-    /*background: #E6E6E6;
-    border: 1px solid #cccccc;
-    width: 180px;*/
-    font-size: 12px;
-    font-family: Arial;
-  }
+#rotate textarea {
+  background: #E6E6E6;
+  border: 1px solid #cccccc;
+}
 
-  #rotate input[type=checkbox] {
-    background: #E6E6E6;
-    border: 1px solid #cccccc;
-  }
+#rotate select {
+  font-size: 12px;
+  font-family: Arial;
+}
 
-  #rotate input[type=submit] {
-    /*background: #555555;
-    border: 1px solid #cccccc;
-    color: #f4f4f4;
-    height: 25px;
-    margin-top: 5px;*/
-  }
+#rotate input[type=checkbox] {
+  background: #E6E6E6;
+  border: 1px solid #cccccc;
+}
 
-  #rotate input[type=submit]:hover {
-    /*background: #f4f4f4;
-    border: 1px solid #cccccc;
-    color: #555555;
-    height: 25px;
-    margin-top: 5px;*/
-  }
+#rotate input[type=submit] {
 
-  input[type=submit]:hover {
-/*    background: #f4f4f4;
-    border: 1px solid #cccccc;*/
-  }
+}
 
-/*#rotate #langName {
-    background: rgb(196, 213, 230) none repeat scroll 0% 0%;
-    text-align: left;
-    border-radius: 15px;
-    width: auto;
-    min-width: 100px;
-}*/
+#rotate input[type=submit]:hover {
+
+}
+
+input[type=submit]:hover {
+
+}
 
 .pagnext {
   text-decoration: none;
@@ -1102,34 +657,9 @@ input[type=checkbox] {
   background-image: url(/images/treeview-default.gif);
 }
 
-/*#rotate #tree li.expandable div{background-position:-80px -2px;}
-#rotate #tree li.collapsable div{background-position:0px -111px;}*/
-
-/*#fragment-1 span {
-    float: left;
-}*/
-
-/*#fragment-1 input {
-    border-radius: 5px;
-}*/
-
 #fragment-1 span.cl {
-    align-content: center;
+  align-content: center;
 }
-
-/*#fragment-1 span.cl +span {
-    float: right;
-}*/
-
-/*#fragment-1 #tableFr1 td {
-    vertical-align: top;
-    text-align: left;
-}
-
-#fragment-1 .mceLayout tbody tr {
-    display: table;
-    margin-bottom: 0px;
-}*/
 
 #langName-label { display:none; }
 
@@ -1139,43 +669,16 @@ div.selector span {
   margin-left: 0px;
 }
 
-/*#fragment-1 dd {
-    display: block;
-    float: right;
-    position: relative;
-    width: auto;
-}*/
-
-/*#chooseLangAdminForm {
-    display: block;
-    float: right;
-    position: absolute;
-    right: 0;
-    top: -15px;
-    width: auto;
-}*/
-
 .cssjswrapp {
-  /* background:silver; */
-/*  padding: 30px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  height: 100%;
-  display: block;
-  position: relative;*/
+
 }
 
 .cssjswrapp2 {
-/*  padding: 10px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  height: 100%;
-  display: block;
-  position: relative;*/
+
 }
 
 #imagesContainer, #imageFoldersShow {
-  /*float: left;*/
+
 }
 
 .ui-dialog .ui-dialog-titlebar-close span {
