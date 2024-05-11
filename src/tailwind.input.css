@@ -16,4 +16,12 @@
 #TB_window a.btn:hover {
   @apply text-white;
 }
-
+.ui-tab-button {
+  @apply btn btn-sm btn-ghost bg-none bg-primary !important;
+}
+.ui-tab-button a {
+  @apply text-white !important;
+}
+.ui-tab-button.ui-state-active {
+  @apply bg-none bg-secondary !important;
+}

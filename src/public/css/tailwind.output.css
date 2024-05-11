@@ -3222,8 +3222,8 @@ input.tab:checked + .tab-content,
   inset: 0px;
 }
 
-.bottom-0 {
-  bottom: 0px;
+.bottom-11 {
+  bottom: 2.75rem;
 }
 
 .left-72 {
@@ -3242,8 +3242,20 @@ input.tab:checked + .tab-content,
   top: 13rem;
 }
 
-.bottom-11 {
-  bottom: 2.75rem;
+.bottom-40 {
+  bottom: 10rem;
+}
+
+.bottom-28 {
+  bottom: 7rem;
+}
+
+.bottom-24 {
+  bottom: 6rem;
+}
+
+.bottom-12 {
+  bottom: 3rem;
 }
 
 .z-\[1\] {
@@ -3426,6 +3438,10 @@ input.tab:checked + .tab-content,
 
 .h-auto {
   height: auto;
+}
+
+.h-dvh {
+  height: 100dvh;
 }
 
 .h-full {
@@ -3659,10 +3675,6 @@ input.tab:checked + .tab-content,
   overflow: hidden;
 }
 
-.overflow-visible {
-  overflow: visible;
-}
-
 .overflow-x-auto {
   overflow-x: auto;
 }
@@ -3699,6 +3711,10 @@ input.tab:checked + .tab-content,
 
 .border {
   border-width: 1px;
+}
+
+.border-0 {
+  border-width: 0px;
 }
 
 .border-4 {
@@ -3752,6 +3768,10 @@ input.tab:checked + .tab-content,
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-none {
+  background-image: none;
+}
+
 .fill-current {
   fill: currentColor;
 }
@@ -3780,6 +3800,11 @@ input.tab:checked + .tab-content,
   padding: 0.5rem;
 }
 
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -3787,6 +3812,22 @@ input.tab:checked + .tab-content,
 
 .pb-40 {
   padding-bottom: 10rem;
+}
+
+.pb-28 {
+  padding-bottom: 7rem;
+}
+
+.pb-24 {
+  padding-bottom: 6rem;
+}
+
+.pb-36 {
+  padding-bottom: 9rem;
+}
+
+.pb-44 {
+  padding-bottom: 11rem;
 }
 
 .text-center {
@@ -3956,6 +3997,301 @@ input.tab:checked + .tab-content,
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.ui-tab-button {
+  display: inline-flex !important;
+  height: 3rem !important;
+  min-height: 3rem !important;
+  flex-shrink: 0 !important;
+  cursor: pointer !important;
+  -webkit-user-select: none !important;
+     -moz-user-select: none !important;
+          user-select: none !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: var(--rounded-btn, 0.5rem) !important;
+  border-color: transparent !important;
+  border-color: oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)) !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  text-align: center !important;
+  font-size: 0.875rem !important;
+  line-height: 1em !important;
+  gap: 0.5rem !important;
+  font-weight: 600 !important;
+  text-decoration-line: none !important;
+  transition-duration: 200ms !important;
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1) !important;
+  border-width: var(--border-btn, 1px) !important;
+  animation: button-pop var(--animation-btn, 0.25s) ease-out !important;
+  transition-property: color, background-color, border-color, opacity, box-shadow, transform !important;
+  --tw-text-opacity: 1 !important;
+  color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity))) !important;
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05) !important;
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color) !important;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+  outline-color: var(--fallback-bc,oklch(var(--bc)/1)) !important;
+  background-color: oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity)) !important;
+  --tw-bg-opacity: 1 !important;
+  --tw-border-opacity: 1 !important;
+}
+
+.ui-tab-button[disabled],.ui-tab-button:disabled {
+  pointer-events: none !important;
+}
+
+:where(.ui-tab-button:is(input[type="checkbox"])),
+:where(.ui-tab-button:is(input[type="radio"])) {
+  width: auto !important;
+  -webkit-appearance: none !important;
+     -moz-appearance: none !important;
+          appearance: none !important;
+}
+
+.ui-tab-button:is(input[type="checkbox"]):after,.ui-tab-button:is(input[type="radio"]):after {
+  --tw-content: attr(aria-label) !important;
+  content: var(--tw-content) !important;
+}
+
+@media (hover: hover) {
+  .ui-tab-button:hover {
+    --tw-border-opacity: 1 !important;
+    border-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-border-opacity))) !important;
+    --tw-bg-opacity: 1 !important;
+    background-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-bg-opacity))) !important;
+  }
+
+  @supports (color: color-mix(in oklab, black, black)) {
+    .ui-tab-button:hover {
+      background-color: color-mix(
+            in oklab,
+            oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1)) 90%,
+            black
+          ) !important;
+      border-color: color-mix(
+            in oklab,
+            oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity, 1)) 90%,
+            black
+          ) !important;
+    }
+  }
+
+  @supports not (color: oklch(0% 0 0)) {
+    .ui-tab-button:hover {
+      background-color: var(--btn-color, var(--fallback-b2)) !important;
+      border-color: var(--btn-color, var(--fallback-b2)) !important;
+    }
+  }
+
+  .ui-tab-button:hover {
+    --tw-border-opacity: 1 !important;
+    border-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-border-opacity))) !important;
+    --tw-bg-opacity: 1 !important;
+    background-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-bg-opacity))) !important;
+  }
+
+  @supports (color: color-mix(in oklab, black, black)) {
+    .ui-tab-button:hover {
+      background-color: color-mix(
+            in oklab,
+            oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1)) 90%,
+            black
+          ) !important;
+      border-color: color-mix(
+            in oklab,
+            oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity, 1)) 90%,
+            black
+          ) !important;
+    }
+  }
+
+  @supports not (color: oklch(0% 0 0)) {
+    .ui-tab-button:hover {
+      background-color: var(--btn-color, var(--fallback-b2)) !important;
+      border-color: var(--btn-color, var(--fallback-b2)) !important;
+    }
+  }
+
+  .ui-tab-button:hover {
+    --tw-border-opacity: 1 !important;
+    border-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-border-opacity))) !important;
+    --tw-bg-opacity: 1 !important;
+    background-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-bg-opacity))) !important;
+  }
+
+  @supports (color: color-mix(in oklab, black, black)) {
+    .ui-tab-button:hover {
+      background-color: color-mix(
+            in oklab,
+            oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1)) 90%,
+            black
+          ) !important;
+      border-color: color-mix(
+            in oklab,
+            oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity, 1)) 90%,
+            black
+          ) !important;
+    }
+  }
+
+  @supports not (color: oklch(0% 0 0)) {
+    .ui-tab-button:hover {
+      background-color: var(--btn-color, var(--fallback-b2)) !important;
+      border-color: var(--btn-color, var(--fallback-b2)) !important;
+    }
+  }
+
+  .ui-tab-button.glass:hover {
+    --glass-opacity: 25% !important;
+    --glass-border-opacity: 15% !important;
+  }
+
+  .ui-tab-button:hover {
+    border-color: transparent !important;
+  }
+
+  @supports (color: oklch(0% 0 0)) {
+    .ui-tab-button:hover {
+      background-color: var(--fallback-bc,oklch(var(--bc)/0.2)) !important;
+    }
+  }
+
+  .ui-tab-button:hover {
+    border-color: transparent !important;
+  }
+
+  @supports (color: oklch(0% 0 0)) {
+    .ui-tab-button:hover {
+      background-color: var(--fallback-bc,oklch(var(--bc)/0.2)) !important;
+    }
+  }
+
+  .ui-tab-button[disabled]:hover,.ui-tab-button:disabled:hover {
+    --tw-border-opacity: 0 !important;
+    background-color: var(--fallback-n,oklch(var(--n)/var(--tw-bg-opacity))) !important;
+    --tw-bg-opacity: 0.2 !important;
+    color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity))) !important;
+    --tw-text-opacity: 0.2 !important;
+  }
+
+  @supports (color: color-mix(in oklab, black, black)) {
+    .ui-tab-button:is(input[type="checkbox"]:checked):hover,.ui-tab-button:is(input[type="radio"]:checked):hover {
+      background-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black) !important;
+      border-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black) !important;
+    }
+  }
+}
+
+.ui-tab-button:active:hover,.ui-tab-button:active:focus {
+  animation: button-pop 0s ease-out !important;
+  transform: scale(var(--btn-focus-scale, 0.97)) !important;
+}
+
+@supports not (color: oklch(0% 0 0)) {
+  .ui-tab-button {
+    background-color: var(--btn-color, var(--fallback-b2)) !important;
+    border-color: var(--btn-color, var(--fallback-b2)) !important;
+  }
+}
+
+.ui-tab-button:focus-visible {
+  outline-style: solid !important;
+  outline-width: 2px !important;
+  outline-offset: 2px !important;
+}
+
+.ui-tab-button.glass {
+  --tw-shadow: 0 0 #0000 !important;
+  --tw-shadow-colored: 0 0 #0000 !important;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+  outline-color: currentColor !important;
+}
+
+.ui-tab-button.glass.btn-active {
+  --glass-opacity: 25% !important;
+  --glass-border-opacity: 15% !important;
+}
+
+.ui-tab-button {
+  border-width: 1px !important;
+  border-color: transparent !important;
+  background-color: transparent !important;
+  color: currentColor !important;
+  --tw-shadow: 0 0 #0000 !important;
+  --tw-shadow-colored: 0 0 #0000 !important;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+  outline-color: currentColor !important;
+}
+
+.ui-tab-button.btn-active {
+  border-color: transparent !important;
+  background-color: var(--fallback-bc,oklch(var(--bc)/0.2)) !important;
+}
+
+.ui-tab-button.btn-disabled,.ui-tab-button[disabled],.ui-tab-button:disabled {
+  --tw-border-opacity: 0 !important;
+  background-color: var(--fallback-n,oklch(var(--n)/var(--tw-bg-opacity))) !important;
+  --tw-bg-opacity: 0.2 !important;
+  color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity))) !important;
+  --tw-text-opacity: 0.2 !important;
+}
+
+.ui-tab-button:is(input[type="checkbox"]:checked),.ui-tab-button:is(input[type="radio"]:checked) {
+  --tw-border-opacity: 1 !important;
+  border-color: var(--fallback-p,oklch(var(--p)/var(--tw-border-opacity))) !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity))) !important;
+  --tw-text-opacity: 1 !important;
+  color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity))) !important;
+}
+
+.ui-tab-button:is(input[type="checkbox"]:checked):focus-visible,.ui-tab-button:is(input[type="radio"]:checked):focus-visible {
+  outline-color: var(--fallback-p,oklch(var(--p)/1)) !important;
+}
+
+.ui-tab-button {
+  height: 2rem !important;
+  min-height: 2rem !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+  font-size: 0.875rem !important;
+}
+
+.btn-square:where(.ui-tab-button) {
+  height: 2rem !important;
+  width: 2rem !important;
+  padding: 0px !important;
+}
+
+.btn-circle:where(.ui-tab-button) {
+  height: 2rem !important;
+  width: 2rem !important;
+  border-radius: 9999px !important;
+  padding: 0px !important;
+}
+
+.ui-tab-button {
+  --tw-bg-opacity: 1 !important;
+  background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity))) !important;
+  background-image: none !important;
+}
+
+#TB_window a.ui-tab-button:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.ui-tab-button a {
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
+
+.ui-tab-button.ui-state-active {
+  --tw-bg-opacity: 1 !important;
+  background-color: var(--fallback-s,oklch(var(--s)/var(--tw-bg-opacity))) !important;
+  background-image: none !important;
+}
+
 @media (min-width: 768px) {
   @media (hover:hover) {
     .md\:table tr.hover:hover,.md\:table tr.hover:nth-child(even):hover {
@@ -4066,16 +4402,8 @@ input.tab:checked + .tab-content,
     bottom: auto;
   }
 
-  .md\:top-12 {
-    top: 3rem;
-  }
-
   .md\:top-0 {
     top: 0px;
-  }
-
-  .md\:col-span-9 {
-    grid-column: span 9 / span 9;
   }
 
   .md\:col-span-8 {
@@ -4097,10 +4425,6 @@ input.tab:checked + .tab-content,
 
   .md\:table {
     display: table;
-  }
-
-  .md\:w-72 {
-    width: 18rem;
   }
 
   .md\:grid-cols-6 {
@@ -4136,4 +4460,3 @@ input.tab:checked + .tab-content,
     color: rgb(255 255 255 / var(--tw-text-opacity));
   }
 }
-
