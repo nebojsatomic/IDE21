@@ -1053,7 +1053,7 @@ class PageController extends NetActionController
                         'label' => 'Choose revision:',
                         'multioptions' => $reverse,
                         //'value' =>  $reverse[$_POST['templateXMLNames']],
-                        'class' => 'select select-xs w-full',
+                        'class' => 'select select-sm md:select-xs w-full',
                     )),
                 'installTemplateSubmit' => array('submit', array(
                     'order' => 100,
@@ -1184,7 +1184,7 @@ class PageController extends NetActionController
                 'pageName' => array('select', array(
                     'required' => true,
                     'label' => $this->_translateCreator->_('Choose page'),
-                    'class' => 'select select-xs w-full',
+                    'class' => 'select select-sm md:select-xs w-full',
                     'multioptions' => $pageArray,
                 )),
 
@@ -1224,7 +1224,7 @@ class PageController extends NetActionController
                 'templateName' => array('select', array(
                     'required' => true,
                     'label' => $this->_translateCreator->_('Choose template'),
-                    'class' => 'select select-xs w-full',
+                    'class' => 'select select-sm md:select-xs w-full',
                     'multioptions' => $templateArray,
                 )),
 

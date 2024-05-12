@@ -295,7 +295,7 @@ class MenuController extends NetActionController
                         //'label' => 'Choose Page:',
                         'style' => 'display:none;',
                         'multioptions' => $categoriesArray,
-                        'class' => 'select select-xs w-full',
+                        'class' => 'select select-sm md:select-xs w-full',
                         'value' => $catid,
                     )),
                     'menuItemPage' => array('select', array(
@@ -303,7 +303,7 @@ class MenuController extends NetActionController
                         //'label' => 'Choose Page:',
                         'style' => 'display:none;',
                         'multioptions' => $pageArray,
-                        'class' => 'select select-xs w-full',
+                        'class' => 'select select-sm md:select-xs w-full',
                         //'value' => $mi[0]['name'. "_" . $langCode]
                     )),
                     'menuItemModule' => array('select', array(
@@ -311,7 +311,7 @@ class MenuController extends NetActionController
                         //'label' => 'Choose Module:',
                         'style' => 'display:none;',
                         'multioptions' => $modulesArray,
-                        'class' => 'select select-xs w-full',
+                        'class' => 'select select-sm md:select-xs w-full',
                         //'value' => $mi[0]['name'. "_" . $langCode]
                     )),
       		          'addMenuItemSubmit' => array('submit', array(
@@ -434,7 +434,7 @@ class MenuController extends NetActionController
                     'menuItemParentId' => array('select', array(
                         'required' => false,
                         'label' => $this->_translateCreator->_('Choose Parent'),
-                        'class' =>'select select-xs w-full',
+                        'class' =>'select select-sm md:select-xs w-full',
                         'size' => '1',
                         'multioptions' => $pageArray,
                         'value' => $mi[0]['parent_id']
@@ -449,7 +449,7 @@ class MenuController extends NetActionController
                     'contentId' => array('select', array(
                         'required' => false,
                         'label' => $this->_translateCreator->_('Choose Content'),
-                        'class' =>'select select-xs w-full',
+                        'class' =>'select select-sm md:select-xs w-full',
                         'size' => '1',
                         'multioptions' => $contArray,
                         'value' => $mi[0]['content_id']

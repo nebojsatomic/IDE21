@@ -206,7 +206,7 @@ class CategoryController extends NetActionController
                 'newCategoryItemName' => array('select', array(
                     'required' => true,
                     'label' => $this->_translateCreator->_('Choose a category item'),
-                    'class' => 'select select-xs w-full',
+                    'class' => 'select select-sm md:select-xs w-full',
                     'multioptions' => $pageArray,
                 )),
                 'addCatItemSubmit' => array('submit', array(

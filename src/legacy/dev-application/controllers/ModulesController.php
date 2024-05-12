@@ -129,7 +129,7 @@ class ModulesController extends NetActionController
           'template_id' => array('select', array(
             'required' => true,
             'label' => 'Template:',
-            'class' => 'select select-xs w-full',
+            'class' => 'select select-sm md:select-xs w-full',
             'multioptions' => $templateArray,
             'value' => @$selValue
           )),
