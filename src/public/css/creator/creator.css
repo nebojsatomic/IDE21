@@ -1,3 +1,7 @@
+/* This file contains legacy code from 2013.
+It must be replaced with it's tailwind counterpart.
+For now, on version 24.05, lets just leave it like this,
+and slowly remove the unnecessary parts bit by bit afterwards. */
 body {
   /*min-width: 1280px;*/
   font-size: 11px ;

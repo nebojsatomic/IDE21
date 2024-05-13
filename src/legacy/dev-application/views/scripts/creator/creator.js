@@ -107,7 +107,7 @@ function ajaxEvent(){
 message = "";
 function ajaxEventDone(message){
   //$('body').append('<div id="ajaxEventMessage"  style="position:fixed;display:none;top:0; left:0;opacity:0.9;background:white;margin:20% 40%;padding:30px;width:300px;height:50px;border-radius:10px;z-index:999999;">' +  message + '<img src="'+ absoluteUrl2 +'images/ajax-loader2.gif" style="float:right;" /></div>');
-  $('body').append('<div id="ajaxEventMessage" role="alert" class="fixed inset-0 w-72 h-24 mx-auto my-auto alert alert-success bg-primary"   style="display:none;opacity:0.9;z-index:999999;"><svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>' +  message + '</span></div>');
+  $('body').append('<div id="ajaxEventMessage" role="alert" class="fixed inset-0 w-72 h-24 mx-auto my-auto alert alert-success bg-accent text-accent-content"  style="display:none;opacity:0.9;z-index:999999;"><svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>' +  message + '</span></div>');
   $('#ajaxEventMessage').fadeIn(1000);
   setTimeout("$('#ajaxEventMessage').fadeOut()", 2000);
 }
@@ -946,7 +946,7 @@ $(document).ready(function(){
     const openPageDialogUniqueId = Date.now();
     $('#openPageForm').remove();
     $('.dialogDiv').remove();
-    $('body').append('<div class="dialogDiv bg-primary text-primary-content" id="dialogDiv_' + openPageDialogUniqueId + '" ></div>');
+    $('body').append('<div class="dialogDiv bg-accent text-accent-content" id="dialogDiv_' + openPageDialogUniqueId + '" ></div>');
     //$('#dialogDiv').draggable();
     $('#dialogDiv_' + openPageDialogUniqueId).html( $('#adminAjaxLoader').html() );
     //dialog();
@@ -1135,7 +1135,7 @@ $(document).ready(function(){
   $('#applyTemplate').click(function(){
     $('#dialogDiv').remove();
 
-    $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     dialog();
     $.get(absoluteUrl + "page/choose-template", function(data){
@@ -1155,7 +1155,7 @@ $(document).ready(function(){
     // ajaxEventDone(lang.TOpen);//sklanjanje maska
     $('#templateIDediting').html($(this).attr("value"));
     document.cookie = 'templateSelectedId=' + $(this).attr("value") + ';  path=/'; //ovo treba namestiti
-    $('#dialogDiv').hide('slow').remove();//ovo je za removovanje dijaloga MUST
+    $('#dialogDiv').hide('slow').remove();// removing dialog - MUST
   });
 
 
@@ -1593,7 +1593,7 @@ $('#aParamCorner').livequery('click', function(){
   if($('#cornerCheck').prop('checked') ){
     ajaxEvent();
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     $.get(absoluteUrl + "creator/corner-params" , function(data){
@@ -1711,7 +1711,7 @@ $('#aParamShadow').livequery('click', function(){
   if($('#shadowCheck').prop('checked') ){
     ajaxEvent();
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     $.get(absoluteUrl + "creator/shadow-params" , function(data){
@@ -1861,7 +1861,7 @@ $('#addImageLink').livequery('click', function(){
   } else {
     ajaxEvent();
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -1887,7 +1887,7 @@ $('#addImageLink').livequery('click', function(){
 //Add FOLDER
 $('#addFolderLink').livequery('click', function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -1982,13 +1982,13 @@ $('#showFolderImages').livequery('change', function(){
   $('#imagePathShow').html(imagePath);
 
   if($( "#dialogDivImages" ).length == 0){
-    $('body').append('<div id="dialogDivImages" class="bg-primary text-primary-content w-full h-full"><div id="imageDetails"></div></div>');
+    $('body').append('<div id="dialogDivImages" class="bg-accent text-accent-content w-full h-full"><div id="imageDetails"></div></div>');
     $( "#dialogDivImages" ).dialog({modal:false, resizable: true, position: ['center','center'], title:"Image Details" , maxHeight:$(window).height() });
     $('#imageDetails').appendTo($('#dialogDivImages') );
   }
   if($('#imageDetails').length == 0){
     $('#dialogDivImages').remove();
-    $('body').append('<div id="dialogDivImages" class="bg-primary text-primary-content w-full h-full"><div id="imageDetails"></div></div>');
+    $('body').append('<div id="dialogDivImages" class="bg-accent text-accent-content w-full h-full"><div id="imageDetails"></div></div>');
     $( "#dialogDivImages" ).dialog({modal:false, resizable: true, position: ['center','center'], title:"Image Details" , maxHeight:$(window).height() });
     $('#dialogDivImages') .append('<div id="mageDetails"></div>');
   } else{
@@ -2141,7 +2141,7 @@ $('#categoryNameAssign').livequery('change', function(){
 //Add CATEGORY
 $('#addCategoryLink').livequery('click', function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -2186,7 +2186,7 @@ $('#addCategoryItemLink').livequery('click', function(){
   hrefVal = $(this).attr("href");
   if(selCategory != ""){
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     $.get(absoluteUrl + hrefVal +"/catid/" + selCategory, function(data){
@@ -2301,7 +2301,7 @@ $('#chooseCategoryForm').change(function(){
 //Add A MENU
 $('#addMenuLink').livequery('click', function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -2353,7 +2353,7 @@ $('#chooseMenuForm').change(function(){
 //Add MENU ITEM
 $('#addMenuItemLink').livequery('click', function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   mid = $('#menuName').attr("value");
@@ -2516,7 +2516,7 @@ $('#menuNameAssign').livequery('change', function(){
 
   menuSelected = $('#' + $(this).attr("id") + " option:selected").attr("value");
   if (menuSelected != "select"){
-    $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -2781,7 +2781,7 @@ $('a.uniTableAdmin').livequery('click', function(){
 
     //$('#addRowForm').remove();
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -2808,7 +2808,7 @@ $('a.uniTableAdmin').livequery('click', function(){
     //var rowId = "5";
     $('#editRowForm').remove();
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     $.get(absoluteUrl + "tables/edit-row/tableid/" + tableid + "/rowid/" + rowId, function(data){
@@ -3131,7 +3131,7 @@ $('#restrictiveCB').livequery('click', function(){
 $('#openPagePermisions').livequery('click', function(){
   $('#permissionsForm').remove();
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   pageId = $('#pgID').html();
@@ -3430,7 +3430,7 @@ $('.setPermissionsAll').livequery('click',function(){
     }
   });
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content" style="z-index:999999 !important;"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content" style="z-index:999999 !important;"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   $.get(absoluteUrl + "page/set-permissions/pids/" + ar , function(data) {
@@ -3451,7 +3451,7 @@ $('.exportToFTP').livequery('click',function(){
       ar.push($(this).attr('value'));
     }
   });
-  $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content" style="z-index:9999999"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content" style="z-index:9999999"></div>');
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   $.get(absoluteUrl + "exportsite/export-pages/pids/" + ar , function(data) {
     $('#dialogDiv').html(data);
@@ -3508,7 +3508,7 @@ $('#rotate select').each(function(){
 //editModules link - dealing with module settings
 $('#editModulesLink').livequery('click', function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   $('#dialogDiv').show();
@@ -3658,7 +3658,7 @@ fsButton3.addEventListener('click', function() {
 //Exporting a template for use on another server
 $('#exportTemplate').click(function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -3674,7 +3674,7 @@ $('#exportTemplate').click(function(){
 //Installing exported template
 $('#installTemplate').click(function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv" class="bg-primary text-primary-content"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   // $('#dialogDiv').show();
