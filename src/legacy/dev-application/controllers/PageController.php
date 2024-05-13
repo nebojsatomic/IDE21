@@ -1053,10 +1053,11 @@ class PageController extends NetActionController
                         'label' => 'Choose revision:',
                         'multioptions' => $reverse,
                         //'value' =>  $reverse[$_POST['templateXMLNames']],
-                        'style' => 'width:auto;',
+                        'class' => 'select select-sm md:select-xs w-full',
                     )),
                 'installTemplateSubmit' => array('submit', array(
                     'order' => 100,
+                    'class' => 'btn btn-xs btn-secondary',
                     'label' => $this->_translateCreator->_('Install'),
                     'value' => $this->_translateCreator->_('Submit')
                 ))
@@ -1143,10 +1144,11 @@ class PageController extends NetActionController
                 'uploadTemplateName' => array('file', array(
                     'required' => true,
                     'label' => $this->_translateCreator->_('Browse a template'),
-                    'style' => 'width:100%;'
+                    'class' => 'input input-sm w-full'
                 )),
                 'uploadImageSubmit' => array('submit', array(
                     'order' => 100,
+                    'class' => 'btn btn-xs btn-secondary',
                     'label' => $this->_translateCreator->_('Upload'),
                     'value' => $this->_translateCreator->_('Submit')
                 ))
@@ -1182,7 +1184,7 @@ class PageController extends NetActionController
                 'pageName' => array('select', array(
                     'required' => true,
                     'label' => $this->_translateCreator->_('Choose page'),
-                    'style' => 'width:100%',
+                    'class' => 'select select-sm md:select-xs w-full',
                     'multioptions' => $pageArray,
                 )),
 
@@ -1222,7 +1224,7 @@ class PageController extends NetActionController
                 'templateName' => array('select', array(
                     'required' => true,
                     'label' => $this->_translateCreator->_('Choose template'),
-                    'style' => 'width:100%',
+                    'class' => 'select select-sm md:select-xs w-full',
                     'multioptions' => $templateArray,
                 )),
 
@@ -1319,38 +1321,34 @@ class PageController extends NetActionController
     public function getPermisionFormAction()
     {
 
-
     }
 
     private function _setPermissionsForm($type, $id)
     {
-	       require_once('Zend/Form/Element/Checkbox.php');
-         $roles = $this->_db->fetchAll("SELECT * from roles");
-         $form = new Zend_Form(array(
-             'method' => 'post',
-             'id' => 'setPermissionsForm_ManageAll',
-	           'action' => $this->_host . 'page/set-permissions/rtype/' . $type . "/pids/" . $id,
-             'elements' => array(
+        require_once('Zend/Form/Element/Checkbox.php');
+        $roles = $this->_db->fetchAll("SELECT * from roles");
+        $form = new Zend_Form(array(
+           'method' => 'post',
+           'id' => 'setPermissionsForm_ManageAll',
+           'action' => $this->_host . 'page/set-permissions/rtype/' . $type . "/pids/" . $id,
+           'elements' => array(
 
-		          'submitB' => array('submit', array(
-                    'label' => $this->_translateCreator->_('Save'),
-                    'order' => 100,
-                    'value' => 'Submit'
-                ))
-              )));
+            'submitB' => array('submit', array(
+                'label' => $this->_translateCreator->_('Save'),
+                'class' => 'btn btn-xs btn-secondary w-full',
+                'order' => 100,
+                'value' => 'Submit'
+            ))
+        )));
 
-	       foreach($roles as $role){
+        foreach($roles as $role){
             $roleName = new Zend_Form_Element_Checkbox('role_' . $role['name']);
             $roleName ->setLabel($role['name']);
+            $roleName->setAttrib('class', 'checkbox-sm');
 
             if($role['name'] == "administrator") {continue;}//admin is alowed everything
             $form->addElements(array($roleName ));
-         }
-
-
-          return $form;
+        }
+        return $form;
     }
-
-
-
 }

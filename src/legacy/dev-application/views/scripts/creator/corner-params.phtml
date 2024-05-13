@@ -26,29 +26,39 @@
  * 
  */
  ?>
-        <div id="cornerPropDiv" >
-            <select id="chooseCornerStyle" style="width:70px">
-            <option>round</option>
-            <option>dog</option>
-            <option>sharp</option>
-            <option>bevel</option>
-            <option>notch</option> 
-            <option>bite</option>
-            <option>cool</option>
-            <option>slide</option>
-            <option>fray</option>
-            <option>wicked</option>
-            <option>sculpt</option>
-            <option>long</option>                      
-            </select>
-            
-            <select id="chooseCornerOrientation"  style="width:70px">
-            <option></option>
-            <option>top</option>
-            <option>bottom</option>                    
-            </select>
-            Radius:<input type="text" id="cornerParamRadius" style="width:25px;" />px            
-            Container BG:<input type="text" id="cornerParamBg" style="width:55px;" />     
-            <br />
-            <input type="submit" value="Apply" id="cornerParamButton" />    
-        </div>
+ <div id="cornerPropDiv" class="grid gap-2 items-center">
+  <div>
+    Corner style:
+    <select id="chooseCornerStyle" class="select select-xs w-full">
+      <option>round</option>
+      <option>dog</option>
+      <option>sharp</option>
+      <option>bevel</option>
+      <option>notch</option> 
+      <option>bite</option>
+      <option>cool</option>
+      <option>slide</option>
+      <option>fray</option>
+      <option>wicked</option>
+      <option>sculpt</option>
+      <option>long</option>                      
+    </select>
+  </div>
+  <div>
+    Corner orientation:
+    <select id="chooseCornerOrientation" class="select select-xs w-full">
+      <option></option>
+      <option>top</option>
+      <option>bottom</option>
+    </select>
+  </div>
+  <div>
+    Radius(px):<input class="input input-sm w-full" type="text" id="cornerParamRadius" /> 
+  </div>
+  <div>
+    Container BG:<input class="input input-sm w-full" type="text" id="cornerParamBg" />
+  </div>
+  <div class="">
+    <input class="btn btn-xs btn-secondary w-full" type="submit" value="Apply" id="cornerParamButton" />
+  </div>
+</div>

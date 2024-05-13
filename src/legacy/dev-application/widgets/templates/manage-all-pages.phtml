@@ -29,101 +29,103 @@
 <?php
 if(count($this->cols) > 1){
 ?>
-<br />
-<div id="div_uta_<?php echo $this->tableId;?>" style="width:100%;">
-
 <?php
-
-//print_r($this->cols);
-//print_r($this->table);
-
 foreach ($this->cols as $col ) {
-$colone[] = $col['Field'];
+  $colone[] = $col['Field'];
 }
 ?>
-<!--<a href="<?php echo $this->actions['add'];?>" class="navLinks uniTableAdmin a_add" value="<?php echo $this->tableId;?>"><?php echo $this->addTitle;?></a>
--->
-<select id="paginationStep_<?php echo $this->tableId;?>" class="paginationStep" style="float:right;width:40px;">
-<option>-</option>
-<option>5</option>
-<option >10</option>
-<option>15</option>
-<option>25</option>
-</select>
-<div class="expanderFullScr" value="uta_<?php echo $this->tableId;?>" style="width:17px;height:17px;float:right;border:0px solid #e7e7e7;-moz-border-radius:3px;margin:2px;"></div>
-<div class="expanderDiv" value="uta_<?php echo $this->tableId;?>" style="width:17px;height:17px;float:right;border:0px solid #e7e7e7;-moz-border-radius:3px;margin:2px;"></div>
-<table id="uta_<?php echo $this->tableId;?>" value="<?php echo $this->tableId;?>" class="universalTableAdmin" cellspacing="0"  >
-    <?php
-    echo '<thead><tr>';
-    echo '<th><input type="checkbox" value="" id="chk_All_' . $this->tableId . '" class="chk_all" /></th>';
-        foreach ($colone as $kolona) {
-        echo "<th>" . ucwords(str_replace("_", " ", $kolona) ) . "</th>";
-        }
-        echo "<th>Action</th>";
-    echo '</tr></thead>';
-    ?>
-    <tbody>
-    <?php
-    foreach ($this->paginator as $data) {
-    ?>    
-    <tr id="<?php echo $data[$colone[0]]?>" class="utaNormal">
-        <td width="15px;"><input type="checkbox" value="<?php echo $data[$colone[0]]?>" id="chk_<?php echo $data[$colone[0]]?>" class="chk_page" /></td>
+<div class="grid gap-2 w-full my-4">
+  <!--<a href="<?php echo $this->actions['add'];?>" class="navLinks uniTableAdmin a_add" value="<?php echo $this->tableId;?>"><?php echo $this->addTitle;?></a>-->
+  <select id="paginationStep_<?php echo $this->tableId;?>" class="paginationStep select select-xs w-20 justify-self-end">
+    <option>-</option>
+    <option>5</option>
+    <option >10</option>
+    <option>15</option>
+    <option>25</option>
+  </select>
+</div>
+<div class="grid gap-2 content-center md:my-4 overflow-auto">
+  <div id="div_uta_<?php echo $this->tableId;?>" class="grid gap-2 w-full">
 
+    <!--<div class="expanderFullScr" value="uta_<?php echo $this->tableId;?>" style="width:17px;height:17px;float:right;border:0px solid #e7e7e7;-moz-border-radius:3px;margin:2px;"></div>
+      <div class="expanderDiv" value="uta_<?php echo $this->tableId;?>" style="width:17px;height:17px;float:right;border:0px solid #e7e7e7;-moz-border-radius:3px;margin:2px;"></div>-->
+      <table id="uta_<?php echo $this->tableId;?>" value="<?php echo $this->tableId;?>" class="universalTableAdmin table-xs md:table" cellspacing="0"  >
         <?php
+        echo '<thead><tr>';
+        echo '<th><input type="checkbox" value="" id="chk_All_' . $this->tableId . '" class="chk_all checkbox-sm" /></th>';
         foreach ($colone as $kolona) {
-            if($kolona == "id"){
-                $pid = @$data[$kolona];
-            }
-            if($kolona == "published"){
-                if(@$data[$kolona] == '1'){
-                    echo '<td><a class="a_published publish" value="' . $pid . '" href=""></a></td>';
-                } else {
-                    echo '<td><a class="a_unpublished publish" value="' . $pid . '" href=""></a></td>';                
-                }
-                continue;            
-            }
-            if($kolona == "homepage"){
-                if(@$data[$kolona] == '1'){
-                    echo '<td><a class="a_published homepage" value="' . $pid . '" href=""></a></td>';
-                } else {
-                    echo '<td><a class="a_unpublished homepage" value="' . $pid . '" href=""></a></td>';                
-                }
-                continue;            
-            }
-            if($kolona == "check_access"){
-                if(@$data[$kolona] == '1'){
-                    echo '<td><a class="a_chkAccess1 access" value="' . $pid . '" href=""></a></td>';
-                } else {
-                    echo '<td><a class="a_chkAccess0 access" value="' . $pid . '" href=""></a></td>';                
-                }
-                continue;            
-            }
-        
-        ?>
-            <td><?php  echo substr(@$data[$kolona], 0, 30) ;?></td>
-        <?php
+          echo '<th class="text-center">' . ucwords(str_replace("_", " ", $kolona) ) . '</th>';
         }
+        echo '<th class="text-center">Action</th>';
+        echo '</tr></thead>';
         ?>
-        <td width="100px;"><a value="<?php echo $this->tableId;?>" id="preview_<?php echo $data[$colone[0]]?>" class="a_previewManage" href="<?php echo $this->host;?>pages/<?php echo $pid;?>" target="_blank" ></a> &nbsp;<a href="<?php echo $this->actions['delete'];?>" id="<?php echo $data[$colone[0]]?>" class="navLinks uniTableAdmin a_deleteManage" value="<?php echo $this->tableId;?>"></a></td>
-    </tr>
-    <?php
-    }
-    ?>
-    </tbody>
-</table>
+        <tbody>
+          <?php
+          foreach ($this->paginator as $data) {
+            ?>    
+            <tr id="<?php echo $data[$colone[0]]?>" class="utaNormal">
+              <td width="15px;"><input type="checkbox" value="<?php echo $data[$colone[0]]?>" id="chk_<?php echo $data[$colone[0]]?>" class="chk_page checkbox-sm" /></td>
 
+              <?php
+              foreach ($colone as $kolona) {
+                if($kolona == "id"){
+                  $pid = @$data[$kolona];
+                }
+                if($kolona == "published"){
+                  if(@$data[$kolona] == '1'){
+                    echo '<td><a class="a_published publish inline-block" value="' . $pid . '" href=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" /></svg></a></td>';
+                  } else {
+                    echo '<td><a class="a_unpublished publish inline-block" value="' . $pid . '" href=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clip-rule="evenodd" /></svg></a></td>';
+                  }
+                  continue;            
+                }
+                if($kolona == "homepage"){
+                  if(@$data[$kolona] == '1'){
+                    echo '<td><a class="a_published homepage inline-block" value="' . $pid . '" href=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" /></svg></a></td>';
+                  } else {
+                    echo '<td><a class="a_unpublished homepage inline-block" value="' . $pid . '" href=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clip-rule="evenodd" /></svg></a></td>';
+                  }
+                  continue;            
+                }
+                if($kolona == "check_access"){
+                  if(@$data[$kolona] == '1'){
+                    echo '<td><a class="a_chkAccess1 access text-white inline-block" value="' . $pid . '" href=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M4.5 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM14.25 8.625a3.375 3.375 0 1 1 6.75 0 3.375 3.375 0 0 1-6.75 0ZM1.5 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM17.25 19.128l-.001.144a2.25 2.25 0 0 1-.233.96 10.088 10.088 0 0 0 5.06-1.01.75.75 0 0 0 .42-.643 4.875 4.875 0 0 0-6.957-4.611 8.586 8.586 0 0 1 1.71 5.157v.003Z" /></svg></a></td>';
+                  } else {
+                    echo '<td><a class="a_chkAccess0 access inline-block" value="' . $pid . '" href=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M8.25 6.75a3.75 3.75 0 1 1 7.5 0 3.75 3.75 0 0 1-7.5 0ZM15.75 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM2.25 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM6.31 15.117A6.745 6.745 0 0 1 12 12a6.745 6.745 0 0 1 6.709 7.498.75.75 0 0 1-.372.568A12.696 12.696 0 0 1 12 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 0 1-.372-.568 6.787 6.787 0 0 1 1.019-4.38Z" clip-rule="evenodd" /><path d="M5.082 14.254a8.287 8.287 0 0 0-1.308 5.135 9.687 9.687 0 0 1-1.764-.44l-.115-.04a.563.563 0 0 1-.373-.487l-.01-.121a3.75 3.75 0 0 1 3.57-4.047ZM20.226 19.389a8.287 8.287 0 0 0-1.308-5.135 3.75 3.75 0 0 1 3.57 4.047l-.01.121a.563.563 0 0 1-.373.486l-.115.04c-.567.2-1.156.349-1.764.441Z" /></svg></a></td>';
+                  }
+                  continue;            
+                }
 
-<?php //print_r($this->paginator);?>
-<?php echo($this->paginationControl($this->paginator, 'Sliding', 'paginator-managePages.phtml', array('params' => array('tableId' => $this->tableId, 'translate' => $this->translate) ) )); ?>
+                ?>
+                <td class="max-w-16 sm:max-w-24 truncate"><?php  echo substr(@$data[$kolona], 0, 30) ;?></td>
+                <?php
+              }
+              ?>
+              <td width="100px;">
+                <a value="<?php echo $this->tableId;?>" id="preview_<?php echo $data[$colone[0]]?>" class="a_previewManage inline-block" href="<?php echo $this->host;?>pages/<?php echo $pid;?>" target="_blank" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /><path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z" clip-rule="evenodd" /></svg></a>
 
+                <a href="<?php echo $this->actions['delete'];?>" id="<?php echo $data[$colone[0]]?>" class="navLinks uniTableAdmin a_deleteManage inline-block" value="<?php echo $this->tableId;?>"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clip-rule="evenodd" /></svg></a>
+              </td>
+            </tr>
+            <?php
+          }
+          ?>
+        </tbody>
+      </table>
 
-<br />
-<?php echo $this->translate->_("With selected");?>:<br />
-<a href="" value="" class="deleteAll"><?php echo $this->translate->_("Delete");?></a>&nbsp;<a href="" value="" class="a_published publishAll"><?php echo $this->translate->_("Publish");?> </a>&nbsp;<a href="" value="" class="a_unpublished unpublishAll"><?php echo $this->translate->_("Unpublish");?></a>
-&nbsp;<a href="" value="" class="a_chkAccess1 restrictAll"><?php echo $this->translate->_("Restrict");?></a>&nbsp;<a href="" value="" class="a_chkAccess0 unrestrictAll"><?php echo $this->translate->_("Un-restrict");?></a>&nbsp;<a href="" value="" class="a_access setPermissionsAll"><?php echo $this->translate->_("Set permissions");?></a>&nbsp;<a href="" value="" class="a_ftp exportToFTP"><?php //echo $this->translate->_("Export Site To FTP");?></a>
-
+      <?php echo($this->paginationControl($this->paginator, 'Sliding', 'paginator-managePages.phtml', array('params' => array('tableId' => $this->tableId, 'translate' => $this->translate) ) )); ?>
+  </div>
+</div>
+<div class="flex items-strech my-2"><?php echo $this->translate->_("With selected");?>:</div>
+<div class="grid gap-1 grid-cols-1 sm:grid-cols-3 md:grid-cols-6 items-strech items-center justify-between">
+  <a href="" value="" class="deleteAll btn btn-sm md:btn-xs btn-ghost btn-primary bg-secondary"><?php echo $this->translate->_("Delete");?></a>
+  <a href="" value="" class="a_published publishAll btn btn-sm md:btn-xs btn-ghost btn-primary bg-secondary"><?php echo $this->translate->_("Publish");?> </a>
+  <a href="" value="" class="a_unpublished unpublishAll btn btn-sm md:btn-xs btn-ghost btn-primary bg-secondary"><?php echo $this->translate->_("Unpublish");?></a>
+  <a href="" value="" class="a_chkAccess1 restrictAll btn btn-sm md:btn-xs btn-ghost btn-primary bg-secondary"><?php echo $this->translate->_("Restrict");?></a>
+  <a href="" value="" class="a_chkAccess0 unrestrictAll btn btn-sm md:btn-xs btn-ghost btn-primary bg-secondary "><?php echo $this->translate->_("Un-restrict");?></a>
+  <a href="" value="" class="a_access setPermissionsAll btn btn-sm md:btn-xs btn-ghost btn-primary bg-secondary"><?php echo $this->translate->_("Set permissions");?></a>
 </div>
 <?php
 } else {
-    echo $this->translate->_("No content yet!");
+  echo $this->translate->_("No content yet!");
 }

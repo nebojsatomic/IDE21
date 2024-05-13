@@ -290,7 +290,7 @@ class CreatorController extends NetActionController
                     'folderNames' => array('select', array(
                         'required' => true,
                         'label' => 'Choose gallery:',
-                        'style' => 'width:200px;',
+                        'class' => 'select min-h-32 w-full px-2',
                         'size' => '8',
                         'multioptions' => $folderArray,
                     )),
@@ -337,9 +337,8 @@ class CreatorController extends NetActionController
                 'categoryNameAssign' => array('select', array(
                     'required' => true,
                     'label' => $this->_translate->_('Assign category to this page:'),
-                    'class' => 'help',
+                    'class' => 'help select select-sm md:select-xs w-full mb-2',
                     'title' => $this->_translate->_('Put this page in a specific category'),
-                    'style' => 'width:190px;',
                     'size' => '1',
                     'multioptions' => $catArray,
                 )),
@@ -377,9 +376,8 @@ class CreatorController extends NetActionController
                 'menuNameAssign' => array('select', array(
                     'required' => true,
                     'label' => $this->_translate->_('Assign this page to menu:'),
-                    'class' => 'help',
+                    'class' => 'help select select-sm md:select-xs w-full mb-2',
                     'title' => $this->_translate->_('Select the menu in which you would like to have this page'),
-                    'style' => 'width:190px;',
                     'size' => '1',
                     'multioptions' => $pageArray,
                 )),
@@ -415,7 +413,7 @@ class CreatorController extends NetActionController
                 'menuName' => array('select', array(
                     'required' => true,
                     'label' => $this->_translate->_('Available menus:'),
-                    'style' => 'width:200px;',
+                    'class' => 'select min-h-32 w-full px-2',
                     'size' => '8',
                     'multioptions' => $pageArray,
                 )),
@@ -457,9 +455,7 @@ class CreatorController extends NetActionController
                 'elements' => array(
                     'langName' => array('select', array(
                         'required' => true,
-                        'label' => '',
-                        'style' => 'float:right;',
-                        'class' => 'help',
+                        'class' => 'help select select-sm md:select-xs w-full',
                         'title' => $this->_translate->_('Choose the language of the pages on which you want to work'),
                         'size' => '1',
                         'multioptions' => $langArray,
@@ -499,8 +495,6 @@ class CreatorController extends NetActionController
     */
     private function _categoriesShowForm()
     {
-
-
       	$db = Zend_Registry::get('db');
         $res = $db->fetchAll("SELECT category_id, name FROM " . $this->_tblprefix . "categories");
 
@@ -519,7 +513,7 @@ class CreatorController extends NetActionController
                     'categoryName' => array('select', array(
                         'required' => true,
                         'label' => $this->_translate->_('Available categories:'),
-                        'style' => 'width:200px;',
+                        'class' => 'select min-h-32 w-full px-2',
                         'size' => '8',
                         'multioptions' => $categoryArray,
                     )),
@@ -616,7 +610,7 @@ class CreatorController extends NetActionController
                     'moduleName' => array('select', array(
                         'required' => true,
                         'label' => $this->_translate->_('Available modules:'),
-                        'style' => 'width:200px;',
+                        'class' => 'select min-h-32 w-full px-2 help',
                         'size' => '8',
                         'multioptions' => $moduleArray,
                     )),
@@ -658,10 +652,10 @@ class CreatorController extends NetActionController
             'elements' => array(
                 'templateChanger' => array('select', array(
                     'required' => true,
-                    'label' => '',
-                    'class' => 'help',
+                    'label' => 'Select the template for this page',
+                    'class' => 'help select select-sm md:select-xs w-full mb-2',
                     'title' => $this->_translate->_('Change the template of this page'),
-                    'style' => 'width:180px',
+                    /*'style' => 'width:180px',*/
                     'multioptions' => $templateArray,
                     'value' => @$valueSelected
                 )),
@@ -809,22 +803,25 @@ class CreatorController extends NetActionController
                 'elements' => array(
                     'username' => array('text', array(
                         'required' => true,
+						'class' => 'input input-bordered w-full max-w-x',
                         'label' => 'Username:'
                     )),
                     'password' => array('password', array(
                         'required' => true,
+						'class' => 'input input-bordered w-full max-w-x',
                         'label' => 'Password:',
                     )),
                 'creatorLang' => array('select', array(
                     'required' => true,
                     'size' => '1',
-                    'style' => 'margin:5px;width:90%;float:right;',
+					'class' => 'select select-sm md:select-xs select-bordered w-full',
                     'multioptions' => $creatorLangsArray,
                     'value' =>  $cL ,
                 )),
 
                     'submit' => array('submit', array(
                         'label' => 'Login',
+						'class' => 'btn btn-primary w-full',
                         'order' => 100,
                     ))
                 ),
@@ -1078,12 +1075,13 @@ class CreatorController extends NetActionController
                 'id' => array('select', array(
                     'required' => true,
                     'label' => '',
-                    'style' => 'width:100%;',
+                    'class' => 'select select-sm md:select-xs w-full',
                     'multioptions' => $languageCodes,
                 )),
 		          'submit' => array('submit', array(
                     'label' => 'Add',
                     'order' => 100,
+                    'class' => 'btn btn-xs btn-secondary w-full',
                     'value' => 'Submit'
                 ))
               )));
@@ -1575,11 +1573,13 @@ class CreatorController extends NetActionController
          $form = new Zend_Form(array(
              'method' => 'post',
              'id' => 'setPermissionsForm',
-	           'action' => $this->_host . 'creator/set-permissions/rtype/' . $type . "/id/" . $id,
+             'class' => 'grid items-center',
+	         'action' => $this->_host . 'creator/set-permissions/rtype/' . $type . "/id/" . $id,
              'elements' => array(
 
 		          'submitB' => array('submit', array(
                     'label' => 'Save',
+                    'class' => 'btn btn-xs btn-secondary',
                     'order' => 100,
                     'value' => 'Submit'
                 ))
@@ -1595,9 +1595,12 @@ class CreatorController extends NetActionController
                 if ($role['roleId'] ==  $rule['roleId']){
                     $attr = "checked";
                     $roleName->setAttrib('checked', $attr);
+
                 } else {
                    $attr = "";
+                   
                 }
+                $roleName->setAttrib('class', 'checkbox-sm');
             }
 
             if($role['name'] == "administrator") {continue;}//admin is alowed everything

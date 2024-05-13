@@ -274,18 +274,19 @@ class MenuController extends NetActionController
                     'menuItemNameDisplayed' => array('text', array(
                         'required' => true,
                         'label' => $this->_translateCreator->_('Menu item title'),
-                        'style' => 'width:100%;'
+                        'class' => 'input input-sm w-full'
                     )),
                     'menuItemDescriptionDisplayed' => array('text', array(
                         'required' => true,
                         'label' => $this->_translateCreator->_('Menu item description'),
-                        'style' => 'width:100%;'
+                        'class' => 'input input-sm w-full'
                     )),
                     'chooseMenuItemTypeRadio' => array('radio', array(
                         'id' => 'chooseMenuItemType',
                         'required' => true,
                         'label' => $this->_translateCreator->_('Choose type'),
                         'multioptions' => array('page' =>'Page', 'module' => 'Module'),
+                        'class' => 'radio-sm'
                         //'value' => $mi[0]['name'. "_" . $langCode]
                     )),
 
@@ -294,6 +295,7 @@ class MenuController extends NetActionController
                         //'label' => 'Choose Page:',
                         'style' => 'display:none;',
                         'multioptions' => $categoriesArray,
+                        'class' => 'select select-sm md:select-xs w-full',
                         'value' => $catid,
                     )),
                     'menuItemPage' => array('select', array(
@@ -301,6 +303,7 @@ class MenuController extends NetActionController
                         //'label' => 'Choose Page:',
                         'style' => 'display:none;',
                         'multioptions' => $pageArray,
+                        'class' => 'select select-sm md:select-xs w-full',
                         //'value' => $mi[0]['name'. "_" . $langCode]
                     )),
                     'menuItemModule' => array('select', array(
@@ -308,12 +311,14 @@ class MenuController extends NetActionController
                         //'label' => 'Choose Module:',
                         'style' => 'display:none;',
                         'multioptions' => $modulesArray,
+                        'class' => 'select select-sm md:select-xs w-full',
                         //'value' => $mi[0]['name'. "_" . $langCode]
                     )),
       		          'addMenuItemSubmit' => array('submit', array(
                           'label' => $this->_translateCreator->_('Add'),
                           'order' => 100,
                           'value' => 'Submit',
+                          'class' => 'btn btn-xs btn-secondary w-full',
                           'style' => "display:none;",
                       )),
                 ),
@@ -422,14 +427,14 @@ class MenuController extends NetActionController
                     'menuItemNameDisplayed' => array('text', array(
                         'required' => true,
                         'label' => $this->_translateCreator->_('Set Title'),
-                        'style' => 'width:200px;',
+                        'class' => 'input input-sm w-full text-primary',
                         'value' => $mi[0]['name'. "_" . $langCode]
                     )),
 
                     'menuItemParentId' => array('select', array(
                         'required' => false,
                         'label' => $this->_translateCreator->_('Choose Parent'),
-                        'style' => 'width:200px;',
+                        'class' =>'select select-sm md:select-xs w-full',
                         'size' => '1',
                         'multioptions' => $pageArray,
                         'value' => $mi[0]['parent_id']
@@ -438,13 +443,13 @@ class MenuController extends NetActionController
                     'menuItemDescriptionDisplayed' => array('textarea', array(
                         'required' => false,
                         'label' => $this->_translateCreator->_('Set Description'),
-                        'style' => 'width:200px;height:120px;',
+                        'class' => 'textarea w-full h-40',
                         'value' => $mi[0]['description'. "_" . $langCode]
                     )),
                     'contentId' => array('select', array(
                         'required' => false,
                         'label' => $this->_translateCreator->_('Choose Content'),
-                        'style' => 'width:200px;',
+                        'class' =>'select select-sm md:select-xs w-full',
                         'size' => '1',
                         'multioptions' => $contArray,
                         'value' => $mi[0]['content_id']
@@ -455,6 +460,7 @@ class MenuController extends NetActionController
                     )),
                     'editMenuItemSubmit' => array('submit', array(
                         'order' => 100,
+                        'class' => 'btn btn-xs text-primary',
                         'label' => $this->_translateCreator->_('Save'),
                         'value' => $this->_translateCreator->_('Submit')
                     ))
@@ -515,10 +521,11 @@ class MenuController extends NetActionController
                 'newMenuName' => array('text', array(
                     'required' => true,
                     'label' => $this->_translateCreator->_('New menu name'),
-                    'style' => 'width:100%;'
+                    'class' => 'input input-sm w-full'
                 )),
                 'addMenuSubmit' => array('submit', array(
                     'order' => 100,
+                    'class' => 'btn btn-xs btn-secondary w-full',
                     'label' => $this->_translateCreator->_('Add a Menu'),
                     'value' => $this->_translateCreator->_('Submit')
                 ))

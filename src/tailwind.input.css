@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#TB_ajaxContent {
+  @apply bg-primary;
+  height: 100% !important; /* override values set with javascript from thickbox.js */
+  width: 100% !important;
+}
+#TB_window a, #TB_window a:visited, #TB_window a:link {
+	@apply btn-primary text-base-content;
+}
+#TB_window a:hover {
+  @apply text-neutral;
+}
+#TB_window a.btn:hover {
+  @apply text-white;
+}
+.ui-tab-button {
+  @apply btn btn-sm btn-ghost bg-none bg-primary !important;
+}
+.ui-tab-button a {
+  @apply text-white !important;
+}
+.ui-tab-button.ui-state-active {
+  @apply bg-none bg-secondary !important;
+}

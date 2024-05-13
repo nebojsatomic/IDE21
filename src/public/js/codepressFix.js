@@ -1,5 +1,7 @@
 //CODEPRESS FIX
-codepressOff = false;
+//codepressOff = false;
+codepressOff = true; // codepress will have to be replaced with something new
+
 //if($.browser.mozilla == false) {
 //  codepressOff = true;
 //}

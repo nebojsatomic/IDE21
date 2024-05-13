@@ -31,7 +31,7 @@ echo $this->form;
 ?>
 <script type="text/javascript">
 
-$('#CatNameDivContainer').html('<form id="catNameForm" enctype="application/x-www-form-urlencoded" action="<?php echo $this->host;?>category/rename-cat/cid/<?php echo $this->cid;?>/" method="post"><dl class="zend_form"><dt><label for="catItems" class="optional">' + lang.CatNameTr + ':</label></dt><dd><input type="text" value="<?php echo $this->catName;?>" name="cat_name_lng" style="width:100%;" /><input type="submit" value="Save" style="float:right;" /></dd></dl></form>');
+$('#CatNameDivContainer').html('<form id="catNameForm" enctype="application/x-www-form-urlencoded" action="<?php echo $this->host;?>category/rename-cat/cid/<?php echo $this->cid;?>/" method="post"><dl class="zend_form"><dt><label for="catItems" class="optional">' + lang.CatNameTr + ':</label></dt><dd><input type="text" value="<?php echo $this->catName;?>" name="cat_name_lng" class="input input-sm w-full" /><input type="submit" value="Save" class="btn btn-xs mt-2" /></dd></dl></form>');
 $('#catNameForm').ajaxForm(function(data){
         ajaxEmitMessage(data);
         setTimeout("clickMask()", 1000); //closing all 

@@ -26,20 +26,21 @@
 ?>
 <?php require("css_browser_selector.php"); ?>
 <!DOCTYPE html>
-<html lang="en" class="<?php echo css_browser_selector() ?>">
+<html lang="en" class="<?php echo css_browser_selector() ?> ">
 <head>
   <meta name="keywords" content="<?php echo $this->meta_description;?>" />
   <meta name="description" content="<?php echo $this->meta_description;?>" />
   <meta name="generator" content="NeT" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo $this->title;?> - <?php echo $this->version;?> </title>
   <link rel="stylesheet" href="/css/creator/creator.css" type="text/css" />
   <link rel="stylesheet" href="/css/jdMenu/blue/jquery.jdMenu.css" type="text/css" />
   <link rel="stylesheet" href="/css/default.css" type="text/css" /><!--CSS written in admin panel-->
   <link rel="stylesheet" href="/css/backend.css" type="text/css" /><!--CSS written for the admin panel-->
-  <!--TABLE GRID STYLES-->
+  <!--TABLE GRID STYLES
   <link rel="stylesheet" type="text/css" media="screen" href="/js/jqgrid/themes/redmond/jquery-ui-1.7.1.custom.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="/js/jqgrid/themes/ui.jqgrid.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/js/jqgrid/themes/ui.jqgrid.css" />-->
   <!--treeView-->
   <link rel="stylesheet" href="/css/treeView/jquery.treeview.css" type="text/css" />
   <link rel="stylesheet" href="/css/treeView/screen.css" type="text/css" />
@@ -54,11 +55,17 @@
   <link type="text/css" href="/css/defaultWidgets.css" rel="stylesheet" />
   <!--themes for the objects-->
   <link type="text/css" href="/css/themes.css" rel="stylesheet" />
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/ide21logo.svg">
   <link rel="stylesheet" href="/css/uniform/css/uniform.aristo.css" media="screen" />
   <!-- Add fancyBox
   <link rel="stylesheet" href="<?php echo $this->host;?>fancybox/2/jquery.fancybox.css" type="text/css" media="screen" />-->
 
+
+  <!--<link href="/daisy/daisyui.full.min.css" rel="stylesheet" type="text/css" />-->
+  <link href="/css/tailwind.output.css" rel="stylesheet" type="text/css" />
+  <script src="/daisy/daisyui.tailwind.3.4.3.js"></script>
+
+  
   <script type="text/javascript" >
   absoluteUrl = "<?php echo $this->hostRW;?>";
   absoluteUrl2 = "<?php echo $this->host;?>";
@@ -82,6 +89,7 @@
   <!--dialog-->
   <script type="text/javascript" src="/js/jquery/ui.dialog.js"></script>
   <script type="text/javascript" src="/js/jquery/ui.position.js"></script>
+  <script type="text/javascript" src="/js/jquery/jquery.ui.touch-punch.min.js"></script>
 
   <script type="text/javascript" src="/js/jqgrid/js/jquery.contextmenu.js" ></script>
   <script type="text/javascript" src="/js/jquery/thickbox.js"></script>
@@ -93,18 +101,98 @@
   <script type="text/javascript" src="/fancybox/2/jquery.fancybox.js"></script>
   <?php echo $this->headScript(); ?>
 </head>
-<body style="font-size:11px ;font-family:Arial;background: transparent;">
+<body class="overflow-hidden">
+  <!-- top panel -->
+  <div class="navbar bg-neutral min-h-12 h-12 relative" style="z-index:999999;">
+    <div class="navbar-start flex gap-2 md:gap-4">
+      <!--<div class="dropdown">
+        <div tabindex="0" role="button" class="btn btn-sm btn-ghost btn-circle text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+        </div>
+        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+          <li><a>Homepage</a></li>
+          <li><a>Portfolio</a></li>
+          <li><a>About</a></li>
+        </ul>
+      </div>-->
+      <div id ="contPreview" class="hidden w-full h-auto absolute top-52 left-72 bg-white" style="z-index: 9999999;"></div><!-- z-index must be like this for now, since a lot of interaction with droppables relies on the order of elements, it should be rewritten to something more sensible, for all elements in the admin panel -->
+      <div id="toggleProperties"  class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-white" title="<?php echo $this->translate->_("Click to toggle properties box");?>">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path fill-rule="evenodd" d="M11.828 2.25c-.916 0-1.699.663-1.85 1.567l-.091.549a.798.798 0 0 1-.517.608 7.45 7.45 0 0 0-.478.198.798.798 0 0 1-.796-.064l-.453-.324a1.875 1.875 0 0 0-2.416.2l-.243.243a1.875 1.875 0 0 0-.2 2.416l.324.453a.798.798 0 0 1 .064.796 7.448 7.448 0 0 0-.198.478.798.798 0 0 1-.608.517l-.55.092a1.875 1.875 0 0 0-1.566 1.849v.344c0 .916.663 1.699 1.567 1.85l.549.091c.281.047.508.25.608.517.06.162.127.321.198.478a.798.798 0 0 1-.064.796l-.324.453a1.875 1.875 0 0 0 .2 2.416l.243.243c.648.648 1.67.733 2.416.2l.453-.324a.798.798 0 0 1 .796-.064c.157.071.316.137.478.198.267.1.47.327.517.608l.092.55c.15.903.932 1.566 1.849 1.566h.344c.916 0 1.699-.663 1.85-1.567l.091-.549a.798.798 0 0 1 .517-.608 7.52 7.52 0 0 0 .478-.198.798.798 0 0 1 .796.064l.453.324a1.875 1.875 0 0 0 2.416-.2l.243-.243c.648-.648.733-1.67.2-2.416l-.324-.453a.798.798 0 0 1-.064-.796c.071-.157.137-.316.198-.478.1-.267.327-.47.608-.517l.55-.091a1.875 1.875 0 0 0 1.566-1.85v-.344c0-.916-.663-1.699-1.567-1.85l-.549-.091a.798.798 0 0 1-.608-.517 7.507 7.507 0 0 0-.198-.478.798.798 0 0 1 .064-.796l.324-.453a1.875 1.875 0 0 0-.2-2.416l-.243-.243a1.875 1.875 0 0 0-2.416-.2l-.453.324a.798.798 0 0 1-.796.064 7.462 7.462 0 0 0-.478-.198.798.798 0 0 1-.517-.608l-.091-.55a1.875 1.875 0 0 0-1.85-1.566h-.344ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" clip-rule="evenodd" />
+        </svg>
+      </div>
+
+      <div id="newItem" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-white" title="<?php echo $this->translate->_("Click to create new object on this page");?>">
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path fill-rule="evenodd" d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875ZM12.75 12a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V18a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V12Z" clip-rule="evenodd" />
+          <path d="M14.25 5.25a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25Z" />
+        </svg>
+      </div>
+      <div id="cloneItem" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-white" title="<?php echo $this->translate->_("Click to create clone object");?>">
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path fill-rule="evenodd" d="M17.663 3.118c.225.015.45.032.673.05C19.876 3.298 21 4.604 21 6.109v9.642a3 3 0 0 1-3 3V16.5c0-5.922-4.576-10.775-10.384-11.217.324-1.132 1.3-2.01 2.548-2.114.224-.019.448-.036.673-.051A3 3 0 0 1 13.5 1.5H15a3 3 0 0 1 2.663 1.618ZM12 4.5A1.5 1.5 0 0 1 13.5 3H15a1.5 1.5 0 0 1 1.5 1.5H12Z" clip-rule="evenodd" />
+          <path d="M3 8.625c0-1.036.84-1.875 1.875-1.875h.375A3.75 3.75 0 0 1 9 10.5v1.875c0 1.036.84 1.875 1.875 1.875h1.875A3.75 3.75 0 0 1 16.5 18v2.625c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 0 1 3 20.625v-12Z" />
+          <path d="M10.5 10.5a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963 5.23 5.23 0 0 0-3.434-1.279h-1.875a.375.375 0 0 1-.375-.375V10.5Z" />
+        </svg>
+      </div>
+
+      <!--<div id="helpButton" class="help hidden btn btn-sm btn-ghost btn-circle text-white" title="<?php echo $this->translate->_("Click to toggle help");?>"></div>
+      <div id="helpDiv"  title=""><?php echo $this->translate->_("NeT.Creator Help");?></div>-->
+
+      <div id="delButton" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-white" title="<?php echo $this->translate->_("Click to delete selected object");?>">
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" >
+          <path fill-rule="evenodd" d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875ZM9.75 14.25a.75.75 0 0 0 0 1.5H15a.75.75 0 0 0 0-1.5H9.75Z" clip-rule="evenodd" />
+          <path d="M14.25 5.25a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25Z" />
+        </svg>
+      </div>
+
+      <div id="updateContentButton" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-white" title="<?php echo $this->translate->_("Click this to update the content of the selected object") . " after editing in tinyMCE.";?>"> <a id="tinySave" href=""  class="navLinks a_refresh noAjaxEvent help" title="<?php echo $this->translate->_("Click this to update the content of the selected object");?>">
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd" />
+        </svg>
+      </a></div>
+      
+      <!-- <div id="moveProps" class="help" title="<?php echo $this->translate->_("Click to move around properties dialog");?>">
+        <button id="upB"></button> <button id="downB"></button>
+      </div> -->
+    </div>
+    <div class="navbar-center hidden md:flex w-8 ">
+      <!--<img alt="IDE21 Logo" src="/images/ide21logo.svg">-->
+    </div>
+    <div class="navbar-end flex gap-2">
+      <div class="dropdown" style="z-index:9;">
+        <div tabindex="0" role="button" class="btn btn-sm min-h-8 h-8 w-8 rounded-full">
+          <svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg>
+        </div>
+        <ul tabindex="0" class="dropdown-content z-[99] p-2 shadow-2xl bg-base-300 rounded-box w-20">
+          <!--<li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="System" value="default"/></li>-->
+          <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Nord" value="nord"/></li>
+          <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Retro" value="retro"/></li>
+        </ul>
+      </div>
+      <div id="logout" class="help btn btn-sm btn-ghost btn-circle text-white mx-2 cursor-pointer" title="<?php echo $this->translate->_("Click to logout");?>">
+        <a id="logout_a" class="a_logout" href="<?php echo $this->host;?>creator/logout" >
+          <svg class="w-6 h-6 rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd" d="M16.5 3.75a1.5 1.5 0 0 1 1.5 1.5v13.5a1.5 1.5 0 0 1-1.5 1.5h-6a1.5 1.5 0 0 1-1.5-1.5V15a.75.75 0 0 0-1.5 0v3.75a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V5.25a3 3 0 0 0-3-3h-6a3 3 0 0 0-3 3V9A.75.75 0 1 0 9 9V5.25a1.5 1.5 0 0 1 1.5-1.5h6ZM5.78 8.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 0 0 0 1.06l3 3a.75.75 0 0 0 1.06-1.06l-1.72-1.72H15a.75.75 0 0 0 0-1.5H4.06l1.72-1.72a.75.75 0 0 0 0-1.06Z" clip-rule="evenodd" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- end top panel -->
+
   <div id="ajax-loader"></div>
-  <div id="dialogDiv"></div>
+  <div id="dialogDiv" class="bg-primary text-primary-content"></div>
   <div id ="container">
     <div id="content">
+      <div id="templateMask"></div>
       <?php
       echo $this->layout()->content;
       ?>
     </div>
   </div>
   <script type="text/javascript" src="/js/codepressFix.js" ></script>
-  <script type="text/javascript" src="/js/codepress/codepress.js" ></script>
+  <!--<script type="text/javascript" src="/js/codepress/codepress.js" ></script>-->
   <script type="text/javascript">
   $(document).ready(function() {
     //$('select, input, textarea').livequery(function(){$(this).uniform();});

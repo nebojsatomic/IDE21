@@ -52,6 +52,8 @@ function dialog(){
 
   $( "#dialogDiv" ).dialog({modal:false, resizable: false, title:$('.currentTitle').text() });
 }
+
+/* //tinyMCE should be replaced */
 //tinyMCE INIT
 tinyMCE.init({
   // add these two lines for absolute urls
@@ -104,13 +106,14 @@ function ajaxEvent(){
 }
 message = "";
 function ajaxEventDone(message){
-  $('body').append('<div id="ajaxEventMessage"  style="position:fixed;display:none;top:0; left:0;opacity:0.9;background:white;margin:20% 40%;padding:30px;width:300px;height:50px;border-radius:10px;z-index:999999;">' +  message + '<img src="'+ absoluteUrl2 +'images/ajax-loader2.gif" style="float:right;" /></div>');
+  //$('body').append('<div id="ajaxEventMessage"  style="position:fixed;display:none;top:0; left:0;opacity:0.9;background:white;margin:20% 40%;padding:30px;width:300px;height:50px;border-radius:10px;z-index:999999;">' +  message + '<img src="'+ absoluteUrl2 +'images/ajax-loader2.gif" style="float:right;" /></div>');
+  $('body').append('<div id="ajaxEventMessage" role="alert" class="fixed inset-0 w-72 h-24 mx-auto my-auto alert alert-success bg-accent text-accent-content"  style="display:none;opacity:0.9;z-index:999999;"><svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>' +  message + '</span></div>');
   $('#ajaxEventMessage').fadeIn(1000);
   setTimeout("$('#ajaxEventMessage').fadeOut()", 2000);
 }
 
 function ajaxEmitMessage(emitMessage){
-  $('#ajaxEventMessage').html(  emitMessage + '<img src="'+ absoluteUrl2 +'images/interface/ajaxDone.png" style="float:right;" />');
+  $('#ajaxEventMessage').html( '<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>' + emitMessage + '</span>');
   setTimeout("$('#ajaxEventMessage').fadeOut()", 1000);
 }
 
@@ -441,7 +444,8 @@ $(document).ready(function(){
   }
 
   $('#droppable').resizable({autohide:true});
-  $('#templateMask').css({left:$('#droppable').offset().left + "px"});
+  //$('#templateMask').css({left:$('#droppable').offset().left + "px"});
+  //$('#templateMask').appendTo($('#droppable')).css({left: "0px"});
 
   //when clickin on a link that starts an ajax action
   $('.navLinks:not(".noAjaxEvent")').livequery('click', function(){
@@ -468,17 +472,20 @@ $(document).ready(function(){
   $('#tinySave').click(function(){
     var ed = tinyMCE.get('objPropertiesHtmlTiny');
     newContent = tinyMCE.get('objPropertiesHtmlTiny').getContent();
-    $('#' + $('#objIDshow').html() + ' p.objContent').each(function(){
-      $(this).remove();
-    });
 
-    $('#' + $('#objIDshow').html() ).resizable('destroy');//stop resizable
+    if($('#objIDshow').html() != '') { // only if object is selected
+      $('#' + $('#objIDshow').html() + ' p.objContent').each(function(){
+        $(this).remove();
+      });
 
-    $('#' + $('#objIDshow').html()).html(newContent + "\n\n\n");//update html of the object
+      $('#' + $('#objIDshow').html() ).resizable('destroy');//stop resizable
 
-    $('#' + $('#objIDshow').html() ).dblclick();
+      $('#' + $('#objIDshow').html()).html(newContent + "\n\n\n");//update html of the object
 
-    $('#' + $('#objIDshow').html() ).resizable({autohide:true});//resizable again
+      $('#' + $('#objIDshow').html() ).dblclick();
+
+      $('#' + $('#objIDshow').html() ).resizable({autohide:true});//resizable again
+    }
   });
 
 
@@ -595,20 +602,17 @@ $(document).ready(function(){
 
   propPos = "visible" ;
   $('#propertiesLeft').fadeOut(4000);
-  $('#contProperties').css({width:"auto", right:"0px", bottom:"0px"});
+  //$('#contProperties').css({width:"auto", right:"0px", bottom:"0px"});
   $('#toggleProperties').livequery('click', function(){
 
     if(propPos == "hidden") {
-      $('#properties').animate({marginRight:0 });
-      $('#properties').fadeIn(1500);
+      $('#contProperties').animate({marginRight:0 });
+      $('#contProperties').css({display: "grid"}).animate({marginRight:0 });
       propPos = "visible" ;
     } else {
-      $('#properties').fadeOut(1500);
-      $('#properties').animate({marginRight:-($('#properties').width()-5 )});
+      $('#contProperties').animate({marginRight:-($('#properties').width()-5 )}).css({display: "none"});
       propPos = "hidden" ;
     }
-
-
 
   });
 
@@ -669,6 +673,7 @@ $(document).ready(function(){
     $('#' + $(this).attr("value") ).dblclick();
   });
   //MOVING AROUND PROPERTIES BOX
+/*
   $("#rightB").click(function(){
     $("#contProperties").animate({"right": "-=100px"}, "slow");
   });
@@ -683,7 +688,7 @@ $(document).ready(function(){
   $("#downB").click(function(){
     $("#contProperties").animate({"top": "+=100px"}, "slow");
   });
-
+*/
   //CREATING NEW OBJECT!
   $('#newItem').livequery('click', function(){
     var now = new Date();
@@ -703,7 +708,7 @@ $(document).ready(function(){
       droppableContainer = "#droppable";
     }
 
-    $(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" style="position:absolute;border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
+    $(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" style="position:absolute;border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent" contenteditable >NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
 
     //IF CONTAINER ON, THEN ADD class IN THE CURRENT OBJECT, ELSE the same
     if (objContainer == 1) {
@@ -941,7 +946,7 @@ $(document).ready(function(){
     const openPageDialogUniqueId = Date.now();
     $('#openPageForm').remove();
     $('.dialogDiv').remove();
-    $('body').append('<div class="dialogDiv" id="dialogDiv_' + openPageDialogUniqueId + '" style="background: silver;"></div>');
+    $('body').append('<div class="dialogDiv bg-accent text-accent-content" id="dialogDiv_' + openPageDialogUniqueId + '" ></div>');
     //$('#dialogDiv').draggable();
     $('#dialogDiv_' + openPageDialogUniqueId).html( $('#adminAjaxLoader').html() );
     //dialog();
@@ -1130,7 +1135,7 @@ $(document).ready(function(){
   $('#applyTemplate').click(function(){
     $('#dialogDiv').remove();
 
-    $('body').append('<div id="dialogDiv"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     dialog();
     $.get(absoluteUrl + "page/choose-template", function(data){
@@ -1150,7 +1155,7 @@ $(document).ready(function(){
     // ajaxEventDone(lang.TOpen);//sklanjanje maska
     $('#templateIDediting').html($(this).attr("value"));
     document.cookie = 'templateSelectedId=' + $(this).attr("value") + ';  path=/'; //ovo treba namestiti
-    $('#dialogDiv').hide('slow').remove();//ovo je za removovanje dijaloga MUST
+    $('#dialogDiv').hide('slow').remove();// removing dialog - MUST
   });
 
 
@@ -1588,7 +1593,7 @@ $('#aParamCorner').livequery('click', function(){
   if($('#cornerCheck').prop('checked') ){
     ajaxEvent();
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     $.get(absoluteUrl + "creator/corner-params" , function(data){
@@ -1706,7 +1711,7 @@ $('#aParamShadow').livequery('click', function(){
   if($('#shadowCheck').prop('checked') ){
     ajaxEvent();
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     $.get(absoluteUrl + "creator/shadow-params" , function(data){
@@ -1856,7 +1861,7 @@ $('#addImageLink').livequery('click', function(){
   } else {
     ajaxEvent();
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -1882,7 +1887,7 @@ $('#addImageLink').livequery('click', function(){
 //Add FOLDER
 $('#addFolderLink').livequery('click', function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -1977,13 +1982,13 @@ $('#showFolderImages').livequery('change', function(){
   $('#imagePathShow').html(imagePath);
 
   if($( "#dialogDivImages" ).length == 0){
-    $('body').append('<div id="dialogDivImages"><div id="imageDetails"></div></div>');
+    $('body').append('<div id="dialogDivImages" class="bg-accent text-accent-content w-full h-full"><div id="imageDetails"></div></div>');
     $( "#dialogDivImages" ).dialog({modal:false, resizable: true, position: ['center','center'], title:"Image Details" , maxHeight:$(window).height() });
     $('#imageDetails').appendTo($('#dialogDivImages') );
   }
   if($('#imageDetails').length == 0){
     $('#dialogDivImages').remove();
-    $('body').append('<div id="dialogDivImages"><div id="imageDetails"></div></div>');
+    $('body').append('<div id="dialogDivImages" class="bg-accent text-accent-content w-full h-full"><div id="imageDetails"></div></div>');
     $( "#dialogDivImages" ).dialog({modal:false, resizable: true, position: ['center','center'], title:"Image Details" , maxHeight:$(window).height() });
     $('#dialogDivImages') .append('<div id="mageDetails"></div>');
   } else{
@@ -2136,7 +2141,7 @@ $('#categoryNameAssign').livequery('change', function(){
 //Add CATEGORY
 $('#addCategoryLink').livequery('click', function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -2181,7 +2186,7 @@ $('#addCategoryItemLink').livequery('click', function(){
   hrefVal = $(this).attr("href");
   if(selCategory != ""){
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     $.get(absoluteUrl + hrefVal +"/catid/" + selCategory, function(data){
@@ -2296,7 +2301,7 @@ $('#chooseCategoryForm').change(function(){
 //Add A MENU
 $('#addMenuLink').livequery('click', function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -2348,7 +2353,7 @@ $('#chooseMenuForm').change(function(){
 //Add MENU ITEM
 $('#addMenuItemLink').livequery('click', function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   mid = $('#menuName').attr("value");
@@ -2511,7 +2516,7 @@ $('#menuNameAssign').livequery('change', function(){
 
   menuSelected = $('#' + $(this).attr("id") + " option:selected").attr("value");
   if (menuSelected != "select"){
-    $('body').append('<div id="dialogDiv"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -2776,7 +2781,7 @@ $('a.uniTableAdmin').livequery('click', function(){
 
     //$('#addRowForm').remove();
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -2803,7 +2808,7 @@ $('a.uniTableAdmin').livequery('click', function(){
     //var rowId = "5";
     $('#editRowForm').remove();
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     $.get(absoluteUrl + "tables/edit-row/tableid/" + tableid + "/rowid/" + rowId, function(data){
@@ -3126,7 +3131,7 @@ $('#restrictiveCB').livequery('click', function(){
 $('#openPagePermisions').livequery('click', function(){
   $('#permissionsForm').remove();
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   pageId = $('#pgID').html();
@@ -3425,7 +3430,7 @@ $('.setPermissionsAll').livequery('click',function(){
     }
   });
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv" style="z-index:999999 !important;"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content" style="z-index:999999 !important;"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   $.get(absoluteUrl + "page/set-permissions/pids/" + ar , function(data) {
@@ -3446,7 +3451,7 @@ $('.exportToFTP').livequery('click',function(){
       ar.push($(this).attr('value'));
     }
   });
-  $('body').append('<div id="dialogDiv" style="z-index:9999999"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content" style="z-index:9999999"></div>');
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   $.get(absoluteUrl + "exportsite/export-pages/pids/" + ar , function(data) {
     $('#dialogDiv').html(data);
@@ -3503,7 +3508,7 @@ $('#rotate select').each(function(){
 //editModules link - dealing with module settings
 $('#editModulesLink').livequery('click', function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   $('#dialogDiv').show();
@@ -3523,9 +3528,20 @@ $('#ftpform').livequery(function(){
 });
 
 $('#objList option').livequery('dblclick', function(){
-  //console.log('a');
   //$('#objPropertiesHtmlTiny_fullscreen').click();
   tinyMCE.execCommand('mceFullScreen');
+});
+
+/* tinyMCE should be replaced with something new, atm do this fix */
+$('#penPointer').livequery('click', function(){
+  tinyMCE.execCommand('mceFullScreen');
+  /*$('body').livequery('click', function(){
+    setTimeout(function(){//set timeout to detect out of fullscreen
+      if($('#mce_fullscreen').length < 1 ) {
+        $('#tinySave').trigger('click'); // trigger update of the el in the template/page
+      }
+    }, 500);
+  });*/
 });
 
 //FULSCREEN ZA CODEPRESS
@@ -3642,7 +3658,7 @@ fsButton3.addEventListener('click', function() {
 //Exporting a template for use on another server
 $('#exportTemplate').click(function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -3658,7 +3674,7 @@ $('#exportTemplate').click(function(){
 //Installing exported template
 $('#installTemplate').click(function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   // $('#dialogDiv').show();
@@ -3705,7 +3721,7 @@ $('input[type="checkbox"]').livequery(function(){
 
 });
 
-$('#contProperties').draggable();
+//$('#contProperties').draggable(); // remove dragging of the properties in daisyui upgrade
 
 $('#enableModulesLink').click(function(){
   url = $(this).attr('href');

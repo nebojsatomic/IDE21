@@ -52,11 +52,8 @@ class ImagesController extends NetActionController
 
     }
 
-
-
     public function indexAction()
     {
-
 
     }
 
@@ -71,7 +68,6 @@ class ImagesController extends NetActionController
         return $exts;
     }
 
-
     public function uploadAction()
     {
         $this->_helper->layout()->disableLayout();
@@ -84,62 +80,59 @@ class ImagesController extends NetActionController
         $i = 1;
         if ($this->_request->isPost() && $formUploadImages->isValid($_POST)) {
 
-             $adapter = new Zend_File_Transfer_Adapter_Http();
+            $adapter = new Zend_File_Transfer_Adapter_Http();
+
+            $tempFile = $_FILES["uploadImageName"]["tmp_name"];
+
+            //echo $tempFile;
+            //moving image
+            $uploaddir = NET_PATH_SITE . "images/" . $folder . "/";
+            $ext = $this->findexts($_FILES["uploadImageName"]['name']);
+            $timedName = time() . $i . "." . $ext;
+            $timedName = $_FILES["uploadImageName"]['name'];
+            $uploadfile = $uploaddir . $timedName;
+
+            move_uploaded_file($_FILES["uploadImageName"]['tmp_name'], $uploadfile );
 
 
-                        $tempFile = $_FILES["uploadImageName"]["tmp_name"];
-                        //print_r($_FILES);
-                        echo $tempFile;
-                        //moving image
-                        $uploaddir = NET_PATH_SITE . "images/" . $folder . "/";
-                        $ext = $this->findexts($_FILES["uploadImageName"]['name']);
-                        $timedName = time() . $i . "." . $ext;
-                        $timedName = $_FILES["uploadImageName"]['name'];
-                        $uploadfile = $uploaddir . $timedName;
+            //generate thumbs
+            //$fname = $timedName;
+            $fname = $_FILES["uploadImageName"]['name'];
 
-                        move_uploaded_file($_FILES["uploadImageName"]['tmp_name'], $uploadfile );
+            if ($ext == "jpg") {$ext = "jpeg";}
+            $command = "imagecreatefrom" . $ext;//imagecreatefromjpeg/gif/png
 
+            // load image and get image size
+            $img = $command( "{$uploadfile}" );
+            $width = imagesx( $img );
+            $height = imagesy( $img );
 
-                        //generate thumbs
-                        //$fname = $timedName;
-                        $fname = $_FILES["uploadImageName"]['name'];
+            // calculate thumbnail size
+            $new_width = floor($width * (100/$height));
+            if ($new_width > 110) {
+                $new_width = 110;
+            }
+            $new_height = floor($height * (110/$width));
+            if ($new_height > 100) {
+                $new_height = 100;
+            }
+            $tmp_img = imagecreatetruecolor( $new_width, $new_height );
+            // copy and resize old image into new image
+            imagecopyresized( $tmp_img, $img, 0, 0, 0, 0, $new_width, $new_height, $width, $height );
 
-                        if ($ext == "jpg") {$ext = "jpeg";}
-                        $command = "imagecreatefrom" . $ext;//imagecreatefromjpeg/gif/png
+            $command = "image" . $ext;//imagejpeg/gif/png
+            $command( $tmp_img, "{$uploaddir}thumb_" . "{$fname}" );
 
-                        // load image and get image size
-                        $img = $command( "{$uploadfile}" );
-                        $width = imagesx( $img );
-                        $height = imagesy( $img );
-
-                        // calculate thumbnail size
-                        $new_width = floor($width * (100/$height));
-                        if ($new_width > 110) {
-                            $new_width = 110;
-                        }
-                        $new_height = floor($height * (110/$width));
-                        if ($new_height > 100) {
-                            $new_height = 100;
-                        }
-                        $tmp_img = imagecreatetruecolor( $new_width, $new_height );
-                        // copy and resize old image into new image
-                        imagecopyresized( $tmp_img, $img, 0, 0, 0, 0, $new_width, $new_height, $width, $height );
-
-                        $command = "image" . $ext;//imagejpeg/gif/png
-                        $command( $tmp_img, "{$uploaddir}thumb_" . "{$fname}" );
-
-
-
-                    if (!$adapter->receive()) {
-                        $messages = $adapter->getMessages();
-                        echo implode("\n", $messages);
-                    }
+            if (!$adapter->receive()) {
+                $messages = $adapter->getMessages();
+                //echo implode("\n", $messages);
+            }
         } else {
             $this->view->formUploadImages = $formUploadImages;
         }
 
-
     }
+
     /*
     * Displays add folder form
     */
@@ -156,11 +149,12 @@ class ImagesController extends NetActionController
                 'uploadImageName' => array('file', array(
                     'required' => true,
                     'label' => $this->_translateCreator->_('Browse an image'),
-                    'style' => 'width:100%;'
+                    'class' => 'input input-sm w-full'
                 )),
                 'uploadImageSubmit' => array('submit', array(
                     'order' => 100,
                     'label' => $this->_translateCreator->_('Upload'),
+                    'class' => 'btn btn-xs btn-secondary w-full',
                     'value' => $this->_translateCreator->_('Submit')
                 ))
 
@@ -180,8 +174,7 @@ class ImagesController extends NetActionController
 
 
         $this->view->imageDetail = $imageName;
-         $this->view->imageDetailFolder = $folder;
-
+        $this->view->imageDetailFolder = $folder;
 
     }
 
@@ -210,13 +203,7 @@ class ImagesController extends NetActionController
             $this->view->formAddFolder = $formAddFolder;
         }
 
-
-
-
-
     }
-
-
 
     /*
     * Displays add folder form
@@ -232,11 +219,12 @@ class ImagesController extends NetActionController
                 'newFolderName' => array('text', array(
                     'required' => true,
                     'label' => $this->_translateCreator->_('New folder name'),
-                    'style' => 'width:100%;'
+                    'class' => 'input input-sm w-full',
                 )),
                 'addFolderSubmit' => array('submit', array(
                     'order' => 100,
                     'label' => $this->_translateCreator->_('Add a Folder'),
+                    'class' => 'btn btn-xs btn-secondary w-full',
                     'value' => 'Submit'
                 ))
 
@@ -246,14 +234,10 @@ class ImagesController extends NetActionController
 
     }
 
-
-
     /**
-     *Deletes a folder
-     *
-     */
-
-
+    *Deletes a folder
+    *
+    */
     public function deleteFolderAction()
     {
         $this->_helper->layout()->disableLayout();
@@ -281,13 +265,10 @@ class ImagesController extends NetActionController
 
     }
 
-
     /**
      *Deletes image
      *
      */
-
-
     public function deleteImageAction()
     {
         $this->_helper->layout()->disableLayout();
@@ -376,7 +357,7 @@ class ImagesController extends NetActionController
                     'imageNames' => array('select', array(
                         'required' => true,
                         'label' => $this->_translateCreator->_('Choose image'),
-                        'style' => 'width:200px;',
+                        'class' => 'select min-h-32 w-full px-2',
                         'size' => '8',
                         'multioptions' => $folderArray,
                     )),
@@ -385,7 +366,6 @@ class ImagesController extends NetActionController
 
             return $form;
         }
-
 
     }
 

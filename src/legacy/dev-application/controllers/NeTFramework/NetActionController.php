@@ -59,7 +59,7 @@ class NetActionController extends Zend_Controller_Action
     protected $_cacheEnabled = 1;
     protected $_commentsAuto = 1;//should comments be auto added to each page or manual(0) - if there is no value from settings table, this is used
     protected $_insideContentArea = true;//if objects should be absolute(false), or inside the content area only(true)
-    protected $_version = "Ver. 0.1L";
+    protected $_version = "Ver. 24.05";
     protected $_translateCreator;
     protected $_translate = null;
     protected $translator = null;
@@ -537,7 +537,6 @@ class NetActionController extends Zend_Controller_Action
      */
     public function renderToTable($table, $justCols = null, $addTitle = null, $actions = null)
     {
-        echo 'table' . $table;
         $db = Zend_Registry::get('db');
         $urlRewrite = Zend_Registry::get('urlRewrite');
         $themePath = NET_PATH . "widgets/";
