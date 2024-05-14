@@ -58,5 +58,5 @@ return array(
 
 "Please verify you're a human" => "Molimo Vas da upišete kod sa slike",
 "Captcha value is wrong" => "Captcha vrednost je pogrešna",
-"CMS-IDE current projects" => "CMS-IDE sadašnji projekti",
+"IDE21 current projects" => "IDE21 sadašnji projekti",
 );

@@ -44,6 +44,6 @@ return array(
 "Welcome Guest" => "Willkomen Gast",
 "Please verify you're a human" => "Bitte überprüfen Sie ein Mensch",
 "Captcha value is wrong" => "Captcha ist nicht richtig!",
-"CMS-IDE current projects" => "CMS-IDE bisher projekte",
+"IDE21 current projects" => "IDE21 bisher projekte",
 "Read more" => "Weitere informationen",
 );

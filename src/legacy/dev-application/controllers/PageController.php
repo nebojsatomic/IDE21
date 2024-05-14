@@ -1,26 +1,16 @@
 <?php
 /**
- * CMS-IDE Visual CMS
+ * IDE21 Content Management System
  *
  * @category   PageController
- * @package    CMS-IDE
- *  Copyright (C) 2010-2021  Nebojsa Tomic
+ * @package    IDE21
+ *  Copyright (C) 2010-present  Nebojsa Tomic (nebojsatmc@gmail.com)
  *
- *  This file is part of CMS-IDE.
+ *  This file is part of IDE21.
  *
- *  CMS-IDE is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Lesser General Public
- *  License as published by the Free Software Foundation; either
- *  version 3 of the License, or (at your option) any later version.
- *
- *  CMS-IDE is distributed in the hope that it will be useful,
+ *  IDE21 is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Lesser General Public License for more details.
- *
- *  You should have received a copy of the GNU Lesser General Public
- *  License along with this library; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  *
  *
@@ -921,7 +911,7 @@ class PageController extends NetActionController
 
       	$res = $db->fetchAll("SELECT title, output, bodyBg, staticFiles FROM templates_$langCode  WHERE id = ?", array($id));
 
-        //echo 'Here should come code for exporting template '  . $values['id'] . ' for use on another installation of CMS-IDE.' ;
+        //echo 'Here should come code for exporting template '  . $values['id'] . ' for use on another installation of IDE21.' ;
         //print_r($res);
         $fields = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
         $fields .= '<template>' . "\n";
@@ -998,7 +988,7 @@ class PageController extends NetActionController
         $formUploadTemplate = $this->_installTemplateForm();
 
         //here should come code for installing of the exported template
-        //echo 'Here should come code for installing template from another installation of CMS-IDE.' ;
+        //echo 'Here should come code for installing template from another installation of IDE21.' ;
         if ($this->_request->isPost() && $formUploadTemplate->isValid($_POST) ) {
 
             try { $adapter = new Zend_File_Transfer_Adapter_Http();
