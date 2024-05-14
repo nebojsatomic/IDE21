@@ -59,5 +59,5 @@ return array(
 
 "Please verify you're a human" => "S'il vous plaît vérifiez que vous n'êtes pas une machine",
 "Captcha value is wrong" => "Captcha valeur est fausse",
-"CMS-IDE current projects" => "CMS-IDE projets en cours",
+"IDE21 current projects" => "IDE21 projets en cours",
 );
