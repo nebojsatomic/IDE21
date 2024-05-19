@@ -21,19 +21,20 @@ li {
 .draggable {
   cursor: pointer;
   position: absolute;
+  /*position:static;*/
   width: auto;
   min-height: 25px;
   height: auto;
   background: transparent;
   padding: 0px;
-  float: left;
+/*  float: left;
   color: black;
-  overflow: hidden;
+  overflow: hidden;*/
 }
 
 .draggable:hover {
   cursor: move;
-  opacity: 0.7;
+  opacity: 0.95;
 }
 
 .container {
@@ -130,9 +131,9 @@ span.ui-button-text {
   /*width: 70%;*/
   height: auto;
   min-height: 100vh;
-  background: white;
+  /*background: white;*/
   padding: 0px;
-  border: 2px dotted lightblue;
+  /*border: 2px dotted lightblue;*/
   margin: 0 auto;
 }
 
@@ -317,8 +318,9 @@ span.ui-button-text {
 
 #contProperties #tabs-navigation {
   padding: 0.25rem;
-  /*position: fixed;*/
-  position: absolute;
+  /*position: fixed;
+  bottom:0;*/
+  /*position: absolute;*/
   z-index: 9;
 }
 
@@ -521,12 +523,12 @@ span.ui-button-text {
 
 .activeObject {
   opacity: 1;
-  border: 1px solid red;
+/*  border: 1px solid red;*/
 }
 
 .inactiveObject {
-  opacity: 0.2;
-  filter: alpha(opacity=20)
+/*  opacity: 0.2;
+  filter: alpha(opacity=20)*/
 }
 
 .universalTableAdmin {
@@ -561,30 +563,30 @@ span.ui-button-text {
 }
 
 input {
-  border: 1px solid #cccccc;
-  background: #E6E6E6;
+/*  border: 1px solid #cccccc;
+  background: #E6E6E6;*/
   font-size: 12px;
   font-family: Arial;
 }
 
 textarea {
-  background: #E6E6E6;
-  border: 1px solid #cccccc;
+/*  background: #E6E6E6;
+  border: 1px solid #cccccc;*/
   font-size: 12px;
   font-family: Arial;
 }
 
 select {
-  background: #E6E6E6;
+/*  background: #E6E6E6;
   border: 1px solid #cccccc;
-  width: 150px;
+  width: 150px;*/
   font-size: 12px;
   font-family: Arial;
 }
 
 input[type=checkbox] {
-  background: #E6E6E6;
-  border: 1px solid #cccccc;
+/*  background: #E6E6E6;
+  border: 1px solid #cccccc;*/
 }
 
 #rotate input {
@@ -612,8 +614,8 @@ input[type=checkbox] {
 }
 
 #rotate textarea {
-  background: #E6E6E6;
-  border: 1px solid #cccccc;
+/*  background: #E6E6E6;
+  border: 1px solid #cccccc;*/
 }
 
 #rotate select {
@@ -622,8 +624,8 @@ input[type=checkbox] {
 }
 
 #rotate input[type=checkbox] {
-  background: #E6E6E6;
-  border: 1px solid #cccccc;
+/*  background: #E6E6E6;
+  border: 1px solid #cccccc;*/
 }
 
 #rotate input[type=submit] {

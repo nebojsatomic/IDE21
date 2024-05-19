@@ -44,7 +44,8 @@
   <link type="text/css" href="/css/jqUI/ui.all.css" rel="stylesheet" />
   <link type="text/css" href="/css/defaultWidgets.css" rel="stylesheet" />
   <!--themes for the objects-->
-  <link type="text/css" href="/css/themes.css" rel="stylesheet" />
+<!--<link type="text/css" href="/css/themes.css" rel="stylesheet" />
+-->
   <link rel="shortcut icon" type="image/x-icon" href="/images/ide21logo.svg">
   <link rel="stylesheet" href="/css/uniform/css/uniform.aristo.css" media="screen" />
   <!-- Add fancyBox
@@ -52,7 +53,7 @@
 
 
   <!--<link href="/daisy/daisyui.full.min.css" rel="stylesheet" type="text/css" />-->
-  <link href="/css/tailwind.output.css" rel="stylesheet" type="text/css" />
+  <link href="/css/tailwind.output.css?rnd=<?php echo rand();?>" rel="stylesheet" type="text/css" />
   <script src="/daisy/daisyui.tailwind.3.4.3.js"></script>
 
   
@@ -93,7 +94,7 @@
 </head>
 <body class="overflow-hidden">
   <!-- top panel -->
-  <div class="navbar bg-neutral min-h-12 h-12 relative" style="z-index:999999;">
+  <div id="creator-header-navbar" class="navbar bg-neutral min-h-16 h-16 relative" style="z-index:999999;">
     <div class="navbar-start flex gap-2 md:gap-4">
       <!--<div class="dropdown">
         <div tabindex="0" role="button" class="btn btn-sm btn-ghost btn-circle text-white">
@@ -150,6 +151,17 @@
       <!--<img alt="IDE21 Logo" src="/images/ide21logo.svg">-->
     </div>
     <div class="navbar-end flex gap-2">
+
+      <div id="p_t_common" class="noAjaxEvent grid grid-cols-2 item-strech items-center h-6 text-white px-8">
+        <div class="col-span-2 grid-cols-2 grid justify-items-center gap-2">
+          <span><input id="pageDisplayer" class="noAjaxEvent help radio-sm" type="radio" name="p_g" value="pageEditing" checked="checked" title="<?php echo $this->translate->_("Page creating Mode");?>" /></span>
+          <span><input  id="templateDisplayer" class="noAjaxEvent help radio-sm" type="radio" name="p_g" value="templateEditing" title="<?php echo $this->translate->_("Template creating Mode");?>" /></span>
+        </div>
+        <div id="p_t-label" class="text-white col-span-2 justify-items-between text-center">
+          <span id="p_t-label-page" class="hidden"><?php echo $this->translate->_("Page");?></span>
+          <span id="p_t-label-template" class="hidden"><?php echo $this->translate->_("Template");?></span>
+        </div>
+      </div>
       <div class="dropdown" style="z-index:9;">
         <div tabindex="0" role="button" class="btn btn-sm min-h-8 h-8 w-8 rounded-full">
           <svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg>

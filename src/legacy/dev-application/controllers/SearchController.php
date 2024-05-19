@@ -277,7 +277,7 @@ class SearchController extends NetActionController
                     'required' => true,
                     'filters' => array('Alnum'),
                     'value' => $translator->_('Search'),
-                    'class' => 'searchinput'
+                    'class' => 'searchinput input input-sm'
                 )),
                 'submitSearch' => array('submit', array(
                     'label' => '',

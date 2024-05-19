@@ -16,6 +16,9 @@
 #TB_window a.btn:hover {
   @apply text-white;
 }
+#TB_title {
+  @apply bg-neutral-content !important;
+}
 .ui-tab-button {
   @apply btn btn-sm btn-ghost bg-none bg-primary !important;
 }
@@ -25,3 +28,14 @@
 .ui-tab-button.ui-state-active {
   @apply bg-none bg-secondary !important;
 }
+.ui-dialog-titlebar.ui-widget-header {
+  @apply bg-none bg-neutral-content border-0 !important;
+}
+.ui-dialog {
+  @apply shadow-lg bg-neutral-content !important;
+}
+
+#mce_fullscreen_container {
+  @apply top-12 h-dvh overflow-auto pb-12 !important;
+}
+

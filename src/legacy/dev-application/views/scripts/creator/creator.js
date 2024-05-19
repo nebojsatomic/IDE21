@@ -70,9 +70,13 @@ tinyMCE.init({
 
 });
 
-function doLightBox()
-{
+// change behaviour of edit object button from version 24.05: this button and some other buttons should appear above the currently selected object
+function showEditObjectButtons(obj){
+  // place pointer above the selected object on the top left
+  $('#penPointer').css({left: $('#'+ obj ).position().left + 'px',top: $('#'+ obj ).position().top + 60 + 'px'}).fadeIn();
+}
 
+function doLightBox(){
   //LB u slideu  mora opet
   $('#manageAllPages').livequery('click', function(){
     $('.TB_overlayBG').css({zIndex:"999997"});
@@ -80,8 +84,7 @@ function doLightBox()
   });
 }
 
-function saveCSSandJS()
-{
+function saveCSSandJS(){
   if(codepressOff == true) {
     $('#pageCSSC').attr("value", $('#pageCSS').attr("value") );
     $('#pageJSC').attr("value", $('#pageJS').attr("value") );
@@ -156,8 +159,7 @@ function redrawMenus(){
 
 }
 
-function showConfirm(linkId)
-{
+function showConfirm(linkId){
   var r = confirm(lang.AYS);
   if (r == true){
     alert($('#' + linkId).attr("href") );
@@ -167,8 +169,7 @@ function showConfirm(linkId)
   }
 }
 
-function floatProperties()
-{
+function floatProperties(){
   var name = "#contProperties";
   var menuYloc = null;
 
@@ -203,8 +204,7 @@ function refreshManageAllPagesTable()
 
 }
 
-function templateReopenAfterLanguage()
-{
+function templateReopenAfterLanguage(){
 
   if($('#templateMask').length < 1){
     $('body').append('<div id="templateMask"></div>');
@@ -252,25 +252,22 @@ function templateReopenAfterLanguage()
 
 
 }
-//body streching depending on the temlate, -moz-background-size
-function bodyStrech()
-{
-  $("body").css("-moz-background-size" , "100%");
+//body streching depending on the temlate
+function bodyStrech(){
+  /*$("body").css("-moz-background-size" , "100%");
   $("body").css("-webkit-background-size" , "100%");
-  $("body").css("-o-background-size" , "100%");
+  $("body").css("-o-background-size" , "100%");*/
   $("body").css("background-size" , "100%");
 }
 // and the oposite, enabling the body bg repeat
-function removeBodyStrech()
-{
-  $("body").css("-moz-background-size" , "");
+function removeBodyStrech(){
+/*  $("body").css("-moz-background-size" , "");
   $("body").css("-webkit-background-size" , "");
-  $("body").css("-o-background-size" , "");
+  $("body").css("-o-background-size" , "");*/
   $("body").css("background-size" , "");
 }
 /*get cookie values*/
-function getCookie(c_name)
-{
+function getCookie(c_name){
   var i,x,y,ARRcookies=document.cookie.split(";");
   for (i=0;i<ARRcookies.length;i++)
   {
@@ -523,7 +520,6 @@ $(document).ready(function(){
       $('#tooltip').hide();
     }
 
-
   });
 
   //TURN ID ASSISTANT on/off
@@ -635,7 +631,7 @@ $(document).ready(function(){
       absPosLeft = leftPositionObj - ($(this).offset().left );
 
       if(id == $('#objProperties').attr("objId") ){
-        $('#penPointer').css({left:absPosLeft + drOff,top: absPosTop-40}).fadeIn();
+        //$('#penPointer').css({left:absPosLeft + drOff,top: absPosTop-40}).fadeIn();
       }
       if(absPosTop < 0 || absPosLeft < 0){
         idForRem = $('#' + id).attr("id");
@@ -661,6 +657,7 @@ $(document).ready(function(){
 
   $('#objList').livequery('click', function(){
     $('#' + $(this).attr("value") ).dblclick();
+
   });
   //MOVING AROUND PROPERTIES BOX
 /*
@@ -698,7 +695,7 @@ $(document).ready(function(){
       droppableContainer = "#droppable";
     }
 
-    $(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" style="position:absolute;border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent" contenteditable >NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
+    $(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent" contenteditable >NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
 
     //IF CONTAINER ON, THEN ADD class IN THE CURRENT OBJECT, ELSE the same
     if (objContainer == 1) {
@@ -820,11 +817,7 @@ $(document).ready(function(){
     $('#droppable').resizable('destroy');
     strCodeP =  $('#droppable').html();
     $('#droppable').resizable({autohide: true});
-    //mozilla crap
-    strCodeP = strCodeP.replace(/(-moz-background-clip:)\s(border;)/g, '');
-    strCodeP = strCodeP.replace(/(-moz-background-origin:)\s(padding;)/g, '');
-    strCodeP = strCodeP.replace(/(-moz-background-inline-policy:)\s(continuous;)/g, '');//mozilla crap till here
-    //console.log(strCodeP);
+
     $('#pageCodeHtml').attr( "value", strCodeP );
     //$('#pageCodeHtml').attr( "value", $('#droppable').html() );
 
@@ -903,10 +896,7 @@ $(document).ready(function(){
     $('#droppable').resizable('destroy');//OVO JE RANIJE RADILO, pre jquery 1.9, prveriti da ne pravi problem na drugom mestu
     strCodeP =  $('#droppable').html();
     $('#droppable').resizable({autohide: true});
-    //mozilla crap
-    strCodeP = strCodeP.replace(/(-moz-background-clip:)\s(border;)/g, '');
-    strCodeP = strCodeP.replace(/(-moz-background-origin:)\s(padding;)/g, '');
-    strCodeP = strCodeP.replace(/(-moz-background-inline-policy:)\s(continuous;)/g, '');//moailla crap till here
+
 
     $('#pageCodeHtml').attr( "value", strCodeP );
     //description and keywords
@@ -1049,11 +1039,6 @@ $(document).ready(function(){
     $('#droppable').resizable({autohide: true});
     $('#templateMask').appendTo($('#droppable')).css({left: "0px"});
 
-    //mozilla crap
-    strCodeT = strCodeT.replace(/(-moz-background-clip:)\s(border;)/g, '');
-    strCodeT = strCodeT.replace(/(-moz-background-origin:)\s(padding;)/g, '');
-    strCodeT = strCodeT.replace(/(-moz-background-inline-policy:)\s(continuous;)/g, '');//moailla crap till here
-
 
     $('#templateCodeHtml').attr( "value",  strCodeT );//kod templatea
 
@@ -1101,10 +1086,6 @@ $(document).ready(function(){
     $('#droppable').resizable({autohide: true});
     $('#templateMask').appendTo($('#droppable')).css({left: "0px"});
 
-    //mozilla crap
-    strCodeT = strCodeT.replace(/(-moz-background-clip:)\s(border;)/g, '');
-    strCodeT = strCodeT.replace(/(-moz-background-origin:)\s(padding;)/g, '');
-    strCodeT = strCodeT.replace(/(-moz-background-inline-policy:)\s(continuous;)/g, '');//moailla crap till here
 
     $('#templateCodeHtml').attr( "value",  strCodeT );//kod templatea
 
@@ -1187,7 +1168,7 @@ $(".draggable").livequery('dblclick', function(){
   toP = $(this).position().top;
   drOff = $('#droppable').position().left;
 
-  $('#penPointer').css({left:lefT + drOff, top:toP-40}).fadeIn();
+  //$('#penPointer').css({left:lefT + drOff, top:toP-40}).fadeIn();
   $(".draggable").each(function(){
 
     $(this).removeClass("activeObject");
@@ -1517,9 +1498,6 @@ $('#chooseImageFolderForm').change(function(){
 
     var tvCommand = "images:display:'" + selFolder + "'" ;
 
-
-
-
     $.post(absoluteUrl + "view/render-tv/var/" + "{" + tvCommand + "}", function(data){
       //$('#' + idObjekta).html(data);
       $('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes good after update
@@ -1529,8 +1507,6 @@ $('#chooseImageFolderForm').change(function(){
       $('#' + idObjekta).attr("command", tvCommand);
 
     });
-
-
   }
 });
 
@@ -1560,8 +1536,6 @@ $('#shadowCheck').click(function(){
   } else {
     $('#' + idObjekta).removeClass("shadowed");
   }
-
-
 });
 
 
@@ -1638,6 +1612,7 @@ $('#aParamCorner').livequery('click', function(){
     return;
   }
 });
+
 $('#cornerParamButton').livequery('click', function(){
 
   idObjekta = $('#objIDshow').html();
@@ -1753,6 +1728,7 @@ $('#aParamShadow').livequery('click', function(){
     return;
   }
 });
+
 $('#shadowParamButton').livequery('click', function(){
 
   idObjekta = $('#objIDshow').html();
@@ -1779,6 +1755,7 @@ $('#shadowParamButton').livequery('click', function(){
   }
 
 });
+
 //COLOR SELECTOR for the SHADOW
 $('#shdwColor').livequery(function(){
   $(this).ColorPicker({
@@ -2739,6 +2716,8 @@ $('#pageDisplayer').click(function(){
   $('#assignPageMenuForm').show();
   $('#descKeyDiv').show();
   $('body').css("background", "none");
+  $('#p_t-label-page').removeClass('hidden');
+  $('#p_t-label-template').addClass('hidden');
 
   $('#templateEditing').hide();
   $('#deletePage').show();
@@ -2752,6 +2731,8 @@ $('#templateDisplayer').click(function(){
   $('#assignPageToCategory').hide();
   $('#assignPageMenuForm').hide();
   $('#descKeyDiv').hide();
+  $('#p_t-label-template').removeClass('hidden');
+  $('#p_t-label-page').addClass('hidden');
 
   $('#templateEditing').show();
   $('#deletePage').hide();
@@ -2834,9 +2815,7 @@ $('a.uniTableAdmin').livequery('click', function(){
       });
       ajaxEventDone(lang.Deleting);
     }
-
   }
-
 });
 
 $('.universalTableAdmin tr').livequery('mouseover', function(){
@@ -3517,9 +3496,18 @@ $('#ftpform').livequery(function(){
   });
 });
 
+$('#objList').livequery('click', function(){
+  const val = $(this).val();
+  $('#objIDshow').html(val);
+
+  // since 24.05 - show edit object above the hovered object
+  const selectedObjID = $(this).val();
+  showEditObjectButtons(selectedObjID);
+});
+
 $('#objList option').livequery('dblclick', function(){
   //$('#objPropertiesHtmlTiny_fullscreen').click();
-  tinyMCE.execCommand('mceFullScreen');
+  //tinyMCE.execCommand('mceFullScreen');
 });
 
 /* tinyMCE should be replaced with something new, atm do this fix */
@@ -3536,7 +3524,6 @@ $('#penPointer').livequery('click', function(){
 
 //FULSCREEN ZA CODEPRESS
 // $('.cssjswrapp').dblclick(function(){
-
 
 isFS = 0;
 // do something interesting with fullscreen support
@@ -3656,8 +3643,6 @@ $('#exportTemplate').click(function(){
     $('#dialogDiv').html(data);
   });
   $('#dialogDiv').show('slow');
-
-
 });
 
 
@@ -3706,6 +3691,10 @@ $('select#objList').livequery('change', function(){
       // $(this).closest('span').removeClass('checked');
     }
   });
+  const val = $(this).val();
+  $('#objIDshow').html(val);
+  $("#" + val).trigger('dblclick');
+  showEditObjectButtons(val);
 });
 $('input[type="checkbox"]').livequery(function(){
 
