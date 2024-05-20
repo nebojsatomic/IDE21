@@ -417,11 +417,19 @@ function loadPage(idP){
 }
 
 
+$('div').livequery('click',  function(e){
+  const hasTemplateParent = $(e.target).closest('#droppable');
+  $('.selected-for-append').removeClass('selected-for-append');
 
+  if (hasTemplateParent.length < 1 ) return;
+    // continue only if it is a part of the template or page working area
+
+  $(e.target).closest('div').addClass('selected-for-append');
+});
 
 $(document).ready(function(){
   //idCurrent = 1;
-  drOff = $('#droppable').position().left;//variabla potrebna za strelicu i pero
+  drOff = $('#droppable').position().left;
 
 
   if(getCookie("enableHelp") == "0"){
@@ -431,8 +439,6 @@ $(document).ready(function(){
   }
 
   $('#droppable').resizable({autohide:true});
-  //$('#templateMask').css({left:$('#droppable').offset().left + "px"});
-  //$('#templateMask').appendTo($('#droppable')).css({left: "0px"});
 
   //when clickin on a link that starts an ajax action
   $('.navLinks:not(".noAjaxEvent")').livequery('click', function(){
@@ -1910,7 +1916,7 @@ $('#showFolderImages').livequery('change', function(){
     selFolder = $('#folderNames').attr("value");//selected folder
     selValueFolder = $('#folderNames').attr("label");
     selectedImage = $('#imageNames').attr("value");
-    imagePath = absoluteUrl + "images/" + selFolder + "/" + selectedImage;
+    imagePath = "/images/" + selFolder + "/" + selectedImage;
     $('#imagePathShow').html(imagePath);
 
 
@@ -1945,7 +1951,7 @@ $('#showFolderImages').livequery('change', function(){
   selFolder = $('#folderNames').attr("value");//selected folder
   selValueFolder = $('#folderNames').attr("label");
   selectedImage = $('#imageNames').attr("value");
-  imagePath = absoluteUrl + "images/" + selFolder + "/" + selectedImage;
+  imagePath = "/images/" + selFolder + "/" + selectedImage;
   $('#imagePathShow').html(imagePath);
 
   if($( "#dialogDivImages" ).length == 0){

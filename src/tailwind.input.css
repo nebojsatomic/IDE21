@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* override Thickbox values */
 #TB_ajaxContent {
   @apply bg-primary;
   height: 100% !important; /* override values set with javascript from thickbox.js */
@@ -19,6 +20,8 @@
 #TB_title {
   @apply bg-neutral-content !important;
 }
+
+/* override jqueryui values */
 .ui-tab-button {
   @apply btn btn-sm btn-ghost bg-none bg-primary !important;
 }
@@ -35,7 +38,19 @@
   @apply shadow-lg bg-neutral-content !important;
 }
 
+/* tinyMCE should be below the header */
 #mce_fullscreen_container {
-  @apply top-12 h-dvh overflow-auto pb-12 !important;
+  @apply top-16 h-dvh overflow-auto pb-16 !important;
 }
 
+/* with selecting the specific div inside template or page, user should be able to insert a new object directly into it */
+#droppable div {
+  @apply border border-dashed border-transparent !important;
+}
+#droppable div:hover {
+  @apply border border-dashed border-lime-800 !important;
+}
+#droppable div.selected-for-append {
+  @apply border border-solid border-red-500 !important;
+}
+/* this marks the specific div to be visible as the div where the new object is to be appended */

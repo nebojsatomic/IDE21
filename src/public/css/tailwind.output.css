@@ -3398,8 +3398,8 @@ input.tab:checked + .tab-content,
   height: 1px !important;
 }
 
-.h-12 {
-  height: 3rem;
+.h-16 {
+  height: 4rem;
 }
 
 .h-2 {
@@ -3458,10 +3458,6 @@ input.tab:checked + .tab-content,
   height: 100%;
 }
 
-.h-16 {
-  height: 4rem;
-}
-
 .max-h-2 {
   max-height: 0.5rem;
 }
@@ -3478,8 +3474,8 @@ input.tab:checked + .tab-content,
   max-height: 24rem;
 }
 
-.min-h-12 {
-  min-height: 3rem;
+.min-h-16 {
+  min-height: 4rem;
 }
 
 .min-h-32 {
@@ -3508,10 +3504,6 @@ input.tab:checked + .tab-content,
 
 .min-h-dvh {
   min-height: 100dvh;
-}
-
-.min-h-16 {
-  min-height: 4rem;
 }
 
 .\!w-px {
@@ -3885,8 +3877,8 @@ input.tab:checked + .tab-content,
   padding-right: 2rem;
 }
 
-.pb-40 {
-  padding-bottom: 10rem;
+.pb-44 {
+  padding-bottom: 11rem;
 }
 
 .pl-8 {
@@ -3895,10 +3887,6 @@ input.tab:checked + .tab-content,
 
 .pt-0 {
   padding-top: 0px;
-}
-
-.pb-44 {
-  padding-bottom: 11rem;
 }
 
 .text-center {
@@ -3994,6 +3982,8 @@ input.tab:checked + .tab-content,
   clip: rect(0,0,0,0) !important;
 }
 
+/* override Thickbox values */
+
 #TB_ajaxContent {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity)));
@@ -4082,6 +4072,8 @@ input.tab:checked + .tab-content,
   --tw-bg-opacity: 1 !important;
   background-color: var(--fallback-nc,oklch(var(--nc)/var(--tw-bg-opacity))) !important;
 }
+
+/* override jqueryui values */
 
 .ui-tab-button {
   display: inline-flex !important;
@@ -4393,12 +4385,38 @@ input.tab:checked + .tab-content,
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
 }
 
+/* tinyMCE should be below the header */
+
 #mce_fullscreen_container {
-  top: 3rem !important;
+  top: 4rem !important;
   height: 100dvh !important;
   overflow: auto !important;
-  padding-bottom: 3rem !important;
+  padding-bottom: 4rem !important;
 }
+
+/* with selecting the specific div inside template or page, user should be able to insert a new object directly into it */
+
+#droppable div {
+  border-width: 1px !important;
+  border-style: dashed !important;
+  border-color: transparent !important;
+}
+
+#droppable div:hover {
+  border-width: 1px !important;
+  border-style: dashed !important;
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(63 98 18 / var(--tw-border-opacity)) !important;
+}
+
+#droppable div.selected-for-append {
+  border-width: 1px !important;
+  border-style: solid !important;
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity)) !important;
+}
+
+/* this marks the specific div to be visible as the div where the new object is to be appended */
 
 @media (min-width: 768px) {
   @media (hover:hover) {
@@ -4620,10 +4638,6 @@ input.tab:checked + .tab-content,
     padding-bottom: 3rem;
   }
 
-  .md\:pt-28 {
-    padding-top: 7rem;
-  }
-
   .md\:pb-16 {
     padding-bottom: 4rem;
   }
@@ -4645,4 +4659,3 @@ input.tab:checked + .tab-content,
     color: rgb(255 255 255 / var(--tw-text-opacity));
   }
 }
-
