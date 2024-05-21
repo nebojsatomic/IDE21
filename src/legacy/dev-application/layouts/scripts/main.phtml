@@ -27,11 +27,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo $this->title;?></title>
   <!--themes for the objects-->
-  <link type="text/css" href="/css/combinedAll.css" rel="stylesheet" />
+  <!-- <link type="text/css" href="/css/combinedAll.css" rel="stylesheet" /> -->
   <!--<link type="text/css" href="/css/themes.css" rel="stylesheet" />-->
   <link rel="stylesheet" href="/css/default.css?rnd=<?php echo rand();?>"  /><!--CSS written in admin panel-->
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/css/uniform/css/uniform.aristo.css" media="screen" />
   <?php echo $this->headLink(); ?>
   <?php
   if($this->staticFilesCSS != '') {
@@ -49,24 +48,14 @@
   absoluteUrl = "<?php echo $this->host;?>";
   templateId =  "<?php echo $this->template;?>";
   </script>
-  <!--<script type="text/javascript" src="/js/cu3er/js/swfobject/swfobject.js"></script>-->
+
   <script type="text/javascript" src="/js/jquery/jquery-1.3.2.min.js"></script>
-  <script type="text/javascript" src="/js/combinedAll.js" ></script>
-  <script type="text/javascript" src="/js/slide/jsCycle.js" ></script>
-  <!--<script type="text/javascript" src="/js/ga.js" ></script>-->
+  <!--<script type="text/javascript" src="/js/combinedAll.js" ></script>-->
 
 
-  <script type="text/javascript" src="/js/js/easySlider1.5.js"></script>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.5.3/jquery-ui.min.js" ></script>
-<!--
-  <script type="text/javascript" src="/js/js/cufon-yui.js"></script>
-  <script type="text/javascript" src="/js/js/NaturalMed_italic_500.font.js"></script>
-  <script type="text/javascript" src="/js/js/NaturalMedBold_italic_750.font.js"></script>
-  <script type="text/javascript" src="/js/js/jquery.jcarousel.min.js"></script>
-  <script type="text/javascript" src="/js/js/cufon_replace.js"></script>
--->
-  <script type="text/javascript" src="/fancybox/jquery.fancybox-1.3.4.js"></script>
-  <script type="text/javascript"  src="/js/uniform/jquery.uniform.js"></script>
+  <!-- <script type="text/javascript" src="/js/js/easySlider1.5.js"></script> -->
+  <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.5.3/jquery-ui.min.js" ></script> -->
+
 </head>
 <body style="background:<?php echo $this->templateBodyBackground;?>;" class="overflow-x-hidden w-full min-h-dvh h-auto bg-cover md:py-12">
   <div class="top"></div>
@@ -84,17 +73,20 @@
   if(!empty($this->staticFilesJS) ){
     foreach($this->staticFilesJS as $jsFile){
       ?>
-      <script type="text/javascript" src="<?php echo $jsFile;?>"></script>
+      <!--<script type="text/javascript" src="<?php echo $jsFile;?>"></script>-->
       <?php
     }
   } else {
     ?>
-    <script type="text/javascript" src="/js/main2.js?rnd=<?php echo rand();?>"></script>
+    <!--<script type="text/javascript" src="/js/main2.js?rnd=<?php echo rand();?>"></script>-->
     <?php
   }
   ?>
   <script type="text/javascript">
-  //$('select, input, textarea').livequery(function(){$(this).uniform();});
+    $('select').addClass('select-sm shadow-sm');
+    $('input').addClass('input input-sm w-full shadow-sm');
+    $('input[type="submit"]').addClass('btn btn-secondary shadow-lg');
+
   </script>
 </body>
 </html>

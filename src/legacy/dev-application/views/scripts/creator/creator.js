@@ -73,7 +73,8 @@ tinyMCE.init({
 // change behaviour of edit object button from version 24.05: this button and some other buttons should appear above the currently selected object
 function showEditObjectButtons(obj){
   // place pointer above the selected object on the top left
-  $('#penPointer').css({left: $('#'+ obj ).position().left + 'px',top: $('#'+ obj ).position().top + 60 + 'px'}).fadeIn();
+  //$('#penPointer').css({left: $('#'+ obj ).offset().left + 'px',top: $('#'+ obj ).offset().top  + 'px'}).fadeIn();
+  $('#penPointer').css({left: '1rem',top: '5rem'}).fadeIn();
 }
 
 function doLightBox(){
@@ -231,12 +232,12 @@ function templateReopenAfterLanguage(){
 
     });
 
-    $(".draggable").draggable({
+    /*$(".draggable").draggable({
       drag:function() {
         id = $(this).attr("id");
       }
       //containment: 'parent'
-    });
+    }); // D */
 
 
     $('#objList').html("");
@@ -327,12 +328,12 @@ function loadTemplate(idT){
 
     });
 
-    $(".draggable").draggable({
+    /*$(".draggable").draggable({
       drag:function() {
         id = $(this).attr("id");
       }
       //containment: 'parent'
-    });
+    }); // D */
 
 
     $('#objList').html("");
@@ -395,12 +396,13 @@ function loadPage(idP){
 
     $('#droppable').css("display", "none");
     $('#droppable').html(data.output).fadeIn();
-    $(".draggable").draggable({
+    
+    /*$(".draggable").draggable({
       drag:function() {
         id = $(this).attr("id");
       },
       containment: 'parent'
-    });
+    }); // D */
 
     $('#objList').html("");
     $('.draggable').each(function(){
@@ -417,7 +419,7 @@ function loadPage(idP){
 }
 
 
-$('div').livequery('click',  function(e){
+$('#droppable div').livequery('click',  function(e){
   const hasTemplateParent = $(e.target).closest('#droppable');
   $('.selected-for-append').removeClass('selected-for-append');
 
@@ -425,6 +427,14 @@ $('div').livequery('click',  function(e){
     // continue only if it is a part of the template or page working area
 
   $(e.target).closest('div').addClass('selected-for-append');
+  console.log($(e.target).closest('.draggable').attr('id'));
+  $('#objList').val( $(e.target).closest('.draggable').attr('id') ).change();
+  $('#objIDshow').html($(e.target).closest('.draggable').attr('id'));
+});
+
+// reset selected-for-append
+$('.navbar, #contProperties').click( function(){
+  $('.selected-for-append').removeClass('selected-for-append');
 });
 
 $(document).ready(function(){
@@ -438,7 +448,7 @@ $(document).ready(function(){
     $('#helpDiv').hide();
   }
 
-  $('#droppable').resizable({autohide:true});
+  //$('#droppable').resizable({autohide:true});
 
   //when clickin on a link that starts an ajax action
   $('.navLinks:not(".noAjaxEvent")').livequery('click', function(){
@@ -471,13 +481,13 @@ $(document).ready(function(){
         $(this).remove();
       });
 
-      $('#' + $('#objIDshow').html() ).resizable('destroy');//stop resizable
+      //$('#' + $('#objIDshow').html() ).resizable('destroy');//stop resizable
 
       $('#' + $('#objIDshow').html()).html(newContent + "\n\n\n");//update html of the object
 
       $('#' + $('#objIDshow').html() ).dblclick();
 
-      $('#' + $('#objIDshow').html() ).resizable({autohide:true});//resizable again
+      //$('#' + $('#objIDshow').html() ).resizable({autohide:true});//resizable again
     }
   });
 
@@ -609,15 +619,16 @@ $(document).ready(function(){
   });
 
   //DRAGGABLES
-  $(".draggable").draggable({
+  /*$(".draggable").draggable({
     drag:function() {
       //$(this).clone();
       id = $(this).prop("id");
     },
     containment: 'parent'
-  });
+  }); // D*/
+
   $(".draggable").each(function(){
-    $('#' +$(this).attr("id") ).resizable();
+    //$('#' +$(this).attr("id") ).resizable();
   });
   $("#droppable").droppable({
     drop: function() {
@@ -695,13 +706,13 @@ $(document).ready(function(){
     newObjId = year + "_" + monthnumber+"_" + monthday+"_"+hour+"_"+ minute+"_" + second;
 
     //IF CONTAINER ON, THEN APPEND IN THE CURRENT OBJECT, ELSE in droppable
-    if (objContainer == 1) {
-      droppableContainer = '#' + $('#objIDshow').html();
+    if ($('.selected-for-append').length == 1) {
+      droppableContainer = '.selected-for-append';
     } else {
       droppableContainer = "#droppable";
     }
 
-    $(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent" contenteditable >NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
+    $(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
 
     //IF CONTAINER ON, THEN ADD class IN THE CURRENT OBJECT, ELSE the same
     if (objContainer == 1) {
@@ -709,20 +720,20 @@ $(document).ready(function(){
     } else {}
 
     $('#objList').append('<option>net_' + newObjId + '</option>');
-    $('#net_' + newObjId  ).resizable({
+    /*$('#net_' + newObjId  ).resizable({
       autoHide: true,
       handles: 'all',
       stop: function() {
         $( '#' + $(this).attr("id") ).dblclick();
       }
-    });
+    });*/
 
-    $(".draggable").draggable({
+    /*$(".draggable").draggable({
       drag:function() {
         id = $(this).attr("id");
       },
       containment: 'parent'
-    });
+    }); // D */
 
 
     refreshControls();
@@ -761,26 +772,26 @@ $(document).ready(function(){
 
     $('#objList').append('<option>net_' + newObjId + '</option>');
 
-    $('#net_' + newObjId  ).resizable({
+    /*$('#net_' + newObjId  ).resizable({
       autoHide: true,
       handles: 'all',
       stop: function() {
         $( '#' + $(this).attr("id") ).dblclick();
       }
-    });
+    });*/
 
 
-    $(".draggable").draggable({
+    /*$(".draggable").draggable({
       drag:function() {
         id = $(this).attr("id");
       },
       containment: 'parent'
-    });
+    }); // D */
 
 
     refreshControls();
     $('#net_' + newObjId  ).css({left:$('#net_' + newObjId  ).position().left + 5, top:$('#net_' + newObjId  ).position().top +5 });
-    $('#net_' + newObjId  ).resizable('destroy');
+    //$('#net_' + newObjId  ).resizable('destroy');
     $('#net_' + newObjId  ).dblclick();
     newIt++;
     zIndexCounter++;
@@ -807,7 +818,7 @@ $(document).ready(function(){
     $(".draggable").each(function(){
       $(this).removeClass("inactiveObject");
       $(this).css("border", "0");
-      $(this).resizable('destroy');
+      //$(this).resizable('destroy');
 
       //if it is a menu write command
       if ($(this).attr("objtype") == "Menu"){
@@ -820,9 +831,9 @@ $(document).ready(function(){
       }
 
     });
-    $('#droppable').resizable('destroy');
+    //$('#droppable').resizable('destroy');
     strCodeP =  $('#droppable').html();
-    $('#droppable').resizable({autohide: true});
+    //$('#droppable').resizable({autohide: true});
 
     $('#pageCodeHtml').attr( "value", strCodeP );
     //$('#pageCodeHtml').attr( "value", $('#droppable').html() );
@@ -899,9 +910,9 @@ $(document).ready(function(){
       $(this).remove();
     });
 
-    $('#droppable').resizable('destroy');//OVO JE RANIJE RADILO, pre jquery 1.9, prveriti da ne pravi problem na drugom mestu
+    //$('#droppable').resizable('destroy');
     strCodeP =  $('#droppable').html();
-    $('#droppable').resizable({autohide: true});
+    //$('#droppable').resizable({autohide: true});
 
 
     $('#pageCodeHtml').attr( "value", strCodeP );
@@ -989,12 +1000,12 @@ $(document).ready(function(){
 
         $('#droppable').css("display", "none");
         $('#droppable').html(data.output).fadeIn();
-        $(".draggable").draggable({
+        /*$(".draggable").draggable({
           drag:function() {
             id = $(this).attr("id");
           },
           containment: 'parent'
-        });
+        }); // D */
 
         $('#objList').html("");
         $('.draggable').each(function(){
@@ -1025,7 +1036,7 @@ $(document).ready(function(){
   $('#saveAsTemplate').click(function(){
     $(".draggable").each(function(){
       $(this).css("border", "0");
-      $(this).resizable('destroy');
+      //$(this).resizable('destroy');
       $(this).removeClass("inactiveObject");
       $(this).addClass("templateDiv");
       //if it is a menu write command
@@ -1039,10 +1050,10 @@ $(document).ready(function(){
       }
 
     });
-    $('#droppable').resizable('destroy');
+    //$('#droppable').resizable('destroy');
     $('#templateMask').appendTo($('body'));
     strCodeT =  $('#templateMask').html() + $('#droppable').html();
-    $('#droppable').resizable({autohide: true});
+    //$('#droppable').resizable({autohide: true});
     $('#templateMask').appendTo($('#droppable')).css({left: "0px"});
 
 
@@ -1073,7 +1084,7 @@ $(document).ready(function(){
 
     $(".draggable").each(function(){
       $(this).removeClass("inactiveObject");
-      $(this).resizable('destroy');
+      //$(this).resizable('destroy');
       //if it is a menu write command
       if ($(this).attr("objtype") == "Menu"){
         $(this).html( "{" +$(this).attr("command") + "}");
@@ -1086,10 +1097,10 @@ $(document).ready(function(){
     });
 
     //$('.ui-resizable-handle').remove();
-    $('#droppable').resizable('destroy');
+    //$('#droppable').resizable('destroy');
     $('#templateMask').appendTo($('body'));
     strCodeT =  $('#templateMask').html() + $('#droppable').html();
-    $('#droppable').resizable({autohide: true});
+    //$('#droppable').resizable({autohide: true});
     $('#templateMask').appendTo($('#droppable')).css({left: "0px"});
 
 
@@ -1180,7 +1191,7 @@ $(".draggable").livequery('dblclick', function(){
     $(this).removeClass("activeObject");
     $(this).addClass("inactiveObject");
 
-    $('#' +$(this).attr("id") ).resizable({ autoHide: true  });
+    //$('#' +$(this).attr("id") ).resizable({ autoHide: true  });
   });
 
   $(this).removeClass("inactiveObject");
@@ -1192,9 +1203,11 @@ $(".draggable").livequery('dblclick', function(){
   bgColor = $(this).css("background-color");
   bgImage = $(this).css("background-image");
   objectClasses = $(this).attr("class");
-  htmlValue = $(this).html();
+  //htmlValue = $(this).html();
+  htmlValue = $('#' + $('#objIDshow').text() ).html();
   zIn = $(this).css("z-index");
-  css = "width: auto; min-height: 25px;height:auto; background: transparent; padding: 10px; float:left;color: black;" + $(this).attr("style");
+  css = $(this).attr("style");
+  //css = "width: auto; min-height: 25px;height:auto; background: transparent; padding: 10px; float:left;color: black;" + $(this).attr("style");
   //theme classes
   themeClass = "";
   if( $(this).hasClass("noTheme") ){themeClass = "no";}
@@ -1222,8 +1235,18 @@ $(".draggable").livequery('dblclick', function(){
 
   }
 
-  $('#objProperties').attr("objId", $(this).attr("id") );
-  $('#objIDshow').html($(this).attr("id"));
+  if( typeof $('.selected-for-append').attr('id') !== undefined) {
+    selectedObjID = $('.selected-for-append').attr('id');
+  } else {
+
+  }
+  
+  console.log(selectedObjID);
+
+  //$('#objProperties').attr("objId", $(this).attr("id") );
+  //$('#objIDshow').html($(this).attr("id"));
+  $('#objProperties').attr("objId", selectedObjID );
+  $('#objIDshow').html($(selectedObjID).attr("id"));
 
   $("#objPropertiesWidth").attr("value", width );
   $("#objPropertiesHeight").attr("value", height );
@@ -1470,7 +1493,7 @@ $('#chooseMenuForm').change(function(){
     var tvCommand = "menu:display:" + selMenuTemplate + displayTypeMenu ;
 
     $.post(absoluteUrl + "view/render-tv/creatorAct/true/var/" + "{" + tvCommand + "}", function(data){
-      $('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes good after update
+      //$('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes good after update
       $('#' + idObjekta).html(data);
       $('#' + idObjekta ).dblclick();
 
@@ -1506,7 +1529,7 @@ $('#chooseImageFolderForm').change(function(){
 
     $.post(absoluteUrl + "view/render-tv/var/" + "{" + tvCommand + "}", function(data){
       //$('#' + idObjekta).html(data);
-      $('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes good after update
+      //$('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes good after update
       $('#' + idObjekta).html(data);
       $('#' + idObjekta ).dblclick();
       $('#objPropertiesHtml').attr("value","{"+ tvCommand + "}");
@@ -1933,7 +1956,7 @@ $('#showFolderImages').livequery('change', function(){
 
     $.post(absoluteUrl + "view/render-tv/var/" + "{" + tvCommand + "}", function(data){
       //$('#' + idObjekta).html(data);
-      $('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes good after update
+      //$('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes good after update
       $('#' + idObjekta).html(data);
       $('#' + idObjekta ).dblclick();
 
@@ -1985,7 +2008,7 @@ $('#showFolderImages').livequery('change', function(){
 //INSERT IMAGE;
 $('#insertImage').click(function(){
   idObjekta = $('#objList').val();
-  $('#' + idObjekta).resizable('destroy');
+  //$('#' + idObjekta).resizable('destroy');
   $('#' + idObjekta).html('<p class="objContent"><img src = "' + $('#imagePathShow').text() + '" width="100%" height="100%" /></p>');
 
   $('#' + idObjekta).resizable({autohide:true});
@@ -2236,7 +2259,7 @@ $('#chooseCategoryForm').change(function(){
 
     $.post(absoluteUrl + "view/render-tv/var/" + "{" + tvCommand + "}", function(data){
       //$('#' + idObjekta).html(data);
-      $('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes good after update
+      //$('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes good after update
       $('#' + idObjekta).html(data);
       $('#' + idObjekta ).dblclick();
 
@@ -2921,12 +2944,12 @@ $('#langName').livequery('change', function(){
         if(data.output){
           $('#droppable').html(data.output).fadeIn();
 
-          $(".draggable").draggable({
+          /*$(".draggable").draggable({
             drag:function() {
               id = $(this).attr("id");
             },
             containment: 'parent'
-          });
+          }); // D */
 
           $('#objList').html("");
           $('.draggable').each(function(){

@@ -20,20 +20,15 @@ li {
 
 .draggable {
   cursor: pointer;
-  position: absolute;
-  /*position:static;*/
+  /*position: absolute;*/
   width: auto;
-  min-height: 25px;
   height: auto;
   background: transparent;
   padding: 0px;
-/*  float: left;
-  color: black;
-  overflow: hidden;*/
 }
 
 .draggable:hover {
-  cursor: move;
+  /*cursor: move;*/
   opacity: 0.95;
 }
 
@@ -42,8 +37,7 @@ li {
 }
 
 .templateDiv {
-  position: absolute;
-  border: 0px solid green;
+  /*position: absolute;*/
   z-index: 0;
 }
 
@@ -121,20 +115,29 @@ span.ui-button-text {
 
 #containerRadnePovrsine {
   width: 100%;
-  height: auto;
+  /*height: auto;*/
+  height: 100dvh;
+  overflow-y: auto;
 }
 
 #droppable {
   position: relative;
   z-index: 2;
   top: 0;
-  /*width: 70%;*/
+  /*height: 100dvh;*/
   height: auto;
-  min-height: 100vh;
-  /*background: white;*/
+  min-height: 100dvh;
+
   padding: 0px;
-  /*border: 2px dotted lightblue;*/
+  padding-bottom: 4rem;
   margin: 0 auto;
+}
+
+/* too thin native scrollbar on mobile browsers */
+.simplebar-track {
+  background: transparent;
+  width: 15px !important;
+  visibility: visible !important;
 }
 
 #droppable2 {
@@ -153,7 +156,8 @@ span.ui-button-text {
 }
 
 #templateMask { /* must rethink this concept */
-  position: absolute;
+  /*position: absolute;*/
+  position: relative;
   z-index: 2;
   top: 0;
   width: 100%;

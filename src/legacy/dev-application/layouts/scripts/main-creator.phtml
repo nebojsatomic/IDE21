@@ -56,7 +56,10 @@
   <link href="/css/tailwind.output.css?rnd=<?php echo rand();?>" rel="stylesheet" type="text/css" />
   <script src="/daisy/daisyui.tailwind.3.4.3.js"></script>
 
-  
+  <!-- native browser scrollbars are too thin on mobile -->
+  <link rel="stylesheet" href="/simplebar/simplebar.css" />
+  <script src="/simplebar/simplebar.min.js"></script>
+
   <script type="text/javascript" >
   absoluteUrl = "<?php echo $this->hostRW;?>";
   absoluteUrl2 = "<?php echo $this->host;?>";
