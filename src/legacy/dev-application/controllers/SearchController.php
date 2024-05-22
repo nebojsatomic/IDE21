@@ -210,8 +210,8 @@ class SearchController extends NetActionController
         $db = Zend_Registry::get('db');
         $themePath = NET_PATH . "widgets/";
         $host = NetActionController::$hostRW;
-  
-        
+
+
         $view = new Zend_View();
         $view->addScriptPath($themePath . "templates/");
 
@@ -224,21 +224,18 @@ class SearchController extends NetActionController
         $Search['hits'] = $paginator;
         $Search['pageNumber'] = $pageNumber;
         $Search['itemCountPerPage'] = 10;
-        
-        
-        
+
         //$Search['hits'] = $hits;
         $Search['keyword'] = $what;
         $Search['host'] = $host;
-        
+
         $view->assign($Search);
         $scriptName = "search.phtml";
 
         $partialOutput = $view->render($scriptName);
 
         return $partialOutput;
-    
-    
+
     }
 
     public static function showSearchForm()
@@ -281,15 +278,12 @@ class SearchController extends NetActionController
                 )),
                 'submitSearch' => array('submit', array(
                     'label' => '',
-                    'style' => 'float:right;',//background:url(' . self::$host . 'images/btnSearch.png) no-repeat',
+                    'class' => 'hidden',
                     'order' => 100,
                 ))
-
         )));
 
         return $form;
-
-    
     }
 
     /**

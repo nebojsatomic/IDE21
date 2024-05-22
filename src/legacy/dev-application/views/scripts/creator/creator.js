@@ -73,8 +73,9 @@ tinyMCE.init({
 // change behaviour of edit object button from version 24.05: this button and some other buttons should appear above the currently selected object
 function showEditObjectButtons(obj){
   // place pointer above the selected object on the top left
-  //$('#penPointer').css({left: $('#'+ obj ).offset().left + 'px',top: $('#'+ obj ).offset().top  + 'px'}).fadeIn();
-  $('#penPointer').css({left: '1rem',top: '5rem'}).fadeIn();
+  if( typeof $('#'+ obj ).offset() == 'undefined' ) return;
+  $('#penPointer').css({left: $('#'+ obj ).offset().left + 'px',top: $('#'+ obj ).offset().top  + 'px'}).fadeIn();
+  //$('#penPointer').css({left: '1rem',top: '5rem'}).fadeIn();
 }
 
 function doLightBox(){
@@ -419,17 +420,35 @@ function loadPage(idP){
 }
 
 
-$('#droppable div').livequery('click',  function(e){
+$('#droppable *').livequery('click', function(e){
   const hasTemplateParent = $(e.target).closest('#droppable');
   $('.selected-for-append').removeClass('selected-for-append');
 
   if (hasTemplateParent.length < 1 ) return;
     // continue only if it is a part of the template or page working area
 
-  $(e.target).closest('div').addClass('selected-for-append');
-  console.log($(e.target).closest('.draggable').attr('id'));
-  $('#objList').val( $(e.target).closest('.draggable').attr('id') ).change();
-  $('#objIDshow').html($(e.target).closest('.draggable').attr('id'));
+
+  $(e.target).addClass('selected-for-append');
+  const selectedObjectNewID = $(this).get(0).localName + '_sel_' + Math.floor(Math.random() * 10000);
+
+  //console.log(typeof $(e.target).attr('id'));
+  if(typeof $(e.target).attr('id') != 'string'){
+
+    $(e.target).attr('id', selectedObjectNewID );
+    $('#objList').append('<option>' + selectedObjectNewID + '</option>');
+
+  }
+
+  //console.log( $('#objList option:contains(' + $(e.target).attr('id') + ')') ) ;
+
+  if( $('#objList option:contains(' + $(e.target).attr('id') + ')').length == 0) {
+    $('#objList').append('<option>' + $(e.target).attr('id') + '</option>');
+  }
+  
+  $('#objList').val( $(e.target).attr('id') ).change();
+
+  $('#objIDshow').html($(e.target).attr('id'));
+  $('#objProperties').attr("objId", $(e.target).attr('id') );
 });
 
 // reset selected-for-append
@@ -757,11 +776,17 @@ $(document).ready(function(){
     newObjId = year + "_" + monthnumber+"_" + monthday+"_"+hour+"_"+ minute+"_" + second;
 
     //IF CONTAINER ON, THEN APPEND IN THE CURRENT OBJECT, ELSE in droppable
-    if (objContainer == 1) {
-      droppableContainer = '#' + $('#objIDshow').html();
+    if ($('.selected-for-append').length == 1) {
+      droppableContainer = '.selected-for-append';
     } else {
       droppableContainer = "#droppable";
     }
+    
+    /*if (objContainer == 1) {
+      droppableContainer = '#' + $('#objIDshow').html();
+    } else {
+      droppableContainer = "#droppable";
+    }*/
 
     $(droppableContainer).append("\n" + '<div class="draggable ' + $('#' + $('#objIDshow').html() ).attr('class') + '" id="net_'+newObjId+'" style="z-index:' + zIndexCounter + $('#' + $('#objIDshow').html() ).attr('style') + ';">' + $('#' + $('#objIDshow').html() ).html() + "\n" + '</div>'+ "\n");
 
@@ -1180,6 +1205,7 @@ $(".container").livequery('click', function(e){
 
 //DBLCLICK ON OBJECT
 $(".draggable").livequery('dblclick', function(){
+  const currentObject = $(this);
 
   lefT = $(this).position().left;
   toP = $(this).position().top;
@@ -1247,6 +1273,9 @@ $(".draggable").livequery('dblclick', function(){
   //$('#objIDshow').html($(this).attr("id"));
   $('#objProperties').attr("objId", selectedObjID );
   $('#objIDshow').html($(selectedObjID).attr("id"));
+  //console.log('#' + currentObject.attr('id') + '***************');
+  //$('.selected-for-append').removeClass('selected-for-append');
+  //$('#' + selectedObjID ).addClass('selected-for-append');
 
   $("#objPropertiesWidth").attr("value", width );
   $("#objPropertiesHeight").attr("value", height );
@@ -1543,7 +1572,7 @@ $('#chooseImageFolderForm').change(function(){
 
 
 $("#delButton").livequery('click', function(){
-  idObjekta = $('#objProperties').attr("objId");
+  idObjekta = $('#objIDshow').text();
   $('#objList option:contains("'+ idObjekta +'")').remove();
 
   $('#penPointer').hide();
@@ -3722,7 +3751,7 @@ $('select#objList').livequery('change', function(){
   });
   const val = $(this).val();
   $('#objIDshow').html(val);
-  $("#" + val).trigger('dblclick');
+  //$("#" + val).trigger('dblclick');
   showEditObjectButtons(val);
 });
 $('input[type="checkbox"]').livequery(function(){

@@ -3369,6 +3369,10 @@ input.tab:checked + .tab-content,
   margin-bottom: 1rem;
 }
 
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+
 .mt-1 {
   margin-top: 0.25rem;
 }
@@ -3383,10 +3387,6 @@ input.tab:checked + .tab-content,
 
 .mt-4 {
   margin-top: 1rem;
-}
-
-.mb-5 {
-  margin-bottom: 1.25rem;
 }
 
 .block {
@@ -3440,10 +3440,6 @@ input.tab:checked + .tab-content,
 
 .h-2 {
   height: 0.5rem;
-}
-
-.h-20 {
-  height: 5rem;
 }
 
 .h-24 {
@@ -3506,12 +3502,12 @@ input.tab:checked + .tab-content,
   max-height: 2rem;
 }
 
-.max-h-96 {
-  max-height: 24rem;
-}
-
 .min-h-16 {
   min-height: 4rem;
+}
+
+.min-h-20 {
+  min-height: 5rem;
 }
 
 .min-h-32 {
@@ -3937,6 +3933,10 @@ input.tab:checked + .tab-content,
   padding-left: 2rem;
 }
 
+.pr-8 {
+  padding-right: 2rem;
+}
+
 .pt-0 {
   padding-top: 0px;
 }
@@ -3985,6 +3985,11 @@ input.tab:checked + .tab-content,
   color: var(--fallback-ac,oklch(var(--ac)/var(--tw-text-opacity)));
 }
 
+.text-neutral-content {
+  --tw-text-opacity: 1;
+  color: var(--fallback-nc,oklch(var(--nc)/var(--tw-text-opacity)));
+}
+
 .text-primary {
   --tw-text-opacity: 1;
   color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity)));
@@ -3998,11 +4003,6 @@ input.tab:checked + .tab-content,
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-neutral-content {
-  --tw-text-opacity: 1;
-  color: var(--fallback-nc,oklch(var(--nc)/var(--tw-text-opacity)));
 }
 
 .underline {
@@ -4049,6 +4049,12 @@ input.tab:checked + .tab-content,
 
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.backdrop-blur-lg {
+  --tw-backdrop-blur: blur(16px);
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }
 
 .\[a-z\:\\-\\\*\] {
@@ -4473,22 +4479,22 @@ input.tab:checked + .tab-content,
 
 /* with selecting the specific div inside template or page, user should be able to insert a new object directly into it */
 
-#droppable div {
+#droppable * {
   border-width: 1px !important;
   border-style: dashed !important;
   border-color: transparent !important;
 }
 
-#droppable div:hover {
+#droppable *:hover {
   border-width: 1px !important;
   border-style: dashed !important;
   --tw-border-opacity: 1 !important;
   border-color: rgb(63 98 18 / var(--tw-border-opacity)) !important;
 }
 
-#droppable div.selected-for-append {
+#droppable *.selected-for-append {
   border-width: 1px !important;
-  border-style: solid !important;
+  border-style: dashed !important;
   --tw-border-opacity: 1 !important;
   border-color: rgb(239 68 68 / var(--tw-border-opacity)) !important;
 }
@@ -4704,11 +4710,6 @@ input.tab:checked + .tab-content,
 
   .md\:p-8 {
     padding: 2rem;
-  }
-
-  .md\:py-12 {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
   }
 
   .md\:pb-12 {

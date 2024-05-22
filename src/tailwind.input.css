@@ -44,13 +44,13 @@
 }
 
 /* with selecting the specific div inside template or page, user should be able to insert a new object directly into it */
-#droppable div {
+#droppable * {
   @apply border border-dashed border-transparent !important;
 }
-#droppable div:hover {
+#droppable *:hover {
   @apply border border-dashed border-lime-800 !important;
 }
-#droppable div.selected-for-append {
-  @apply border border-solid border-red-500 !important;
+#droppable *.selected-for-append {
+  @apply border border-dashed border-red-500 !important;
 }
 /* this marks the specific div to be visible as the div where the new object is to be appended */
