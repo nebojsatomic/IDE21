@@ -50,6 +50,7 @@ tinyMCE.init({
   remove_script_host : false,
   convert_urls : false,
   entity_encoding : "raw",
+  forced_root_block: false,
 
   mode : "exact",
   elements : "objPropertiesHtmlTiny",
@@ -453,7 +454,7 @@ $('#droppable *').livequery('click', function(e){
 
 // reset selected-for-append
 $('.navbar, #contProperties').click( function(){
-  $('.selected-for-append').removeClass('selected-for-append');
+  //$('.selected-for-append').removeClass('selected-for-append');
 });
 
 $(document).ready(function(){
@@ -630,9 +631,13 @@ $(document).ready(function(){
       $('#contProperties').animate({marginRight:0 });
       $('#contProperties').css({display: "grid"}).animate({marginRight:0 });
       propPos = "visible" ;
+      $('#containerRadnePovrsine').removeClass('full-width');
     } else {
       $('#contProperties').animate({marginRight:-($('#properties').width()-5 )}).css({display: "none"});
       propPos = "hidden" ;
+      //setTimeout(function(){
+        $('#containerRadnePovrsine').addClass('full-width');
+      //}, 500);
     }
 
   });
@@ -731,7 +736,11 @@ $(document).ready(function(){
       droppableContainer = "#droppable";
     }
 
-    $(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
+    // insert inside selected object
+    //$(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
+
+    // insertAfter selected object
+    $("\n" + '<div class="draggable" id="net_'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n").insertAfter(droppableContainer);
 
     //IF CONTAINER ON, THEN ADD class IN THE CURRENT OBJECT, ELSE the same
     if (objContainer == 1) {
@@ -788,7 +797,18 @@ $(document).ready(function(){
       droppableContainer = "#droppable";
     }*/
 
-    $(droppableContainer).append("\n" + '<div class="draggable ' + $('#' + $('#objIDshow').html() ).attr('class') + '" id="net_'+newObjId+'" style="z-index:' + zIndexCounter + $('#' + $('#objIDshow').html() ).attr('style') + ';">' + $('#' + $('#objIDshow').html() ).html() + "\n" + '</div>'+ "\n");
+    // inside selected object
+    //$(droppableContainer).append("\n" + '<div class="draggable ' + $('#' + $('#objIDshow').html() ).attr('class') + '" id="net_'+newObjId+'" style="z-index:' + zIndexCounter + $('#' + $('#objIDshow').html() ).attr('style') + ';">' + $('#' + $('#objIDshow').html() ).html() + "\n" + '</div>'+ "\n");
+
+    // after selected object
+    // first remove the olds ids for each element inside the cloned one
+    const elementWithNewIDs = $('#' + $('#objIDshow').html() ).get(0).outerHTML.replace('id="' + $('#objIDshow').text() + '"' , ''); // todo : add for every element
+
+    //$("\n" + '<div class="draggable draggable-clone" id="net_'+newObjId+'" style="z-index:' + zIndexCounter + $('#' + $('#objIDshow').html() ).attr('style') + ';">' + elementWithNewIDs + "\n" + '</div>'+ "\n").insertAfter(droppableContainer);
+
+    $("\n" + elementWithNewIDs + "\n").insertAfter(droppableContainer);
+
+    // insertAfter till here
 
     //IF CONTAINER ON, THEN ADD class IN THE CURRENT OBJECT, ELSE the same
     if (objContainer == 1) {
@@ -1267,7 +1287,7 @@ $(".draggable").livequery('dblclick', function(){
 
   }
   
-  console.log(selectedObjID);
+  //console.log(selectedObjID);
 
   //$('#objProperties').attr("objId", $(this).attr("id") );
   //$('#objIDshow').html($(this).attr("id"));
@@ -3561,16 +3581,16 @@ $('#objList').livequery('click', function(){
   // since 24.05 - show edit object above the hovered object
   const selectedObjID = $(this).val();
   showEditObjectButtons(selectedObjID);
+  $('.selected-for-append').removeClass('selected-for-append');
+  $('#'+ selectedObjID ).addClass('selected-for-append');
 });
 
-$('#objList option').livequery('dblclick', function(){
-  //$('#objPropertiesHtmlTiny_fullscreen').click();
-  //tinyMCE.execCommand('mceFullScreen');
-});
 
 /* tinyMCE should be replaced with something new, atm do this fix */
 $('#penPointer').livequery('click', function(){
+  $('.selected-for-append').trigger('dblclick');
   tinyMCE.execCommand('mceFullScreen');
+  
   /*$('body').livequery('click', function(){
     setTimeout(function(){//set timeout to detect out of fullscreen
       if($('#mce_fullscreen').length < 1 ) {

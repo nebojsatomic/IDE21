@@ -458,8 +458,11 @@ class ViewController extends NetActionController
                 if (!$acl->has('page:' . $menuQR['cid'])) {
                     $acl->add(new Zend_Acl_Resource('page:' . $menuQR['cid'] ));//make sure resource exists
                 }
-                if(@in_array('page:' . $menuQR['cid'], $allowArray[$curRole] ) ){
-                    $acl->allow($curRole, 'page:' . $menuQR['cid'] );
+
+                if(!empty($allowArray[$curRole])) { // MUST RECHECK this behaviour
+                    if(@in_array('page:' . $menuQR['cid'], $allowArray[$curRole]) ){
+                        $acl->allow($curRole, 'page:' . $menuQR['cid'] );
+                    }
                 }
 
                 if($menuQR['check_access'] == '1') {

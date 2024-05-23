@@ -84,7 +84,9 @@
   ?>
   <script type="text/javascript">
     $('select').addClass('select-sm shadow-sm');
-    $('input').addClass('input input-sm w-full shadow-sm');
+    $('input').each(function(){
+      $(this).addClass('input input-sm w-full shadow-sm').attr('placeholder', $(this).attr('name'));
+    });
     $('input[type="submit"]').addClass('btn btn-secondary shadow-lg');
 
   </script>

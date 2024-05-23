@@ -3514,14 +3514,6 @@ input.tab:checked + .tab-content,
   min-height: 8rem;
 }
 
-.min-h-52 {
-  min-height: 13rem;
-}
-
-.min-h-60 {
-  min-height: 15rem;
-}
-
 .min-h-72 {
   min-height: 18rem;
 }
@@ -3787,6 +3779,10 @@ input.tab:checked + .tab-content,
   border-width: 0px;
 }
 
+.border-2 {
+  border-width: 2px;
+}
+
 .border-4 {
   border-width: 4px;
 }
@@ -3797,6 +3793,11 @@ input.tab:checked + .tab-content,
 
 .border-current {
   border-color: currentColor;
+}
+
+.border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
 .border-e-transparent {
@@ -3846,6 +3847,11 @@ input.tab:checked + .tab-content,
 .bg-primary {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity)));
+}
+
+.bg-red-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 113 113 / var(--tw-bg-opacity));
 }
 
 .bg-secondary {
@@ -4500,6 +4506,24 @@ input.tab:checked + .tab-content,
 }
 
 /* this marks the specific div to be visible as the div where the new object is to be appended */
+
+@media (min-width: 640px) {
+  #containerRadnePovrsine.full-width {
+    grid-column: span 12 / span 12 !important;
+  }
+}
+
+@media (min-width: 768px) {
+  #containerRadnePovrsine.full-width {
+    grid-column: span 12 / span 12 !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  #containerRadnePovrsine.full-width {
+    grid-column: span 12 / span 12 !important;
+  }
+}
 
 @media (min-width: 768px) {
   @media (hover:hover) {
