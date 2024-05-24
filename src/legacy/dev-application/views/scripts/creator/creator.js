@@ -301,7 +301,7 @@ function loadTemplate(idT){
     if(data.bodyBg){
       $('#template_bodyBg').prop("value", data.bodyBg);//template body BG
 
-      bg = data.bodyBg.replace(/;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%;/g, "");
+      bg = data.bodyBg.replace(/;background-size:100%;/g, "");
 
       splBG = bg.split(';');
       $(splBG).each(function(k,v){
@@ -339,7 +339,11 @@ function loadTemplate(idT){
 
 
     $('#objList').html("");
-    $('.draggable').each(function(){
+    //$('.draggable').each(function(){
+    $('#templateMask *').each(function(){
+      const objID = $(this).attr("id");
+
+      if(typeof $(this).attr("id") === 'undefined') return;
       $(this).removeClass("inactiveObject");
       $('#objList').append('<option>' + $(this).attr("id") + '</option>');
     });
@@ -430,7 +434,9 @@ $('#droppable *').livequery('click', function(e){
 
 
   $(e.target).addClass('selected-for-append');
-  const selectedObjectNewID = $(this).get(0).localName + '_sel_' + Math.floor(Math.random() * 10000);
+  const contentsToName = $(e.target).text().replace(/\s/g, '_').replace(/[^a-zA-Z0-9_]/g, '').substring(0, 15).toLowerCase(); // append this string to id of the object, to be able to see which one it is just by looking in the object list
+
+  const selectedObjectNewID = $(this).get(0).localName + '_sel_' + Math.floor(Math.random() * 10000) + '_' + contentsToName;
 
   //console.log(typeof $(e.target).attr('id'));
   if(typeof $(e.target).attr('id') != 'string'){
@@ -450,6 +456,8 @@ $('#droppable *').livequery('click', function(e){
 
   $('#objIDshow').html($(e.target).attr('id'));
   $('#objProperties').attr("objId", $(e.target).attr('id') );
+  //e.preventDefault();
+  //$(this).attr('contenteditable', 'true').focus();// edit in place
 });
 
 // reset selected-for-append
@@ -547,9 +555,9 @@ $(document).ready(function(){
 
   //ID ASSISTANT displayed
   tooltipShow = 0;
-  $('.draggable').livequery('mouseover', function(e){
+  $('#templateMask *').livequery('mouseover', function(e){
     if (tooltipShow == 1) {
-      $('#tooltip').html($(this).attr("id") );
+      $('#tooltip').html($(e.target).attr("id") );
       $('#tooltip').css({top:e.pageY, left:e.pageX});
       $('#tooltip').show();
     } else {
@@ -1224,7 +1232,7 @@ $(".container").livequery('click', function(e){
 
 
 //DBLCLICK ON OBJECT
-$(".draggable").livequery('dblclick', function(){
+$(".draggable").livequery('dblclick', function(e){
   const currentObject = $(this);
 
   lefT = $(this).position().left;
@@ -1243,16 +1251,18 @@ $(".draggable").livequery('dblclick', function(){
   $(this).removeClass("inactiveObject");
   $(this).addClass("activeObject");
 
-  width = $(this).css("width");
-  height= $(this).css("height");
-  border = $(this).css("border");
-  bgColor = $(this).css("background-color");
-  bgImage = $(this).css("background-image");
-  objectClasses = $(this).attr("class");
+  width = $(e.target).css("width");
+  height= $(e.target).css("height");
+  border = $(e.target).css("border");
+  bgColor = $(e.target).css("background-color");
+  bgImage = $(e.target).css("background-image");
+  objectClasses = $(e.target).attr("class");
   //htmlValue = $(this).html();
   htmlValue = $('#' + $('#objIDshow').text() ).html();
-  zIn = $(this).css("z-index");
-  css = $(this).attr("style");
+  zIn = $(e.target).css("z-index");
+  css = $(e.target).attr("style");
+  console.log($(e.target));
+console.log($(e.target).attr('style'));
   //css = "width: auto; min-height: 25px;height:auto; background: transparent; padding: 10px; float:left;color: black;" + $(this).attr("style");
   //theme classes
   themeClass = "";
@@ -1328,8 +1338,11 @@ $(".draggable").livequery('dblclick', function(){
 
   }
 
-  $("#objPropertiesCSS").attr("value", css );
-
+  if( typeof css == 'string' ) {
+    $("#objPropertiesCSS").attr("value", css );
+  } else {
+    $("#objPropertiesCSS").attr("value", '' );
+  }
   if ( $(this).hasClass("shadowed") ) {
     $('#shadowCheck').prop("checked", "checked");
     $('#shadowCheck').closest('span').addClass('checked');
@@ -2058,7 +2071,7 @@ $('#showFolderImages').livequery('change', function(){
 $('#insertImage').click(function(){
   idObjekta = $('#objList').val();
   //$('#' + idObjekta).resizable('destroy');
-  $('#' + idObjekta).html('<p class="objContent"><img src = "' + $('#imagePathShow').text() + '" width="100%" height="100%" /></p>');
+  $('#' + idObjekta).append('<img src = "' + $('#imagePathShow').text() + '" />');
 
   $('#' + idObjekta).resizable({autohide:true});
 
@@ -2084,6 +2097,7 @@ $('#setBodyBgImage').click(function(){
   }
 });
 
+$('#NR, #fixedBg').removeAttr('checked'); // reset checkboxes to unchecked
 $('#NR').livequery('change', function(){
 
   if($(this).attr("value") == "repeat"){
@@ -2114,20 +2128,23 @@ $('#NR').livequery('change', function(){
 });
 
 $('#fixedBg').livequery('change', function(){
+  console.log($(this).attr("value"));
   if($(this).attr("value") == "fixed"){
     trenutniCss = $('#template_bodyBg').attr("value");
-    if(trenutniCss.match(/;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%;/g) ) {
-      val = trenutniCss.replace(/;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%;/g , "");
-      $('#template_bodyBg').attr("value" ,  val + " fixed" + ";-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%;");
+    if(trenutniCss.match(/;background-size:100%;/g) ) {
+      val = trenutniCss.replace(/;background-size:100%;/g , "");
+      $('#template_bodyBg').attr("value" ,  val + " fixed" + ";background-size:100%;");
     } else {
       $('#template_bodyBg').attr("value" , trenutniCss + " fixed" );
     }
     $('#bodyBack').css("position", "fixed");
-    $('#template_bodyBg').prop("value" ,  $('#template_bodyBg').attr("value") + ';background-attachment:fixed;');
+    $('#template_bodyBg').prop("value" ,  $('#template_bodyBg').attr("value") + ';background-attachment: fixed; background-size: cover; background-position: center center;');
 
     $('#template_bodyBg').change();
     $(this).prop("value", "") ;
     $('body').css({backgroundAttachment:"fixed"});
+    $('body').css({backgroundSize:"cover"});
+    $('body').css({backgroundPosition:"center center"});
 
   } else {
     str = $('#template_bodyBg').attr("value");
