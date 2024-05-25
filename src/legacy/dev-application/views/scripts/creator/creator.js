@@ -456,8 +456,12 @@ $('#droppable *').livequery('click', function(e){
 
   $('#objIDshow').html($(e.target).attr('id'));
   $('#objProperties').attr("objId", $(e.target).attr('id') );
-  //e.preventDefault();
-  //$(this).attr('contenteditable', 'true').focus();// edit in place
+  e.preventDefault();
+  $(e.target).attr('contenteditable', 'true').focus();// edit in place
+});
+
+$('#droppable *').livequery('blur', function(e){
+  $(e.target).attr('contenteditable', 'false');
 });
 
 // reset selected-for-append
@@ -466,6 +470,13 @@ $('.navbar, #contProperties').click( function(){
 });
 
 $(document).ready(function(){
+  const simpleBar = new SimpleBar(document.getElementById('containerRadnePovrsine'));
+  simpleBar.getScrollElement().addEventListener('scroll', function(){
+    if( typeof $('.selected-for-append').offset() == 'undefined' ) return;
+    $('#penPointer').css({
+      top: $('.selected-for-append').offset().top + 'px'
+    });
+  });
   //idCurrent = 1;
   drOff = $('#droppable').position().left;
 
@@ -805,18 +816,18 @@ $(document).ready(function(){
       droppableContainer = "#droppable";
     }*/
 
-    // inside selected object
+    // INSIDE selected object - todo
     //$(droppableContainer).append("\n" + '<div class="draggable ' + $('#' + $('#objIDshow').html() ).attr('class') + '" id="net_'+newObjId+'" style="z-index:' + zIndexCounter + $('#' + $('#objIDshow').html() ).attr('style') + ';">' + $('#' + $('#objIDshow').html() ).html() + "\n" + '</div>'+ "\n");
 
-    // after selected object
+    // AFTER selected object
     // first remove the olds ids for each element inside the cloned one
-    const elementWithNewIDs = $('#' + $('#objIDshow').html() ).get(0).outerHTML.replace('id="' + $('#objIDshow').text() + '"' , ''); // todo : add for every element
+    const regexForIDs = /id=\"[\S]*\"/g;
 
-    //$("\n" + '<div class="draggable draggable-clone" id="net_'+newObjId+'" style="z-index:' + zIndexCounter + $('#' + $('#objIDshow').html() ).attr('style') + ';">' + elementWithNewIDs + "\n" + '</div>'+ "\n").insertAfter(droppableContainer);
+    const elementWithNewIDs = $('#' + $('#objIDshow').html() ).get(0).outerHTML.replace( regexForIDs , '').replace('selected-for-append', '');
 
     $("\n" + elementWithNewIDs + "\n").insertAfter(droppableContainer);
-
     // insertAfter till here
+
 
     //IF CONTAINER ON, THEN ADD class IN THE CURRENT OBJECT, ELSE the same
     if (objContainer == 1) {
@@ -1297,15 +1308,10 @@ console.log($(e.target).attr('style'));
 
   }
   
-  //console.log(selectedObjID);
 
-  //$('#objProperties').attr("objId", $(this).attr("id") );
-  //$('#objIDshow').html($(this).attr("id"));
   $('#objProperties').attr("objId", selectedObjID );
   $('#objIDshow').html($(selectedObjID).attr("id"));
-  //console.log('#' + currentObject.attr('id') + '***************');
-  //$('.selected-for-append').removeClass('selected-for-append');
-  //$('#' + selectedObjID ).addClass('selected-for-append');
+
 
   $("#objPropertiesWidth").attr("value", width );
   $("#objPropertiesHeight").attr("value", height );
