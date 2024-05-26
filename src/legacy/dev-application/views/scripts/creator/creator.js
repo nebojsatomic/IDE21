@@ -2060,7 +2060,7 @@ $('#showFolderImages').livequery('change', function(){
   }
 
   $('#imageDetails').html( $('#adminAjaxLoader').html() );
-  //console.log('ja');
+
   var val = $('#imageNames').attr("value");
   var valFolder = $('#folderNames').attr("value");
   $.get(absoluteUrl + "images/show-image-details/fname/" + valFolder + "/imname/" + val , function(data){
@@ -2816,7 +2816,7 @@ $('#pageDisplayer').click(function(){
   $('#assignPageToCategory').show();
   $('#assignPageMenuForm').show();
   $('#descKeyDiv').show();
-  $('body').css("background", "none");
+  $('body').css("background", "white");
   $('#p_t-label-page').removeClass('hidden');
   $('#p_t-label-template').addClass('hidden');
 
@@ -3623,8 +3623,7 @@ $('#penPointer').livequery('click', function(){
   });*/
 });
 
-//FULSCREEN ZA CODEPRESS
-// $('.cssjswrapp').dblclick(function(){
+//FULSCREEN CSS and JS tabs
 
 isFS = 0;
 // do something interesting with fullscreen support
@@ -3637,7 +3636,9 @@ fsElement2 = document.getElementById('fragment-8wrapper');
 
 var fsButton3 = document.getElementById('fsbutton3');
 fsElement3 = document.getElementById('fragment-5wrapper');
-//fsStatus = document.getElementById('fsstatus');
+
+var fsButtonAll = document.getElementById('fsbuttonAll');
+fsElementAll = document.getElementById('body');
 
 (function() {
   var
@@ -3712,24 +3713,59 @@ fsElement3 = document.getElementById('fragment-5wrapper');
 
 // handle button click CSS
 fsButton.addEventListener('click', function() {
+  // if already in fullscreen, it needs to get out of it
+  if( $(fsElement).hasClass('fs') === true ){
+    window.fullScreenApi.cancelFullScreen(fsElement);
+    $(fsElement).removeClass('fs');
+    return;
+  }
+
   window.fullScreenApi.requestFullScreen(fsElement);
   $(fsElement).addClass('fs').find('iframe').height($(window).height());
 
 }, true);
+
 //JS
 fsButton2.addEventListener('click', function() {
+  // if already in fullscreen, it needs to get out of it
+  if( $(fsElement2).hasClass('fs') === true ){
+    window.fullScreenApi.cancelFullScreen(fsElement2);
+    $(fsElement2).removeClass('fs');
+    return;
+  }
   window.fullScreenApi.requestFullScreen(fsElement2);
   $(fsElement2).addClass('fs').find('iframe').height($(window).height());
 }, true);
-//modules
+
+//MODULES
 fsButton3.addEventListener('click', function() {
+  // if already in fullscreen, it needs to get out of it
+  if( $(fsElement3).hasClass('fs') === true ){
+    window.fullScreenApi.cancelFullScreen(fsElement3);
+    $(fsElement3).removeClass('fs');
+    return;
+  }
+
   window.fullScreenApi.requestFullScreen(fsElement3);
+  $(fsElement3).addClass('fs').find('iframe').height($(window).height());
   $('.ui-dialog').livequery(function(){
     if(window.fullScreen == 1){
       $(this).appendTo(fsElement3);
     }
   });
   //$(fsElement3).addClass('fs').height($(window).height());
+}, true);
+
+// fullscreen All
+fsButtonAll.addEventListener('click', function() {
+  // if already in fullscreen, it needs to get out of it
+  if( $(fsElementAll).hasClass('fs') === true ){
+    window.fullScreenApi.cancelFullScreen(fsElementAll);
+    $(fsElementAll).removeClass('fs');
+    return;
+  }
+  window.fullScreenApi.requestFullScreen(fsElementAll);
+  $(fsElementAll).addClass('fs').find('iframe').height($(window).height());
 }, true);
 
 //install/export template
