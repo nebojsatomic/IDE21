@@ -1,0 +1,40 @@
+<!-- this file should be editable from admin panel for the current user -->
+<style type="text/css">
+  h1 {}
+  h2 {}
+  a {}
+</style>
+<div id="ide21-default-template-blue" class="grid grid-cols-12 rounded-lg relative bg-blue-400 md:p-8 md:w-4/5 mx-auto">
+  <div class="header w-full h-auto min-h-72 overflow-hidden bg-blue-400 col-span-12">
+    <!--<img class="w-full max-w-full bg-contain" src="/images/backgrounds/vector_0012.png" alt="" />-->
+    <div id="hdr" class="hero min-h-screen" style="background-image: url(/images/backgrounds/vector_0543.jpg);">
+      <div class="hero-overlay bg-opacity-60"></div>
+      <div class="hero-content backdrop-blur-lg text-center text-neutral-content bg-neutral rounded-lg bg-opacity-70">
+        <div class="max-w-md">
+          <h1 class="mb-5 text-5xl font-bold">Hello there</h1>
+          <p class="mb-5 text-lg">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+          <button class="btn btn-primary text-white">Get Started</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-6  inline-flex items-center gap-2 pl-8">{language:flags}</div><div class="col-span-6 grid items-center justify-items-end min-h-20 pr-8">{searchform}</div>
+  <div id="wrp" class="grid grid-cols-12 col-span-12">
+    <div id="sdb" class="leftcolumn col-span-12 md:col-span-4 bg-blue-200 p-8">
+      <div id="t1menu" >{menu:display:1:vertical}</div>
+      <div>{liveblock:user:loginArea}</div>
+      <div>
+        <p>{adminurl}</p>
+      </div>
+    </div>
+    <div id="cnt" class="sheet col-span-12 md:col-span-8 bg-blue-100 p-8">
+      <div class=""><h1 class="text-2xl">{title}</h1></div>
+      <div class="">{content}</div>
+    </div>
+  </div>
+  <div id="ftr" class="col-span-12 bg-blue-400 p-8">
+    <div>
+      <p>Copyright © 2010-present Nebojsa Tomic | Powered by <a href="#" target="_blank">IDE21</a></p>
+    </div>
+  </div>
+</div>

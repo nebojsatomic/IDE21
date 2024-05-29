@@ -12,7 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        // exclude routes that are passed to Zend framework
+        // exclude routes that are passed to Zend Framework, once the app is fully migrated to Laravel this should be removed
         'creator/*',
         'pages/*',
         'page/*',
@@ -21,6 +21,7 @@ class VerifyCsrfToken extends Middleware
         'menu/*',
         'category/*',
         'modules/*',
-        'tables/*'
+        'tables/*',
+        'user/*'
     ];
 }

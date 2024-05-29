@@ -44,7 +44,8 @@
   <link type="text/css" href="/css/jqUI/ui.all.css" rel="stylesheet" />
   <link type="text/css" href="/css/defaultWidgets.css" rel="stylesheet" />
   <!--themes for the objects-->
-  <link type="text/css" href="/css/themes.css" rel="stylesheet" />
+<!--<link type="text/css" href="/css/themes.css" rel="stylesheet" />
+-->
   <link rel="shortcut icon" type="image/x-icon" href="/images/ide21logo.svg">
   <link rel="stylesheet" href="/css/uniform/css/uniform.aristo.css" media="screen" />
   <!-- Add fancyBox
@@ -52,10 +53,13 @@
 
 
   <!--<link href="/daisy/daisyui.full.min.css" rel="stylesheet" type="text/css" />-->
-  <link href="/css/tailwind.output.css" rel="stylesheet" type="text/css" />
+  <link href="/css/tailwind.output.css?rnd=<?php echo rand();?>" rel="stylesheet" type="text/css" />
   <script src="/daisy/daisyui.tailwind.3.4.3.js"></script>
 
-  
+  <!-- native browser scrollbars are too thin on mobile -->
+  <link rel="stylesheet" href="/simplebar/simplebar.css" />
+  <script src="/simplebar/simplebar.min.js"></script>
+
   <script type="text/javascript" >
   absoluteUrl = "<?php echo $this->hostRW;?>";
   absoluteUrl2 = "<?php echo $this->host;?>";
@@ -91,10 +95,10 @@
   <script type="text/javascript" src="/fancybox/2/jquery.fancybox.js"></script>
   <?php echo $this->headScript(); ?>
 </head>
-<body class="overflow-hidden">
+<body id="body" class="overflow-hidden">
   <!-- top panel -->
-  <div class="navbar bg-neutral min-h-12 h-12 relative" style="z-index:999999;">
-    <div class="navbar-start flex gap-2 md:gap-4">
+  <div id="creator-header-navbar" class="navbar bg-neutral min-h-16 h-16 relative" style="z-index:999999;">
+    <div class="navbar-start flex gap-1 md:gap-2">
       <!--<div class="dropdown">
         <div tabindex="0" role="button" class="btn btn-sm btn-ghost btn-circle text-white">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
@@ -146,10 +150,28 @@
         <button id="upB"></button> <button id="downB"></button>
       </div> -->
     </div>
-    <div class="navbar-center hidden md:flex w-8 ">
+    <div class="navbar-center hidden sm:flex text-base text-white font-semibold w-8">
       <!--<img alt="IDE21 Logo" src="/images/ide21logo.svg">-->
+      <div><?php echo str_replace('Ver.', '', $this->version);?></div>
     </div>
     <div class="navbar-end flex gap-2">
+      <div>
+        <a id="fsbuttonAll" class="help fsbutton w-8 text-white" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+            <path fill-rule="evenodd" d="M15 3.75a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0V5.56l-3.97 3.97a.75.75 0 1 1-1.06-1.06l3.97-3.97h-2.69a.75.75 0 0 1-.75-.75Zm-12 0A.75.75 0 0 1 3.75 3h4.5a.75.75 0 0 1 0 1.5H5.56l3.97 3.97a.75.75 0 0 1-1.06 1.06L4.5 5.56v2.69a.75.75 0 0 1-1.5 0v-4.5Zm11.47 11.78a.75.75 0 1 1 1.06-1.06l3.97 3.97v-2.69a.75.75 0 0 1 1.5 0v4.5a.75.75 0 0 1-.75.75h-4.5a.75.75 0 0 1 0-1.5h2.69l-3.97-3.97Zm-4.94-1.06a.75.75 0 0 1 0 1.06L5.56 19.5h2.69a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 1 1.5 0v2.69l3.97-3.97a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd"></path>
+          </svg>
+        </a>
+      </div>
+      <div id="p_t_common" class="noAjaxEvent grid grid-cols-2 item-strech items-center h-6 text-white px-2">
+        <div class="col-span-2 grid-cols-2 grid justify-items-center gap-2">
+          <span><input id="pageDisplayer" class="noAjaxEvent help radio-sm" type="radio" name="p_g" value="pageEditing" checked="checked" title="<?php echo $this->translate->_("Page creating Mode");?>" /></span>
+          <span><input  id="templateDisplayer" class="noAjaxEvent help radio-sm" type="radio" name="p_g" value="templateEditing" title="<?php echo $this->translate->_("Template creating Mode");?>" /></span>
+        </div>
+        <div id="p_t-label" class="text-white col-span-2 justify-items-between text-center">
+          <span id="p_t-label-page" class="hidden"><?php echo $this->translate->_("Page");?></span>
+          <span id="p_t-label-template" class="hidden"><?php echo $this->translate->_("Template");?></span>
+        </div>
+      </div>
       <div class="dropdown" style="z-index:9;">
         <div tabindex="0" role="button" class="btn btn-sm min-h-8 h-8 w-8 rounded-full">
           <svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg>

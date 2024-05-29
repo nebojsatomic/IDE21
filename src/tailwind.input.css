@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* override Thickbox values */
 #TB_ajaxContent {
   @apply bg-primary;
   height: 100% !important; /* override values set with javascript from thickbox.js */
@@ -16,6 +17,11 @@
 #TB_window a.btn:hover {
   @apply text-white;
 }
+#TB_title {
+  @apply bg-neutral-content !important;
+}
+
+/* override jqueryui values */
 .ui-tab-button {
   @apply btn btn-sm btn-ghost bg-none bg-primary !important;
 }
@@ -24,4 +30,31 @@
 }
 .ui-tab-button.ui-state-active {
   @apply bg-none bg-secondary !important;
+}
+.ui-dialog-titlebar.ui-widget-header {
+  @apply bg-none bg-neutral-content border-0 !important;
+}
+.ui-dialog {
+  @apply shadow-lg bg-neutral-content !important;
+}
+
+/* tinyMCE should be below the header */
+#mce_fullscreen_container {
+  @apply top-16 h-dvh overflow-auto pb-16 !important;
+}
+
+/* with selecting the specific div inside template or page, user should be able to insert a new object directly into it */
+#droppable * {
+  @apply border border-dashed border-transparent !important;
+}
+#droppable *:hover {
+  @apply border border-dashed border-lime-800 !important;
+}
+#droppable *.selected-for-append {
+  @apply border border-dashed border-red-500 !important;
+}
+/* this marks the specific div to be visible as the div where the new object is to be appended */
+
+#containerRadnePovrsine.full-width {
+  @apply sm:col-span-12 md:col-span-12 lg:col-span-12  !important;
 }

@@ -395,7 +395,7 @@ require_once 'Zend/Form/Element/Captcha.php';
             'elements' => array(
                 'username' => array('text', array(
                     'required' => true,
-                    'value' => $translator->_('username'),
+                    //'value' => $translator->_('username'),
                 )),
                 'password' => array('password', array(
                     'required' => true,
@@ -634,11 +634,11 @@ require_once 'Zend/Form/Element/Captcha.php';
             'elements' => array(
                 'username' => array('text', array(
                     'required' => true,
-                    'value' => $translator->_('Username'),
+                    //'value' => $translator->_('Username'),
                 )),
                 'email' => array('text', array(
                     'required' => true,
-                    'value' => $translator->_('E-mail'),
+                    //'value' => $translator->_('E-mail'),
                     'validators' => array('EmailAddress'),
                 )),
 

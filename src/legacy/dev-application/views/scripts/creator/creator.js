@@ -50,6 +50,7 @@ tinyMCE.init({
   remove_script_host : false,
   convert_urls : false,
   entity_encoding : "raw",
+  forced_root_block: false,
 
   mode : "exact",
   elements : "objPropertiesHtmlTiny",
@@ -70,9 +71,15 @@ tinyMCE.init({
 
 });
 
-function doLightBox()
-{
+// change behaviour of edit object button from version 24.05: this button and some other buttons should appear above the currently selected object
+function showEditObjectButtons(obj){
+  // place pointer above the selected object on the top left
+  if( typeof $('#'+ obj ).offset() == 'undefined' ) return;
+  $('#penPointer').css({left: $('#'+ obj ).offset().left + 'px',top: $('#'+ obj ).offset().top  + 'px'}).fadeIn();
+  //$('#penPointer').css({left: '1rem',top: '5rem'}).fadeIn();
+}
 
+function doLightBox(){
   //LB u slideu  mora opet
   $('#manageAllPages').livequery('click', function(){
     $('.TB_overlayBG').css({zIndex:"999997"});
@@ -80,8 +87,7 @@ function doLightBox()
   });
 }
 
-function saveCSSandJS()
-{
+function saveCSSandJS(){
   if(codepressOff == true) {
     $('#pageCSSC').attr("value", $('#pageCSS').attr("value") );
     $('#pageJSC').attr("value", $('#pageJS').attr("value") );
@@ -156,8 +162,7 @@ function redrawMenus(){
 
 }
 
-function showConfirm(linkId)
-{
+function showConfirm(linkId){
   var r = confirm(lang.AYS);
   if (r == true){
     alert($('#' + linkId).attr("href") );
@@ -167,8 +172,7 @@ function showConfirm(linkId)
   }
 }
 
-function floatProperties()
-{
+function floatProperties(){
   var name = "#contProperties";
   var menuYloc = null;
 
@@ -203,8 +207,7 @@ function refreshManageAllPagesTable()
 
 }
 
-function templateReopenAfterLanguage()
-{
+function templateReopenAfterLanguage(){
 
   if($('#templateMask').length < 1){
     $('body').append('<div id="templateMask"></div>');
@@ -231,12 +234,12 @@ function templateReopenAfterLanguage()
 
     });
 
-    $(".draggable").draggable({
+    /*$(".draggable").draggable({
       drag:function() {
         id = $(this).attr("id");
       }
       //containment: 'parent'
-    });
+    }); // D */
 
 
     $('#objList').html("");
@@ -252,25 +255,22 @@ function templateReopenAfterLanguage()
 
 
 }
-//body streching depending on the temlate, -moz-background-size
-function bodyStrech()
-{
-  $("body").css("-moz-background-size" , "100%");
+//body streching depending on the temlate
+function bodyStrech(){
+  /*$("body").css("-moz-background-size" , "100%");
   $("body").css("-webkit-background-size" , "100%");
-  $("body").css("-o-background-size" , "100%");
+  $("body").css("-o-background-size" , "100%");*/
   $("body").css("background-size" , "100%");
 }
 // and the oposite, enabling the body bg repeat
-function removeBodyStrech()
-{
-  $("body").css("-moz-background-size" , "");
+function removeBodyStrech(){
+/*  $("body").css("-moz-background-size" , "");
   $("body").css("-webkit-background-size" , "");
-  $("body").css("-o-background-size" , "");
+  $("body").css("-o-background-size" , "");*/
   $("body").css("background-size" , "");
 }
 /*get cookie values*/
-function getCookie(c_name)
-{
+function getCookie(c_name){
   var i,x,y,ARRcookies=document.cookie.split(";");
   for (i=0;i<ARRcookies.length;i++)
   {
@@ -301,7 +301,7 @@ function loadTemplate(idT){
     if(data.bodyBg){
       $('#template_bodyBg').prop("value", data.bodyBg);//template body BG
 
-      bg = data.bodyBg.replace(/;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%;/g, "");
+      bg = data.bodyBg.replace(/;background-size:100%;/g, "");
 
       splBG = bg.split(';');
       $(splBG).each(function(k,v){
@@ -330,16 +330,20 @@ function loadTemplate(idT){
 
     });
 
-    $(".draggable").draggable({
+    /*$(".draggable").draggable({
       drag:function() {
         id = $(this).attr("id");
       }
       //containment: 'parent'
-    });
+    }); // D */
 
 
     $('#objList').html("");
-    $('.draggable').each(function(){
+    //$('.draggable').each(function(){
+    $('#templateMask *').each(function(){
+      const objID = $(this).attr("id");
+
+      if(typeof $(this).attr("id") === 'undefined') return;
       $(this).removeClass("inactiveObject");
       $('#objList').append('<option>' + $(this).attr("id") + '</option>');
     });
@@ -398,12 +402,13 @@ function loadPage(idP){
 
     $('#droppable').css("display", "none");
     $('#droppable').html(data.output).fadeIn();
-    $(".draggable").draggable({
+    
+    /*$(".draggable").draggable({
       drag:function() {
         id = $(this).attr("id");
       },
       containment: 'parent'
-    });
+    }); // D */
 
     $('#objList').html("");
     $('.draggable').each(function(){
@@ -420,11 +425,60 @@ function loadPage(idP){
 }
 
 
+$('#droppable *').livequery('click', function(e){
+  const hasTemplateParent = $(e.target).closest('#droppable');
+  $('.selected-for-append').removeClass('selected-for-append');
 
+  if (hasTemplateParent.length < 1 ) return;
+    // continue only if it is a part of the template or page working area
+
+
+  $(e.target).addClass('selected-for-append');
+  const contentsToName = $(e.target).text().replace(/\s/g, '_').replace(/[^a-zA-Z0-9_]/g, '').substring(0, 15).toLowerCase(); // append this string to id of the object, to be able to see which one it is just by looking in the object list
+
+  const selectedObjectNewID = $(this).get(0).localName + '_sel_' + Math.floor(Math.random() * 10000) + '_' + contentsToName;
+
+  //console.log(typeof $(e.target).attr('id'));
+  if(typeof $(e.target).attr('id') != 'string'){
+
+    $(e.target).attr('id', selectedObjectNewID );
+    $('#objList').append('<option>' + selectedObjectNewID + '</option>');
+
+  }
+
+  //console.log( $('#objList option:contains(' + $(e.target).attr('id') + ')') ) ;
+
+  if( $('#objList option:contains(' + $(e.target).attr('id') + ')').length == 0) {
+    $('#objList').append('<option>' + $(e.target).attr('id') + '</option>');
+  }
+  
+  $('#objList').val( $(e.target).attr('id') ).change();
+
+  $('#objIDshow').html($(e.target).attr('id'));
+  $('#objProperties').attr("objId", $(e.target).attr('id') );
+  e.preventDefault();
+  $(e.target).attr('contenteditable', 'true').focus();// edit in place
+});
+
+$('#droppable *').livequery('blur', function(e){
+  $(e.target).attr('contenteditable', 'false');
+});
+
+// reset selected-for-append
+$('.navbar, #contProperties').click( function(){
+  //$('.selected-for-append').removeClass('selected-for-append');
+});
 
 $(document).ready(function(){
+  const simpleBar = new SimpleBar(document.getElementById('containerRadnePovrsine'));
+  simpleBar.getScrollElement().addEventListener('scroll', function(){
+    if( typeof $('.selected-for-append').offset() == 'undefined' ) return;
+    $('#penPointer').css({
+      top: $('.selected-for-append').offset().top + 'px'
+    });
+  });
   //idCurrent = 1;
-  drOff = $('#droppable').position().left;//variabla potrebna za strelicu i pero
+  drOff = $('#droppable').position().left;
 
 
   if(getCookie("enableHelp") == "0"){
@@ -433,9 +487,7 @@ $(document).ready(function(){
     $('#helpDiv').hide();
   }
 
-  $('#droppable').resizable({autohide:true});
-  //$('#templateMask').css({left:$('#droppable').offset().left + "px"});
-  //$('#templateMask').appendTo($('#droppable')).css({left: "0px"});
+  //$('#droppable').resizable({autohide:true});
 
   //when clickin on a link that starts an ajax action
   $('.navLinks:not(".noAjaxEvent")').livequery('click', function(){
@@ -468,13 +520,13 @@ $(document).ready(function(){
         $(this).remove();
       });
 
-      $('#' + $('#objIDshow').html() ).resizable('destroy');//stop resizable
+      //$('#' + $('#objIDshow').html() ).resizable('destroy');//stop resizable
 
       $('#' + $('#objIDshow').html()).html(newContent + "\n\n\n");//update html of the object
 
       $('#' + $('#objIDshow').html() ).dblclick();
 
-      $('#' + $('#objIDshow').html() ).resizable({autohide:true});//resizable again
+      //$('#' + $('#objIDshow').html() ).resizable({autohide:true});//resizable again
     }
   });
 
@@ -514,15 +566,14 @@ $(document).ready(function(){
 
   //ID ASSISTANT displayed
   tooltipShow = 0;
-  $('.draggable').livequery('mouseover', function(e){
+  $('#templateMask *').livequery('mouseover', function(e){
     if (tooltipShow == 1) {
-      $('#tooltip').html($(this).attr("id") );
+      $('#tooltip').html($(e.target).attr("id") );
       $('#tooltip').css({top:e.pageY, left:e.pageX});
       $('#tooltip').show();
     } else {
       $('#tooltip').hide();
     }
-
 
   });
 
@@ -599,23 +650,28 @@ $(document).ready(function(){
       $('#contProperties').animate({marginRight:0 });
       $('#contProperties').css({display: "grid"}).animate({marginRight:0 });
       propPos = "visible" ;
+      $('#containerRadnePovrsine').removeClass('full-width');
     } else {
       $('#contProperties').animate({marginRight:-($('#properties').width()-5 )}).css({display: "none"});
       propPos = "hidden" ;
+      //setTimeout(function(){
+        $('#containerRadnePovrsine').addClass('full-width');
+      //}, 500);
     }
 
   });
 
   //DRAGGABLES
-  $(".draggable").draggable({
+  /*$(".draggable").draggable({
     drag:function() {
       //$(this).clone();
       id = $(this).prop("id");
     },
     containment: 'parent'
-  });
+  }); // D*/
+
   $(".draggable").each(function(){
-    $('#' +$(this).attr("id") ).resizable();
+    //$('#' +$(this).attr("id") ).resizable();
   });
   $("#droppable").droppable({
     drop: function() {
@@ -635,7 +691,7 @@ $(document).ready(function(){
       absPosLeft = leftPositionObj - ($(this).offset().left );
 
       if(id == $('#objProperties').attr("objId") ){
-        $('#penPointer').css({left:absPosLeft + drOff,top: absPosTop-40}).fadeIn();
+        //$('#penPointer').css({left:absPosLeft + drOff,top: absPosTop-40}).fadeIn();
       }
       if(absPosTop < 0 || absPosLeft < 0){
         idForRem = $('#' + id).attr("id");
@@ -661,6 +717,7 @@ $(document).ready(function(){
 
   $('#objList').livequery('click', function(){
     $('#' + $(this).attr("value") ).dblclick();
+
   });
   //MOVING AROUND PROPERTIES BOX
 /*
@@ -691,14 +748,23 @@ $(document).ready(function(){
 
     newObjId = year + "_" + monthnumber+"_" + monthday+"_"+hour+"_"+ minute+"_" + second;
 
-    //IF CONTAINER ON, THEN APPEND IN THE CURRENT OBJECT, ELSE in droppable
-    if (objContainer == 1) {
-      droppableContainer = '#' + $('#objIDshow').html();
-    } else {
-      droppableContainer = "#droppable";
-    }
+    //IF THERE IS A SELECTED OBJECT, THEN INSERT AFTER IT, ELSE APPEND TO #droppable
+    if ($('.selected-for-append').length > 0) {
 
-    $(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" style="position:absolute;border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent" contenteditable >NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
+      droppableContainer = '.selected-for-append';
+
+      // insert inside selected object - TODO
+      //$(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
+
+      // insertAfter selected object
+      $("\n" + '<div class="draggable" id="net_'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n").insertAfter(droppableContainer);
+    } else {
+
+      droppableContainer = "#droppable";
+      // insert inside #droppable
+      $(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
+
+    }
 
     //IF CONTAINER ON, THEN ADD class IN THE CURRENT OBJECT, ELSE the same
     if (objContainer == 1) {
@@ -706,20 +772,20 @@ $(document).ready(function(){
     } else {}
 
     $('#objList').append('<option>net_' + newObjId + '</option>');
-    $('#net_' + newObjId  ).resizable({
+    /*$('#net_' + newObjId  ).resizable({
       autoHide: true,
       handles: 'all',
       stop: function() {
         $( '#' + $(this).attr("id") ).dblclick();
       }
-    });
+    });*/
 
-    $(".draggable").draggable({
+    /*$(".draggable").draggable({
       drag:function() {
         id = $(this).attr("id");
       },
       containment: 'parent'
-    });
+    }); // D */
 
 
     refreshControls();
@@ -743,13 +809,30 @@ $(document).ready(function(){
     newObjId = year + "_" + monthnumber+"_" + monthday+"_"+hour+"_"+ minute+"_" + second;
 
     //IF CONTAINER ON, THEN APPEND IN THE CURRENT OBJECT, ELSE in droppable
-    if (objContainer == 1) {
-      droppableContainer = '#' + $('#objIDshow').html();
+    if ($('.selected-for-append').length == 1) {
+      droppableContainer = '.selected-for-append';
     } else {
       droppableContainer = "#droppable";
     }
+    
+    /*if (objContainer == 1) {
+      droppableContainer = '#' + $('#objIDshow').html();
+    } else {
+      droppableContainer = "#droppable";
+    }*/
 
-    $(droppableContainer).append("\n" + '<div class="draggable ' + $('#' + $('#objIDshow').html() ).attr('class') + '" id="net_'+newObjId+'" style="z-index:' + zIndexCounter + $('#' + $('#objIDshow').html() ).attr('style') + ';">' + $('#' + $('#objIDshow').html() ).html() + "\n" + '</div>'+ "\n");
+    // INSIDE selected object - todo
+    //$(droppableContainer).append("\n" + '<div class="draggable ' + $('#' + $('#objIDshow').html() ).attr('class') + '" id="net_'+newObjId+'" style="z-index:' + zIndexCounter + $('#' + $('#objIDshow').html() ).attr('style') + ';">' + $('#' + $('#objIDshow').html() ).html() + "\n" + '</div>'+ "\n");
+
+    // AFTER selected object
+    // first remove the olds ids for each element inside the cloned one
+    const regexForIDs = /id=\"[\S]*\"/g;
+
+    const elementWithNewIDs = $('#' + $('#objIDshow').html() ).get(0).outerHTML.replace( regexForIDs , '').replace('selected-for-append', '');
+
+    $("\n" + elementWithNewIDs + "\n").insertAfter(droppableContainer);
+    // insertAfter till here
+
 
     //IF CONTAINER ON, THEN ADD class IN THE CURRENT OBJECT, ELSE the same
     if (objContainer == 1) {
@@ -758,26 +841,26 @@ $(document).ready(function(){
 
     $('#objList').append('<option>net_' + newObjId + '</option>');
 
-    $('#net_' + newObjId  ).resizable({
+    /*$('#net_' + newObjId  ).resizable({
       autoHide: true,
       handles: 'all',
       stop: function() {
         $( '#' + $(this).attr("id") ).dblclick();
       }
-    });
+    });*/
 
 
-    $(".draggable").draggable({
+    /*$(".draggable").draggable({
       drag:function() {
         id = $(this).attr("id");
       },
       containment: 'parent'
-    });
+    }); // D */
 
 
     refreshControls();
     $('#net_' + newObjId  ).css({left:$('#net_' + newObjId  ).position().left + 5, top:$('#net_' + newObjId  ).position().top +5 });
-    $('#net_' + newObjId  ).resizable('destroy');
+    //$('#net_' + newObjId  ).resizable('destroy');
     $('#net_' + newObjId  ).dblclick();
     newIt++;
     zIndexCounter++;
@@ -804,7 +887,7 @@ $(document).ready(function(){
     $(".draggable").each(function(){
       $(this).removeClass("inactiveObject");
       $(this).css("border", "0");
-      $(this).resizable('destroy');
+      //$(this).resizable('destroy');
 
       //if it is a menu write command
       if ($(this).attr("objtype") == "Menu"){
@@ -817,14 +900,10 @@ $(document).ready(function(){
       }
 
     });
-    $('#droppable').resizable('destroy');
+    //$('#droppable').resizable('destroy');
     strCodeP =  $('#droppable').html();
-    $('#droppable').resizable({autohide: true});
-    //mozilla crap
-    strCodeP = strCodeP.replace(/(-moz-background-clip:)\s(border;)/g, '');
-    strCodeP = strCodeP.replace(/(-moz-background-origin:)\s(padding;)/g, '');
-    strCodeP = strCodeP.replace(/(-moz-background-inline-policy:)\s(continuous;)/g, '');//mozilla crap till here
-    //console.log(strCodeP);
+    //$('#droppable').resizable({autohide: true});
+
     $('#pageCodeHtml').attr( "value", strCodeP );
     //$('#pageCodeHtml').attr( "value", $('#droppable').html() );
 
@@ -900,13 +979,10 @@ $(document).ready(function(){
       $(this).remove();
     });
 
-    $('#droppable').resizable('destroy');//OVO JE RANIJE RADILO, pre jquery 1.9, prveriti da ne pravi problem na drugom mestu
+    //$('#droppable').resizable('destroy');
     strCodeP =  $('#droppable').html();
-    $('#droppable').resizable({autohide: true});
-    //mozilla crap
-    strCodeP = strCodeP.replace(/(-moz-background-clip:)\s(border;)/g, '');
-    strCodeP = strCodeP.replace(/(-moz-background-origin:)\s(padding;)/g, '');
-    strCodeP = strCodeP.replace(/(-moz-background-inline-policy:)\s(continuous;)/g, '');//moailla crap till here
+    //$('#droppable').resizable({autohide: true});
+
 
     $('#pageCodeHtml').attr( "value", strCodeP );
     //description and keywords
@@ -993,12 +1069,12 @@ $(document).ready(function(){
 
         $('#droppable').css("display", "none");
         $('#droppable').html(data.output).fadeIn();
-        $(".draggable").draggable({
+        /*$(".draggable").draggable({
           drag:function() {
             id = $(this).attr("id");
           },
           containment: 'parent'
-        });
+        }); // D */
 
         $('#objList').html("");
         $('.draggable').each(function(){
@@ -1029,7 +1105,7 @@ $(document).ready(function(){
   $('#saveAsTemplate').click(function(){
     $(".draggable").each(function(){
       $(this).css("border", "0");
-      $(this).resizable('destroy');
+      //$(this).resizable('destroy');
       $(this).removeClass("inactiveObject");
       $(this).addClass("templateDiv");
       //if it is a menu write command
@@ -1043,16 +1119,11 @@ $(document).ready(function(){
       }
 
     });
-    $('#droppable').resizable('destroy');
+    //$('#droppable').resizable('destroy');
     $('#templateMask').appendTo($('body'));
     strCodeT =  $('#templateMask').html() + $('#droppable').html();
-    $('#droppable').resizable({autohide: true});
+    //$('#droppable').resizable({autohide: true});
     $('#templateMask').appendTo($('#droppable')).css({left: "0px"});
-
-    //mozilla crap
-    strCodeT = strCodeT.replace(/(-moz-background-clip:)\s(border;)/g, '');
-    strCodeT = strCodeT.replace(/(-moz-background-origin:)\s(padding;)/g, '');
-    strCodeT = strCodeT.replace(/(-moz-background-inline-policy:)\s(continuous;)/g, '');//moailla crap till here
 
 
     $('#templateCodeHtml').attr( "value",  strCodeT );//kod templatea
@@ -1082,7 +1153,7 @@ $(document).ready(function(){
 
     $(".draggable").each(function(){
       $(this).removeClass("inactiveObject");
-      $(this).resizable('destroy');
+      //$(this).resizable('destroy');
       //if it is a menu write command
       if ($(this).attr("objtype") == "Menu"){
         $(this).html( "{" +$(this).attr("command") + "}");
@@ -1095,16 +1166,12 @@ $(document).ready(function(){
     });
 
     //$('.ui-resizable-handle').remove();
-    $('#droppable').resizable('destroy');
+    //$('#droppable').resizable('destroy');
     $('#templateMask').appendTo($('body'));
     strCodeT =  $('#templateMask').html() + $('#droppable').html();
-    $('#droppable').resizable({autohide: true});
+    //$('#droppable').resizable({autohide: true});
     $('#templateMask').appendTo($('#droppable')).css({left: "0px"});
 
-    //mozilla crap
-    strCodeT = strCodeT.replace(/(-moz-background-clip:)\s(border;)/g, '');
-    strCodeT = strCodeT.replace(/(-moz-background-origin:)\s(padding;)/g, '');
-    strCodeT = strCodeT.replace(/(-moz-background-inline-policy:)\s(continuous;)/g, '');//moailla crap till here
 
     $('#templateCodeHtml').attr( "value",  strCodeT );//kod templatea
 
@@ -1181,33 +1248,38 @@ $(".container").livequery('click', function(e){
 
 
 //DBLCLICK ON OBJECT
-$(".draggable").livequery('dblclick', function(){
+$(".draggable").livequery('dblclick', function(e){
+  const currentObject = $(this);
 
   lefT = $(this).position().left;
   toP = $(this).position().top;
   drOff = $('#droppable').position().left;
 
-  $('#penPointer').css({left:lefT + drOff, top:toP-40}).fadeIn();
+  //$('#penPointer').css({left:lefT + drOff, top:toP-40}).fadeIn();
   $(".draggable").each(function(){
 
     $(this).removeClass("activeObject");
     $(this).addClass("inactiveObject");
 
-    $('#' +$(this).attr("id") ).resizable({ autoHide: true  });
+    //$('#' +$(this).attr("id") ).resizable({ autoHide: true  });
   });
 
   $(this).removeClass("inactiveObject");
   $(this).addClass("activeObject");
 
-  width = $(this).css("width");
-  height= $(this).css("height");
-  border = $(this).css("border");
-  bgColor = $(this).css("background-color");
-  bgImage = $(this).css("background-image");
-  objectClasses = $(this).attr("class");
-  htmlValue = $(this).html();
-  zIn = $(this).css("z-index");
-  css = "width: auto; min-height: 25px;height:auto; background: transparent; padding: 10px; float:left;color: black;" + $(this).attr("style");
+  width = $(e.target).css("width");
+  height= $(e.target).css("height");
+  border = $(e.target).css("border");
+  bgColor = $(e.target).css("background-color");
+  bgImage = $(e.target).css("background-image");
+  objectClasses = $(e.target).attr("class");
+  //htmlValue = $(this).html();
+  htmlValue = $('#' + $('#objIDshow').text() ).html();
+  zIn = $(e.target).css("z-index");
+  css = $(e.target).attr("style");
+  console.log($(e.target));
+console.log($(e.target).attr('style'));
+  //css = "width: auto; min-height: 25px;height:auto; background: transparent; padding: 10px; float:left;color: black;" + $(this).attr("style");
   //theme classes
   themeClass = "";
   if( $(this).hasClass("noTheme") ){themeClass = "no";}
@@ -1235,8 +1307,16 @@ $(".draggable").livequery('dblclick', function(){
 
   }
 
-  $('#objProperties').attr("objId", $(this).attr("id") );
-  $('#objIDshow').html($(this).attr("id"));
+  if( typeof $('.selected-for-append').attr('id') !== undefined) {
+    selectedObjID = $('.selected-for-append').attr('id');
+  } else {
+
+  }
+  
+
+  $('#objProperties').attr("objId", selectedObjID );
+  $('#objIDshow').html($(selectedObjID).attr("id"));
+
 
   $("#objPropertiesWidth").attr("value", width );
   $("#objPropertiesHeight").attr("value", height );
@@ -1269,8 +1349,11 @@ $(".draggable").livequery('dblclick', function(){
 
   }
 
-  $("#objPropertiesCSS").attr("value", css );
-
+  if( typeof css == 'string' ) {
+    $("#objPropertiesCSS").attr("value", css );
+  } else {
+    $("#objPropertiesCSS").attr("value", '' );
+  }
   if ( $(this).hasClass("shadowed") ) {
     $('#shadowCheck').prop("checked", "checked");
     $('#shadowCheck').closest('span').addClass('checked');
@@ -1483,7 +1566,7 @@ $('#chooseMenuForm').change(function(){
     var tvCommand = "menu:display:" + selMenuTemplate + displayTypeMenu ;
 
     $.post(absoluteUrl + "view/render-tv/creatorAct/true/var/" + "{" + tvCommand + "}", function(data){
-      $('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes good after update
+      //$('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes good after update
       $('#' + idObjekta).html(data);
       $('#' + idObjekta ).dblclick();
 
@@ -1517,20 +1600,15 @@ $('#chooseImageFolderForm').change(function(){
 
     var tvCommand = "images:display:'" + selFolder + "'" ;
 
-
-
-
     $.post(absoluteUrl + "view/render-tv/var/" + "{" + tvCommand + "}", function(data){
       //$('#' + idObjekta).html(data);
-      $('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes good after update
+      //$('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes good after update
       $('#' + idObjekta).html(data);
       $('#' + idObjekta ).dblclick();
       $('#objPropertiesHtml').attr("value","{"+ tvCommand + "}");
       $('#' + idObjekta).attr("command", tvCommand);
 
     });
-
-
   }
 });
 
@@ -1538,7 +1616,7 @@ $('#chooseImageFolderForm').change(function(){
 
 
 $("#delButton").livequery('click', function(){
-  idObjekta = $('#objProperties').attr("objId");
+  idObjekta = $('#objIDshow').text();
   $('#objList option:contains("'+ idObjekta +'")').remove();
 
   $('#penPointer').hide();
@@ -1560,8 +1638,6 @@ $('#shadowCheck').click(function(){
   } else {
     $('#' + idObjekta).removeClass("shadowed");
   }
-
-
 });
 
 
@@ -1638,6 +1714,7 @@ $('#aParamCorner').livequery('click', function(){
     return;
   }
 });
+
 $('#cornerParamButton').livequery('click', function(){
 
   idObjekta = $('#objIDshow').html();
@@ -1753,6 +1830,7 @@ $('#aParamShadow').livequery('click', function(){
     return;
   }
 });
+
 $('#shadowParamButton').livequery('click', function(){
 
   idObjekta = $('#objIDshow').html();
@@ -1779,6 +1857,7 @@ $('#shadowParamButton').livequery('click', function(){
   }
 
 });
+
 //COLOR SELECTOR for the SHADOW
 $('#shdwColor').livequery(function(){
   $(this).ColorPicker({
@@ -1933,7 +2012,7 @@ $('#showFolderImages').livequery('change', function(){
     selFolder = $('#folderNames').attr("value");//selected folder
     selValueFolder = $('#folderNames').attr("label");
     selectedImage = $('#imageNames').attr("value");
-    imagePath = absoluteUrl + "images/" + selFolder + "/" + selectedImage;
+    imagePath = "/images/" + selFolder + "/" + selectedImage;
     $('#imagePathShow').html(imagePath);
 
 
@@ -1950,7 +2029,7 @@ $('#showFolderImages').livequery('change', function(){
 
     $.post(absoluteUrl + "view/render-tv/var/" + "{" + tvCommand + "}", function(data){
       //$('#' + idObjekta).html(data);
-      $('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes good after update
+      //$('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes good after update
       $('#' + idObjekta).html(data);
       $('#' + idObjekta ).dblclick();
 
@@ -1968,7 +2047,7 @@ $('#showFolderImages').livequery('change', function(){
   selFolder = $('#folderNames').attr("value");//selected folder
   selValueFolder = $('#folderNames').attr("label");
   selectedImage = $('#imageNames').attr("value");
-  imagePath = absoluteUrl + "images/" + selFolder + "/" + selectedImage;
+  imagePath = "/images/" + selFolder + "/" + selectedImage;
   $('#imagePathShow').html(imagePath);
 
   if($( "#dialogDivImages" ).length == 0){
@@ -1986,7 +2065,7 @@ $('#showFolderImages').livequery('change', function(){
   }
 
   $('#imageDetails').html( $('#adminAjaxLoader').html() );
-  //console.log('ja');
+
   var val = $('#imageNames').attr("value");
   var valFolder = $('#folderNames').attr("value");
   $.get(absoluteUrl + "images/show-image-details/fname/" + valFolder + "/imname/" + val , function(data){
@@ -2002,8 +2081,8 @@ $('#showFolderImages').livequery('change', function(){
 //INSERT IMAGE;
 $('#insertImage').click(function(){
   idObjekta = $('#objList').val();
-  $('#' + idObjekta).resizable('destroy');
-  $('#' + idObjekta).html('<p class="objContent"><img src = "' + $('#imagePathShow').text() + '" width="100%" height="100%" /></p>');
+  //$('#' + idObjekta).resizable('destroy');
+  $('#' + idObjekta).append('<img src = "' + $('#imagePathShow').text() + '" />');
 
   $('#' + idObjekta).resizable({autohide:true});
 
@@ -2029,6 +2108,7 @@ $('#setBodyBgImage').click(function(){
   }
 });
 
+$('#NR, #fixedBg').removeAttr('checked'); // reset checkboxes to unchecked
 $('#NR').livequery('change', function(){
 
   if($(this).attr("value") == "repeat"){
@@ -2059,20 +2139,23 @@ $('#NR').livequery('change', function(){
 });
 
 $('#fixedBg').livequery('change', function(){
+  console.log($(this).attr("value"));
   if($(this).attr("value") == "fixed"){
     trenutniCss = $('#template_bodyBg').attr("value");
-    if(trenutniCss.match(/;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%;/g) ) {
-      val = trenutniCss.replace(/;-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%;/g , "");
-      $('#template_bodyBg').attr("value" ,  val + " fixed" + ";-moz-background-size:100%;-webkit-background-size:100%;-o-background-size:100%;background-size:100%;");
+    if(trenutniCss.match(/;background-size:100%;/g) ) {
+      val = trenutniCss.replace(/;background-size:100%;/g , "");
+      $('#template_bodyBg').attr("value" ,  val + " fixed" + ";background-size:100%;");
     } else {
       $('#template_bodyBg').attr("value" , trenutniCss + " fixed" );
     }
     $('#bodyBack').css("position", "fixed");
-    $('#template_bodyBg').prop("value" ,  $('#template_bodyBg').attr("value") + ';background-attachment:fixed;');
+    $('#template_bodyBg').prop("value" ,  $('#template_bodyBg').attr("value") + ';background-attachment: fixed; background-size: cover; background-position: center center;');
 
     $('#template_bodyBg').change();
     $(this).prop("value", "") ;
     $('body').css({backgroundAttachment:"fixed"});
+    $('body').css({backgroundSize:"cover"});
+    $('body').css({backgroundPosition:"center center"});
 
   } else {
     str = $('#template_bodyBg').attr("value");
@@ -2253,7 +2336,7 @@ $('#chooseCategoryForm').change(function(){
 
     $.post(absoluteUrl + "view/render-tv/var/" + "{" + tvCommand + "}", function(data){
       //$('#' + idObjekta).html(data);
-      $('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes good after update
+      //$('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes good after update
       $('#' + idObjekta).html(data);
       $('#' + idObjekta ).dblclick();
 
@@ -2738,7 +2821,9 @@ $('#pageDisplayer').click(function(){
   $('#assignPageToCategory').show();
   $('#assignPageMenuForm').show();
   $('#descKeyDiv').show();
-  $('body').css("background", "none");
+  $('body').css("background", "white");
+  $('#p_t-label-page').removeClass('hidden');
+  $('#p_t-label-template').addClass('hidden');
 
   $('#templateEditing').hide();
   $('#deletePage').show();
@@ -2752,6 +2837,8 @@ $('#templateDisplayer').click(function(){
   $('#assignPageToCategory').hide();
   $('#assignPageMenuForm').hide();
   $('#descKeyDiv').hide();
+  $('#p_t-label-template').removeClass('hidden');
+  $('#p_t-label-page').addClass('hidden');
 
   $('#templateEditing').show();
   $('#deletePage').hide();
@@ -2834,9 +2921,7 @@ $('a.uniTableAdmin').livequery('click', function(){
       });
       ajaxEventDone(lang.Deleting);
     }
-
   }
-
 });
 
 $('.universalTableAdmin tr').livequery('mouseover', function(){
@@ -2936,12 +3021,12 @@ $('#langName').livequery('change', function(){
         if(data.output){
           $('#droppable').html(data.output).fadeIn();
 
-          $(".draggable").draggable({
+          /*$(".draggable").draggable({
             drag:function() {
               id = $(this).attr("id");
             },
             containment: 'parent'
-          });
+          }); // D */
 
           $('#objList').html("");
           $('.draggable').each(function(){
@@ -3517,14 +3602,23 @@ $('#ftpform').livequery(function(){
   });
 });
 
-$('#objList option').livequery('dblclick', function(){
-  //$('#objPropertiesHtmlTiny_fullscreen').click();
-  tinyMCE.execCommand('mceFullScreen');
+$('#objList').livequery('click', function(){
+  const val = $(this).val();
+  $('#objIDshow').html(val);
+
+  // since 24.05 - show edit object above the hovered object
+  const selectedObjID = $(this).val();
+  showEditObjectButtons(selectedObjID);
+  $('.selected-for-append').removeClass('selected-for-append');
+  $('#'+ selectedObjID ).addClass('selected-for-append');
 });
+
 
 /* tinyMCE should be replaced with something new, atm do this fix */
 $('#penPointer').livequery('click', function(){
+  $('.selected-for-append').trigger('dblclick');
   tinyMCE.execCommand('mceFullScreen');
+  
   /*$('body').livequery('click', function(){
     setTimeout(function(){//set timeout to detect out of fullscreen
       if($('#mce_fullscreen').length < 1 ) {
@@ -3534,9 +3628,7 @@ $('#penPointer').livequery('click', function(){
   });*/
 });
 
-//FULSCREEN ZA CODEPRESS
-// $('.cssjswrapp').dblclick(function(){
-
+//FULSCREEN CSS and JS tabs
 
 isFS = 0;
 // do something interesting with fullscreen support
@@ -3549,7 +3641,9 @@ fsElement2 = document.getElementById('fragment-8wrapper');
 
 var fsButton3 = document.getElementById('fsbutton3');
 fsElement3 = document.getElementById('fragment-5wrapper');
-//fsStatus = document.getElementById('fsstatus');
+
+var fsButtonAll = document.getElementById('fsbuttonAll');
+fsElementAll = document.getElementById('body');
 
 (function() {
   var
@@ -3624,24 +3718,59 @@ fsElement3 = document.getElementById('fragment-5wrapper');
 
 // handle button click CSS
 fsButton.addEventListener('click', function() {
+  // if already in fullscreen, it needs to get out of it
+  if( $(fsElement).hasClass('fs') === true ){
+    window.fullScreenApi.cancelFullScreen(fsElement);
+    $(fsElement).removeClass('fs');
+    return;
+  }
+
   window.fullScreenApi.requestFullScreen(fsElement);
   $(fsElement).addClass('fs').find('iframe').height($(window).height());
 
 }, true);
+
 //JS
 fsButton2.addEventListener('click', function() {
+  // if already in fullscreen, it needs to get out of it
+  if( $(fsElement2).hasClass('fs') === true ){
+    window.fullScreenApi.cancelFullScreen(fsElement2);
+    $(fsElement2).removeClass('fs');
+    return;
+  }
   window.fullScreenApi.requestFullScreen(fsElement2);
   $(fsElement2).addClass('fs').find('iframe').height($(window).height());
 }, true);
-//modules
+
+//MODULES
 fsButton3.addEventListener('click', function() {
+  // if already in fullscreen, it needs to get out of it
+  if( $(fsElement3).hasClass('fs') === true ){
+    window.fullScreenApi.cancelFullScreen(fsElement3);
+    $(fsElement3).removeClass('fs');
+    return;
+  }
+
   window.fullScreenApi.requestFullScreen(fsElement3);
+  $(fsElement3).addClass('fs').find('iframe').height($(window).height());
   $('.ui-dialog').livequery(function(){
     if(window.fullScreen == 1){
       $(this).appendTo(fsElement3);
     }
   });
   //$(fsElement3).addClass('fs').height($(window).height());
+}, true);
+
+// fullscreen All
+fsButtonAll.addEventListener('click', function() {
+  // if already in fullscreen, it needs to get out of it
+  if( $(fsElementAll).hasClass('fs') === true ){
+    window.fullScreenApi.cancelFullScreen(fsElementAll);
+    $(fsElementAll).removeClass('fs');
+    return;
+  }
+  window.fullScreenApi.requestFullScreen(fsElementAll);
+  $(fsElementAll).addClass('fs').find('iframe').height($(window).height());
 }, true);
 
 //install/export template
@@ -3656,8 +3785,6 @@ $('#exportTemplate').click(function(){
     $('#dialogDiv').html(data);
   });
   $('#dialogDiv').show('slow');
-
-
 });
 
 
@@ -3706,6 +3833,10 @@ $('select#objList').livequery('change', function(){
       // $(this).closest('span').removeClass('checked');
     }
   });
+  const val = $(this).val();
+  $('#objIDshow').html(val);
+  //$("#" + val).trigger('dblclick');
+  showEditObjectButtons(val);
 });
 $('input[type="checkbox"]').livequery(function(){
 

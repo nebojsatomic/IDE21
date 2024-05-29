@@ -19,27 +19,6 @@
 <?php
 echo $this->output;
 ?>
-<script type="text/javascript">
-bodyBg = "<?php echo  $this->bg ; ?>";
-bodyBgA = bodyBg.split(";");
-bodyBgSize = bodyBgA[1] + ";" + bodyBgA[2] + ";" + bodyBgA[3] + ";" +bodyBgA[4] + ";";
-if(bodyBgA[1]){
-  bodyBgSizeA = new Array;
-  bodyBgSizeA[0] = bodyBgA[1].replace(":100%", "");
-  bodyBgSizeA[1] = bodyBgA[1].replace("-moz-background-size:", "");
-}
-if(bodyBgA[2]){
-  bodyBgSizeA[2] = bodyBgA[2].replace(":100%", "");
-  bodyBgSizeA[3] = bodyBgA[2].replace("-webkit-background-size:", "");
-}
-if(bodyBgA[3]){
-  bodyBgSizeA[4] = bodyBgA[3].replace(":100%", "");
-  bodyBgSizeA[5] = bodyBgA[3].replace("-o-background-size:", "");
-}
-if(bodyBgA[4]){
-  bodyBgSizeA[6] = bodyBgA[4].replace(":100%", "");
-  bodyBgSizeA[7] = bodyBgA[4].replace("background-size:", "");
-}
-</script>
+
 <!--<script type="text/javascript" src="<?php echo $this->host;?>js/view.js"></script><script type="text/javascript" src="<?php echo $this->host;?>js/frontend.js"></script><script type="text/javascript" src="<?php echo $this->host;?>js/default.js"></script>--><!--js not compressed-->
 <!--<script type="text/javascript" src="<?php echo $this->host;?>js/view.min.js"></script><script type="text/javascript" src="<?php echo $this->host;?>js/frontend.min.js"></script><script type="text/javascript" src="<?php echo $this->host;?>js/default.min.js"></script>-->
