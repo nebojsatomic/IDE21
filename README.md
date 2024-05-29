@@ -10,18 +10,17 @@ After that template is available for export, it can be uploaded to some other in
 This is the base idea, there are still some bugs and unfinished features, there will be Wiki documentation created for User and Developer realms, which describe what is posible to do, and what is in TODO list.
 
 
-# INTRO to former version
-Videos on youtube that describe CMS-IDE ( pretty old, from 2013 )
+# YOUTUBE CHANNEL
 
-https://www.youtube.com/watch?v=qgRPWqAuB8Q
-
-( Watch from 2:00, first part is installation which is skipped in this Dockerized version )
-
-There will be new videos produced soon, with User tutorials.
+IDE21 playlist:
 
 https://youtube.com/playlist?list=PL9J82k6JLMCSzktjF3NLeNDEFidb9E6xx&feature=shared
 
+
+using IDE21 for website administration on a mobile phone:
+
 https://youtu.be/WZEZ3wNYZHg?feature=shared
+
 
 # INSTALLATION OF THIS VERSION
 
