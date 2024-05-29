@@ -19,6 +19,10 @@ https://www.youtube.com/watch?v=qgRPWqAuB8Q
 
 There will be new videos produced soon, with User tutorials.
 
+https://youtube.com/playlist?list=PL9J82k6JLMCSzktjF3NLeNDEFidb9E6xx&feature=shared
+
+https://youtu.be/WZEZ3wNYZHg?feature=shared
+
 # INSTALLATION OF THIS VERSION
 
 - Install Docker
