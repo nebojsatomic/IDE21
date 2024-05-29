@@ -748,18 +748,23 @@ $(document).ready(function(){
 
     newObjId = year + "_" + monthnumber+"_" + monthday+"_"+hour+"_"+ minute+"_" + second;
 
-    //IF CONTAINER ON, THEN APPEND IN THE CURRENT OBJECT, ELSE in droppable
-    if ($('.selected-for-append').length == 1) {
+    //IF THERE IS A SELECTED OBJECT, THEN INSERT AFTER IT, ELSE APPEND TO #droppable
+    if ($('.selected-for-append').length > 0) {
+
       droppableContainer = '.selected-for-append';
+
+      // insert inside selected object - TODO
+      //$(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
+
+      // insertAfter selected object
+      $("\n" + '<div class="draggable" id="net_'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n").insertAfter(droppableContainer);
     } else {
+
       droppableContainer = "#droppable";
+      // insert inside #droppable
+      $(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
+
     }
-
-    // insert inside selected object
-    //$(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
-
-    // insertAfter selected object
-    $("\n" + '<div class="draggable" id="net_'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n").insertAfter(droppableContainer);
 
     //IF CONTAINER ON, THEN ADD class IN THE CURRENT OBJECT, ELSE the same
     if (objContainer == 1) {
