@@ -58,3 +58,10 @@
 #containerRadnePovrsine.full-width {
   @apply sm:col-span-12 md:col-span-12 lg:col-span-12  !important;
 }
+
+.btn-search {
+  @apply btn btn-sm bg-accent absolute top-0 right-0 w-8 !important;
+}
+#what-label, #submitSearch-label {
+  @apply hidden;
+}

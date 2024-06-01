@@ -16,15 +16,12 @@
  * 
  */
  ?>
-<h1 class="searchHeaading">Search results</h1>
+<h1 class="searchHeaading text-2xl font-bold">Search results</h1>
 <br />
 <div id="searchResults">
 <?php
 $host = $this->host;
-//$host = $this->host;
 
-//print_r($this->hits);
-//echo $this->currentPageNumber . "**";
 if (count($this->hits)) {
     if($this->pageNumber == '1'){//ako je prva strana
         $strKoef = 0;
@@ -33,13 +30,12 @@ if (count($this->hits)) {
     }
     
     foreach ($this->hits as $k => $hit) {
-        echo ($strKoef + ($k +1) ) . '.<br /><a class="componentLink" href="' . $host . @$hit['url'] . '">  '  . @$hit['title'] . '</a><br />' ;
+        echo ($strKoef + ($k +1) ) . '.<br /><a class="componentLink text-lg font-bold hover:underline" href="' . $host . @$hit['url'] . '">  '  . @$hit['title'] . '</a><br />' ;
         echo  @$hit['teaser'] . "" ;
         echo '<div class="horizontalLine" style="width:100%;"></div>';
 
     }
 ?>
-<br /><br />
 <?php echo($this->paginationControl($this->hits, 'Sliding', 'paginatorSearch.phtml', array('params' => array('host' => $this->host, 'what' => $this->keyword) ) )); ?>
 <?php
 } else {

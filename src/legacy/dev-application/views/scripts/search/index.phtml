@@ -19,7 +19,7 @@
 <?php
 
 echo $this->output;
-if(@count($this->hits)) {
+if(!empty($this->hits)) {
   ?>
   <b style="padding:0px;font-size:18px;">Search results:</b><br /><br /><br />
   <div id="scroll">
@@ -28,7 +28,7 @@ if(@count($this->hits)) {
     //foreach ($this->hits as $hit) {
     ?>
 
-    <h1>Search results</h1>
+    <h1 class="text-2xl">Search results</h1>
     <table  style="border:0px solid silver;width:100%;margin-bottom:10px;padding:0px;">
       <tr>
         <td>
@@ -73,9 +73,3 @@ if(@count($this->hits)) {
   //echo '<b>There are no matching results for your search.</b>';
 }
 ?>
-
-<script type="text/javascript">
-$('body').livequery(function(){
-  //$(this).css({background:"<?php echo str_replace(';', '', $this->templateBodyBackground);?>"});
-});
-</script>
