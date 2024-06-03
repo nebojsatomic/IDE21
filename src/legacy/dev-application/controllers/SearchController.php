@@ -295,7 +295,7 @@ class SearchController extends NetActionController
     
     public function adminAction()
     {
-        echo 'This module is required for search';
+        echo '<div class="bg-green-100 p-4 mb-4 font-bold rounded text-primary-content">This module is required for search</div>';
     
     }    
     

@@ -16,17 +16,24 @@
  * 
  */
  ?>
-<?php echo $this->translate->_("Available Forms");?>:<br />
+ <div class="divider"></div>
+ <div class="bg-secondary p-4 mt-4 mb-4 font-bold rounded text-primary-content">
+<?php echo $this->translate->_("Available Forms");?>:
+</div>
 <?php
 echo $this->formsList;
 ?>
-<br />
-<?php echo $this->translate->_("Form Fields");?>:<br />
+<div class="divider"></div>
+<div class="bg-secondary p-4 mt-4 mb-4 font-bold rounded text-primary-content">
+<?php echo $this->translate->_("Form Fields");?>:
+</div>
 <?php
 echo $this->formsFieldsList;
 ?>
-<br />
-<?php echo $this->translate->_("Contacts");?>:<br />
+<div class="divider"></div>
+<div class="bg-secondary p-4 mt-4 mb-4 font-bold rounded text-primary-content">
+<?php echo $this->translate->_("Contacts");?>:
+</div>
 <?php
 echo $this->contactsList;
 ?>
