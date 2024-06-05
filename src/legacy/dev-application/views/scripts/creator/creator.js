@@ -2964,15 +2964,19 @@ $('.expanderDivClosed').livequery('click', function(){
 $('.pag_a').livequery('click', function(){
 
   idCurrent = $(this).html();//this is important for refreshing of the table
-  //idCurrent = parseInt($('#paginationControl span.current').text() );
-  //console.log(idCurrent);
-  div = $(this).parents("div:eq(1)").attr("id");
-  //$('#' + div + " .universalTableAdmin").fadeOut(1000);
+
+  div = $(this).parents(".pagination-closest").attr("id");
+
   $('#' + div + " .universalTableAdmin").prepend('<div id="loadingBook" style="position:absolute;bottom:20px;left:85%;z-index:999999;text-align:center;background:transparent;padding:10px;"><img align="center" src="' + absoluteUrl2 + 'images/ajax-loaderTable.gif" /></div>');
 
   $.get( absoluteUrl + $(this).attr("href"), function(data){
     $('#loadingBook').remove();
-    $('#' + div).html(data);
+
+    if( $('#' + div).parents('#TB_window').length < 1 ) {
+      $('#' + div).html(data);
+    } else {
+      $('#TB_ajaxContent').html(data);
+    }
   });
   return false;
 });

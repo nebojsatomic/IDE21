@@ -16,7 +16,7 @@
 *
 */
 ?>
-<div id="div_uta_<?php echo $this->tableId;?>">
+<div id="div_uta_<?php echo $this->tableId;?>" class="pagination-closest">
   <?php
   foreach ($this->cols as $col ) {
     $colone[] = $col['Field'];
@@ -76,8 +76,6 @@
       <option>15</option>
       <option>25</option>
     </select>
-
-    <!--<div class="expanderDiv" value="uta_<?php echo $this->tableId;?>" style="width:17px;height:17px;float:right;border:0px solid #e7e7e7;-moz-border-radius:3px;margin:2px;"></div>-->
   </div>
   <div class="mt-4">
   <?php

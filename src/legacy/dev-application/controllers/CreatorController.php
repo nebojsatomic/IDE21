@@ -1387,10 +1387,10 @@ class CreatorController extends NetActionController
 
         //vars
         $tableName = $tableIdQ[0]['name'];
-        //print_r($this->_sesija->table);
-        $queryTable = "" . $this->_sesija->table->$tableName->queryString;
-        $addTitle = "" . $this->_sesija->table->$tableName->addTitle;
-        $actions = $this->_sesija->table->$tableName->actions;
+
+        $queryTable = "" . $this->_sesija->table[$tableName]['queryString'];
+        $addTitle = "" . $this->_sesija->table[$tableName]['addTitle'];
+        $actions = $this->_sesija->table[$tableName]['actions'];
 
         $tablePaginated = $this->renderToTable($tableName, $queryTable, $addTitle, $actions );
         echo $tablePaginated ;
@@ -1406,10 +1406,10 @@ class CreatorController extends NetActionController
 
         //vars
         $tableName = $tableIdQ[0]['name'];
-        //print_r($this->_sesija->table);
-        $queryTable = "" . $this->_sesija->table->$tableName->queryString;
-        $addTitle = "" . $this->_sesija->table->$tableName->addTitle;
-        $actions = $this->_sesija->table->$tableName->actions;
+
+        $queryTable = "" . $this->_sesija->table[$tableName]['queryString'];
+        $addTitle = "" . $this->_sesija->table[$tableName]['addTitle'];
+        $actions = $this->_sesija->table[$tableName]['actions'];
 
         $tablePaginated = $this->renderToTableManagePages($tableName, $queryTable, $addTitle, $actions );
         echo $tablePaginated ;
