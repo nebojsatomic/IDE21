@@ -65,3 +65,7 @@
 #what-label, #submitSearch-label {
   @apply hidden;
 }
+
+.cssjswrapp.fs, .cssjswrapp2.fs {
+  @apply overflow-y-auto p-4 !important;
+}

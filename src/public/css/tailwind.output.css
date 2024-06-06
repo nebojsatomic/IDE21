@@ -3971,6 +3971,11 @@ input.tab:checked + .tab-content,
   padding-right: 0.5rem;
 }
 
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .pb-44 {
   padding-bottom: 11rem;
 }
@@ -4827,6 +4832,11 @@ input.tab:checked + .tab-content,
 
 #what-label, #submitSearch-label {
   display: none;
+}
+
+.cssjswrapp.fs, .cssjswrapp2.fs {
+  overflow-y: auto !important;
+  padding: 1rem !important;
 }
 
 @media (min-width: 768px) {
