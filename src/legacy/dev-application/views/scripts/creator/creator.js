@@ -568,13 +568,51 @@ $(document).ready(function(){
   tooltipShow = 0;
   $('#templateMask *').livequery('mouseover', function(e){
     if (tooltipShow == 1) {
-      $('#tooltip').html($(e.target).attr("id") );
+
+      // find all the classes that object has and put them in an array
+      const objectClassesArray = $(e.target).attr('class').split(' ');
+
+      let objectClassesFields = ''; // reset for every object
+
+      // go through the classes and create html with checkboxes to enable toggling classes
+      $.each( objectClassesArray, function( index, item ){
+        let currentClass = item;
+        if( currentClass === '' || currentClass == 'selected-for-append') return;
+
+        objectClassesFields = objectClassesFields + '<div class="inline-flex gap-2 items-center"><input type="checkbox" class="checkbox-sm classes-toggle" checked="true" value="' + currentClass + '" /><span>' + currentClass + '</span></div>';
+      });
+
+      // create the part in ID assistenat that holds classes and their checkboxes
+      const objectClasses = '<div class="grid grid-cols-2 gap-2 bg-base p-4">' + objectClassesFields + '</div>';
+
+      // Add New Class input field and button
+      const addNewClass = '<div class="grid gap-2"><input id="add-new-class-input" type="text" class="input input-sm mt-2" /><a id="add-new-class" class="btn btn-sm btn-primary btn-ghost">Add new class</a></div>'
+
+      // finaly put it all together
+      $('#tooltip').html( '<div id="assistant-target-id">' + $(e.target).attr("id") + '</div>' + objectClasses + addNewClass );
       $('#tooltip').css({top:e.pageY, left:e.pageX});
       $('#tooltip').show();
     } else {
       $('#tooltip').hide();
     }
 
+  });
+
+  // toggling classes for the object that ID assistant is pointing to
+  $('.classes-toggle').livequery('change', function(e){
+
+    if($(e.target).attr('checked') === undefined) {
+
+      $( '#' + $('#assistant-target-id').text()).removeClass($(e.target).val());
+    } else {
+
+      $( '#' + $('#assistant-target-id').text()).addClass($(e.target).val());
+    }
+  });
+  // add a new class to the object that ID assistant is pointing to
+  $('#add-new-class').livequery('click', function(e){
+    $( '#' + $('#assistant-target-id').text()).addClass($('#add-new-class-input').val());
+    $( '#' + $('#assistant-target-id').text()).trigger('mouseover');
   });
 
   //TURN ID ASSISTANT on/off
