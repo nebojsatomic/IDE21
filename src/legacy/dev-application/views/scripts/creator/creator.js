@@ -458,10 +458,17 @@ $('#droppable *').livequery('click', function(e){
   $('#objProperties').attr("objId", $(e.target).attr('id') );
   e.preventDefault();
   $(e.target).attr('contenteditable', 'true').focus();// edit in place
+
+  // if there was ID assistant active, trigger redraw of classes, and disable mouseover event until the next object is selected
+  if($('#tooltip').css('display') != 'none') {
+    $(e.target).trigger('mouseover');
+    $(e.target).addClass('tooltip-freeze');
+  }
 });
 
 $('#droppable *').livequery('blur', function(e){
   $(e.target).attr('contenteditable', 'false');
+  $('.tooltip-freeze').removeClass('tooltip-freeze');
 });
 
 // reset selected-for-append
@@ -476,6 +483,9 @@ $(document).ready(function(){
     $('#penPointer').css({
       top: $('.selected-for-append').offset().top + 'px'
     });
+    /*$('#tooltip').css({
+      top: $('.selected-for-append').offset().top + $('.selected-for-append').outerHeight() + 'px'
+    });*/
   });
   //idCurrent = 1;
   drOff = $('#droppable').position().left;
@@ -566,11 +576,15 @@ $(document).ready(function(){
 
   //ID ASSISTANT displayed
   tooltipShow = 0;
-  $('#templateMask *').livequery('mouseover', function(e){
+  $('#droppable *').livequery('mouseover', function(e){
     if (tooltipShow == 1) {
 
+      if($('.tooltip-freeze').length > 0 ) return;
       // find all the classes that object has and put them in an array
-      const objectClassesArray = $(e.target).attr('class').split(' ');
+      let objectClassesArray = []; // initial empty array
+      if( typeof $(e.target).attr('class') != 'undefined' ){
+        objectClassesArray = $(e.target).attr('class').split(' '); // if class attribute present, get classes in an array
+      }
 
       let objectClassesFields = ''; // reset for every object
 
@@ -579,18 +593,35 @@ $(document).ready(function(){
         let currentClass = item;
         if( currentClass === '' || currentClass == 'selected-for-append') return;
 
-        objectClassesFields = objectClassesFields + '<div class="inline-flex gap-2 items-center"><input type="checkbox" class="checkbox-sm classes-toggle" checked="true" value="' + currentClass + '" /><span>' + currentClass + '</span></div>';
+        objectClassesFields = objectClassesFields + '<div class="inline-flex gap-2 items-center max-w-80"><input type="checkbox" class="checkbox-sm classes-toggle" checked="true" value="' + currentClass + '" /><span style="overflow-wrap: break-word;inline-size: 9rem;">' + currentClass + '</span></div>';
       });
 
       // create the part in ID assistenat that holds classes and their checkboxes
-      const objectClasses = '<div class="grid grid-cols-2 gap-2 bg-base p-4">' + objectClassesFields + '</div>';
+      const objectClasses = '<div class="grid grid-cols-2 gap-2 bg-base p-2">' + objectClassesFields + '</div>';
 
       // Add New Class input field and button
-      const addNewClass = '<div class="grid gap-2"><input id="add-new-class-input" type="text" class="input input-sm mt-2" /><a id="add-new-class" class="btn btn-sm btn-primary btn-ghost">Add new class</a></div>'
+      const addNewClass = '<div class="grid gap-2"><input id="add-new-class-input" type="text" class="input input-sm mt-2" /><button id="add-new-class" class="btn btn-sm bg-neutral text-neutral-content btn-ghost">Add</button></div>'
 
       // finaly put it all together
-      $('#tooltip').html( '<div id="assistant-target-id">' + $(e.target).attr("id") + '</div>' + objectClasses + addNewClass );
-      $('#tooltip').css({top:e.pageY, left:e.pageX});
+      $('#tooltip').html( '<div id="assistant-target-id" class="text-normal font-semibold">' + $(e.target).attr("id") + '</div>' + objectClasses + addNewClass );
+
+      $('#tooltip').appendTo('#dialogDiv_assistant');
+
+      // calculate if #tooltip height is below screen, or not visible completely at any side - commented out atm while trying out dialog version which is draggable
+      /*let posTop = $(e.target).offset().top +  $(e.target).outerHeight();
+      let posLeft = $(e.target).offset().left;
+      if(e.pageY + $('#tooltip').outerHeight() > $(window).height() ){
+        //console.log('should be up');
+        posTop = $(e.target).offset().top - $('#tooltip').outerHeight();
+      } else if(e.pageY - $('#tooltip').outerHeight() < 0 ){
+        posTop = $(e.target).offset().top;
+      }
+      if(e.pageX + $('#tooltip').outerWidth() > $(window).width() ){
+        //console.log('should be to the right');
+        posLeft = posLeft - $('#tooltip').outerWidth();
+      }
+
+      $('#tooltip').css({top:posTop, left:posLeft});*/
       $('#tooltip').show();
     } else {
       $('#tooltip').hide();
@@ -616,14 +647,42 @@ $(document).ready(function(){
   });
 
   //TURN ID ASSISTANT on/off
+  $('#tttoggle').attr('checked', false); // uncheck by default
   $('#tttoggle').livequery('click', function(){
 
     if ($(this).prop("checked") == true) {
       tooltipShow = 1;
+      // dialog
+      $('#dialogDiv_assistant').remove();
 
+      if($('#dialogDiv_assistant' ).length < 1 ){
+
+        $('body').append('<div class="dialogDiv bg-accent text-accent-content" id="dialogDiv_assistant" ><p>Select the object to see its classes</p></div>');
+        $('#tooltip').appendTo('#dialogDiv_assistant');
+
+        $('#dialogDiv_assistant' ).dialog({modal: false, resizable: true, title: 'ID Assistant', closeOnEscape: false,
+          position: { my: "left top", at: "left bottom", of: '#objList' },
+          width: $('#objList').outerWidth(),
+          beforeClose: function(event, ui) {
+          $('#tooltip').appendTo('body');
+          //console.log('before close');
+        }, close: function(event, ui){
+          //console.log('close reached');
+          $('#dialogDiv_assistant').dialog('destroy');
+          $('#dialogDiv_assistant').remove();
+
+          $('#tttoggle').attr('checked', false);
+        }
+        });
+        $('#dialogDiv_assistant').show();
+      }
+      $('#dialogDiv_assistant').show();
     } else {
       tooltipShow = 0;
-      $('#tooltip').hide();
+
+      $('#tooltip').appendTo('body');
+      $('#dialogDiv_assistant').remove();
+
     }
   });
 
@@ -3653,6 +3712,9 @@ $('#objList').livequery('click', function(){
   showEditObjectButtons(selectedObjID);
   $('.selected-for-append').removeClass('selected-for-append');
   $('#'+ selectedObjID ).addClass('selected-for-append');
+
+  $('#'+ selectedObjID ).trigger('click');
+  $('#'+ selectedObjID ).trigger('mouseover'); // triger refresh of classes in ID assistant
 });
 
 

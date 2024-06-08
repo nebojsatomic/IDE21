@@ -24,7 +24,7 @@
 </div>
 <div id="downPointer"></div>
 
-<div id="tooltip" class="rounded bg-primary text-balance" style="display:none"></div>
+<div id="tooltip" class="text-balance" style="display:none"></div>
 <div id="adminAjaxLoader"><div
   class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
   role="status">
@@ -69,8 +69,8 @@
     </div>
 
     <div id="properties" class="w-full h-dvh overflow-auto">
-      <div id="rotate" class="pt-0 pb-44 md:pb-16 px-0 bg-primary text-primary-content shadow-lg rounded-none">
-        <ul id="tabs-navigation" class="tabs tabs-boxed fixed grid grid-cols-3 bottom-0 md:sticky md:top-0 md:bottom-auto w-full h-28 bg-none bg-neutral border-0 rounded-none">
+      <div id="rotate" class="ui-tabs pt-0 pb-44 md:pb-16 px-0 bg-primary text-primary-content shadow-lg rounded-none">
+        <ul id="tabs-navigation" class="tabs tabs-boxed ui-tabs-nav fixed grid grid-cols-3 bottom-0 md:sticky md:top-0 md:bottom-auto w-full h-28 bg-none bg-neutral border-0 rounded-none">
           <li role="tab" class="help tab ui-tab-button  row-start-auto" description="<?php echo $this->translate->_("Contains properties of page and objects");?>"><a href="#fragment-1" id="poA" title="Object properties on a Page or a  Template"><span><?php echo $this->translate->_("Objects");?></span></a></li>
           <li role="tab"  class="help tab ui-tab-button  row-start-auto" description="<?php echo $this->translate->_("Contains Menu management");?>"><a href="#fragment-2" id="MenuA"><span><?php echo $this->translate->_("Menus");?></span></a></li>
           <li role="tab"  class="help tab ui-tab-button  row-start-auto" description="<?php echo $this->translate->_("Contains Categories management");?>"><a href="#fragment-3" id="CatA"><span><?php echo $this->translate->_("Categories");?></span></a></li>
@@ -82,7 +82,7 @@
           <li role="tab"  class="help tab ui-tab-button  row-start-auto" description="<?php echo $this->translate->_("Site Settings");?>"><a href="#fragment-9" id="SettingsA"><span><?php echo $this->translate->_("Settings");?></span></a></li>
 
         </ul>
-        <div id="fragment-1">
+        <div id="fragment-1" style="padding: 1em 1.4em;">
           <form id="objProperties" name="objProperties" objId="" action="<?php echo $this->host;?>save" method="post">
 
             <div class="grid">  
@@ -156,7 +156,7 @@
             <div class="grid place-items-strech gap-4" >
               <div class="grid gap-y-2 content-start">
                 <div class="grid mt-1 gap-y-2 h-24">
-                  <div class="creatorDiv grid grid-cols-2 items-strech"><span class="cl"><?php echo $this->translate->_("ID Assistant");?></span><span><input id="tttoggle" type="checkbox"  class="checkbox-sm float-right" /></span></div>
+                  <div class="creatorDiv grid grid-cols-2 items-strech"><span class="cl"><?php echo $this->translate->_("ID Assistant");?></span><span><input id="tttoggle" type="checkbox"  class="checkbox-sm float-right" checked="false" /></span></div>
                   <div class="creatorDiv grid grid-cols-2 items-strech"><span class="cl"><?php echo $this->translate->_("Show hidden");?>:</span><span><input id="showFooterCheck" name="showFooterCheck" type="checkbox" class="checkbox-sm float-right" /></span></div>
                   <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("Shadow");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent currentTitle" id="aParamShadow" title="<?php echo $this->translate->_("Click to set shadow params");?>">
                     <svg class="w-4 h-4 fill-current bg-secondary text-white rounded-full inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -222,7 +222,10 @@
 
                 <span class="cl col-span-3 justify-self-start">BgColor:</span><span><input id="objPropertiesBackground" name="objPropertiesBackground"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
                 <span class="cl col-span-3 justify-self-start">BgImage:</span><span><input id="objPropertiesBackgroundImage" name="objPropertiesBackgroundImage"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
-                <span class="cl col-span-4 justify-self-start">class:</span><span class="col-span-4 w-full"><input id="objPropertiesClass" name="objPropertiesClass"class="input w-full max-h-8 p-0" type="text" value="" /></span>
+                <!-- classes are to be handled through former ID assistant -->
+                <div id="id-assistant-container"></div>
+                <div class="hidden"><span class="cl col-span-4 justify-self-start">class:</span><span class="col-span-4 w-full"><input id="objPropertiesClass" name="objPropertiesClass"class="input w-full max-h-8 p-0" type="text" value="" /></span></div>
+                <!-- classes are to be handled through former ID assistant -->
 
               </div>
               <div class="grid gap-2">
