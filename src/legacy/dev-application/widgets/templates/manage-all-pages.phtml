@@ -115,6 +115,10 @@ foreach ($this->cols as $col ) {
   <a href="" value="" class="a_chkAccess0 unrestrictAll btn btn-sm md:btn-xs btn-ghost btn-primary bg-secondary "><?php echo $this->translate->_("Un-restrict");?></a>
   <a href="" value="" class="a_access setPermissionsAll btn btn-sm md:btn-xs btn-ghost btn-primary bg-secondary"><?php echo $this->translate->_("Set permissions");?></a>
 </div>
+
+<div class="close-butt-container grid">
+  <a id="close-manage-all-pages" href="#" value="" class="btn btn-sm md:btn-xs md:w-40 md:justify-self-end relative right-0 mt-4"><?php echo $this->translate->_("Close");?></a>
+</div>
 <?php
 } else {
   echo $this->translate->_("No content yet!");

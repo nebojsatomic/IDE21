@@ -197,7 +197,7 @@
                   </select>
                 </div>
 
-                <div class="mt-4">
+                <!--Disable theme changer for now, it should be replaced with Daisyui themes changer<div class="mt-4">
                   <?php echo $this->translate->_("Theme");?>:
                   <select id="objTheme" class="help select  select-sm md:select-xs mt-1 w-full" description="<?php echo $this->translate->_("Choose the theme for the selected object");?>">
                     <option value="no">None</option>
@@ -208,7 +208,7 @@
                     <option value="white">White</option>
                     <option value="black">Black</option>
                   </select>
-                </div>
+                </div>-->
               </div>
 
               <div class="grid grid-cols-4 h-64 items-strech justify-items-end">
@@ -231,9 +231,9 @@
               <div class="grid gap-2">
                 <a href="" id="newPage" class="navLinks a_new" style="display:none" title="<?php echo $this->translate->_("Click to create new page");?>"><?php echo $this->translate->_("New Page");?></a>
                 <a href="<?php echo $this->host;?>creator/manage-all-pages?height=450&width=900" id="manageAllPages" class="thickbox btn btn-secondary btn-sm mb-4" title="<?php echo $this->translate->_("Manage All Pages");?>"><b><?php echo $this->translate->_("Manage All Pages");?></b></a>
-
-                <a id="previewButton" class="a_preview help btn btn-secondary btn-sm md:btn-xs mb-2" target="_blank" href="" title="<?php echo $this->translate->_("Click this to go to the page and see how it looks!");?>"><?php echo $this->translate->_("View Page");?></a>
                 <a href="" id="openPage" class="navLinks a_open btn btn-secondary btn-sm md:btn-xs mb-2" title="<?php echo $this->translate->_("Click to open existing page");?>"><?php echo $this->translate->_("Open Page");?></a>
+                <a id="previewButton" class="a_preview help btn btn-secondary btn-sm md:btn-xs mb-2" target="_blank" href="" title="<?php echo $this->translate->_("Click this to go to the page and see how it looks!");?>"><?php echo $this->translate->_("View Page");?></a>
+                <div class="page-title"><?php echo $this->translate->_("Page Title");?>:<input id="pageTitle" class="input input-sm w-full" type="text" name="pageTitle" value="Page <?php echo $this->pageId;?>" /></div>
                 <a href="#" class="navLinks a_redraw noAjaxEvent btn btn-secondary btn-sm md:btn-xs mb-2" id="redraw" style="display:none;"><?php echo $this->translate->_("Redraw");?></a>
                 <div id="pageEditing" class="grid gap-2">
                   <a href="" id="saveThisPage" class="navLinks a_save btn btn-secondary btn-sm md:btn-xs mb-2" title="<?php echo $this->translate->_("Click to save work on this page");?>"><?php echo $this->translate->_("Save Page");?></a>
@@ -259,7 +259,7 @@
                 
                 <div id="templateChangerDiv" class="card w-full mt-2"><?php echo $this->changeTemplate;?></div>
 
-                <div class="page-title"><?php echo $this->translate->_("Page Title");?>:<input id="pageTitle" class="input input-sm w-full" type="text" name="pageTitle" value="Page <?php echo $this->pageId;?>" /></div>
+
                 <div class="page-image"><?php echo $this->translate->_("Page Image");?>:<input id="pageImage" class="input input-sm w-full" type="text" name="pageImage" value="<?php echo $this->pageImage;?>" /></div>
 
               </div>

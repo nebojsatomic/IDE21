@@ -2,10 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+.btn-error {
+  @apply text-neutral-content !important;
+}
 /* override Thickbox values */
 #TB_ajaxContent {
-  @apply bg-primary;
-  height: 100% !important; /* override values set with javascript from thickbox.js */
+  @apply bg-primary pb-32;
+  height: 100dvh !important; /* override values set with javascript from thickbox.js */
   width: 100% !important;
 }
 #TB_window a, #TB_window a:visited, #TB_window a:link {
@@ -17,8 +20,17 @@
 #TB_window a.btn:hover {
   @apply text-white;
 }
+#TB_window a#close-manage-all-pages{
+  @apply btn-error text-neutral-content hover:text-white !important;
+}
 #TB_title {
-  @apply bg-neutral-content !important;
+  @apply grid bg-neutral-content  !important;
+}
+#TB_ajaxWindowTitle {
+  @apply w-full shadow-lg text-center font-bold;
+}
+#TB_closeAjaxWindow {
+  @apply hidden;
 }
 
 /* override jqueryui values */

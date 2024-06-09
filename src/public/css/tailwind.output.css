@@ -4219,12 +4219,18 @@ input.tab:checked + .tab-content,
   clip: rect(0,0,0,0) !important;
 }
 
+.btn-error {
+  --tw-text-opacity: 1 !important;
+  color: var(--fallback-nc,oklch(var(--nc)/var(--tw-text-opacity))) !important;
+}
+
 /* override Thickbox values */
 
 #TB_ajaxContent {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity)));
-  height: 100% !important;
+  padding-bottom: 8rem;
+  height: 100dvh !important;
   /* override values set with javascript from thickbox.js */
   width: 100% !important;
 }
@@ -4305,9 +4311,94 @@ input.tab:checked + .tab-content,
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+@media (hover: hover) {
+  .btn-outline#TB_window a#close-manage-all-pages:hover {
+    --tw-text-opacity: 1 !important;
+    color: var(--fallback-erc,oklch(var(--erc)/var(--tw-text-opacity))) !important;
+  }
+
+  @supports (color: color-mix(in oklab, black, black)) {
+    .btn-outline#TB_window a#close-manage-all-pages:hover {
+      background-color: color-mix(in oklab, var(--fallback-er,oklch(var(--er)/1)) 90%, black) !important;
+      border-color: color-mix(in oklab, var(--fallback-er,oklch(var(--er)/1)) 90%, black) !important;
+    }
+  }
+
+  .btn-outline#TB_window a#close-manage-all-pages:hover {
+    --tw-text-opacity: 1 !important;
+    color: var(--fallback-erc,oklch(var(--erc)/var(--tw-text-opacity))) !important;
+  }
+
+  @supports (color: color-mix(in oklab, black, black)) {
+    .btn-outline#TB_window a#close-manage-all-pages:hover {
+      background-color: color-mix(in oklab, var(--fallback-er,oklch(var(--er)/1)) 90%, black) !important;
+      border-color: color-mix(in oklab, var(--fallback-er,oklch(var(--er)/1)) 90%, black) !important;
+    }
+  }
+}
+
+@supports not (color: oklch(0% 0 0)) {
+  #TB_window a#close-manage-all-pages {
+    --btn-color: var(--fallback-er) !important;
+  }
+}
+
+@supports (color: color-mix(in oklab, black, black)) {
+  .btn-outline#TB_window a#close-manage-all-pages.btn-active {
+    background-color: color-mix(in oklab, var(--fallback-er,oklch(var(--er)/1)) 90%, black) !important;
+    border-color: color-mix(in oklab, var(--fallback-er,oklch(var(--er)/1)) 90%, black) !important;
+  }
+}
+
+@supports (color: oklch(0% 0 0)) {
+  #TB_window a#close-manage-all-pages {
+    --btn-color: var(--er) !important;
+  }
+}
+
+#TB_window a#close-manage-all-pages {
+  --tw-text-opacity: 1 !important;
+  color: var(--fallback-erc,oklch(var(--erc)/var(--tw-text-opacity))) !important;
+  outline-color: var(--fallback-er,oklch(var(--er)/1)) !important;
+}
+
+.btn-outline#TB_window a#close-manage-all-pages {
+  --tw-text-opacity: 1 !important;
+  color: var(--fallback-er,oklch(var(--er)/var(--tw-text-opacity))) !important;
+}
+
+.btn-outline#TB_window a#close-manage-all-pages.btn-active {
+  --tw-text-opacity: 1 !important;
+  color: var(--fallback-erc,oklch(var(--erc)/var(--tw-text-opacity))) !important;
+}
+
+#TB_window a#close-manage-all-pages {
+  --tw-text-opacity: 1 !important;
+  color: var(--fallback-nc,oklch(var(--nc)/var(--tw-text-opacity))) !important;
+}
+
+#TB_window a#close-manage-all-pages:hover {
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
+
 #TB_title {
+  display: grid !important;
   --tw-bg-opacity: 1 !important;
   background-color: var(--fallback-nc,oklch(var(--nc)/var(--tw-bg-opacity))) !important;
+}
+
+#TB_ajaxWindowTitle {
+  width: 100%;
+  text-align: center;
+  font-weight: 700;
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+#TB_closeAjaxWindow {
+  display: none;
 }
 
 /* override jqueryui values */
@@ -5128,6 +5219,10 @@ input.tab:checked + .tab-content,
     width: 80%;
   }
 
+  .md\:w-40 {
+    width: 10rem;
+  }
+
   .md\:w-auto {
     width: auto;
   }
@@ -5138,6 +5233,10 @@ input.tab:checked + .tab-content,
 
   .md\:gap-2 {
     gap: 0.5rem;
+  }
+
+  .md\:justify-self-end {
+    justify-self: end;
   }
 
   .md\:rounded-box {

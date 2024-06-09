@@ -1087,7 +1087,7 @@ $(document).ready(function(){
     $('#pageKEYWORDS').attr("value", $('#pageKeywords').attr("value") );
 
     $('#pageImageC').attr("value", $('#pageImage').attr("value") );
-    console.log($('#pageTitle').attr("value") );
+
     $('#pageTitleC').attr("value", $('#pageTitle').attr("value") );
     $('#pageCategoryC').attr("value", $('#categoryNameAssign').attr("value") );
 
@@ -1127,7 +1127,7 @@ $(document).ready(function(){
       $('#droppable').empty();
       //update data on the interface
       //getting output for the loaded page
-      pageTitle = $('#' + $(this).attr("id") + " option:selected").attr("label") ;
+      pageTitle = $('#dialogDiv_' + openPageDialogUniqueId + ' #pageName :selected').text();
       pgId = $('#' + $(this).attr("id") + " option:selected").attr("value");
       //console.log(pgId)
       $('#pgID').html(pgId);
@@ -3371,6 +3371,12 @@ $('.chk_all').livequery('click', function(){
     });
 
   }
+});
+
+// close Manage All Pages window
+$('#close-manage-all-pages').livequery('click', function(){
+  $('#TB_closeWindowButton').trigger('click');
+  return false;
 });
 
 //tree display
