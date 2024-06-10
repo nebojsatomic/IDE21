@@ -81,3 +81,14 @@
 .cssjswrapp.fs, .cssjswrapp2.fs {
   @apply overflow-y-auto p-4 !important;
 }
+/* override ui-autocomplete */
+.ui-autocomplete {
+  @apply bg-neutral-content text-lg font-semibold w-full h-auto max-h-96 px-4 left-0 overflow-auto !important;
+}
+.ui-autocomplete .ui-menu-item a {
+  @apply flex w-full px-2 text-lg border-0 font-semibold bg-transparent hover:font-semibold cursor-pointer !important;
+}
+.ui-autocomplete .ui-menu-item a.ui-state-focus {
+  background: transparent;
+  @apply text-accent;
+}

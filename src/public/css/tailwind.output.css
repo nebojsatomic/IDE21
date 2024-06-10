@@ -5024,6 +5024,46 @@ input.tab:checked + .tab-content,
   padding: 1rem !important;
 }
 
+/* override ui-autocomplete */
+
+.ui-autocomplete {
+  left: 0px !important;
+  height: auto !important;
+  max-height: 24rem !important;
+  width: 100% !important;
+  overflow: auto !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: var(--fallback-nc,oklch(var(--nc)/var(--tw-bg-opacity))) !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
+  font-weight: 600 !important;
+}
+
+.ui-autocomplete .ui-menu-item a {
+  display: flex !important;
+  width: 100% !important;
+  cursor: pointer !important;
+  border-width: 0px !important;
+  background-color: transparent !important;
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
+  font-weight: 600 !important;
+}
+
+.ui-autocomplete .ui-menu-item a:hover {
+  font-weight: 600 !important;
+}
+
+.ui-autocomplete .ui-menu-item a.ui-state-focus {
+  background: transparent;
+  --tw-text-opacity: 1;
+  color: var(--fallback-a,oklch(var(--a)/var(--tw-text-opacity)));
+}
+
 @media (min-width: 768px) {
   @media (hover:hover) {
     .md\:table tr.hover:hover,.md\:table tr.hover:nth-child(even):hover {

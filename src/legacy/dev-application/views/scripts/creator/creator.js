@@ -573,7 +573,10 @@ $(document).ready(function(){
     $('#' + $('#objProperties').attr("objId")).css( {fontSize:fSize} );
   });
 
-
+  // load tailwindCSS classes to be used for autocomplete
+  $.getScript("/daisy/tailwind.classes.js", function(data) {
+    //console.log('array of classes loaded');
+  });
   //ID ASSISTANT displayed
   tooltipShow = 0;
   $('#droppable *').livequery('mouseover', function(e){
@@ -607,21 +610,9 @@ $(document).ready(function(){
 
       $('#tooltip').appendTo('#dialogDiv_assistant');
 
-      // calculate if #tooltip height is below screen, or not visible completely at any side - commented out atm while trying out dialog version which is draggable
-      /*let posTop = $(e.target).offset().top +  $(e.target).outerHeight();
-      let posLeft = $(e.target).offset().left;
-      if(e.pageY + $('#tooltip').outerHeight() > $(window).height() ){
-        //console.log('should be up');
-        posTop = $(e.target).offset().top - $('#tooltip').outerHeight();
-      } else if(e.pageY - $('#tooltip').outerHeight() < 0 ){
-        posTop = $(e.target).offset().top;
-      }
-      if(e.pageX + $('#tooltip').outerWidth() > $(window).width() ){
-        //console.log('should be to the right');
-        posLeft = posLeft - $('#tooltip').outerWidth();
-      }
+      // add tailwindCSS classes autocomplete
+      $('#add-new-class-input').autocomplete({source: tailwindClasses });
 
-      $('#tooltip').css({top:posTop, left:posLeft});*/
       $('#tooltip').show();
     } else {
       $('#tooltip').hide();
@@ -640,6 +631,13 @@ $(document).ready(function(){
       $( '#' + $('#assistant-target-id').text()).addClass($(e.target).val());
     }
   });
+  $('#add-new-class-input').livequery('keypress', function(e){
+    if(e.which == 13) {
+      $('#add-new-class').trigger('click'); // add a new class by clicking on a button
+      $('#add-new-class-input').focus();
+    }
+  });
+
   // add a new class to the object that ID assistant is pointing to
   $('#add-new-class').livequery('click', function(e){
     $( '#' + $('#assistant-target-id').text()).addClass($('#add-new-class-input').val());
