@@ -16,25 +16,14 @@
 *
 */
 ?>
-<div id="div_uta_<?php echo $this->tableId;?>">
+<div id="div_uta_<?php echo $this->tableId;?>" class="pagination-closest">
   <?php
   foreach ($this->cols as $col ) {
     $colone[] = $col['Field'];
   }
   ?>
-  <a href="<?php echo @$this->actions['add'];?>" class="navLinks uniTableAdmin a_add btn btn-xs" value="<?php echo $this->tableId;?>"><?php echo $this->translate->_($this->addTitle);?></a>
 
-  <select id="paginationStep_<?php echo $this->tableId;?>" class="paginationStep select select-xs float-right w-10">
-    <option>-</option>
-    <option>5</option>
-    <option >10</option>
-    <option>15</option>
-    <option>25</option>
-  </select>
-
-  <!--<div class="expanderDiv" value="uta_<?php echo $this->tableId;?>" style="width:17px;height:17px;float:right;border:0px solid #e7e7e7;-moz-border-radius:3px;margin:2px;"></div>-->
-
-  <div class="overflow-x-auto my-4">
+  <div class="overflow-x-auto my-4 w-full">
     <table id="uta_<?php echo $this->tableId;?>" value="<?php echo $this->tableId;?>" class="universalTableAdmin bg-neutral-content text-center table table-xs" cellspacing="0" >
       <?php
       echo '<thead><tr class="text-center">';
@@ -77,6 +66,21 @@
       </tbody>
     </table>
   </div>
+  <div class="">
+    <a href="<?php echo @$this->actions['add'];?>" class="navLinks uniTableAdmin a_add btn btn-xs" value="<?php echo $this->tableId;?>"><?php echo $this->translate->_($this->addTitle);?></a>
 
-  <?php echo($this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array('params' => array('tableId' => $this->tableId, 'translate' => $this->translate) ) )); ?>
+    <select id="paginationStep_<?php echo $this->tableId;?>" class="paginationStep select select-xs float-right w-10">
+      <option>-</option>
+      <option>5</option>
+      <option >10</option>
+      <option>15</option>
+      <option>25</option>
+    </select>
+  </div>
+  <div class="mt-4">
+  <?php
+    //echo($this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array('params' => array('tableId' => $this->tableId, 'translate' => $this->translate) ) ));
+    echo($this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array('params' => array('tableId' => $this->tableId) ) ));
+  ?>
+  </div>
 </div>

@@ -62,12 +62,12 @@ class SearchController extends NetActionController
     {
         $db = Zend_Registry::get('db');
         $langCode = $this->_sesija->lang;
-        //$langCode = "sr";
-        
+
         $values = $this->_request->getParams();
-        if (@$values['page'] == "" && (!isset($values['what']) || $values['what'] == "" ) ) {
+
+        /*        if (@$values['page'] == "" && (!isset($values['what']) || $values['what'] == "" ) ) {
             //die("No search string!");
-            $content = $this->_translate->_("No search string!");
+            $content = $this->_translate->_("No search string!again!");
             
             //$template = $db->fetchAll("SELECT output FROM templates_$langCode where defaultTemplate = '1'");
             $template = $db->fetchAll("SELECT output, bodyBg FROM templates_$langCode RIGHT JOIN modules ON modules.templateId = templates_$langCode.id ");
@@ -78,7 +78,7 @@ class SearchController extends NetActionController
                 $this->view->templateBodyBackground = $template[0]['bodyBg'];    
             }
             return;
-        }
+        }*/
         
         $what = $values['what'];
 
@@ -266,9 +266,10 @@ class SearchController extends NetActionController
 
         
         $form = new Zend_Form(array(
-            'action' => NetActionController::$hostRW . 'search/',
-            'id' => 'searchForm',
             'method' => 'post',
+            'action' => NetActionController::$hostRW . 'search',
+            'id' => 'searchForm',
+            'class' => 'relative',
             'elements' => array(
                 'what' => array('text', array(
                     'required' => true,
@@ -278,7 +279,7 @@ class SearchController extends NetActionController
                 )),
                 'submitSearch' => array('submit', array(
                     'label' => '',
-                    'class' => 'hidden',
+                    'class' => 'btn-search',
                     'order' => 100,
                 ))
         )));
@@ -294,7 +295,7 @@ class SearchController extends NetActionController
     
     public function adminAction()
     {
-        echo 'This module is required for search';
+        echo '<div class="bg-green-100 p-4 mb-4 font-bold rounded text-primary-content">This module is required for search</div>';
     
     }    
     

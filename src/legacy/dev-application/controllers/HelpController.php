@@ -36,7 +36,7 @@ class HelpController extends NetActionController
         $this->_checkAccess();
         $this->_helper->layout()->disableLayout();        
 	      $this->_helper->viewRenderer->setNoRender();
-        echo "Not available yet" ;    
+        echo '<div class="bg-yellow-100 p-4 mb-4 font-bold rounded text-primary-content">Not available yet</div>' ;    
     }
     public function indexAction()
 

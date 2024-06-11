@@ -458,10 +458,17 @@ $('#droppable *').livequery('click', function(e){
   $('#objProperties').attr("objId", $(e.target).attr('id') );
   e.preventDefault();
   $(e.target).attr('contenteditable', 'true').focus();// edit in place
+
+  // if there was ID assistant active, trigger redraw of classes, and disable mouseover event until the next object is selected
+  if($('#tooltip').css('display') != 'none') {
+    $(e.target).trigger('mouseover');
+    $(e.target).addClass('tooltip-freeze');
+  }
 });
 
 $('#droppable *').livequery('blur', function(e){
   $(e.target).attr('contenteditable', 'false');
+  $('.tooltip-freeze').removeClass('tooltip-freeze');
 });
 
 // reset selected-for-append
@@ -476,6 +483,9 @@ $(document).ready(function(){
     $('#penPointer').css({
       top: $('.selected-for-append').offset().top + 'px'
     });
+    /*$('#tooltip').css({
+      top: $('.selected-for-append').offset().top + $('.selected-for-append').outerHeight() + 'px'
+    });*/
   });
   //idCurrent = 1;
   drOff = $('#droppable').position().left;
@@ -563,13 +573,46 @@ $(document).ready(function(){
     $('#' + $('#objProperties').attr("objId")).css( {fontSize:fSize} );
   });
 
-
+  // load tailwindCSS classes to be used for autocomplete
+  $.getScript("/daisy/tailwind.classes.js", function(data) {
+    //console.log('array of classes loaded');
+  });
   //ID ASSISTANT displayed
   tooltipShow = 0;
-  $('#templateMask *').livequery('mouseover', function(e){
+  $('#droppable *').livequery('mouseover', function(e){
     if (tooltipShow == 1) {
-      $('#tooltip').html($(e.target).attr("id") );
-      $('#tooltip').css({top:e.pageY, left:e.pageX});
+
+      if($('.tooltip-freeze').length > 0 ) return;
+      // find all the classes that object has and put them in an array
+      let objectClassesArray = []; // initial empty array
+      if( typeof $(e.target).attr('class') != 'undefined' ){
+        objectClassesArray = $(e.target).attr('class').split(' '); // if class attribute present, get classes in an array
+      }
+
+      let objectClassesFields = ''; // reset for every object
+
+      // go through the classes and create html with checkboxes to enable toggling classes
+      $.each( objectClassesArray, function( index, item ){
+        let currentClass = item;
+        if( currentClass === '' || currentClass == 'selected-for-append') return;
+
+        objectClassesFields = objectClassesFields + '<div class="inline-flex gap-2 items-center max-w-80"><input type="checkbox" class="checkbox-sm classes-toggle" checked="true" value="' + currentClass + '" /><span style="overflow-wrap: break-word;inline-size: 9rem;">' + currentClass + '</span></div>';
+      });
+
+      // create the part in ID assistenat that holds classes and their checkboxes
+      const objectClasses = '<div class="grid grid-cols-2 gap-2 bg-base p-2">' + objectClassesFields + '</div>';
+
+      // Add New Class input field and button
+      const addNewClass = '<div class="grid gap-2"><input id="add-new-class-input" type="text" class="input input-sm mt-2" /><button id="add-new-class" class="btn btn-sm bg-neutral text-neutral-content btn-ghost">Add</button></div>'
+
+      // finaly put it all together
+      $('#tooltip').html( '<div id="assistant-target-id" class="text-normal font-semibold">' + $(e.target).attr("id") + '</div>' + objectClasses + addNewClass );
+
+      $('#tooltip').appendTo('#dialogDiv_assistant');
+
+      // add tailwindCSS classes autocomplete
+      $('#add-new-class-input').autocomplete({source: tailwindClasses });
+
       $('#tooltip').show();
     } else {
       $('#tooltip').hide();
@@ -577,15 +620,67 @@ $(document).ready(function(){
 
   });
 
+  // toggling classes for the object that ID assistant is pointing to
+  $('.classes-toggle').livequery('change', function(e){
+
+    if($(e.target).attr('checked') === undefined) {
+
+      $( '#' + $('#assistant-target-id').text()).removeClass($(e.target).val());
+    } else {
+
+      $( '#' + $('#assistant-target-id').text()).addClass($(e.target).val());
+    }
+  });
+  $('#add-new-class-input').livequery('keypress', function(e){
+    if(e.which == 13) {
+      $('#add-new-class').trigger('click'); // add a new class by clicking on a button
+      $('#add-new-class-input').focus();
+    }
+  });
+
+  // add a new class to the object that ID assistant is pointing to
+  $('#add-new-class').livequery('click', function(e){
+    $( '#' + $('#assistant-target-id').text()).addClass($('#add-new-class-input').val());
+    $( '#' + $('#assistant-target-id').text()).trigger('mouseover');
+  });
+
   //TURN ID ASSISTANT on/off
+  $('#tttoggle').attr('checked', false); // uncheck by default
   $('#tttoggle').livequery('click', function(){
 
     if ($(this).prop("checked") == true) {
       tooltipShow = 1;
+      // dialog
+      $('#dialogDiv_assistant').remove();
 
+      if($('#dialogDiv_assistant' ).length < 1 ){
+
+        $('body').append('<div class="dialogDiv bg-accent text-accent-content" id="dialogDiv_assistant" ><p>Select the object to see its classes</p></div>');
+        $('#tooltip').appendTo('#dialogDiv_assistant');
+
+        $('#dialogDiv_assistant' ).dialog({modal: false, resizable: true, title: 'ID Assistant', closeOnEscape: false,
+          position: { my: "left top", at: "left bottom", of: '#objList' },
+          width: $('#objList').outerWidth(),
+          beforeClose: function(event, ui) {
+          $('#tooltip').appendTo('body');
+          //console.log('before close');
+        }, close: function(event, ui){
+          //console.log('close reached');
+          $('#dialogDiv_assistant').dialog('destroy');
+          $('#dialogDiv_assistant').remove();
+
+          $('#tttoggle').attr('checked', false);
+        }
+        });
+        $('#dialogDiv_assistant').show();
+      }
+      $('#dialogDiv_assistant').show();
     } else {
       tooltipShow = 0;
-      $('#tooltip').hide();
+
+      $('#tooltip').appendTo('body');
+      $('#dialogDiv_assistant').remove();
+
     }
   });
 
@@ -990,7 +1085,7 @@ $(document).ready(function(){
     $('#pageKEYWORDS').attr("value", $('#pageKeywords').attr("value") );
 
     $('#pageImageC').attr("value", $('#pageImage').attr("value") );
-    console.log($('#pageTitle').attr("value") );
+
     $('#pageTitleC').attr("value", $('#pageTitle').attr("value") );
     $('#pageCategoryC').attr("value", $('#categoryNameAssign').attr("value") );
 
@@ -1030,7 +1125,7 @@ $(document).ready(function(){
       $('#droppable').empty();
       //update data on the interface
       //getting output for the loaded page
-      pageTitle = $('#' + $(this).attr("id") + " option:selected").attr("label") ;
+      pageTitle = $('#dialogDiv_' + openPageDialogUniqueId + ' #pageName :selected').text();
       pgId = $('#' + $(this).attr("id") + " option:selected").attr("value");
       //console.log(pgId)
       $('#pgID').html(pgId);
@@ -2964,15 +3059,19 @@ $('.expanderDivClosed').livequery('click', function(){
 $('.pag_a').livequery('click', function(){
 
   idCurrent = $(this).html();//this is important for refreshing of the table
-  //idCurrent = parseInt($('#paginationControl span.current').text() );
-  //console.log(idCurrent);
-  div = $(this).parents("div:eq(1)").attr("id");
-  //$('#' + div + " .universalTableAdmin").fadeOut(1000);
+
+  div = $(this).parents(".pagination-closest").attr("id");
+
   $('#' + div + " .universalTableAdmin").prepend('<div id="loadingBook" style="position:absolute;bottom:20px;left:85%;z-index:999999;text-align:center;background:transparent;padding:10px;"><img align="center" src="' + absoluteUrl2 + 'images/ajax-loaderTable.gif" /></div>');
 
   $.get( absoluteUrl + $(this).attr("href"), function(data){
     $('#loadingBook').remove();
-    $('#' + div).html(data);
+
+    if( $('#' + div).parents('#TB_window').length < 1 ) {
+      $('#' + div).html(data);
+    } else {
+      $('#TB_ajaxContent').html(data);
+    }
   });
   return false;
 });
@@ -3270,6 +3369,12 @@ $('.chk_all').livequery('click', function(){
     });
 
   }
+});
+
+// close Manage All Pages window
+$('#close-manage-all-pages').livequery('click', function(){
+  $('#TB_closeWindowButton').trigger('click');
+  return false;
 });
 
 //tree display
@@ -3611,6 +3716,9 @@ $('#objList').livequery('click', function(){
   showEditObjectButtons(selectedObjID);
   $('.selected-for-append').removeClass('selected-for-append');
   $('#'+ selectedObjID ).addClass('selected-for-append');
+
+  $('#'+ selectedObjID ).trigger('click');
+  $('#'+ selectedObjID ).trigger('mouseover'); // triger refresh of classes in ID assistant
 });
 
 

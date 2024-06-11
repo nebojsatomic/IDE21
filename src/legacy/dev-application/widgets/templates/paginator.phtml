@@ -15,43 +15,36 @@
  * 
  * 
  */
- ?>
-<?php 
-//print_r($this->params);
 ?>
 <?php
 $i=1;
 ?>
-
 <?php if ($this->pageCount > 1): ?>
-<div id="paginationControl">
-&nbsp;<?php echo $this->translate("PAGE");?> <span class="current"><?php echo $this->current;?></span>/<span class="total"><?php echo $this->pageCount;?></span>
-<br />
-<!-- Previous page link -->
-<a class="pagback arrows pag_a" href="<?php $this->host;?>creator/paginate-table/tid/<?php echo $this->params['tableId']; ?>/page/<?php echo $this->previous;?>"> <?php echo $this->translate('Back');?></a> &nbsp;&nbsp;
+  <div id="paginationControl" class="grid gap-2">
+    <div class="flex gap-2">
+      <?php echo $this->translate("PAGE");?><span class="current"><?php echo $this->current;?></span>/<span class="total"><?php echo $this->pageCount;?></span>
+    </div>
+    <div class="flex gap-2 bg-neutral-content  py-4 rounded">
+      <!-- Previous page link -->
+      <a class="pagback arrows pag_a" href="<?php $this->host;?>creator/paginate-table/tid/<?php echo $this->params['tableId']; ?>/page/<?php echo $this->previous;?>"> <?php echo $this->translate('Back');?></a>
+      <!-- Numbered page links -->
+      <?php foreach ($this->pagesInRange as $page): ?>
+        <?php echo '<!--' . $this->route . '-->';?>
+        <?php
+        if($page == $this->current){
+          $style = "font-weight:bold;text-decoration:none;";
+        } else {
+          $style = "font-weight:normal;text-decoration:underline;";
+        }
+        ?>
+        <a style="<?php echo $style;?>" class="pag_a" href="<?php $this->host;?>creator/paginate-table/tid/<?php echo $this->params['tableId']; ?>/page/<?= $page; ?>" value="<?= $this->url(array_merge($this->params, array('page' => $page)), $this->route); ?>"><?= $page; ?></a>
+      <?php endforeach; ?>
 
-<!-- Numbered page links -->
-<?php foreach ($this->pagesInRange as $page): ?>
-    <?php echo '<!--' . $this->route . '-->';?>
-    <?php
-    if($page == $this->current){
-        $style = "font-weight:bold;text-decoration:none;";
-    } else {
-        $style = "font-weight:normal;text-decoration:underline;";    
-    }
-    ?>
-    
-     <a style="<?php echo $style;?>" class="pag_a" href="<?php $this->host;?>creator/paginate-table/tid/<?php echo $this->params['tableId']; ?>/page/<?= $page; ?>" value="<?= $this->url(array_merge($this->params, array('page' => $page)), $this->route); ?>"><?= $page; ?></a> &nbsp;
-<?php endforeach; ?>
-&nbsp;&nbsp;
-
-<!-- Next page link -->
-<a class="pagnext arrows pag_a" href="<?php $this->host;?>creator/paginate-table/tid/<?php echo $this->params['tableId']; ?>/page/<?php echo $this->next;?>" ><?php echo $this->translate('Next');?></a>
-
-</div>
-
-<?php
-$i++;
-?>
-
+      <!-- Next page link -->
+      <a class="pagnext arrows pag_a" href="<?php $this->host;?>creator/paginate-table/tid/<?php echo $this->params['tableId']; ?>/page/<?php echo $this->next;?>" ><?php echo $this->translate('Next');?></a>
+    </div>
+  </div>
+  <?php
+  $i++;
+  ?>
 <?php endif; ?>

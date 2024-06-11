@@ -533,9 +533,14 @@ class NetActionController extends Zend_Controller_Action
         $host = NetActionController::$host;
 
         //session variables
-        //@$this->_sesija->table->$table->queryString = $justCols;
-        //@$this->_sesija->table->$table->addTitle = $addTitle;
-        //@$this->_sesija->table->$table->actions = $actions;
+        if( $this->_sesija->table === NULL ) {
+            $this->_sesija->table = Array();
+            $this->_sesija->table[$table] = Array($table);
+        }
+
+        $this->_sesija->table[$table]['queryString'] = $justCols;
+        $this->_sesija->table[$table]['addTitle'] = $addTitle;
+        $this->_sesija->table[$table]['actions'] = $actions;
 
         if ($addTitle == null){
             $addTitle = $this->translate->_("Add a record");
@@ -642,9 +647,9 @@ class NetActionController extends Zend_Controller_Action
         $host = NetActionController::$hostRW;
 
         //session variables
-        //@$this->_sesija->table->$table->queryString = $justCols;
-        //@$this->_sesija->table->$table->addTitle = $addTitle;
-        //@$this->_sesija->table->$table->actions = $actions;
+        $this->_sesija->table[$table]['queryString'] = $justCols;
+        $this->_sesija->table[$table]['addTitle'] = $addTitle;
+        $this->_sesija->table[$table]['actions'] = $actions;
 
         if ($addTitle == null){
             $addTitle = "Add a record";

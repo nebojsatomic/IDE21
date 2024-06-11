@@ -22,6 +22,8 @@ class VerifyCsrfToken extends Middleware
         'category/*',
         'modules/*',
         'tables/*',
-        'user/*'
+        'user/*',
+        'search',
+        'public/*'
     ];
 }

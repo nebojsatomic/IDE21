@@ -35,7 +35,7 @@ foreach ($this->cols as $col ) {
   </select>
 </div>
 <div class="grid gap-2 content-center md:my-4 overflow-auto">
-  <div id="div_uta_<?php echo $this->tableId;?>" class="grid gap-2 w-full">
+  <div id="div_uta_<?php echo $this->tableId;?>" class="grid gap-2 w-full pagination-closest">
 
     <!--<div class="expanderFullScr" value="uta_<?php echo $this->tableId;?>" style="width:17px;height:17px;float:right;border:0px solid #e7e7e7;-moz-border-radius:3px;margin:2px;"></div>
       <div class="expanderDiv" value="uta_<?php echo $this->tableId;?>" style="width:17px;height:17px;float:right;border:0px solid #e7e7e7;-moz-border-radius:3px;margin:2px;"></div>-->
@@ -114,6 +114,10 @@ foreach ($this->cols as $col ) {
   <a href="" value="" class="a_chkAccess1 restrictAll btn btn-sm md:btn-xs btn-ghost btn-primary bg-secondary"><?php echo $this->translate->_("Restrict");?></a>
   <a href="" value="" class="a_chkAccess0 unrestrictAll btn btn-sm md:btn-xs btn-ghost btn-primary bg-secondary "><?php echo $this->translate->_("Un-restrict");?></a>
   <a href="" value="" class="a_access setPermissionsAll btn btn-sm md:btn-xs btn-ghost btn-primary bg-secondary"><?php echo $this->translate->_("Set permissions");?></a>
+</div>
+
+<div class="close-butt-container grid">
+  <a id="close-manage-all-pages" href="#" value="" class="btn btn-sm md:btn-xs md:w-40 md:justify-self-end relative right-0 mt-4"><?php echo $this->translate->_("Close");?></a>
 </div>
 <?php
 } else {

@@ -317,11 +317,11 @@ span.ui-button-text {
 
 #contProperties * {
   font-family: Arial;
-  font-size: 12px!important;
+  /*font-size: 12px!important;*/
 }
 
 #contProperties #tabs-navigation {
-  padding: 0.25rem;
+  /*padding: 0.25rem;*/
   /*position: fixed;
   bottom:0;*/
   /*position: absolute;*/
@@ -346,17 +346,17 @@ span.ui-button-text {
 }
 
 #tooltip {
-  position: absolute;
+/*  position: absolute;
   left: 0;
   top: 0;
   z-index: 999999;
-  width: 200px;
   height: auto;
   min-height: 50px;
   font-weight: bold;
   font-size: 15px;
   padding: 20px;
   border: 1px solid #555555;
+  word-wrap: break-word;*/
 }
 
 #ajax-loader {
@@ -449,9 +449,7 @@ span.ui-button-text {
 }
 
 .a_clear {
-  text-decoration: none;
-  font-style: italic;
-  color: #555555
+
 }
 
 .a_redraw {

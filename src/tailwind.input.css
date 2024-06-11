@@ -2,10 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+.btn-error {
+  @apply text-neutral-content !important;
+}
 /* override Thickbox values */
 #TB_ajaxContent {
-  @apply bg-primary;
-  height: 100% !important; /* override values set with javascript from thickbox.js */
+  @apply bg-primary pb-32;
+  height: 100dvh !important; /* override values set with javascript from thickbox.js */
   width: 100% !important;
 }
 #TB_window a, #TB_window a:visited, #TB_window a:link {
@@ -17,8 +20,17 @@
 #TB_window a.btn:hover {
   @apply text-white;
 }
+#TB_window a#close-manage-all-pages{
+  @apply btn-error text-neutral-content hover:text-white !important;
+}
 #TB_title {
-  @apply bg-neutral-content !important;
+  @apply grid bg-neutral-content  !important;
+}
+#TB_ajaxWindowTitle {
+  @apply w-full shadow-lg text-center font-bold;
+}
+#TB_closeAjaxWindow {
+  @apply hidden;
 }
 
 /* override jqueryui values */
@@ -57,4 +69,26 @@
 
 #containerRadnePovrsine.full-width {
   @apply sm:col-span-12 md:col-span-12 lg:col-span-12  !important;
+}
+
+.btn-search {
+  @apply btn btn-sm bg-accent absolute top-0 right-0 w-8 !important;
+}
+#what-label, #submitSearch-label {
+  @apply hidden;
+}
+
+.cssjswrapp.fs, .cssjswrapp2.fs {
+  @apply overflow-y-auto p-4 !important;
+}
+/* override ui-autocomplete */
+.ui-autocomplete {
+  @apply bg-neutral-content text-lg font-semibold w-full h-auto max-h-96 px-4 left-0 overflow-auto !important;
+}
+.ui-autocomplete .ui-menu-item a {
+  @apply flex w-full px-2 text-lg border-0 font-semibold bg-transparent hover:font-semibold cursor-pointer !important;
+}
+.ui-autocomplete .ui-menu-item a.ui-state-focus {
+  background: transparent;
+  @apply text-accent;
 }

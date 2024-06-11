@@ -1169,7 +1169,7 @@ $build = array();
             $Tvars[] = $parts;
         }
 
-        if (@count(@$Tvars)) {
+        if (isset($Tvars)) {
             foreach ($Tvars as $Tvarss) {
                 $i = 0;
 
@@ -1190,7 +1190,7 @@ $build = array();
 
         $count = 0;
         $cHI = 0;
-        if (@count(@$build)) {
+        if (!empty($build)) {
             foreach ($build as $build_){
                 @$pattern = $matches[$count];
                 $params = array();
