@@ -52,7 +52,7 @@ class PageController extends NetActionController
     {
         $values = $this->_request->getParams();
         $langCode = $this->_sesija->langAdmin;
-        print_r($values);
+
         $title = $values['pageTitleC'];
         $alias = str_replace(" ", "-", $values['pageTitleC']);//remove white space
         $alias = str_replace(".", "", $alias);//remove dots
@@ -71,21 +71,22 @@ class PageController extends NetActionController
         $saved = $this->_saveJS($js);
 
         if ($saved == true) {
-            echo "yyyyyyyyy";
+            echo "Page saved";
 
         } else {
-            echo $saved;
+            echo $saved; // whatever the output of the function is
         }
 
 
         $db = Zend_Registry::get('db');
         $langs = NetActionController::getLanguages();
 
+        // find default template_id to be inserted with the new page, to avoid errors on viewing the new page without template
+        $defaultTemplateID = $db->fetchAll("SELECT id FROM templates_$langCode WHERE defaultTemplate = 1");
+
         // IGNORE added to SQL because mariadb doesn't allow skipping the values for some columns, with IGNORE it inserts NULL in those columns and makes no error
         foreach ($langs as $lang) {
-            //$db->query("INSERT IGNORE INTO pages_$langCode(title, alias, category, output) VALUES(?, ?, ?, ?)", array($title, $alias, $categoryId, $output));
-            $db->query("INSERT IGNORE INTO pages_$lang(userId, title, alias, category, output, description, keywords, unbounded) VALUES(?, ?, ?, ?, ?, ?, ?, ?)", array($this->_sesija->userId, $title, $alias, $categoryId, $output, $description, $keywords, '0'));
-
+            $db->query("INSERT IGNORE INTO pages_$lang(userId, title, alias, category, template_id, output, description, keywords, unbounded) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)", array($this->_sesija->userId, $title, $alias, $categoryId, $defaultTemplateID[0]['id'], $output, $description, $keywords, '0'));
         }
     }
 

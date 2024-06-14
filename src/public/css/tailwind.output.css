@@ -3389,6 +3389,14 @@ input.tab:checked + .tab-content,
   bottom: 0px;
 }
 
+.bottom-12 {
+  bottom: 3rem;
+}
+
+.left-0 {
+  left: 0px;
+}
+
 .left-72 {
   left: 18rem;
 }
@@ -3403,6 +3411,10 @@ input.tab:checked + .tab-content,
 
 .top-52 {
   top: 13rem;
+}
+
+.top-12 {
+  top: 3rem;
 }
 
 .z-\[1\] {
@@ -3447,6 +3459,10 @@ input.tab:checked + .tab-content,
 
 .\!-m-px {
   margin: -1px !important;
+}
+
+.m-0 {
+  margin: 0px;
 }
 
 .mx-2 {
@@ -3969,6 +3985,11 @@ input.tab:checked + .tab-content,
   background-color: var(--fallback-n,oklch(var(--n)/var(--tw-bg-opacity)));
 }
 
+.bg-neutral-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 245 245 / var(--tw-bg-opacity));
+}
+
 .bg-neutral-content {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-nc,oklch(var(--nc)/var(--tw-bg-opacity)));
@@ -4025,6 +4046,16 @@ input.tab:checked + .tab-content,
 
 .stroke-current {
   stroke: currentColor;
+}
+
+.object-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .\!p-0 {
@@ -5283,6 +5314,11 @@ input.tab:checked + .tab-content,
     border-radius: var(--rounded-box, 1rem);
   }
 
+  .md\:object-contain {
+    -o-object-fit: contain;
+       object-fit: contain;
+  }
+
   .md\:p-8 {
     padding: 2rem;
   }
@@ -5294,6 +5330,11 @@ input.tab:checked + .tab-content,
   .md\:pb-16 {
     padding-bottom: 4rem;
   }
+
+  .md\:text-5xl {
+    font-size: 3rem;
+    line-height: 1;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -5303,6 +5344,11 @@ input.tab:checked + .tab-content,
 
   .lg\:col-span-9 {
     grid-column: span 9 / span 9;
+  }
+
+  .lg\:object-contain {
+    -o-object-fit: contain;
+       object-fit: contain;
   }
 }
 

@@ -92,12 +92,15 @@ class ViewController extends NetActionController
         if(!$result = $this->_cache->load("q_View_index_$langCode" . "_$id") ){//caching this query
             //do required queries for the page and template
             $res = $db->fetchAll("SELECT output, title, description, keywords, template_id, unbounded, published, pages_$langCode.dateChanged, pages_$langCode.userId, users.email, users.fullname FROM pages_$langCode LEFT JOIN users ON pages_$langCode.userId = users.userId WHERE pages_$langCode.id = ?", array($id));
-            //if($values['ajax'] == "1") {
-            //    $resTemplate[0]['output'] = "";//if ajax call then emit just the content
-            //} else {
-                $resTemplate = $db->fetchAll("SELECT output, bodyBg, staticFiles FROM templates_$langCode WHERE id = ?", array($res[0]['template_id']));
-                //$this->view->templateOut =
-            //}
+
+            if(empty($res)) {
+                //echo 'no page with this id';
+                $this->_redirect($this->_host . "error/"); // display error 404 page
+                //return; // do not proceed
+            }
+
+            $resTemplate = $db->fetchAll("SELECT output, bodyBg, staticFiles FROM templates_$langCode WHERE id = ?", array($res[0]['template_id']));
+
             $cachedresult = array('res'=>$res ,'resTemplate'=>$resTemplate);
             $this->_cache->save($cachedresult , "q_View_index_$langCode" . "_$id" );
 
