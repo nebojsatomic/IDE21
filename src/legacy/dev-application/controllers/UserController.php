@@ -531,87 +531,48 @@ require_once 'Zend/Form/Element/Captcha.php';
         $db = Zend_Registry::get('db');
         $userRegEnabled = Zend_Registry::get('userRegistrationEnabled');
         $template = Zend_Registry::get('defaultTemplate_' . $langCode );
-        
+
         $form = self::_passwordReminderForm();
         $formError = "";
-        
-        
+
         if ($this->_request->isPost() && $form->isValid($_POST) ) {
+
             $values = $this->_request->getParams();
 
             $authAdapter = new Zend_Auth_Adapter_DbTable($this->_db, 'users', 'username', 'email');
 
-
             $authAdapter->setIdentity($values['username'])
-                        ->setCredential($values['email']);
+            ->setCredential($values['email']);
 
             $result = $authAdapter->authenticate();
             $resultRow = (array)$authAdapter->getResultRowObject();
             
-            if (!$result->isValid()) {//ako result NIJE validan
-                $content = $this->translator->_("There is no user with these credentials!") . "<br />" . $form;                 
-                if(!empty($template )) {                  
+            if (!$result->isValid()) {// result NOT valid
+                $content = $this->translator->_("There is no user with these credentials!") . "<br />" . $form;
+                if(!empty($template )) {
                     $out = ViewController::_templatePrepare($template[0]['output'], $content);
-                    $this->view->output = ViewController::_liveBlocksPrepare($out);          
+                    $this->view->output = ViewController::_liveBlocksPrepare($out);
                 }
-            } else {//SVE OK
+            } else { // ALL OK
 
                 $token = $this->_createToken($values['username']);
                 $mail = $this->_sendLinkMail($values['email'], $values['username'], $token, 'password_reminder', 'change-password');
-            
-                $content = $this->translator->_("Password reminder is sent to the provided email!");                 
-                if(!empty($template )) {                  
+
+                $content = $this->translator->_($mail);
+                if(!empty($template )) {
                     $out = ViewController::_templatePrepare($template[0]['output'], $content);
-                    $this->view->output = ViewController::_liveBlocksPrepare($out);          
-                }                         
+                    $this->view->output = ViewController::_liveBlocksPrepare($out);
+                }
             }
 
-
-
-        } else {//ako nije validan post
-            $content = $form;                 
-            if(!empty($template )) {                  
+        } else {// NOT a valid post
+            $content = $form;
+            if(!empty($template )) {
                 $out = ViewController::_templatePrepare($template[0]['output'], $content);
-                $this->view->output = ViewController::_liveBlocksPrepare($out);          
-            }        
+                $this->view->output = ViewController::_liveBlocksPrepare($out);
+            }
         }
-        
-        /*
-        $this->view->rmdform = $this->_passwordReminderForm($this->view->host);
-
-        $url = Ozimbo::getSetting('http_host');
-
-        if (!$this->_request->isPost() || !$this->view->rmdform->isValid($_POST)) {
-            $this->view->rmdform = $this->view->rmdform->render();
-            return;
-        }
-
-        $db = Zend_Registry::get('db');
-        $authAdapter = new Zend_Auth_Adapter_DbTable($db, 'users', 'username', 'email');//'SHA1(?)'
-
-        $values = $this->view->rmdform->getValues();
-
-        $authAdapter->setIdentity($values['username'])
-                    ->setCredential($values['email']);
-
-        $result = $authAdapter->authenticate();
-        $resultRow = $authAdapter->getResultRowObject();
-
-        if (!$result->isValid()) {
-            $this->view->rmdform->addError("Could not find the provided username/email in the database.");
-            $this->view->formErrors = $this->view->rmdform->getMessages();
-            $this->view->rmdform = $this->view->rmdform->render();
-
-            return;
-        }
-
-        $token = $this->_createToken($values['username']);
-        $mail = $this->_sendLinkMail($values['email'], $values['username'], $token, 'password_reminder', 'change-password');
-
-        $this->_flashMessenger->addMessage($this->translate('Mail with change link is sent to the provided address!'));
-        $this->_redirect($this->view->host);
-        */
-    }    
+    }
 
 
 
@@ -641,7 +602,6 @@ require_once 'Zend/Form/Element/Captcha.php';
                     //'value' => $translator->_('E-mail'),
                     'validators' => array('EmailAddress'),
                 )),
-
 
                 'submit_pass_rem' => array('submit', array(
                     'label' => 'Remind',

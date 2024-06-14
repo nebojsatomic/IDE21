@@ -26,7 +26,7 @@ require_once 'Zend/Db/Table.php';
 
 class NetActionController extends Zend_Controller_Action
 {
-    /*FOLOWING VARS ARE SET IN THE CONFIG FILE*/
+    /* FOLOWING VARS ARE SET IN THE CONFIG FILE */
     protected $_host;
     public static $host ;
     protected $_hostRW;
@@ -40,7 +40,12 @@ class NetActionController extends Zend_Controller_Action
 
     protected $_np;
     public static $np;
-    /*TILL HERE CONFIG*/
+
+    /* SMTP variables */
+    protected $_smtpMailConfig = array(); // set values from config.ini in constructor
+    protected $_smtpMailServer = ""; // set in constructor
+
+    /* TILL HERE CONFIG */
 
     protected $_server;
     protected $_reqParams;
@@ -49,7 +54,7 @@ class NetActionController extends Zend_Controller_Action
     protected $_cacheEnabled = 1;
     protected $_commentsAuto = 1;//should comments be auto added to each page or manual(0) - if there is no value from settings table, this is used
     protected $_insideContentArea = true;//if objects should be absolute(false), or inside the content area only(true)
-    protected $_version = "Ver. 24.05";
+    protected $_version = "Ver. 24.06";
     protected $_translateCreator;
     protected $_translate = null;
     protected $translator = null;
@@ -64,92 +69,69 @@ class NetActionController extends Zend_Controller_Action
     public static $langC;
     protected $_tblprefix;
 
-    /*GMAIL*/
-    /*
-    protected $_smtpMailConfig = array('auth' => 'login',
-                        'port' => 587,
-                        'username' => 'nebojsatmc',
-                        'password' => '',
-                        'ssl' => 'tls'
-                    );
-    protected $_smtpMailServer = "smtp.gmail.com";
-    */
-
-    /*TELEKOM*/
-    protected $_smtpMailConfig = array('auth' => 'login',
-                        //'port' => 587,
-                        'username' => '',
-                        'password' => ''
-                        //'ssl' => 'tls'
-                    );
-    protected $_smtpMailServer = "";
-
-
-    protected $_smtpMailConfig2 ;
-
-
     public function __call($method, $args)
     {
         $controller = $this->getRequest()->getControllerName();
         $action = $this->getRequest()->getActionName();
-        //$errors = $this->_getParam('error_handler');
-        //return $errors;
-        //$this->_redirect($this->_host . "error/");
-        //$this->_helper->layout->setLayoutPath($this->_np . 'layouts/errorPages/')->setLayout('404');
-        //return;
-        //throw new Exception('greska bre');
+        // TODO: add error handling
     }
 
-
-    //CONSTRUCTOR
+    // CONSTRUCTOR
     public function __construct(Zend_Controller_Request_Abstract $request, Zend_Controller_Response_Abstract $response, array $invokeArgs = array())
     {
 
-    /*CONFIG VARS*/
-    $server = explode(".", $_SERVER['HTTP_HOST']);
-    $c = count($server);
-    @$SERVER = $server[$c-2]  . "." . $server[$c-1];
+        // CONFIG VARS
+        $server = explode(".", $_SERVER['HTTP_HOST']);
+        $c = count($server);
+        @$SERVER = $server[$c-2]  . "." . $server[$c-1];
 
-    try{
-      $config= new Zend_Config_Ini('config.ini', $_SERVER['HTTP_HOST']);
-      $this->_server =  $_SERVER['HTTP_HOST'];
-    }catch(Exception $e){
-      $config = new Zend_Config_Ini('config.ini', $SERVER );
-      $this->_server = $SERVER;
-    }
-/*
-    if (!empty($configCheck)) {//if there is a config value in config, use that one
-        $config = new Zend_Config_Ini('quickstart.ini',  $_SERVER['HTTP_HOST'] );
-        $this->_server =  $_SERVER['HTTP_HOST'];
-    }
-*/
-    $request = Zend_Controller_Front::getInstance()->getRequest();
+        try {
+          $config= new Zend_Config_Ini('config.ini', $_SERVER['HTTP_HOST']);
+          $this->_server =  $_SERVER['HTTP_HOST'];
+        } catch(Exception $e){
+            $config = new Zend_Config_Ini('config.ini', $SERVER );
+            $this->_server = $SERVER;
+        }
 
-    //print_r( $request->getParams());
-    $this->_tblprefix = $config->tblprefix;
+        // set SMTP mail configuration from config.ini
+        if(!empty($config->mail)){
+            $this->_smtpMailConfig = [
+                'auth' => $config->mail->smtp->auth,
+                'port' => $config->mail->smtp->port,
+                'username' => $config->mail->smtp->username,
+                'password' => $config->mail->smtp->password
+            ];
+            $this->_smtpMailServer = $config->mail->smtp->server;
+        }
+        // end smtp configuration
 
-    $this->_host = $request->getScheme() . '://'  . $config->paths->host;
-    self::$host = $request->getScheme() . '://'  . $config->paths->host;
-    $this->_hostRW = $request->getScheme() . '://'  . $config->paths->hostRW;
-    self::$hostRW = $request->getScheme() . '://' . $config->paths->hostRW;
+        $request = Zend_Controller_Front::getInstance()->getRequest();
 
-    $this->_host = 'https://'  . $config->paths->host;
-    self::$host = 'https://'  . $config->paths->host;
-    $this->_hostRW = 'https://'  . $config->paths->hostRW;
-    self::$hostRW = 'https://' . $config->paths->hostRW;
+        $this->_tblprefix = $config->tblprefix;
 
-    $this->_nps = $config->paths->nps;
-    self::$nps = $config->paths->nps;
+        $this->_host = $request->getScheme() . '://'  . $config->paths->host;
+        self::$host = $request->getScheme() . '://'  . $config->paths->host;
+        $this->_hostRW = $request->getScheme() . '://'  . $config->paths->hostRW;
+        self::$hostRW = $request->getScheme() . '://' . $config->paths->hostRW;
 
-    $this->_np = $config->paths->np;
-    self::$np = $config->paths->np;
+        // should https be forced ?
+        $this->_host = 'https://'  . $config->paths->host;
+        self::$host = 'https://'  . $config->paths->host;
+        $this->_hostRW = 'https://'  . $config->paths->hostRW;
+        self::$hostRW = 'https://' . $config->paths->hostRW;
 
-    $this->_adminUrl = $config->adminUrl;
-    self::$adminUrl = $config->adminUrl;
+        $this->_nps = $config->paths->nps;
+        self::$nps = $config->paths->nps;
+
+        $this->_np = $config->paths->np;
+        self::$np = $config->paths->np;
+
+        $this->_adminUrl = $config->adminUrl;
+        self::$adminUrl = $config->adminUrl;
 
         $this->setRequest($request)
-             ->setResponse($response)
-             ->_setInvokeArgs($invokeArgs);
+        ->setResponse($response)
+        ->_setInvokeArgs($invokeArgs);
         $this->_helper = new Zend_Controller_Action_HelperBroker($this);
 
         // This cache doesn't expire, needs to be cleaned manually.
@@ -166,7 +148,7 @@ class NetActionController extends Zend_Controller_Action
         $this->_cachedPages = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
         Zend_Registry::set('cachedPages', $this->_cachedPages);
 
-        //SESSION
+        // SESSION
         $this->_sesija = new Zend_Session_Namespace('net');
         $defaultLanguage = self::getDefaultLanguage();
         if ($this->_sesija->lang == null){
@@ -176,19 +158,19 @@ class NetActionController extends Zend_Controller_Action
         Zend_Registry::set('currentUser', $this->_sesija->user);
         Zend_Registry::set('langCode', $this->_sesija->lang);
         self::setSettings();//this was earlier in the bootstrap - is it better here?
-        //ACL
+
+        // ACL
         if($this->_sesija->currentRole == "") {$this->_sesija->currentRole = "guest";}
         Zend_Registry::set('currentRole', $this->_sesija->currentRole);
         $acl = $this->getAcl();
         Zend_Registry::set('acl', $acl );
-        //ACL end
+        // ACL end
 
-        //TRANSLATOR
+        // TRANSLATOR
         $reqValues = $this->_request->getParams();
         $request = Zend_Controller_Front::getInstance()->getRequest();
 
         $this->_reqParams = $this->getRequest()->getRequestUri()  ;
-        //print_r($this->_reqParams);
 
         if($reqValues['controller'] != "creator" && $reqValues['action'] != "admin" ) {//in creator only english - so far
             if(file_exists($this->_np . "languages/" . $this->_sesija->lang . ".php")){
@@ -211,30 +193,30 @@ class NetActionController extends Zend_Controller_Action
             $this->_translateCreator = new Zend_Translate('array', $this->_np . 'languages/creator/' . $creatorLanguage . '.php', $creatorLanguage );
             Zend_Registry::set('Zend_Translate_Creator', $this->_translateCreator);
         }
+
         //BASE URL
         $this->_baseUrl = $this->_request->getRequestUri();
-        //$this->_sesija->_urlCurrent = $this->_baseUrl;
-        //$this->_sesija->bcumbs = array();
-        if(!empty($this->_sesija->bcumbs)){
-                $should = 1;
-                foreach($this->_sesija->bcumbs as $bcumb){
 
-                    if (in_array($this->_baseUrl, $bcumb) ){
-                        $should = 0;
-                        break;
-                    } else {
-                        $should = 1;
-                    }
+        if(!empty($this->_sesija->bcumbs)){
+            $should = 1;
+            foreach($this->_sesija->bcumbs as $bcumb){
+
+                if (in_array($this->_baseUrl, $bcumb) ){
+                    $should = 0;
+                    break;
+                } else {
+                    $should = 1;
                 }
-                if(strpos($this->_baseUrl, "font.swf") === FALSE && strpos($this->_baseUrl, "lang") === FALSE && $should == 1 && $reqValues['controller'] != "creator") {
+            }
+            if(strpos($this->_baseUrl, "font.swf") === FALSE && strpos($this->_baseUrl, "lang") === FALSE && $should == 1 && $reqValues['controller'] != "creator") {
                 $this->_sesija->bcumbs[$this->_sesija->_i]['url'] = $this->_baseUrl;
                 $this->_sesija->bcumbs[$this->_sesija->_i]['title'] = $this->_title . "CCC";
 
                 $this->_sesija->_i++;
-                }
-                //$this->_sesija->bcumbs[$this->_baseUrl]['url']['title'] = $this->_title . "CCC";
+            }
         }
-        //AJAX
+
+        // AJAX
         $request = $this->getRequest();
         if ($request->isXmlHttpRequest()) {
             $this->_helper->layout()->disableLayout();
@@ -242,13 +224,13 @@ class NetActionController extends Zend_Controller_Action
 
         $this->_db = Zend_Registry::get('db');
         $this->_getDefaultTemplate();
-    $this->init();
+        $this->init();
     }
 
 
     /**
-     *Setup ACL
-     */
+    * Setup ACL
+    */
     protected function getAcl()
     {
         $acl = new Zend_Acl();
@@ -261,7 +243,6 @@ class NetActionController extends Zend_Controller_Action
             $roleCurrent = new Zend_Acl_Role($role);
             $acl->addRole($roleCurrent);
         }
-        //treba dodati resources
 
         //admin is alowed everything
         $acl->allow('administrator');
@@ -730,8 +711,6 @@ class NetActionController extends Zend_Controller_Action
 
     }
 
-
-
     /**
      * Sending mail with the link used for $akcija action
      * @param string $email email used for sending email ('To')
@@ -747,11 +726,10 @@ class NetActionController extends Zend_Controller_Action
     protected function _sendLinkMail($email,$user,$token,$reason,$akcija)
     {
         $data = array(
-              'requestId' => '',
-              'username'   => $user,
-              'code'      => $token,
-              'used'       => '2'
-              );
+            'username'   => $user,
+            'code'      => $token,
+            'used'       => '2'
+        );
 
         $this->_db->insert('tokens', $data);
 
@@ -772,7 +750,6 @@ class NetActionController extends Zend_Controller_Action
             $body = $substituteString;
         }
 
-
         $mail = new Zend_Mail();
         $mail->setFrom($emailFrom, 'Admin');
         $mail->addTo($email, $user);
@@ -781,18 +758,15 @@ class NetActionController extends Zend_Controller_Action
         $mail->setBodyText($body);
         $mail->setBodyHtml($body);
 
-            $pathSep = PATH_SEPARATOR;
-            if ($pathSep == ";") {//ako je windows platforma koristi SMTP
+        // use SMTP
+        if(empty($this->_smtpMailServer)) return '<p class="bg-red-500 text-white p-2 rounded">SMTP not configured! Mail was not sent!</p>';
 
-                $config = $this->_smtpMailConfig;
-
-                $tr = new Zend_Mail_Transport_Smtp($this->_smtpMailServer, $config);
-                Zend_Mail::setDefaultTransport($tr);
-            }
-
-
+        $config = $this->_smtpMailConfig;
+        $tr = new Zend_Mail_Transport_Smtp($this->_smtpMailServer, $config);
+        Zend_Mail::setDefaultTransport($tr);
 
         $mail->send();
+        return '<p class="bg-accent text-white p-2 rounded">Mail is sent to the provided email address!</p>';
     }
 
     /**
