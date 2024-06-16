@@ -65,8 +65,6 @@ class ViewController extends NetActionController
         }
         $langCode = $this->_sesija->lang;
 
-
-        //print_r($values);
         @$alias = $values['alias'];
         if ($alias != '') {
 
@@ -495,7 +493,7 @@ class ViewController extends NetActionController
                 $front = Zend_Controller_Front::getInstance();
                 $req = $front->getRequest();
                 $treeVals = $req->getParams();
-                //print_r($treeVals);
+
                 if(@$treeVals['creatorAct'] == 'true') {
                     $data['langC'] = "_" . $treeVals['langC'];
                 }
@@ -913,8 +911,6 @@ $build = array();
 
             }
         }
-        //print_r($build);
-        //print_r($matches);
 
         $count = 0;
         $cHI = 0;
@@ -1009,7 +1005,7 @@ $build = array();
                     //} else {
                         $menuQ = $db->fetchAll("SELECT *, menu_items.check_access as chkAccess, menu_items.content_id as cid, url_$langCode as url, name_$langCode as name, description_$langCode as description FROM menu_items LEFT JOIN pages_$langCode ON menu_items.content_id = pages_$langCode.id WHERE menu_id = ? AND pages_$langCode.published = '1' ORDER BY weight ASC", array($menuId));
                     //}
-                    //print_r($menuQ );
+
                     if (!empty($menuQ)) {
 
                         $output = ViewController::displayMenu($menuQ, $orientation);
@@ -1044,7 +1040,7 @@ $build = array();
         $catItemsArray2 = $db->fetchAll("SELECT DISTINCT *, pages_$langCode.id as id, pages_$langCode.title as title, pages_$langCode.alias as alias, pages_$langCode.category as category, pages_$langCode.image, pages_$langCode.description, pages_$langCode.check_access as check_access FROM category_items LEFT JOIN  pages_$langCode  ON pages_$langCode.id = category_items.content_id WHERE category_items.category_id = ? AND pages_$langCode.published = '1' GROUP BY pages_$langCode.id DESC ", array($catId));
         $catQ = array_merge($catQ, $catItemsArray2 );
         //$catQ = $catQ + $catItemsArray2;
-                    //print_r($menuQ );
+
                     if (!empty($catQ)) {
 
                         $output = ViewController::displayCategory($catQ, $orientation);
@@ -1083,7 +1079,6 @@ $build = array();
 
                     //$menuQ = $db->fetchAll("SELECT *, url_en as url,name_en as name,description_en as description FROM menu_items  WHERE menu_id = ?", array($menuId));
 
-                    //print_r($menuQ );
                     if (!empty($folder)) {
 
                         if (empty($image)) {
@@ -1116,7 +1111,7 @@ $build = array();
 
                     $contactFormId = $db->fetchAll("SELECT *, mod_forms.name as formName FROM mod_forms LEFT JOIN mod_forms_fields ON mod_forms.id = mod_forms_fields.form_id WHERE enabled = '1' AND mod_forms.name = ?", array($contactFormName));
 
-                    //print_r($contactFormId);
+
                     if (!empty($contactFormId)) {
 
                         $formId = $contactFormId;
@@ -1160,7 +1155,7 @@ $build = array();
         $title = Zend_Registry::get('pageTitle');
         $langCode = self::$lang;
         $langCode = Zend_Registry::get('langCode');
-        if ($langCode == "") {//OVO MORA DA SE SKLONI!!!!!
+        if ($langCode == "") {
             $langCode = "sr";
         }
 
@@ -1182,14 +1177,10 @@ $build = array();
 
                            $i++;
                     }
-
                     $build[] = $build2;
                     $build2 = array();
-
             }
         }
-        //print_r($build);
-        //print_r($matches);
 
         $count = 0;
         $cHI = 0;
@@ -1197,34 +1188,19 @@ $build = array();
             foreach ($build as $build_){
                 @$pattern = $matches[$count];
                 $params = array();
-                /*
-                 //BREADCRUMB HANDLE
-                 //if (@preg_match("/{searchform}/", "{" . $build_[0] . "}" )) {
-                 if (@strstr( "{" . $build_[0] . "}", "{breadcrumbs}" )) {
-                        $output = ViewController::showBreadcrumbs();
-                        $outputDB = str_replace('{breadcrumbs}', $output, $outputDB);
-                }
-                */
-                //print_r($build_);
 
-                 //if (@strstr( $build_[0] . ":" . $build_[1], "liveblock:user")) {
                  //if liveblock encountered
                  if (@strstr( $build_[0] . ":" , "liveblock:")) {
                     $block = $build_[1];
-                    if( isset($build_[3]) ) $params = $build_[3];
+                    if( isset($build_[3]) ) array_push( $params, $build_[3] );
 
-                    $function = $build_[2];// . "(" . $params . ")";
+                    $function = $build_[2];
 
-
-                    //if($params != ""){//ako su dati parametri
                         if( isset($build_[3]) ) { 
                             $idsOut = ':' . $build_[3];
                         } else {
                             $idsOut = '';
                         }
-                    //} else {
-                    //    $idsOut = '';
-                    //}
 
                         //require_once 'UserController.php';
                         $ucwordsBlock = ucwords($block);
@@ -1249,19 +1225,12 @@ $build = array();
                     $output = ob_get_contents();
                     ob_end_clean();
                     $outputDB = str_replace('{php:' . $block  .'}', $output, $outputDB);
-
                 }
-
 
             $outputString = "";
             $count++;
             }
-        } else {
-            //$output = ViewController::setDefaultHeaderImage();
-            //$outputDB .= $output;
         }
-        //$outputDB = str_replace('{content}' , $content, $outputDB);
-
         return $outputDB;
     }
 
