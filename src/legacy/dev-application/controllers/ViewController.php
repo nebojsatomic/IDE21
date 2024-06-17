@@ -882,11 +882,11 @@ class ViewController extends NetActionController
         $title = Zend_Registry::get('pageTitle');
         $langCode = self::$lang;
         $langCode = Zend_Registry::get('langCode');
-        if ($langCode == "") {//OVO MORA DA SE SKLONI!!!!!
+        if ($langCode == "") {// this must be set to EN, check if it doesn't create problems
             $langCode = "sr";
         }
-$Tvars = array();
-$build = array();
+        $Tvars = array();
+        $build = array();
         $replaceThis = preg_match_all('/[{].+[}]/', $outputDB, $matches);
         foreach ($matches[0] as $part) {
 
@@ -1062,12 +1062,6 @@ $build = array();
 
                 }
 
-                 //SLIDE cu3er
-                 if (@strstr( "{" . $build_[0] . "}", "{cu3er}" )) {
-                        $output = ViewController::slides();
-                        $outputDB = str_replace('{cu3er}', $output, $outputDB);
-                }
-
                 //DISPLAY IMAGES
                  //if (@preg_match("/images:display/", "{" . $build_[0] . ":" . $build_[1])) {
                  if (@strstr( $build_[0] . ":" . $build_[1], "images:display")) {
@@ -1096,21 +1090,14 @@ $build = array();
                     } else {
                         $outputDB = str_replace('{images:display:' . $build_[2] . $imageOut . '}', '<b style="color:red;">{images:' . $build_[2] . '}Doesn\'t exist or it is empty!</b>', $outputDB);
                     }
-
-
                 }
 
-
-
-
-
-                 //MODULE 'FORM'
-                 if (@preg_match("/module:forms/", "{" . $build_[0] . ":" . $build_[1])) {
+                //MODULE 'FORM'
+                if (@preg_match("/module:forms/", "{" . $build_[0] . ":" . $build_[1])) {
 
                     $contactFormName = trim($build_[2], "''");
 
                     $contactFormId = $db->fetchAll("SELECT *, mod_forms.name as formName FROM mod_forms LEFT JOIN mod_forms_fields ON mod_forms.id = mod_forms_fields.form_id WHERE enabled = '1' AND mod_forms.name = ?", array($contactFormName));
-
 
                     if (!empty($contactFormId)) {
 
@@ -1125,15 +1112,9 @@ $build = array();
 
                 }
 
-
-
-
-            $outputString = "";
-            $count++;
+                $outputString = "";
+                $count++;
             }
-        } else {
-            //$output = ViewController::setDefaultHeaderImage();
-            //$outputDB .= $output;
         }
         $outputDB = str_replace('{content}' , $content, $outputDB);
 

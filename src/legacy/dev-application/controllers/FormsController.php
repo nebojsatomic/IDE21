@@ -18,6 +18,8 @@
 
 require_once 'ViewController.php';
 require_once 'Zend/Form/Element/Captcha.php';
+require_once 'Zend/Form/Element/Text.php';
+require_once 'Zend/Validate/EmailAddress.php';
 require_once 'Zend/Service/ReCaptcha.php';
 require_once 'Zend/Captcha/ReCaptcha.php';
 require_once 'NeTFramework/NetActionController.php';
@@ -78,12 +80,21 @@ class FormsController extends NetActionController
         if($to == ""){ // a required value was not set
             return '<p class="bg-red-500 text-white p-2 rounded">No value set for receiver of the email! Mail was not sent!</p>';
         }
-                
+
         // select template output from db
         $template = $db->fetchAll("SELECT output FROM templates_$langCode where id = ?", array($formQ[0]['templateId']) );
-     
+
+        if(empty($template)) {
+            $content = "<p>A template assigned to this form doesn't exist, please check which template is assigned to the form.</p>";
+            $template = Zend_Registry::get('defaultTemplate_' . $langCode );// since there was no template assigned, we must use default template
+            $out = ViewController::_liveBlocksPrepare( ViewController::_templatePrepare($template[0]['output'], $content) );
+            $this->view->output = $out;
+
+            return;// do not proceed
+        }
+
         //Form
-        $form = $this->__contactForm($formQ[0]['name']);
+        $form = $this->_contactForm($formQ[0]['name']);
         $formErrors = array();
 
         if ($this->_request->isPost() && $form->isValid($_POST) ) {
@@ -105,23 +116,10 @@ class FormsController extends NetActionController
                 //continue;
                 } else  if ($key == "submitbut") {
                 //continue;
-                }/*
-                elseif (($key == "first_name") && ($value == '')) {
-                    $formErrors[] = $translator->_("First name is missing!");
-                    //die("First name is missing!");
-                }
-                elseif (($key == "last_name") && ($value == '')) {
-                     $formErrors[] = $translator->_('Last name is missing!');
-                }
-                elseif (($key == "email_address") && ($value == '') && !$this->_validEmail($value)) {
-                     $formErrors[] = $translator->_('Email is missing!');
-                }*/
-                elseif (($key == "thank_page") && ($value != '')) {
+                } else if (($key == "thank_page") && ($value != '')) {
                      $thankPage = $value;
                      unset($values['thank_page']);
-                }
-                else {
-
+                } else {
                     @$body .=   "<b>" . $translator->_( str_replace("_", " ", ucwords($key)) ) . "</b>:" . $value  ."<br />\n";
                 }
             }
@@ -154,7 +152,7 @@ class FormsController extends NetActionController
             $mail->setBodyText($body);
             $mail->setBodyHtml($body);
 
-            // use SMTP
+            // use SMTP, settings for it should be in config.ini
             if(empty($this->_smtpMailServer)) return '<p class="bg-red-500 text-white p-2 rounded">SMTP not configured! Mail was not sent!</p>';
 
             $config = $this->_smtpMailConfig;
@@ -166,15 +164,12 @@ class FormsController extends NetActionController
             //ALL IS WELL -> flush()OUTPUT
             $content = "<h2>" . $translator->_("<br />Mail has been sent! Thank you.") . "</h2>";
 
-            $template = Zend_Registry::get('defaultTemplate_' . $langCode );// should be replaced with template that was assigned by a form,from the db
-
             if(!empty($template )) {
                 $out = ViewController::_liveBlocksPrepare( ViewController::_templatePrepare($template[0]['output'], $content) );
                 $this->view->output = $out;
             }
 
         } else {
-            $template = Zend_Registry::get('defaultTemplate_' . $langCode );// should be replaced with template that was assigned by a form,from the db
             $content = $form;
             if(!empty($template )) {
                 $out = ViewController::_liveBlocksPrepare( ViewController::_templatePrepare($template[0]['output'], $content, $this->_sesija->lang) );
@@ -236,7 +231,7 @@ class FormsController extends NetActionController
         }
     }
 
-    public static function _contactForm($formList,$contactId = null)
+    public static function _contactForm($formList, $contactId = null)
     {
         $db = Zend_Registry::get('db');
         
@@ -262,30 +257,46 @@ class FormsController extends NetActionController
                 switch($type) {
                     case 1:
                     $type = "text";
-                    /*$Height = "15px";*/
+                    $required = 'true';
                     break;
                     case 2:
                     $type = "textarea";
-                    /*$Height = "";*/
+                    $required = 'true';
                     break;
                     case 3:
                     $type = "file";
-                    /*$Height = "20px";*/
+                    $required = 'true';
                     break;
                     case 4:
                     $type = "checkbox";
-                    /*$Height = "15px";*/
+                    $required = 'true';
+                    break;
+                    case 5: // email
+                    $type = "text";
+                    $required = 'true';
                     break;
                 }
                 $translator = Zend_Registry::get('Zend_Translate');
 
-                $elements[strtolower(preg_replace('/ /', '_', $field['name']))] = array($type, array(
-                        'label' => $translator->_($field['name']),
-                        'class' => 'w-full input',
-                    ),
-                );
-
-                $displayGroupElements[] = strtolower(preg_replace('/ /', '_', $field['name']));
+                if($field['type'] === 5) { // should have email validation
+                    $email = new Zend_Form_Element_Text('email_address', array(
+                            'label' => $translator->_($field['name']),
+                            'required' => $required,
+                            'class' => 'w-full input input-sm shadow-sm',
+                        ),
+                    );
+                    $email->addValidator('EmailAddress',  TRUE  );
+                    //$elements['email_address'] = $email;
+                    $displayGroupElements[] = $email;
+                } else {// all the other types of input fields
+                    $elements[strtolower(preg_replace('/ /', '_', $field['name']))] = array($type, array(
+                            'label' => $translator->_($field['name']),
+                            'required' => $required,
+                            'class' => 'w-full input input-sm shadow-sm',
+                        ),
+                    );
+                    $displayGroupElements[] = strtolower(preg_replace('/ /', '_', $field['name']));
+                }
             }
 
             $recaptcha = new Zend_Service_ReCaptcha('6LdrqMgSAAAAAMNf7hOddRHyWYmEmx9zMFYswaXM', '6LdrqMgSAAAAAFwKXLm9V_7CkJtGqX11O7DJWd4k');
@@ -294,24 +305,27 @@ class FormsController extends NetActionController
             $elementCaptcha = new Zend_Form_Element_Captcha('captchaContact_' . $formId, array(
                 'label' =>  $translator->_("Please verify you're a human"),
                 'captcha' => 'Dumb',
+                'class' => 'w-full input input-sm shadow-sm',
                 'captchaOptions' => array(
                     'captcha' => 'Dumb',
                     'wordLen' => 6,
                     'timeout' => 300,
                 ),
-            ));            
+            ));
 
-            $displayGroupElements[] = 'captchaContact_' . $formId; //dispay captcha in display group
+            $displayGroupElements[] = $elementCaptcha;
 
             $elements['submitbut'] = array('submit', array(
                 'label' => 'Submit',
+                'class' => 'input input-sm w-full shadow-sm btn btn-secondary shadow-lg',
                 'order' => 100
             ));
             $displayGroupElements[] = 'submitbut';
 
             $elements['to'] = array('hidden', array('value' => $to, ));
             $elements['formID'] = array('hidden', array('value' => $formId, ));
-            $elements['rcap'] = $recaptcha;
+
+            $elements['rcap'] = new Zend_Captcha_ReCaptcha(); 
 
             $labl = "Submit";
 
@@ -324,117 +338,12 @@ class FormsController extends NetActionController
             ));
 
             $form->setAttrib('enctype', 'multipart/form-data');
-            $form->addElement($elementCaptcha);
 
             $form->addDisplayGroup($displayGroupElements, 'contactForm', array(
                 'legend' => $translator->_('Contact form')
             ));
 
             return $form;
-        }
-    }
-
-
-    private function __contactForm($formList,$contactId = null)
-    {
-        $db = Zend_Registry::get('db');
-        
-        if(!is_array($formList) ) {
-            $contactFormName = $formList;
-            $formList = $db->fetchAll("SELECT * FROM mod_forms LEFT JOIN mod_forms_fields ON mod_forms.id = mod_forms_fields.form_id WHERE enabled = '1' AND mod_forms.name = ?", array($contactFormName));
-        }
-        $formId = $formList[0]['form_id'];
-
-        $formIdContact = $formList[0]['contact'];
-
-        $contactEmail = $db->fetchAll("SELECT email FROM contacts WHERE id = ?", array($formIdContact));
-        $to = $contactEmail[0]['email'];
-
-        $fieldsArray = $formList;
-
-        if (count($fieldsArray)){
-            foreach ($fieldsArray  as $field) {
-                $type = $field['type'];
-
-                switch($type) {
-                case 1:
-                $type = "text";
-                /*$Height = "15px";*/
-                $required = 'true';
-                break;
-                case 2:
-                $type = "textarea";
-                /*$Height = "";*/
-                $required = 'false';
-                break;
-                case 3:
-                $type = "file";
-                /*$Height = "20px";*/
-                $required = 'false';
-                break;
-                case 4:
-                $type = "checkbox";
-                /*$Height = "15px";*/
-                $required = 'false';
-                break;
-                }
-                
-                $translator = Zend_Registry::get('Zend_Translate');
-
-
-                $elements[strtolower(preg_replace('/ /', '_', $field['name']))] = array($type, array(
-                        'label' => $translator->_($field['name']),
-                        'required' => $required,
-                    ),
-                    );
-                    
-                    $displayGroupElements[] = strtolower(preg_replace('/ /', '_', $field['name']));
-            }
-
-        // Using both captcha and captchaOptions:
-        $elementCaptcha = new Zend_Form_Element_Captcha('captchaContact_' . $formId, array(
-            'label' =>  $translator->_("Please verify you're a human"),
-            'captcha' => 'Dumb',
-            'captchaOptions' => array(
-                'captcha' => 'Dumb',
-                'wordLen' => 6,
-                'timeout' => 300,
-            ),
-        ));
-        $recaptcha = new Zend_Service_ReCaptcha('6LdrqMgSAAAAAMNf7hOddRHyWYmEmx9zMFYswaXM', '6LdrqMgSAAAAAFwKXLm9V_7CkJtGqX11O7DJWd4k');
-        
-           $elements['submitbut'] = array('submit', array(
-                    'label' => 'Submit',
-                    'order' => 100
-                    ));
-
-            $elements['to'] = array('hidden', array(
-                        'value' => $to,
-                        ));
-            
-            $elements['formID'] = array('hidden', array(
-                        'value' => $formId,
-                        ));
-        $elements['rcap'] = new Zend_Captcha_ReCaptcha();      
-
-        $labl = "Submit";
-
-        $form = new Zend_Form(array(
-                'id'     => 'customForm' . $formId,
-                'class' => 'contactForm',
-                'method' => 'post',
-                'action' => NetActionController::$hostRW . 'forms/',
-                'elements' =>$elements,
-
-                )
-
-                );
-        $form->setAttrib('enctype', 'multipart/form-data');
-        $form->addDisplayGroup($displayGroupElements, 'contactForm',
-                              array('legend' => $translator->_('Contact form') ));        
-        
-        $form->addElement($elementCaptcha);
-        return $form;
         }
     }
 
@@ -526,22 +435,18 @@ class FormsController extends NetActionController
                 switch($type) {
                 case 1:
                 $type = "text";
-                /*$Height = "15px";*/
                 $required = 'true';
                 break;
                 case 2:
                 $type = "textarea";
-                /*$Height = "200px";*/
                 $required = 'false';
                 break;
                 case 3:
                 $type = "file";
-                /*$Height = "20px";*/
                 $required = 'false';
                 break;
                 case 4:
                 $type = "checkbox";
-                /*$Height = "15px";*/
                 $required = 'false';
                 break;
                 }
@@ -577,53 +482,6 @@ class FormsController extends NetActionController
         return $form;
 
         }
-    }
-
-    public function xmltablesAction()
-    {
-
-        $this->_checkAccess();
-                
-        // turn off layout and ViewRenderer
-        $this->_helper->layout()->disableLayout();        
-        //$this->_helper->viewRenderer->setNoRender();
-        $values = $this->_request->getParams();
-        
-        $db = Zend_Registry::get('db');
-        $tableName = $values['tablename'];
-        $formID = $values['formid'];
-
-        $table = $db->fetchAll("SELECT * FROM $tableName WHERE form_id = ?", array($formID) );
-        $tableCols = $db->fetchAll("DESCRIBE $tableName");
-
-        if ($formID == "") {
-            $table = $db->fetchAll("SELECT * FROM $tableName");        
-        }
- 
-        header( 'Content-Type: text/xml; charset=UTF-8' ); // Sets HTTP header
-        $this->view->data = $table;
-        $this->view->cols = $tableCols;
-    }
-
-    public function xmltablesContactsAction()
-    {
-
-        $this->_checkAccess();
-
-        // turn off layout and ViewRenderer
-        $this->_helper->layout()->disableLayout();        
-        //$this->_helper->viewRenderer->setNoRender();
-        $values = $this->_request->getParams();
-
-        $db = Zend_Registry::get('db');
-        $tableName = $values['tablename'];
-
-        $table = $db->fetchAll("SELECT * FROM $tableName ");
-        $tableCols = $db->fetchAll("DESCRIBE $tableName");
-
-        header( 'Content-Type: text/xml; charset=UTF-8' ); // Sets HTTP header
-        $this->view->data = $table;
-        $this->view->cols = $tableCols;
     }
 
     /**
