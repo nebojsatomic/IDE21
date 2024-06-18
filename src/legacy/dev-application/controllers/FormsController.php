@@ -153,7 +153,16 @@ class FormsController extends NetActionController
             $mail->setBodyHtml($body);
 
             // use SMTP, settings for it should be in config.ini
-            if(empty($this->_smtpMailServer)) return '<p class="bg-red-500 text-white p-2 rounded">SMTP not configured! Mail was not sent!</p>';
+            if(empty($this->_smtpMailServer)) {
+
+                $content ='<h2 class="bg-red-500 text-white p-2 rounded">SMTP not configured! Mail was not sent!</h2>';
+
+                if(!empty($template )) {
+                    $out = ViewController::_liveBlocksPrepare( ViewController::_templatePrepare($template[0]['output'], $content) );
+                    $this->view->output = $out;
+                }
+                return;
+            }
 
             $config = $this->_smtpMailConfig;
             $tr = new Zend_Mail_Transport_Smtp($this->_smtpMailServer, $config);
