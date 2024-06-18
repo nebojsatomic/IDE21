@@ -45,6 +45,17 @@ Demo pass:  proba
 
 If you consider further use of IDE21, set your own configuration for the database in docker-compose.yaml, and config files inside dev-application, do not use this default configuration, naturally.
 
+# DEMO
+
+https://demo.ide21.com/admin
+
+user: proba
+
+pass: proba
+
+*  upload and mail disabled in this demo
+contact me for a fully functional instance
+
 
 # IF YOU WOULD LIKE TO CONTRIBUTE
 This project needs volunteers in the form of designers, frontend developers, backend php developers who are familiar with both Zend and Laravel frameworks, since Todo list will be populated with translating Zend functionality to Laravel in the backend. Also frontend part will be going in the mobile direction where the templates which user can create should be mobile friendly and responsive.
