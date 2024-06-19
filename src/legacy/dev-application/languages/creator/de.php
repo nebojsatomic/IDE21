@@ -84,6 +84,8 @@ return array(
 "Pages in this category:" => "Seiten in dieser Kategorie:",
 
 "Add new Language" => "Neue Sprache hinzufügen",
+"Default language cannot be deleted!" => "Die Spache, die die Einstellung isDefault=1 hat, darf nicht gelöscht werden.",
+"The selected language has been deleted!" => "Ausgewählte Sprache ist gelöscht worden!",
 "Add new Setting" => "Neue Einstellung hinzufügen",
 
 "Available modules:" => "Verfügbare Module:",

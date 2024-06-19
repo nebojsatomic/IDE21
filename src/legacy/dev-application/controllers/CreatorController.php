@@ -1314,6 +1314,7 @@ class CreatorController extends NetActionController
     public function deleteLanguageAction()
     {
         $this->_checkAccess();
+
         if($this->_sesija->superadmin != "1") {
             echo $this->_translate->_("Only superadministrator can delete this!");
             return;
@@ -1321,8 +1322,18 @@ class CreatorController extends NetActionController
         // turn off ViewRenderer
         $this->_helper->viewRenderer->setNoRender();
         $values = $this->_request->getParams();
+
         if ($values['id'] != "" ) {
-            $result = $this->_db->fetchAll("SELECT code, name FROM " . $this->_tblprefix . "languages WHERE id= ?", array($values['id']));
+            $result = $this->_db->fetchAll("SELECT code, name, isDefault FROM " . $this->_tblprefix . "languages WHERE id= ?", array($values['id']));
+
+            if($result[0]['isDefault'] === 1) { // nobody should be able to delete the default language
+                $jsonResponse = json_encode([
+                    "success" => false,
+                    "message" => $this->_translate->_("Default language cannot be deleted!")
+                ]);
+                echo $jsonResponse;
+                return;
+            }
 
             //Drop table
             $this->_db->query("DROP TABLE " . $this->_tblprefix . "pages_" . $result[0]['code']);
@@ -1342,8 +1353,12 @@ class CreatorController extends NetActionController
             $this->_db->query("DELETE FROM " . $this->_tblprefix . "tableregistry  WHERE name = ?", array('pages_' . $result[0]['code']) );
             //clean cache
             $this->cleanCache();
-            echo $this->translate("The selected language has been deleted!");
-            echo '<script type="text/javascript">$("#langName option:contains(' . "'" . $langName . "'" . ')").remove();</script>';//js for removing the lng frm combo
+
+            $jsonResponse = json_encode([
+                "success" => true,
+                "message" => $this->_translate->_("The selected language has been deleted!")
+            ]);
+            echo $jsonResponse;
         } else {
             echo $this->translate("No Language specified!");
         }

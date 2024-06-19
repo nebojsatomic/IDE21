@@ -102,15 +102,15 @@ function ajaxEvent(){
 }
 message = "";
 function ajaxEventDone(message){
-  //$('body').append('<div id="ajaxEventMessage"  style="position:fixed;display:none;top:0; left:0;opacity:0.9;background:white;margin:20% 40%;padding:30px;width:300px;height:50px;border-radius:10px;z-index:999999;">' +  message + '<img src="'+ absoluteUrl2 +'images/ajax-loader2.gif" style="float:right;" /></div>');
+
   $('body').append('<div id="ajaxEventMessage" role="alert" class="fixed inset-0 w-72 h-24 mx-auto my-auto alert alert-success bg-accent text-accent-content"  style="display:none;opacity:0.9;z-index:999999;"><svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>' +  message + '</span></div>');
   $('#ajaxEventMessage').fadeIn(1000);
-  setTimeout("$('#ajaxEventMessage').fadeOut()", 2000);
+  setTimeout("$('#ajaxEventMessage').fadeOut()", 3000);
 }
 
 function ajaxEmitMessage(emitMessage){
   $('#ajaxEventMessage').html( '<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>' + emitMessage + '</span>');
-  setTimeout("$('#ajaxEventMessage').fadeOut()", 1000);
+  //setTimeout("$('#ajaxEventMessage').fadeOut()", 1000);
 }
 
 function clickMask(){
@@ -2994,7 +2994,7 @@ $('a.uniTableAdmin').livequery('click', function(){
 
   //IF DELETE
   if ($(this).hasClass("a_delete") ){
-    //console.log($(this).attr("id") );
+
     var rowId = $(this).attr("id");
     var confir = confirm(lang.AYS);
     if(hrefVal == "") {
@@ -3005,14 +3005,23 @@ $('a.uniTableAdmin').livequery('click', function(){
 
     if (confir == true) {
       ajaxEvent();
-      $.post(absoluteUrl + hrefVal, function(data){
-        //console.log(data);
-        ajaxEmitMessage(data);
-        setTimeout("$('#ajaxEventMask').click()", 1000);
-        $('#uta_' + tableid  + ' tr[id^='+ rowId +']').fadeOut(2000, function(){
-          $(this).remove();
-        });
+      $.post(absoluteUrl + hrefVal, function(response){
+        try { // first check if the backend has provided json response
+          const data = JSON.parse(response);
 
+          ajaxEmitMessage(data.message);
+
+          if(data.success === true){
+            $('#uta_' + tableid  + ' tr[id^='+ rowId +']').fadeOut(2000, function(){
+              $(this).remove();
+            });
+          }
+        } catch(e) {// not a json response, TODO: make all the responses to delete buttons from backend as JSON
+            ajaxEmitMessage(response);
+            $('#uta_' + tableid  + ' tr[id^='+ rowId +']').fadeOut(2000, function(){
+              $(this).remove();
+            });
+        }
       });
       ajaxEventDone(lang.Deleting);
     }

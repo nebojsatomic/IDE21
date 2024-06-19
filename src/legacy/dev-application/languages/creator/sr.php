@@ -86,6 +86,8 @@ return array(
 "Pages in this category" => "Strane u ovoj kategoriji",
 //languages
 "Add new Language" => "Dodaj novi jezik",
+"Default language cannot be deleted!" => "Jezik koji je default ne može biti obrisan.",
+"The selected language has been deleted!" => "Jezik koji ste izabrali je obrisan!",
 "Add new Setting" => "Dodaj novo podešavanje",
 //modules
 "Available modules:" => "Postojeći moduli",
