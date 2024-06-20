@@ -414,13 +414,12 @@ class ViewController extends NetActionController
 
 
     /**
-     *Render menu
+     * Render menu
      *
      *
-     *@author NT
+     * @author NT
      *
      */
-
     public static function displayMenu($menuQ, $orientation = null, $lC = null)
     {
         $db = Zend_Registry::get('db');
@@ -436,89 +435,67 @@ class ViewController extends NetActionController
 
         $view = new Zend_View();
         $view->addScriptPath($themePath . "templates/");
-        //$view->addHelperPath(OZIMBO_PATH . 'framework/Ozimbo/View/Helper', 'Ozimbo_View_Helper');
 
 
-           foreach ($menuQ as $menuQR) {
-                //ACL PART
-/*
-                $acl->add(new Zend_Acl_Resource('menu_item:' . $menuQR['item_id'] ));//make sure resource exists
-                if(@in_array('menu_item:' . $menuQR['item_id'], $allowArray[$curRole] ) ){
-                    $acl->allow($curRole, 'menu_item:' . $menuQR['item_id'] );
-                }
-
-                if($menuQR['chkAccess'] == '1') {
-                    if (!$acl->isAllowed($curRole, 'menu_item:' . $menuQR['item_id'] )) {
-                        // no permission, move along now
-                        continue;
-                    }
-                }
-
-*/
-//acl in relation to page
-                if (!$acl->has('page:' . $menuQR['cid'])) {
-                    $acl->add(new Zend_Acl_Resource('page:' . $menuQR['cid'] ));//make sure resource exists
-                }
-
-                if(!empty($allowArray[$curRole])) { // MUST RECHECK this behaviour
-                    if(@in_array('page:' . $menuQR['cid'], $allowArray[$curRole]) ){
-                        $acl->allow($curRole, 'page:' . $menuQR['cid'] );
-                    }
-                }
-
-                if($menuQR['check_access'] == '1') {
-                    if (!$acl->isAllowed($curRole, 'page:' . $menuQR['cid'] )) {
-                        // no permission, move along now
-                        continue;
-                    }
-                }
-                //ACL END
-
-                if (($menuQR['parent_id'] == 0) ) {
-                    $data['menus'][$menuQR['item_id']] = $menuQR;
-                    if ($orientation == "slide")  {
-                        $data['menus'][$menuQR['item_id']]['output'] = ViewController::_templatePrepare($data['menus'][$menuQR['item_id']]['output']);
-                    }
-                    $hasItems = true;
-                } else if (($menuQR['parent_id'] != 0)) {
-                    $data['menu_items'][$menuQR['parent_id']][$menuQR['item_id']] = $menuQR;
-                    $hasItems = true;
-                }
-            }
-            if ($orientation == null) {
-                $scriptName = "jdMenu.phtml";
-            } elseif ($orientation == "vertical")  {
-                $scriptName = "jdMenuVertical.phtml";
-            } elseif ($orientation == "tree")  {
-                $front = Zend_Controller_Front::getInstance();
-                $req = $front->getRequest();
-                $treeVals = $req->getParams();
-
-                if(@$treeVals['creatorAct'] == 'true') {
-                    $data['langC'] = "_" . $treeVals['langC'];
-                }
-                $scriptName = "treeView.phtml";
-            } elseif ($orientation == "slide")  {
-                $scriptName = "slide.phtml";
+        foreach ($menuQ as $menuQR){
+            /*acl in relation to page*/
+            if (!$acl->has('page:' . $menuQR['cid'])) {
+                $acl->add(new Zend_Acl_Resource('page:' . $menuQR['cid'] ));//make sure resource exists
             }
 
+            if(!empty($allowArray[$curRole])) { // MUST RECHECK this behaviour
+                if(@in_array('page:' . $menuQR['cid'], $allowArray[$curRole]) ){
+                   $acl->allow($curRole, 'page:' . $menuQR['cid'] );
+               }
+            }
 
-            $Menu['menu'] = $menuQ;
-            $data['host'] = str_replace('/quickstart/public/',"/", $host);
-            $data['host'] = str_replace('/public/',"/", $data['host']);
-            $data['translate'] = $translator;
-            $data['urlRewrite'] = $urlRewrite;
-            //$view->assign($host);
-            //$view->assign($Menu);
-            $view->assign($data);
+            if($menuQR['check_access'] == '1') {
+                if (!$acl->isAllowed($curRole, 'page:' . $menuQR['cid'] )) {
+                    // no permission, move along now
+                    continue;
+                }
+            }
+            /*ACL END*/
+            if (($menuQR['parent_id'] == 0) ){
+                $data['menus'][$menuQR['item_id']] = $menuQR;
+                if ($orientation == "slide"){
+                    $data['menus'][$menuQR['item_id']]['output'] = ViewController::_templatePrepare($data['menus'][$menuQR['item_id']]['output']);
+                }
+                $hasItems = true;
+            } else if (($menuQR['parent_id'] != 0)) {
+                $data['menu_items'][$menuQR['parent_id']][$menuQR['item_id']] = $menuQR;
+                $hasItems = true;
+            }
+        }
 
+        if ($orientation == null){
+            $scriptName = "jdMenu.phtml";
+        } elseif ($orientation == "vertical"){
+            $scriptName = "jdMenuVertical.phtml";
+        } elseif ($orientation == "tree"){
+            $front = Zend_Controller_Front::getInstance();
+            $req = $front->getRequest();
+            $treeVals = $req->getParams();
 
-            $partialOutput = $view->render($scriptName);
+            if(@$treeVals['creatorAct'] == 'true'){
+                $data['langC'] = "_" . $treeVals['langC'];
+            }
+            $scriptName = "treeView.phtml";
+        } elseif ($orientation == "slide"){
+            $scriptName = "slide.phtml";
+        }
 
-            return $partialOutput;
+        $Menu['menu'] = $menuQ;
+        $data['host'] = str_replace('/quickstart/public/',"/", $host);
+        $data['host'] = str_replace('/public/',"/", $data['host']);
+        $data['translate'] = $translator;
+        $data['urlRewrite'] = $urlRewrite;
 
+        $view->assign($data);
 
+        $partialOutput = $view->render($scriptName);
 
+        return $partialOutput;
     }
 
     /**

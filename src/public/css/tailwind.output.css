@@ -3389,10 +3389,6 @@ input.tab:checked + .tab-content,
   bottom: 0px;
 }
 
-.bottom-12 {
-  bottom: 3rem;
-}
-
 .left-0 {
   left: 0px;
 }
@@ -3409,12 +3405,12 @@ input.tab:checked + .tab-content,
   top: 0px;
 }
 
-.top-52 {
-  top: 13rem;
-}
-
 .top-12 {
   top: 3rem;
+}
+
+.top-52 {
+  top: 13rem;
 }
 
 .z-\[1\] {
@@ -3563,6 +3559,16 @@ input.tab:checked + .tab-content,
   height: 6rem;
 }
 
+.size-5 {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.size-6 {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 .\!h-px {
   height: 1px !important;
 }
@@ -3697,6 +3703,10 @@ input.tab:checked + .tab-content,
 
 .w-52 {
   width: 13rem;
+}
+
+.w-56 {
+  width: 14rem;
 }
 
 .w-6 {
@@ -3955,6 +3965,11 @@ input.tab:checked + .tab-content,
   background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
 }
 
+.bg-base-200 {
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
+}
+
 .bg-base-300 {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-bg-opacity)));
@@ -4005,6 +4020,11 @@ input.tab:checked + .tab-content,
   background-color: rgb(248 113 113 / var(--tw-bg-opacity));
 }
 
+.bg-red-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
+}
+
 .bg-secondary {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-s,oklch(var(--s)/var(--tw-bg-opacity)));
@@ -4046,11 +4066,6 @@ input.tab:checked + .tab-content,
 
 .stroke-current {
   stroke: currentColor;
-}
-
-.object-contain {
-  -o-object-fit: contain;
-     object-fit: contain;
 }
 
 .object-cover {
@@ -5210,6 +5225,11 @@ input.tab:checked + .tab-content,
   }
 }
 
+.hover\:bg-accent:hover {
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-a,oklch(var(--a)/var(--tw-bg-opacity)));
+}
+
 .hover\:underline:hover {
   text-decoration-line: underline;
 }
@@ -5312,11 +5332,6 @@ input.tab:checked + .tab-content,
 
   .md\:rounded-box {
     border-radius: var(--rounded-box, 1rem);
-  }
-
-  .md\:object-contain {
-    -o-object-fit: contain;
-       object-fit: contain;
   }
 
   .md\:p-8 {
