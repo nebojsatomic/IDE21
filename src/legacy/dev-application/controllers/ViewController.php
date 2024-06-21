@@ -64,11 +64,11 @@ class ViewController extends NetActionController
              $this->_sesija->lang = $values['lng'];
         }
         $langCode = $this->_sesija->lang;
-
-        @$alias = $values['alias'];
+        $alias = '';// set empty alias, so we dont search for it if only pageID was given
+        if(str_contains($values['id'], '.html')) $alias = str_replace('.html', '', $values['id']);
         if ($alias != '') {
 
-            //this below is an unsuccessfull try to cache a query for the alias
+            //this below is an unsuccessfull try to cache a query for the alias. TODO: make it work
             //if(!$result = $this->_cache->load('q_View_index_resID_' . str_replace("-", "", urlencode($alias)) )) {//caching this query
                 $resID = $db->fetchAll("SELECT id, check_access FROM pages_$langCode  WHERE alias = ?", array($alias));
                 $id = $resID[0]['id'];

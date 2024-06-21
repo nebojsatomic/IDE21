@@ -47,8 +47,8 @@ ul.jd_menu_vertical {
 	height: auto;
 }
 ul.jd_menu ul {
-  width:150px;
-	height: auto;
+/*	width:150px;
+	height: auto;*/
 }
 * html ul.jd_menu ul {
 	width: 1%;
