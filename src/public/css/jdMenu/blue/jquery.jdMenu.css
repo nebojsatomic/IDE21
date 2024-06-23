@@ -1,8 +1,8 @@
 ul.jd_menu, 
 ul.jd_menu_vertical {
-	margin: 0px;
+/*	margin: 0px;
 	padding: 0px;
-	list-style-type: none;
+	list-style-type: none;*/
 }
 ul.jd_menu ul,
 ul.jd_menu_vertical ul {

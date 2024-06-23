@@ -17,7 +17,7 @@
  */
  ?>
 <!--jd_menu jd_menu_vertical -->
-<ul class=" jd_menu jd_menu_vertical w-full rounded-lg bg-primary" style="">
+<ul class=" jd_menu jd_menu_vertical w-full rounded-lg bg-primary p-1" style="">
 <?php
 
 $menu_items = $this->menu_items;
@@ -30,9 +30,9 @@ $linkURLrewrite = $this->urlRewrite;
 foreach(@$this->menus as $menus => $k){
 
     if ($linkURLrewrite == 1){//if REWRITEURL
-        $link = $k['alias'] . ".html";
+        $link = '/pages/' . $k['alias'] . ".html";
     } else {
-        $link = $k['url'];
+        $link = '/' . $k['url'];
     }
     echo '<li class="group transition ease-in duration-200 bg-primary hover:bg-accent rounded relative pr-8">';
     //generate link if there is such
@@ -43,37 +43,37 @@ foreach(@$this->menus as $menus => $k){
     }
     //if there is submenu generate submenu links //SUBLEVEL 1
     if ( @$menu_items[$k['item_id']] !== null ){
-        echo '<span class="submenu-pointer grid items-center self-center justify-items-center rounded-full text-neutral-content absolute bg-accent group-hover:bg-neutral right-1 top-1 w-8 h-8"> > </span><ul class="w-full">';
+        echo '<span class="submenu-pointer grid items-center self-center justify-items-center rounded-full text-neutral-content absolute bg-accent group-hover:bg-neutral right-1 top-3 w-4 h-4 text-xs"> > </span><ul class="w-full shadow-lg">';
         foreach($menu_items[$k['item_id']] as $sub => $s){
 
             if ($linkURLrewrite == 1){
-                $link = $s['alias'] . ".html";
+                $link = '/pages/' . $s['alias'] . ".html";
             } else {
-                $link = $s['url'];
+                $link = '/' . $s['url'];
             }
 
             echo '<li id="'.$s['item_id'].'" class="group transition ease-in duration-200 bg-primary hover:bg-accent rounded w-full pr-8"><a ' . $linkType. '="'  . $link . '"  target="' .$target . '" class="link flex p-2"   >' . $s['name'] . '</a> ';
             // SUBLEVEL 2
             if ( @$menu_items[$s['item_id']] !== null ) {
-                echo '<span class="submenu-pointer grid items-center self-center justify-items-center rounded-full text-neutral-content absolute bg-accent group-hover:bg-neutral right-1 top-1 w-8 h-8"> > </span><ul class="w-full">';
+                echo '<span class="submenu-pointer grid items-center self-center justify-items-center rounded-full text-neutral-content absolute bg-accent group-hover:bg-neutral right-1 top-3 w-4 h-4 text-xs"> > </span><ul class="w-full shadow-lg">';
                 foreach($menu_items[$s['item_id']] as $sub2 => $s2) {
 
                     if ($linkURLrewrite == 1) {
-                        $link = $s2['alias'] . ".html";
+                        $link = '/pages/' . $s2['alias'] . ".html";
                     } else {
-                        $link = $s2['url'];
+                        $link = '/' . $s2['url'];
                     }
 
                     echo '<li id="'.$s2['item_id'].'" class="group transition ease-in duration-200 bg-primary hover:bg-accent rounded w-full pr-8"><a ' . $linkType. '="'  . $link . '"  target="' .$target . '" class="link flex p-2"   >' . $s2['name'] . '</a> ';
 
                     //SUBLEVEL 3
                     if ( @$menu_items[$s2['item_id']] !== null ) {
-                        echo '<span class="submenu-pointer grid items-center self-center justify-items-center rounded-full text-neutral-content absolute bg-accent group-hover:bg-neutral right-1 top-1 w-8 h-8"> > </span><ul class="w-full">';
+                        echo '<span class="submenu-pointer grid items-center self-center justify-items-center rounded-full text-neutral-content absolute bg-accent group-hover:bg-neutral right-1 top-3 w-4 h-4 text-xs"> > </span><ul class="w-full shadow-lg">';
                         foreach($menu_items[$s2['item_id']] as $sub3 => $s3) {
                             if ($linkURLrewrite == 1) {
-                                $link = $s3['alias'] . ".html";
+                                $link = '/pages/' . $s3['alias'] . ".html";
                             } else {
-                                $link = $s3['url'];
+                                $link = '/' . $s3['url'];
                             }
                             echo '<li id="'.$s3['item_id'].'" class="group transition ease-in duration-200 bg-primary hover:bg-accent rounded w-full pr-8"><a ' . $linkType. '="'  . $link . '"  target="' .$target . '" class="link flex p-2"   >' . $s3['name'] . '</a> ';
 

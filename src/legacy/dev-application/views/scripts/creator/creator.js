@@ -151,7 +151,7 @@ function redrawMenus(){
     if ($(this).attr("objtype") == "Menu"  ){
 
       tvId = $(this).attr("id");
-      //console.log(tvId);
+
       var tvCommand = "{" + $(this).attr("command") + "}";
 
       $.post(absoluteUrl + "view/render-tv/var/" + tvCommand  , function(data){
@@ -985,11 +985,11 @@ $(document).ready(function(){
       //$(this).resizable('destroy');
 
       //if it is a menu write command
-      if ($(this).attr("objtype") == "Menu"){
+      /*if ($(this).attr("objtype") == "Menu"){
         $(this).addClass("menuObj");
         $(this).html( "{" +$(this).attr("command") + "}");
 
-      }
+      }*/
       if ($(this).attr("objtype") == "Category"){
         $(this).html( "{" +$(this).attr("command") + "}");
       }
@@ -1042,11 +1042,10 @@ $(document).ready(function(){
       $(this).removeClass("inactiveObject");
 
       //if it is a menu write command
-      if ($(this).attr("objtype") == "Menu"){
+      /*if ($(this).attr("objtype") == "Menu"){
         $(this).addClass("menuObj");
         $(this).html( "{" +$(this).attr("command") + "}");
-        //$(this).attr("command", "");
-      }
+      }*/
       if ($(this).attr("objtype") == "Category"){
         $(this).html( "{" +$(this).attr("command") + "}");
         //$(this).attr("command", "");
@@ -1205,8 +1204,7 @@ $(document).ready(function(){
       $(this).addClass("templateDiv");
       //if it is a menu write command
       if ($(this).attr("objtype") == "Menu"){
-        $(this).html( "{" +$(this).attr("command") + "}");
-        //$(this).attr("command", "");
+        //$(this).html( "{" +$(this).attr("command") + "}");
       }
       if ($(this).attr("objtype") == "Category"){
         $(this).html( "{" +$(this).attr("command") + "}");
@@ -1251,8 +1249,7 @@ $(document).ready(function(){
       //$(this).resizable('destroy');
       //if it is a menu write command
       if ($(this).attr("objtype") == "Menu"){
-        $(this).html( "{" +$(this).attr("command") + "}");
-        //$(this).attr("command", "");
+        //$(this).html( "{" +$(this).attr("command") + "}");
       }
       if ($(this).attr("objtype") == "Category"){
         $(this).html( "{" +$(this).attr("command") + "}");
@@ -1372,9 +1369,7 @@ $(".draggable").livequery('dblclick', function(e){
   htmlValue = $('#' + $('#objIDshow').text() ).html();
   zIn = $(e.target).css("z-index");
   css = $(e.target).attr("style");
-  console.log($(e.target));
-console.log($(e.target).attr('style'));
-  //css = "width: auto; min-height: 25px;height:auto; background: transparent; padding: 10px; float:left;color: black;" + $(this).attr("style");
+
   //theme classes
   themeClass = "";
   if( $(this).hasClass("noTheme") ){themeClass = "no";}
@@ -1571,31 +1566,31 @@ $('#objType').change(function(){
 
   //title
   if (defaultBackground == "title") {
-    //$('#' + idObjekta).addClass("menuObj");
+
     $('#' + idObjekta).html("{title}");
     setTimeout("clickMask()", 500); //closing all
   }
   //pageInfo
   if (defaultBackground == "pageinfo") {
-    //$('#' + idObjekta).addClass("menuObj");
+
     $('#' + idObjekta).html("{pageinfo}");
     setTimeout("clickMask()", 500); //closing all
   }
   //SEARCHFORM
   if (defaultBackground == "searchform") {
-    //$('#' + idObjekta).addClass("menuObj");
+
     $('#' + idObjekta).html("{searchform}");
     setTimeout("clickMask()", 500); //closing all
   }
   //languageFORM
   if (defaultBackground == "languageform") {
-    //$('#' + idObjekta).addClass("menuObj");
+
     $('#' + idObjekta).html("{language:flags}");
     setTimeout("clickMask()", 500); //closing all
   }
   //contactFORM
   if (defaultBackground == "contactform") {
-    //$('#' + idObjekta).addClass("menuObj");
+
     $('#' + idObjekta).html("{liveblock:forms:_contactForm:contact}");
     setTimeout("clickMask()", 500); //closing all
   }
@@ -1615,7 +1610,7 @@ $('#objType').change(function(){
 
   //loginArea
   if (defaultBackground == "loginarea") {
-    //$('#' + idObjekta).addClass("menuObj");
+
     $('#' + idObjekta).html("{liveblock:user:loginArea}");
     setTimeout("clickMask()", 500); //closing all
   }
@@ -1623,7 +1618,7 @@ $('#objType').change(function(){
   if ($(this).attr("value") == "Menu") {
     $('#' + idObjekta).addClass("menuObj");
     $('#MenuA').click();
-    //console.log("Click on the menu to select it!");
+
     ajaxEventDone(lang.ClickMenu);
     ajaxEmitMessage(lang.ClickMenu);
     setTimeout("clickMask()", 2000); //closing all

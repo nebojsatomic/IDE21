@@ -3421,6 +3421,10 @@ input.tab:checked + .tab-content,
   top: 13rem;
 }
 
+.top-3 {
+  top: 0.75rem;
+}
+
 .z-\[1\] {
   z-index: 1;
 }
@@ -3431,6 +3435,10 @@ input.tab:checked + .tab-content,
 
 .col-span-1 {
   grid-column: span 1 / span 1;
+}
+
+.col-span-10 {
+  grid-column: span 10 / span 10;
 }
 
 .col-span-12 {
@@ -3459,6 +3467,10 @@ input.tab:checked + .tab-content,
 
 .float-right {
   float: right;
+}
+
+.float-left {
+  float: left;
 }
 
 .\!-m-px {
@@ -3565,6 +3577,11 @@ input.tab:checked + .tab-content,
 .size-24 {
   width: 6rem;
   height: 6rem;
+}
+
+.size-5 {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .\!h-px {
@@ -3717,6 +3734,10 @@ input.tab:checked + .tab-content,
 
 .w-full {
   width: 100%;
+}
+
+.min-w-48 {
+  min-width: 12rem;
 }
 
 .min-w-64 {
@@ -4057,6 +4078,14 @@ input.tab:checked + .tab-content,
   stroke: currentColor;
 }
 
+.stroke-white {
+  stroke: #fff;
+}
+
+.stroke-2 {
+  stroke-width: 2;
+}
+
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -4113,6 +4142,10 @@ input.tab:checked + .tab-content,
   padding-left: 2rem;
 }
 
+.pr-2 {
+  padding-right: 0.5rem;
+}
+
 .pr-8 {
   padding-right: 2rem;
 }
@@ -4147,6 +4180,11 @@ input.tab:checked + .tab-content,
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
 .font-black {
@@ -4252,14 +4290,6 @@ input.tab:checked + .tab-content,
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
-}
-
-.duration-1000 {
-  transition-duration: 1000ms;
-}
-
-.duration-500 {
-  transition-duration: 500ms;
 }
 
 .duration-200 {
@@ -5243,18 +5273,8 @@ input.tab:checked + .tab-content,
   background-color: var(--fallback-a,oklch(var(--a)/var(--tw-bg-opacity)));
 }
 
-.hover\:bg-primary:hover {
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity)));
-}
-
 .hover\:underline:hover {
   text-decoration-line: underline;
-}
-
-.group:hover .group-hover\:bg-primary {
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity)));
 }
 
 .group:hover .group-hover\:bg-neutral {
@@ -5372,6 +5392,10 @@ input.tab:checked + .tab-content,
 
   .md\:pb-16 {
     padding-bottom: 4rem;
+  }
+
+  .md\:text-center {
+    text-align: center;
   }
 
   .md\:text-5xl {
