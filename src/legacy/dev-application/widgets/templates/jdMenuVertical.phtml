@@ -43,7 +43,7 @@ foreach(@$this->menus as $menus => $k){
     }
     //if there is submenu generate submenu links //SUBLEVEL 1
     if ( @$menu_items[$k['item_id']] !== null ){
-        echo '<span class="submenu-pointer grid items-center self-center justify-items-center rounded-full text-neutral-content absolute bg-accent group-hover:bg-neutral right-1 top-3 w-4 h-4 text-xs"> > </span><ul class="w-full shadow-lg">';
+        echo '<span class="submenu-pointer grid items-center self-center justify-items-center rounded-full text-neutral-content absolute  right-1 top-3 w-4 h-4 text-xs"></span><ul class="w-full shadow-lg">';
         foreach($menu_items[$k['item_id']] as $sub => $s){
 
             if ($linkURLrewrite == 1){
@@ -55,7 +55,7 @@ foreach(@$this->menus as $menus => $k){
             echo '<li id="'.$s['item_id'].'" class="group transition ease-in duration-200 bg-primary hover:bg-accent rounded w-full pr-8"><a ' . $linkType. '="'  . $link . '"  target="' .$target . '" class="link flex p-2"   >' . $s['name'] . '</a> ';
             // SUBLEVEL 2
             if ( @$menu_items[$s['item_id']] !== null ) {
-                echo '<span class="submenu-pointer grid items-center self-center justify-items-center rounded-full text-neutral-content absolute bg-accent group-hover:bg-neutral right-1 top-3 w-4 h-4 text-xs"> > </span><ul class="w-full shadow-lg">';
+                echo '<span class="submenu-pointer grid items-center self-center justify-items-center rounded-full text-neutral-content absolute  right-1 top-3 w-4 h-4 text-xs"></span><ul class="w-full shadow-lg">';
                 foreach($menu_items[$s['item_id']] as $sub2 => $s2) {
 
                     if ($linkURLrewrite == 1) {
@@ -68,7 +68,7 @@ foreach(@$this->menus as $menus => $k){
 
                     //SUBLEVEL 3
                     if ( @$menu_items[$s2['item_id']] !== null ) {
-                        echo '<span class="submenu-pointer grid items-center self-center justify-items-center rounded-full text-neutral-content absolute bg-accent group-hover:bg-neutral right-1 top-3 w-4 h-4 text-xs"> > </span><ul class="w-full shadow-lg">';
+                        echo '<span class="submenu-pointer grid items-center self-center justify-items-center rounded-full text-neutral-content absolute  right-1 top-3 w-4 h-4 text-xs"></span><ul class="w-full shadow-lg">';
                         foreach($menu_items[$s2['item_id']] as $sub3 => $s3) {
                             if ($linkURLrewrite == 1) {
                                 $link = '/pages/' . $s3['alias'] . ".html";

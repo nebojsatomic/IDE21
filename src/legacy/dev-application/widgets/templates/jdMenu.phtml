@@ -16,7 +16,7 @@
  * 
  */
  ?>
-<ul class=" jd_menu jd_menu_slate block w-full float-left bg-primary md:text-center">
+<ul class=" jd_menu jd_menu_slate grid grid-cols-6 xl:grid-cols-10 justify-items-stretch w-full bg-primary text-center">
 <?php
 
 $menu_items = $this->menu_items;
@@ -33,7 +33,7 @@ foreach(@$this->menus as $menus => $k){
     } else {
         $link = '/' . $k['url'];
     }
-    echo '<li class="group transition ease-in duration-200 bg-primary hover:bg-accent rounded pr-2 min-w-48 w-full md:w-auto grid grid-cols-12">';
+    echo '<li class="group transition ease-in duration-200 bg-primary hover:bg-accent rounded pr-2 min-w-fit col-span-12 md:col-span-2 lg:col-span-1 w-full md:w-auto grid grid-cols-12">';
     //generate link if there is such
     if ($k['url'] != '' ) {
         echo '<a class="link col-span-10 p-2" target="' .$target . '" ' . $linkType. '="'  . $link . '" >'.$k['name'].'</a>';
@@ -42,7 +42,7 @@ foreach(@$this->menus as $menus => $k){
     }
     //if there is submenu generate submenu links //SUBLEVEL 1
     if ( @$menu_items[$k['item_id']] !== null ){
-        echo '<span class="submenu-pointer grid col-span-2 items-center self-center justify-self-end justify-items-center rounded-full text-neutral-content bg-accent group-hover:bg-neutral right-1 top-1 w-4 h-4 text-xs"> > </span><ul class="min-w-48 w-full md:w-auto grid grid-cols-12 shadow-lg">';
+        echo '<span class="submenu-pointer grid col-span-2 items-center self-center justify-self-end justify-items-center rounded-full text-neutral-content right-1 top-1 w-4 h-4 text-xs"></span><ul class="min-w-48 w-full md:w-auto grid grid-cols-12 shadow-lg">';
         foreach($menu_items[$k['item_id']] as $sub => $s){
 
             if ($linkURLrewrite == 1){
@@ -54,7 +54,7 @@ foreach(@$this->menus as $menus => $k){
             echo '<li id="'.$s['item_id'].'" class="group transition ease-in duration-200 bg-primary hover:bg-accent rounded pr-2 w-full md:w-auto grid grid-cols-12"><a ' . $linkType. '="'  . $link . '"  target="' .$target . '" class="link col-span-10 p-2"   >' . $s['name'] . '</a> ';
             // SUBLEVEL 2
             if ( @$menu_items[$s['item_id']] !== null ) {
-                echo '<span class="submenu-pointer grid col-span-2 justify-self-end items-center self-center justify-items-center rounded-full text-neutral-content  bg-accent group-hover:bg-neutral right-1 top-1 w-4 h-4 text-xs"> > </span><ul class="min-w-48 w-full md:w-auto grid grid-cols-12 shadow-lg">';
+                echo '<span class="submenu-pointer grid col-span-2 justify-self-end items-center self-center justify-items-center rounded-full text-neutral-content  right-1 top-1 w-4 h-4 text-xs"></span><ul class="min-w-48 w-full md:w-auto grid grid-cols-12 shadow-lg">';
                 foreach($menu_items[$s['item_id']] as $sub2 => $s2) {
 
                     if ($linkURLrewrite == 1) {
@@ -67,7 +67,7 @@ foreach(@$this->menus as $menus => $k){
 
                     //SUBLEVEL 3
                     if ( @$menu_items[$s2['item_id']] !== null ) {
-                        echo '<span class="submenu-pointer grid col-span-2 justify-self-end items-center self-center justify-items-center rounded-full text-neutral-content  bg-accent group-hover:bg-neutral right-1 top-1 w-4 h-4 text-xs"> > </span><ul class="min-w-48 w-full md:w-auto grid grid-cols-12 shadow-lg">';
+                        echo '<span class="submenu-pointer grid col-span-2 justify-self-end items-center self-center justify-items-center rounded-full text-neutral-content  right-1 top-1 w-4 h-4 text-xs"></span><ul class="min-w-48 w-full md:w-auto grid grid-cols-12 shadow-lg">';
                         foreach($menu_items[$s2['item_id']] as $sub3 => $s3) {
                             if ($linkURLrewrite == 1) {
                                 $link = '/pages/' . $s3['alias'] . ".html";

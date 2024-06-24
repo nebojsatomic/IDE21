@@ -17,107 +17,88 @@
 */
 ?>
 <ul id="tree">
+<?php
 
-  <?php
-  //echo $this->langC;
-  $menu_items = $this->menu_items;
+$menu_items = $this->menu_items;
 
-  $host = $this->host;
-  $linkType = 'href';
-  $target = "_self";
-  $linkURLrewrite = $this->urlRewrite;
-  
-  //echo '<ul id="menu">';
-  foreach($this->menus as $menus => $k) {
-    //if REWRITEURL
-    if ($linkURLrewrite == 1) {
-      $link = $k['alias'] . ".html";
-      //$link = $k['alias'] ;
-    } else {
-      $link = $k['url'];
-    }
+$host = $this->host;
+$linkType = 'href';
+$target = "_self";
+$linkURLrewrite = $this->urlRewrite;
 
-    echo '<li  >';
-    //generate link if there is such
-    if ($k['url'] != '' ) {
-      echo    '<a  id="mi_' . $k['item_id']. '" target="' .$target . '" ' . $linkType. '="' . $host .$link.'"  >'.$k['name' . $this->langC ] .'&nbsp;</a>';
+foreach($this->menus as $menus => $k){
+  // if REWRITEURL
+  if ($linkURLrewrite == 1) {
+    $link = '/pages/' . $k['alias'] . ".html";
 
-    } else {
-      echo    '<a id="mi_' . $k['item_id']. '" target="' .$target . '" ' . $linkType. '="' . $this->host . '"  >'.$k['name' . $this->langC ] .'&nbsp;</a>';
-    }
-
-    //echo '</li>';
-
-
-    //if there is submenu generate submenu links//SUBLEVEL 1
-    if ( @$menu_items[$k['item_id']] !== null ) {
-
-
-      //echo '<div  class="submenu" id="submenu_'.$k['item_id'].'" style="display:none">';
-      echo '<ul>';
-      foreach($menu_items[$k['item_id']] as $sub => $s) {
-
-        if ($linkURLrewrite == 1) {
-          $link = $s['alias'] . ".html";
-          //$link = $s['alias'] ;
-        } else {
-          $link = $s['url'];
-        }
-
-        echo '<li id="'.$s['item_id'].'" ><a id="mi_' . $s['item_id']. '" ' . $linkType. '="' . $host . $link . '"  target="' .$target . '" class="link"   >' . $s['name' . $this->langC] . '&nbsp;</a> ';
-
-        //SUBLEVEL 2
-        if ( @$menu_items[$s['item_id']] !== null ) {
-          //echo '<div  class="submenu2" id="submenu2_'.$s['item_id'].'" style="display:none">';
-          echo '<ul>';
-          foreach($menu_items[$s['item_id']] as $sub2 => $s2) {
-
-            if ($linkURLrewrite == 1) {
-              $link = $s2['alias'] . ".html";
-              //$link = $s2['alias'];
-            } else {
-              $link = $s2['url'];
-            }
-
-            echo '<li id="'.$s2['item_id'].'" ><a id="mi_' . $s2['item_id']. '" ' . $linkType. '="' . $host . $link . '"  target="' .$target . '" class="link"   >' . $s2['name' . $this->langC] . '&nbsp;</a> ';
-
-            //SUBLEVEL 3
-            if ( @$menu_items[$s2['item_id']] !== null ) {
-              //echo '<div  class="submenu3" id="submenu3_'.$s2['item_id'].'" style="display:none">';
-              echo '<ul>';
-              foreach($menu_items[$s2['item_id']] as $sub3 => $s3) {
-
-                if ($linkURLrewrite == 1) {
-                  $link = $s3['alias'] . ".html";
-                  //$link = $s3['alias'] ;
-                } else {
-                  $link = $s3['url'];
-                }
-
-                echo '<li id="'.$s3['item_id'].'" ><a id="mi_' . $s3['item_id']. '"' . $linkType. '="' . $host . $link . '"  target="' .$target . '" class="link"   >' . $s3['name' . $this->langC] . '&nbsp;</a> ';
-
-                echo '</li>';
-              }
-              echo '</ul>';
-              //echo "</div>";
-
-            }
-
-            echo '</li>';
-          }
-          echo '</ul>';
-          //echo "</div>";
-
-        }
-
-        echo '</li>';
-      }
-      echo '</ul>';
-      //echo '</li>';
-
-    }
-    echo '</li>';
+  } else {
+    $link = '/' . $k['url'];
   }
 
-  ?>
+  echo '<li  >';
+  // generate link if there is such
+  if ($k['url'] != '' ) {
+    echo    '<a  id="mi_' . $k['item_id']. '" target="' .$target . '" ' . $linkType. '="' .$link.'"  >'.$k['name' . $this->langC ] .'&nbsp;</a>';
+
+  } else {
+    echo    '<a id="mi_' . $k['item_id']. '" target="' .$target . '" ' . $linkType. '="' . $this->host . '"  >'.$k['name' . $this->langC ] .'&nbsp;</a>';
+  }
+
+  // if there is submenu generate submenu links // SUBLEVEL 1
+  if ( @$menu_items[$k['item_id']] !== null ){
+
+    echo '<ul>';
+    foreach($menu_items[$k['item_id']] as $sub => $s) {
+
+      if ($linkURLrewrite == 1){
+        $link = '/pages/' . $s['alias'] . ".html";
+      } else {
+        $link = '/' . $s['url'];
+      }
+
+      echo '<li id="'.$s['item_id'].'" ><a id="mi_' . $s['item_id']. '" ' . $linkType. '="' . $link . '"  target="' .$target . '" class="link"   >' . $s['name' . $this->langC] . '&nbsp;</a> ';
+
+      // SUBLEVEL 2
+      if ( @$menu_items[$s['item_id']] !== null ) {
+
+        echo '<ul>';
+        foreach($menu_items[$s['item_id']] as $sub2 => $s2){
+
+          if ($linkURLrewrite == 1){
+            $link = '/pages/' . $s2['alias'] . ".html";
+          } else {
+            $link = '/' . $s2['url'];
+          }
+
+          echo '<li id="'.$s2['item_id'].'" ><a id="mi_' . $s2['item_id']. '" ' . $linkType. '="' . $link . '"  target="' .$target . '" class="link"   >' . $s2['name' . $this->langC] . '&nbsp;</a> ';
+
+          // SUBLEVEL 3
+          if ( @$menu_items[$s2['item_id']] !== null ){
+            echo '<ul>';
+            foreach($menu_items[$s2['item_id']] as $sub3 => $s3) {
+
+              if ($linkURLrewrite == 1) {
+                $link = '/pages/' . $s3['alias'] . ".html";
+
+              } else {
+                $link = '/' . $s3['url'];
+              }
+
+              echo '<li id="'.$s3['item_id'].'" ><a id="mi_' . $s3['item_id']. '"' . $linkType. '="' . $link . '"  target="' .$target . '" class="link"   >' . $s3['name' . $this->langC] . '&nbsp;</a> ';
+
+              echo '</li>';
+            }
+            echo '</ul>';
+          }
+          echo '</li>';
+        }
+        echo '</ul>';
+      }
+      echo '</li>';
+    }
+    echo '</ul>';
+  }
+  echo '</li>';
+}
+?>
 </ul>

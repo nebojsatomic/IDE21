@@ -73,6 +73,8 @@
 
 .btn-search {
   @apply btn btn-sm bg-accent absolute top-0 right-0 w-8 !important;
+  background-image: url( '/images/search.svg' );
+  @apply bg-center bg-no-repeat bg-contain;
 }
 #what-label, #submitSearch-label {
   @apply hidden;
@@ -91,4 +93,14 @@
 .ui-autocomplete .ui-menu-item a.ui-state-focus {
   background: transparent;
   @apply text-accent;
+}
+
+/* menus */
+.submenu-pointer {
+  @apply bg-center bg-no-repeat bg-contain;
+  background-image: url( '/images/submenu-pointer.svg' );
+}
+.treeview a {
+  @apply relative px-2 rounded;
+  @apply -top-1.5 hover:text-accent !important;
 }
