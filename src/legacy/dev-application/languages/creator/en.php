@@ -19,4 +19,5 @@
 <?php
 return array(
 "Submit" => "Submit",
+"Click this to update the content of the selected object" => "Click this to update the content of the selected object with the content from WYSIWYG editor"
 );

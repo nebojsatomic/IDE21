@@ -102,5 +102,5 @@
 }
 .treeview a {
   @apply relative px-2 rounded;
-  @apply -top-1.5 hover:text-accent !important;
+  @apply hover:text-accent !important;
 }

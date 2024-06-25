@@ -3829,7 +3829,8 @@ fsElementAll = document.getElementById('body');
 })();
 
 // handle button click CSS
-fsButton.addEventListener('click', function() {
+fsButton.addEventListener('click', function(e) {
+  e.preventDefault();
   // if already in fullscreen, it needs to get out of it
   if( $(fsElement).hasClass('fs') === true ){
     window.fullScreenApi.cancelFullScreen(fsElement);
@@ -3843,7 +3844,8 @@ fsButton.addEventListener('click', function() {
 }, true);
 
 //JS
-fsButton2.addEventListener('click', function() {
+fsButton2.addEventListener('click', function(e) {
+  e.preventDefault();
   // if already in fullscreen, it needs to get out of it
   if( $(fsElement2).hasClass('fs') === true ){
     window.fullScreenApi.cancelFullScreen(fsElement2);
@@ -3855,7 +3857,8 @@ fsButton2.addEventListener('click', function() {
 }, true);
 
 //MODULES
-fsButton3.addEventListener('click', function() {
+fsButton3.addEventListener('click', function(e) {
+  e.preventDefault();
   // if already in fullscreen, it needs to get out of it
   if( $(fsElement3).hasClass('fs') === true ){
     window.fullScreenApi.cancelFullScreen(fsElement3);
@@ -3870,11 +3873,12 @@ fsButton3.addEventListener('click', function() {
       $(this).appendTo(fsElement3);
     }
   });
-  //$(fsElement3).addClass('fs').height($(window).height());
+
 }, true);
 
 // fullscreen All
-fsButtonAll.addEventListener('click', function() {
+fsButtonAll.addEventListener('click', function(e) {
+  e.preventDefault();
   // if already in fullscreen, it needs to get out of it
   if( $(fsElementAll).hasClass('fs') === true ){
     window.fullScreenApi.cancelFullScreen(fsElementAll);
