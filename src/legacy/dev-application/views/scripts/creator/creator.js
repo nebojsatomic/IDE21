@@ -802,7 +802,7 @@ $(document).ready(function(){
   });
 
   $('#poA').click(function(){
-    aaa = 0;
+    shouldDisplayMenu = 0;
   });
   //toggle visibility for the textareas with tinymce, html and style for the object
   $('#toggleVisibilityRowAnchor').click(function(){
@@ -1622,7 +1622,7 @@ $('#objType').change(function(){
     ajaxEventDone(lang.ClickMenu);
     ajaxEmitMessage(lang.ClickMenu);
     setTimeout("clickMask()", 2000); //closing all
-    aaa = 1;
+    shouldDisplayMenu = 1;
 
   }
 
@@ -1638,26 +1638,32 @@ $('#objType').change(function(){
 });
 
 
-//DISPLAYING MENU IN AN OBJECT
-aaa = 0;
-$('#chooseMenuForm').livequery('click', function(){
-  //$(this).change();
-});
+// DISPLAYING A MENU INSIDE THE SELECTED OBJECT
+shouldDisplayMenu = 0;
 $('#chooseMenuForm').change(function(){
   idObjekta = $('#objProperties').attr("objId");
 
-  //MENU PUTTING
-  if (aaa == 1 || putInThisObj == 1) {
+  // PUTTING A MENU INSIDE THE SELECTED OBJECT
+  if (shouldDisplayMenu == 1 || putInThisObj == 1) {
     selMenuTemplate = $('#' + $(this).attr("id") + " option:selected").attr("value");//selected menu
     selValueTemplate = $('#' + $(this).attr("id") + " option:selected").attr("label");
 
-    aaa = 0;
+    shouldDisplayMenu = 0;
 
     var tvCommand = "menu:display:" + selMenuTemplate + displayTypeMenu ;
 
     $.post(absoluteUrl + "view/render-tv/creatorAct/true/var/" + "{" + tvCommand + "}", function(data){
-      //$('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes good after update
-      $('#' + idObjekta).html(data);
+      //$('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes well after update
+      if(displayTypeMenu === ':tree') {
+        $('#' + idObjekta).html(data.replace('id="tree"', 'id="tree_' + selMenuTemplate + '"'));
+        $('#tree_' + selMenuTemplate).treeview({
+          collapsed: true,
+          animated: "medium"
+        });
+
+      } else {
+        $('#' + idObjekta).html(data);
+      }
       $('#' + idObjekta ).dblclick();
 
       $('#objPropertiesHtml').attr("value","{"+ tvCommand + "}");
@@ -2489,6 +2495,7 @@ $('#chooseMenuForm').change(function(){
   selValue = $('#' + $(this).attr("id") + " option:selected").attr("label");
 
   var tvCommand = "menu:display:" + selMenu + ":tree";
+  $('#chosen-menu-id').text(selMenu);
 
   $.post(absoluteUrl + "view/render-tv/creatorAct/true/var/" + "{" + tvCommand + "}", function(data){
     //$('#adminAjaxLoader').fadeOut();

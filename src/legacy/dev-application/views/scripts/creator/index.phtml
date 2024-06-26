@@ -330,12 +330,14 @@
                 <input class="radio-sm" type="radio" name="displaytype" value="" checked="checked">Horizontal
                 <input class="radio-sm" type="radio" name="displaytype" value=":vertical">Vertical
                 <input class="radio-sm" type="radio" name="displaytype" value=":tree">Tree
-                <input class="radio-sm" type="radio" name="displaytype" value=":slide">Slide
+                <!-- SLIDE MENU DISPLAY DISABLED FOR NOW, TODO: MAKE IT WORK WITH DAISYUI OR SOMETHING ELSE -->
+                <!-- <input class="radio-sm" type="radio" name="displaytype" value=":slide">Slide -->
               </form>
             </div>
 
             <div>
               <?php echo $this->formChooseMenu;?>
+              <div class="flex gap-2 mt-2"><span><?php echo $this->translate->_("Selected menu ID:");?></span><span id="chosen-menu-id"></span></div>
             </div>
             <div id="addMenuLinkDiv" class="grid gap-2">
               <a id="addMenuLink" href="menu/add-menu" class="navLinks a_add btn btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to create new menu");?>"><?php echo $this->translate->_("Add a menu");?></a>
