@@ -139,7 +139,7 @@ class ImagesController extends NetActionController
                 'uploadImageName' => array('file', array(
                     'required' => true,
                     'label' => $this->_translateCreator->_('Browse an image'),
-                    'class' => 'input input-sm w-full'
+                    'class' => 'file-input file-input-bordered file-input-primary w-full max-w-xs'
                 )),
                 'uploadImageSubmit' => array('submit', array(
                     'order' => 100,

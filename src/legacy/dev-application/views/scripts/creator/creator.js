@@ -3072,8 +3072,8 @@ $('.pag_a').livequery('click', function(){
   idCurrent = $(this).html();//this is important for refreshing of the table
 
   div = $(this).parents(".pagination-closest").attr("id");
-
-  $('#' + div + " .universalTableAdmin").prepend('<div id="loadingBook" style="position:absolute;bottom:20px;left:85%;z-index:999999;text-align:center;background:transparent;padding:10px;"><img align="center" src="' + absoluteUrl2 + 'images/ajax-loaderTable.gif" /></div>');
+/*style="position:absolute;bottom:20px;left:10%;z-index:999999;text-align:center;background:transparent;padding:10px;"*/
+  $(this).closest('.pagination-container').prepend('<div id="loadingBook" class="absolute right-1 bottom-1 "><span class="loading loading-spinner loading-xs text-white w-8 h-8"></span></div>');
 
   $.get( absoluteUrl + $(this).attr("href"), function(data){
     $('#loadingBook').remove();

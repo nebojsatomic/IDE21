@@ -171,7 +171,6 @@ class PageController extends NetActionController
         $values = $this->_request->getParams();
         $langCode = $this->_sesija->langAdmin;
 
-        //print_r($values);
         $title = $values['pageTitleC'];
         $alias = str_replace(" ", "-", $values['pageTitleC']);
         $alias = str_replace(".", "", $alias);//remove dots
@@ -338,7 +337,7 @@ class PageController extends NetActionController
             //check if this is the autor of the page
             $pageOwner = $this->_db->fetchAll("SELECT userId FROM pages_$firstLang WHERE id = ?", array($pageID));
             if($pageOwner[0]['userId'] != $this->_sesija->userId){
-                print_r($langs);
+
                 echo $this->_translateCreator->_("You can't erase the page you haven't created!");
                 return;
             }
@@ -376,7 +375,7 @@ class PageController extends NetActionController
             //check if this is the autor of the page
             $pageOwner = $this->_db->fetchAll("SELECT userId FROM pages_$firstLang WHERE id = ?", array($pidsArray[0]));
             if($pageOwner[0]['userId'] != $this->_sesija->userId){
-                //print_r($langs);
+
                 echo $this->_translateCreator->_("You can't erase the page you haven't created!");
                 return;
             }
@@ -436,9 +435,6 @@ class PageController extends NetActionController
         $this->cleanCache();
     }
 
-
-
-
     /**
      *Function for toggle published all selected
      */
@@ -446,7 +442,7 @@ class PageController extends NetActionController
     {
         // turn off layout and ViewRenderer
         $this->_helper->layout()->disableLayout();
-	      $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->viewRenderer->setNoRender();
 
         //get Languages
         $langs = NetActionController::getLanguages();
@@ -466,14 +462,14 @@ class PageController extends NetActionController
                 }
             }
             if($publishedBool == "1"){
-                //print_r($pidsArray);
+
                 echo $this->_translateCreator->_('These pages are published!');
             } else {
-                //print_r($pidsArray);
+
                 echo $this->_translateCreator->_('These pages are unpublished!');
             }
         }
-	      //clean cache
+        //clean cache
         $this->cleanCache();
     }
 
@@ -508,8 +504,7 @@ class PageController extends NetActionController
             //use all langs for update
             foreach($langs as $lang){
                 //set value for published to all selected items in manage all pages table
-                //$this->_sesija->lang = $lang;
-                //file_get_contents($this->_host . "view/change-language/code/$lang");
+
                 foreach($pidsArray as $item){
                     $alias = $this->_db->fetchAll("SELECT alias FROM pages_$lang WHERE id = ?", array($item));
                     $html = file_get_contents($this->_host . "view/index/id/" . $item . "/lng/$lang" );
@@ -532,19 +527,15 @@ class PageController extends NetActionController
                 }
             }
             if($publishedBool == "1"){
-                //print_r($pidsArray);
+
                 echo $this->_translateCreator->_('These pages are exported!');
-            } else {
-                //print_r($pidsArray);
-                //echo 'These pages are unpublished!';
             }
         }
 
     }
 
-
     /**
-     *Function for toggle check_access
+     * Function for toggle check_access
      */
     public function toggleCheckAccessAction()
     {
@@ -602,13 +593,13 @@ class PageController extends NetActionController
                 }
             }
             if($publishedBool == "1"){
-                //print_r($pidsArray);
+
                 echo $this->_translateCreator->_('These pages are set to RESTRICTED!');
             } else {
-                //print_r($pidsArray);
+
                 echo $this->_translateCreator->_('These pages are set to UNRESTRICTED!');
             }
-        	  //clean cache
+        	//clean cache
             $this->cleanCache();
         }
     }
@@ -616,7 +607,7 @@ class PageController extends NetActionController
 
 
     /**
-     *Function for setting homepage
+     * Function for setting homepage
      */
     public function setHomepageAction()
     {
@@ -675,7 +666,7 @@ class PageController extends NetActionController
             //check if this is the autor of the template
             $templateOwner = $this->_db->fetchAll("SELECT userId FROM templates_$firstLang WHERE id = ?", array($tempID));
             if($templateOwner[0]['userId'] != $this->_sesija->userId){
-                //print_r($langs);
+
                 echo "You can't erase the template you haven't created!";
                 return;
             }
@@ -687,14 +678,12 @@ class PageController extends NetActionController
                 //update pages with this template id to default template
                 $this->_db->query("UPDATE IGNORE pages_$lang SET template_id = ? WHERE template_id  = ?", array($defaultTempl[0]['id'], $tempID));
             }
-            //$this->_db->query("DELETE FROM menu_items WHERE content_id = ?", array($pageID));
 
             echo $this->_translateCreator->_('This Template is deleted!');
         } else {
             if ($defaultTempl[0]['id'] != $tempID ) {
                 echo $this->_translateCreator->_("Can not erase default template!");
             }
-
         }
     }
 
@@ -707,7 +696,6 @@ class PageController extends NetActionController
 
         $values = $this->_request->getParams();
         $langCode = $this->_sesija->langAdmin;
-        //print_r($values);
 
         $title = $values['templateTitleC'];
         $alias = strtolower( str_replace(" ", "-", $values['templateTitleC']) );
@@ -720,7 +708,7 @@ class PageController extends NetActionController
         //FOR each language insert template
         $langs = NetActionController::getLanguages();
         foreach ($langs as $lang) {
-            //$db->query("INSERT IGNORE INTO templates_$langCode(title, alias, output) VALUES(?, ?, ?)", array($title, $alias, $output));
+
             $db->query("INSERT IGNORE INTO templates_$lang(userId, title, alias, output) VALUES(?, ?, ?, ?)", array($this->_sesija->userId, $title, $alias, $output));
         }
     }
@@ -853,30 +841,25 @@ class PageController extends NetActionController
         $db = Zend_Registry::get('db');
         $values = $this->_request->getParams();
         $id = $values['id'];
-        //$id=3;
-      	//$res = $db->fetchAll("SELECT output, description, keywords, template_id, category, check_access, access_rules.role as rolesAllowed FROM pages_$langCode LEFT JOIN access_rules ON access_rules.resource = 'page:$id'  WHERE pages_$langCode.id = ?", array($id));
+
       	$res = $db->fetchAll("SELECT output, image, description, keywords, template_id, category, check_access, unbounded, title AS pageTitle FROM pages_$langCode WHERE pages_$langCode.id = ?", array($id));
 
       	$resAllowedRoles = $db->fetchAll("SELECT access_rules.roleId as rolesAllowed, roles.name as name FROM access_rules LEFT JOIN roles ON access_rules.roleId = roles.roleId WHERE resource = 'page:$id'");
-        //print_r($resAllowedRoles);
 
-        //$output = ViewController::_templatePrepare($res[0]['output']);
         $roles = "";
       	foreach($resAllowedRoles as $allowedRole){
-            //$roles .= $allowedRole['rolesAllowed'] . ", ";
+
             $roles .= $allowedRole['name'] . ", ";
         }
         $res[0]['rolesAllowed'] = rtrim($roles, ", ");
-        //$jsonenc = json_encode($res[0] );
+
         $jsonenc = json_encode($res[0] );
 
         echo $jsonenc ;
-        //$this->view->output = $res[0];
-
     }
 
     /**
-     *Function for opening a template
+     * Function for opening a template
      */
     public function applyTemplateAction()
     {
@@ -912,8 +895,6 @@ class PageController extends NetActionController
 
       	$res = $db->fetchAll("SELECT title, output, bodyBg, staticFiles FROM templates_$langCode  WHERE id = ?", array($id));
 
-        //echo 'Here should come code for exporting template '  . $values['id'] . ' for use on another installation of IDE21.' ;
-        //print_r($res);
         $fields = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
         $fields .= '<template>' . "\n";
         $fields .= '<description>template install file</description>' . "\n";
@@ -922,7 +903,7 @@ class PageController extends NetActionController
                // $fields .= '<' . $key . '><![CDATA[' . htmlspecialchars($value ). ']]</' . $key . '>' . "\n";
             }
             if($key == 'staticFiles') {
-              // $fields .= '<' . $key . '>' . $this->_host . 'css/userCSS/default_' . $this->_sesija->user . '.css;' . $this->_host . 'js/userJS/default_' . $this->_sesija->user . '.js' . '</' . $key . '>' . "\n";
+
                $fields .= '<' . $key . '>'  . '/css/themes.css;' .  '/css/default.css;'  . '/js/main2.js' . '</' . $key . '>' . "\n";
 
                continue;
@@ -943,28 +924,24 @@ class PageController extends NetActionController
         }
         //create xml file
         if ($handle = opendir( $dir )) {
+            $filename = $dir. "/$templateName.xml";
+            if (!$handle = fopen($filename, 'w+') ) {
+                $message = "Cannot open file ";
+                return;
 
+            }
 
-                $filename = $dir. "/$templateName.xml";
-                if (!$handle = fopen($filename, 'w+') ) {
-                     $message = "Cannot open file ";
-                     return;
-
-                }
-
-                // Write $somecontent to our opened file.
-                if (fwrite($handle, $fields ) === FALSE) {
-                    $message = "Cannot write to file ";
-                    return;
-                }
-                fclose($handle);
+            // Write $somecontent to our opened file.
+            if (fwrite($handle, $fields ) === FALSE) {
+                $message = "Cannot write to file ";
+                return;
+            }
+            fclose($handle);
         }
 
-       //create the zip archive
+        //create the zip archive
 
         $v_dir = $this->_nps . 'templates/' . $templateDir;
-        //$v_dir = $dir;
-        //echo $v_dir;
 
         $archive = new PclZip( $templateName . '.zip');
         $v_list = $archive->create($v_dir, PCLZIP_OPT_REMOVE_PATH, $v_dir, PCLZIP_OPT_ADD_PATH, $templateDir);
@@ -973,11 +950,10 @@ class PageController extends NetActionController
         }
         echo  $this->_translateCreator->_('Note that you should ship images with this package in a separate package if it is to be installed on another server.<br /><br />');
         echo  $this->_translateCreator->_('Click here to download all revisions of this template') . ' <br /><br /><a target="_blank" href="' . $this->_host . $templateName . '.zip' . '">' . $res[0]['title'] . '</a><br />';
-        //echo  $this->_translateCreator->_('Click here to view XML just for the current revision') . ' <a target="_blank" href="' . $this->_host . "templates/$templateDir/" . $templateName . '.xml' . '">' . $res[0]['title'] . '</a>';
-
     }
+
     /**
-     *Function for installing of the exported template
+     * Function for installing of the exported template
      */
     public function installTemplateAction()
     {
@@ -985,109 +961,102 @@ class PageController extends NetActionController
         //ini_set('post_max_size', '8M');
         $this->_helper->layout()->disableLayout();
         //$this->_helper->viewRenderer->setNoRender();
+
         $langCode = $this->_sesija->langAdmin ;
         $formUploadTemplate = $this->_installTemplateForm();
 
-        //here should come code for installing of the exported template
-        //echo 'Here should come code for installing template from another installation of IDE21.' ;
         if ($this->_request->isPost() && $formUploadTemplate->isValid($_POST) ) {
 
-            try { $adapter = new Zend_File_Transfer_Adapter_Http();
+            try {
+                $adapter = new Zend_File_Transfer_Adapter_Http();
 
+                $tempFile = $_FILES["uploadTemplateName"]["tmp_name"];
 
-                        $tempFile = $_FILES["uploadTemplateName"]["tmp_name"];
-                        //print_r($_FILES);
-                        //echo $tempFile;
-                        //moving image
-                        $uploaddir = NET_PATH_SITE . "templates/";
-                        $ext = $this->findexts($_FILES["uploadTemplateName"]['name']);
-                        //$timedName = time() . $i . "." . $ext;
-                        $timedName = $_FILES["uploadTemplateName"]['name'];
-                        $uploadfile = $uploaddir . $timedName;
+                //moving image
+                $uploaddir = NET_PATH_SITE . "templates/";
+                $ext = $this->findexts($_FILES["uploadTemplateName"]['name']);
 
-                        move_uploaded_file($_FILES["uploadTemplateName"]['tmp_name'], $uploadfile );
-                        //extracting contents of the archive
-                        $archive = new PclZip($uploadfile);
-                        $archive->extract($uploaddir);
-                        $folderName = explode('__', $timedName);
+                $timedName = $_FILES["uploadTemplateName"]['name'];
+                $uploadfile = $uploaddir . $timedName;
 
-                        }catch(Exception $e){echo $e;}
-                        //print_r($folderName );
-        if ($handle = opendir(NET_PATH_SITE . "templates/" . $folderName[0] )) {
-//echo NET_PATH_SITE ;
-            $i = 0;
-            $optionsArray = array();
-            while (false !== ($file = readdir($handle))) {
-                if ($file != "." && $file != "..") {
-                    $f = str_replace('.xml', '' , $file);
+                move_uploaded_file($_FILES["uploadTemplateName"]['tmp_name'], $uploadfile );
 
-                    $optionsArray[filemtime(NET_PATH_SITE . "templates/" . $folderName[0] . '/' . $file)]= $f;
-                    //file created info
-                $i++;
-                }
+                //extracting contents of the archive
+                $archive = new PclZip($uploadfile);
+                $archive->extract($uploaddir);
+                $folderName = explode('__', $timedName);
 
+            } catch(Exception $e) {
+                echo $e;
             }
 
-        ksort($optionsArray);
-        $reverse = array_reverse($optionsArray, true);
+            if ($handle = opendir(NET_PATH_SITE . "templates/" . $folderName[0] )) {
 
-        if (!empty($optionsArray) ) {
-            $form = new Zend_Form(array(
-                'action' => $this->_host . 'page/install-template-db/' ,
-                'id' => 'chooseTemplateRevisionForm',
+                $i = 0;
+                $optionsArray = array();
+                while (false !== ($file = readdir($handle))) {
+                    if ($file != "." && $file != "..") {
+                        $f = str_replace('.xml', '' , $file);
 
-                'method' => 'post',
-                'elements' => array(
-                    'templateXMLNames' => array('select', array(
-                        'id' => 'revisionSelect',
-                        'required' => true,
-                        'label' => 'Choose revision:',
-                        'multioptions' => $reverse,
-                        //'value' =>  $reverse[$_POST['templateXMLNames']],
-                        'class' => 'select select-sm md:select-xs w-full',
-                    )),
-                'installTemplateSubmit' => array('submit', array(
-                    'order' => 100,
-                    'class' => 'btn btn-xs btn-secondary',
-                    'label' => $this->_translateCreator->_('Install'),
-                    'value' => $this->_translateCreator->_('Submit')
-                ))
-            )));
-            //$this->_helper->viewRenderer->setNoRender();
-          $javascript =  "jQuery('#installTemplateSubmit').one('click', function (evt) {
-                           evt.preventDefault();
-                           jQuery(this).closest('form').ajaxForm({
-                           complete:function(xhr){
-                              jQuery('#dialogDiv').html(xhr.responseText);
-                              evt.preventDefault();
-                              },
-                           success: function(data){
-                           }
-                           });
-                          });";
-            echo  $form . '<script type="text/javascript">' . $javascript .'</script>' ;
-            //$jsonOut['out']['form'] =  $form;
-            //echo json_encode($jsonOut);
-        }
-            closedir($handle);
-        }
-                        unlink($uploadfile);
-
-
-
-                    if (!$adapter->receive()) {
-                        $messages = $adapter->getMessages();
-                        //echo implode("\n", $messages);
+                        $optionsArray[filemtime(NET_PATH_SITE . "templates/" . $folderName[0] . '/' . $file)]= $f;
+                        //file created info
+                        $i++;
                     }
+
+                }
+
+                ksort($optionsArray);
+                $reverse = array_reverse($optionsArray, true);
+
+                if (!empty($optionsArray) ) {
+                    $form = new Zend_Form(array(
+                        'action' => $this->_host . 'page/install-template-db/' ,
+                        'id' => 'chooseTemplateRevisionForm',
+
+                        'method' => 'post',
+                        'elements' => array(
+                            'templateXMLNames' => array('select', array(
+                                'id' => 'revisionSelect',
+                                'required' => true,
+                                'label' => 'Choose revision:',
+                                'multioptions' => $reverse,
+                                //'value' =>  $reverse[$_POST['templateXMLNames']],
+                                'class' => 'select select-sm md:select-xs w-full',
+                            )),
+                            'installTemplateSubmit' => array('submit', array(
+                                'order' => 100,
+                                'class' => 'btn btn-xs btn-secondary',
+                                'label' => $this->_translateCreator->_('Install'),
+                                'value' => $this->_translateCreator->_('Submit')
+                            ))
+                        )));
+
+                    $javascript =  "jQuery('#installTemplateSubmit').one('click', function (evt) {
+                     evt.preventDefault();
+                     jQuery(this).closest('form').ajaxForm({
+                         complete:function(xhr){
+                          jQuery('#dialogDiv').html(xhr.responseText);
+                          evt.preventDefault();
+                          },
+                          success: function(data){
+                          }
+                          });
+                      });";
+                      echo  $form . '<script type="text/javascript">' . $javascript .'</script>' ;
+
+                  }
+                  closedir($handle);
+            }
+            unlink($uploadfile);
+
+            if (!$adapter->receive()) {
+                $messages = $adapter->getMessages();
+            }
         } else {
             $this->view->formUploadTemplate = $formUploadTemplate;
-            //echo $formUploadTemplate;
         }
-
-        //echo $formUploadTemplate;
-
-
     }
+
     /**
      *Function for installing of the exported template in the db
      */
@@ -1096,17 +1065,15 @@ class PageController extends NetActionController
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
 
-        //echo 'here install in the db';
-        //print_r($values);
         $db = Zend_Registry::get('db');
-        //here should come code for exporting current template
+
         $values = $this->_request->getParams();
         $file = $values['file'];
         if($file == ''){return;}
         $folderName = explode('__', $file );
         if (file_exists($this->_nps . 'templates/' . $folderName[0] . '/' . $file . '.xml' ) ) {
             $xml = simplexml_load_file($this->_nps . 'templates/' . $folderName[0] . '/' . $file . '.xml' );
-            //print_r($xml);
+
             $langs = NetActionController::getLanguages();
             foreach ($langs as $lang) {
                 $db->query("INSERT IGNORE INTO templates_$lang(userId, title, output, bodyBg, staticFiles) VALUES(?, ?, ?, ?, ?)", array($this->_sesija->userId, $xml->title,  $xml->output, $xml->bodyBg,  $xml->staticFiles));
@@ -1114,17 +1081,15 @@ class PageController extends NetActionController
             }
             echo 'Template installed!';
         }
-
-      	//$res = $db->fetchAll("SELECT title, output, bodyBg, staticFiles FROM templates_$langCode  WHERE id = ?", array($id));
-
     }
+
     /*
     * Displays install template form
     */
     private function _installTemplateForm()
     {
         $values = $this->_request->getParams();
-        //$folder = $values['fname'] ;
+
         $folder = '' ;
 
         $form = new Zend_Form(array(
@@ -1135,7 +1100,7 @@ class PageController extends NetActionController
                 'uploadTemplateName' => array('file', array(
                     'required' => true,
                     'label' => $this->_translateCreator->_('Browse a template'),
-                    'class' => 'input input-sm w-full'
+                    'class' => 'file-input file-input-bordered file-input-primary w-full max-w-xs'
                 )),
                 'uploadImageSubmit' => array('submit', array(
                     'order' => 100,
@@ -1157,7 +1122,7 @@ class PageController extends NetActionController
     private function _choosePageForm()
     {
       	$db = Zend_Registry::get('db');
-        $langCode = $this->_sesija->langAdmin ;
+        $langCode = $this->_sesija->langAdmin;
 
         $res = $db->fetchAll("SELECT id, title, category, categories.name_$langCode as catName FROM pages_$langCode LEFT JOIN categories ON pages_$langCode.category = categories.category_id WHERE pages_$langCode.userId = ?", array($this->_sesija->userId));
 
@@ -1179,19 +1144,10 @@ class PageController extends NetActionController
                     'multioptions' => $pageArray,
                 )),
 
-/*
-                'pageOpenButtonSubmit' => array('button', array(
-                    'order' => 100,
-                    'label' => 'Open Page',
-                    'value' => 'Submit'
-                ))
-
-                */
-        )));
+            )
+        ));
 
         return $form;
-
-
     }
 
     private function _chooseTemplateForm()
@@ -1242,13 +1198,13 @@ class PageController extends NetActionController
         $pidsArray = explode(",", $rid );
 
         $form = $this->_setPermissionsForm($rtype, $rid);
-        //echo $form;
+
         if ($this->_request->isPost() && $form->isValid($_POST) ) {
             $this->_helper->viewRenderer->setNoRender();
             $values = $this->_request->getParams();
             $rid = $values['pids'];
             $pidsArray = explode(",", $rid );
-            //print_r($values);
+
             foreach($pidsArray as $pid) {
                 $rolesAllowed = "";
                 foreach($values as $k=>$value){
@@ -1268,44 +1224,12 @@ class PageController extends NetActionController
                         }else {
                             $this->_db->query("DELETE FROM access_rules WHERE  roleId = ? and resource = ?", array($roleForInsert, $resource));//delete if deny (not checked)
                         }
-
-                    } else {
-                        //echo 'ja';//nothing
                     }
-
                 }
             }
-        /*
-
-
-            $rolesAllowed = rtrim($rolesAllowed, ", ");
-            $out = $rolesAllowed;
-
-            //clean Search Index and cache
-            $frontendOptions = array('caching' => true, 'lifetime' => null, 'ignore_user_abort' => true, 'automatic_serialization' => true);
-            $backendOptions = array('cache_dir' => NET_PATH . 'searchIndex/');
-            $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
-
-            $frontendOptions = array('caching' => true, 'lifetime' => null, 'ignore_user_abort' => true, 'automatic_serialization' => true);
-            $backendOptions = array('cache_dir' => NET_PATH . 'cache/');
-            $cacheCache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
-
-            $langs = NetActionController::getLanguages();
-            $roles = $this->getRoles();
-            foreach ($langs as $lang) {
-                $cache->remove('pagesAll_'. $lang );
-                $this->_cache->remove("q_View_index_$lang" . "_$rid");
-                foreach($roles as $role){
-                    $cacheCache->remove($rtype . $rid . "_" . $lang . "_" . $role);
-                }
-            }
-
-            echo $out;
-        */
         } else {
             echo $form;
         }
-
     }
 
 
