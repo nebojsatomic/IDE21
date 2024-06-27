@@ -516,7 +516,6 @@ $(document).ready(function(){
   $('input[type=submit]').livequery('click', function(){
     ajaxEvent();
     ajaxEventDone(lang.Working);//showing the message
-
   });
 
 

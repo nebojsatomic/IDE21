@@ -15,42 +15,23 @@
  * 
  * 
  */
- ?>
+?>
 <?php
 echo $this->form;
 ?>
 <script type="text/javascript">
-$('#addMenuItemSubmit').one('click', function (evt) {
-    /* prevent default action */
-    evt.preventDefault();
-    /* code to be executed once */
-    /**
-     * disable default action (this handler will be attached after first 
-     * submit event and it will prevent any further submit action
-     */
-     $(this).closest('form').ajaxForm(function(data){
-        //submiting addmenu item form
+  $('#addMenuItemSubmit').one('click', function (evt) {
 
-            $('#dialogDiv').remove();
-            $('#menuName').change();
-            
-            ajaxEmitMessage(data);
-            setTimeout("clickMask()", 1000); //closing all          
-        evt.preventDefault();
-        return false;
-        
-     });
+    $(this).closest('form').ajaxForm(function(data){
 
-});
-</script>
-<script type="text/javascript">
-/*        //submiting addmenu item form
-        $('#addMenuItemForm').ajaxForm(function(data){
-            $('#dialogDiv').remove();
-            $('#menuName').change();
-            
-            ajaxEmitMessage(data);
-            setTimeout("clickMask()", 1000); //closing all 
-        });  
-        */
+      $('#dialogDiv').remove();
+      $('#menuName').change();
+
+      ajaxEmitMessage(data);
+      setTimeout("clickMask()", 2000); //closing all
+      evt.preventDefault();
+      return false;
+    });
+
+  });
 </script>
