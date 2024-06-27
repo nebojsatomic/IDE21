@@ -6,7 +6,7 @@ Restarting CMS-IDE project from 2013, now powered by Docker, which made the task
 The base idea of the software is to be able to design the website in the admin panel, and do it in visual way, having the CMS in the background which will take care of the functionality, while the front should be 100% customizable right there in the admin panel, and being able to change the looks very quickly to something quite different with a few clicks, but also can add CSS and JS on the fly...
 
 Basically have the designer and the frontend developer in one person, from the admin panel.
-After that template is available for export, it can be uploaded to some other installation of IDE21, and that design which is created from the first admin can now take another admin and work on it to improve it in his own way.
+After that template is available for export, it can be uploaded to some other installation of IDE21, and the design which was created by the first admin on one domain can now taken by another admin to work on it to improve it in his own way on another domain, which should enable quick creating of the new templates ( new designs ).
 This is the base idea, there are still some bugs and unfinished features, there will be Wiki documentation created for User and Developer realms, which describe what is posible to do, and what is in TODO list.
 
 
