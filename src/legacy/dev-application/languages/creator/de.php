@@ -32,7 +32,7 @@ return array(
 "View Page" => "Seite anzeigen",
 "Style for this object" => "Stil für dieses Objekt",
 "Update object" => "Objekt aktualisieren",
-"Page " => "Seite",
+"Page" => "Seite",
 "Template" => "Vorlage",
 "Empty Cache" => "Cache leeren",
 "Backup Site" => "Sicherungskopie",
@@ -84,6 +84,8 @@ return array(
 "Pages in this category:" => "Seiten in dieser Kategorie:",
 
 "Add new Language" => "Neue Sprache hinzufügen",
+"Default language cannot be deleted!" => "Die Spache, die die Einstellung isDefault=1 hat, darf nicht gelöscht werden.",
+"The selected language has been deleted!" => "Ausgewählte Sprache ist gelöscht worden!",
 "Add new Setting" => "Neue Einstellung hinzufügen",
 
 "Available modules:" => "Verfügbare Module:",
@@ -122,7 +124,7 @@ return array(
 "Click here to have backup of the site in a folder that is created for that purpose.If system command is disabled then it must be done through phpMyAdmin..." => "Klicken Sie hier, um Sicherungskopien der Website in einem Ordner zu erstellen. Wenn bestimmter System-Befehl nicht erstellt wird, oder ist er deaktiviert, dann das durch phpMyAdmin muss getan werden ...",
 "Page creating Mode" => "Seite Modus",
 "Template creating Mode" => "Vorlage Modus",
-"Click this to update the content of the selected object" => "Klicken Sie hier, um den Inhalt des ausgewählten Objekts zu aktualisieren",
+"Click this to update the content of the selected object" => "Klicken Sie hier, um den Inhalt des ausgewählten Objekts mit dem Inhalt aus WYSIWYG zu aktualisieren",
 "Here write the description for your page, which will make it Search Engine Optimized..." => "Hier schreiben Sie die Beschreibung für Ihre Seite, wodurch sie für die Suchmaschine optimiert wird...",
 "Here write the keywords for your page, which will make it Search Engine Optimized..." => "Hier schreiben Sie die Schlüsselwörter für Ihre Seite, wodurch sie für die Suchmaschine optimiert wird...",
 "Click to set shadow params" => "Klicken, um Schattenparameter festzulegen",
@@ -261,4 +263,8 @@ return array(
 "Menu item" => "Menüelement",
 "edited!" => "bearbeitet!",
 "This Page is deleted!" => "Diese Seite wurde gelöscht!",
+"Close" => "Schließen",
+"Install Template" => "Vorlage installieren",
+"Export Template" => "Vorlage exportieren",
+"Enable all modules" => "Alle Module ermöglichen",
 );

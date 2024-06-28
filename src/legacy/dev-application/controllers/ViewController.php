@@ -64,13 +64,11 @@ class ViewController extends NetActionController
              $this->_sesija->lang = $values['lng'];
         }
         $langCode = $this->_sesija->lang;
-
-
-        //print_r($values);
-        @$alias = $values['alias'];
+        $alias = '';// set empty alias, so we dont search for it if only pageID was given
+        if(str_contains($values['id'], '.html')) $alias = str_replace('.html', '', $values['id']);
         if ($alias != '') {
 
-            //this below is an unsuccessfull try to cache a query for the alias
+            //this below is an unsuccessfull try to cache a query for the alias. TODO: make it work
             //if(!$result = $this->_cache->load('q_View_index_resID_' . str_replace("-", "", urlencode($alias)) )) {//caching this query
                 $resID = $db->fetchAll("SELECT id, check_access FROM pages_$langCode  WHERE alias = ?", array($alias));
                 $id = $resID[0]['id'];
@@ -416,13 +414,12 @@ class ViewController extends NetActionController
 
 
     /**
-     *Render menu
+     * Render menu
      *
      *
-     *@author NT
+     * @author NT
      *
      */
-
     public static function displayMenu($menuQ, $orientation = null, $lC = null)
     {
         $db = Zend_Registry::get('db');
@@ -438,89 +435,67 @@ class ViewController extends NetActionController
 
         $view = new Zend_View();
         $view->addScriptPath($themePath . "templates/");
-        //$view->addHelperPath(OZIMBO_PATH . 'framework/Ozimbo/View/Helper', 'Ozimbo_View_Helper');
 
 
-           foreach ($menuQ as $menuQR) {
-                //ACL PART
-/*
-                $acl->add(new Zend_Acl_Resource('menu_item:' . $menuQR['item_id'] ));//make sure resource exists
-                if(@in_array('menu_item:' . $menuQR['item_id'], $allowArray[$curRole] ) ){
-                    $acl->allow($curRole, 'menu_item:' . $menuQR['item_id'] );
-                }
-
-                if($menuQR['chkAccess'] == '1') {
-                    if (!$acl->isAllowed($curRole, 'menu_item:' . $menuQR['item_id'] )) {
-                        // no permission, move along now
-                        continue;
-                    }
-                }
-
-*/
-//acl in relation to page
-                if (!$acl->has('page:' . $menuQR['cid'])) {
-                    $acl->add(new Zend_Acl_Resource('page:' . $menuQR['cid'] ));//make sure resource exists
-                }
-
-                if(!empty($allowArray[$curRole])) { // MUST RECHECK this behaviour
-                    if(@in_array('page:' . $menuQR['cid'], $allowArray[$curRole]) ){
-                        $acl->allow($curRole, 'page:' . $menuQR['cid'] );
-                    }
-                }
-
-                if($menuQR['check_access'] == '1') {
-                    if (!$acl->isAllowed($curRole, 'page:' . $menuQR['cid'] )) {
-                        // no permission, move along now
-                        continue;
-                    }
-                }
-                //ACL END
-
-                if (($menuQR['parent_id'] == 0) ) {
-                    $data['menus'][$menuQR['item_id']] = $menuQR;
-                    if ($orientation == "slide")  {
-                        $data['menus'][$menuQR['item_id']]['output'] = ViewController::_templatePrepare($data['menus'][$menuQR['item_id']]['output']);
-                    }
-                    $hasItems = true;
-                } else if (($menuQR['parent_id'] != 0)) {
-                    $data['menu_items'][$menuQR['parent_id']][$menuQR['item_id']] = $menuQR;
-                    $hasItems = true;
-                }
-            }
-            if ($orientation == null) {
-                $scriptName = "jdMenu.phtml";
-            } elseif ($orientation == "vertical")  {
-                $scriptName = "jdMenuVertical.phtml";
-            } elseif ($orientation == "tree")  {
-                $front = Zend_Controller_Front::getInstance();
-                $req = $front->getRequest();
-                $treeVals = $req->getParams();
-                //print_r($treeVals);
-                if(@$treeVals['creatorAct'] == 'true') {
-                    $data['langC'] = "_" . $treeVals['langC'];
-                }
-                $scriptName = "treeView.phtml";
-            } elseif ($orientation == "slide")  {
-                $scriptName = "slide.phtml";
+        foreach ($menuQ as $menuQR){
+            /*acl in relation to page*/
+            if (!$acl->has('page:' . $menuQR['cid'])) {
+                $acl->add(new Zend_Acl_Resource('page:' . $menuQR['cid'] ));//make sure resource exists
             }
 
+            if(!empty($allowArray[$curRole])) { // MUST RECHECK this behaviour
+                if(@in_array('page:' . $menuQR['cid'], $allowArray[$curRole]) ){
+                   $acl->allow($curRole, 'page:' . $menuQR['cid'] );
+               }
+            }
 
-            $Menu['menu'] = $menuQ;
-            $data['host'] = str_replace('/quickstart/public/',"/", $host);
-            $data['host'] = str_replace('/public/',"/", $data['host']);
-            $data['translate'] = $translator;
-            $data['urlRewrite'] = $urlRewrite;
-            //$view->assign($host);
-            //$view->assign($Menu);
-            $view->assign($data);
+            if($menuQR['check_access'] == '1') {
+                if (!$acl->isAllowed($curRole, 'page:' . $menuQR['cid'] )) {
+                    // no permission, move along now
+                    continue;
+                }
+            }
+            /*ACL END*/
+            if (($menuQR['parent_id'] == 0) ){
+                $data['menus'][$menuQR['item_id']] = $menuQR;
+                if ($orientation == "slide"){
+                    $data['menus'][$menuQR['item_id']]['output'] = ViewController::_templatePrepare($data['menus'][$menuQR['item_id']]['output']);
+                }
+                $hasItems = true;
+            } else if (($menuQR['parent_id'] != 0)) {
+                $data['menu_items'][$menuQR['parent_id']][$menuQR['item_id']] = $menuQR;
+                $hasItems = true;
+            }
+        }
 
+        if ($orientation == null){
+            $scriptName = "jdMenu.phtml";
+        } elseif ($orientation == "vertical"){
+            $scriptName = "jdMenuVertical.phtml";
+        } elseif ($orientation == "tree"){
+            $front = Zend_Controller_Front::getInstance();
+            $req = $front->getRequest();
+            $treeVals = $req->getParams();
 
-            $partialOutput = $view->render($scriptName);
+            if(@$treeVals['creatorAct'] == 'true'){
+                $data['langC'] = "_" . $treeVals['langC'];
+            }
+            $scriptName = "treeView.phtml";
+        } elseif ($orientation == "slide"){
+            $scriptName = "slide.phtml";
+        }
 
-            return $partialOutput;
+        $Menu['menu'] = $menuQ;
+        $data['host'] = str_replace('/quickstart/public/',"/", $host);
+        $data['host'] = str_replace('/public/',"/", $data['host']);
+        $data['translate'] = $translator;
+        $data['urlRewrite'] = $urlRewrite;
 
+        $view->assign($data);
 
+        $partialOutput = $view->render($scriptName);
 
+        return $partialOutput;
     }
 
     /**
@@ -884,11 +859,11 @@ class ViewController extends NetActionController
         $title = Zend_Registry::get('pageTitle');
         $langCode = self::$lang;
         $langCode = Zend_Registry::get('langCode');
-        if ($langCode == "") {//OVO MORA DA SE SKLONI!!!!!
+        if ($langCode == "") {// this must be set to EN, check if it doesn't create problems
             $langCode = "sr";
         }
-$Tvars = array();
-$build = array();
+        $Tvars = array();
+        $build = array();
         $replaceThis = preg_match_all('/[{].+[}]/', $outputDB, $matches);
         foreach ($matches[0] as $part) {
 
@@ -913,8 +888,6 @@ $build = array();
 
             }
         }
-        //print_r($build);
-        //print_r($matches);
 
         $count = 0;
         $cHI = 0;
@@ -1009,7 +982,7 @@ $build = array();
                     //} else {
                         $menuQ = $db->fetchAll("SELECT *, menu_items.check_access as chkAccess, menu_items.content_id as cid, url_$langCode as url, name_$langCode as name, description_$langCode as description FROM menu_items LEFT JOIN pages_$langCode ON menu_items.content_id = pages_$langCode.id WHERE menu_id = ? AND pages_$langCode.published = '1' ORDER BY weight ASC", array($menuId));
                     //}
-                    //print_r($menuQ );
+
                     if (!empty($menuQ)) {
 
                         $output = ViewController::displayMenu($menuQ, $orientation);
@@ -1044,7 +1017,7 @@ $build = array();
         $catItemsArray2 = $db->fetchAll("SELECT DISTINCT *, pages_$langCode.id as id, pages_$langCode.title as title, pages_$langCode.alias as alias, pages_$langCode.category as category, pages_$langCode.image, pages_$langCode.description, pages_$langCode.check_access as check_access FROM category_items LEFT JOIN  pages_$langCode  ON pages_$langCode.id = category_items.content_id WHERE category_items.category_id = ? AND pages_$langCode.published = '1' GROUP BY pages_$langCode.id DESC ", array($catId));
         $catQ = array_merge($catQ, $catItemsArray2 );
         //$catQ = $catQ + $catItemsArray2;
-                    //print_r($menuQ );
+
                     if (!empty($catQ)) {
 
                         $output = ViewController::displayCategory($catQ, $orientation);
@@ -1066,12 +1039,6 @@ $build = array();
 
                 }
 
-                 //SLIDE cu3er
-                 if (@strstr( "{" . $build_[0] . "}", "{cu3er}" )) {
-                        $output = ViewController::slides();
-                        $outputDB = str_replace('{cu3er}', $output, $outputDB);
-                }
-
                 //DISPLAY IMAGES
                  //if (@preg_match("/images:display/", "{" . $build_[0] . ":" . $build_[1])) {
                  if (@strstr( $build_[0] . ":" . $build_[1], "images:display")) {
@@ -1083,7 +1050,6 @@ $build = array();
 
                     //$menuQ = $db->fetchAll("SELECT *, url_en as url,name_en as name,description_en as description FROM menu_items  WHERE menu_id = ?", array($menuId));
 
-                    //print_r($menuQ );
                     if (!empty($folder)) {
 
                         if (empty($image)) {
@@ -1101,22 +1067,15 @@ $build = array();
                     } else {
                         $outputDB = str_replace('{images:display:' . $build_[2] . $imageOut . '}', '<b style="color:red;">{images:' . $build_[2] . '}Doesn\'t exist or it is empty!</b>', $outputDB);
                     }
-
-
                 }
 
-
-
-
-
-                 //MODULE 'FORM'
-                 if (@preg_match("/module:forms/", "{" . $build_[0] . ":" . $build_[1])) {
+                //MODULE 'FORM'
+                if (@preg_match("/module:forms/", "{" . $build_[0] . ":" . $build_[1])) {
 
                     $contactFormName = trim($build_[2], "''");
 
                     $contactFormId = $db->fetchAll("SELECT *, mod_forms.name as formName FROM mod_forms LEFT JOIN mod_forms_fields ON mod_forms.id = mod_forms_fields.form_id WHERE enabled = '1' AND mod_forms.name = ?", array($contactFormName));
 
-                    //print_r($contactFormId);
                     if (!empty($contactFormId)) {
 
                         $formId = $contactFormId;
@@ -1130,15 +1089,9 @@ $build = array();
 
                 }
 
-
-
-
-            $outputString = "";
-            $count++;
+                $outputString = "";
+                $count++;
             }
-        } else {
-            //$output = ViewController::setDefaultHeaderImage();
-            //$outputDB .= $output;
         }
         $outputDB = str_replace('{content}' , $content, $outputDB);
 
@@ -1160,7 +1113,7 @@ $build = array();
         $title = Zend_Registry::get('pageTitle');
         $langCode = self::$lang;
         $langCode = Zend_Registry::get('langCode');
-        if ($langCode == "") {//OVO MORA DA SE SKLONI!!!!!
+        if ($langCode == "") {
             $langCode = "sr";
         }
 
@@ -1182,14 +1135,10 @@ $build = array();
 
                            $i++;
                     }
-
                     $build[] = $build2;
                     $build2 = array();
-
             }
         }
-        //print_r($build);
-        //print_r($matches);
 
         $count = 0;
         $cHI = 0;
@@ -1197,34 +1146,19 @@ $build = array();
             foreach ($build as $build_){
                 @$pattern = $matches[$count];
                 $params = array();
-                /*
-                 //BREADCRUMB HANDLE
-                 //if (@preg_match("/{searchform}/", "{" . $build_[0] . "}" )) {
-                 if (@strstr( "{" . $build_[0] . "}", "{breadcrumbs}" )) {
-                        $output = ViewController::showBreadcrumbs();
-                        $outputDB = str_replace('{breadcrumbs}', $output, $outputDB);
-                }
-                */
-                //print_r($build_);
 
-                 //if (@strstr( $build_[0] . ":" . $build_[1], "liveblock:user")) {
                  //if liveblock encountered
                  if (@strstr( $build_[0] . ":" , "liveblock:")) {
                     $block = $build_[1];
-                    if( isset($build_[3]) ) $params = $build_[3];
+                    if( isset($build_[3]) ) array_push( $params, $build_[3] );
 
-                    $function = $build_[2];// . "(" . $params . ")";
+                    $function = $build_[2];
 
-
-                    //if($params != ""){//ako su dati parametri
                         if( isset($build_[3]) ) { 
                             $idsOut = ':' . $build_[3];
                         } else {
                             $idsOut = '';
                         }
-                    //} else {
-                    //    $idsOut = '';
-                    //}
 
                         //require_once 'UserController.php';
                         $ucwordsBlock = ucwords($block);
@@ -1249,19 +1183,12 @@ $build = array();
                     $output = ob_get_contents();
                     ob_end_clean();
                     $outputDB = str_replace('{php:' . $block  .'}', $output, $outputDB);
-
                 }
-
 
             $outputString = "";
             $count++;
             }
-        } else {
-            //$output = ViewController::setDefaultHeaderImage();
-            //$outputDB .= $output;
         }
-        //$outputDB = str_replace('{content}' , $content, $outputDB);
-
         return $outputDB;
     }
 

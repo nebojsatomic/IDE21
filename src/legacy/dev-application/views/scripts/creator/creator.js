@@ -102,15 +102,15 @@ function ajaxEvent(){
 }
 message = "";
 function ajaxEventDone(message){
-  //$('body').append('<div id="ajaxEventMessage"  style="position:fixed;display:none;top:0; left:0;opacity:0.9;background:white;margin:20% 40%;padding:30px;width:300px;height:50px;border-radius:10px;z-index:999999;">' +  message + '<img src="'+ absoluteUrl2 +'images/ajax-loader2.gif" style="float:right;" /></div>');
+
   $('body').append('<div id="ajaxEventMessage" role="alert" class="fixed inset-0 w-72 h-24 mx-auto my-auto alert alert-success bg-accent text-accent-content"  style="display:none;opacity:0.9;z-index:999999;"><svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>' +  message + '</span></div>');
   $('#ajaxEventMessage').fadeIn(1000);
-  setTimeout("$('#ajaxEventMessage').fadeOut()", 2000);
+  setTimeout("$('#ajaxEventMessage').fadeOut()", 3000);
 }
 
 function ajaxEmitMessage(emitMessage){
   $('#ajaxEventMessage').html( '<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>' + emitMessage + '</span>');
-  setTimeout("$('#ajaxEventMessage').fadeOut()", 1000);
+  //setTimeout("$('#ajaxEventMessage').fadeOut()", 1000);
 }
 
 function clickMask(){
@@ -151,7 +151,7 @@ function redrawMenus(){
     if ($(this).attr("objtype") == "Menu"  ){
 
       tvId = $(this).attr("id");
-      //console.log(tvId);
+
       var tvCommand = "{" + $(this).attr("command") + "}";
 
       $.post(absoluteUrl + "view/render-tv/var/" + tvCommand  , function(data){
@@ -516,7 +516,6 @@ $(document).ready(function(){
   $('input[type=submit]').livequery('click', function(){
     ajaxEvent();
     ajaxEventDone(lang.Working);//showing the message
-
   });
 
 
@@ -802,7 +801,7 @@ $(document).ready(function(){
   });
 
   $('#poA').click(function(){
-    aaa = 0;
+    shouldDisplayMenu = 0;
   });
   //toggle visibility for the textareas with tinymce, html and style for the object
   $('#toggleVisibilityRowAnchor').click(function(){
@@ -985,11 +984,11 @@ $(document).ready(function(){
       //$(this).resizable('destroy');
 
       //if it is a menu write command
-      if ($(this).attr("objtype") == "Menu"){
+      /*if ($(this).attr("objtype") == "Menu"){
         $(this).addClass("menuObj");
         $(this).html( "{" +$(this).attr("command") + "}");
 
-      }
+      }*/
       if ($(this).attr("objtype") == "Category"){
         $(this).html( "{" +$(this).attr("command") + "}");
       }
@@ -1042,11 +1041,10 @@ $(document).ready(function(){
       $(this).removeClass("inactiveObject");
 
       //if it is a menu write command
-      if ($(this).attr("objtype") == "Menu"){
+      /*if ($(this).attr("objtype") == "Menu"){
         $(this).addClass("menuObj");
         $(this).html( "{" +$(this).attr("command") + "}");
-        //$(this).attr("command", "");
-      }
+      }*/
       if ($(this).attr("objtype") == "Category"){
         $(this).html( "{" +$(this).attr("command") + "}");
         //$(this).attr("command", "");
@@ -1205,8 +1203,7 @@ $(document).ready(function(){
       $(this).addClass("templateDiv");
       //if it is a menu write command
       if ($(this).attr("objtype") == "Menu"){
-        $(this).html( "{" +$(this).attr("command") + "}");
-        //$(this).attr("command", "");
+        //$(this).html( "{" +$(this).attr("command") + "}");
       }
       if ($(this).attr("objtype") == "Category"){
         $(this).html( "{" +$(this).attr("command") + "}");
@@ -1251,8 +1248,7 @@ $(document).ready(function(){
       //$(this).resizable('destroy');
       //if it is a menu write command
       if ($(this).attr("objtype") == "Menu"){
-        $(this).html( "{" +$(this).attr("command") + "}");
-        //$(this).attr("command", "");
+        //$(this).html( "{" +$(this).attr("command") + "}");
       }
       if ($(this).attr("objtype") == "Category"){
         $(this).html( "{" +$(this).attr("command") + "}");
@@ -1372,9 +1368,7 @@ $(".draggable").livequery('dblclick', function(e){
   htmlValue = $('#' + $('#objIDshow').text() ).html();
   zIn = $(e.target).css("z-index");
   css = $(e.target).attr("style");
-  console.log($(e.target));
-console.log($(e.target).attr('style'));
-  //css = "width: auto; min-height: 25px;height:auto; background: transparent; padding: 10px; float:left;color: black;" + $(this).attr("style");
+
   //theme classes
   themeClass = "";
   if( $(this).hasClass("noTheme") ){themeClass = "no";}
@@ -1571,31 +1565,31 @@ $('#objType').change(function(){
 
   //title
   if (defaultBackground == "title") {
-    //$('#' + idObjekta).addClass("menuObj");
+
     $('#' + idObjekta).html("{title}");
     setTimeout("clickMask()", 500); //closing all
   }
   //pageInfo
   if (defaultBackground == "pageinfo") {
-    //$('#' + idObjekta).addClass("menuObj");
+
     $('#' + idObjekta).html("{pageinfo}");
     setTimeout("clickMask()", 500); //closing all
   }
   //SEARCHFORM
   if (defaultBackground == "searchform") {
-    //$('#' + idObjekta).addClass("menuObj");
+
     $('#' + idObjekta).html("{searchform}");
     setTimeout("clickMask()", 500); //closing all
   }
   //languageFORM
   if (defaultBackground == "languageform") {
-    //$('#' + idObjekta).addClass("menuObj");
+
     $('#' + idObjekta).html("{language:flags}");
     setTimeout("clickMask()", 500); //closing all
   }
   //contactFORM
   if (defaultBackground == "contactform") {
-    //$('#' + idObjekta).addClass("menuObj");
+
     $('#' + idObjekta).html("{liveblock:forms:_contactForm:contact}");
     setTimeout("clickMask()", 500); //closing all
   }
@@ -1615,7 +1609,7 @@ $('#objType').change(function(){
 
   //loginArea
   if (defaultBackground == "loginarea") {
-    //$('#' + idObjekta).addClass("menuObj");
+
     $('#' + idObjekta).html("{liveblock:user:loginArea}");
     setTimeout("clickMask()", 500); //closing all
   }
@@ -1623,11 +1617,11 @@ $('#objType').change(function(){
   if ($(this).attr("value") == "Menu") {
     $('#' + idObjekta).addClass("menuObj");
     $('#MenuA').click();
-    //console.log("Click on the menu to select it!");
+
     ajaxEventDone(lang.ClickMenu);
     ajaxEmitMessage(lang.ClickMenu);
     setTimeout("clickMask()", 2000); //closing all
-    aaa = 1;
+    shouldDisplayMenu = 1;
 
   }
 
@@ -1643,26 +1637,32 @@ $('#objType').change(function(){
 });
 
 
-//DISPLAYING MENU IN AN OBJECT
-aaa = 0;
-$('#chooseMenuForm').livequery('click', function(){
-  //$(this).change();
-});
+// DISPLAYING A MENU INSIDE THE SELECTED OBJECT
+shouldDisplayMenu = 0;
 $('#chooseMenuForm').change(function(){
   idObjekta = $('#objProperties').attr("objId");
 
-  //MENU PUTTING
-  if (aaa == 1 || putInThisObj == 1) {
+  // PUTTING A MENU INSIDE THE SELECTED OBJECT
+  if (shouldDisplayMenu == 1 || putInThisObj == 1) {
     selMenuTemplate = $('#' + $(this).attr("id") + " option:selected").attr("value");//selected menu
     selValueTemplate = $('#' + $(this).attr("id") + " option:selected").attr("label");
 
-    aaa = 0;
+    shouldDisplayMenu = 0;
 
     var tvCommand = "menu:display:" + selMenuTemplate + displayTypeMenu ;
 
     $.post(absoluteUrl + "view/render-tv/creatorAct/true/var/" + "{" + tvCommand + "}", function(data){
-      //$('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes good after update
-      $('#' + idObjekta).html(data);
+      //$('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes well after update
+      if(displayTypeMenu === ':tree') {
+        $('#' + idObjekta).html(data.replace('id="tree"', 'id="tree_' + selMenuTemplate + '"'));
+        $('#tree_' + selMenuTemplate).treeview({
+          collapsed: true,
+          animated: "medium"
+        });
+
+      } else {
+        $('#' + idObjekta).html(data);
+      }
       $('#' + idObjekta ).dblclick();
 
       $('#objPropertiesHtml').attr("value","{"+ tvCommand + "}");
@@ -2494,6 +2494,7 @@ $('#chooseMenuForm').change(function(){
   selValue = $('#' + $(this).attr("id") + " option:selected").attr("label");
 
   var tvCommand = "menu:display:" + selMenu + ":tree";
+  $('#chosen-menu-id').text(selMenu);
 
   $.post(absoluteUrl + "view/render-tv/creatorAct/true/var/" + "{" + tvCommand + "}", function(data){
     //$('#adminAjaxLoader').fadeOut();
@@ -2994,7 +2995,7 @@ $('a.uniTableAdmin').livequery('click', function(){
 
   //IF DELETE
   if ($(this).hasClass("a_delete") ){
-    //console.log($(this).attr("id") );
+
     var rowId = $(this).attr("id");
     var confir = confirm(lang.AYS);
     if(hrefVal == "") {
@@ -3005,14 +3006,23 @@ $('a.uniTableAdmin').livequery('click', function(){
 
     if (confir == true) {
       ajaxEvent();
-      $.post(absoluteUrl + hrefVal, function(data){
-        //console.log(data);
-        ajaxEmitMessage(data);
-        setTimeout("$('#ajaxEventMask').click()", 1000);
-        $('#uta_' + tableid  + ' tr[id^='+ rowId +']').fadeOut(2000, function(){
-          $(this).remove();
-        });
+      $.post(absoluteUrl + hrefVal, function(response){
+        try { // first check if the backend has provided json response
+          const data = JSON.parse(response);
 
+          ajaxEmitMessage(data.message);
+
+          if(data.success === true){
+            $('#uta_' + tableid  + ' tr[id^='+ rowId +']').fadeOut(2000, function(){
+              $(this).remove();
+            });
+          }
+        } catch(e) {// not a json response, TODO: make all the responses to delete buttons from backend as JSON
+            ajaxEmitMessage(response);
+            $('#uta_' + tableid  + ' tr[id^='+ rowId +']').fadeOut(2000, function(){
+              $(this).remove();
+            });
+        }
       });
       ajaxEventDone(lang.Deleting);
     }
@@ -3061,8 +3071,8 @@ $('.pag_a').livequery('click', function(){
   idCurrent = $(this).html();//this is important for refreshing of the table
 
   div = $(this).parents(".pagination-closest").attr("id");
-
-  $('#' + div + " .universalTableAdmin").prepend('<div id="loadingBook" style="position:absolute;bottom:20px;left:85%;z-index:999999;text-align:center;background:transparent;padding:10px;"><img align="center" src="' + absoluteUrl2 + 'images/ajax-loaderTable.gif" /></div>');
+/*style="position:absolute;bottom:20px;left:10%;z-index:999999;text-align:center;background:transparent;padding:10px;"*/
+  $(this).closest('.pagination-container').prepend('<div id="loadingBook" class="absolute right-1 bottom-1 "><span class="loading loading-spinner loading-xs text-white w-8 h-8"></span></div>');
 
   $.get( absoluteUrl + $(this).attr("href"), function(data){
     $('#loadingBook').remove();
@@ -3825,7 +3835,8 @@ fsElementAll = document.getElementById('body');
 })();
 
 // handle button click CSS
-fsButton.addEventListener('click', function() {
+fsButton.addEventListener('click', function(e) {
+  e.preventDefault();
   // if already in fullscreen, it needs to get out of it
   if( $(fsElement).hasClass('fs') === true ){
     window.fullScreenApi.cancelFullScreen(fsElement);
@@ -3839,7 +3850,8 @@ fsButton.addEventListener('click', function() {
 }, true);
 
 //JS
-fsButton2.addEventListener('click', function() {
+fsButton2.addEventListener('click', function(e) {
+  e.preventDefault();
   // if already in fullscreen, it needs to get out of it
   if( $(fsElement2).hasClass('fs') === true ){
     window.fullScreenApi.cancelFullScreen(fsElement2);
@@ -3851,7 +3863,8 @@ fsButton2.addEventListener('click', function() {
 }, true);
 
 //MODULES
-fsButton3.addEventListener('click', function() {
+fsButton3.addEventListener('click', function(e) {
+  e.preventDefault();
   // if already in fullscreen, it needs to get out of it
   if( $(fsElement3).hasClass('fs') === true ){
     window.fullScreenApi.cancelFullScreen(fsElement3);
@@ -3866,11 +3879,12 @@ fsButton3.addEventListener('click', function() {
       $(this).appendTo(fsElement3);
     }
   });
-  //$(fsElement3).addClass('fs').height($(window).height());
+
 }, true);
 
 // fullscreen All
-fsButtonAll.addEventListener('click', function() {
+fsButtonAll.addEventListener('click', function(e) {
+  e.preventDefault();
   // if already in fullscreen, it needs to get out of it
   if( $(fsElementAll).hasClass('fs') === true ){
     window.fullScreenApi.cancelFullScreen(fsElementAll);

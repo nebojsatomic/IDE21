@@ -24,6 +24,7 @@ class VerifyCsrfToken extends Middleware
         'tables/*',
         'user/*',
         'search',
+        'forms',
         'public/*'
     ];
 }

@@ -86,6 +86,8 @@ return array(
 "Pages in this category" => "Strane u ovoj kategoriji",
 //languages
 "Add new Language" => "Dodaj novi jezik",
+"Default language cannot be deleted!" => "Jezik koji je default ne može biti obrisan.",
+"The selected language has been deleted!" => "Jezik koji ste izabrali je obrisan!",
 "Add new Setting" => "Dodaj novo podešavanje",
 //modules
 "Available modules:" => "Postojeći moduli",
@@ -124,7 +126,7 @@ return array(
 "Click here to have backup of the site in a folder that is created for that purpose.If system command is disabled then it must be done through phpMyAdmin..." => "Napraviti backup sajta, ovo funkcioniše ukoliko je 'system' komanda omogućena na serveru, ukoliko ne - uradite preko phpMyAdmina",
 "Page creating Mode" => "Mod za pravljenje strana",
 "Template creating Mode" => "Mod za pravljenje templejta",
-"Click this to update the content of the selected object" => "Osveži sadržaj selektovanog objekta",
+"Click this to update the content of the selected object" => "Sinhronizuj sadržaj selektovanog objekta sa sadržajem WYSIWYG editora",
 "Here write the description for your page, which will make it Search Engine Optimized..." => "Napišite Opis vaše strane što pomaže boljem ostvarivanju SEO",
 "Here write the keywords for your page, which will make it Search Engine Optimized..." => "Napišite Ključne reči vaše strane što pomaže boljem ostvarivanju SEO",
 "Click to set shadow params" => "Podesite parametre za senku",
@@ -262,4 +264,8 @@ return array(
 "Menu item" => "Stavka u meniju",
 "edited!" => "uradjeno!",
 "This Page is deleted!" => "Ova strana je obrisana!",
+"Close" => "Zatvori",
+"Install Template" => "Instaliraj templejt",
+"Export Template" => "Eksportuj templejt",
+"Enable all modules" => "Omogući sve module",
 );

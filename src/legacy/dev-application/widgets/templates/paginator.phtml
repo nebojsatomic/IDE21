@@ -20,7 +20,7 @@
 $i=1;
 ?>
 <?php if ($this->pageCount > 1): ?>
-  <div id="paginationControl" class="grid gap-2">
+  <div id="paginationControl" class="pagination-container grid gap-2 relative">
     <div class="flex gap-2">
       <?php echo $this->translate("PAGE");?><span class="current"><?php echo $this->current;?></span>/<span class="total"><?php echo $this->pageCount;?></span>
     </div>

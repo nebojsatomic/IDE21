@@ -281,7 +281,7 @@
                   <div class="creatorDiv inline-flex gap-2 items-center"><input id="allLangCheckTemplate" class="checkbox-sm" type="checkbox" /><?php echo $this->translate->_("Apply to all languages");?></div>
                   <div id="DefaultTemplateChangerDiv" class="inline-flex gap-2 items-center"><input id="templateDefaultCB" class="checkbox-sm" type="checkbox" name="templateDefaultCB" /><?php echo $this->translate->_("Default Template");?></div>
 
-                  <a href="" id="exportTemplate" class="navLinks a_edit btn btn-secondary btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to export this template for use on another installation.");?>"><?php echo $this->translate->_("Export template");?></a>
+                  <a href="" id="exportTemplate" class="navLinks a_edit btn btn-secondary btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to export this template for use on another installation.");?>"><?php echo $this->translate->_("Export Template");?></a>
                   <a href="" id="installTemplate" class="navLinks a_save btn btn-secondary btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to install exported template");?>"><?php echo $this->translate->_("Install Template");?></a>
                   <a href="" id="deleteTemplate" class="navLinks a_delete btn btn-sm btn-secondary btn-error" title="<?php echo $this->translate->_("Click to delete this template");?>"><?php echo $this->translate->_("Delete This Template");?></a>
                 </div>
@@ -320,22 +320,24 @@
         <div id="menuFormContainer" class="grid gap-4 min-h-96">
           <div id="menuShow" class="grid gap-2 content-start">
 
-            <div>
+            <div class="inline-flex items-center gap-2">
               <?php echo $this->translate->_("Put in this object");?> <input id="putInThis" class="checkbox-sm" type="checkbox" />
             </div>
 
-            <div>
+            <div class="grid items-center gap-2">
               <?php echo $this->translate->_("Display Type");?>:
-              <form id="menuDisplayType">
+              <form id="menuDisplayType" class="inline-flex items-center gap-1">
                 <input class="radio-sm" type="radio" name="displaytype" value="" checked="checked">Horizontal
                 <input class="radio-sm" type="radio" name="displaytype" value=":vertical">Vertical
                 <input class="radio-sm" type="radio" name="displaytype" value=":tree">Tree
-                <input class="radio-sm" type="radio" name="displaytype" value=":slide">Slide
+                <!-- SLIDE MENU DISPLAY DISABLED FOR NOW, TODO: MAKE IT WORK WITH DAISYUI OR SOMETHING ELSE -->
+                <!-- <input class="radio-sm" type="radio" name="displaytype" value=":slide">Slide -->
               </form>
             </div>
 
             <div>
               <?php echo $this->formChooseMenu;?>
+              <div class="flex gap-2 mt-2"><span><?php echo $this->translate->_("Selected menu ID:");?></span><span id="chosen-menu-id"></span></div>
             </div>
             <div id="addMenuLinkDiv" class="grid gap-2">
               <a id="addMenuLink" href="menu/add-menu" class="navLinks a_add btn btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to create new menu");?>"><?php echo $this->translate->_("Add a menu");?></a>
@@ -345,7 +347,7 @@
             </div>
 
           </div>
-          <div id="menuSelected" class="grid gap-2 content-start bg-neutral-content rounded"></div>
+          <div id="menuSelected" class="grid gap-2 content-start bg-neutral-content rounded min-h-20"></div>
           <div id="menuSelectedForm" class="grid gap-2 content-start">
             <a id="editMenuItem" style="display:none">Edit</a>
             <a id="deleteMenuItem" class="a_delete btn btn-sm md:btn-xs btn-error" style="display:none" title="<?php echo $this->translate->_("Click to delete this menu item");?>"><?php echo $this->translate->_("Delete this item");?> </a>
@@ -390,7 +392,7 @@
                   <dt><label for="catItems" class="optional"><?php echo $this->translate->_("Category Name Translation");?>:</label></dt>
                   <dd>
                     <input type="text" value="" name="cat_name_lng" class="input input-sm w-full"/>
-                    <input type="submit" value="Save" class="btn btn-sm md:btn-xs mt-2" />
+                    <input type="submit" value="<?php echo $this->translate->_("Save");?>" class="btn btn-sm md:btn-xs mt-2" />
                   </dd></dl>
                 </form>
               </div>
