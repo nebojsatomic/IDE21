@@ -2,5 +2,5 @@
 
 ## Reporting a Vulnerability
 
-Create an issue with the label 'security'.
+Private vulnerability reporting is enabled, go to Security tab and make a report.
 
