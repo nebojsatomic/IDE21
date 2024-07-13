@@ -75,8 +75,11 @@ tinyMCE.init({
 function showEditObjectButtons(obj){
   // place pointer above the selected object on the top left
   if( typeof $('#'+ obj ).offset() == 'undefined' ) return;
-  $('#penPointer').css({left: $('#'+ obj ).offset().left + 'px',top: $('#'+ obj ).offset().top  + 'px'}).fadeIn();
-  //$('#penPointer').css({left: '1rem',top: '5rem'}).fadeIn();
+  $('#penPointer').css({left: $('#'+ obj ).offset().left + 'px',top: $('#'+ obj ).offset().top - 30 + 'px'}).fadeIn();
+  $('#movePointer').css({left: $('#'+ obj ).offset().left + 40 + 'px',top: $('#'+ obj ).offset().top  - 30 + 'px'}).fadeIn();
+  $('#dropPointer').css({left: $('#'+ obj ).offset().left + 80 + 'px',top: $('#'+ obj ).offset().top  - 30 + 'px'}).fadeIn();
+  $('#moveUpPointer').css({left: $('#'+ obj ).offset().left + 120 + 'px',top: $('#'+ obj ).offset().top  - 30 + 'px'}).fadeIn();
+  $('#moveDownPointer').css({left: $('#'+ obj ).offset().left + 160 + 'px',top: $('#'+ obj ).offset().top  - 30 + 'px'}).fadeIn();
 }
 
 function doLightBox(){
@@ -428,12 +431,18 @@ function loadPage(idP){
 $('#droppable *').livequery('click', function(e){
   const hasTemplateParent = $(e.target).closest('#droppable');
   $('.selected-for-append').removeClass('selected-for-append');
+  if(!$(e.target).hasClass('movable')){
+    $('#movePointer').removeClass('bg-green-400');
+  } else {
+    $('#movePointer').addClass('bg-green-400');
+  }
 
   if (hasTemplateParent.length < 1 ) return;
     // continue only if it is a part of the template or page working area
 
 
   $(e.target).addClass('selected-for-append');
+  //$(e.target).addClass('selected-droppable');
   const contentsToName = $(e.target).text().replace(/\s/g, '_').replace(/[^a-zA-Z0-9_]/g, '').substring(0, 15).toLowerCase(); // append this string to id of the object, to be able to see which one it is just by looking in the object list
 
   const selectedObjectNewID = $(this).get(0).localName + '_sel_' + Math.floor(Math.random() * 10000) + '_' + contentsToName;
@@ -480,8 +489,8 @@ $(document).ready(function(){
   const simpleBar = new SimpleBar(document.getElementById('containerRadnePovrsine'));
   simpleBar.getScrollElement().addEventListener('scroll', function(){
     if( typeof $('.selected-for-append').offset() == 'undefined' ) return;
-    $('#penPointer').css({
-      top: $('.selected-for-append').offset().top + 'px'
+    $('#penPointer, #movePointer, #dropPointer, #moveUpPointer, #moveDownPointer').css({
+      top: $('.selected-for-append').offset().top - 30 + 'px'
     });
     /*$('#tooltip').css({
       top: $('.selected-for-append').offset().top + $('.selected-for-append').outerHeight() + 'px'
@@ -3744,6 +3753,50 @@ $('#penPointer').livequery('click', function(){
       }
     }, 500);
   });*/
+});
+
+$('#movePointer').livequery('click', function(){
+
+  if( !$('.selected-for-append').hasClass('movable')) {
+    $('#movePointer').addClass('bg-green-400');
+    $('.selected-for-append').addClass('movable');
+  } else {
+    $('#movePointer').removeClass('bg-green-400');
+    $('.selected-for-append').removeClass('movable');
+    return;
+  }
+
+  const getMovingObjectID = $('.selected-for-append').attr('id');
+  const getMovingObjectParent = $('.selected-for-append').parent();
+  const getMovingObjectIndex = $('.selected-for-append').index();
+
+});
+
+$('#dropPointer').livequery('click', function(){
+
+  if( $('.movable').length > 0 ){
+    $('.movable').appendTo($('.selected-for-append'));
+    $('#movePointer').removeClass('bg-green-400');
+    $('.movable').removeClass('movable');
+  }
+});
+
+$('#moveUpPointer').livequery('click', function(){
+  const getMovingObjectID = $('.selected-for-append').attr('id');
+  const getMovingObjectParent = $('.selected-for-append').parent();
+  const getMovingObjectIndex = $('.selected-for-append').index();
+
+  $('.selected-for-append').insertBefore($('.selected-for-append').prev());
+
+});
+
+$('#moveDownPointer').livequery('click', function(){
+  const getMovingObjectID = $('.selected-for-append').attr('id');
+  const getMovingObjectParent = $('.selected-for-append').parent();
+  const getMovingObjectIndex = $('.selected-for-append').index();
+
+  $('.selected-for-append').insertAfter($('.selected-for-append').next());
+
 });
 
 //FULSCREEN CSS and JS tabs
