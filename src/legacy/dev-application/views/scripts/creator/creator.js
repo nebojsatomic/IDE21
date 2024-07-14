@@ -75,11 +75,14 @@ tinyMCE.init({
 function showEditObjectButtons(obj){
   // place pointer above the selected object on the top left
   if( typeof $('#'+ obj ).offset() == 'undefined' ) return;
-  $('#penPointer').css({left: $('#'+ obj ).offset().left + 'px',top: $('#'+ obj ).offset().top - 30 + 'px'}).fadeIn();
-  $('#movePointer').css({left: $('#'+ obj ).offset().left + 40 + 'px',top: $('#'+ obj ).offset().top  - 30 + 'px'}).fadeIn();
-  $('#dropPointer').css({left: $('#'+ obj ).offset().left + 80 + 'px',top: $('#'+ obj ).offset().top  - 30 + 'px'}).fadeIn();
-  $('#moveUpPointer').css({left: $('#'+ obj ).offset().left + 120 + 'px',top: $('#'+ obj ).offset().top  - 30 + 'px'}).fadeIn();
-  $('#moveDownPointer').css({left: $('#'+ obj ).offset().left + 160 + 'px',top: $('#'+ obj ).offset().top  - 30 + 'px'}).fadeIn();
+  let adjustTopPosition = 30;
+  if( $('#'+ obj ).offset().top < 70 ) adjustTopPosition = 0;
+
+  $('#penPointer').css({left: $('#'+ obj ).offset().left + 'px',top: $('#'+ obj ).offset().top - adjustTopPosition + 'px'}).fadeIn();
+  $('#movePointer').css({left: $('#'+ obj ).offset().left + 40 + 'px',top: $('#'+ obj ).offset().top  - adjustTopPosition + 'px'}).fadeIn();
+  $('#dropPointer').css({left: $('#'+ obj ).offset().left + 80 + 'px',top: $('#'+ obj ).offset().top  - adjustTopPosition + 'px'}).fadeIn();
+  $('#moveUpPointer').css({left: $('#'+ obj ).offset().left + 120 + 'px',top: $('#'+ obj ).offset().top  - adjustTopPosition + 'px'}).fadeIn();
+  $('#moveDownPointer').css({left: $('#'+ obj ).offset().left + 160 + 'px',top: $('#'+ obj ).offset().top  - adjustTopPosition + 'px'}).fadeIn();
 }
 
 function doLightBox(){
@@ -489,8 +492,12 @@ $(document).ready(function(){
   const simpleBar = new SimpleBar(document.getElementById('containerRadnePovrsine'));
   simpleBar.getScrollElement().addEventListener('scroll', function(){
     if( typeof $('.selected-for-append').offset() == 'undefined' ) return;
+
+    let adjustTopPosition = 30;
+    if( $('.selected-for-append').offset().top < 70 ) adjustTopPosition = 0;
+
     $('#penPointer, #movePointer, #dropPointer, #moveUpPointer, #moveDownPointer').css({
-      top: $('.selected-for-append').offset().top - 30 + 'px'
+      top: $('.selected-for-append').offset().top - adjustTopPosition + 'px'
     });
     /*$('#tooltip').css({
       top: $('.selected-for-append').offset().top + $('.selected-for-append').outerHeight() + 'px'
@@ -2200,15 +2207,20 @@ $('#setBodyBgImage').click(function(){
   }
   if($('#bgSelect').val() == "SHEET") {
     $('.sheet').css("background" , "url(" + $('#imagePathShow').text() + ")" );
-
   }
   if($('#bgSelect').val() == "HEADER") {
-
     $('.header').css("background" , "url(" + $('#imagePathShow').text() + ")" );
-
   }
   if($('#bgSelect').val() == "FOOTER") {
     $('#ftr').css("background" , "url(" + $('#imagePathShow').text() + ")" );
+  }
+  if($('#bgSelect').val() == "SELECTED-OBJECT") {
+    $('.selected-for-append').css({
+      "background-image" : "url(" + $('#imagePathShow').text() + ")",
+      "background-repeat" : "no-repeat",
+      "background-position" : "center center",
+      "background-size" : "cover"
+    });
   }
 });
 
