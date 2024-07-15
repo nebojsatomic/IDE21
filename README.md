@@ -12,8 +12,7 @@ This is the base idea, there are still some bugs and unfinished features, there 
 # SCREENSHOTS
 MOBILE:
 
-![IDE21-Mobile-1-sm](https://github.com/user-attachments/assets/77bbc977-0f9b-479f-a967-0702d2863013)
-
+<img src="https://github.com/user-attachments/assets/adf338b0-0b5a-4cf9-9d88-f2e182329aa6" width="320" />
 
 DESKTOP:
 
