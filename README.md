@@ -9,6 +9,16 @@ Basically have the designer and the frontend developer in one person, from the a
 After that template is available for export, it can be uploaded to some other installation of IDE21, and the design which was created by the first admin on one domain can now be taken by another admin to work on it to improve it in his own way on another domain, which should enable quick creating of the new templates ( new designs ).
 This is the base idea, there are still some bugs and unfinished features, there will be Wiki documentation created for User and Developer realms, which describe what is posible to do, and what is in TODO list.
 
+# SCREENSHOTS
+MOBILE:
+
+![IDE21-Mobile-1-sm](https://github.com/user-attachments/assets/77bbc977-0f9b-479f-a967-0702d2863013)
+
+
+DESKTOP:
+
+![IDE21-Desktop-1](https://github.com/user-attachments/assets/a8ee2d7d-674d-410d-be02-11b5f1616a98)
+![IDE21-Desktop-2](https://github.com/user-attachments/assets/bb9b3f70-5d67-479a-98e5-817a359db612)
 
 # YOUTUBE CHANNEL
 
