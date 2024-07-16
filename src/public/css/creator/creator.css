@@ -170,12 +170,6 @@ span.ui-button-text {
   display: none ; /* must rethink this concept */
 }
 
-#penPointer {
-  display: none;
-  position: absolute;
-  z-index: 199998;
-}
-
 #downPointer {
   display: none;
   position: absolute;
