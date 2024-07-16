@@ -478,9 +478,19 @@ $('#droppable *').livequery('click', function(e){
   }
 });
 
+$('.object-buttons').livequery('mouseover', function(){
+  $(this).addClass('hovered');
+});
+$('.object-buttons').livequery('mouseout', function(){
+  $(this).removeClass('hovered');
+});
+
 $('#droppable *').livequery('blur', function(e){
   $(e.target).attr('contenteditable', 'false');
   $('.tooltip-freeze').removeClass('tooltip-freeze');
+
+  if(!$('.object-buttons').hasClass('hovered')) $('.object-buttons').hide();
+
 });
 
 // reset selected-for-append
@@ -2933,7 +2943,7 @@ $('#templateChanger').change(function(){
 });
 
 $('#pageDisplayer').click(function(){
-  //console.log( $(this).attr("value"));
+
   $('#pageEditing').show();
   $('#assignPageToCategory').show();
   $('#assignPageMenuForm').show();
@@ -2945,6 +2955,8 @@ $('#pageDisplayer').click(function(){
   $('#templateEditing').hide();
   $('#deletePage').show();
   $('#clearPage').click();
+  $('.object-buttons').hide();
+
   document.cookie = 'templateSelected=0;  path=/';
   if(getCookie("pageSelectedId")){loadPage(getCookie("pageSelectedId"));}  //return to the previously edited page
 });
@@ -2960,6 +2972,8 @@ $('#templateDisplayer').click(function(){
   $('#templateEditing').show();
   $('#deletePage').hide();
   $('#clearPage').click();
+  $('.object-buttons').hide();
+
   document.cookie = 'templateSelected=1; path=/';
   if(getCookie("templateSelectedId")){loadTemplate(getCookie("templateSelectedId"));} //return to the previously edited template
 
