@@ -205,20 +205,29 @@
     </div>
   </div>
   <script type="text/javascript" src="/js/codepressFix.js" ></script>
-  <!--<script type="text/javascript" src="/js/codepress/codepress.js" ></script>-->
-  <script type="text/javascript">
-  $(document).ready(function() {
-    //$('select, input, textarea').livequery(function(){$(this).uniform();});
-  });
-  </script>
-  <script type="text/javascript">
-  // send message to the new admin that it can show itself
-  window.parent.postMessage('creator_logged_in', '*');
 
-  window.addEventListener('message', function(message){
-    //console.log(message.data);
-    //$('#' + message.data).get(0).click();
-  });
+  <script src="/ace/src-min/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/ace/src-min/ext-language_tools.js"></script>
+  <script>
+      var editorCSS = ace.edit("pageCSS-ace");
+      editorCSS.setTheme("ace/theme/monokai");
+      editorCSS.session.setMode("ace/mode/css");
+
+      editorCSS.setOptions({
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: true
+      });
+
+      var editorJS = ace.edit("pageJS-ace");
+      editorJS.setTheme("ace/theme/monokai");
+      editorJS.session.setMode("ace/mode/javascript");
+
+      editorJS.setOptions({
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: true
+      });
   </script>
 </body>
 </html>
