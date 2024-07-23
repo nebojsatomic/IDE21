@@ -3873,11 +3873,13 @@ fsButton.addEventListener('click', function(e) {
   if( $(fsElement).hasClass('fs') === true ){
     window.fullScreenApi.cancelFullScreen(fsElement);
     $(fsElement).removeClass('fs');
+    $('#pageCSS-ace').height('auto');
     return;
   }
 
   window.fullScreenApi.requestFullScreen(fsElement);
   $(fsElement).addClass('fs').find('iframe').height($(window).height());
+  $('#pageCSS-ace').height( $(window).innerHeight() - $('#addCssCodeA').outerHeight() - $('#objListForCss').outerHeight() );
 
 }, true);
 
@@ -3888,10 +3890,13 @@ fsButton2.addEventListener('click', function(e) {
   if( $(fsElement2).hasClass('fs') === true ){
     window.fullScreenApi.cancelFullScreen(fsElement2);
     $(fsElement2).removeClass('fs');
+    $('#pageJS-ace').height('auto');
     return;
   }
   window.fullScreenApi.requestFullScreen(fsElement2);
   $(fsElement2).addClass('fs').find('iframe').height($(window).height());
+  $('#pageJS-ace').height( $(window).innerHeight() - $('#addJsCodeA').outerHeight() - $('#objListForJs').outerHeight() - $('#eventListForJs').outerHeight() - 50 );
+
 }, true);
 
 //MODULES
