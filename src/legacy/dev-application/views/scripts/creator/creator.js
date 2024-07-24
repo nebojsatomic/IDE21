@@ -567,12 +567,15 @@ $(document).ready(function(){
 
 
   $('#saveCssCodeA').click(function(){
-
+    const editorCSSValue = editorCSS.getValue();
+    $('#pageCSS').val(editorCSSValue);
     $('#saveThisPage').click();
 
   });
 
   $('#saveJsCodeA').click(function(){
+    const editorJSValue = editorJS.getValue();
+    $('#pageJS').val(editorJSValue);
     $('#saveThisPage').click();
   });
 
@@ -2764,44 +2767,20 @@ $('#menuDisplayType').change(function(){
 //CSS TAB
 $('#addCssCodeA').click(function(){
   ajaxEvent();
-  if(codepressOff == false) {//IF codepress is turned on
-    pageCSS.toggleEditor();
-  }
 
   oldCss = $('#pageCSS').attr("value");
-  if(codepressOff == true) {//IF codepress is turned off
-    oldCss_cp = oldCss;
-  } else {
-    oldCss_cp = $('#pageCSS_cp').attr("value");
-  }
 
   newPageCss = "\n#" + $('#objListForCss').attr("value") + '{' + "\n\n\n" + '}' + "\n" + oldCss;
-  if(codepressOff == true) {//IF codepress is turned off
-    newPageCss_cp = newPageCss;
-  } else {
-    newPageCss_cp = "\n#" + $('#objListForCss').attr("value") + '{' + "\n\n\n" + '}' + "\n" + oldCss_cp;
-  }
-
 
   if ( $('#objListForCss').attr("value") != "") {
     $('#pageCSS').attr("value", newPageCss);
-    if(codepressOff == true) {//IF codepress is turned off
-      //$('#pageCSS_cp').attr("value", newPageCss_cp);//cp is for codepress
-    } else {
-      $('#pageCSS_cp').attr("value", newPageCss_cp);//cp is for codepress
-    }
+    editorCSS.setValue(newPageCss);// update ace editor
 
-    if(codepressOff == false) {//IF codepress is turned on
-      pageCSS.toggleEditor();
-    }
   } else {
 
     ajaxEventDone(lang.FirstSelObj);
     ajaxEmitMessage(lang.FirstSelObj);
     setTimeout("clickMask()", 2000);
-    if(codepressOff == false) {//IF codepress is turned on
-      pageCSS.toggleEditor();
-    }
   }
 });
 
@@ -2809,46 +2788,20 @@ $('#addCssCodeA').click(function(){
 
 $('#addJsCodeA').click(function(){
   ajaxEvent();
-  if(codepressOff == false) {//IF codepress is turned on
-    pageJS.toggleEditor();
-  }
 
   oldJs = $('#pageJS').attr("value");
 
-  if(codepressOff == true) {//IF codepress is turned off
-    oldJs_cp = oldJs;
-  } else {
-    oldJs_cp = $('#pageJS_cp').attr("value");
-  }
-
   newPageJs = "\n$('#" + $('#objListForJs').attr("value") + "').livequery('" + $('#eventListForJs').attr("value") + "', " + 'function(){' + "\n\n\n" + '});' + "\n" + oldJs;
-  if(codepressOff == true) {//IF codepress is turned off
-    newPageJs_cp = newPageJs;
-  } else {
-    newPageJs_cp = "\n$('#" + $('#objListForJs').attr("value") + "').livequery('" + $('#eventListForJs').attr("value") + "', " + 'function(){' + "\n\n\n" + '});' + "\n" + oldJs_cp;
-  }
 
   if ( $('#objListForJs').attr("value") != "") {
     $('#pageJS').attr("value", newPageJs);
-    if(codepressOff == true) {//IF codepress is turned off
-      //
-    } else {
-      $('#pageJS_cp').attr("value", newPageJs_cp);//cp is for codepress
-    }
-
-    if(codepressOff == false) {//IF codepress is turned on
-      pageJS.toggleEditor();
-    }
+    editorJS.setValue(newPageJs);// update ace editor
 
   } else {
-    //console.log("First select the object!");
+
     ajaxEventDone(lang.FirstSelObj);
     ajaxEmitMessage(lang.FirstSelObj);
     setTimeout("clickMask()", 2000);
-
-    if(codepressOff == false) {//IF codepress is turned on
-      pageJS.toggleEditor();
-    }
   }
 
 });
@@ -3920,11 +3873,13 @@ fsButton.addEventListener('click', function(e) {
   if( $(fsElement).hasClass('fs') === true ){
     window.fullScreenApi.cancelFullScreen(fsElement);
     $(fsElement).removeClass('fs');
+    $('#pageCSS-ace').height('auto');
     return;
   }
 
   window.fullScreenApi.requestFullScreen(fsElement);
   $(fsElement).addClass('fs').find('iframe').height($(window).height());
+  $('#pageCSS-ace').height( $(window).innerHeight() - $('#addCssCodeA').outerHeight() - $('#objListForCss').outerHeight() );
 
 }, true);
 
@@ -3935,10 +3890,13 @@ fsButton2.addEventListener('click', function(e) {
   if( $(fsElement2).hasClass('fs') === true ){
     window.fullScreenApi.cancelFullScreen(fsElement2);
     $(fsElement2).removeClass('fs');
+    $('#pageJS-ace').height('auto');
     return;
   }
   window.fullScreenApi.requestFullScreen(fsElement2);
   $(fsElement2).addClass('fs').find('iframe').height($(window).height());
+  $('#pageJS-ace').height( $(window).innerHeight() - $('#addJsCodeA').outerHeight() - $('#objListForJs').outerHeight() - $('#eventListForJs').outerHeight() - 50 );
+
 }, true);
 
 //MODULES

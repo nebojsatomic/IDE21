@@ -543,9 +543,10 @@
 
         </div>
         <div class="grid">
-          <textarea id="pageCSS" name="pageCSS" class="codepress css min-h-96">
+          <textarea id="pageCSS" name="pageCSS" class="hidden codepress css min-h-96">
             <?php echo $this->css;?>
           </textarea>
+          <div id="pageCSS-ace" class="w-full h-full min-h-96"><?php echo $this->css;?></div>
           <a id="saveCssCodeA" class="navLinks a_save btn btn-sm mt-4 btn-sm md:btn-xs md:mt-2"><?php echo $this->translate->_("Save This Code");?></a>
         </div>
       </div>
@@ -581,10 +582,10 @@
         </div>
 
         <div class="grid gap-2">
-          <textarea id="pageJS" name="pageJS" class="codepress javascript min-h-96">
+          <textarea id="pageJS" name="pageJS" class="hidden codepress javascript min-h-96">
             <?php echo $this->js;?>
-
           </textarea>
+          <div id="pageJS-ace" class="w-full min-h-96"><?php echo $this->js;?></div>
           <a id="saveJsCodeA" class="navLinks a_save btn btn-sm md:btn-xs "><?php echo $this->translate->_("Save This Code");?></a>
         </div>
 

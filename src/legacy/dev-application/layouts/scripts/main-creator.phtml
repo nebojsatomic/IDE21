@@ -181,6 +181,13 @@
           <!--<li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="System" value="default"/></li>-->
           <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Nord" value="nord"/></li>
           <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Retro" value="retro"/></li>
+          <!-- <li>
+            <a id="add-new-daisy" class="theme-controller btn btn-sm btn-block btn-ghost justify-center text-green-600">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+              <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd" />
+            </svg>
+            </a>
+          </li> -->
         </ul>
       </div>
       <div id="logout" class="help btn btn-sm btn-ghost btn-circle text-white mx-2 cursor-pointer" title="<?php echo $this->translate->_("Click to logout");?>">
@@ -205,20 +212,29 @@
     </div>
   </div>
   <script type="text/javascript" src="/js/codepressFix.js" ></script>
-  <!--<script type="text/javascript" src="/js/codepress/codepress.js" ></script>-->
-  <script type="text/javascript">
-  $(document).ready(function() {
-    //$('select, input, textarea').livequery(function(){$(this).uniform();});
-  });
-  </script>
-  <script type="text/javascript">
-  // send message to the new admin that it can show itself
-  window.parent.postMessage('creator_logged_in', '*');
 
-  window.addEventListener('message', function(message){
-    //console.log(message.data);
-    //$('#' + message.data).get(0).click();
-  });
+  <script src="/ace/src-min/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/ace/src-min/ext-language_tools.js"></script>
+  <script>
+      var editorCSS = ace.edit("pageCSS-ace");
+      editorCSS.setTheme("ace/theme/chrome");
+      editorCSS.session.setMode("ace/mode/css");
+
+      editorCSS.setOptions({
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: true
+      });
+
+      var editorJS = ace.edit("pageJS-ace");
+      editorJS.setTheme("ace/theme/chrome");
+      editorJS.session.setMode("ace/mode/javascript");
+
+      editorJS.setOptions({
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: true
+      });
   </script>
 </body>
 </html>
