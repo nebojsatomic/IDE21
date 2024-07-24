@@ -1441,6 +1441,8 @@ $(".draggable").livequery('dblclick', function(e){
   $("#objPropertiesBorder").attr("value", border );
   $("#objPropertiesClass").attr("value", objectClasses );
   $("#objPropertiesBackground").attr("value", bgColor );
+  $('.clr-field').css({ color: bgColor });
+
   $("#objPropertiesBackgroundImage").attr("value", bgImage );
   //objTheme
   $('#objTheme').attr("value", themeClass);
@@ -1542,11 +1544,17 @@ $("#objPropertiesCSS").livequery('change', function(){
   $('#' + idObjekta).attr("style", $(this).attr("value"));
 
 });
-$("#objPropertiesBackground").livequery('change', function(){
-  idObjekta = $('#objProperties').attr("objId");
-  $('#' + idObjekta).css("background", absoluteUrl + $(this).attr("value"));
+
+document.addEventListener('coloris:pick', event => {
+
+  // if change the background of the selected object
+  if(event.detail.currentEl.id === 'objPropertiesBackground') {
+    idObjekta = $('#objProperties').attr("objId");
+    $('#' + idObjekta).css("background-color", event.detail.color);
+  }
 
 });
+
 $("#objPropertiesBackgroundImage").livequery('change', function(){
   idObjekta = $('#objProperties').attr("objId");
 
@@ -1879,22 +1887,7 @@ $('#cornerParamButton').livequery('click', function(){
 });
 
 //COLOR SELECTOR for the corners
-$('#cornerParamBg').livequery(function(){
-  $(this).ColorPicker({
-    onSubmit: function(hsb, hex, rgb, el) {
-      $(el).val('#' + hex);
-      //idObjekta = $('#objProperties').attr("objId");
-      //$('#' + idObjekta).css("background", '#' + hex);
-      $(el).ColorPickerHide();
-    },
-    onBeforeShow: function () {
-      $(this).ColorPickerSetColor(this.value);
-    }
-  })
-  .bind('keyup', function(){
-    $(this).ColorPickerSetColor(this.value);
-  });
-});
+// switched from ColorPicker to Coloris
 
 
 //SHADOW HANDLING
@@ -1983,20 +1976,7 @@ $('#shadowParamButton').livequery('click', function(){
 });
 
 //COLOR SELECTOR for the SHADOW
-$('#shdwColor').livequery(function(){
-  $(this).ColorPicker({
-    onSubmit: function(hsb, hex, rgb, el) {
-      $(el).val('#' + hex);
-      $(el).ColorPickerHide();
-    },
-    onBeforeShow: function () {
-      $(this).ColorPickerSetColor(this.value);
-    }
-  })
-  .bind('keyup', function(){
-    $(this).ColorPickerSetColor(this.value);
-  });
-});
+// switched from ColorPicker to Coloris
 
 //CLEAR PAGE
 $('#clearPage').livequery('click', function(){
@@ -2861,23 +2841,6 @@ $('#MenuA').click(function(){
 $('#poA').click(function(){
   $('#downPointer').fadeOut();
 });
-
-//COLOR SELECTOR
-$('#objPropertiesBackground').ColorPicker({
-  onSubmit: function(hsb, hex, rgb, el) {
-    $(el).val('#' + hex);
-    idObjekta = $('#objProperties').attr("objId");
-    $('#' + idObjekta).css("background", '#' + hex);
-    $(el).ColorPickerHide();
-  },
-  onBeforeShow: function () {
-    $(this).ColorPickerSetColor(this.value);
-  }
-})
-.bind('keyup', function(){
-  $(this).ColorPickerSetColor(this.value);
-});
-
 
 //TEMPLATE CHANGER
 $('#templateChanger').change(function(){

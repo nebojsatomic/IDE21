@@ -28,17 +28,14 @@
   <link rel="stylesheet" href="/css/jdMenu/blue/jquery.jdMenu.css" type="text/css" />
   <link rel="stylesheet" href="/css/default.css" type="text/css" /><!--CSS written in admin panel-->
   <link rel="stylesheet" href="/css/backend.css" type="text/css" /><!--CSS written for the admin panel-->
-  <!--TABLE GRID STYLES
-  <link rel="stylesheet" type="text/css" media="screen" href="/js/jqgrid/themes/redmond/jquery-ui-1.7.1.custom.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="/js/jqgrid/themes/ui.jqgrid.css" />-->
   <!--treeView-->
   <link rel="stylesheet" href="/css/treeView/jquery.treeview.css" type="text/css" />
   <link rel="stylesheet" href="/css/treeView/screen.css" type="text/css" />
   <!--lightBox-->
   <link rel="stylesheet" href="/css/lightbox/jquery.lightbox-0.5.css" type="text/css" />
   <link rel="stylesheet" href="/css/lightbox/thickbox.css" type="text/css" media="screen" />
-  <!--color picker-->
-  <link rel="stylesheet" media="screen" type="text/css" href="/css/colorpicker.css" />
+  <!--coloris-->
+  <link rel="stylesheet" href="/coloris/coloris.min.css"/>
   <link rel="stylesheet" href="/css/default.css" type="text/css" /><!--CSS written in admin panel-->
   <link rel="stylesheet" href="/css/backend.css" type="text/css" /><!--CSS written for the admin panel-->
   <link type="text/css" href="/css/jqUI/ui.all.css" rel="stylesheet" />
@@ -47,10 +44,6 @@
 <!--<link type="text/css" href="/css/themes.css" rel="stylesheet" />
 -->
   <link rel="shortcut icon" type="image/x-icon" href="/images/ide21logo.svg">
-  <link rel="stylesheet" href="/css/uniform/css/uniform.aristo.css" media="screen" />
-  <!-- Add fancyBox
-  <link rel="stylesheet" href="<?php echo $this->host;?>fancybox/2/jquery.fancybox.css" type="text/css" media="screen" />-->
-
 
   <!--<link href="/daisy/daisyui.full.min.css" rel="stylesheet" type="text/css" />-->
   <link href="/css/tailwind.output.css?rnd=<?php echo rand();?>" rel="stylesheet" type="text/css" />
@@ -70,7 +63,7 @@
   <!--<script type="text/javascript" src="/js/combinedAll.js"></script>-->
   <script type="text/javascript" src="/js/jquery/jquery.ui.js"></script>
   <script type="text/javascript" src="/js/jquery/jquery.livequery.js"></script>
-  <script type="text/javascript" src="/js/jquery/colorpicker.js"></script>
+
   <script type="text/javascript" src="/js/jquery/ui.draggable.js"></script>
   <script type="text/javascript" src="/js/jquery/ui.droppable.js"></script>
   <script type="text/javascript" src="/js/jquery/ui.resizable.js"></script>
@@ -88,11 +81,6 @@
   <script type="text/javascript" src="/js/jqgrid/js/jquery.contextmenu.js" ></script>
   <script type="text/javascript" src="/js/jquery/thickbox.js"></script>
   <script language="JavaScript" type="text/javascript" src="/js/wysiwyg/tiny_mce/tiny_mce.js"></script>
-
-  <script type="text/javascript"  src="/js/uniform/jquery.uniform.js"></script>
-  <script type="text/javascript" src="/js/jqtransformplugin/jquery.jqtransform.js"></script>
-
-  <script type="text/javascript" src="/fancybox/2/jquery.fancybox.js"></script>
   <?php echo $this->headScript(); ?>
 </head>
 <body id="body" class="overflow-hidden">
@@ -211,6 +199,8 @@
       ?>
     </div>
   </div>
+  <script src="/coloris/coloris.min.js"></script>
+
   <script type="text/javascript" src="/js/codepressFix.js" ></script>
 
   <script src="/ace/src-min/ace.js" type="text/javascript" charset="utf-8"></script>
