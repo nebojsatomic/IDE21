@@ -467,7 +467,7 @@ $('#droppable *').livequery('click', function(e){
   $('#objList').val( $(e.target).attr('id') ).change();
 
   $('#objIDshow').html($(e.target).attr('id'));
-  $('#objProperties').attr("objId", $(e.target).attr('id') );
+  $('#objProperties').data("objid", $(e.target).attr('id') );
   e.preventDefault();
   $(e.target).attr('contenteditable', 'true').focus();// edit in place
 
@@ -586,19 +586,19 @@ $(document).ready(function(){
 
   //FONT BIGGER
   $('#fontBigger').click(function(){
-    fSize =  $( '#' + $('#objProperties').attr("objId") ).css("font-size").replace(/px/, '');
+    fSize =  $( '#' + $('#objProperties').data("objid") ).css("font-size").replace(/px/, '');
     fSize++;
     //console.log(fSize);
-    $('#' + $('#objProperties').attr("objId")).css( {fontSize:fSize} );
+    $('#' + $('#objProperties').data("objid")).css( {fontSize:fSize} );
     $('#' + $('#objIDshow').html() ).css( {fontSize:fSize} );
 
   });
   //FONT SMALLER
   $('#fontSmaller').click(function(){
-    fSize =  $( '#' + $('#objProperties').attr("objId") ).css("font-size").replace(/px/, '');
+    fSize =  $( '#' + $('#objProperties').data("objid") ).css("font-size").replace(/px/, '');
     fSize--;
     //console.log(fSize);
-    $('#' + $('#objProperties').attr("objId")).css( {fontSize:fSize} );
+    $('#' + $('#objProperties').data("objid")).css( {fontSize:fSize} );
   });
 
   // load tailwindCSS classes to be used for autocomplete
@@ -813,7 +813,7 @@ $(document).ready(function(){
       absPosTop = topPositionObj - ($(this).offset().top);
       absPosLeft = leftPositionObj - ($(this).offset().left );
 
-      if(id == $('#objProperties').attr("objId") ){
+      if(id == $('#objProperties').data("objid") ){
         //$('#penPointer').css({left:absPosLeft + drOff,top: absPosTop-40}).fadeIn();
       }
       if(absPosTop < 0 || absPosLeft < 0){
@@ -1432,7 +1432,7 @@ $(".draggable").livequery('dblclick', function(e){
   }
   
 
-  $('#objProperties').attr("objId", selectedObjID );
+  $('#objProperties').data("objid", selectedObjID );
   $('#objIDshow').html($(selectedObjID).attr("id"));
 
 
@@ -1474,7 +1474,7 @@ $(".draggable").livequery('dblclick', function(e){
   } else {
     $("#objPropertiesCSS").attr("value", '' );
   }
-  if ( $(this).hasClass("shadowed") ) {
+  if ( $(e.target).hasClass("shadowed") ) {
     $('#shadowCheck').prop("checked", "checked");
     $('#shadowCheck').closest('span').addClass('checked');
   } else {
@@ -1482,7 +1482,7 @@ $(".draggable").livequery('dblclick', function(e){
     $('#shadowCheck').closest('span').removeClass('checked');
   }
 
-  if ( $(this).hasClass("cornered") ) {
+  if ( $(e.target).hasClass("cornered") ) {
     $('#cornerCheck').prop("checked", "checked");
     $('#cornerCheck').closest('span').addClass('checked');
     //$('#cornerPropDiv').show("slow");
@@ -1500,47 +1500,47 @@ $(".draggable").livequery('dblclick', function(e){
 //handle the resizing of objects when input has changed
 //WIDTH
 $("#objPropertiesWidth").livequery('change', function(){
-  idObjekta = $('#objProperties').attr("objId");
+  idObjekta = $('#objProperties').data("objid");
   $('#' + idObjekta).css("width", $(this).attr("value"));
 
 });
 //height
 $("#objPropertiesHeight").livequery('change', function(){
-  idObjekta = $('#objProperties').attr("objId");
+  idObjekta = $('#objProperties').data("objid");
   $('#' + idObjekta).css("height", $(this).attr("value"));
 
 });
 //border
 $("#objPropertiesBorder").livequery('change', function(){
-  idObjekta = $('#objProperties').attr("objId");
+  idObjekta = $('#objProperties').data("objid");
   $('#' + idObjekta).css("border", $(this).attr("value"));
 
 });
 //X pos
 $("#objPropertiesX").livequery('change', function(){
-  idObjekta = $('#objProperties').attr("objId");
+  idObjekta = $('#objProperties').data("objid");
   $('#' + idObjekta).css("left", $(this).attr("value"));
 
 });
 //Y pos
 $("#objPropertiesY").livequery('change', function(){
-  idObjekta = $('#objProperties').attr("objId");
+  idObjekta = $('#objProperties').data("objid");
   $('#' + idObjekta).css("top", $(this).attr("value"));
 
 });
 
 $("#objPropertiesZ").livequery('change', function(){
-  idObjekta = $('#objProperties').attr("objId");
+  idObjekta = $('#objProperties').data("objid");
   $('#' + idObjekta).css("z-index", $(this).attr("value"));
 
 });
 $("#objPropertiesHtml").livequery('change', function(){
-  idObjekta = $('#objProperties').attr("objId");
+  idObjekta = $('#objProperties').data("objid");
   $('#' + idObjekta).html($(this).attr("value"));
 
 });
 $("#objPropertiesCSS").livequery('change', function(){
-  idObjekta = $('#objProperties').attr("objId");
+  idObjekta = $('#objProperties').data("objid");
   $('#' + idObjekta).attr("style", $(this).attr("value"));
 
 });
@@ -1549,21 +1549,21 @@ document.addEventListener('coloris:pick', event => {
 
   // if change the background of the selected object
   if(event.detail.currentEl.id === 'objPropertiesBackground') {
-    idObjekta = $('#objProperties').attr("objId");
+    idObjekta = $('#objProperties').data("objid");
     $('#' + idObjekta).css("background-color", event.detail.color);
   }
 
 });
 
 $("#objPropertiesBackgroundImage").livequery('change', function(){
-  idObjekta = $('#objProperties').attr("objId");
+  idObjekta = $('#objProperties').data("objid");
 
   $('#' + idObjekta).css("background-image", $(this).attr("value"));
   $('#' + idObjekta).css("background-repeat",   "no-repeat"  );
 });
 
 $("#objPropertiesClass").livequery('change', function(){
-  idObjekta = $('#objProperties').attr("objId");
+  idObjekta = $('#objProperties').data("objid");
   $('#' + idObjekta).attr("class", $(this).attr("value"));
 });
 
@@ -1587,7 +1587,7 @@ $("#template_bodyBg").livequery('change', function(){
 //$('#objType').livequery('change', function(){
 $('#objType').change(function(){
   ajaxEvent();
-  idObjekta = $('#objProperties').attr("objId");
+  idObjekta = $('#objProperties').data("objid");
 
   objectType = $('#' + idObjekta).attr("objType");
 
@@ -1677,7 +1677,7 @@ $('#objType').change(function(){
 // DISPLAYING A MENU INSIDE THE SELECTED OBJECT
 shouldDisplayMenu = 0;
 $('#chooseMenuForm').change(function(){
-  idObjekta = $('#objProperties').attr("objId");
+  idObjekta = $('#objProperties').data("objid");
 
   // PUTTING A MENU INSIDE THE SELECTED OBJECT
   if (shouldDisplayMenu == 1 || putInThisObj == 1) {
@@ -1754,7 +1754,7 @@ $("#delButton").livequery('click', function(){
   $('#penPointer').hide();
   $('#objIDshow').html("");
   $('#' + idObjekta).remove();
-  $('#objProperties').attr("objId", "");
+  $('#objProperties').data("objid", "");
 
 });
 $('#previewButton').click(function(){
@@ -1763,7 +1763,7 @@ $('#previewButton').click(function(){
 
 //SHADOW
 $('#shadowCheck').click(function(){
-  idObjekta = $('#objProperties').attr("objid");
+  idObjekta = $('#objProperties').data("objid");
   //console.log($(this).attr("checked") );
   if ($(this).prop("checked") == true) {
     $('#' + idObjekta).addClass("shadowed");
@@ -1775,7 +1775,7 @@ $('#shadowCheck').click(function(){
 
 //CORNERS hide/show div and operation
 $('#cornerCheck').livequery('click', function(){
-  idObjekta = $('#objProperties').attr("objid");
+  idObjekta = $('#objProperties').data("objid");
   //console.log($(this).attr("checked") );
   if ($(this).prop("checked") == true) {
     $('#' + idObjekta).addClass("cornered");
@@ -1854,12 +1854,12 @@ $('#cornerParamButton').livequery('click', function(){
   re = /corParams_\S*/;
   if(objClass.match(re)){
     a = objClass.replace(/corParams_\S*/g, '');
-    alert(a );
+
     $('#' + idObjekta).attr('class', a);
 
     $('#' + idObjekta).removeClass(objClass.match(re));
     $('#' + idObjekta).addClass("corParams_(" + $('#chooseCornerStyle').val() + "," + $('#chooseCornerOrientation').val() + "," + $('#cornerParamRadius').attr('value') + "px" + ")" );
-    alert($('#' + idObjekta).attr("class") );
+
     $('#objPropertiesClass').prop('value', $('#' + idObjekta).attr("class") );
     ajaxEmitMessage(objClass.match(re) + "is removed");
     setTimeout("$('.ui-dialog').remove();", 500); //closing all
@@ -2433,7 +2433,7 @@ $('#putCategoryInThis').click(function(){
 categ = 0;
 
 $('#chooseCategoryForm').change(function(){
-  idObjekta = $('#objProperties').attr("objId");
+  idObjekta = $('#objProperties').data("objid");
   //CATEG PUTTING
   if (categ == 1 || putCategoryInThisObj == 1) {
     selCategoryTemplate = $('#' + $(this).attr("id") + " option:selected").attr("value");//selected category
