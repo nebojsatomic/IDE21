@@ -56,7 +56,7 @@
 </div></div>
 
 <!--form for saving and updating page-->
-<form id="pageCode" name="pageCode" objId="" style="display:none" action="<?php echo $this->host;?>page/save" method="post">
+<form id="pageCode" name="pageCode" data-objid="" style="display:none" action="<?php echo $this->host;?>page/save" method="post">
   <input name="pageTitleC" id="pageTitleC" class="input w-full" value="" />
   <input name="pageImageC" id="pageImageC" class="input w-full" value="" />
   <textarea id="pageCodeHtml" name="pageCodeHtml"></textarea>
@@ -68,7 +68,7 @@
 </form>
 
 <!--form for saving and updating template-->
-<form id="templateCode" name="templateCode" objId="" style="display:none" action="<?php echo $this->host;?>page/save-as-template" method="post">
+<form id="templateCode" name="templateCode" data-objid="" style="display:none" action="<?php echo $this->host;?>page/save-as-template" method="post">
   <input name="templateTitleC" id="templateTitleC" value="" />
   <input name="templateBodyBgC" id="templateBodyBgC" value="" />
   <input name="templateDefaultC" id="templateDefaultC" value="" />
@@ -104,7 +104,7 @@
 
         </ul>
         <div id="fragment-1" style="padding: 1em 1.4em;">
-          <form id="objProperties" name="objProperties" objId="" action="<?php echo $this->host;?>save" method="post">
+          <form id="objProperties" name="objProperties" data-objid="" action="<?php echo $this->host;?>save" method="post">
 
             <div class="grid">  
               <div class="grid gap-2">
@@ -241,7 +241,7 @@
                 <span class="cl col-span-3 justify-self-start">PosY:</span><span><input id="objPropertiesY" name="objPropertiesY"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
                 <span class="cl col-span-3 justify-self-start">Z-Index:</span><span><input id="objPropertiesZ" name="objPropertiesZ"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
 
-                <span class="cl col-span-3 justify-self-start">BgColor:</span><span><input id="objPropertiesBackground" name="objPropertiesBackground"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
+                <span class="cl col-span-3 justify-self-start">BgColor:</span><span><input id="objPropertiesBackground" name="objPropertiesBackground"class="input w-16 max-h-5 p-0" type="text" value="" data-coloris /></span>
                 <span class="cl col-span-3 justify-self-start">BgImage:</span><span><input id="objPropertiesBackgroundImage" name="objPropertiesBackgroundImage"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
                 <!-- classes are to be handled through former ID assistant -->
                 <div id="id-assistant-container"></div>

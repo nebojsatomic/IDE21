@@ -738,4 +738,6 @@ div.selector span {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-/*div.help, #contProperties {display: none;}*/
+
+/* coloris fix */
+#clr-picker { z-index: 999999; position: fixed; }
