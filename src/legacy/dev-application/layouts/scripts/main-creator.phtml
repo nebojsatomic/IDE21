@@ -139,8 +139,10 @@
         <button id="upB"></button> <button id="downB"></button>
       </div> -->
     </div>
-    <div class="navbar-center hidden sm:flex text-base text-white font-semibold w-8">
+    <div class="navbar-center hidden sm:flex text-base text-white font-semibold w-40 grid gap-2">
       <!--<img alt="IDE21 Logo" src="/images/ide21logo.svg">-->
+      <div class="truncate"><?php echo $this->loggedUserFullName; ?></div>
+      <div> on: </div>
       <div><?php echo str_replace('Ver.', '', $this->version);?></div>
     </div>
     <div class="navbar-end flex gap-2">

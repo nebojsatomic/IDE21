@@ -67,19 +67,13 @@ class CreatorController extends NetActionController
         }
         $this->_helper->layout->setLayoutPath(NET_PATH . 'layouts/scripts')->setLayout('mainCreator');
         $this->view->version = $this->_version;//NeT Objects Version info
+        $this->view->loggedUserFullName = $this->_sesija->loggedUserFullName;
         $this->view->translate = $this->_translate;
 
         if($this->_sesija->langAdmin == ""){
             $this->_sesija->langAdmin = "en";
         }
         $langCode = $this->_sesija->langAdmin ;
-        //$langCode = "en" ;
-        /*
-        $adminLang = "en";
-        require_once 'Zend/Translate.php';
-        $translator = new Zend_Translate('array', $this->_np . 'languages/'. $adminLang . '.php', $adminLang );
-        Zend_Registry::set('Zend_Translate', $translator);
-        */
 
         //$this->view->currentRole = $this->_application->currentRole;
 
@@ -144,16 +138,18 @@ class CreatorController extends NetActionController
         $this->view->imagesFoldersForm = $formImagesFolder;
 
         //LOAD CSS FILE
-        $cssFile = file_get_contents( NET_PATH_SITE . "css/userCSS/default_" . $this->_sesija->loggedUser . ".css");
-        $this->view->css = $cssFile;
-        $this->_backupCSS($cssFile);//make secure all the css written so far for the logged user
-
+        if(file_exists(NET_PATH_SITE . "css/userCSS/default_" . $this->_sesija->loggedUser . ".css")) {
+            $cssFile = file_get_contents( NET_PATH_SITE . "css/userCSS/default_" . $this->_sesija->loggedUser . ".css");
+            $this->view->css = $cssFile;
+            $this->_backupCSS($cssFile);//make secure all the css written so far for the logged user
+        }
 
         //LOAD JS FILE
-        $jsFile = file_get_contents( NET_PATH_SITE . "js/userJS/default_" . $this->_sesija->loggedUser . ".js");
-        $this->view->js = $jsFile;
-        $this->_backupJS($jsFile);//make secure all the js written so far for the logged user
-
+        if(file_exists(NET_PATH_SITE . "js/userJS/default_" . $this->_sesija->loggedUser . ".js")) {
+            $jsFile = file_get_contents( NET_PATH_SITE . "js/userJS/default_" . $this->_sesija->loggedUser . ".js");
+            $this->view->js = $jsFile;
+            $this->_backupJS($jsFile);//make secure all the js written so far for the logged user
+        }
         //LOAD SETTINGS
         $settings = $this->renderToTable("settings", "id, settingName, description, value", $this->_translate->_("Add new Setting"), array('add' => '', 'edit' => '', 'delete' => 'creator/delete-setting/') );
         $this->view->settings = $settings;
