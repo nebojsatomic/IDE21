@@ -21,18 +21,17 @@ require_once 'NeTFramework/NetActionController.php';
 require_once 'Zend/Form/Element/Captcha.php';
 
 
-
- class UserController extends NetActionController
+class UserController extends NetActionController
 {
-	  public function init()
-	  {
+	public function init()
+	{
         $this->_getTranslator();
-        
+
         define("NET_PATH_SITE", $this->_nps);
         define("NET_PATH", $this->_np);
-        
+
         $langCode = $this->_sesija->lang;
-        $template = Zend_Registry::get('defaultTemplate_' . $langCode );        
+        $template = Zend_Registry::get('defaultTemplate_' . $langCode );
         $this->view->bg = @$template[0]['bodyBg'];
         $this->view->templateBodyBackground = @$template[0]['bodyBg'];
         $staticFiles = explode(';', @$template[0]['staticFiles']);
@@ -40,39 +39,35 @@ require_once 'Zend/Form/Element/Captcha.php';
 
         $this->view->host = $this->_host;
         $this->view->translate = $this->_translate;
-        //$this->view->title = $this->_translateCreator->_("User Index");
-        $this->view->title = $this->_translate->_("User") . " &bull; " . ucwords($this->_sesija->user);                        
-        
+
+        $this->view->title = $this->_translate->_("User") . " &bull; " . ucwords($this->_sesija->user);
+
         $request = $this->getRequest();
         if ($request->isXmlHttpRequest()) {
             $this->_helper->layout()->disableLayout();
-        }    
+        }
     }
-    
+
     public static function isModule()
     {
         return true;
     }
-     
+
     public function indexAction()
     {
         $langCode = $this->_sesija->lang;
-        //$db = Zend_Registry::get('db');
+
         $userRegEnabled = Zend_Registry::get('userRegistrationEnabled');
         $template = Zend_Registry::get('defaultTemplate_' . $langCode );
         $values = $this->_request->getParams();
-//print_r($this->_sesija->bcumbs );
-        //$this->_baseUrl = $this->_request->getRequestUri(); ;
-//$this->_title = $this->_translate->_("User Index");
-        $content = $this->_translate->_("User Index") ;//.  " - " . $this->_hostRW . $this->_baseUrl;                 
-        //print_r($template);
-        if(!empty($template )) {                  
-              $out = ViewController::_templatePrepare($template[0]['output'], $content);
-              $this->view->output = ViewController::_liveBlocksPrepare($out);          
-              $this->view->bg = $template[0]['bodyBg'];
 
-          }
+        $content = $this->_translate->_("User Index");
 
+        if(!empty($template )) {
+            $out = ViewController::_templatePrepare($template[0]['output'], $content);
+            $this->view->output = ViewController::_liveBlocksPrepare($out);
+            $this->view->bg = $template[0]['bodyBg'];
+        }
     }
 
 
@@ -83,10 +78,10 @@ require_once 'Zend/Form/Element/Captcha.php';
         $userRegEnabled = Zend_Registry::get('userRegistrationEnabled');
         $template = Zend_Registry::get('defaultTemplate_' . $langCode );
             if ($userRegEnabled != "0" ){
-               $form = $this->_registerUserForm();
-               $formError = "";
-               if ($this->_request->isPost() && $form->isValid($_POST) ) {
-                   $values = $this->_request->getParams();
+                $form = $this->_registerUserForm();
+                $formError = "";
+                if ($this->_request->isPost() && $form->isValid($_POST) ) {
+                    $values = $this->_request->getParams();
         
                     $existingUser = $db->fetchAll("SELECT userId FROM users WHERE username = ?", $values['username']);
                     if ($existingUser) {
@@ -97,73 +92,64 @@ require_once 'Zend/Form/Element/Captcha.php';
                     if ($existingMail) {
                         $formError .= "<br />" . $this->translator->_("The email you entered already exists.");
                     }
-                                
+
                     if ($values['password'] != $values['repeatPassword']) {
                         $formError .= "<br />" . $this->translator->_("The supplied passwords don't match.");
                     }
-                                  
-                  $content = $form . "<br />" . $formError;
 
-                  if ($formError == "") {
-                  //STATUS OF THE USER - IT IS NOT ACTIVATED IN THE BEGINING
-                  if ($values['status'] != "") {
-                      switch ($values['status']) {
-                          case  'Activated':
-                              $stat = 1;
-                              break;
-                          case  'Not Activated':
-                              $stat = 2;
-                              break;
-                          case  'Blocked':
-                              $stat = 3;
-                              break;
-                      }
-                  } else {
-                      $stat = 2;
-                  }
-                  
-                  $roleName = 1;                  
+                    $content = $form . "<br />" . $formError;
 
-                  $data = array($values['username'], $values['fullName'], sha1($values['password']), $values['email'], $stat,
+                    if ($formError == "") {
+                    //STATUS OF THE USER - IT IS NOT ACTIVATED IN THE BEGINING
+                    if ($values['status'] != "") {
+                        switch ($values['status']) {
+                            case  'Activated':
+                                $stat = 1;
+                                break;
+                            case  'Not Activated':
+                                $stat = 2;
+                                break;
+                            case  'Blocked':
+                                $stat = 3;
+                                break;
+                        }
+                    } else {
+                        $stat = 2;
+                    }
+
+                    $roleName = 1;
+
+                    $data = array($values['username'], $values['fullName'], sha1($values['password']), $values['email'], $stat,
                                 '', '', '', $roleName);
-                  $db->query("INSERT IGNORE INTO users (username, fullname, password, email, created, status, timezone, date_format, languageId, roleId)
+                    $db->query("INSERT IGNORE INTO users (username, fullname, password, email, created, status, timezone, date_format, languageId, roleId)
                                       VALUES(?, ?, ?, ?, UNIX_TIMESTAMP(), ?, ?, ?, ?, ?)", $data);
 
 
-                  $token = $this->_createToken($values['username']);
-                  $mail = $this->_sendLinkMail($values['email'], $values['username'], $token, 'account_activation', 'account-activation');
-                  $mailAdmin = $this->_sendLinkMail('admin', $values['username'], $token, 'admin_info_new_user', '');//sending info to the admin that new user has registered
+                    $token = $this->_createToken($values['username']);
+                    $mail = $this->_sendLinkMail($values['email'], $values['username'], $token, 'account_activation', 'account-activation');
+                    $mailAdmin = $this->_sendLinkMail('admin', $values['username'], $token, 'admin_info_new_user', '');//sending info to the admin that new user has registered
 
-                  
-                  $content = $this->translator->_("Your account has been created, you have been provided with activation link, check your mail!");
-                  }                    
+                    $content = $this->translator->_("Your account has been created, you have been provided with activation link, check your mail!");
+                }
 
-                  
-                                   
-                  if(!empty($template )) {                  
-                      $out = ViewController::_templatePrepare($template[0]['output'], $content);
-                      $this->view->output = ViewController::_liveBlocksPrepare($out); 
-                      $this->view->bg = $template[0]['bodyBg'];          
-                  }               
-               }else {
-                  $content = $form;                 
-                  if(!empty($template )) {                  
-                      $out = ViewController::_templatePrepare($template[0]['output'], $content);
-                      $this->view->output = ViewController::_liveBlocksPrepare($out);          
-                      $this->view->bg = $template[0]['bodyBg'];
-                  }
-               }
-            
-            
-            
-            
-            
+                if(!empty($template )) {
+                    $out = ViewController::_templatePrepare($template[0]['output'], $content);
+                    $this->view->output = ViewController::_liveBlocksPrepare($out);
+                    $this->view->bg = $template[0]['bodyBg'];
+                }
             } else {
-                echo $this->translator->_('<b>User registration disabled</b>');
+                $content = $form;
+                if(!empty($template )) {
+                    $out = ViewController::_templatePrepare($template[0]['output'], $content);
+                    $this->view->output = ViewController::_liveBlocksPrepare($out);
+                    $this->view->bg = $template[0]['bodyBg'];
+                }
             }
+        } else {
+            echo $this->translator->_('<b>User registration disabled</b>');
+        }
 
-            $this->_sesija->role = "guest";
-
+        $this->_sesija->role = "guest";
     }
 
     /**
@@ -172,6 +158,7 @@ require_once 'Zend/Form/Element/Captcha.php';
      * @author Nebojsa Tomic
      * @return string Token for the link
      */
+
     private function _createToken($username)
     {
         $time = time();
@@ -181,10 +168,6 @@ require_once 'Zend/Form/Element/Captcha.php';
 
     private function _registerUserForm()
     {
-        //$defaults = Ozimbo::getSettings(array('default_timezone', 'default_time_format'));
-        //$defaultTimezone = $defaults['default_timezone'];
-        //$defaultTimeFormat = $defaults['default_time_format'];
-
         $action = $this->_hostRW . "user/register";
 
         $form = new Zend_Form(array(
@@ -219,23 +202,6 @@ require_once 'Zend/Form/Element/Captcha.php';
                     'size' => 60,
                     'validators' => array('EmailAddress'),
                 )),
-                /*
-                'timezone' => array('select', array(
-                    'required' => false,
-                    'label' => 'Timezone:',
-
-                    'multioptions' => Ozimbo::getFormTimezones(),
-                    'value' => $defaultTimezone,
-                )),
-
-                'date_format' => array('select', array(
-                    'required' => false,
-                    'label' => 'Date Format:',
-
-                    'multioptions' => Ozimbo::getFormDateFormats(),
-                    'value' => $defaultTimeFormat,
-                )),
-                */
                 'submit' => array('submit', array(
                     'label' => 'Register',
                     'order' => 100,
@@ -253,16 +219,12 @@ require_once 'Zend/Form/Element/Captcha.php';
                 'timeout' => 300,
             ),
         ));
-        
-        
-        $form->addDisplayGroup(array('username', 'password', 'repeatPassword', 'fullName', 'email'), 'account_info',
-                               array('legend' => $this->translator->_('Account Information') ));
 
-        /*
-        $form->addDisplayGroup(array('timezone', 'date_format'), 'date_time',
-                               array('legend' => 'Time and Date Settings'));
-        */
-
+        $form->addDisplayGroup(
+            array('username', 'password', 'repeatPassword', 'fullName', 'email'),
+            'account_info',
+            array('legend' => $this->translator->_('Account Information') )
+        );
 
         $form->addElement($elementCaptcha);
         return $form;
@@ -289,7 +251,7 @@ require_once 'Zend/Form/Element/Captcha.php';
         
         //$req = $this->getRequest();
         $t = $this->_request->getParams();
-        //print_r($t);
+
         $t = $t['token'];
 
         $db = Zend_Registry::get('db');
@@ -310,29 +272,23 @@ require_once 'Zend/Form/Element/Captcha.php';
             $where[] = "code = '$t'";
             $db->update('tokens', $dataTokens, $where);
                   
-                  $content = $this->translator->_("Your Account has been activated!You can now login!");
-                   
-            //$this->_flashMessenger->addMessage($this->translate("Your Account has been activated!You can now login!"));
-            //$this->_redirect($this->view->host);
+            $content = $this->translator->_("Your Account has been activated!You can now login!");
         
         } else {
-               $content = $this->translator->_("Your activation link is invalid!");
-
-            //$this->_flashMessenger->addMessage($this->translate("Your activation link is invalid!"));
-            //$this->_redirect($this->view->host);       
+            $content = $this->translator->_("Your activation link is invalid!");
         }
 
-                  if(!empty($template )) {                  
-                      $out = ViewController::_templatePrepare($template[0]['output'], $content);
-                      $this->view->output = ViewController::_liveBlocksPrepare($out);        
-                  }
-
+        if(!empty($template )) {
+            $out = ViewController::_templatePrepare($template[0]['output'], $content);
+            $this->view->output = ViewController::_liveBlocksPrepare($out);
+        }
     }
+
     /**
-     *Render login block
+     * Render login block
      *
      *
-     *@author NT
+     * @author NT
      *
      */
 
@@ -342,47 +298,36 @@ require_once 'Zend/Form/Element/Captcha.php';
         $urlRewrite = Zend_Registry::get('urlRewrite');
         $registrationEnabled = Zend_Registry::get('userRegistrationEnabled');
         $translator = Zend_Registry::get('Zend_Translate');
-        
+
         $themePath = NET_PATH . "widgets/";
         $host = NetActionController::$hostRW;
 
         $view = new Zend_View();
         $view->addScriptPath($themePath . "templates/");
-        //$view->addHelperPath(OZIMBO_PATH . 'framework/Ozimbo/View/Helper', 'Ozimbo_View_Helper');
-        
-        //$form = self::userLoginForm();
-        
+
         $currUser = Zend_Registry::get('currentUser');
         if($currUser == "" || $currUser == "guest" ) {
             if($registrationEnabled == '1'){ $registerText = $translator->_("Register");}else{$registerText = "";}//if registration is enabled
             $message = "<b>" . $translator->_("Welcome Guest") . '! &nbsp;</b><i><a href="' . $host . 'user/register">' .  $registerText . '</a></i>' . '<br /><i><a href="' . $host . 'user/password-reminder">' .  $translator->_("Password reminder") . '</a></i>';
             $form = self::userLoginForm();
-                
+
         } else {
             $form = "";
             $message = "<b>" . $translator->_("Welcome") . " " . $currUser . '! &nbsp;</b><i><a href="' . $host . 'user/logout">' . $translator->_("Logout") . '</a></i>' . '<br /><i><a href="' . $host . 'user/my-account">' .  $translator->_("My Account") . '</a></i>' ;
-            //$form = self::userLoginForm();
-        
         }
-        
 
-            $scriptName = "login.phtml";
+        $scriptName = "login.phtml";
 
-            $data['form'] = $form . "<br />" . $message;
-            $data['host'] = $host;
-            $data['translate'] = $translator;
-            $data['urlRewrite'] = $urlRewrite;
-            //$view->assign($host);
-            //$view->assign($Menu);
-            $view->assign($data);
+        $data['form'] = $form . "<br />" . $message;
+        $data['host'] = $host;
+        $data['translate'] = $translator;
+        $data['urlRewrite'] = $urlRewrite;
 
-            
-            $partialOutput = $view->render($scriptName);
+        $view->assign($data);
 
-            return $partialOutput;
+        $partialOutput = $view->render($scriptName);
 
-
-
+        return $partialOutput;
     }
 
     private static function userLoginForm()
@@ -401,17 +346,7 @@ require_once 'Zend/Form/Element/Captcha.php';
                     'required' => true,
                     'label' => '',
                 )),
-/*
-                'remember_me' => array('checkbox', array(
-                    'label' => 'Remember me',
-                    'decorators' => array(
-                                            array('ViewHelper'),
-                                            array('Errors'),
-                                            array('Label', array('separator'=> ' ')),
-                                            array('HtmlTag', array('tag' => 'dd', 'class'=>'ozimbo_checkbox')),
-                                        ),
-                )),
-*/
+
                 'loginsubmit' => array('submit', array(
                     'label' => $translator->_('Login'),
                     'order' => 100,
@@ -419,12 +354,8 @@ require_once 'Zend/Form/Element/Captcha.php';
             ),
         ));
 
-        //$form->addDisplayGroup(array('username', 'password'), 'login',
-          //                     array('legend' => 'Login'));
-
         return $form;
     }
-
 
 
     public function loginAction()
@@ -444,7 +375,7 @@ require_once 'Zend/Form/Element/Captcha.php';
 
             $result = $authAdapter->authenticate();
             $resultRow = (array)$authAdapter->getResultRowObject();
-            //print_r($resultRow);
+
             if (!$result->isValid()) {// || $resultRow['username'] == 'admin') {                
                 $this->_sesija->user = "guest";
                                 
@@ -464,11 +395,10 @@ require_once 'Zend/Form/Element/Captcha.php';
                     
                     $content = $this->translator->_("Your Account, ") . $this->_sesija->currentRole  . ", " . $this->_sesija->loggedUserFullName . ":";                           
                 } else {
-                    $content = $this->translator->_("Your Account, ") .   $this->_sesija->loggedUserFullName . " is still not activated, activate it with your link sent during the registration process!";                                           
+                    $content = $this->translator->_("Your Account, ") .   $this->_sesija->loggedUserFullName . " is still not activated, activate it with your link sent during the registration process!";
                 }
             }
 
-     
             if(!empty($template )) {                  
                 $out = ViewController::_templatePrepare($template[0]['output'], $content);
                 $this->view->output = ViewController::_liveBlocksPrepare($out);          
@@ -497,23 +427,14 @@ require_once 'Zend/Form/Element/Captcha.php';
         $template = Zend_Registry::get('defaultTemplate_' . $langCode );
         $form = self::userLoginForm();
 
-            $this->_sesija->user = "guest";
-            $this->_sesija->currentRole = "guest";
-            Zend_Registry::set('currentUser', "guest");
-            Zend_Registry::set('currentRole', "guest");
+        $this->_sesija->user = "guest";
+        $this->_sesija->currentRole = "guest";
+        Zend_Registry::set('currentUser', "guest");
+        Zend_Registry::set('currentRole', "guest");
 
-            /*
-            $content = $this->translator->_("You are not logged in!Please Login to see your account details!");          
-            if(!empty($template )) {
-                 
-                $out = ViewController::_templatePrepare($template[0]['output'], $content  );
-                $this->view->output = ViewController::_liveBlocksPrepare($out);          
-            } 
-            */
-            $this->_redirect($this->_hostRW);        
+        $this->_redirect($this->_hostRW);
+    }
 
-    }    
-    
     /**
      * When user calls password-reminder action
      * form passwordReminderForm is displayed
@@ -800,21 +721,16 @@ require_once 'Zend/Form/Element/Captcha.php';
                 $this->view->output = ViewController::_liveBlocksPrepare($out);          
             } 
         }
-    
-    
     }
+
     /**
-     *My account form
+     * My account form
      *
      *
      */
-                        
+
     private function _myAccountForm()
     {
-        //$defaults = Ozimbo::getSettings(array('default_timezone', 'default_time_format'));
-        //$defaultTimezone = $defaults['default_timezone'];
-        //$defaultTimeFormat = $defaults['default_time_format'];
-
         $dbValues = $this->_db->fetchAll("SELECT fullname, email, timezone, date_format FROM users WHERE username = ?", array($this->_sesija->user));
         if(!empty($dbValues)) {
             $values = $dbValues[0];
@@ -848,23 +764,6 @@ require_once 'Zend/Form/Element/Captcha.php';
                         'size' => 60,
                         'validators' => array('EmailAddress'),
                     )),
-                    /*
-                    'timezone' => array('select', array(
-                        'required' => false,
-                        'label' => 'Timezone:',
-    
-                        'multioptions' => Ozimbo::getFormTimezones(),
-                        'value' => $defaultTimezone,
-                    )),
-    
-                    'date_format' => array('select', array(
-                        'required' => false,
-                        'label' => 'Date Format:',
-    
-                        'multioptions' => Ozimbo::getFormDateFormats(),
-                        'value' => $defaultTimeFormat,
-                    )),
-                    */
                     'submit' => array('submit', array(
                         'label' => $this->translator->_('Update'),
                         'order' => 100,
@@ -872,16 +771,12 @@ require_once 'Zend/Form/Element/Captcha.php';
                 ),
             ));
     
-            $form->addDisplayGroup(array('fullName', 'newpassword1', 'newpassword2', 'email'), 'account_info',
-                                   array('legend' => $this->translator->_('Account Information') ));
-    
-            /*
-            $form->addDisplayGroup(array('timezone', 'date_format'), 'date_time',
-                                   array('legend' => 'Time and Date Settings'));
-            */
-    
-    
-    
+            $form->addDisplayGroup(
+                array('fullName', 'newpassword1', 'newpassword2', 'email'),
+                'account_info',
+                array('legend' => $this->translator->_('Account Information') )
+            );
+
             return $form;
         } else {
             return $this->translator->_("You need to Login!");
@@ -889,17 +784,16 @@ require_once 'Zend/Form/Element/Captcha.php';
     }    
 
 
-
     /**
-     *Function which every module should have for administrating
+     * Function which every module should have for administrating
      *
      *
      */                   
-    
+
     public function adminAction()
     {
         $this->_checkAccess();
-       
+
         $db = Zend_Registry::get('db');
         $this->view->translate = $this->_translate;
 
@@ -912,17 +806,11 @@ require_once 'Zend/Form/Element/Captcha.php';
         $rolesList = $this->renderToTable("roles", "roleId, name", $this->_translate->_("Add new role"), array('add'=>'', 'edit'=>'', 'delete' => '')); 
         //$this->_sesija->table->users = "userId, username, fullname, email, status";
         $this->view->rolesList = $rolesList;     
-
-    
     } 
 
 
     private function _adminAddUserForm()
     {
-        //$defaults = Ozimbo::getSettings(array('default_timezone', 'default_time_format'));
-        //$defaultTimezone = $defaults['default_timezone'];
-        //$defaultTimeFormat = $defaults['default_time_format'];
-
         $action = $this->_host . "user/admin-add-user";
 
         $form = new Zend_Form(array(
@@ -950,7 +838,6 @@ require_once 'Zend/Form/Element/Captcha.php';
                     'required' => true,
                     'class' => 'input input-sm w-full',
                     'label' => $this->translator->_('Repeat Password'),
-
                 )),
                 'email' => array('text', array(
                     'required' => true,
@@ -959,23 +846,6 @@ require_once 'Zend/Form/Element/Captcha.php';
                     'size' => 60,
                     'validators' => array('EmailAddress'),
                 )),
-                /*
-                'timezone' => array('select', array(
-                    'required' => false,
-                    'label' => 'Timezone:',
-
-                    'multioptions' => Ozimbo::getFormTimezones(),
-                    'value' => $defaultTimezone,
-                )),
-
-                'date_format' => array('select', array(
-                    'required' => false,
-                    'label' => 'Date Format:',
-
-                    'multioptions' => Ozimbo::getFormDateFormats(),
-                    'value' => $defaultTimeFormat,
-                )),
-                */
                 'submit' => array('submit', array(
                     'label' => 'Register user',
                     'class' => 'btn btn-xs btn-secondary w-full',
@@ -984,16 +854,11 @@ require_once 'Zend/Form/Element/Captcha.php';
             ),
         ));
 
-        $form->addDisplayGroup(array('username', 'password', 'repeatPassword', 'fullName', 'email'), 'account_info',
-                               array('legend' => $this->translator->_('Account Information') ));
-
-        /*
-        $form->addDisplayGroup(array('timezone', 'date_format'), 'date_time',
-                               array('legend' => 'Time and Date Settings'));
-        */
-
-
-
+        $form->addDisplayGroup(
+            array('username', 'password', 'repeatPassword', 'fullName', 'email'),
+            'account_info',
+            array('legend' => $this->translator->_('Account Information'), 'class' => 'grid gap-2')
+        );
         return $form;
     }
 
@@ -1004,83 +869,75 @@ require_once 'Zend/Form/Element/Captcha.php';
 
         // turn off layout and ViewRenderer
         $this->_helper->layout()->disableLayout();        
-	      //$this->_helper->viewRenderer->setNoRender();
-	      
+        //$this->_helper->viewRenderer->setNoRender();
+
         $langCode = $this->_sesija->lang;
         $db = Zend_Registry::get('db');
-               $form = $this->_adminAddUserForm();
-               $formError = "";
-               if ($this->_request->isPost() && $form->isValid($_POST) ) {
-                   $values = $this->_request->getParams();
-        
-                    $existingUser = $db->fetchAll("SELECT userId FROM users WHERE username = ?", $values['username']);
-                    if ($existingUser) {
-                        $formError .= "<br />" . $this->translator->_("The username you selected already exists.");
+        $form = $this->_adminAddUserForm();
+        $formError = "";
+        if ($this->_request->isPost() && $form->isValid($_POST) ) {
+            $values = $this->_request->getParams();
+
+            $existingUser = $db->fetchAll("SELECT userId FROM users WHERE username = ?", $values['username']);
+            if ($existingUser) {
+                $formError .= "<br />" . $this->translator->_("The username you selected already exists.");
+            }
+
+            $existingMail = $db->fetchAll("SELECT userId FROM users WHERE email = ?", $values['email']);
+            if ($existingMail) {
+                $formError .= "<br />" . $this->translator->_("The email you entered already exists.");
+            }
+
+            if ($values['password'] != $values['repeatPassword']) {
+                $formError .= "<br />" . $this->translator->_("The supplied passwords don't match.");
+            }
+
+            $content = $form . "<br />" . $formError;
+
+            if ($formError == "") {
+                //STATUS OF THE USER - IT IS NOT ACTIVATED IN THE BEGINING
+                if (@$values['status'] != "") {
+                    switch ($values['status']) {
+                        case  'Activated':
+                        $stat = 1;
+                        break;
+                        case  'Not Activated':
+                        $stat = 2;
+                        break;
+                        case  'Blocked':
+                        $stat = 3;
+                        break;
                     }
-                    
-                    $existingMail = $db->fetchAll("SELECT userId FROM users WHERE email = ?", $values['email']);
-                    if ($existingMail) {
-                        $formError .= "<br />" . $this->translator->_("The email you entered already exists.");
-                    }
-                                
-                    if ($values['password'] != $values['repeatPassword']) {
-                        $formError .= "<br />" . $this->translator->_("The supplied passwords don't match.");
-                    }
-                                  
-                  $content = $form . "<br />" . $formError;
+                } else {
+                    $stat = 2;
+                }
 
-                  if ($formError == "") {
-                  //STATUS OF THE USER - IT IS NOT ACTIVATED IN THE BEGINING
-                  if (@$values['status'] != "") {
-                      switch ($values['status']) {
-                          case  'Activated':
-                              $stat = 1;
-                              break;
-                          case  'Not Activated':
-                              $stat = 2;
-                              break;
-                          case  'Blocked':
-                              $stat = 3;
-                              break;
-                      }
-                  } else {
-                      $stat = 2;
-                  }
-                  
-                  $roleName = 1;                  
+                $roleName = 1;
 
-                  $data = array($values['username'], $values['fullName'], sha1($values['password']), $values['email'], $stat,
-                                '', '', '', $roleName);
-                  $db->query("INSERT IGNORE INTO users (username, fullname, password, email, created, status, timezone, date_format, languageId, roleId)
-                                      VALUES(?, ?, ?, ?, UNIX_TIMESTAMP(), ?, ?, ?, ?, ?)", $data);
+                $data = array($values['username'], $values['fullName'], sha1($values['password']), $values['email'], $stat,
+                '', '', '', $roleName);
+                $db->query("INSERT IGNORE INTO users (username, fullname, password, email, created, status, timezone, date_format, languageId, roleId)
+                  VALUES(?, ?, ?, ?, UNIX_TIMESTAMP(), ?, ?, ?, ?, ?)", $data);
 
+                $token = $this->_createToken($values['username']);
+                //$mail = $this->_sendLinkMail($values['email'], $values['username'], $token, 'account_activation', 'account-activation');
 
-                  $token = $this->_createToken($values['username']);
-                  //$mail = $this->_sendLinkMail($values['email'], $values['username'], $token, 'account_activation', 'account-activation');
+                // create js and css files for the new user
+                file_put_contents(NET_PATH_SITE . "css/userCSS/default_" . $values['username'] . ".css", '/* This file was created when admin created the user ' . $values['username'] . ' */');
+                file_put_contents(NET_PATH_SITE . "js/userJS/default_" . $values['username'] . ".js", '/* This file was created when admin created the user ' . $values['username'] . ' */');
 
-                  
-                  $content = $this->translator->_("This account has been created!");
-                  }
-                  //$this->_helper->viewRenderer->setNoRender();                    
-                  //$jsonOut = array("out" => array("allWell" => "1", "form" => $content, "message" => $content) );
-                  //echo json_encode($jsonOut);
-                  $this->view->allWell = "1";
-                  echo $content; 
-              
-               }else {
-                  //$this->_helper->viewRenderer->setNoRender();
-                  $content = $form;
-                  $this->view->allWell = "0";
-                  //$jsonOut = array("out" => array("allWell" => "0", "form" => $content, "message" => $content) );
-                  //echo json_encode($jsonOut);
-                  echo $content;               
+                $content = $this->translator->_("This account has been created!");
+            }
 
-               }
-            
-            
-            
-          
+            $this->view->allWell = "1";
+            echo $content;
 
+        } else {
+            $content = $form;
+            $this->view->allWell = "0";
+
+            echo $content;
+        }
     }
 
     public static function sessionsOnline()
@@ -1090,14 +947,13 @@ require_once 'Zend/Form/Element/Captcha.php';
 
         $view = new Zend_View();
         $view->addScriptPath($themePath . "templates/");
-        
+
         $SessionsOnline = new Zend_Session_Namespace('sessionsOnline', true);
         $session_id =  Zend_Session::getId();
         $SessionsOnline->sessionArray = array();
         $SessionsOnline->sessionArray[] = $session_id;
         $sessCount = count($SessionsOnline->sessionArray);
-        
+
         return  $session_id . "**" . count($SessionsOnline->sessionArray);
-    
-    }    
+    }
 }
