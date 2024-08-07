@@ -95,11 +95,11 @@ function doLightBox(){
 
 function saveCSSandJS(){
   if(codepressOff == true) {
-    $('#pageCSSC').attr("value", $('#pageCSS').attr("value") );
-    $('#pageJSC').attr("value", $('#pageJS').attr("value") );
+    $('#pageCSSC').val( $('#pageCSS').val() );
+    $('#pageJSC').val( $('#pageJS').val() );
   } else {
-    $('#pageCSSC').attr("value", pageCSS.getCode() );
-    $('#pageJSC').attr("value", pageJS.getCode() );
+    $('#pageCSSC').val( pageCSS.getCode() );
+    $('#pageJSC').val( pageJS.getCode() );
   }
 }
 
@@ -224,7 +224,7 @@ function templateReopenAfterLanguage(){
 
     $('#templateMask').empty();
 
-    $('#templateTitle').attr("value", data.title);//templateName
+    $('#templateTitle').val( data.title);//templateName
     if(data.bodyBg){
       $('#template_bodyBg').prop("value", data.bodyBg);//template body BG
 
@@ -303,7 +303,7 @@ function loadTemplate(idT){
 
     $('#templateMask').empty();
 
-    $('#templateTitle').attr("value", data.title);//templateName
+    $('#templateTitle').val( data.title);//templateName
     if(data.bodyBg){
       $('#template_bodyBg').prop("value", data.bodyBg);//template body BG
 
@@ -361,7 +361,7 @@ function loadTemplate(idT){
   });
 
   $('#templateIDediting').html(idT);
-  document.cookie = 'templateSelectedId=' + idT + ';  path=/'; //ovo treba namestiti
+  document.cookie = 'templateSelectedId=' + idT + ';  path=/'; //needs improvement
 }
 
 function loadPage(idP){
@@ -427,7 +427,7 @@ function loadPage(idP){
 
   });
 
-  document.cookie = 'pageSelectedId=' + idP + ';  path=/'; //ovo treba namestiti
+  document.cookie = 'pageSelectedId=' + idP + ';  path=/'; //needs improvement
 }
 
 
@@ -754,10 +754,10 @@ $(document).ready(function(){
   });
   newIt = 1;
   pageID ="<?php echo $this->pageId;?>";
-  //console.log(pageID);
+
   selMenuTemplate = "";
   idForRem = "";
-  zIndexCounter = 500;//ovo je da bi se odvojilo od templatea
+  zIndexCounter = 500;// separation from the template
 
   $('#rotate').tabs();
 
@@ -799,7 +799,7 @@ $(document).ready(function(){
   $("#droppable").droppable({
     drop: function() {
       if(typeof id === "undefined") return;
-      $('#objList').attr("value", $('#' + id).attr("id"));
+      $('#objList').val( $('#' + id).attr("id"));
 
       if(id == 'pageJS') {return;}
       topPositionObj = $('#' + id).position().top;
@@ -822,8 +822,8 @@ $(document).ready(function(){
 
       $('#' + id).dblclick();
 
-      $('#droppable').css("min-width", $("#bodyWidth").attr("value") );
-      $('#droppable').css("min-height", $("#bodyHeight").attr("value") );
+      $('#droppable').css("min-width", $("#bodyWidth").val() );
+      $('#droppable').css("min-height", $("#bodyHeight").val() );
 
     }
 
@@ -839,7 +839,7 @@ $(document).ready(function(){
   });
 
   $('#objList').livequery('click', function(){
-    $('#' + $(this).attr("value") ).dblclick();
+    $('#' + $(this).val() ).dblclick();
 
   });
   //MOVING AROUND PROPERTIES BOX
@@ -1027,15 +1027,15 @@ $(document).ready(function(){
     strCodeP =  $('#droppable').html();
     //$('#droppable').resizable({autohide: true});
 
-    $('#pageCodeHtml').attr( "value", strCodeP );
-    //$('#pageCodeHtml').attr( "value", $('#droppable').html() );
+    $('#pageCodeHtml').val( strCodeP );
+    //$('#pageCodeHtml').val( $('#droppable').html() );
 
     //description and keywords
-    $('#pageDESC').attr("value", $('#pageDescription').attr("value") );
-    $('#pageKEYWORDS').attr("value", $('#pageKeywords').attr("value") );
+    $('#pageDESC').val( $('#pageDescription').val() );
+    $('#pageKEYWORDS').val( $('#pageKeywords').val() );
 
-    $('#pageTitleC').attr("value", $('#pageTitle').attr("value") );
-    $('#pageCategoryC').attr("value", $('#categoryNameAssign').attr("value") );
+    $('#pageTitleC').val( $('#pageTitle').val() );
+    $('#pageCategoryC').val( $('#categoryNameAssign').val() );
 
     saveCSSandJS();
 
@@ -1106,15 +1106,15 @@ $(document).ready(function(){
     //$('#droppable').resizable({autohide: true});
 
 
-    $('#pageCodeHtml').attr( "value", strCodeP );
+    $('#pageCodeHtml').val( strCodeP );
     //description and keywords
-    $('#pageDESC').attr("value", $('#pageDescription').attr("value") );
-    $('#pageKEYWORDS').attr("value", $('#pageKeywords').attr("value") );
+    $('#pageDESC').val( $('#pageDescription').val() );
+    $('#pageKEYWORDS').val( $('#pageKeywords').val() );
 
-    $('#pageImageC').attr("value", $('#pageImage').attr("value") );
+    $('#pageImageC').val( $('#pageImage').val() );
 
-    $('#pageTitleC').attr("value", $('#pageTitle').attr("value") );
-    $('#pageCategoryC').attr("value", $('#categoryNameAssign').attr("value") );
+    $('#pageTitleC').val( $('#pageTitle').val() );
+    $('#pageCategoryC').val( $('#categoryNameAssign').val() );
 
     saveCSSandJS();
 
@@ -1153,7 +1153,7 @@ $(document).ready(function(){
       //update data on the interface
       //getting output for the loaded page
       pageTitle = $('#dialogDiv_' + openPageDialogUniqueId + ' #pageName :selected').text();
-      pgId = $('#' + $(this).attr("id") + " option:selected").attr("value");
+      pgId = $('#' + $(this).attr("id") + " option:selected").val();
       //console.log(pgId)
       $('#pgID').html(pgId);
       $('#pageTitle').prop("value", pageTitle);
@@ -1247,10 +1247,10 @@ $(document).ready(function(){
     $('#templateMask').appendTo($('#droppable')).css({left: "0px"});
 
 
-    $('#templateCodeHtml').attr( "value",  strCodeT );//kod templatea
+    $('#templateCodeHtml').val(  strCodeT );//template code
 
-    $('#templateTitleC').attr("value", $('#templateTitle').attr("value") );//name templatea
-    $('#templateBodyBgC').attr("value", $('#template_bodyBg').attr("value") );//body BG templatea
+    $('#templateTitleC').val( $('#templateTitle').val() );//name of the template
+    $('#templateBodyBgC').val( $('#template_bodyBg').val() );//body BG of the template
 
 
     $('#templateCode').attr("action", absoluteUrl + "page/save-as-template");
@@ -1293,11 +1293,11 @@ $(document).ready(function(){
     $('#templateMask').appendTo($('#droppable')).css({left: "0px"});
 
 
-    $('#templateCodeHtml').attr( "value",  strCodeT );//kod templatea
+    $('#templateCodeHtml').val(  strCodeT );//template code
 
-    $('#templateTitleC').attr("value", $('#templateTitle').attr("value") );//name templatea
-    $('#templateBodyBgC').attr("value", $('#template_bodyBg').attr("value") );//body BG templatea
-    $('#templateDefaultC').attr("value", $('#templateDefaultCB').prop("checked") );//template default
+    $('#templateTitleC').val( $('#templateTitle').val() );//name of the template
+    $('#templateBodyBgC').val( $('#template_bodyBg').val() );//body BG of the template
+    $('#templateDefaultC').val( $('#templateDefaultCB').prop("checked") );//template default
 
     $('#templateCode').attr("action", absoluteUrl + "page/update-template/templateId/" + $('#templateIDediting').html() + "/applytoall/" + applytoAllLangsTemplate );
     $('#templateCode').ajaxSubmit(function(){
@@ -1327,11 +1327,11 @@ $(document).ready(function(){
 
   $('#templateName').livequery('change', function(){
     //console.log('e');
-    loadTemplate( $(this).attr("value"));
+    loadTemplate( $(this).val());
 
     // ajaxEventDone(lang.TOpen);//sklanjanje maska
-    $('#templateIDediting').html($(this).attr("value"));
-    document.cookie = 'templateSelectedId=' + $(this).attr("value") + ';  path=/'; //ovo treba namestiti
+    $('#templateIDediting').html($(this).val());
+    document.cookie = 'templateSelectedId=' + $(this).val() + ';  path=/'; //needs improvement
     $('#dialogDiv').hide('slow').remove();// removing dialog - MUST
   });
 
@@ -1436,32 +1436,32 @@ $(".draggable").livequery('dblclick', function(e){
   $('#objIDshow').html($(selectedObjID).attr("id"));
 
 
-  $("#objPropertiesWidth").attr("value", width );
-  $("#objPropertiesHeight").attr("value", height );
-  $("#objPropertiesBorder").attr("value", border );
-  $("#objPropertiesClass").attr("value", objectClasses );
-  $("#objPropertiesBackground").attr("value", bgColor );
+  $("#objPropertiesWidth").val( width );
+  $("#objPropertiesHeight").val( height );
+  $("#objPropertiesBorder").val( border );
+  $("#objPropertiesClass").val( objectClasses );
+  $("#objPropertiesBackground").val( bgColor );
   $('.clr-field').css({ color: bgColor });
 
-  $("#objPropertiesBackgroundImage").attr("value", bgImage );
+  $("#objPropertiesBackgroundImage").val( bgImage );
   //objTheme
-  $('#objTheme').attr("value", themeClass);
+  $('#objTheme').val( themeClass);
   $('#objTheme').val(themeClass);
   $('#objTheme').prev("span").text($('#objTheme option[value="' + themeClass + '"]').text() );
 
   //console.log(themeClass);
-  $("#objPropertiesX").attr("value",posix + "px");
-  $("#objPropertiesY").attr("value",posiy + "px");
-  $("#objPropertiesZ").attr("value",zIn );
+  $("#objPropertiesX").val(posix + "px");
+  $("#objPropertiesY").val(posiy + "px");
+  $("#objPropertiesZ").val(zIn );
 
   if($(this).attr("objType") == "Menu") {
     $('#objPropertiesHtml').attr("disabled", "disabled");
-    $("#objPropertiesHtml").attr("value","{" + $(this).attr("command") + "}" );
+    $("#objPropertiesHtml").val("{" + $(this).attr("command") + "}" );
 
   } else {
     $('#objPropertiesHtml').attr("disabled", false);
-    $("#objPropertiesHtml").attr("value", htmlValue );
-    $('#objPropertiesHtmlTiny').attr("value", htmlValue);
+    $("#objPropertiesHtml").val( htmlValue );
+    $('#objPropertiesHtmlTiny').val( htmlValue);
 
     var ed = tinyMCE.get('objPropertiesHtmlTiny');
 
@@ -1470,9 +1470,9 @@ $(".draggable").livequery('dblclick', function(e){
   }
 
   if( typeof css == 'string' ) {
-    $("#objPropertiesCSS").attr("value", css );
+    $("#objPropertiesCSS").val( css );
   } else {
-    $("#objPropertiesCSS").attr("value", '' );
+    $("#objPropertiesCSS").val( '' );
   }
   if ( $(e.target).hasClass("shadowed") ) {
     $('#shadowCheck').prop("checked", "checked");
@@ -1501,47 +1501,47 @@ $(".draggable").livequery('dblclick', function(e){
 //WIDTH
 $("#objPropertiesWidth").livequery('change', function(){
   idObjekta = $('#objProperties').data("objid");
-  $('#' + idObjekta).css("width", $(this).attr("value"));
+  $('#' + idObjekta).css("width", $(this).val());
 
 });
 //height
 $("#objPropertiesHeight").livequery('change', function(){
   idObjekta = $('#objProperties').data("objid");
-  $('#' + idObjekta).css("height", $(this).attr("value"));
+  $('#' + idObjekta).css("height", $(this).val());
 
 });
 //border
 $("#objPropertiesBorder").livequery('change', function(){
   idObjekta = $('#objProperties').data("objid");
-  $('#' + idObjekta).css("border", $(this).attr("value"));
+  $('#' + idObjekta).css("border", $(this).val());
 
 });
 //X pos
 $("#objPropertiesX").livequery('change', function(){
   idObjekta = $('#objProperties').data("objid");
-  $('#' + idObjekta).css("left", $(this).attr("value"));
+  $('#' + idObjekta).css("left", $(this).val());
 
 });
 //Y pos
 $("#objPropertiesY").livequery('change', function(){
   idObjekta = $('#objProperties').data("objid");
-  $('#' + idObjekta).css("top", $(this).attr("value"));
+  $('#' + idObjekta).css("top", $(this).val());
 
 });
 
 $("#objPropertiesZ").livequery('change', function(){
   idObjekta = $('#objProperties').data("objid");
-  $('#' + idObjekta).css("z-index", $(this).attr("value"));
+  $('#' + idObjekta).css("z-index", $(this).val());
 
 });
 $("#objPropertiesHtml").livequery('change', function(){
   idObjekta = $('#objProperties').data("objid");
-  $('#' + idObjekta).html($(this).attr("value"));
+  $('#' + idObjekta).html($(this).val());
 
 });
 $("#objPropertiesCSS").livequery('change', function(){
   idObjekta = $('#objProperties').data("objid");
-  $('#' + idObjekta).attr("style", $(this).attr("value"));
+  $('#' + idObjekta).attr("style", $(this).val());
 
 });
 
@@ -1558,28 +1558,28 @@ document.addEventListener('coloris:pick', event => {
 $("#objPropertiesBackgroundImage").livequery('change', function(){
   idObjekta = $('#objProperties').data("objid");
 
-  $('#' + idObjekta).css("background-image", $(this).attr("value"));
+  $('#' + idObjekta).css("background-image", $(this).val());
   $('#' + idObjekta).css("background-repeat",   "no-repeat"  );
 });
 
 $("#objPropertiesClass").livequery('change', function(){
   idObjekta = $('#objProperties').data("objid");
-  $('#' + idObjekta).attr("class", $(this).attr("value"));
+  $('#' + idObjekta).attr("class", $(this).val());
 });
 
 
 $("#bodyWidth").livequery('change', function(){
-  $('#droppable').css("width", $(this).attr("value") );
+  $('#droppable').css("width", $(this).val() );
 
 });
 
 $("#bodyHeight").livequery('change', function(){
-  $('#droppable').css("height", $(this).attr("value") );
+  $('#droppable').css("height", $(this).val() );
 
 });
 
 $("#template_bodyBg").livequery('change', function(){
-  $('body').css("background", $(this).attr("value") );
+  $('body').css("background", $(this).val() );
 
 });
 
@@ -1592,7 +1592,7 @@ $('#objType').change(function(){
   objectType = $('#' + idObjekta).attr("objType");
 
 
-  //defaultBackground = $('#objType').attr("value");
+  //defaultBackground = $('#objType').val();
   defaultBackground = $('#objType' + ' option:selected').attr('class');
   $('#' + idObjekta).attr("objType", defaultBackground );
 
@@ -1651,7 +1651,7 @@ $('#objType').change(function(){
     setTimeout("clickMask()", 500); //closing all
   }
 
-  if ($(this).attr("value") == "Menu") {
+  if ($(this).val() == "Menu") {
     $('#' + idObjekta).addClass("menuObj");
     $('#MenuA').click();
 
@@ -1662,7 +1662,7 @@ $('#objType').change(function(){
 
   }
 
-  if ($(this).attr("value") == "Image") {
+  if ($(this).val() == "Image") {
     $('#ImagesA').click();
     //console.log("Click on the folder, and then on the image to select it!");
     ajaxEventDone(lang.ClickFolIm);
@@ -1681,7 +1681,7 @@ $('#chooseMenuForm').change(function(){
 
   // PUTTING A MENU INSIDE THE SELECTED OBJECT
   if (shouldDisplayMenu == 1 || putInThisObj == 1) {
-    selMenuTemplate = $('#' + $(this).attr("id") + " option:selected").attr("value");//selected menu
+    selMenuTemplate = $('#' + $(this).attr("id") + " option:selected").val();//selected menu
     selValueTemplate = $('#' + $(this).attr("id") + " option:selected").attr("label");
 
     shouldDisplayMenu = 0;
@@ -1702,7 +1702,7 @@ $('#chooseMenuForm').change(function(){
       }
       $('#' + idObjekta ).dblclick();
 
-      $('#objPropertiesHtml').attr("value","{"+ tvCommand + "}");
+      $('#objPropertiesHtml').val("{"+ tvCommand + "}");
       $('#' + idObjekta).attr("command", tvCommand);
 
     });
@@ -1718,9 +1718,9 @@ $('#chooseImageFolderForm').change(function(){
 
   if (imageSelectionActive == 1 || putImagesInThisObj == 1) {
     ajaxEvent();
-    selFolder = $('#' + $(this).attr("id") + " option:selected").attr("value");//selected menu
+    selFolder = $('#' + $(this).attr("id") + " option:selected").val();//selected menu
     selValueFolder = $('#' + $(this).attr("id") + " option:selected").attr("label");
-    selectedImage = $('#imageNames').attr("value");
+    selectedImage = $('#imageNames').val();
 
     //console.log("You have chosen " + selFolder + " to display in this object!");
     ajaxEventDone("You have chosen " + selFolder + " to display in this object!");
@@ -1737,7 +1737,7 @@ $('#chooseImageFolderForm').change(function(){
       //$('#' + idObjekta ).resizable('destroy');//removing resizable so that it goes good after update
       $('#' + idObjekta).html(data);
       $('#' + idObjekta ).dblclick();
-      $('#objPropertiesHtml').attr("value","{"+ tvCommand + "}");
+      $('#objPropertiesHtml').val("{"+ tvCommand + "}");
       $('#' + idObjekta).attr("command", tvCommand);
 
     });
@@ -2026,7 +2026,7 @@ $('#putSingleImageInThis').click(function(){
 
 //UPLOAD IMAGES
 $('#addImageLink').livequery('click', function(){
-  var valFolder = $('#folderNames').attr("value");
+  var valFolder = $('#folderNames').val();
   if (valFolder == "") {
     ajaxEventDone(lang.SelFolFirst);
     ajaxEmitMessage(lang.SelFolFirst);
@@ -2073,7 +2073,7 @@ $('#addFolderLink').livequery('click', function(){
 
 //DELETE FOLDER
 $('#delFolderLink').click(function(){
-  if($('#folderNames').attr("value") != ""){
+  if($('#folderNames').val() != ""){
     var confir = confirm(lang.AYS);
   } else {
     ajaxEvent();
@@ -2082,7 +2082,7 @@ $('#delFolderLink').click(function(){
     setTimeout("clickMask()", 2000); //closing all
   }
 
-  var val = $('#folderNames').attr("value");
+  var val = $('#folderNames').val();
   if (confir == true ){
     ajaxEvent();
     $.get(absoluteUrl + "images/delete-folder/fname/" + val , function(data){
@@ -2099,7 +2099,7 @@ $('#delFolderLink').click(function(){
 //When folder is chosen show images in that folder
 $('#folderNames').livequery('change', function(){
   $('#imagesShow').html( $('#adminAjaxLoader').html() );
-  var val = $('#folderNames').attr("value");
+  var val = $('#folderNames').val();
   $.get(absoluteUrl + "images/show-images/fname/" + val , function(data){
     //console.log(data);
     $('#imagesShow').html(data);
@@ -2113,9 +2113,9 @@ $('#showFolderImages').livequery('change', function(){
 
   if (imageSelectionActive == 1 || putImagesInThisObj == 1) {
     ajaxEvent();
-    selFolder = $('#folderNames').attr("value");//selected folder
+    selFolder = $('#folderNames').val();//selected folder
     selValueFolder = $('#folderNames').attr("label");
-    selectedImage = $('#imageNames').attr("value");
+    selectedImage = $('#imageNames').val();
     imagePath = "/images/" + selFolder + "/" + selectedImage;
     $('#imagePathShow').html(imagePath);
 
@@ -2137,7 +2137,7 @@ $('#showFolderImages').livequery('change', function(){
       $('#' + idObjekta).html(data);
       $('#' + idObjekta ).dblclick();
 
-      $('#objPropertiesHtml').attr("value","{"+ tvCommand + "}");
+      $('#objPropertiesHtml').val("{"+ tvCommand + "}");
       $('#' + idObjekta).attr("command", tvCommand);
 
     });
@@ -2148,9 +2148,9 @@ $('#showFolderImages').livequery('change', function(){
 //When  image is chosen  show details
 $('#showFolderImages').livequery('change', function(){
 
-  selFolder = $('#folderNames').attr("value");//selected folder
+  selFolder = $('#folderNames').val();//selected folder
   selValueFolder = $('#folderNames').attr("label");
-  selectedImage = $('#imageNames').attr("value");
+  selectedImage = $('#imageNames').val();
   imagePath = "/images/" + selFolder + "/" + selectedImage;
   $('#imagePathShow').html(imagePath);
 
@@ -2170,8 +2170,8 @@ $('#showFolderImages').livequery('change', function(){
 
   $('#imageDetails').html( $('#adminAjaxLoader').html() );
 
-  var val = $('#imageNames').attr("value");
-  var valFolder = $('#folderNames').attr("value");
+  var val = $('#imageNames').val();
+  var valFolder = $('#folderNames').val();
   $.get(absoluteUrl + "images/show-image-details/fname/" + valFolder + "/imname/" + val , function(data){
     //console.log(data);
     $('#imageDetails').html(data);
@@ -2220,25 +2220,25 @@ $('#setBodyBgImage').click(function(){
 $('#NR, #fixedBg').removeAttr('checked'); // reset checkboxes to unchecked
 $('#NR').livequery('change', function(){
 
-  if($(this).attr("value") == "repeat"){
+  if($(this).val() == "repeat"){
 
-    str = $('#template_bodyBg').attr("value");
+    str = $('#template_bodyBg').val();
 
     $('#template_bodyBg').prop("value" , str.replace("repeat", " no-repeat")  );
-    $('#template_bodyBg').prop("value" , $('#template_bodyBg').attr("value") + " no-repeat" );
+    $('#template_bodyBg').prop("value" , $('#template_bodyBg').val() + " no-repeat" );
 
-    $('#template_bodyBg').prop("value" ,  $('#template_bodyBg').attr("value") + ';background-repeat:no-repeat;');
+    $('#template_bodyBg').prop("value" ,  $('#template_bodyBg').val() + ';background-repeat:no-repeat;');
     $('#template_bodyBg').change();
 
     $(this).prop("value", "no-repeat") ;
-    str = $('#template_bodyBg').attr("value");
+    str = $('#template_bodyBg').val();
     $('body').css({backgroundRepeat:"no-repeat"});
 
   } else {
-    str = $('#template_bodyBg').attr("value");
+    str = $('#template_bodyBg').val();
 
     $('#template_bodyBg').attr("value" , str.replace(" no-repeat", " repeat") );
-    $('#template_bodyBg').prop("value" ,  $('#template_bodyBg').attr("value") + ';background-repeat:repeat;');
+    $('#template_bodyBg').prop("value" ,  $('#template_bodyBg').val() + ';background-repeat:repeat;');
 
     $('#template_bodyBg').change();
 
@@ -2248,9 +2248,9 @@ $('#NR').livequery('change', function(){
 });
 
 $('#fixedBg').livequery('change', function(){
-  console.log($(this).attr("value"));
-  if($(this).attr("value") == "fixed"){
-    trenutniCss = $('#template_bodyBg').attr("value");
+  console.log($(this).val());
+  if($(this).val() == "fixed"){
+    trenutniCss = $('#template_bodyBg').val();
     if(trenutniCss.match(/;background-size:100%;/g) ) {
       val = trenutniCss.replace(/;background-size:100%;/g , "");
       $('#template_bodyBg').attr("value" ,  val + " fixed" + ";background-size:100%;");
@@ -2258,7 +2258,7 @@ $('#fixedBg').livequery('change', function(){
       $('#template_bodyBg').attr("value" , trenutniCss + " fixed" );
     }
     $('#bodyBack').css("position", "fixed");
-    $('#template_bodyBg').prop("value" ,  $('#template_bodyBg').attr("value") + ';background-attachment: fixed; background-size: cover; background-position: center center;');
+    $('#template_bodyBg').prop("value" ,  $('#template_bodyBg').val() + ';background-attachment: fixed; background-size: cover; background-position: center center;');
 
     $('#template_bodyBg').change();
     $(this).prop("value", "") ;
@@ -2267,11 +2267,11 @@ $('#fixedBg').livequery('change', function(){
     $('body').css({backgroundPosition:"center center"});
 
   } else {
-    str = $('#template_bodyBg').attr("value");
+    str = $('#template_bodyBg').val();
 
     $('#template_bodyBg').attr("value" , str.replace("fixed", "") );
     $('#bodyBack').css("position", "absolute");
-    $('#template_bodyBg').prop("value" ,  $('#template_bodyBg').attr("value") + ';background-attachment:scroll;');
+    $('#template_bodyBg').prop("value" ,  $('#template_bodyBg').val() + ';background-attachment:scroll;');
     $('#template_bodyBg').prop("value" , str.replace("fixed", "") );
 
     $('#template_bodyBg').change();
@@ -2283,13 +2283,13 @@ $('#fixedBg').livequery('change', function(){
 });
 //DELETE IMAGE;
 $('#deleteImage').click(function(){
-  if($('#showFolderImages').attr("value") != ""){
+  if($('#showFolderImages').val() != ""){
     var confir = confirm(lang.AYS);
   }
 
   if (confir == true ){
     ajaxEvent();
-    $.get(absoluteUrl + "images/delete-image/f/" + $('#folderNames').attr("value") + '/i/' + $('#imageNames').attr("value"), function(data){
+    $.get(absoluteUrl + "images/delete-image/f/" + $('#folderNames').val() + '/i/' + $('#imageNames').val(), function(data){
 
       ajaxEmitMessage(data);
       setTimeout("clickMask()", 1000);
@@ -2317,7 +2317,7 @@ $('#chooseModulesForm').livequery('change', function(){
 
 //CATEGORIES
 $('#categoryNameAssign').livequery('change', function(){
-  //console.log($(this).attr("value") );
+  //console.log($(this).val() );
 });
 
 //Add CATEGORY
@@ -2436,7 +2436,7 @@ $('#chooseCategoryForm').change(function(){
   idObjekta = $('#objProperties').data("objid");
   //CATEG PUTTING
   if (categ == 1 || putCategoryInThisObj == 1) {
-    selCategoryTemplate = $('#' + $(this).attr("id") + " option:selected").attr("value");//selected category
+    selCategoryTemplate = $('#' + $(this).attr("id") + " option:selected").val();//selected category
     selValueCategory = $('#' + $(this).attr("id") + " option:selected").attr("label");
 
     categ = 0;
@@ -2449,7 +2449,7 @@ $('#chooseCategoryForm').change(function(){
       $('#' + idObjekta).html(data);
       $('#' + idObjekta ).dblclick();
 
-      $('#objPropertiesHtml').attr("value","{"+ tvCommand + "}");
+      $('#objPropertiesHtml').val("{"+ tvCommand + "}");
       $('#' + idObjekta).attr("command", tvCommand);
       $('#' + idObjekta).attr("objtype", "Category");
 
@@ -2468,7 +2468,7 @@ $('#chooseCategoryForm').change(function(){
   $('#categorySelected').append($('#adminAjaxLoader').html() );
 
 
-  selCategory = $('#' + $(this).attr("id") + " option:selected").attr("value");//selected Category
+  selCategory = $('#' + $(this).attr("id") + " option:selected").val();//selected Category
   selValueCategory = $('#' + $(this).attr("id") + " option:selected").attr("label");
 
   $.get(absoluteUrl + "category/show-category-items/catid/" + selCategory , function(data){
@@ -2504,7 +2504,7 @@ $('#chooseMenuForm').change(function(){
   $('#menuSelected').html(lang.Loading);
   $('#menuSelected').append($('#adminAjaxLoader').html() );
 
-  selMenu = $('#' + $(this).attr("id") + " option:selected").attr("value");//selected menu
+  selMenu = $('#' + $(this).attr("id") + " option:selected").val();//selected menu
   selValue = $('#' + $(this).attr("id") + " option:selected").attr("label");
 
   var tvCommand = "menu:display:" + selMenu + ":tree";
@@ -2524,7 +2524,7 @@ $('#chooseMenuForm').change(function(){
       $('#menuSelectedForm').show();//first show the form
 
       $('#menuItemForm').html('ID:' + miId );
-      $('#menuItemForm').attr("value", miId);
+      $('#menuItemForm').val( miId);
       $('#editMenuItem').click();
       $('#deleteMenuItem').show();
 
@@ -2539,7 +2539,7 @@ $('#addMenuItemLink').livequery('click', function(){
   $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
-  mid = $('#menuName').attr("value");
+  mid = $('#menuName').val();
   if(mid != ""){
     $.get(absoluteUrl + "menu/add-menu-item/mid/" + mid, function(data){
       //console.log(data);
@@ -2574,7 +2574,7 @@ $('#addMenuItemForm').livequery('change', function(){
     $('#menuItemCategory').hide();
     $('#menuItemPage').hide();
     $('#menuItemModule').show();
-    if($('#menuItemModule').attr("value") == '0'){
+    if($('#menuItemModule').val() == '0'){
       $('#addMenuItemSubmit').hide();
     }
 
@@ -2582,7 +2582,7 @@ $('#addMenuItemForm').livequery('change', function(){
     $('#uniform-menuItemCategory').hide();
     $('#uniform-menuItemPage').hide();
     $('#uniform-menuItemModule').show();
-    if($('#uniform-menuItemModule').attr("value") == '0'){
+    if($('#uniform-menuItemModule').val() == '0'){
       $('#uniform-addMenuItemSubmit').hide();
     }
   }
@@ -2590,8 +2590,8 @@ $('#addMenuItemForm').livequery('change', function(){
 
 //when category for the menu item that is to be added is choosed, then call the filter function
 $('#menuItemCategory').livequery('change', function(){
-  //console.log($(this).attr("value") );
-  val = $(this).attr("value");
+  //console.log($(this).val() );
+  val = $(this).val();
   $.post(absoluteUrl + "menu/get-pages-by-category/catid/" + val, function(data){
     $('#menuItemPage').empty();
 
@@ -2601,8 +2601,8 @@ $('#menuItemCategory').livequery('change', function(){
 
 //when page is selected display the submit button
 $('#menuItemPage').livequery('change', function(){
-  pageVal = $(this).attr("value");
-  if($(this).attr("value") != "0"){
+  pageVal = $(this).val();
+  if($(this).val() != "0"){
     //console.log(pageVal);
     $('#addMenuItemSubmit').show();
   } else {
@@ -2612,8 +2612,8 @@ $('#menuItemPage').livequery('change', function(){
 
 //when module is selected display the submit button
 $('#menuItemModule').livequery('change', function(){
-  moduleVal = $(this).attr("value");
-  if($(this).attr("value") != "0"){
+  moduleVal = $(this).val();
+  if($(this).val() != "0"){
     //console.log(pageVal);
     $('#addMenuItemSubmit').show();
   } else {
@@ -2627,27 +2627,27 @@ $('#editMenuItem').click(function(){
   $('#menuItemForm').append("<br />" + lang.Loading);
   $('#menuItemForm').append($('#adminAjaxLoader').html() );
   //console.log("ja");
-  $.get(absoluteUrl + "menu/edit-menu-item/id/" + $('#menuItemForm').attr("value"), function(data){
+  $.get(absoluteUrl + "menu/edit-menu-item/id/" + $('#menuItemForm').val(), function(data){
 
-    $('#menuItemForm').html('ID:' + $('#menuItemForm').attr("value") + "<br />" + data);
+    $('#menuItemForm').html('ID:' + $('#menuItemForm').val() + "<br />" + data);
 
   });
 });
 
 //DELETE MENU ITEM;
 $('#deleteMenuItem').click(function(){
-  if($('#menuItemForm').attr("value") != ""){
+  if($('#menuItemForm').val() != ""){
     var confir = confirm(lang.AYS);
   }
 
   if (confir == true ){
     ajaxEvent();
-    $.get(absoluteUrl + "menu/delete-menu-item/id/" + $('#menuItemForm').attr("value"), function(data){
+    $.get(absoluteUrl + "menu/delete-menu-item/id/" + $('#menuItemForm').val(), function(data){
       //console.log(data);
       ajaxEmitMessage(data);
       setTimeout("clickMask()", 1000);
       $('#menuItemForm').html("");
-      $('#menuItemForm').attr("value", "");
+      $('#menuItemForm').val( "");
       $('#chooseMenuForm').change();
       ajaxEventDone(lang.DelMenuItem);
     });
@@ -2692,12 +2692,12 @@ $('#delMenuLink ').livequery('click', function(){
 $('#menuNameAssign').livequery('change', function(){
   ajaxEvent();
   menu = "";
-  selMenu = $('#' + $(this).attr("id") + " option:selected").attr("value");//selected menu
+  selMenu = $('#' + $(this).attr("id") + " option:selected").val();//selected menu
   selValue = $('#' + $(this).attr("id") + " option:selected").attr("label");
   if (selMenu =="select") {return;};
   var tvCommand = "menu:display:" + selMenu + ":tree";
 
-  menuSelected = $('#' + $(this).attr("id") + " option:selected").attr("value");
+  menuSelected = $('#' + $(this).attr("id") + " option:selected").val();
   if (menuSelected != "select"){
     $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
     dialog();
@@ -2719,9 +2719,9 @@ $('#menuNameAssign').livequery('change', function(){
         $("#dialogDiv #tree a").click(function(){
           miId = $(this).attr("id").replace(/mi_/, "") ;
           //console.log(miId );
-          $('#menuItemName').attr("value",miId);
+          $('#menuItemName').val(miId);
           $('#menuItemName').prev('span').text( $('#menuItemName').find(':selected').text() );
-          //console.log($('#menuItemName').attr("value") );
+          //console.log($('#menuItemName').val() );
 
           return false;
         });
@@ -2733,7 +2733,7 @@ $('#menuNameAssign').livequery('change', function(){
 
 
 $('#menuItemName').livequery('change', function(){
-  var menuItemSelected = $('#' + $(this).attr("id") + " option:selected").attr("value");
+  var menuItemSelected = $('#' + $(this).attr("id") + " option:selected").val();
   //console.log(menuItemSelected);
 
 });
@@ -2741,19 +2741,19 @@ $('#menuItemName').livequery('change', function(){
 //DISPLAY MENU IN DIFFERENT WAYS
 displayTypeMenu = "";
 $('#menuDisplayType').change(function(){
-  displayTypeMenu = $("#menuDisplayType input:checked").attr("value");
+  displayTypeMenu = $("#menuDisplayType input:checked").val();
 });
 
 //CSS TAB
 $('#addCssCodeA').click(function(){
   ajaxEvent();
 
-  oldCss = $('#pageCSS').attr("value");
+  oldCss = $('#pageCSS').val();
 
-  newPageCss = "\n#" + $('#objListForCss').attr("value") + '{' + "\n\n\n" + '}' + "\n" + oldCss;
+  newPageCss = "\n#" + $('#objListForCss').val() + '{' + "\n\n\n" + '}' + "\n" + oldCss;
 
-  if ( $('#objListForCss').attr("value") != "") {
-    $('#pageCSS').attr("value", newPageCss);
+  if ( $('#objListForCss').val() != "") {
+    $('#pageCSS').val( newPageCss);
     editorCSS.setValue(newPageCss);// update ace editor
 
   } else {
@@ -2769,12 +2769,12 @@ $('#addCssCodeA').click(function(){
 $('#addJsCodeA').click(function(){
   ajaxEvent();
 
-  oldJs = $('#pageJS').attr("value");
+  oldJs = $('#pageJS').val();
 
-  newPageJs = "\n$('#" + $('#objListForJs').attr("value") + "').livequery('" + $('#eventListForJs').attr("value") + "', " + 'function(){' + "\n\n\n" + '});' + "\n" + oldJs;
+  newPageJs = "\n$('#" + $('#objListForJs').val() + "').livequery('" + $('#eventListForJs').val() + "', " + 'function(){' + "\n\n\n" + '});' + "\n" + oldJs;
 
-  if ( $('#objListForJs').attr("value") != "") {
-    $('#pageJS').attr("value", newPageJs);
+  if ( $('#objListForJs').val() != "") {
+    $('#pageJS').val( newPageJs);
     editorJS.setValue(newPageJs);// update ace editor
 
   } else {
@@ -2788,11 +2788,11 @@ $('#addJsCodeA').click(function(){
 
 //ARROW ON SELECTED OBJECT FOR CSS
 $('#objListForCss').change(function(){
-  //console.log( $(this).attr("value") );
+  //console.log( $(this).val() );
 
-  if ($(this).attr("value") != "") {
-    lefT = $('#' + $(this).attr("value") ).position().left;
-    toP = $('#' + $(this).attr("value") ).position().top;
+  if ($(this).val() != "") {
+    lefT = $('#' + $(this).val() ).position().left;
+    toP = $('#' + $(this).val() ).position().top;
 
     $('#downPointer').css({left:lefT +drOff, top:toP}).fadeIn();
   } else {
@@ -2803,9 +2803,9 @@ $('#objListForCss').change(function(){
 //ARROW ON SELECTED OBJECT FOR JS
 $('#objListForJs').change(function(){
 
-  if ($(this).attr("value") != "") {
-    lefT = $('#' + $(this).attr("value") ).position().left;
-    toP = $('#' + $(this).attr("value") ).position().top;
+  if ($(this).val() != "") {
+    lefT = $('#' + $(this).val() ).position().left;
+    toP = $('#' + $(this).val() ).position().top;
 
     $('#downPointer').css({left:lefT + drOff, top:toP}).fadeIn();
   } else {
@@ -2845,7 +2845,7 @@ $('#poA').click(function(){
 //TEMPLATE CHANGER
 $('#templateChanger').change(function(){
   ajaxEvent();
-  templateId = $(this).attr("value");
+  templateId = $(this).val();
   if(templateId == 0) {return false;}
 
   pageId = $('#pgID').html();
@@ -2897,7 +2897,7 @@ $('#templateDisplayer').click(function(){
 
 //TABLE MANIPULATION UniversalTableAdmin
 $('a.uniTableAdmin').livequery('click', function(){
-  tableid =   $(this).attr("value");
+  tableid =   $(this).val();
   rowId = $(this).closest("tr").attr("id");
   hrefVal =  $(this).attr("href");
 
@@ -3001,7 +3001,7 @@ $('.expanderDiv').livequery('click', function(){
     $(this).addClass("expanderDiv");
     $(this).removeClass("expanderDivClosed");
   }
-  $('#' + $(this).attr("value")).toggle();
+  $('#' + $(this).val()).toggle();
 });
 
 $('.expanderDivClosed').livequery('click', function(){
@@ -3013,7 +3013,7 @@ $('.expanderDivClosed').livequery('click', function(){
     $(this).addClass("expanderDiv");
     $(this).removeClass("expanderDivClosed");
   }
-  $('#' + $(this).attr("value")).toggle();
+  $('#' + $(this).val()).toggle();
 });
 
 //Pagination
@@ -3041,7 +3041,7 @@ $('.pag_a').livequery('click', function(){
 //LANGUAGE CHANGE
 $('#langName').livequery('change', function(){
   ajaxEvent();
-  langcode = $(this).attr("value");
+  langcode = $(this).val();
   $.post(absoluteUrl + "creator/change-language/code/" + langcode, function(data) {
     //console.log($('#deletePage').css("display"));
     if($('#deletePage').css("display") != 'none'){
