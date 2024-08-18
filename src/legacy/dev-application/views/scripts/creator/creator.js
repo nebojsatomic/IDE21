@@ -172,9 +172,6 @@ function showConfirm(linkId){
   var r = confirm(lang.AYS);
   if (r == true){
     alert($('#' + linkId).attr("href") );
-
-  } else {
-
   }
 }
 
@@ -198,7 +195,7 @@ function floatProperties(){
 function refreshManageAllPagesTable()
 {
   idCurrent = $('#paginationControl span.current').html();
-  //console.log(idCurrent);
+
   if(!idCurrent){idCurrent = 1;}
   //idCurrent = 1;
   clicked = 0;
@@ -218,7 +215,6 @@ function templateReopenAfterLanguage(){
   if($('#templateMask').length < 1){
     $('body').append('<div id="templateMask"></div>');
   }
-
 
   $.getJSON(absoluteUrl + "page/apply-template/id/" + $("#templateIDediting").html(), function(data){
 
@@ -247,7 +243,6 @@ function templateReopenAfterLanguage(){
       //containment: 'parent'
     }); // D */
 
-
     $('#objList').html("");
     $('.draggable').each(function(){
       $(this).removeClass("inactiveObject");
@@ -258,7 +253,6 @@ function templateReopenAfterLanguage(){
     ajaxEmitMessage(lang.Done);
     setTimeout("$('#ajaxEventMask').click()", 1000);
   });
-
 
 }
 //body streching depending on the temlate
@@ -343,7 +337,6 @@ function loadTemplate(idT){
       //containment: 'parent'
     }); // D */
 
-
     $('#objList').html("");
     //$('.draggable').each(function(){
     $('#templateMask *').each(function(){
@@ -384,7 +377,6 @@ function loadPage(idP){
     $('#templateChanger').prev('span').text($('#templateChanger').find(":selected").text() );
     $('#pageTitle').prop("value", data.pageTitle);
 
-
     $('#allowedRolesDiv').html( data.rolesAllowed );
     //CHECK ACCESS setting
     if(data.check_access == 1){
@@ -408,7 +400,7 @@ function loadPage(idP){
 
     $('#droppable').css("display", "none");
     $('#droppable').html(data.output).fadeIn();
-    
+
     /*$(".draggable").draggable({
       drag:function() {
         id = $(this).attr("id");
@@ -422,14 +414,12 @@ function loadPage(idP){
       $('#objList').append('<option>' + $(this).attr("id") + '</option>');
     });
 
-
     refreshControls();
 
   });
 
   document.cookie = 'pageSelectedId=' + idP + ';  path=/'; //needs improvement
 }
-
 
 $('#droppable *').livequery('click', function(e){
   const hasTemplateParent = $(e.target).closest('#droppable');
@@ -443,14 +433,12 @@ $('#droppable *').livequery('click', function(e){
   if (hasTemplateParent.length < 1 ) return;
     // continue only if it is a part of the template or page working area
 
-
   $(e.target).addClass('selected-for-append');
   //$(e.target).addClass('selected-droppable');
   const contentsToName = $(e.target).text().replace(/\s/g, '_').replace(/[^a-zA-Z0-9_]/g, '').substring(0, 15).toLowerCase(); // append this string to id of the object, to be able to see which one it is just by looking in the object list
 
   const selectedObjectNewID = $(this).get(0).localName + '_sel_' + Math.floor(Math.random() * 10000) + '_' + contentsToName;
 
-  //console.log(typeof $(e.target).attr('id'));
   if(typeof $(e.target).attr('id') != 'string'){
 
     $(e.target).attr('id', selectedObjectNewID );
@@ -458,12 +446,10 @@ $('#droppable *').livequery('click', function(e){
 
   }
 
-  //console.log( $('#objList option:contains(' + $(e.target).attr('id') + ')') ) ;
-
   if( $('#objList option:contains(' + $(e.target).attr('id') + ')').length == 0) {
     $('#objList').append('<option>' + $(e.target).attr('id') + '</option>');
   }
-  
+
   $('#objList').val( $(e.target).attr('id') ).change();
 
   $('#objIDshow').html($(e.target).attr('id'));
@@ -516,7 +502,6 @@ $(document).ready(function(){
   //idCurrent = 1;
   drOff = $('#droppable').position().left;
 
-
   if(getCookie("enableHelp") == "0"){
     $('#helpDiv').show();
   } else {
@@ -544,7 +529,6 @@ $(document).ready(function(){
     ajaxEventDone(lang.Working);//showing the message
   });
 
-
   //CLICK NA UPDATE FROM TINYMCE
   $('#tinySave').click(function(){
     var ed = tinyMCE.get('objPropertiesHtmlTiny');
@@ -564,7 +548,6 @@ $(document).ready(function(){
       //$('#' + $('#objIDshow').html() ).resizable({autohide:true});//resizable again
     }
   });
-
 
   $('#saveCssCodeA').click(function(){
     const editorCSSValue = editorCSS.getValue();
@@ -588,7 +571,7 @@ $(document).ready(function(){
   $('#fontBigger').click(function(){
     fSize =  $( '#' + $('#objProperties').data("objid") ).css("font-size").replace(/px/, '');
     fSize++;
-    //console.log(fSize);
+
     $('#' + $('#objProperties').data("objid")).css( {fontSize:fSize} );
     $('#' + $('#objIDshow').html() ).css( {fontSize:fSize} );
 
@@ -597,13 +580,13 @@ $(document).ready(function(){
   $('#fontSmaller').click(function(){
     fSize =  $( '#' + $('#objProperties').data("objid") ).css("font-size").replace(/px/, '');
     fSize--;
-    //console.log(fSize);
+
     $('#' + $('#objProperties').data("objid")).css( {fontSize:fSize} );
   });
 
   // load tailwindCSS classes to be used for autocomplete
   $.getScript("/daisy/tailwind.classes.js", function(data) {
-    //console.log('array of classes loaded');
+
   });
   //ID ASSISTANT displayed
   tooltipShow = 0;
@@ -691,9 +674,9 @@ $(document).ready(function(){
           width: $('#objList').outerWidth(),
           beforeClose: function(event, ui) {
           $('#tooltip').appendTo('body');
-          //console.log('before close');
+
         }, close: function(event, ui){
-          //console.log('close reached');
+
           $('#dialogDiv_assistant').dialog('destroy');
           $('#dialogDiv_assistant').remove();
 
@@ -715,7 +698,7 @@ $(document).ready(function(){
   //CONTAINER
   objContainer = 0;
   $('#objContainer').livequery('click', function(){
-    //console.log($(this).attr("checked") );
+
     if ($(this).prop("checked") == true) {
       objContainer = 1;
 
@@ -723,7 +706,6 @@ $(document).ready(function(){
       objContainer = 0;
 
     }
-
 
   });
 
@@ -762,7 +744,6 @@ $(document).ready(function(){
   $('#rotate').tabs();
 
   $('#poA').click();
-
 
   propPos = "visible" ;
   $('#propertiesLeft').fadeOut(4000);
@@ -910,7 +891,6 @@ $(document).ready(function(){
       containment: 'parent'
     }); // D */
 
-
     refreshControls();
     $('#net_' + newObjId  ).dblclick();
     newIt++;
@@ -937,7 +917,7 @@ $(document).ready(function(){
     } else {
       droppableContainer = "#droppable";
     }
-    
+
     /*if (objContainer == 1) {
       droppableContainer = '#' + $('#objIDshow').html();
     } else {
@@ -956,7 +936,6 @@ $(document).ready(function(){
     $("\n" + elementWithNewIDs + "\n").insertAfter(droppableContainer);
     // insertAfter till here
 
-
     //IF CONTAINER ON, THEN ADD class IN THE CURRENT OBJECT, ELSE the same
     if (objContainer == 1) {
       $(droppableContainer ).addClass("container");
@@ -972,14 +951,12 @@ $(document).ready(function(){
       }
     });*/
 
-
     /*$(".draggable").draggable({
       drag:function() {
         id = $(this).attr("id");
       },
       containment: 'parent'
     }); // D */
-
 
     refreshControls();
     $('#net_' + newObjId  ).css({left:$('#net_' + newObjId  ).position().left + 5, top:$('#net_' + newObjId  ).position().top +5 });
@@ -996,11 +973,10 @@ $(document).ready(function(){
     return false;
   });
 
-
   //Saving a new page
   $('#savePageNew').livequery('click', function(){
     boundCBval = $('#boundCB').val();
-    //console.log($('#boundCB').val());
+
     if(boundCBval == 'on') {
       firstObjVal = $('#objList option:first').val();
       $('#' + firstObjVal).css("position", "relative");
@@ -1046,7 +1022,7 @@ $(document).ready(function(){
       setTimeout("$('#ajaxEventMask').click()", 1000);
 
     });
-    ajaxEventDone(lang.PUpdate);//sklanjanje maska
+    ajaxEventDone(lang.PUpdate);//removing mask
 
   });
 
@@ -1056,7 +1032,7 @@ $(document).ready(function(){
   $('#saveThisPage').click(function(){
 
     boundCBval = $('#boundCB').val();
-    //console.log($('#boundCB').val());
+
     if(boundCBval == 'on') {
       firstObjVal = $('#objList option:first').val();
 
@@ -1095,7 +1071,7 @@ $(document).ready(function(){
 
       $(this).closest("object").append('<param name="wmode" value="transparent" />');
       $(this).closest("object").append('<param name="movie" value="' + $(this).attr("src") + '"  />') ;
-      //console.log( $(this).closest("object").attr("width" ) );
+
     });
     $('embed').each(function(){
       $(this).remove();
@@ -1104,7 +1080,6 @@ $(document).ready(function(){
     //$('#droppable').resizable('destroy');
     strCodeP =  $('#droppable').html();
     //$('#droppable').resizable({autohide: true});
-
 
     $('#pageCodeHtml').val( strCodeP );
     //description and keywords
@@ -1121,11 +1096,11 @@ $(document).ready(function(){
     $('#pageCode').attr("action", absoluteUrl + "page/update/pageId/" + $('#pgID').html() + "/applytoall/" + applytoAllLangs );
     $('#pageCode').ajaxSubmit(function(data){
       console.log("Page is updated!");
-      //alert(data);
+
       ajaxEmitMessage(lang.Done);
       setTimeout("$('#ajaxEventMask').click()", 1000);
     });
-    ajaxEventDone(lang.PUpdate);//sklanjanje maska
+    ajaxEventDone(lang.PUpdate);//removing mask
     return;
   });
 
@@ -1154,7 +1129,7 @@ $(document).ready(function(){
       //getting output for the loaded page
       pageTitle = $('#dialogDiv_' + openPageDialogUniqueId + ' #pageName :selected').text();
       pgId = $('#' + $(this).attr("id") + " option:selected").val();
-      //console.log(pgId)
+
       $('#pgID').html(pgId);
       $('#pageTitle').prop("value", pageTitle);
       const pageID = $(this).val();
@@ -1222,7 +1197,6 @@ $(document).ready(function(){
     $('#ajaxEventMask').click();
   });
 
-
   //Saving a NEW template TREBA DORADJIVATI JOS
   $('#saveAsTemplate').click(function(){
     $(".draggable").each(function(){
@@ -1246,12 +1220,10 @@ $(document).ready(function(){
     //$('#droppable').resizable({autohide: true});
     $('#templateMask').appendTo($('#droppable')).css({left: "0px"});
 
-
     $('#templateCodeHtml').val(  strCodeT );//template code
 
     $('#templateTitleC').val( $('#templateTitle').val() );//name of the template
     $('#templateBodyBgC').val( $('#template_bodyBg').val() );//body BG of the template
-
 
     $('#templateCode').attr("action", absoluteUrl + "page/save-as-template");
     $('#templateCode').ajaxSubmit(function(){
@@ -1259,7 +1231,7 @@ $(document).ready(function(){
       ajaxEmitMessage(lang.Done);
       setTimeout("$('#ajaxEventMask').click()", 1000);
     });
-    ajaxEventDone('Saving template...');//sklanjanje maska
+    ajaxEventDone('Saving template...');//removing mask
   });
 
   //Saving a template - needs more work
@@ -1292,7 +1264,6 @@ $(document).ready(function(){
     //$('#droppable').resizable({autohide: true});
     $('#templateMask').appendTo($('#droppable')).css({left: "0px"});
 
-
     $('#templateCodeHtml').val(  strCodeT );//template code
 
     $('#templateTitleC').val( $('#templateTitle').val() );//name of the template
@@ -1301,12 +1272,11 @@ $(document).ready(function(){
 
     $('#templateCode').attr("action", absoluteUrl + "page/update-template/templateId/" + $('#templateIDediting').html() + "/applytoall/" + applytoAllLangsTemplate );
     $('#templateCode').ajaxSubmit(function(){
-      //console.log("Template is saved");
+
       $('#ajaxEventMask').click();
     });
-    ajaxEventDone(lang.TUpdate);//sklanjanje maska
+    ajaxEventDone(lang.TUpdate);//removing mask
   });
-
 
   //Applying a template
   $('#applyTemplate').click(function(){
@@ -1326,15 +1296,14 @@ $(document).ready(function(){
   });
 
   $('#templateName').livequery('change', function(){
-    //console.log('e');
+
     loadTemplate( $(this).val());
 
-    // ajaxEventDone(lang.TOpen);//sklanjanje maska
+    // ajaxEventDone(lang.TOpen);//removing mask
     $('#templateIDediting').html($(this).val());
     document.cookie = 'templateSelectedId=' + $(this).val() + ';  path=/'; //needs improvement
     $('#dialogDiv').hide('slow').remove();// removing dialog - MUST
   });
-
 
   if(idForRem){
     if (idForRem  != "") {
@@ -1359,13 +1328,11 @@ $(document).ready(function(){
   }
 });//end document ready
 
-
 $(".container").livequery('click', function(e){
 
   var id = $('#' + $(this).attr("id") + ' .draggable').html();
 
 });
-
 
 //DBLCLICK ON OBJECT
 $(".draggable").livequery('dblclick', function(e){
@@ -1430,11 +1397,9 @@ $(".draggable").livequery('dblclick', function(e){
   } else {
 
   }
-  
 
   $('#objProperties').data("objid", selectedObjID );
   $('#objIDshow').html($(selectedObjID).attr("id"));
-
 
   $("#objPropertiesWidth").val( width );
   $("#objPropertiesHeight").val( height );
@@ -1449,7 +1414,6 @@ $(".draggable").livequery('dblclick', function(e){
   $('#objTheme').val(themeClass);
   $('#objTheme').prev("span").text($('#objTheme option[value="' + themeClass + '"]').text() );
 
-  //console.log(themeClass);
   $("#objPropertiesX").val(posix + "px");
   $("#objPropertiesY").val(posiy + "px");
   $("#objPropertiesZ").val(zIn );
@@ -1492,10 +1456,7 @@ $(".draggable").livequery('dblclick', function(e){
     //$('#cornerPropDiv').hide("slow");
   }
 
-
-
 });
-
 
 //handle the resizing of objects when input has changed
 //WIDTH
@@ -1567,7 +1528,6 @@ $("#objPropertiesClass").livequery('change', function(){
   $('#' + idObjekta).attr("class", $(this).val());
 });
 
-
 $("#bodyWidth").livequery('change', function(){
   $('#droppable').css("width", $(this).val() );
 
@@ -1591,14 +1551,12 @@ $('#objType').change(function(){
 
   objectType = $('#' + idObjekta).attr("objType");
 
-
   //defaultBackground = $('#objType').val();
   defaultBackground = $('#objType' + ' option:selected').attr('class');
   $('#' + idObjekta).attr("objType", defaultBackground );
 
   //VAZNO!
   //$('#' + idObjekta).css("background", "url("+ absoluteUrl + "images/" + $('#' + idObjekta).attr("objType") + ".png) no-repeat center");
-
 
   //title
   if (defaultBackground == "title") {
@@ -1664,7 +1622,7 @@ $('#objType').change(function(){
 
   if ($(this).val() == "Image") {
     $('#ImagesA').click();
-    //console.log("Click on the folder, and then on the image to select it!");
+
     ajaxEventDone(lang.ClickFolIm);
     ajaxEmitMessage(lang.ClickFolIm);
     setTimeout("clickMask()", 2000); //closing all
@@ -1672,7 +1630,6 @@ $('#objType').change(function(){
 
   }
 });
-
 
 // DISPLAYING A MENU INSIDE THE SELECTED OBJECT
 shouldDisplayMenu = 0;
@@ -1711,7 +1668,6 @@ $('#chooseMenuForm').change(function(){
 
 });
 
-
 //IMAGE PUTTING
 imageSelectionActive = 0;
 $('#chooseImageFolderForm').change(function(){
@@ -1722,11 +1678,9 @@ $('#chooseImageFolderForm').change(function(){
     selValueFolder = $('#' + $(this).attr("id") + " option:selected").attr("label");
     selectedImage = $('#imageNames').val();
 
-    //console.log("You have chosen " + selFolder + " to display in this object!");
     ajaxEventDone("You have chosen " + selFolder + " to display in this object!");
     ajaxEmitMessage("You have chosen " + selFolder + " to display in this object!");
     setTimeout("clickMask()", 2000); //closing all
-
 
     imageSelectionActive = 0;
 
@@ -1743,9 +1697,6 @@ $('#chooseImageFolderForm').change(function(){
     });
   }
 });
-
-
-
 
 $("#delButton").livequery('click', function(){
   idObjekta = $('#objIDshow').text();
@@ -1764,7 +1715,7 @@ $('#previewButton').click(function(){
 //SHADOW
 $('#shadowCheck').click(function(){
   idObjekta = $('#objProperties').data("objid");
-  //console.log($(this).attr("checked") );
+
   if ($(this).prop("checked") == true) {
     $('#' + idObjekta).addClass("shadowed");
   } else {
@@ -1772,11 +1723,10 @@ $('#shadowCheck').click(function(){
   }
 });
 
-
 //CORNERS hide/show div and operation
 $('#cornerCheck').livequery('click', function(){
   idObjekta = $('#objProperties').data("objid");
-  //console.log($(this).attr("checked") );
+
   if ($(this).prop("checked") == true) {
     $('#' + idObjekta).addClass("cornered");
     //$('#cornerPropDiv').show("slow");
@@ -1839,7 +1789,6 @@ $('#aParamCorner').livequery('click', function(){
       }
       $('#cornerParamBg').val(backgAttr);
 
-
     });
     $('#dialogDiv').show('slow');
   } else {
@@ -1873,7 +1822,7 @@ $('#cornerParamButton').livequery('click', function(){
   re2 = /corBg_\S*/;
   if(objClass.match(re2)){
     a = objClass.replace(/corBg_\S*/g, '');
-    //console.log(a );
+
     $('#' + idObjekta).attr('class', a);
     $('#' + idObjekta).removeClass(objClass.match(re2));
     $('#' + idObjekta).addClass( "corBg_(" + $('#cornerParamBg').val() + ")" );
@@ -1888,7 +1837,6 @@ $('#cornerParamButton').livequery('click', function(){
 
 //COLOR SELECTOR for the corners
 // switched from ColorPicker to Coloris
-
 
 //SHADOW HANDLING
 $('#aParamShadow').livequery('click', function(){
@@ -1912,7 +1860,7 @@ $('#aParamShadow').livequery('click', function(){
         var names = sdwExpr.split(",");
         for ( var i in names )
         {
-          //console.log( names[i] );
+
           if(names[i].match("left:")){
             Lleft = names[i].split("left:");
             Rleft = parseInt(Lleft[1]);
@@ -1954,12 +1902,12 @@ $('#shadowParamButton').livequery('click', function(){
   objClass = $('#' + idObjekta).attr("class");
   re = /dsParams_\S*/;
   if(objClass.match(re)){
-    //console.log(objClass.match(re));
+
     $('#' + idObjekta).removeClass(objClass.match(re));
     a = objClass.replace(/dsParams_\S*/, '');
-    //console.log(a );
+
     $('#' + idObjekta).attr('class', a);
-    //console.log($('#' + idObjekta).attr("class") );
+
     $('#' + idObjekta).addClass("dsParams_(" + "left:" + $('#shdwLeft').attr('value') + "," + "top:" + $('#shdwTop').attr('value') + "," + "blur:" + $('#shdwBlur').attr('value') + "," + "opacity:" + $('#shdwOpacity').attr('value') + "," + "color:" + $('#shdwColor').attr('value') + ")" );
     $('#objPropertiesClass').prop('value', $('#' + idObjekta).attr("class") );
     ajaxEmitMessage(objClass.match(re) + "is removed");
@@ -1989,13 +1937,12 @@ $('#clearPage').livequery('click', function(){
 //TURN putting in object on/off
 putInThisObj = 0;
 $('#putInThis').click(function(){
-  //console.log($(this).attr("checked") );
+
   if ($(this).prop("checked") == true) {
     putInThisObj = 1;
   } else {
     putInThisObj = 0;
   }
-
 
 });
 
@@ -2003,7 +1950,7 @@ $('#putInThis').click(function(){
 //TURN putting in object on/off
 putImagesInThisObj = 0;
 $('#putImagesInThis').click(function(){
-  //console.log($(this).attr("checked") );
+
   if ($(this).attr("checked") == true) {
     putImagesInThisObj = 1;
   } else {
@@ -2016,7 +1963,7 @@ $('#putImagesInThis').click(function(){
 //TURN putting in object on/off
 singleImage = 0;
 $('#putSingleImageInThis').click(function(){
-  //console.log($(this).attr("checked") );
+
   if ($(this).attr("checked") == true) {
     singleImage = 1;
   } else {
@@ -2039,7 +1986,6 @@ $('#addImageLink').livequery('click', function(){
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
     $.get(absoluteUrl + "images/upload/fname/" + valFolder, function(data){
-      //console.log(data);
 
       $('#dialogDiv').html(data);
 
@@ -2065,7 +2011,7 @@ $('#addFolderLink').livequery('click', function(){
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
   $.get(absoluteUrl + "images/add-folder", function(data){
-    //console.log(data);
+
     $('#dialogDiv').html(data);
   });
   $('#dialogDiv').show('slow');
@@ -2086,7 +2032,7 @@ $('#delFolderLink').click(function(){
   if (confir == true ){
     ajaxEvent();
     $.get(absoluteUrl + "images/delete-folder/fname/" + val , function(data){
-      //console.log(data);
+
       ajaxEmitMessage(lang.FolDeleted);
       setTimeout("clickMask()", 1000); //closing all
       $('#folderNames option:contains('  + val + ')').remove();
@@ -2101,11 +2047,10 @@ $('#folderNames').livequery('change', function(){
   $('#imagesShow').html( $('#adminAjaxLoader').html() );
   var val = $('#folderNames').val();
   $.get(absoluteUrl + "images/show-images/fname/" + val , function(data){
-    //console.log(data);
+
     $('#imagesShow').html(data);
   });
 });
-
 
 singleImage = 0;
 selectedImage = "";
@@ -2118,7 +2063,6 @@ $('#showFolderImages').livequery('change', function(){
     selectedImage = $('#imageNames').val();
     imagePath = "/images/" + selFolder + "/" + selectedImage;
     $('#imagePathShow').html(imagePath);
-
 
     ajaxEventDone("You have chosen " + selectedImage + " to display in this object!");
     ajaxEmitMessage("You have chosen " + selectedImage + " to display in this object!");
@@ -2143,7 +2087,6 @@ $('#showFolderImages').livequery('change', function(){
     });
   }
 });
-
 
 //When  image is chosen  show details
 $('#showFolderImages').livequery('change', function(){
@@ -2173,7 +2116,7 @@ $('#showFolderImages').livequery('change', function(){
   var val = $('#imageNames').val();
   var valFolder = $('#folderNames').val();
   $.get(absoluteUrl + "images/show-image-details/fname/" + valFolder + "/imname/" + val , function(data){
-    //console.log(data);
+
     $('#imageDetails').html(data);
     $('#deleteImage').show();
     $('#insertImage').show();
@@ -2308,7 +2251,7 @@ $('#chooseModulesForm').livequery('change', function(){
   var val = $('#moduleName option:selected').text();
 
   $.get(absoluteUrl + val + "/admin", function(data){
-    //console.log(data);
+
     $('#modulesSelected').html(data);
 
   });
@@ -2317,7 +2260,7 @@ $('#chooseModulesForm').livequery('change', function(){
 
 //CATEGORIES
 $('#categoryNameAssign').livequery('change', function(){
-  //console.log($(this).val() );
+
 });
 
 //Add CATEGORY
@@ -2328,7 +2271,7 @@ $('#addCategoryLink').livequery('click', function(){
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
   $.get(absoluteUrl + "category/add-category", function(data){
-    //console.log(data);
+
     $('#dialogDiv').html( data);
   });
   $('#dialogDiv').show('slow');
@@ -2342,7 +2285,7 @@ $('#delCategoryLink ').livequery('click', function(){
     if (confirCategory == true){
       ajaxEvent();
       $.get(absoluteUrl + "category/del-category/id/" + selCategory, function(data){
-        //console.log(data);
+
         ajaxEmitMessage(data);
         setTimeout("clickMask()", 1000);
 
@@ -2354,14 +2297,13 @@ $('#delCategoryLink ').livequery('click', function(){
     }
 
   } else {
-    //console.log("First select a category!");
+
     ajaxEvent();
     ajaxEventDone(lang.FirstSelCat);
     ajaxEmitMessage(lang.FirstSelCat);
     setTimeout("clickMask()", 2000);
   }
 });
-
 
 //CATEGORY ITEMS -add
 $('#addCategoryItemLink').livequery('click', function(){
@@ -2376,7 +2318,7 @@ $('#addCategoryItemLink').livequery('click', function(){
     });
     $('#dialogDiv').show('slow');
   } else {
-    //console.log("First select a category!");
+
     ajaxEventDone(lang.FirstSelCat);
     ajaxEmitMessage(lang.FirstSelCat);
     setTimeout("clickMask()", 2000);
@@ -2384,7 +2326,7 @@ $('#addCategoryItemLink').livequery('click', function(){
 });
 selCategoryItem = "";
 $('#catItems').livequery('change', function(){
-  //console.log( $(this).val() );
+
   selCategoryItem = $(this).val();
 });
 
@@ -2419,7 +2361,7 @@ $('#delCategoryItemLink').livequery('click', function(){
 //TURN putting in object on/off
 putCategoryInThisObj = 0;
 $('#putCategoryInThis').click(function(){
-  //console.log($(this).attr("checked") );
+
   if ($(this).attr("checked") == true) {
     putCategoryInThisObj = 1;
   } else {
@@ -2427,7 +2369,6 @@ $('#putCategoryInThis').click(function(){
   }
 
 });
-
 
 //DISPLAYING CATEGORY IN AN OBJECT
 categ = 0;
@@ -2467,12 +2408,11 @@ $('#chooseCategoryForm').change(function(){
   $('#categorySelected').html(lang.Loading);
   $('#categorySelected').append($('#adminAjaxLoader').html() );
 
-
   selCategory = $('#' + $(this).attr("id") + " option:selected").val();//selected Category
   selValueCategory = $('#' + $(this).attr("id") + " option:selected").attr("label");
 
   $.get(absoluteUrl + "category/show-category-items/catid/" + selCategory , function(data){
-    //console.log(data);
+
     $('#categorySelected').html(data);
 
   });
@@ -2488,7 +2428,6 @@ $('#addMenuLink').livequery('click', function(){
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
   $.get(absoluteUrl + "menu/add-menu", function(data){
-    //console.log(data);
 
     $('#dialogDiv').html( data);
 
@@ -2519,8 +2458,7 @@ $('#chooseMenuForm').change(function(){
 
     $("#menuSelected #tree.adminTree a").click(function(){
       miId = $(this).attr("id").replace(/mi_/, "") ;
-      //console.log(miId );
-      //console.log(miId);
+
       $('#menuSelectedForm').show();//first show the form
 
       $('#menuItemForm').html('ID:' + miId );
@@ -2542,12 +2480,12 @@ $('#addMenuItemLink').livequery('click', function(){
   mid = $('#menuName').val();
   if(mid != ""){
     $.get(absoluteUrl + "menu/add-menu-item/mid/" + mid, function(data){
-      //console.log(data);
+
       $('#dialogDiv').html(data);
     });
     $('#dialogDiv').show('slow');
   } else {
-    //console.log("Choose a menu first!");
+
     ajaxEventDone(lang.FSelMenu);
     ajaxEmitMessage(lang.FSelMenu);
     setTimeout("clickMask()", 2000);
@@ -2557,7 +2495,7 @@ $('#addMenuItemLink').livequery('click', function(){
 $('#addMenuItemForm').livequery('change', function(){
 
   checkedValue = $('#addMenuItemForm input[type=radio]:checked').val();
-  //console.log(checkedValue + 'e');
+
   if(checkedValue == "page"){
 
     $('#menuItemCategory').show();
@@ -2590,7 +2528,7 @@ $('#addMenuItemForm').livequery('change', function(){
 
 //when category for the menu item that is to be added is choosed, then call the filter function
 $('#menuItemCategory').livequery('change', function(){
-  //console.log($(this).val() );
+
   val = $(this).val();
   $.post(absoluteUrl + "menu/get-pages-by-category/catid/" + val, function(data){
     $('#menuItemPage').empty();
@@ -2603,7 +2541,7 @@ $('#menuItemCategory').livequery('change', function(){
 $('#menuItemPage').livequery('change', function(){
   pageVal = $(this).val();
   if($(this).val() != "0"){
-    //console.log(pageVal);
+
     $('#addMenuItemSubmit').show();
   } else {
     $('#addMenuItemSubmit').hide();
@@ -2614,19 +2552,18 @@ $('#menuItemPage').livequery('change', function(){
 $('#menuItemModule').livequery('change', function(){
   moduleVal = $(this).val();
   if($(this).val() != "0"){
-    //console.log(pageVal);
+
     $('#addMenuItemSubmit').show();
   } else {
     $('#addMenuItemSubmit').hide();
   }
 });
 
-
 //EDIT MENU ITEM
 $('#editMenuItem').click(function(){
   $('#menuItemForm').append("<br />" + lang.Loading);
   $('#menuItemForm').append($('#adminAjaxLoader').html() );
-  //console.log("ja");
+
   $.get(absoluteUrl + "menu/edit-menu-item/id/" + $('#menuItemForm').val(), function(data){
 
     $('#menuItemForm').html('ID:' + $('#menuItemForm').val() + "<br />" + data);
@@ -2643,7 +2580,7 @@ $('#deleteMenuItem').click(function(){
   if (confir == true ){
     ajaxEvent();
     $.get(absoluteUrl + "menu/delete-menu-item/id/" + $('#menuItemForm').val(), function(data){
-      //console.log(data);
+
       ajaxEmitMessage(data);
       setTimeout("clickMask()", 1000);
       $('#menuItemForm').html("");
@@ -2665,7 +2602,7 @@ $('#delMenuLink ').livequery('click', function(){
     if (confir == true){
       ajaxEvent();
       $.get(absoluteUrl + "menu/del-menu/id/" + selMenu, function(data){
-        //console.log(data);
+
         ajaxEmitMessage(data);
         setTimeout("clickMask()", 1000);
 
@@ -2679,14 +2616,13 @@ $('#delMenuLink ').livequery('click', function(){
 
   } else {
     ajaxEvent();
-    //console.log("First select a menu!");
+
     ajaxEventDone(lang.FirstSelMenu);
     ajaxEmitMessage(lang.FirstSelMenu);
     setTimeout("clickMask()", 2000);
 
   }
 });
-
 
 //ON ASSIGN THIS PAGE TO MENU
 $('#menuNameAssign').livequery('change', function(){
@@ -2707,7 +2643,7 @@ $('#menuNameAssign').livequery('change', function(){
     $.post(absoluteUrl + "view/render-tv/creatorAct/true/var/" + "{" + tvCommand + "}", function(data){
       menu = data;
       $.get(absoluteUrl + "menu/show-menu-items/id/" + menuSelected + "/cid/" + $('#pgID').html(), function(data){
-        //console.log(data);
+
         $('#dialogDiv').append( menu + '<div id="addMenuItForm">' + data + '</div>');
         $('#dialogDiv img').hide();
 
@@ -2718,10 +2654,9 @@ $('#menuNameAssign').livequery('change', function(){
         //CLICK ON THE TREE
         $("#dialogDiv #tree a").click(function(){
           miId = $(this).attr("id").replace(/mi_/, "") ;
-          //console.log(miId );
+
           $('#menuItemName').val(miId);
           $('#menuItemName').prev('span').text( $('#menuItemName').find(':selected').text() );
-          //console.log($('#menuItemName').val() );
 
           return false;
         });
@@ -2731,10 +2666,8 @@ $('#menuNameAssign').livequery('change', function(){
   }
 });
 
-
 $('#menuItemName').livequery('change', function(){
   var menuItemSelected = $('#' + $(this).attr("id") + " option:selected").val();
-  //console.log(menuItemSelected);
 
 });
 
@@ -2788,58 +2721,20 @@ $('#addJsCodeA').click(function(){
 
 //ARROW ON SELECTED OBJECT FOR CSS
 $('#objListForCss').change(function(){
-  //console.log( $(this).val() );
 
-  if ($(this).val() != "") {
-    lefT = $('#' + $(this).val() ).position().left;
-    toP = $('#' + $(this).val() ).position().top;
-
-    $('#downPointer').css({left:lefT +drOff, top:toP}).fadeIn();
-  } else {
-    $('#downPointer').fadeOut();
-  }
 });
 
 //ARROW ON SELECTED OBJECT FOR JS
 $('#objListForJs').change(function(){
 
-  if ($(this).val() != "") {
-    lefT = $('#' + $(this).val() ).position().left;
-    toP = $('#' + $(this).val() ).position().top;
-
-    $('#downPointer').css({left:lefT + drOff, top:toP}).fadeIn();
-  } else {
-    $('#downPointer').fadeOut();
-  }
 });
 //RESETING ARROW WHEN CLICKIN ON TABS
 $('#CssA').click(function(){
-  //$('#downPointer').fadeOut();
   $('#objListForCss').change();
 });
 
 $('#JsA').click(function(){
-  //$('#downPointer').fadeOut();
   $('#objListForJs').change();
-});
-
-$('#ImagesA').click(function(){
-  $('#downPointer').fadeOut();
-});
-$('#ModA').click(function(){
-  $('#downPointer').fadeOut();
-});
-$('#LangA').click(function(){
-  $('#downPointer').fadeOut();
-});
-$('#CatA').click(function(){
-  $('#downPointer').fadeOut();
-});
-$('#MenuA').click(function(){
-  $('#downPointer').fadeOut();
-});
-$('#poA').click(function(){
-  $('#downPointer').fadeOut();
 });
 
 //TEMPLATE CHANGER
@@ -2849,7 +2744,7 @@ $('#templateChanger').change(function(){
   if(templateId == 0) {return false;}
 
   pageId = $('#pgID').html();
-  //console.log( templateId );
+
   $.post(absoluteUrl + "page/change-template/pageid/" + pageId + "/templateid/" + templateId, function(data){
 
     ajaxEmitMessage(data);
@@ -2896,8 +2791,9 @@ $('#templateDisplayer').click(function(){
 });
 
 //TABLE MANIPULATION UniversalTableAdmin
-$('a.uniTableAdmin').livequery('click', function(){
-  tableid =   $(this).val();
+$('a.uniTableAdmin').livequery('click', function(e){
+  tableid =  $(e.target).attr('value');
+
   rowId = $(this).closest("tr").attr("id");
   hrefVal =  $(this).attr("href");
 
@@ -2909,14 +2805,12 @@ $('a.uniTableAdmin').livequery('click', function(){
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
-
     if(hrefVal == "") {
       hrefVal = "tables/add-row/tableid/" + tableid;
     }
 
-    //console.log(tableid);
     $.get(absoluteUrl + hrefVal, function(data){
-      //console.log(data);
+
       $('#dialogDiv').html( data);
     });
     $('#dialogDiv').show('slow');
@@ -2925,11 +2819,10 @@ $('a.uniTableAdmin').livequery('click', function(){
 
   //IF EDIT
   if ($(this).hasClass("a_edit") ){
-    var rowId = $(this).closest("tr").attr("id");
 
-    //console.log(parentTag );
-    //var rowId = $(this).attr("id");
-    //var rowId = "5";
+    let rowId = $(this).closest("tr").attr("id");
+    let tableid =  $(this).attr('value');
+
     $('#editRowForm').remove();
     $('#dialogDiv').remove();
     $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
@@ -2947,8 +2840,10 @@ $('a.uniTableAdmin').livequery('click', function(){
   //IF DELETE
   if ($(this).hasClass("a_delete") ){
 
-    var rowId = $(this).attr("id");
-    var confir = confirm(lang.AYS);
+    let tableid =  $(this).attr('value');
+    let rowId = $(this).attr("id");
+    let confir = confirm(lang.AYS);
+
     if(hrefVal == "") {
       hrefVal = "tables/delete-row/tableid/" + tableid + "/rowid/" + rowId;
     } else {
@@ -2989,7 +2884,7 @@ $('.universalTableAdmin tr').livequery('mouseout', function(){
   $(this).addClass("utaNormal");
 });
 $('.universalTableAdmin tr').livequery('click', function(){
-  //console.log($(this).attr("id") );
+
 });
 
 $('.expanderDiv').livequery('click', function(){
@@ -3043,13 +2938,13 @@ $('#langName').livequery('change', function(){
   ajaxEvent();
   langcode = $(this).val();
   $.post(absoluteUrl + "creator/change-language/code/" + langcode, function(data) {
-    //console.log($('#deletePage').css("display"));
+
     if($('#deletePage').css("display") != 'none'){
       //Otvaranje strane koja je bila otvorena pre promene languagea
       $.getJSON(absoluteUrl + "page/open/id/" + $("#pgID").html(), function(data){
-        //console.log(data.category);
+
         //jsin = eval("(" + data + ")" );
-        //console.log(jsin.output);
+
         $('#categoryNameAssign').prop("value" , data.category);
         $('#pageImage').prop("value" , data.image);
         $('#pageDescription').prop("value" , data.description);
@@ -3227,14 +3122,14 @@ $('#logout').livequery('click', function(){
 
 //CHANGING DEFAULT TEMPLATE
 $('#templateDefaultCB').livequery('change', function(){
-  //console.log($(this).attr("checked") );
+
 });
 
 //BACKUP OF THE SITE
 $('#backupSiteButton').livequery('click', function(){
   ajaxEventDone(lang.GBackup);
   $.get(absoluteUrl + "creator/backup-site", function(data){
-    //console.log("BackedUp");
+
     ajaxEmitMessage(data);
     setTimeout("$('#ajaxEventMask').click()", 1000);
   });
@@ -3243,7 +3138,7 @@ $('#backupSiteButton').livequery('click', function(){
 //SETTING PERMISSIONS
 $('#restrictiveCB').livequery('click', function(){
   pageId = $('#pgID').html();
-  //console.log('ja');//console.log($(this).attr('checked'));
+
   if($(this).prop('checked') == true){
     ajaxEvent();
     $('#openPagePermisions').show();
@@ -3272,20 +3167,20 @@ $('#openPagePermisions').livequery('click', function(){
   pageId = $('#pgID').html();
 
   $.get(absoluteUrl + "creator/set-permissions/rtype/page/id/" + pageId, function(data){
-    //console.log(data);
+
     $('#dialogDiv').html( data);
   });
   $('#dialogDiv').show('slow');
 });
 
 $('#catItems').livequery('change', function(){
-  //console.log($(this).val());
+
 });
 
 //BOUND TO CONTENT AREA
 $('#boundCB').livequery('click', function(){
   pageId = $('#pgID').html();
-  //console.log('ja');//console.log($(this).attr('checked'));
+
   if($(this).prop('checked') == true){//if should be inside content area
     ajaxEvent();
     $.post(absoluteUrl + "creator/set-bound/val/0/page/" + pageId, function(data){
@@ -3393,7 +3288,6 @@ $('.publish').livequery('click',function(){
   return false;
 });
 
-
 //DELETE ALL SELECTED PAGES from Manage all pages
 $('.deleteAll').livequery('click',function(){
   var confir = confirm(lang.AYSdelPag);
@@ -3401,13 +3295,12 @@ $('.deleteAll').livequery('click',function(){
   if (confir == true) {
     ar = new Array();
     $('.chk_page').each(function(){
-      //console.log($(this).attr('checked') );
+
       pid = $(this).prop('checked');
       if(pid == true){
         ar.push($(this).attr('value'));
       }
     });
-    //console.log(ar);
 
     ajaxEvent();
     $.post(absoluteUrl + "page/delete-pages-selected/pids/" + ar  , function(data) {
@@ -3421,7 +3314,6 @@ $('.deleteAll').livequery('click',function(){
   return false;
 });
 
-
 //set unPUBLISHED all SELECTED from Manage all pages
 $('.unpublishAll').livequery('click',function(){
   var confir = confirm(lang.AYS);
@@ -3429,13 +3321,12 @@ $('.unpublishAll').livequery('click',function(){
   if (confir == true) {
     ar = new Array();
     $('.chk_page').each(function(){
-      //console.log($(this).attr('checked') );
+
       pid = $(this).prop('checked');
       if(pid == true){
         ar.push($(this).attr('value'));
       }
     });
-    //console.log(ar);
 
     ajaxEvent();
     $.post(absoluteUrl + "page/toggle-published-selected/pids/" + ar + '/pubval/0/' , function(data) {
@@ -3456,13 +3347,12 @@ $('.publishAll').livequery('click',function(){
   if (confir == true) {
     ar = new Array();
     $('.chk_page').each(function(){
-      //console.log($(this).attr('checked') );
+
       pid = $(this).prop('checked');
       if(pid == true){
         ar.push($(this).attr('value'));
       }
     });
-    //console.log(ar);
 
     ajaxEvent();
     $.post(absoluteUrl + "page/toggle-published-selected/pids/" + ar + '/pubval/1/' , function(data) {
@@ -3504,7 +3394,6 @@ $('.access').livequery('click',function(){
   return false;
 });
 
-
 //set unRESTRICTED all SELECTED from Manage all pages
 $('.unrestrictAll').livequery('click',function(){
   var confir = confirm(lang.AYS);
@@ -3512,7 +3401,7 @@ $('.unrestrictAll').livequery('click',function(){
   if (confir == true) {
     ar = new Array();
     $('.chk_page').each(function(){
-      //console.log($(this).attr('checked') );
+
       pid = $(this).prop('checked');
       if(pid == true){
         ar.push($(this).attr('value'));
@@ -3538,13 +3427,12 @@ $('.restrictAll').livequery('click',function(){
   if (confir == true) {
     ar = new Array();
     $('.chk_page').each(function(){
-      //console.log($(this).attr('checked') );
+
       pid = $(this).prop('checked');
       if(pid == true){
         ar.push($(this).attr('value'));
       }
     });
-    //console.log(ar);
 
     ajaxEvent();
     $.post(absoluteUrl + "page/toggle-restrict-selected/pids/" + ar + '/pubval/1/' , function(data) {
@@ -3557,7 +3445,6 @@ $('.restrictAll').livequery('click',function(){
   }
   return false;
 });
-
 
 //set permissions to all SELECTED from Manage all pages
 $('.setPermissionsAll').livequery('click',function(){
@@ -3682,12 +3569,11 @@ $('#objList').livequery('click', function(){
   $('#'+ selectedObjID ).trigger('mouseover'); // triger refresh of classes in ID assistant
 });
 
-
 /* tinyMCE should be replaced with something new, atm do this fix */
 $('#penPointer').livequery('click', function(){
   $('.selected-for-append').trigger('dblclick');
   tinyMCE.execCommand('mceFullScreen');
-  
+
   /*$('body').livequery('click', function(){
     setTimeout(function(){//set timeout to detect out of fullscreen
       if($('#mce_fullscreen').length < 1 ) {
@@ -3750,7 +3636,6 @@ fsElement = document.getElementById('fragment-7wrapper');
 
 var fsButton2 = document.getElementById('fsbutton2');
 fsElement2 = document.getElementById('fragment-8wrapper');
-
 
 var fsButton3 = document.getElementById('fsbutton3');
 fsElement3 = document.getElementById('fragment-5wrapper');
@@ -3909,7 +3794,6 @@ $('#exportTemplate').click(function(){
   $('#dialogDiv').show('slow');
 });
 
-
 //Installing exported template
 $('#installTemplate').click(function(){
   $('#dialogDiv').remove();
@@ -3920,7 +3804,7 @@ $('#installTemplate').click(function(){
 
   $.get(absoluteUrl + "page/install-template", function(data){
     $('#dialogDiv').html( data);
-    //console.log(data);
+
     $('#ajaxEventMask').remove();
   });
 });
@@ -3928,13 +3812,13 @@ $('#installTemplate').click(function(){
 $('#chooseTemplateRevisionForm').livequery(function(){
   $(this).attr('action', $(this).attr('action') + 'file/' + $('#revisionSelect option:selected').text() );
   $(this).ajaxForm(function(data){
-    //console.log(data);
+
     //$('#uploadTemplateForm').html(data);
     ajaxEmitMessage(lang.TemplateInstalled );
     //setTimeout("$('#ajaxEventMessage').fadeOut(1000)", 1000);
     $('#dialogDiv').remove();
     //$('#folderNames').change();
-    //console.log(data);
+
     //ajaxEmitMessage(lang.FileUploaded);
     setTimeout("clickMask()", 1000); //closing all
   });
@@ -3946,11 +3830,11 @@ $('#ajaxEventMessage').livequery('click', function(){
 
 //UPDATING CHECKBOXES, COMBOBOXES
 $('select#objList').livequery('change', function(){
-  //console.log($(this).val() );
+
   $('input[type="checkbox"]').each(function(){
     if($(this).prop('checked') == true ) {
       // $(this).closest('span').addClass('checked');
-      //console.log(this.id);
+
     }  else{
       // $(this).closest('span').removeClass('checked');
     }
