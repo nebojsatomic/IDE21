@@ -1807,13 +1807,13 @@ $('#cornerParamButton').livequery('click', function(){
     $('#' + idObjekta).attr('class', a);
 
     $('#' + idObjekta).removeClass(objClass.match(re));
-    $('#' + idObjekta).addClass("corParams_(" + $('#chooseCornerStyle').val() + "," + $('#chooseCornerOrientation').val() + "," + $('#cornerParamRadius').attr('value') + "px" + ")" );
+    $('#' + idObjekta).addClass("corParams_(" + $('#chooseCornerStyle').val() + "," + $('#chooseCornerOrientation').val() + "," + $('#cornerParamRadius').val() + "px" + ")" );
 
     $('#objPropertiesClass').prop('value', $('#' + idObjekta).attr("class") );
     ajaxEmitMessage(objClass.match(re) + "is removed");
     setTimeout("$('.ui-dialog').remove();", 500); //closing all
   } else {
-    $('#' + idObjekta).addClass("corParams_(" + $('#chooseCornerStyle').val() + "," + $('#chooseCornerOrientation').val() + "," + $('#cornerParamRadius').attr('value') + "px" + ")" );
+    $('#' + idObjekta).addClass("corParams_(" + $('#chooseCornerStyle').val() + "," + $('#chooseCornerOrientation').val() + "," + $('#cornerParamRadius').val() + "px" + ")" );
     $('#objPropertiesClass').attr('value', $('#' + idObjekta).attr("class") );
     ajaxEmitMessage(objClass.match(re) + "is removed");
     setTimeout("$('.ui-dialog').remove();", 500); //closing all
@@ -1883,11 +1883,11 @@ $('#aParamShadow').livequery('click', function(){
           }
         }
         //putting the existing values in the input boxes
-        $('#shdwLeft').attr('value',Rleft);
-        $('#shdwTop').attr('value',Rtop);
-        $('#shdwBlur').attr('value',Rblur);
-        $('#shdwOpacity').attr('value',Ropacity);
-        $('#shdwColor').attr('value',Rcolor);
+        $('#shdwLeft').val(Rleft);
+        $('#shdwTop').val(Rtop);
+        $('#shdwBlur').val(Rblur);
+        $('#shdwOpacity').val(Ropacity);
+        $('#shdwColor').val(Rcolor);
       }
     });
     $('#dialogDiv').show('slow');
@@ -1908,13 +1908,13 @@ $('#shadowParamButton').livequery('click', function(){
 
     $('#' + idObjekta).attr('class', a);
 
-    $('#' + idObjekta).addClass("dsParams_(" + "left:" + $('#shdwLeft').attr('value') + "," + "top:" + $('#shdwTop').attr('value') + "," + "blur:" + $('#shdwBlur').attr('value') + "," + "opacity:" + $('#shdwOpacity').attr('value') + "," + "color:" + $('#shdwColor').attr('value') + ")" );
+    $('#' + idObjekta).addClass("dsParams_(" + "left:" + $('#shdwLeft').val() + "," + "top:" + $('#shdwTop').val() + "," + "blur:" + $('#shdwBlur').val() + "," + "opacity:" + $('#shdwOpacity').val() + "," + "color:" + $('#shdwColor').val() + ")" );
     $('#objPropertiesClass').prop('value', $('#' + idObjekta).attr("class") );
     ajaxEmitMessage(objClass.match(re) + "is removed");
     setTimeout("$('.ui-dialog').remove();", 500); //closing all
   } else {
     //$('#' + idObjekta).removeClass(objClass.match(re));
-    $('#' + idObjekta).addClass("dsParams_(" + "left:" + $('#shdwLeft').attr('value') + "," + "top:" + $('#shdwTop').attr('value') + "," + "blur:" + $('#shdwBlur').attr('value') + "," + "opacity:" + $('#shdwOpacity').attr('value') + "," + "color:" + $('#shdwColor').attr('value') + ")" );
+    $('#' + idObjekta).addClass("dsParams_(" + "left:" + $('#shdwLeft').val() + "," + "top:" + $('#shdwTop').val() + "," + "blur:" + $('#shdwBlur').val() + "," + "opacity:" + $('#shdwOpacity').val() + "," + "color:" + $('#shdwColor').val() + ")" );
     $('#objPropertiesClass').prop('value', $('#' + idObjekta).attr("class") );
     ajaxEmitMessage(objClass.match(re) + "is added");
     setTimeout("$('.ui-dialog').remove();", 500); //closing all
@@ -2137,7 +2137,7 @@ $('#insertImage').click(function(){
 //set as body bg;
 $('#setBodyBgImage').click(function(){
   if($('#bgSelect').val() == "BODY") {
-    $('#template_bodyBg').attr("value" , "url(" + $('#imagePathShow').text() + ")" );
+    $('#template_bodyBg').val("url(" + $('#imagePathShow').text() + ")" );
     $('#template_bodyBg').change();
     $('.body2be').attr("src" , $('#imagePathShow').text() );
   }
