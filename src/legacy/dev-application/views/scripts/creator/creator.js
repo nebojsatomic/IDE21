@@ -255,18 +255,12 @@ function templateReopenAfterLanguage(){
   });
 
 }
-//body streching depending on the temlate
+//body streching depending on the template
 function bodyStrech(){
-  /*$("body").css("-moz-background-size" , "100%");
-  $("body").css("-webkit-background-size" , "100%");
-  $("body").css("-o-background-size" , "100%");*/
   $("body").css("background-size" , "100%");
 }
 // and the oposite, enabling the body bg repeat
 function removeBodyStrech(){
-/*  $("body").css("-moz-background-size" , "");
-  $("body").css("-webkit-background-size" , "");
-  $("body").css("-o-background-size" , "");*/
   $("body").css("background-size" , "");
 }
 /*get cookie values*/
@@ -312,15 +306,9 @@ function loadTemplate(idT){
         }
         if(k == 0) {$('body').css("background" , v);}
 
-      })
-
-      if(data.bodyBg.match(/-moz-background-size:100%/g) ){
-        bodyStrech();
-      } else {
-        removeBodyStrech();
-      }
-
+      });
     }
+
     if(data.defaultTemplate == "1"){chck = "checked";} else {chck = "";}
     $('#templateDefaultCB').prop("checked", chck);//templateDefault
 
@@ -823,23 +811,7 @@ $(document).ready(function(){
     $('#' + $(this).val() ).dblclick();
 
   });
-  //MOVING AROUND PROPERTIES BOX
-/*
-  $("#rightB").click(function(){
-    $("#contProperties").animate({"right": "-=100px"}, "slow");
-  });
 
-  $("#leftB").click(function(){
-    $("#contProperties").animate({"right": "+=100px"}, "slow");
-  });
-  $("#upB").click(function(){
-    $("#contProperties").animate({"top": "-=100px"}, "slow");
-  });
-
-  $("#downB").click(function(){
-    $("#contProperties").animate({"top": "+=100px"}, "slow");
-  });
-*/
   //CREATING NEW OBJECT!
   $('#newItem').livequery('click', function(){
     var now = new Date();
@@ -2917,7 +2889,7 @@ $('.pag_a').livequery('click', function(){
   idCurrent = $(this).html();//this is important for refreshing of the table
 
   div = $(this).parents(".pagination-closest").attr("id");
-/*style="position:absolute;bottom:20px;left:10%;z-index:999999;text-align:center;background:transparent;padding:10px;"*/
+
   $(this).closest('.pagination-container').prepend('<div id="loadingBook" class="absolute right-1 bottom-1 "><span class="loading loading-spinner loading-xs text-white w-8 h-8"></span></div>');
 
   $.get( absoluteUrl + $(this).attr("href"), function(data){
@@ -2940,10 +2912,8 @@ $('#langName').livequery('change', function(){
   $.post(absoluteUrl + "creator/change-language/code/" + langcode, function(data) {
 
     if($('#deletePage').css("display") != 'none'){
-      //Otvaranje strane koja je bila otvorena pre promene languagea
+      //Opening the page that was open before the language change
       $.getJSON(absoluteUrl + "page/open/id/" + $("#pgID").html(), function(data){
-
-        //jsin = eval("(" + data + ")" );
 
         $('#categoryNameAssign').prop("value" , data.category);
         $('#pageImage').prop("value" , data.image);
@@ -2992,13 +2962,13 @@ $('#langName').livequery('change', function(){
 
         refreshControls();
 
-      });//end za otvaranje strane
-    } else {//END AKO JE PAGE
+      });//end opening the page
+    } else {//END IF IT IS A PAGE
 
       //templateReopenAfterLanguage();
       loadTemplate($('#templateIDediting').html());
 
-    } //END AKO JE TEMPLATE
+    } //END IF IT IS A TEMPLATE
     $('#clearPage').click();
 
     ajaxEmitMessage(data);
