@@ -1067,7 +1067,6 @@ $(document).ready(function(){
 
     $('#pageCode').attr("action", absoluteUrl + "page/update/pageId/" + $('#pgID').html() + "/applytoall/" + applytoAllLangs );
     $('#pageCode').ajaxSubmit(function(data){
-      console.log("Page is updated!");
 
       ajaxEmitMessage(lang.Done);
       setTimeout("$('#ajaxEventMask').click()", 1000);
@@ -2163,7 +2162,7 @@ $('#NR').livequery('change', function(){
 });
 
 $('#fixedBg').livequery('change', function(){
-  console.log($(this).val());
+
   if($(this).val() == "fixed"){
     trenutniCss = $('#template_bodyBg').val();
     if(trenutniCss.match(/;background-size:100%;/g) ) {
@@ -3173,9 +3172,6 @@ $('.paginationStep').livequery('change', function(){
   psValue = $(this).val();
   $.post(absoluteUrl + 'creator/change-pagination-step/pagid/' + psId + '/val/' + psValue, function(data){
     replaced = psId.replace(/paginationStep_/, "");
-    //$.get(absoluteUrl + 'creator/paginate-table/tid/'+ replaced, function(data){
-    //    console.log(data);
-    //});
   });
 
 });
