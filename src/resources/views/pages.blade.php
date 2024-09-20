@@ -20,10 +20,10 @@
   <!-- Don't use this in production: 
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>-->
 
-    <!-- Fonts to support Material Design -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-    <!-- Icons to support Material Design -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <!-- !!! disable loading of google fonts - should be local fonts !!! Fonts to support Material Design
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /> -->
+    <!-- Icons to support Material Design
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /> -->
 
     <?php 
     if($staticFiles) {

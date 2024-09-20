@@ -16,13 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/aa', function () {
-    return 'Hello World';
-});
 */
-Route::get('/ide21_creator/interface', 'App\Http\Controllers\LInterfaceController@index' );
 
+//Route::get('/ide21_creator/interface', 'App\Http\Controllers\LInterfaceController@index' );
 //Route::get('/pages/{pageid}', 'App\Http\Controllers\LPagesController@index' ); // disable temporary, use ZF1 website
 
 // Legacy Framework Routes
