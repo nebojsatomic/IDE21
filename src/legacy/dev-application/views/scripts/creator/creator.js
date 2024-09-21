@@ -2197,7 +2197,7 @@ $('#fixedBg').livequery('change', function(){
 });
 //DELETE IMAGE;
 $('#deleteImage').click(function(){
-  if($('#showFolderImages').val() != ""){
+  if($('#imageNames').val() != ""){
     var confir = confirm(lang.AYS);
   }
 
