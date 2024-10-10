@@ -49,7 +49,7 @@ return array (
 "Save Page" => "Guardar página",
 "Save As New Page" => "Guardar como página nueva",
 "Apply to all languages" => "Aplicar a todos los idiomas",
-"Restrictive" => "Restrictivo",
+"Restrictive" => "Restringir",
 "Permissions" => "Permisos",
 "Relative to Content Area" => "En relación al área de contenido",
 "Page Title" => "Título de la página",
