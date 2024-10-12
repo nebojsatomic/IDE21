@@ -1,4 +1,4 @@
-FROM php:8.3-apache
+FROM php:apache
 
 RUN apt update && apt install -y zlib1g-dev libpng-dev zip nano && rm -rf /var/lib/apt/lists/*
 RUN a2enmod rewrite
