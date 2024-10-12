@@ -79,4 +79,4 @@ There is a lot to rewrite here, but it should not be impossible to create someth
 5. Commit the changes to your branch on your fork, and create a pull request
 
 
-Anyone interested in contributing, or need help with installing, running or using it, contact me on LinkedIn.
+Anyone interested in contributing, or need help with installing, running or using it, contact me on [LinkedIn](https://www.linkedin.com/in/nebojsatomic/).
