@@ -76,7 +76,8 @@ There is a lot to rewrite here, but it should not be impossible to create someth
 2. Create branch on your fork for translation, for example 'german' branch
 3. Create a new file in src/legacy/dev-application/languages/creator/  (if german than de.php - for other languages check what i18n locale you should use)
 4. You should see all the strings for creator admin panel in src/legacy/dev-application/languages/creator/sr.php, use them for your language.
-5. Commit the changes to your branch on your fork, and create a pull request
+5. When creating a new translation, there is also a website front part: copy src/legacy/dev-application/languages/sr.php - contents of this file to src/legacy/dev-application/languages/YOUR_LANG_CODE.php and translate, and there is a  part that uses javascript files for translating some strings: src/public/js/language/creator/en.js should be copied to src/public/js/language/creator/YOUR_LANG_CODE.js and translated
+6.  Commit the changes to your branch on your fork, and create a pull request
 
 
 Anyone interested in contributing, or need help with installing, running or using it, contact me on [LinkedIn](https://www.linkedin.com/in/nebojsatomic/).
