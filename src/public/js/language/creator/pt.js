@@ -1,14 +1,14 @@
 var lang = new Object();
 
-lang.Loading = '';
-lang.Working = 'Trabalhando...';
-lang.AYS = 'Você tem certeza?';
-lang.Done = 'Concluído!';
-lang.TOpen = 'Abrindo template...';
-lang.POpen = 'Abrindo página...';
-lang.TUpdate = 'Modificando template...';
-lang.PUpdate = 'Salvando página...';
-lang.PageOpened = 'Página aberta!';
+lang.Loading = "";
+lang.Working = "Trabalhando...";
+lang.AYS = "Você tem certeza?";
+lang.Done = "Concluído!";
+lang.TOpen = "Abrindo template...";
+lang.POpen = "Abrindo página...";
+lang.TUpdate = "Modificando template...";
+lang.PUpdate = "Salvando página...";
+lang.PageOpened = "Página aberta!";
 lang.ClickMenu = "Clique no menu para selecioná-lo!";
 lang.ClickFolIm = "Clique na pasta e depois na imagem para selecioná-la!";
 lang.SelFolFirst = "Selecione uma pasta primeiro!";
