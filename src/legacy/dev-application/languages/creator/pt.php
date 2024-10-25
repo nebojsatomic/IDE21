@@ -169,7 +169,7 @@ return array(
 "Change the template of this page" => "Alterar o Template Desta Página",
 "Click to logout" => "Clique para Sair",
 //manage all pages translations
-"With selected" => 'Com Selecionados',
+"With selected" => "Com Selecionados",
 "Delete" => "Excluir",
 "Publish" => "Publicar",
 "Unpublish" => "Despublicar",
