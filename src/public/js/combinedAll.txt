@@ -21,8 +21,6 @@
     <!--tiny_mce
     <script language="JavaScript" type="text/javascript" src="/js/wysiwyg/tiny_mce/tiny_mce.js"></script>
     -->
-    <!--Cycle-->
-    <script type="text/javascript" src="/js/slide/jquery-cycle.js" ></script>
 
     <!--easing-->
     <script type="text/javascript" src="/js/jquery/jquery.easing.1.3.js"></script>
