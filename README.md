@@ -56,6 +56,8 @@ If you consider further use of IDE21, set your own configuration for the databas
 
 If you want to develop, note that container uses Named volume by default, in order to be able to see your changes in the container instantly ( not rebuild the image ), you must set Host volume in docker-compose.yaml by uncommenting the line 12 and commenting the line 13, and afterwards access the 'web' container with docker exec and run ./laravel.sh.
 
+DO NOT PUSH THE CHANGE YOU MADE IN docker-compose.yaml TO REMOTE BRANCH
+
 # DEMO
 
 https://demo.ide21.com/admin
