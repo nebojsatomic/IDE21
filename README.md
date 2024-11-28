@@ -9,6 +9,22 @@ Basically have the designer and the frontend developer in one person, from the a
 After that template is available for export, it can be uploaded to some other installation of IDE21, and the design which was created by the first admin on one domain can now be taken by another admin to work on it to improve it in his own way on another domain, which should enable quick creating of the new templates ( new designs ).
 This is the base idea, there are still some bugs and unfinished features, there will be Wiki documentation created for User and Developer realms, which describe what is posible to do, and what is in TODO list.
 
+# FEATURES so far
+- Design templates in admin panel
+- create pages with the same principle, assign template to be used with the specific page
+- TailwindCSS - use classes to create designs
+- create and display Menus
+- create and display Categories
+- use Modules ( form creation, user, search)
+- upload Images and use them in design
+- Multi User: *set ACL permissions on the pages
+- Multi Language: add as many languages as you want
+- Write CSS and/or Javascript if you need to, every user can write his own
+- website administration is possible on a mobile device
+
+and more…
+
+
 # SCREENSHOTS
 MOBILE:
 
