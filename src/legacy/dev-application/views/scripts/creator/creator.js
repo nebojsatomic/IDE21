@@ -1329,6 +1329,7 @@ $(".draggable").livequery('dblclick', function(e){
   height= $(e.target).css("height");
   border = $(e.target).css("border");
   bgColor = $(e.target).css("background-color");
+  fontColor = $(e.target).css("color");
   bgImage = $(e.target).css("background-image");
   objectClasses = $(e.target).attr("class");
   //htmlValue = $(this).html();
@@ -1377,7 +1378,9 @@ $(".draggable").livequery('dblclick', function(e){
   $("#objPropertiesBorder").val( border );
   $("#objPropertiesClass").val( objectClasses );
   $("#objPropertiesBackground").val( bgColor );
-  $('.clr-field').css({ color: bgColor });
+  $("#objPropertiesFontColor").val( fontColor );
+  $("#objPropertiesBackground").closest('.clr-field').css({ color: bgColor });
+  $("#objPropertiesFontColor").closest('.clr-field').css({ color: fontColor });
 
   $("#objPropertiesBackgroundImage").val( bgImage );
   //objTheme
@@ -1483,6 +1486,11 @@ document.addEventListener('coloris:pick', event => {
   if(event.detail.currentEl.id === 'objPropertiesBackground') {
     idObjekta = $('#objProperties').data("objid");
     $('#' + idObjekta).css("background-color", event.detail.color);
+  }
+  // if change font-color of the selected object
+  if(event.detail.currentEl.id === 'objPropertiesFontColor') {
+    idObjekta = $('#objProperties').data("objid");
+    $('#' + idObjekta).css("color", event.detail.color);
   }
 
 });
