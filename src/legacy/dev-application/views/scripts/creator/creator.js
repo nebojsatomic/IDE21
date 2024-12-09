@@ -50,11 +50,10 @@ function showEditObjectButtons(obj){
   let adjustTopPosition = 30;
   if( $('#'+ obj ).offset().top < 70 ) adjustTopPosition = 0;
 
-  $('#penPointer').css({left: $('#'+ obj ).offset().left + 'px',top: $('#'+ obj ).offset().top - adjustTopPosition + 'px'}).fadeIn();
-  $('#movePointer').css({left: $('#'+ obj ).offset().left + 40 + 'px',top: $('#'+ obj ).offset().top  - adjustTopPosition + 'px'}).fadeIn();
-  $('#dropPointer').css({left: $('#'+ obj ).offset().left + 80 + 'px',top: $('#'+ obj ).offset().top  - adjustTopPosition + 'px'}).fadeIn();
-  $('#moveUpPointer').css({left: $('#'+ obj ).offset().left + 120 + 'px',top: $('#'+ obj ).offset().top  - adjustTopPosition + 'px'}).fadeIn();
-  $('#moveDownPointer').css({left: $('#'+ obj ).offset().left + 160 + 'px',top: $('#'+ obj ).offset().top  - adjustTopPosition + 'px'}).fadeIn();
+  $('#movePointer').css({left: $('#'+ obj ).offset().left + 'px',top: $('#'+ obj ).offset().top  - adjustTopPosition + 'px'}).fadeIn();
+  $('#dropPointer').css({left: $('#'+ obj ).offset().left + 40 + 'px',top: $('#'+ obj ).offset().top  - adjustTopPosition + 'px'}).fadeIn();
+  $('#moveUpPointer').css({left: $('#'+ obj ).offset().left + 80 + 'px',top: $('#'+ obj ).offset().top  - adjustTopPosition + 'px'}).fadeIn();
+  $('#moveDownPointer').css({left: $('#'+ obj ).offset().left + 120 + 'px',top: $('#'+ obj ).offset().top  - adjustTopPosition + 'px'}).fadeIn();
 }
 
 function doLightBox(){
@@ -452,7 +451,7 @@ $(document).ready(function(){
     let adjustTopPosition = 30;
     if( $('.selected-for-append').offset().top < 70 ) adjustTopPosition = 0;
 
-    $('#penPointer, #movePointer, #dropPointer, #moveUpPointer, #moveDownPointer').css({
+    $('#movePointer, #dropPointer, #moveUpPointer, #moveDownPointer').css({
       top: $('.selected-for-append').offset().top - adjustTopPosition + 'px'
     });
     /*$('#tooltip').css({
@@ -734,9 +733,6 @@ $(document).ready(function(){
       absPosTop = topPositionObj - ($(this).offset().top);
       absPosLeft = leftPositionObj - ($(this).offset().left );
 
-      if(id == $('#objProperties').data("objid") ){
-        //$('#penPointer').css({left:absPosLeft + drOff,top: absPosTop-40}).fadeIn();
-      }
       if(absPosTop < 0 || absPosLeft < 0){
         idForRem = $('#' + id).attr("id");
       }
@@ -1264,7 +1260,6 @@ $(".draggable").livequery('dblclick', function(e){
   toP = $(this).position().top;
   drOff = $('#droppable').position().left;
 
-  //$('#penPointer').css({left:lefT + drOff, top:toP-40}).fadeIn();
   $(".draggable").each(function(){
 
     $(this).removeClass("activeObject");
@@ -1633,7 +1628,6 @@ $("#delButton").livequery('click', function(){
   idObjekta = $('#objIDshow').text();
   $('#objList option:contains("'+ idObjekta +'")').remove();
 
-  $('#penPointer').hide();
   $('#objIDshow').html("");
   $('#' + idObjekta).remove();
   $('#objProperties').data("objid", "");
