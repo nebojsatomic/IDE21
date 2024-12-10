@@ -135,13 +135,18 @@
 
                 <div class="flex flex-col my-2">
                   <?php echo $this->translate->_("Style for this object");?>:
-                  <textarea id="objPropertiesCSS" name="objPropertiesCSS" class="help textarea" title="<?php echo $this->translate->_("Style for this object");?>">
-                  </textarea>
+                  <textarea id="objPropertiesCSS" name="objPropertiesCSS" class="help textarea" title="<?php echo $this->translate->_("Style for this object");?>"></textarea>
+                  <a href="" id="applyStyle" class="navLinks noAjaxEvent btn btn-secondary btn-sm md:btn-xs mb-2 help" title="<?php echo $this->translate->_("Click to apply this HTML to the selected object");?>">Apply</a>
                 </div>
                 <!-- tinyMCE should be replaced -->
-                <div class="flex flex-col h-52 my-4 hidden">
+                <div class="flex flex-col h-52 my-2 hidden">
                   <textarea id="objPropertiesHtmlTiny" name="objPropertiesHtmlTiny" style="height:100px;">
                   </textarea>
+                </div>
+                <div class="flex flex-col min-h-32">
+                  <?php echo $this->translate->_("HTML of this object");?>:
+                  <textarea id="objPropertiesHtmlSelected" name="objPropertiesHtmlSelected" class="min-h-32"></textarea>
+                  <a href="" id="applyHtml" class="navLinks noAjaxEvent btn btn-secondary btn-sm md:btn-xs mb-2 help" title="<?php echo $this->translate->_("Click to apply this HTML to the selected object");?>">Apply</a>
                 </div>
 
                 <div class="">

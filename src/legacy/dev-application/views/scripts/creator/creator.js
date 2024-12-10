@@ -43,34 +43,6 @@ function dialog(){
   $( "#dialogDiv" ).dialog({modal:false, resizable: false, title:$('.currentTitle').text() });
 }
 
-/* //tinyMCE should be replaced */
-//tinyMCE INIT
-tinyMCE.init({
-  // add these two lines for absolute urls
-  remove_script_host : false,
-  convert_urls : false,
-  entity_encoding : "raw",
-  forced_root_block: false,
-
-  mode : "exact",
-  elements : "objPropertiesHtmlTiny",
-  theme : "advanced",
-  //plugins : "safari,spellchecker,style,table,advhr,advimage,advlink,inlinepopups,contextmenu,paste,fullscreen,noneditable,visualchars",
-  plugins : "safari,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
-
-  theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,formatselect,fontselect",
-  theme_advanced_buttons2 : "pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,fontsizeselect",
-  theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup",
-  theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,link,unlink,anchor,image,cleanup",
-  theme_advanced_buttons5 : "visualchars,nonbreaking,template,blockquote,pagebreak,|,insertdate,inserttime,|,forecolor,backcolor,|,charmap,emotions,iespell,media,advhr,|,fullscreen,code",
-  theme_advanced_toolbar_location : "top",
-  theme_advanced_toolbar_align : "left",
-  theme_advanced_statusbar_location : "none",
-
-  theme_advanced_resizing : false
-
-});
-
 // change behaviour of edit object button from version 24.05: this button and some other buttons should appear above the currently selected object
 function showEditObjectButtons(obj){
   // place pointer above the selected object on the top left
@@ -78,11 +50,10 @@ function showEditObjectButtons(obj){
   let adjustTopPosition = 30;
   if( $('#'+ obj ).offset().top < 70 ) adjustTopPosition = 0;
 
-  $('#penPointer').css({left: $('#'+ obj ).offset().left + 'px',top: $('#'+ obj ).offset().top - adjustTopPosition + 'px'}).fadeIn();
-  $('#movePointer').css({left: $('#'+ obj ).offset().left + 40 + 'px',top: $('#'+ obj ).offset().top  - adjustTopPosition + 'px'}).fadeIn();
-  $('#dropPointer').css({left: $('#'+ obj ).offset().left + 80 + 'px',top: $('#'+ obj ).offset().top  - adjustTopPosition + 'px'}).fadeIn();
-  $('#moveUpPointer').css({left: $('#'+ obj ).offset().left + 120 + 'px',top: $('#'+ obj ).offset().top  - adjustTopPosition + 'px'}).fadeIn();
-  $('#moveDownPointer').css({left: $('#'+ obj ).offset().left + 160 + 'px',top: $('#'+ obj ).offset().top  - adjustTopPosition + 'px'}).fadeIn();
+  $('#movePointer').css({left: $('#'+ obj ).offset().left + 'px',top: $('#'+ obj ).offset().top  - adjustTopPosition + 'px'}).fadeIn();
+  $('#dropPointer').css({left: $('#'+ obj ).offset().left + 40 + 'px',top: $('#'+ obj ).offset().top  - adjustTopPosition + 'px'}).fadeIn();
+  $('#moveUpPointer').css({left: $('#'+ obj ).offset().left + 80 + 'px',top: $('#'+ obj ).offset().top  - adjustTopPosition + 'px'}).fadeIn();
+  $('#moveDownPointer').css({left: $('#'+ obj ).offset().left + 120 + 'px',top: $('#'+ obj ).offset().top  - adjustTopPosition + 'px'}).fadeIn();
 }
 
 function doLightBox(){
@@ -480,7 +451,7 @@ $(document).ready(function(){
     let adjustTopPosition = 30;
     if( $('.selected-for-append').offset().top < 70 ) adjustTopPosition = 0;
 
-    $('#penPointer, #movePointer, #dropPointer, #moveUpPointer, #moveDownPointer').css({
+    $('#movePointer, #dropPointer, #moveUpPointer, #moveDownPointer').css({
       top: $('.selected-for-append').offset().top - adjustTopPosition + 'px'
     });
     /*$('#tooltip').css({
@@ -515,26 +486,6 @@ $(document).ready(function(){
   $('input[type=submit]').livequery('click', function(){
     ajaxEvent();
     ajaxEventDone(lang.Working);//showing the message
-  });
-
-  //CLICK NA UPDATE FROM TINYMCE
-  $('#tinySave').click(function(){
-    var ed = tinyMCE.get('objPropertiesHtmlTiny');
-    newContent = tinyMCE.get('objPropertiesHtmlTiny').getContent();
-
-    if($('#objIDshow').html() != '') { // only if object is selected
-      $('#' + $('#objIDshow').html() + ' p.objContent').each(function(){
-        $(this).remove();
-      });
-
-      //$('#' + $('#objIDshow').html() ).resizable('destroy');//stop resizable
-
-      $('#' + $('#objIDshow').html()).html(newContent + "\n\n\n");//update html of the object
-
-      $('#' + $('#objIDshow').html() ).dblclick();
-
-      //$('#' + $('#objIDshow').html() ).resizable({autohide:true});//resizable again
-    }
   });
 
   $('#saveCssCodeA').click(function(){
@@ -782,9 +733,6 @@ $(document).ready(function(){
       absPosTop = topPositionObj - ($(this).offset().top);
       absPosLeft = leftPositionObj - ($(this).offset().left );
 
-      if(id == $('#objProperties').data("objid") ){
-        //$('#penPointer').css({left:absPosLeft + drOff,top: absPosTop-40}).fadeIn();
-      }
       if(absPosTop < 0 || absPosLeft < 0){
         idForRem = $('#' + id).attr("id");
       }
@@ -801,10 +749,9 @@ $(document).ready(function(){
   $('#poA').click(function(){
     shouldDisplayMenu = 0;
   });
-  //toggle visibility for the textareas with tinymce, html and style for the object
+  //toggle visibility for the textareas with html and style for the object
   $('#toggleVisibilityRowAnchor').click(function(){
     $('#toggleVisibilityRow').toggle();
-
   });
 
   $('#objList').livequery('click', function(){
@@ -1313,7 +1260,6 @@ $(".draggable").livequery('dblclick', function(e){
   toP = $(this).position().top;
   drOff = $('#droppable').position().left;
 
-  //$('#penPointer').css({left:lefT + drOff, top:toP-40}).fadeIn();
   $(".draggable").each(function(){
 
     $(this).removeClass("activeObject");
@@ -1332,8 +1278,8 @@ $(".draggable").livequery('dblclick', function(e){
   fontColor = $(e.target).css("color");
   bgImage = $(e.target).css("background-image");
   objectClasses = $(e.target).attr("class");
-  //htmlValue = $(this).html();
   htmlValue = $('#' + $('#objIDshow').text() ).html();
+  outerHtmlValue = $('#' + $('#objIDshow').text() ).get(0).outerHTML;
   zIn = $(e.target).css("z-index");
   css = $(e.target).attr("style");
 
@@ -1399,11 +1345,8 @@ $(".draggable").livequery('dblclick', function(e){
   } else {
     $('#objPropertiesHtml').attr("disabled", false);
     $("#objPropertiesHtml").val( htmlValue );
-    $('#objPropertiesHtmlTiny').val( htmlValue);
 
-    var ed = tinyMCE.get('objPropertiesHtmlTiny');
-
-    ed.setContent(htmlValue, {format : 'raw'});
+    $('#objPropertiesHtmlSelected').val( outerHtmlValue);
 
   }
 
@@ -1467,17 +1410,21 @@ $("#objPropertiesY").livequery('change', function(){
 $("#objPropertiesZ").livequery('change', function(){
   idObjekta = $('#objProperties').data("objid");
   $('#' + idObjekta).css("z-index", $(this).val());
-
 });
+
 $("#objPropertiesHtml").livequery('change', function(){
   idObjekta = $('#objProperties').data("objid");
   $('#' + idObjekta).html($(this).val());
-
 });
+
+$("#objPropertiesHtmlSelected").livequery('change', function(){
+  idObjekta = $('#objProperties').data("objid");
+  $('#' + idObjekta).replaceWith( $(this).val() );
+});
+
 $("#objPropertiesCSS").livequery('change', function(){
   idObjekta = $('#objProperties').data("objid");
   $('#' + idObjekta).attr("style", $(this).val());
-
 });
 
 document.addEventListener('coloris:pick', event => {
@@ -1681,7 +1628,6 @@ $("#delButton").livequery('click', function(){
   idObjekta = $('#objIDshow').text();
   $('#objList option:contains("'+ idObjekta +'")').remove();
 
-  $('#penPointer').hide();
   $('#objIDshow').html("");
   $('#' + idObjekta).remove();
   $('#objProperties').data("objid", "");
@@ -3541,20 +3487,6 @@ $('#objList').livequery('click', function(){
 
   $('#'+ selectedObjID ).trigger('click');
   $('#'+ selectedObjID ).trigger('mouseover'); // triger refresh of classes in ID assistant
-});
-
-/* tinyMCE should be replaced with something new, atm do this fix */
-$('#penPointer').livequery('click', function(){
-  $('.selected-for-append').trigger('dblclick');
-  tinyMCE.execCommand('mceFullScreen');
-
-  /*$('body').livequery('click', function(){
-    setTimeout(function(){//set timeout to detect out of fullscreen
-      if($('#mce_fullscreen').length < 1 ) {
-        $('#tinySave').trigger('click'); // trigger update of the el in the template/page
-      }
-    }, 500);
-  });*/
 });
 
 $('#movePointer').livequery('click', function(){
