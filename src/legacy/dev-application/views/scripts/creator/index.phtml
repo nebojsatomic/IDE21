@@ -138,7 +138,7 @@
                 </div>
                 <div class="flex flex-col min-h-32">
                   <?php echo $this->translate->_("HTML of this object");?>:
-                  <textarea id="objPropertiesHtmlSelected" name="objPropertiesHtmlSelected" class="min-h-32"></textarea>
+                  <textarea id="objPropertiesHtmlSelected" name="objPropertiesHtmlSelected" class="textarea min-h-32"></textarea>
                   <a href="" id="applyHtml" class="navLinks noAjaxEvent btn btn-secondary btn-sm md:btn-xs mb-2 help" title="<?php echo $this->translate->_("Click to apply this HTML to the selected object");?>">Apply</a>
                 </div>
 
@@ -175,21 +175,21 @@
             <div class="grid place-items-strech gap-4" >
               <div class="grid gap-y-2 content-start">
                 <div class="grid mt-1 gap-y-2 h-24">
-                  <div class="creatorDiv grid grid-cols-2 items-strech"><span class="cl"><?php echo $this->translate->_("ID Assistant");?></span><span><input id="tttoggle" type="checkbox"  class="checkbox-sm float-right" checked="false" /></span></div>
-                  <div class="creatorDiv grid grid-cols-2 items-strech"><span class="cl"><?php echo $this->translate->_("Show hidden");?>:</span><span><input id="showFooterCheck" name="showFooterCheck" type="checkbox" class="checkbox-sm float-right" /></span></div>
+                  <div class="creatorDiv grid grid-cols-2 items-strech"><span class="cl"><?php echo $this->translate->_("ID Assistant");?></span><span><input id="tttoggle" type="checkbox"  class="checkbox-sm checkbox float-right" checked="false" /></span></div>
+                  <div class="creatorDiv grid grid-cols-2 items-strech"><span class="cl"><?php echo $this->translate->_("Show hidden");?>:</span><span><input id="showFooterCheck" name="showFooterCheck" type="checkbox" class="checkbox-sm checkbox float-right" /></span></div>
                   <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("Shadow");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent currentTitle" id="aParamShadow" title="<?php echo $this->translate->_("Click to set shadow params");?>">
                     <svg class="w-4 h-4 fill-current bg-secondary text-white rounded-full inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M16.5 6a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v7.5a3 3 0 0 0 3 3v-6A4.5 4.5 0 0 1 10.5 6h6Z" />
                       <path d="M18 7.5a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-7.5a3 3 0 0 1-3-3v-7.5a3 3 0 0 1 3-3H18Z" />
                     </svg>
                     <div class="hidden">Shadow</div>
-                  </a><input id="shadowCheck" type="checkbox" class="checkbox-sm float-right"  /></span></div>
+                  </a><input id="shadowCheck" type="checkbox" class="checkbox-sm checkbox float-right"  /></span></div>
                   <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("Corner");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent currentTitle content-center h-6 inline-block" id="aParamCorner" title="<?php echo $this->translate->_("Click to set corner params");?>">
                     <svg class="w-4 h-4 fill-current text-white rounded" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" >
                       <path d="M6 3a3 3 0 0 0-3 3v1.5a.75.75 0 0 0 1.5 0V6A1.5 1.5 0 0 1 6 4.5h1.5a.75.75 0 0 0 0-1.5H6ZM16.5 3a.75.75 0 0 0 0 1.5H18A1.5 1.5 0 0 1 19.5 6v1.5a.75.75 0 0 0 1.5 0V6a3 3 0 0 0-3-3h-1.5ZM12 8.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5ZM4.5 16.5a.75.75 0 0 0-1.5 0V18a3 3 0 0 0 3 3h1.5a.75.75 0 0 0 0-1.5H6A1.5 1.5 0 0 1 4.5 18v-1.5ZM21 16.5a.75.75 0 0 0-1.5 0V18a1.5 1.5 0 0 1-1.5 1.5h-1.5a.75.75 0 0 0 0 1.5H18a3 3 0 0 0 3-3v-1.5Z" />
                     </svg>
                     <div class="hidden">Corner</div>
-                  </a><input id="cornerCheck" type="checkbox" class="checkbox-sm float-right"  /></span></div>
+                  </a><input id="cornerCheck" type="checkbox" class="checkbox-sm checkbox float-right"  /></span></div>
                 </div>
 
                 <div id="fontCont" style="display:none;">
@@ -230,7 +230,7 @@
                 </div>-->
               </div>
 
-              <div class="grid grid-cols-4 h-64 items-strech justify-items-end">
+              <div class="grid grid-cols-4 h-96 items-strech justify-items-end">
                 <span class="cl col-span-3 justify-self-start"><?php echo $this->translate->_("Width");?>:</span><span><input id="objPropertiesWidth" name="objPropertiesWidth"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
                 <span class="cl col-span-3 justify-self-start"><?php echo $this->translate->_("Height");?>:</span><span><input id="objPropertiesHeight" name="objPropertiesHeight"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
                 <span class="cl col-span-3 justify-self-start"><?php echo $this->translate->_("Border");?>:</span><span><input id="objPropertiesBorder" name="objPropertiesBorder"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
@@ -244,7 +244,7 @@
 
                 <span class="cl col-span-3 justify-self-start">BgImage:</span><span><input id="objPropertiesBackgroundImage" name="objPropertiesBackgroundImage"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
                 <span class="cl col-span-3 justify-self-start">Position:</span><span>
-                  <select name="selected-object-position" id="selected-object-position" class="help select select-xs w-full" title="Set the position of the selected object." size="1">
+                  <select name="selected-object-position" id="selected-object-position" class="help select select-xs w-16" title="Set the position of the selected object." size="1">
                       <option value="static" selected="selected">Static</option>
                       <option value="relative">Relative</option>
                       <option value="fixed">Fixed</option>
@@ -309,15 +309,15 @@
 
                   <div class="w-full">
 
-                    <div class="creatorDiv inline-flex gap-2 items-center w-full"><input id="allLangCheck" type="checkbox" class="checkbox-sm" /><?php echo $this->translate->_("Apply to all languages");?></div>
+                    <div class="creatorDiv inline-flex gap-2 items-center w-full"><input id="allLangCheck" type="checkbox" class="checkbox-sm checkbox" /><?php echo $this->translate->_("Apply to all languages");?></div>
 
-                    <div id="restrictiveDiv" class="inline-flex gap-2 items-center w-full"><input id="restrictiveCB" type="checkbox" class="checkbox-sm"  /><?php echo $this->translate->_("Restrictive");?> 
+                    <div id="restrictiveDiv" class="inline-flex gap-2 items-center w-full"><input id="restrictiveCB" type="checkbox" class="checkbox-sm checkbox"  /><?php echo $this->translate->_("Restrictive");?>
                     <a href="" style="display:none" id="openPagePermisions" class="navLinks a_access btn btn-xs btn-secondary" title="<?php echo $this->translate->_("Click to set permissions for this page");?>"><?php echo $this->translate->_("Permissions");?></a>
                     <div id="allowedRolesDiv" class="w-full p-2"></div>
                   </div>
 
                   <div id="boundDiv" class="inline-flex gap-2 items-center w-full">
-                    <input id="boundCB" type="checkbox" checked="checked" class="checkbox-sm" /><?php echo $this->translate->_("Relative to Content Area");?> 
+                    <input id="boundCB" type="checkbox" checked="checked" class="checkbox-sm checkbox" /><?php echo $this->translate->_("Relative to Content Area");?>
                   </div>
 
                 </div>
@@ -346,8 +346,8 @@
                   <a href="" id="applyTemplate" class="navLinks a_edit btn btn-secondary btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to edit existing template");?>"><?php echo $this->translate->_("Edit template");?></a>
                   <a href="" id="saveThisTemplate" class="navLinks a_save btn btn-secondary btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to save work on this template");?>"><?php echo $this->translate->_("Save Template");?></a>
                   <a href="" id="saveAsTemplate" class="navLinks a_save_new btn btn-secondary btn-sm md:btn-xs"  title="<?php echo $this->translate->_("Click to save this work as template");?>"><?php echo $this->translate->_("Save As New Template");?></a>
-                  <div class="creatorDiv inline-flex gap-2 items-center"><input id="allLangCheckTemplate" class="checkbox-sm" type="checkbox" /><?php echo $this->translate->_("Apply to all languages");?></div>
-                  <div id="DefaultTemplateChangerDiv" class="inline-flex gap-2 items-center"><input id="templateDefaultCB" class="checkbox-sm" type="checkbox" name="templateDefaultCB" /><?php echo $this->translate->_("Default Template");?></div>
+                  <div class="creatorDiv inline-flex gap-2 items-center"><input id="allLangCheckTemplate" class="checkbox-sm checkbox" type="checkbox" /><?php echo $this->translate->_("Apply to all languages");?></div>
+                  <div id="DefaultTemplateChangerDiv" class="inline-flex gap-2 items-center"><input id="templateDefaultCB" class="checkbox-sm checkbox" type="checkbox" name="templateDefaultCB" /><?php echo $this->translate->_("Default Template");?></div>
 
                   <a href="" id="exportTemplate" class="navLinks a_edit btn btn-secondary btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to export this template for use on another installation.");?>"><?php echo $this->translate->_("Export Template");?></a>
                   <a href="" id="installTemplate" class="navLinks a_save btn btn-secondary btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to install exported template");?>"><?php echo $this->translate->_("Install Template");?></a>
@@ -389,7 +389,7 @@
           <div id="menuShow" class="grid gap-2 content-start">
 
             <div class="inline-flex items-center gap-2">
-              <?php echo $this->translate->_("Put in this object");?> <input id="putInThis" class="checkbox-sm" type="checkbox" />
+              <?php echo $this->translate->_("Put in this object");?> <input id="putInThis" class="checkbox-sm checkbox" type="checkbox" />
             </div>
 
             <div class="grid items-center gap-2">
@@ -432,7 +432,7 @@
         <div id="categoryFormContainer" class="grid gap-4" >
           <div class="grid gap-2 content-start">
             <div>
-              <?php echo $this->translate->_("Put in this object");?> <input id="putCategoryInThis" class="checkbox-sm" type="checkbox" />
+              <?php echo $this->translate->_("Put in this object");?> <input id="putCategoryInThis" class="checkbox-sm checkbox" type="checkbox" />
             </div>
 
             <div id="categoryShow">
@@ -494,7 +494,7 @@
               </div>
 
               <div id="modulesShow">
-                <div style="display:none;"><?php echo $this->translate->_("Put in this object");?> <input id="putModulesInThis" class="checkbox-sm" type="checkbox" /></div>
+                <div style="display:none;"><?php echo $this->translate->_("Put in this object");?> <input id="putModulesInThis" class="checkbox-sm checkbox" type="checkbox" /></div>
 
                 <?php echo $this->formChooseModules;?>
               </div>
@@ -550,16 +550,16 @@
 
         <a id="setBodyBgImage" class="a_add marginBottom5 btn btn-sm md:btn-xs" style="display:none" title="<?php echo $this->translate->_("Click to set background");?>"><?php echo $this->translate->_("Set background");?> </a>
 
-        <div>
-          <?php echo $this->translate->_("Put image(s) in the selected object");?> <input id="putImagesInThis" class="checkbox-sm" type="checkbox" /> into the
+        <div class="inline-flex gap-2 items-center">
+          <?php echo $this->translate->_("Put image(s) in the selected object");?> <input id="putImagesInThis" class="checkbox-sm checkbox" type="checkbox" /> into the
           <!--<?php echo $this->translate->_("Single Image");?><input id="putSingleImageInThis" type="checkbox" />-->
         </div>
 
         <select id="bgSelect" class="help select select-sm md:select-xs w-full" title="<?php echo $this->translate->_("For this to work, set appropriate classes to the objects, lowercase (HEADER = header) except for the BODY, body is always there." );?>"><option>BODY</option><option>HEADER</option><option>SHEET</option><option>LEFTCOLUMN</option><option>RIGHTCOLUMN</option><option>FOOTER</option><option>SELECTED-OBJECT</option></select>
         
-        <div>
-          <input type="checkbox" class="checkbox-sm" name="NR" value="repeat" id="NR" /> no-repeat
-          <input type="checkbox" class="checkbox-sm" name="fixedBg" value="fixed"  id="fixedBg" /> Fixed
+        <div class="inline-flex gap-2 items-center">
+          <input type="checkbox" class="checkbox-sm checkbox" name="NR" value="repeat" id="NR" /> no-repeat
+          <input type="checkbox" class="checkbox-sm checkbox" name="fixedBg" value="fixed"  id="fixedBg" /> Fixed
         </div>
 
         <!--Image path:-->
