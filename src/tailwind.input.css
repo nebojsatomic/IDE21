@@ -104,3 +104,8 @@
   @apply relative px-2 rounded;
   @apply hover:text-accent !important;
 }
+
+/* Typography */
+.prose {
+  max-width: 100%;
+}

@@ -108,13 +108,6 @@
 
             <div class="grid">  
               <div class="grid gap-2">
-
-                <!-- <div id="p_t_common" class="noAjaxEvent flex item-strech gap-2 items-center h-6">
-
-                  <span><?php echo $this->translate->_("Page");?></span><span><input id="pageDisplayer" class="noAjaxEvent help radio-sm" type="radio" name="p_g" value="pageEditing" checked="checked" title="<?php echo $this->translate->_("Page creating Mode");?>" /></span>
-                  <span><?php echo $this->translate->_("Template");?></span><span><input  id="templateDisplayer" class="noAjaxEvent help radio-sm" type="radio" name="p_g" value="templateEditing" title="<?php echo $this->translate->_("Template creating Mode");?>" /></span>
-                </div> -->
-
                 <div class="" >
                   <?php echo $this->langChooserAdmin;?>
                 </div>
@@ -250,6 +243,53 @@
                 <span class="cl col-span-3 justify-self-start">FontColor:</span><span><input id="objPropertiesFontColor" name="objPropertiesFontColor"class="input w-16 max-h-5 p-0" type="text" value="" data-coloris /></span>
 
                 <span class="cl col-span-3 justify-self-start">BgImage:</span><span><input id="objPropertiesBackgroundImage" name="objPropertiesBackgroundImage"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
+                <span class="cl col-span-3 justify-self-start">Position:</span><span>
+                  <select name="selected-object-position" id="selected-object-position" class="help select select-xs w-full" title="Set the position of the selected object." size="1">
+                      <option value="static" selected="selected">Static</option>
+                      <option value="relative">Relative</option>
+                      <option value="fixed">Fixed</option>
+                      <option value="absolute">Absolute</option>
+                      <option value="sticky">Sticky</option>
+                  </select>
+                </span>
+
+                <span class="w-full col-span-4 justify-self-start mt-2">
+                  <div class="grid grid-cols-6 justify-items-center">
+                    <div id="toggleFontWeight" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-white" title="Click to toggle font-weight">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                        <path fill-rule="evenodd" d="M5.246 3.744a.75.75 0 0 1 .75-.75h7.125a4.875 4.875 0 0 1 3.346 8.422 5.25 5.25 0 0 1-2.97 9.58h-7.5a.75.75 0 0 1-.75-.75V3.744Zm7.125 6.75a2.625 2.625 0 0 0 0-5.25H8.246v5.25h4.125Zm-4.125 2.251v6h4.5a3 3 0 0 0 0-6h-4.5Z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+
+                    <div id="toggleFontStyle" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-white" title="Click to toggle font-style">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                        <path fill-rule="evenodd" d="M10.497 3.744a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-3.275l-5.357 15.002h2.632a.75.75 0 1 1 0 1.5h-7.5a.75.75 0 1 1 0-1.5h3.275l5.357-15.002h-2.632a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+
+                    <div id="toggleUnderline" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-white" title="Click to toggle underline">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                        <path fill-rule="evenodd" d="M5.995 2.994a.75.75 0 0 1 .75.75v7.5a5.25 5.25 0 1 0 10.5 0v-7.5a.75.75 0 0 1 1.5 0v7.5a6.75 6.75 0 1 1-13.5 0v-7.5a.75.75 0 0 1 .75-.75Zm-3 17.252a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5h-16.5a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                    <div id="toggleTextCenter" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-white" title="Click to toggle underline">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
+                        <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                    <div id="toggleTextLeft" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-white" title="Click to toggle underline">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
+                        <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75H12a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                    <div id="toggleTextRight" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-white" title="Click to toggle underline">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
+                        <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm8.25 5.25a.75.75 0 0 1 .75-.75h8.25a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                  </div>
+                </span>
+
                 <!-- classes are to be handled through former ID assistant -->
                 <div id="id-assistant-container"></div>
                 <div class="hidden"><span class="cl col-span-4 justify-self-start">class:</span><span class="col-span-4 w-full"><input id="objPropertiesClass" name="objPropertiesClass"class="input w-full max-h-8 p-0" type="text" value="" /></span></div>

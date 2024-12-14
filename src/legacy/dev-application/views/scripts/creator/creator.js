@@ -31,6 +31,51 @@ $('.navLinks').click( function(){
   $('.currentTitle').removeClass('currentTitle');
   $(this).addClass('currentTitle');
 });
+$('#toggleFontWeight').click( function(){
+  setBold();
+});
+$('#toggleFontStyle').click( function(){
+  setItalic();
+});
+$('#toggleUnderline').click( function(){
+  setUnderline();
+});
+$('#toggleTextCenter').click( function(){
+  setTextAlign('center');
+});
+$('#toggleTextLeft').click( function(){
+  setTextAlign('left');
+});
+$('#toggleTextRight').click( function(){
+  setTextAlign('right');
+});
+$('#selected-object-position').change(function(){
+  $('.selected-for-append').css( 'position', $(this).val() );
+});
+/* functions for setting styles of selected text */
+function setBold(){
+  const strong = document.createElement("strong");
+  const selectedText = window.getSelection();
+  const selectedTextRange = selectedText.getRangeAt(0);
+  selectedTextRange.surroundContents(strong);
+}
+function setItalic(){
+  const italic = document.createElement("i");
+  const selectedText = window.getSelection();
+  const selectedTextRange = selectedText.getRangeAt(0);
+  selectedTextRange.surroundContents(italic);
+}
+function setUnderline(){
+  const span = document.createElement("span");
+  const selectedText = window.getSelection();
+  const selectedTextRange = selectedText.getRangeAt(0);
+  selectedTextRange.surroundContents(span);
+  span.style.textDecoration = 'underline';
+}
+function setTextAlign(align){
+  $('.selected-for-append').css('text-align', align);
+}
+
 function dialog(){
 
   if (screen.width == window.innerWidth && screen.height == window.innerHeight) {
@@ -1271,6 +1316,7 @@ $(".draggable").livequery('dblclick', function(e){
   $(this).removeClass("inactiveObject");
   $(this).addClass("activeObject");
 
+  const position = $(e.target).css('position');
   width = $(e.target).css("width");
   height= $(e.target).css("height");
   border = $(e.target).css("border");
@@ -1329,6 +1375,7 @@ $(".draggable").livequery('dblclick', function(e){
   $("#objPropertiesFontColor").closest('.clr-field').css({ color: fontColor });
 
   $("#objPropertiesBackgroundImage").val( bgImage );
+  $("#selected-object-position").val( position );
   //objTheme
   $('#objTheme').val( themeClass);
   $('#objTheme').val(themeClass);
