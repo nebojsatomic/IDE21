@@ -591,7 +591,7 @@ $(document).ready(function(){
         let currentClass = item;
         if( currentClass === '' || currentClass == 'selected-for-append') return;
 
-        objectClassesFields = objectClassesFields + '<div class="inline-flex gap-2 items-center max-w-80"><input type="checkbox" class="checkbox-sm classes-toggle" checked="true" value="' + currentClass + '" /><span style="overflow-wrap: break-word;inline-size: 9rem;">' + currentClass + '</span></div>';
+        objectClassesFields = objectClassesFields + '<div class="inline-flex gap-2 items-center max-w-80"><input type="checkbox" class="checkbox-sm checkbox classes-toggle" checked="true" value="' + currentClass + '" /><span style="overflow-wrap: break-word;inline-size: 9rem;">' + currentClass + '</span></div>';
       });
 
       // create the part in ID assistenat that holds classes and their checkboxes
@@ -618,11 +618,9 @@ $(document).ready(function(){
   // toggling classes for the object that ID assistant is pointing to
   $('.classes-toggle').livequery('change', function(e){
 
-    if($(e.target).attr('checked') === undefined) {
-
+    if( e.target.checked === false ) {
       $( '#' + $('#assistant-target-id').text()).removeClass($(e.target).val());
     } else {
-
       $( '#' + $('#assistant-target-id').text()).addClass($(e.target).val());
     }
   });
