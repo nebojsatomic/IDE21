@@ -4823,6 +4823,10 @@ html:has(.drawer-toggle:checked) {
   margin-bottom: auto;
 }
 
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
 .mb-10 {
   margin-bottom: 2.5rem;
 }
@@ -4841,6 +4845,10 @@ html:has(.drawer-toggle:checked) {
 
 .mb-72 {
   margin-bottom: 18rem;
+}
+
+.mr-1 {
+  margin-right: 0.25rem;
 }
 
 .mt-1 {
@@ -4950,12 +4958,12 @@ html:has(.drawer-toggle:checked) {
   height: 1.5rem;
 }
 
-.h-64 {
-  height: 16rem;
-}
-
 .h-8 {
   height: 2rem;
+}
+
+.h-96 {
+  height: 24rem;
 }
 
 .h-auto {
@@ -5399,6 +5407,11 @@ html:has(.drawer-toggle:checked) {
   background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity)));
 }
 
+.bg-primary-content {
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-pc,oklch(var(--pc)/var(--tw-bg-opacity)));
+}
+
 .bg-red-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(248 113 113 / var(--tw-bg-opacity));
@@ -5422,11 +5435,6 @@ html:has(.drawer-toggle:checked) {
 .bg-yellow-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(254 249 195 / var(--tw-bg-opacity));
-}
-
-.bg-primary-content {
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-pc,oklch(var(--pc)/var(--tw-bg-opacity)));
 }
 
 .bg-opacity-60 {
@@ -5593,6 +5601,11 @@ html:has(.drawer-toggle:checked) {
   color: rgb(22 163 74 / var(--tw-text-opacity));
 }
 
+.text-neutral {
+  --tw-text-opacity: 1;
+  color: var(--fallback-n,oklch(var(--n)/var(--tw-text-opacity)));
+}
+
 .text-neutral-content {
   --tw-text-opacity: 1;
   color: var(--fallback-nc,oklch(var(--nc)/var(--tw-text-opacity)));
@@ -5611,11 +5624,6 @@ html:has(.drawer-toggle:checked) {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-neutral {
-  --tw-text-opacity: 1;
-  color: var(--fallback-n,oklch(var(--n)/var(--tw-text-opacity)));
 }
 
 .underline {
@@ -6194,15 +6202,6 @@ html:has(.drawer-toggle:checked) {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
 }
 
-/* tinyMCE should be below the header */
-
-#mce_fullscreen_container {
-  top: 4rem !important;
-  height: 100dvh !important;
-  overflow: auto !important;
-  padding-bottom: 4rem !important;
-}
-
 /* with selecting the specific div inside template or page, user should be able to insert a new object directly into it */
 
 #droppable * {
@@ -6507,9 +6506,15 @@ html:has(.drawer-toggle:checked) {
   display: none;
 }
 
-.cssjswrapp.fs, .cssjswrapp2.fs {
+/* fullscreen elements adjust */
+
+.cssjswrapp.fs, .cssjswrapp2.fs, #selected-object-html-wrapper.fs {
   overflow-y: auto !important;
   padding: 1rem !important;
+}
+
+#selected-object-html-wrapper.fs textarea {
+  height: 100dvh;
 }
 
 /* override ui-autocomplete */

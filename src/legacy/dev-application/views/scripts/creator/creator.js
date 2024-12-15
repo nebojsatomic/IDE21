@@ -3591,6 +3591,9 @@ fsElement2 = document.getElementById('fragment-8wrapper');
 var fsButton3 = document.getElementById('fsbutton3');
 fsElement3 = document.getElementById('fragment-5wrapper');
 
+var fsButtonHtml = document.getElementById('fsbuttonHtml');
+fsElementHtml = document.getElementById('selected-object-html-wrapper');
+
 var fsButtonAll = document.getElementById('fsbuttonAll');
 fsElementAll = document.getElementById('body');
 
@@ -3713,6 +3716,26 @@ fsButton3.addEventListener('click', function(e) {
   $('.ui-dialog').livequery(function(){
     if(window.fullScreen == 1){
       $(this).appendTo(fsElement3);
+    }
+  });
+
+}, true);
+
+//edit HTML in FS
+fsButtonHtml.addEventListener('click', function(e) {
+  e.preventDefault();
+  // if already in fullscreen, it needs to get out of it
+  if( $(fsElementHtml).hasClass('fs') === true ){
+    window.fullScreenApi.cancelFullScreen(fsElementHtml);
+    $(fsElementHtml).removeClass('fs');
+    return;
+  }
+
+  window.fullScreenApi.requestFullScreen(fsElementHtml);
+  $(fsElementHtml).addClass('fs').find('iframe').height($(window).height());
+  $('.ui-dialog').livequery(function(){
+    if(window.fullScreen == 1){
+      $(this).appendTo(fsElementHtml);
     }
   });
 
