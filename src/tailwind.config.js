@@ -1,12 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./legacy/dev-application/**/*.{php,phtml,js}"],
+  content: ["./legacy/dev-application/**/*.{php,phtml,js}", "./public/cache/*"],
   theme: {
     extend: {},
   },
-  plugins: [require("daisyui")],
+  plugins: [require("@tailwindcss/typography"), require("daisyui")],
   daisyui: {
-    themes: ["nord", "retro"],
+    themes: ["nord", "retro", 'cyberpunk', 'valentine', 'aqua'],
   },
 }
 

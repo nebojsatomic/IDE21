@@ -17,7 +17,7 @@
  */
  ?>
 <!--jd_menu jd_menu_vertical -->
-<ul class=" jd_menu jd_menu_vertical w-full rounded-lg bg-primary p-1" style="">
+<ul class=" jd_menu jd_menu_vertical w-full rounded-lg p-1" style="">
 <?php
 
 $menu_items = $this->menu_items;
@@ -34,7 +34,7 @@ foreach(@$this->menus as $menus => $k){
     } else {
         $link = '/' . $k['url'];
     }
-    echo '<li class="group transition ease-in duration-200 bg-primary hover:bg-accent rounded relative pr-8">';
+    echo '<li class="group transition ease-in duration-200 hover:bg-accent rounded relative pr-8">';
     //generate link if there is such
     if ($k['url'] != '' ) {
         echo '<a class="link flex p-2" target="' .$target . '" ' . $linkType. '="'  . $link . '" >'.$k['name'].'</a>';
@@ -52,7 +52,7 @@ foreach(@$this->menus as $menus => $k){
                 $link = '/' . $s['url'];
             }
 
-            echo '<li id="'.$s['item_id'].'" class="group transition ease-in duration-200 bg-primary hover:bg-accent rounded w-full pr-8"><a ' . $linkType. '="'  . $link . '"  target="' .$target . '" class="link flex p-2"   >' . $s['name'] . '</a> ';
+            echo '<li id="'.$s['item_id'].'" class="group transition ease-in duration-200 hover:bg-accent rounded w-full pr-8"><a ' . $linkType. '="'  . $link . '"  target="' .$target . '" class="link flex p-2"   >' . $s['name'] . '</a> ';
             // SUBLEVEL 2
             if ( @$menu_items[$s['item_id']] !== null ) {
                 echo '<span class="submenu-pointer grid items-center self-center justify-items-center rounded-full text-neutral-content absolute  right-1 top-3 w-4 h-4 text-xs"></span><ul class="w-full shadow-lg">';
@@ -64,7 +64,7 @@ foreach(@$this->menus as $menus => $k){
                         $link = '/' . $s2['url'];
                     }
 
-                    echo '<li id="'.$s2['item_id'].'" class="group transition ease-in duration-200 bg-primary hover:bg-accent rounded w-full pr-8"><a ' . $linkType. '="'  . $link . '"  target="' .$target . '" class="link flex p-2"   >' . $s2['name'] . '</a> ';
+                    echo '<li id="'.$s2['item_id'].'" class="group transition ease-in duration-200 hover:bg-accent rounded w-full pr-8"><a ' . $linkType. '="'  . $link . '"  target="' .$target . '" class="link flex p-2"   >' . $s2['name'] . '</a> ';
 
                     //SUBLEVEL 3
                     if ( @$menu_items[$s2['item_id']] !== null ) {
@@ -75,7 +75,7 @@ foreach(@$this->menus as $menus => $k){
                             } else {
                                 $link = '/' . $s3['url'];
                             }
-                            echo '<li id="'.$s3['item_id'].'" class="group transition ease-in duration-200 bg-primary hover:bg-accent rounded w-full pr-8"><a ' . $linkType. '="'  . $link . '"  target="' .$target . '" class="link flex p-2"   >' . $s3['name'] . '</a> ';
+                            echo '<li id="'.$s3['item_id'].'" class="group transition ease-in duration-200 hover:bg-accent rounded w-full pr-8"><a ' . $linkType. '="'  . $link . '"  target="' .$target . '" class="link flex p-2"   >' . $s3['name'] . '</a> ';
 
                             echo '</li>';
                         }

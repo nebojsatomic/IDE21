@@ -50,11 +50,6 @@
   @apply shadow-lg bg-neutral-content !important;
 }
 
-/* tinyMCE should be below the header */
-#mce_fullscreen_container {
-  @apply top-16 h-dvh overflow-auto pb-16 !important;
-}
-
 /* with selecting the specific div inside template or page, user should be able to insert a new object directly into it */
 #droppable * {
   @apply border border-dashed border-transparent !important;
@@ -79,9 +74,12 @@
 #what-label, #submitSearch-label {
   @apply hidden;
 }
-
-.cssjswrapp.fs, .cssjswrapp2.fs {
+/* fullscreen elements adjust */
+.cssjswrapp.fs, .cssjswrapp2.fs, #selected-object-html-wrapper.fs {
   @apply overflow-y-auto p-4 !important;
+}
+#selected-object-html-wrapper.fs textarea {
+  @apply h-dvh;
 }
 /* override ui-autocomplete */
 .ui-autocomplete {
@@ -103,4 +101,9 @@
 .treeview a {
   @apply relative px-2 rounded;
   @apply hover:text-accent !important;
+}
+
+/* Typography */
+.prose {
+  max-width: 100%;
 }

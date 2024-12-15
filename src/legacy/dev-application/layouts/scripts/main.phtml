@@ -56,10 +56,6 @@
   <script type="text/javascript" src="/js/jquery/jquery-1.3.2.min.js"></script>
   <script type="text/javascript" src="/js/combinedAll.js" ></script>
 
-
-  <!-- <script type="text/javascript" src="/js/js/easySlider1.5.js"></script> -->
-  <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.5.3/jquery-ui.min.js" ></script> -->
-
 </head>
 <body style="background:<?php echo $this->templateBodyBackground;?>;" class="overflow-x-hidden w-full min-h-dvh h-auto bg-cover">
   <div class="top"></div>
@@ -68,7 +64,6 @@
       <div id="content">
         <?php
         echo $this->layout()->content;
-        //echo $this->layout()->ajaxContent ;
         ?>
       </div>
     </div>
@@ -87,6 +82,7 @@
   }
   ?>
   <script type="text/javascript">
+    /* add DaisyUI fixes */
     $('select').addClass('select-sm shadow-sm');
     $('input').each(function(){
       $(this).addClass('input input-sm w-full shadow-sm').attr('placeholder', $(this).attr('name'));
@@ -96,7 +92,12 @@
       collapsed: true,
       animated: "medium"
     });
-
+    $.each( $('.jd_menu'), function(k,v){
+        const parentBackgroundColor = $(this).closest('.templateDiv').css('background-color');
+        const parentFontColor = $(this).closest('.templateDiv').css('color');
+        $(this).find('li').css('background-color', parentBackgroundColor);
+        $(this).find('a.link').css('color', parentFontColor);
+    });
   </script>
 </body>
 </html>

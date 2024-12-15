@@ -31,6 +31,51 @@ $('.navLinks').click( function(){
   $('.currentTitle').removeClass('currentTitle');
   $(this).addClass('currentTitle');
 });
+$('#toggleFontWeight').click( function(){
+  setBold();
+});
+$('#toggleFontStyle').click( function(){
+  setItalic();
+});
+$('#toggleUnderline').click( function(){
+  setUnderline();
+});
+$('#toggleTextCenter').click( function(){
+  setTextAlign('center');
+});
+$('#toggleTextLeft').click( function(){
+  setTextAlign('left');
+});
+$('#toggleTextRight').click( function(){
+  setTextAlign('right');
+});
+$('#selected-object-position').change(function(){
+  $('.selected-for-append').css( 'position', $(this).val() );
+});
+/* functions for setting styles of selected text */
+function setBold(){
+  const strong = document.createElement("strong");
+  const selectedText = window.getSelection();
+  const selectedTextRange = selectedText.getRangeAt(0);
+  selectedTextRange.surroundContents(strong);
+}
+function setItalic(){
+  const italic = document.createElement("i");
+  const selectedText = window.getSelection();
+  const selectedTextRange = selectedText.getRangeAt(0);
+  selectedTextRange.surroundContents(italic);
+}
+function setUnderline(){
+  const span = document.createElement("span");
+  const selectedText = window.getSelection();
+  const selectedTextRange = selectedText.getRangeAt(0);
+  selectedTextRange.surroundContents(span);
+  span.style.textDecoration = 'underline';
+}
+function setTextAlign(align){
+  $('.selected-for-append').css('text-align', align);
+}
+
 function dialog(){
 
   if (screen.width == window.innerWidth && screen.height == window.innerHeight) {
@@ -546,7 +591,7 @@ $(document).ready(function(){
         let currentClass = item;
         if( currentClass === '' || currentClass == 'selected-for-append') return;
 
-        objectClassesFields = objectClassesFields + '<div class="inline-flex gap-2 items-center max-w-80"><input type="checkbox" class="checkbox-sm classes-toggle" checked="true" value="' + currentClass + '" /><span style="overflow-wrap: break-word;inline-size: 9rem;">' + currentClass + '</span></div>';
+        objectClassesFields = objectClassesFields + '<div class="inline-flex gap-2 items-center max-w-80"><input type="checkbox" class="checkbox-sm checkbox classes-toggle" checked="true" value="' + currentClass + '" /><span style="overflow-wrap: break-word;inline-size: 9rem;">' + currentClass + '</span></div>';
       });
 
       // create the part in ID assistenat that holds classes and their checkboxes
@@ -573,11 +618,9 @@ $(document).ready(function(){
   // toggling classes for the object that ID assistant is pointing to
   $('.classes-toggle').livequery('change', function(e){
 
-    if($(e.target).attr('checked') === undefined) {
-
+    if( e.target.checked === false ) {
       $( '#' + $('#assistant-target-id').text()).removeClass($(e.target).val());
     } else {
-
       $( '#' + $('#assistant-target-id').text()).addClass($(e.target).val());
     }
   });
@@ -1271,6 +1314,7 @@ $(".draggable").livequery('dblclick', function(e){
   $(this).removeClass("inactiveObject");
   $(this).addClass("activeObject");
 
+  const position = $(e.target).css('position');
   width = $(e.target).css("width");
   height= $(e.target).css("height");
   border = $(e.target).css("border");
@@ -1329,6 +1373,7 @@ $(".draggable").livequery('dblclick', function(e){
   $("#objPropertiesFontColor").closest('.clr-field').css({ color: fontColor });
 
   $("#objPropertiesBackgroundImage").val( bgImage );
+  $("#selected-object-position").val( position );
   //objTheme
   $('#objTheme').val( themeClass);
   $('#objTheme').val(themeClass);
@@ -3546,6 +3591,9 @@ fsElement2 = document.getElementById('fragment-8wrapper');
 var fsButton3 = document.getElementById('fsbutton3');
 fsElement3 = document.getElementById('fragment-5wrapper');
 
+var fsButtonHtml = document.getElementById('fsbuttonHtml');
+fsElementHtml = document.getElementById('selected-object-html-wrapper');
+
 var fsButtonAll = document.getElementById('fsbuttonAll');
 fsElementAll = document.getElementById('body');
 
@@ -3668,6 +3716,26 @@ fsButton3.addEventListener('click', function(e) {
   $('.ui-dialog').livequery(function(){
     if(window.fullScreen == 1){
       $(this).appendTo(fsElement3);
+    }
+  });
+
+}, true);
+
+//edit HTML in FS
+fsButtonHtml.addEventListener('click', function(e) {
+  e.preventDefault();
+  // if already in fullscreen, it needs to get out of it
+  if( $(fsElementHtml).hasClass('fs') === true ){
+    window.fullScreenApi.cancelFullScreen(fsElementHtml);
+    $(fsElementHtml).removeClass('fs');
+    return;
+  }
+
+  window.fullScreenApi.requestFullScreen(fsElementHtml);
+  $(fsElementHtml).addClass('fs').find('iframe').height($(window).height());
+  $('.ui-dialog').livequery(function(){
+    if(window.fullScreen == 1){
+      $(this).appendTo(fsElementHtml);
     }
   });
 
