@@ -482,7 +482,7 @@ class NetActionController extends Zend_Controller_Action
             Zend_Registry::set($setting['settingName'], $setting['value']);
         }
         //settings that are required for net.creator to function
-        $settingsRequired = array('urlRewrite', 'cacheEnabled', 'userRegistrationEnabled', 'emails_from_default', 'defaultKeywords', 'defaultDescription', 'commentsAuto', 'htmLawed');
+        $settingsRequired = array('urlRewrite', 'cacheEnabled', 'userRegistrationEnabled', 'emails_from_default', 'defaultKeywords', 'defaultDescription', 'commentsAuto');
         foreach($settingsRequired as $settingKey){
             //set all values to 1
             $s = "";

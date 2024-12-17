@@ -68,18 +68,8 @@ class ViewController extends NetActionController
         if(str_contains($values['id'], '.html')) $alias = str_replace('.html', '', $values['id']);
         if ($alias != '') {
 
-            //this below is an unsuccessfull try to cache a query for the alias. TODO: make it work
-            //if(!$result = $this->_cache->load('q_View_index_resID_' . str_replace("-", "", urlencode($alias)) )) {//caching this query
-                $resID = $db->fetchAll("SELECT id, check_access FROM pages_$langCode  WHERE alias = ?", array($alias));
-                $id = $resID[0]['id'];
-
-                //$cachedresult = array('resID'=>$resID ,'id'=>$id);
-                //$this->_cache->save($cachedresult , 'q_View_index_resID_' . str_replace("-", "", urlencode($alias)) );
-            //} else {
-                //$resID = $result['resID'];
-                //$id = $result['id'];
-
-            //}
+            $resID = $db->fetchAll("SELECT id, check_access FROM pages_$langCode  WHERE alias = ?", array($alias));
+            $id = $resID[0]['id'];
 
         } else {
             @$id = $values['id'];
@@ -102,230 +92,171 @@ class ViewController extends NetActionController
             $cachedresult = array('res'=>$res ,'resTemplate'=>$resTemplate);
             $this->_cache->save($cachedresult , "q_View_index_$langCode" . "_$id" );
 
-        } else{
+        } else {
             $res = $result['res'];
             $resTemplate = $result['resTemplate'];
         }
         /*static files that needs to be loaded, for exported template to work*/
         $staticFiles = explode(';', @$resTemplate[0]['staticFiles']);
 
-        //if {html:} then turn the htmlawed off
-        $mystring = $res[0]['output'];
-        $mystring2 = @$resTemplate[0]['output'];
-        $findme   = '{html:';
-        $pos = strpos($mystring, $findme);
-        $pos2 = strpos($mystring2, $findme);
-
-        if ($pos === false && $pos2 === false) {
-            $htmlawedFeature = 1;
-        } else {
-            $htmlawedFeature = 0;
-        }
-
-
-        //$this->view->templateBodyBackground = "url(" . $this->_host . "images/templates/" . $res[0]['template_id'] . "/bodyBg.jpg) repeat-x";
         $this->view->templateBodyBackground = @$resTemplate[0]['bodyBg'];
         $bodyBG = @$resTemplate[0]['bodyBg'];
         $this->view->bg = @$resTemplate[0]['bodyBg'];
-
-        require_once(NET_PATH. 'includes/htmLawed/htmLawed.php');//require htmlLawed
-        $config = array(
-                 'comments'=>0,
-                 'cdata'=>0,
-                 'lc_std_val'=>0,
-                 //'tidy'=>1,//this breaks ajax content load
-                 'deny_attribute'=>'on*',
-                 //'elements'=> 'a, div, h1, h2, h3, p, ul, li, fb:fan, span, img, script, style, dd, dl, b, i, table, tr, td, tbody, br',
-                 //'elements'=>'*-applet-iframe-script', // object, embed allowed
-                 'schemes'=>'classid:clsid; href: aim, feed, file, ftp, gopher, http, https, irc, mailto, skype, news, nntp, sftp, ssh, telnet; style: *; *:file, http, https' // clsid allowed in classid
-                );//config for htmLawed
 
         //ACL
         $acl = Zend_Registry::get('acl');
         $curRole = Zend_Registry::get('currentRole');
         $allowArray = Zend_Registry::get('aclAllow');
         if($resID[0]['check_access'] == '1') {
-        //ACL in relation to page
+            //ACL in relation to page
             if (!$acl->has('page:' . $resID[0]['id'])) {
-                  $acl->add(new Zend_Acl_Resource('page:' . $resID[0]['id'] ));//make sure resource exists
+                $acl->add(new Zend_Acl_Resource('page:' . $resID[0]['id'] ));//make sure resource exists
             }
 
             if(@in_array('page:' . $resID[0]['id'], $allowArray[$curRole]  )  ){
                 $acl->allow($curRole, 'page:' . $resID[0]['id'] );//allow resource access if it is in allow array
             }
 
+            if (!$acl->isAllowed($curRole, 'page:' .$resID[0]['id'] )) {
+                // no permission, move along now
+                $output = $translator->_("<b><h2>You dont have permission to access this content!</h2></b>");
+                $outputTemplate = ViewController::_templatePrepare($resTemplate[0]['output'], $output);
 
+                $out = ViewController::_liveBlocksPrepare($outputTemplate);
+                $this->view->output = $out;
 
-                if (!$acl->isAllowed($curRole, 'page:' .$resID[0]['id'] )) {
-                    // no permission, move along now
-                    $output = $translator->_("<b><h2>You dont have permission to access this content!</h2></b>");
-                    $outputTemplate = ViewController::_templatePrepare($resTemplate[0]['output'], $output);
-
-                    $out = ViewController::_liveBlocksPrepare($outputTemplate);
-                    //if htmlawed
-                    if($htmlawedFeature == 1){
-                        $this->view->output = htmLawed($out, $config);
-                    } else {
-                        $this->view->output = $out;
-                    }
-
-                    return;
-                }
+                return;
+            }
 
         }
-            //ACL END
+        //ACL END
 
-
-
-        //if ($alias != '' ) {
-        //    Zend_Registry::set('page' . utf8_encode($alias), $cache);
-        //} else {
-            Zend_Registry::set('page' . $id . "_" . $langCode, $this->_cache);
-            $this->_sesija->_urlCurrent = $this->_host . "pages/" .$id ;
-            self::$urlCurrent = $this->_sesija->_urlCurrent;
-       // }
+        Zend_Registry::set('page' . $id . "_" . $langCode, $this->_cache);
+        $this->_sesija->_urlCurrent = $this->_host . "pages/" .$id ;
+        self::$urlCurrent = $this->_sesija->_urlCurrent;
 
         //if there is a page cached, load it
         if (!$results = $this->_cache->load('page' . $id . "_" . $langCode . "_" . $this->_sesija->currentRole)  ) {
 
-                if(!$res || $res[0]['published'] != '1') {
-                    Zend_Registry::set('pageTitle', "404");
-                    $outputDB = '<b>404</b>';
-                    $outputDBtemplate = '';
-                  	$title = '404';
-                    $meta_description = '404';
-                    $meta_keywords = '404';
-                    $this->_helper->layout->setLayoutPath(NET_PATH . 'layouts/scripts/errorPages')->setLayout('404');
-                    return;
-                } else {
-                    Zend_Registry::set('pageTitle', $res[0]['title']);
-                    $outputDB = $res[0]['output'];
-                    $pageinfo = array('fullname' => $res[0]['fullname'], 'created' => $res[0]['dateChanged']);
-                    $outputDBtemplate = @$resTemplate[0]['output'];
-                  	$title = $res[0]['title'];
-                    $meta_description = $res[0]['description'];
-                    $meta_keywords = $res[0]['keywords'];
-                    //if description empty input default description
-                    if($meta_description == "") {
-                        $defDecr = Zend_Registry::get('defaultDescription');
-                        $meta_description = $defDecr;
-                    }
-                    //if keywords empty input default keywords
-                    if($meta_keywords == "") {
-                        $defKW= Zend_Registry::get('defaultKeywords');
-                        $meta_keywords = $defKW;
-                    }
+            if(!$res || $res[0]['published'] != '1') {
+                Zend_Registry::set('pageTitle', "404");
+                $outputDB = '<b>404</b>';
+                $outputDBtemplate = '';
+                $title = '404';
+                $meta_description = '404';
+                $meta_keywords = '404';
+                $this->_helper->layout->setLayoutPath(NET_PATH . 'layouts/scripts/errorPages')->setLayout('404');
+                return;
+            } else {
+                Zend_Registry::set('pageTitle', $res[0]['title']);
+                $outputDB = $res[0]['output'];
+                $pageinfo = array('fullname' => $res[0]['fullname'], 'created' => $res[0]['dateChanged']);
+                $outputDBtemplate = @$resTemplate[0]['output'];
+                $title = $res[0]['title'];
+                $meta_description = $res[0]['description'];
+                $meta_keywords = $res[0]['keywords'];
+
+                //if description empty input default description
+                if($meta_description == "") {
+                    $defDecr = Zend_Registry::get('defaultDescription');
+                    $meta_description = $defDecr;
                 }
 
-                $comments = '<div id="commentsDivWrapper" style="">{liveblock:comments:display:' . $id . '}</div>';
-
-                $output = ViewController::_templatePrepare($outputDB,null,null, $pageinfo );
-                if($commentsAuto == "1"){
-                    $output = str_replace('{liveblock:comments:display:' . $id . '}', '', $output);//if there is defined auto display of the comments, remove manually entered ones
+                //if keywords empty input default keywords
+                if($meta_keywords == "") {
+                    $defKW= Zend_Registry::get('defaultKeywords');
+                    $meta_keywords = $defKW;
                 }
-                if($res[0]['unbounded'] == '0'){//position in content
-                    $this->_insideContentArea = true;
-                } else {//absolute position
-                    $this->_insideContentArea = false;
-                    $comments = '<div id="commentsDivWrapper" style="position:absolute;display:none;">{liveblock:comments:display:' . $id . '}</div>';//comments disabled if absolute positioning for now
-                    //$comments = '';
-                }
-                //if automatic comments display is set to 0, dont display comments
-                if($commentsAuto == "0"){
-                    $comments = '';
-                } else {
-                    //str_replace('{liveblock:comments:display:' . $id . '}', '', $output);//if there is defined auto display of the comments, remove manually entered ones
-                }
-                $_insideContentArea = $this->_insideContentArea;//if not supposed to be absolute positioning
-                if($_insideContentArea == true){
-                    //handling the output for the content area
-                    //$output = str_replace("position: absolute;", "background:none;position: relative;" , $output);
-                    $output = str_replace("position: absolute;", "position: absolute;" , $output);
+            }
 
-                    //$output = str_replace('<div id="templateMask"/>', "" , $output);
-                    $output = '<div id="contentDivWrapper" style="position:relative;">' . $output . "</div><br /><br />";
+            $comments = '<div id="commentsDivWrapper" style="">{liveblock:comments:display:' . $id . '}</div>';
 
-                    $outputTemplate = ViewController::_templatePrepare($outputDBtemplate, $output . $comments);
-                    $out = ViewController::_liveBlocksPrepare($outputTemplate);
-                    //if htmlawed
-                    if($htmlawedFeature == 1){
-                        $this->view->output = htmLawed($out, $config);
-                    } else {
-                        $this->view->output = $out;
-                    }
-                    //$this->view->output = htmLawed($out, $config) ;
-                    $cachedOutput = $outputTemplate;
-                } else {
-                    $outputTemplate = ViewController::_templatePrepare($outputDBtemplate);
-                    $output = '<div class="contentArea">' . $output . "</div>";
-                    $out = ViewController::_liveBlocksPrepare($outputTemplate . $output . $comments);
-                    //if htmlawed
-                    if($htmlawedFeature == 1){
-                        $this->view->output = htmLawed($out, $config);
-                    } else {
-                        $this->view->output = $out;
-                    }
-                    //$this->view->output = htmLawed($out, $config );
+            $output = ViewController::_templatePrepare($outputDB,null,null, $pageinfo );
+            if($commentsAuto == "1"){
+                $output = str_replace('{liveblock:comments:display:' . $id . '}', '', $output); // if there is defined auto display of the comments, remove manually entered ones
+            }
+            if($res[0]['unbounded'] == '0'){//position in content
+                $this->_insideContentArea = true;
+            } else {//absolute position
+                $this->_insideContentArea = false;
+                $comments = '<div id="commentsDivWrapper" style="position:absolute;display:none;">{liveblock:comments:display:' . $id . '}</div>';//comments disabled if absolute positioning for now
 
-                    $cachedOutput = $outputTemplate . $output . $comments;
-                }
+            }
+            //if automatic comments display is set to 0, dont display comments
+            if($commentsAuto == "0"){
+                $comments = '';
+            }
 
+            $_insideContentArea = $this->_insideContentArea; //if not supposed to be absolute positioning
+            if($_insideContentArea == true){
+                //handling the output for the content area
 
-                $this->view->translate = $translator;
-                $this->view->title = $title;
-                $this->_title = $title;
-                $this->view->bodyBG = @$bodyBG;//background of the template
-                if(@$bodyBG == "") {
-                    $this->view->bodyBG = "transparent";
-                }
-                $this->view->meta_description = $meta_description;
-                $this->view->meta_keywords = $meta_keywords;
+                $output = '<div id="contentDivWrapper" style="position:relative;">' . $output . "</div><br /><br />";
 
+                $outputTemplate = ViewController::_templatePrepare($outputDBtemplate, $output . $comments);
+                $out = ViewController::_liveBlocksPrepare($outputTemplate);
 
-                $cacheResult = array('output' =>  $cachedOutput, 'title' => $title, 'bodyBG'=> $bodyBG, 'metaDesc' => $meta_description, 'metaKeywords' => $meta_keywords  );
+                $this->view->output = $out;
 
-                $cacheEnabled = $this->_cacheEnabled;
-                if($cacheEnabled == 1 ) {
-                    $this->_cache->save($cacheResult, 'page' . $id . "_" . $langCode . "_" . $this->_sesija->currentRole);
-                }
+                $cachedOutput = $outputTemplate;
+            } else {
+                $outputTemplate = ViewController::_templatePrepare($outputDBtemplate);
+                $output = '<div class="contentArea">' . $output . "</div>";
+                $out = ViewController::_liveBlocksPrepare($outputTemplate . $output . $comments);
 
+                $this->view->output = $out;
+
+                $cachedOutput = $outputTemplate . $output . $comments;
+            }
+
+            $this->view->translate = $translator;
+            $this->view->title = $title;
+            $this->_title = $title;
+            $this->view->bodyBG = @$bodyBG; //background of the template
+            if(@$bodyBG == "") {
+                $this->view->bodyBG = "transparent";
+            }
+            $this->view->meta_description = $meta_description;
+            $this->view->meta_keywords = $meta_keywords;
+
+            $cacheResult = array('output' =>  $cachedOutput, 'title' => $title, 'bodyBG'=> $bodyBG, 'metaDesc' => $meta_description, 'metaKeywords' => $meta_keywords  );
+
+            $cacheEnabled = $this->_cacheEnabled;
+            if($cacheEnabled == 1 ) {
+                $this->_cache->save($cacheResult, 'page' . $id . "_" . $langCode . "_" . $this->_sesija->currentRole);
+            }
 
         } else {
-                    //display page from cache
-                    //if htmlawed
-                    if($htmlawedFeature == 1){
-                        $this->view->output = htmLawed(ViewController::_liveBlocksPrepare($results['output'] ), $config);
-                    } else {
-                        $this->view->output = ViewController::_liveBlocksPrepare($results['output'] );
 
-                    }
-                    //$this->view->output = htmLawed(ViewController::_liveBlocksPrepare($results['output'] ), $config);
-                  	$this->view->title = $results['title'];
-                  	$this->_title = $results['title'];
-                    $this->view->bodyBG = @$results['bodyBG'];//background of the template
-                    if(@$results['bodyBG'] == "") {
-                        $this->view->bodyBG = "transparent";
-                    }
-                    $this->view->meta_description = $results['metaDesc'];
-                    $this->view->meta_keywords = $results['metaKeywords'];
-                    $this->view->translate = $translator;
+            $this->view->output = ViewController::_liveBlocksPrepare($results['output'] );
+
+            $this->view->title = $results['title'];
+            $this->_title = $results['title'];
+            //background of the template
+            $this->view->bodyBG = @$results['bodyBG'];
+
+            if(@$results['bodyBG'] == "") {
+                 $this->view->bodyBG = "transparent";
+            }
+            $this->view->meta_description = $results['metaDesc'];
+            $this->view->meta_keywords = $results['metaKeywords'];
+            $this->view->translate = $translator;
 
         }
-                //static files for the template
-                if($staticFiles != ''){
-                    $this->view->staticFilesCSS = array();
-                    $this->view->staticFilesJS = array();
-                    foreach($staticFiles as $staticFile){
-                        if(strstr( $staticFile, '.js') != '' ){
-                            $this->view->staticFilesJS[] = $staticFile;
-                        }
-                        if(strstr( $staticFile, '.css') != ''){
-                            $this->view->staticFilesCSS[] = $staticFile;
-                        }
-                    }
+
+        //static files for the template
+        if($staticFiles != ''){
+            $this->view->staticFilesCSS = array();
+            $this->view->staticFilesJS = array();
+            foreach($staticFiles as $staticFile){
+                if(strstr( $staticFile, '.js') != '' ){
+                    $this->view->staticFilesJS[] = $staticFile;
                 }
-
-
+                if(strstr( $staticFile, '.css') != ''){
+                    $this->view->staticFilesCSS[] = $staticFile;
+                }
+            }
+        }
     }
 
 
@@ -338,13 +269,10 @@ class ViewController extends NetActionController
         $var = $values['var'];
         Zend_Registry::set('pageTitle', " ");
 
-        //$outputDB = $res[0]['output'];
-        //$pageName = $contentOutput[0]['title'];
         $front = Zend_Controller_Front::getInstance();
-        //$front->getRequest()->setParam('creatorAct', 'true');
+
         $front->getRequest()->setParam('langC', $this->_sesija->langAdmin);
         $output = ViewController::_templatePrepare($var);
-
 
         $this->view->output = $output;
 
@@ -369,8 +297,8 @@ class ViewController extends NetActionController
         $view = new Zend_View();
         $view->addScriptPath($themePath . "templates/");
 
-            $data['host'] = str_replace('/quickstart/public/',"/", $host);
-            $data['host'] = str_replace('/public/',"/", $data['host']);
+        $data['host'] = str_replace('/public/',"/", $host);
+
         $langArray['langs'] = $langsEnabled;
         $langArray['host'] = $data['host'];
         $langArray['hostForImage'] = $host;
@@ -400,15 +328,10 @@ class ViewController extends NetActionController
 
         $request = $this->getRequest();
         if (!$request->isXmlHttpRequest()) {
-            $budzedHost = str_replace('/quickstart/public/', "/", $this->_sesija->_urlCurrent );
-            $budzedHost = str_replace('/public/', '/', $budzedHost);
-            //$this->_redirect( $this->_sesija->_urlCurrent  );//if not ajax - redirect
-            $this->_redirect( $budzedHost );//if not ajax - redirect
-        }
+            $redirectToHostURL = str_replace('/public/', "/", $this->_sesija->_urlCurrent );
 
-        //$this->_sesija->lang = $lang;
-        //$this->_redirect( $this->_sesija->_urlCurrent  ) ;
-        //$this->view->returnUrl =  $this->_sesija->_urlCurrent ;
+            $this->_redirect( $redirectToHostURL );//if not ajax - redirect
+        }
 
     }
 
@@ -486,8 +409,8 @@ class ViewController extends NetActionController
         }
 
         $Menu['menu'] = $menuQ;
-        $data['host'] = str_replace('/quickstart/public/',"/", $host);
-        $data['host'] = str_replace('/public/',"/", $data['host']);
+        $data['host'] = str_replace('/public/',"/", $host);
+
         $data['translate'] = $translator;
         $data['urlRewrite'] = $urlRewrite;
 
@@ -506,7 +429,7 @@ class ViewController extends NetActionController
      *
      */
 
-    public static function displayLiveBlock($lbQ)
+    public static function displayLiveBlock($liveblock)
     {
         $db = Zend_Registry::get('db');
         $urlRewrite = Zend_Registry::get('urlRewrite');
@@ -517,24 +440,18 @@ class ViewController extends NetActionController
 
         $view = new Zend_View();
         $view->addScriptPath($themePath . "templates/");
-        //$view->addHelperPath(OZIMBO_PATH . 'framework/Ozimbo/View/Helper', 'Ozimbo_View_Helper');
 
+        $scriptName = "liveBlock.phtml";
 
-            $scriptName = "liveBlock.phtml";
+        $data['host'] = $host;
+        $data['translate'] = $translator;
+        $data['urlRewrite'] = $urlRewrite;
 
-            $data['host'] = $host;
-            $data['translate'] = $translator;
-            $data['urlRewrite'] = $urlRewrite;
-            //$view->assign($host);
-            //$view->assign($Menu);
-            $view->assign($data);
+        $view->assign($data);
 
+        $partialOutput = $view->render($scriptName);
 
-            $partialOutput = $view->render($scriptName);
-
-            return $partialOutput;
-
-
+        return $partialOutput;
 
     }
 
@@ -550,7 +467,6 @@ class ViewController extends NetActionController
 
     public static function displayCategory($catQ, $orientation = null)
     {
-
         $db = Zend_Registry::get('db');
         $urlRewrite = Zend_Registry::get('urlRewrite');
         $acl = Zend_Registry::get('acl');
@@ -559,12 +475,10 @@ class ViewController extends NetActionController
         $translator = Zend_Registry::get('Zend_Translate');
         $langCode = Zend_Registry::get('langCode');
 
-
         $themePath = NET_PATH . "widgets/";
         $host = NetActionController::$host;
-        //$host = "http://localhost";
 
-      	$resCat = $db->fetchAll("SELECT * FROM categories  WHERE category_id = ?", array($catQ[0]['category']));
+        $resCat = $db->fetchAll("SELECT * FROM categories  WHERE category_id = ?", array($catQ[0]['category']));
 
         $view = new Zend_View();
         $view->addScriptPath($themePath . "templates/");
@@ -574,10 +488,10 @@ class ViewController extends NetActionController
             if (!$acl->has('page:' . $cat['id'])) {
                 $acl->add(new Zend_Acl_Resource( 'page:' . $cat['id']));//make sure resource exists - AND ONLY ONCE
             }
-                //ovo je dodato - razmisliti
-                if(@in_array('page:' . $cat['id'], $allowArray[$curRole] ) ){
-                    $acl->allow($curRole, 'page:' . $cat['id'] );
-                }
+
+            if(@in_array('page:' . $cat['id'], $allowArray[$curRole] ) ){
+                $acl->allow($curRole, 'page:' . $cat['id'] );
+            }
 
             if($cat['check_access'] == '1') {
                 if (!$acl->isAllowed($curRole, 'page:' . $cat['id'] )) {
@@ -588,46 +502,43 @@ class ViewController extends NetActionController
             $categoryArray[$k] = $cat;
 
         }
-            //$Category['category'] = $catQ;
-            $Category['category'] = $categoryArray;
 
-            if (!empty($resCat)){
-                if($resCat[0]['name_' . $langCode] != ""){
-                    $translatedCatName = $resCat[0]['name_' . $langCode];//if cat name translation exists
-                } else {
-                    $translatedCatName = $resCat[0]['name']; //no translation
-                }
+        $Category['category'] = $categoryArray;
 
-                $Category['categoryName'] = $translator->_($translatedCatName);
+        if (!empty($resCat)){
+            if($resCat[0]['name_' . $langCode] != ""){
+                $translatedCatName = $resCat[0]['name_' . $langCode];//if cat name translation exists
             } else {
-                $Category['categoryName'] = $translator->_("Uncategorized");
+                $translatedCatName = $resCat[0]['name']; //no translation
             }
 
-            $data['host'] = str_replace('/quickstart/public/',"/", $host);
-            $data['host'] = str_replace('/public/',"/", $data['host']);
-            $Category['translator'] = $translator;
-            $Category['host'] = $data['host'];
-            $Category['urlRewrite'] = $urlRewrite;
+            $Category['categoryName'] = $translator->_($translatedCatName);
+        } else {
+            $Category['categoryName'] = $translator->_("Uncategorized");
+        }
 
-            //$view->assign($host);
-            $view->assign($Category);
-            //$view->assign($CategoryName);
-            //$view->assign($data);
+        $data['host'] = str_replace('/public/',"/", $host);
+
+        $Category['translator'] = $translator;
+        $Category['host'] = $data['host'];
+        $Category['urlRewrite'] = $urlRewrite;
 
 
-            if ($orientation == null) {
-                $scriptName = "categories.phtml";
-            } elseif ($orientation == "oldest")  {
-                $scriptName = "categories.phtml";
-            } elseif ($orientation == "latest")  {
-                $scriptName = "categories.phtml";
-            } elseif ($orientation == "desc")  {
-                $scriptName = "categories-desc.phtml";
-            }
+        $view->assign($Category);
 
-            $partialOutput = $view->render($scriptName);
+        if ($orientation == null) {
+            $scriptName = "categories.phtml";
+        } elseif ($orientation == "oldest")  {
+            $scriptName = "categories.phtml";
+        } elseif ($orientation == "latest")  {
+            $scriptName = "categories.phtml";
+        } elseif ($orientation == "desc")  {
+            $scriptName = "categories-desc.phtml";
+        }
 
-            return $partialOutput;
+        $partialOutput = $view->render($scriptName);
+
+        return $partialOutput;
 
     }
 
@@ -685,7 +596,6 @@ class ViewController extends NetActionController
         $db = Zend_Registry::get('db');
         $themePath = NET_PATH . "widgets/";
         $host = NetActionController::$host;
-        //$folder = $host . "images/slideWidget/";
 
         $view = new Zend_View();
         $view->addScriptPath($themePath . "templates/slideWidget/");
@@ -737,6 +647,8 @@ class ViewController extends NetActionController
         return $partialOutput;
 
     }
+
+
     /**
      *Render breadcrumbs
      *
@@ -770,6 +682,8 @@ class ViewController extends NetActionController
         return $partialOutput;
 
     }
+
+
     /**
      *Render page info
      *
@@ -805,45 +719,6 @@ class ViewController extends NetActionController
 
     }
 
-    /**
-     *Render EXTERNAL Joomla! installation
-     *
-     *
-     *@author NT
-     *
-     */
-
-    public static function displayExternJoomla($type)
-    {
-        //$type can be modul or component
-        //Joomla! path
-        $jPath = "http://localhost/joom159/";
-        //$jPath = "http://localhost/joom159/index.php/Srebrna-voda/gsdfgas/flypage.tpl.html";
-
-        $db = Zend_Registry::get('db');
-        $themePath = NET_PATH . "widgets/";
-        $host = self::$host;
-
-        $view = new Zend_View();
-        $view->addScriptPath($themePath . "templates/");
-
-        $out = file_get_contents($jPath);
-
-        $jOut = $out;
-
-
-        $JoomlaOutput['jOut'] = $jOut;
-
-        $view->assign($JoomlaOutput);
-        $scriptName = "joomla.phtml";
-
-        $partialOutput = $view->render($scriptName);
-
-        return $partialOutput;
-
-    }
-
-
 
     /**
      *Preparing contents from database to be rendered
@@ -876,15 +751,15 @@ class ViewController extends NetActionController
             foreach ($Tvars as $Tvarss) {
                 $i = 0;
 
-                    foreach ($Tvarss as $TV) {
-                        $module = trim($TV, "{}");
-                           $build2[] =$module;
+                foreach ($Tvarss as $TV) {
+                    $module = trim($TV, "{}");
+                    $build2[] =$module;
 
-                           $i++;
-                    }
+                    $i++;
+                }
 
-                    $build[] = $build2;
-                    $build2 = array();
+                $build[] = $build2;
+                $build2 = array();
 
             }
         }
@@ -895,93 +770,43 @@ class ViewController extends NetActionController
             foreach ($build as $build_){
                 @$pattern = $matches[$count];
 
-                 //TITLE OF THE PAGE
-                 //if (@preg_match("/{title}/", "{" . $build_[0] . "}" )) {
-                 if (@strstr( "{" . $build_[0] . "}", "{title}" )) {
+                // TITLE OF THE PAGE
+                if (@strstr( "{" . $build_[0] . "}", "{title}" )) {
                         $output = $title;
                         $outputDB = str_replace('{title}', $output, $outputDB);
                 }
 
-                 //PAGE INFO HANDLE
-                 //if (@preg_match("/{searchform}/", "{" . $build_[0] . "}" )) {
-                 if (@strstr( "{" . $build_[0] . "}", "{pageinfo}" )) {
+                // PAGE INFO HANDLE
+                if (@strstr( "{" . $build_[0] . "}", "{pageinfo}" )) {
                         $output = ViewController::pageInfo($pageInfo);
                         $outputDB = str_replace('{pageinfo}', $output, $outputDB);
                 }
-                 if (@strstr( "{" . $build_[0] . "}", "{adminurl}" )) {
+                if (@strstr( "{" . $build_[0] . "}", "{adminurl}" )) {
 
                         $outputDB = str_replace('{adminurl}', '<a href="' . NetActionController::$hostRW . NetActionController::$adminUrl . '" target="_blank">Admin (FF!/Safari/Chrome)</a>' , $outputDB);
                 }
-                 //SEARCH HANDLE
-                 //if (@preg_match("/{searchform}/", "{" . $build_[0] . "}" )) {
-                 if (@strstr( "{" . $build_[0] . "}", "{searchform}" )) {
+                // SEARCH HANDLE
+                if (@strstr( "{" . $build_[0] . "}", "{searchform}" )) {
                         $output = SearchController::showSearchForm();
                         $outputDB = str_replace('{searchform}', $output, $outputDB);
                 }
-                 //HTML PART HANDLE
-                 if (@strstr( "{" . $build_[0], "{html" )) {
-                        //$codeAll = $build_[1] . ":" . $build_[2];
-                        //$countBuild = count($build_);
-                        $codeA = "";
-                        foreach($build_ as $countedB){
-                            $codeA .= $countedB . ":";
-                        }
-                        $codeA = ltrim($codeA, "html:");
-                        $codeA = rtrim($codeA, ":");
-                        $output = htmlspecialchars_decode($codeA );
-                        $output = str_replace('<br />', "", $output);
-                        $output = str_replace('<br>', "\n", $output);
-                        //$output = '<script type="text/javascript">document.write(' ."\n" . $output . ');</script>';
-                        $outputDB = str_replace('{html:' . $codeA . '}', $output, $outputDB);
-                        //$outputDB = str_replace('{html' , $output, $outputDB);
-                }
-                 //xHTML PART HANDLE - if this code block is to be xhtml purified
-                 if (@strstr( "{" . $build_[0], "{x-html" )) {
+                //LANGUAGE chooser
+                if (@strstr( "{" . $build_[0] . ":flags}" , "{language:flags}")) {
 
-                        $codeA = "";
-                        foreach($build_ as $countedB){
-                            $codeA .= $countedB . ":";
-                        }
-                        $codeA = ltrim($codeA, "x-html:");
-                        $codeA = rtrim($codeA, ":");
-                        $output = htmlspecialchars_decode($codeA );
-                        $output = str_replace('<br />', "", $output);
-                        $output = str_replace('<br>', "\n", $output);
-                        //$output = '<script type="text/javascript">document.write(' ."\n" . $output . ');</script>';
-                        $outputDB = str_replace('{x-html:' . $codeA . '}', $output, $outputDB);
-                        //$outputDB = str_replace('{html' , $output, $outputDB);
+                    $langsEnabled = NetActionController::getEnabledLanguages();
+
+                    $output = ViewController::showLanguageChooser($langsEnabled);
+                    $outputDB = str_replace('{language:flags}', $output, $outputDB);
                 }
 
-                 //LANGUAGE chooser
-                 //if (@preg_match("/{language:flags}/", "{" . $build_[0] . ":flags}" )) {
-                 if (@strstr( "{" . $build_[0] . ":flags}" , "{language:flags}")) {
-
-                        $langsEnabled = NetActionController::getEnabledLanguages();
-                        /*
-                        $langQ = $db->fetchAll("SELECT * FROM languages WHERE enabled = '1'");
-                        foreach ($langQ as $lang) {
-                            $langsEnabled[] = $lang['code'];
-                        }
-                        */
-
-                        $output = ViewController::showLanguageChooser($langsEnabled);
-                        $outputDB = str_replace('{language:flags}', $output, $outputDB);
-
-                }
-
-
-                //MENU HANDLE
-                 //if (@preg_match("/menu:display/", "{" . $build_[0] . ":" . $build_[1])) {
-                 if (@strstr( $build_[0] . ":" . $build_[1], "menu:display" )) {
+                // MENU HANDLE
+                if (@strstr( $build_[0] . ":" . $build_[1], "menu:display" )) {
 
                     $menuId = trim($build_[2], '""');
                     @$orientation = $build_[3];
 
-                    //if ($orientation =! "slide") {
-                        //$menuQ = $db->fetchAll("SELECT *, url_en as url,name_en as name,description_en as description FROM menu_items  WHERE menu_id = ?", array($menuId));
-                    //} else {
-                        $menuQ = $db->fetchAll("SELECT *, menu_items.check_access as chkAccess, menu_items.content_id as cid, url_$langCode as url, name_$langCode as name, description_$langCode as description FROM menu_items LEFT JOIN pages_$langCode ON menu_items.content_id = pages_$langCode.id WHERE menu_id = ? AND pages_$langCode.published = '1' ORDER BY weight ASC", array($menuId));
-                    //}
+
+                    $menuQ = $db->fetchAll("SELECT *, menu_items.check_access as chkAccess, menu_items.content_id as cid, url_$langCode as url, name_$langCode as name, description_$langCode as description FROM menu_items LEFT JOIN pages_$langCode ON menu_items.content_id = pages_$langCode.id WHERE menu_id = ? AND pages_$langCode.published = '1' ORDER BY weight ASC", array($menuId));
 
                     if (!empty($menuQ)) {
 
@@ -1002,21 +827,18 @@ class ViewController extends NetActionController
                         $outputDB = str_replace('{menu:display:' . $build_[2] . @$orient . '}', '<b style="color:red;">{menu:' . $build_[2] . '}Doesn\'t exist or it is empty!</b>', $outputDB);
                     }
 
-
                 }
 
-                 //CATEGORIES
-                 //if (@preg_match("/category:display/", "{" . $build_[0] . ":" . $build_[1])) {
-                 if (@strstr($build_[0] . ":" . $build_[1], "category:display")) {
+                // CATEGORIES
+                if (@strstr($build_[0] . ":" . $build_[1], "category:display")) {
 
                     $catId = trim($build_[2], '""');
                     @$orientation = $build_[3];
                     $catQ = $db->fetchAll("SELECT id, title, alias, category, image, description, check_access  FROM pages_$langCode  WHERE category = ? AND pages_$langCode.published = '1'", array($catId));
-                    //$catQ = $db->fetchAll("SELECT id, title, alias, category, image, description, check_access  FROM pages_$langCode WHERE category = ? AND pages_$langCode.published = '1'", array($catId));
-        //$catQ = array();
-        $catItemsArray2 = $db->fetchAll("SELECT DISTINCT *, pages_$langCode.id as id, pages_$langCode.title as title, pages_$langCode.alias as alias, pages_$langCode.category as category, pages_$langCode.image, pages_$langCode.description, pages_$langCode.check_access as check_access FROM category_items LEFT JOIN  pages_$langCode  ON pages_$langCode.id = category_items.content_id WHERE category_items.category_id = ? AND pages_$langCode.published = '1' GROUP BY pages_$langCode.id DESC ", array($catId));
-        $catQ = array_merge($catQ, $catItemsArray2 );
-        //$catQ = $catQ + $catItemsArray2;
+
+                    $catItemsArray2 = $db->fetchAll("SELECT DISTINCT *, pages_$langCode.id as id, pages_$langCode.title as title, pages_$langCode.alias as alias, pages_$langCode.category as category, pages_$langCode.image, pages_$langCode.description, pages_$langCode.check_access as check_access FROM category_items LEFT JOIN  pages_$langCode  ON pages_$langCode.id = category_items.content_id WHERE category_items.category_id = ? AND pages_$langCode.published = '1' GROUP BY pages_$langCode.id DESC ", array($catId));
+                    $catQ = array_merge($catQ, $catItemsArray2 );
+
 
                     if (!empty($catQ)) {
 
@@ -1036,19 +858,15 @@ class ViewController extends NetActionController
                         $outputDB = str_replace('{category:display:' . $build_[2] . @$orient . '}', '<b style="color:red;">{category:' . $build_[2] . '}Doesn\'t exist or it is empty!</b>', $outputDB);
                     }
 
-
                 }
 
-                //DISPLAY IMAGES
-                 //if (@preg_match("/images:display/", "{" . $build_[0] . ":" . $build_[1])) {
-                 if (@strstr( $build_[0] . ":" . $build_[1], "images:display")) {
+                // DISPLAY IMAGES
+                if (@strstr( $build_[0] . ":" . $build_[1], "images:display")) {
 
                     $folder = trim($build_[2], '""');
                     $folder = trim($folder , "''");
 
                     @$image = trim($build_[3], "''");
-
-                    //$menuQ = $db->fetchAll("SELECT *, url_en as url,name_en as name,description_en as description FROM menu_items  WHERE menu_id = ?", array($menuId));
 
                     if (!empty($folder)) {
 
@@ -1060,16 +878,14 @@ class ViewController extends NetActionController
                             $imageOut = ":'" . $image . "'";
                         }
 
-
                         $outputDB = str_replace('{images:display:' . $build_[2] . $imageOut . '}', $output, $outputDB);
-                        //$outputDB = str_replace('{images:display:' . $build_[2]  . '}', "AAAAA", $outputDB);
 
                     } else {
                         $outputDB = str_replace('{images:display:' . $build_[2] . $imageOut . '}', '<b style="color:red;">{images:' . $build_[2] . '}Doesn\'t exist or it is empty!</b>', $outputDB);
                     }
                 }
 
-                //MODULE 'FORM'
+                // MODULE 'FORM'
                 if (@preg_match("/module:forms/", "{" . $build_[0] . ":" . $build_[1])) {
 
                     $contactFormName = trim($build_[2], "''");
@@ -1147,46 +963,33 @@ class ViewController extends NetActionController
                 @$pattern = $matches[$count];
                 $params = array();
 
-                 //if liveblock encountered
-                 if (@strstr( $build_[0] . ":" , "liveblock:")) {
+                //if liveblock encountered
+                if (@strstr( $build_[0] . ":" , "liveblock:")) {
                     $block = $build_[1];
                     if( isset($build_[3]) ) array_push( $params, $build_[3] );
 
                     $function = $build_[2];
 
-                        if( isset($build_[3]) ) { 
-                            $idsOut = ':' . $build_[3];
-                        } else {
-                            $idsOut = '';
-                        }
+                    if( isset($build_[3]) ) {
+                        $idsOut = ':' . $build_[3];
+                    } else {
+                        $idsOut = '';
+                    }
 
-                        //require_once 'UserController.php';
-                        $ucwordsBlock = ucwords($block);
-                        if(file_exists(NET_PATH . "controllers/" . $ucwordsBlock . 'Controller.php') ){
-                            require_once $ucwordsBlock . 'Controller.php';
-                            $controller = $ucwordsBlock. "Controller";
-                            $output =  @call_user_func_array($controller . "::" . $function, $params);//calling the appropriate function
+                    $ucwordsBlock = ucwords($block);
+                    if(file_exists(NET_PATH . "controllers/" . $ucwordsBlock . 'Controller.php') ){
+                        require_once $ucwordsBlock . 'Controller.php';
+                        $controller = $ucwordsBlock. "Controller";
+                        $output =  @call_user_func_array($controller . "::" . $function, $params);//calling the appropriate function
 
-                            //$outputDB = str_replace('{liveblock:user:' . $build_[2] . '}', $output, $outputDB);
-                            $outputDB = str_replace('{liveblock:' . $block . ':' . $build_[2] . $idsOut .'}', $output, $outputDB);
-                        } else {
-                            $outputDB = str_replace('{liveblock:' . $block . ':' . $build_[2] . $idsOut .'}', '{Functionality doesn\'t exist!}', $outputDB);
-                        }
+                        $outputDB = str_replace('{liveblock:' . $block . ':' . $build_[2] . $idsOut .'}', $output, $outputDB);
+                    } else {
+                        $outputDB = str_replace('{liveblock:' . $block . ':' . $build_[2] . $idsOut .'}', '{Functionality doesn\'t exist!}', $outputDB);
+                    }
                 }
 
-                 //if php block encountered
-                 if (@strstr( $build_[0] . ":" , "php:")) {
-                    $block = $build_[1];
-
-                    ob_start();
-                    eval(strip_tags($block));
-                    $output = ob_get_contents();
-                    ob_end_clean();
-                    $outputDB = str_replace('{php:' . $block  .'}', $output, $outputDB);
-                }
-
-            $outputString = "";
-            $count++;
+                $outputString = "";
+                $count++;
             }
         }
         return $outputDB;
@@ -1194,18 +997,14 @@ class ViewController extends NetActionController
 
     public function bindViewCssAction()
     {
-        //$this->_helper->layout()->disableLayout();
-        //$this->_helper->viewRenderer->setNoRender();
         $values = $this->_request->getParams();
-        $this->view->headLink()->appendStylesheet($this->_host . 'quickstart/public/css/' . $values['id'] , $type = 'text/css');
+        $this->view->headLink()->appendStylesheet($this->_host . 'public/css/' . $values['id'] , $type = 'text/css');
 
     }
     public function bindViewJsAction()
     {
-        //$this->_helper->layout()->disableLayout();
-        //$this->_helper->viewRenderer->setNoRender();
         $values = $this->_request->getParams();
-        $this->view->headScript()->appendScript($this->_host . 'quickstart/public/js/' . $values['id'] , $type = 'text/css');
+        $this->view->headScript()->appendScript($this->_host . 'public/js/' . $values['id'] , $type = 'text/css');
 
     }
 

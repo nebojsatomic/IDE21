@@ -107,3 +107,7 @@
 .prose {
   max-width: 100%;
 }
+.prose :where(dd):not(:where([class~="not-prose"], [class~="not-prose"] *)){
+  margin-top: initial;
+  padding-inline-start: initial;
+}

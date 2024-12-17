@@ -16,38 +16,19 @@
  * 
  */
  ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
-  <head>
+<head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="generator" content="NeT">
-  
-  
-  
-  <title> An error has occurred - Page not Found! </title>
-
-    <style type="text/css">
-        
-    #loginform fieldset {background:white;opacity:0.9;-moz-border-radius:15px;font-family:Arial;font-size:12px;padding:20px;}
-    #loginform input {padding:5px;padding-left:10px;padding-right:10px;background:darkblue;opacity:0.9;-moz-border-radius:15px;font-family:Arial;font-size:12px;color:white;}
-    #loginform input[type=submit]:hover {padding:5px;padding-left:10px;padding-right:10px;background:blue;opacity:0.9;-moz-border-radius:15px;font-family:Arial;font-size:12px;color:white;}
-
-    #loginform dd {margin:0px;margin-top:-16px;margin-left:70px}
- 
-    </style>
-
-  </head>
-  <body>
-    <div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:9;background:black;">
-    <img src="http://<?php echo $_SERVER['HTTP_HOST'];?>/quickstart/public/images/loginBg.jpg" height="100%" />
-    </div>
-    
-    <div style="position:absolute;top:50px;left:350px;width:500px;height:300px;z-index:999999;color:white;font-family:Arial;">
-    <h2>
-    <?php
-    echo  "An error has occurred - Page not Found!" ;
-    ?>
-    </h2>
-    </div>
-  </body>
+  <title> Page not found!</title>
+  <link rel="shortcut icon" type="image/x-icon" href="/images/ide21logo.svg">
+  <link href="/css/tailwind.output.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="p-0 m-0 w-dvh h-dvh bg-neutral-100">
+  <div class="absolute top-0 left-0 w-full h-full bg-neutral-100">
+    <h1 class="text-2xl md:text-5xl font-bold text-white w-full text-center absolute top-12 bg-neutral">404 - Page not found!</h1>
+    <img src="/images/ide21logo.svg" height="100%" class="w-full h-full object-cover lg:object-contain" >
+  </div>
+</body>
 </html>
