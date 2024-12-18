@@ -316,11 +316,10 @@ function loadTemplate(idT){
       splBG = bg.split(';');
       $(splBG).each(function(k,v){
         splRule = v.split(':');
-        if(splRule[1]){
 
-          $('body').css(splRule[0], splRule[1]);
-        }
-        if(k == 0) {$('body').css("background" , v);}
+        $('body').css(splRule[0].replace(' ', ''), splRule[1]);
+
+        if(k == 0) {$('body').css("background-image" , v.replace(/no-repeat/, '') );}
 
       });
     }
@@ -1160,6 +1159,9 @@ $(document).ready(function(){
 
   //Saving a NEW template TREBA DORADJIVATI JOS
   $('#saveAsTemplate').click(function(){
+
+    $('*[contenteditable="true"]').attr('contenteditable', 'false');
+
     $(".draggable").each(function(){
       $(this).css("border", "0");
       //$(this).resizable('destroy');
@@ -1193,10 +1195,14 @@ $(document).ready(function(){
       setTimeout("$('#ajaxEventMask').click()", 1000);
     });
     ajaxEventDone('Saving template...');//removing mask
+
+    $('.selected-for-append').attr('contenteditable', 'true');
   });
 
   //Saving a template - needs more work
   $('#saveThisTemplate').click(function(){
+
+    $('*[contenteditable="true"]').attr('contenteditable', 'false');
 
     $(".draggable:not('.templateDiv')").each(function(){
       $(this).css("border", "0");
@@ -1237,6 +1243,8 @@ $(document).ready(function(){
       $('#ajaxEventMask').click();
     });
     ajaxEventDone(lang.TUpdate);//removing mask
+
+    $('.selected-for-append').attr('contenteditable', 'true');
   });
 
   //Applying a template
