@@ -6,6 +6,7 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "@tailwindcss/typography": "^0.5.15",
         "axios": "^1.6.4",
         "daisyui": "^4.10.2",
         "laravel-vite-plugin": "^1.0",
