@@ -134,28 +134,26 @@ class SearchController extends NetActionController
 
             //echo $what;
             if (preg_match("/$what/i",strip_tags($out) )  ) {
-                @$pos = stripos(strip_tags($out), $what);               
-            //if (preg_match("/$what/i",strip_tags($page['title']) )  ) {
-             //   $hits[$i]['title'] =  '<b class="searchHitsBG"><i>' . $page['title'] . "</i></b>";
-            //} else {
-                $hits[$i]['title'] =   $page['title'];            
-            //}
+                @$pos = stripos(strip_tags($out), $what);
+
+                $hits[$i]['title'] =   $page['title'];
+
                 $lengthOfWhat = strlen($what);
                 $hits[$i]['teaser'] =   '...<b class="searchHitsBG"><i>' . substr(strip_tags($out), $pos, $lengthOfWhat) . "</i></b>" . substr(strip_tags($out), $pos + $lengthOfWhat, 350) . "...";
                 $hits[$i]['url'] =  "pages/" . $page['id'];
-                $hits[$i]['url'] =  $page['alias'] . ".html";   
-            
+                $hits[$i]['url'] =  "pages/" . $page['alias'] . ".html";
+
             }
             if (preg_match("/$what/i",strip_tags($page['title']) )  ) {
-                @$pos = stripos(strip_tags($page['title']), $what);               
+                @$pos = stripos(strip_tags($page['title']), $what);
                 $lengthOfWhat = strlen($what);
                 $hits[$i]['title'] =  substr(strip_tags($page['title']), 0, $pos) . '<b class="searchHitsBG"><i>' . substr(strip_tags($page['title']), $pos, $lengthOfWhat)  . "</i></b>" . substr(strip_tags($page['title']), $pos + $lengthOfWhat, 150);
                 $hits[$i]['teaser'] =   "..." .substr( strip_tags($out), 0, 350) . "...";
                 $hits[$i]['url'] =  "pages/" . $page['id'];
-                $hits[$i]['url'] =  $page['alias'] . ".html";   
-            
+                $hits[$i]['url'] =  "pages/" . $page['alias'] . ".html";
+
             }
-            
+
         $i++;
         }
         if(isset($hits)){
