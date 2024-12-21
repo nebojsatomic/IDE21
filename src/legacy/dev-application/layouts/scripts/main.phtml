@@ -92,11 +92,19 @@
       collapsed: true,
       animated: "medium"
     });
-    $.each( $('.jd_menu'), function(k,v){
-        const parentBackgroundColor = $(this).closest('.templateDiv').css('background-color');
-        const parentFontColor = $(this).closest('.templateDiv').css('color');
-        $(this).find('li').css('background-color', parentBackgroundColor);
-        $(this).find('a.link').css('color', parentFontColor);
+    /* for displaying other then default color of the menu items, which was set in admin panel, we need to use this */
+    function changeMenuColors(){
+      $.each( $('.jd_menu'), function(k,v){
+          const parentBackgroundColor = $(this).closest('.templateDiv').css('background-color');
+          const parentFontColor = $(this).closest('.templateDiv').css('color');
+
+          $(this).find('li').css('background-color', parentBackgroundColor);
+          $(this).find('a.link').css('color', parentFontColor);
+      });
+    }
+    changeMenuColors();
+    $('.theme-controller').change(function(e){
+      changeMenuColors();
     });
   </script>
 </body>

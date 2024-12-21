@@ -99,10 +99,19 @@
   background-image: url( '/images/submenu-pointer.svg' );
 }
 .treeview a {
-  @apply relative px-2 rounded;
+  @apply relative px-2 rounded no-underline;
   @apply hover:text-accent !important;
 }
-
+.treeview a.selected {
+  @apply bg-accent text-primary-content;
+}
+.treeview a.selected:hover {
+  @apply text-primary-content !important;
+}
+/* override borders */
+.input:focus{
+  @apply outline-none;
+}
 /* Typography */
 .prose {
   max-width: 100%;

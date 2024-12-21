@@ -637,7 +637,7 @@ $(document).ready(function(){
   });
 
   //TURN ID ASSISTANT on/off
-  $('#tttoggle').attr('checked', false); // uncheck by default
+  $('#tttoggle').prop('checked', false); // uncheck by default
   $('#tttoggle').livequery('click', function(){
 
     if ($(this).prop("checked") == true) {
@@ -661,7 +661,7 @@ $(document).ready(function(){
           $('#dialogDiv_assistant').dialog('destroy');
           $('#dialogDiv_assistant').remove();
 
-          $('#tttoggle').attr('checked', false);
+          $('#tttoggle').prop('checked', false);
         }
         });
         $('#dialogDiv_assistant').show();
