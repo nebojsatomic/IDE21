@@ -1686,8 +1686,15 @@ $("#delButton").livequery('click', function(){
   $('#objProperties').data("objid", "");
 
 });
-$('#previewButton').click(function(){
 
+$('#panelToggle').click(function(){
+  $('#creator-header-navbar').toggle();
+  if( $('#panelToggle svg').hasClass('rotate-180')) {
+    $('#panelToggle svg').removeClass('rotate-180');
+  } else {
+    $('#panelToggle svg').addClass('rotate-180');
+  }
+  return false;
 });
 
 //SHADOW
