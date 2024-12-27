@@ -3221,6 +3221,42 @@ input.tab:checked + .tab-content,
   margin-top: 0;
 }
 
+.mockup-phone .camera {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  background: #000;
+  height: 25px;
+  width: 150px;
+  margin: 0 auto;
+  border-bottom-left-radius: 17px;
+  border-bottom-right-radius: 17px;
+  z-index: 11;
+}
+
+.mockup-phone .camera:before {
+  content: "";
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  width: 50px;
+  height: 4px;
+  border-radius: 5px;
+  background-color: #0c0b0e;
+  transform: translate(-50%, -50%);
+}
+
+.mockup-phone .camera:after {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 70%;
+  width: 8px;
+  height: 8px;
+  border-radius: 5px;
+  background-color: #0f0b25;
+}
+
 .mockup-phone .display {
   overflow: hidden;
   border-radius: 40px;
@@ -4269,6 +4305,10 @@ input.tab:checked + .tab-content,
   bottom: 0.25rem;
 }
 
+.bottom-4 {
+  bottom: 1rem;
+}
+
 .left-0 {
   left: 0px;
 }
@@ -4291,6 +4331,10 @@ input.tab:checked + .tab-content,
 
 .right-1 {
   right: 0.25rem;
+}
+
+.right-4 {
+  right: 1rem;
 }
 
 .top-0 {
@@ -4479,6 +4523,11 @@ input.tab:checked + .tab-content,
 
 .hidden {
   display: none;
+}
+
+.size-12 {
+  width: 3rem;
+  height: 3rem;
 }
 
 .size-24 {
@@ -5153,6 +5202,11 @@ input.tab:checked + .tab-content,
 
 .italic {
   font-style: italic;
+}
+
+.text-accent {
+  --tw-text-opacity: 1;
+  color: var(--fallback-a,oklch(var(--a)/var(--tw-text-opacity)));
 }
 
 .text-accent-content {
@@ -6153,6 +6207,12 @@ input.tab:checked + .tab-content,
   outline-offset: 2px;
 }
 
+/* override ZendForm's unwanted elements */
+
+#contactForm-element legend, #to-label, #to-element, #formID-label, #formID-element, #contactForm-label {
+  display: none;
+}
+
 /* Typography */
 
 .prose {
@@ -6284,6 +6344,11 @@ input.tab:checked + .tab-content,
   background-color: var(--fallback-a,oklch(var(--a)/var(--tw-bg-opacity)));
 }
 
+.hover\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
 .hover\:underline:hover {
   text-decoration-line: underline;
 }
@@ -6395,6 +6460,10 @@ input.tab:checked + .tab-content,
 
   .md\:justify-self-end {
     justify-self: end;
+  }
+
+  .md\:rounded-2xl {
+    border-radius: 1rem;
   }
 
   .md\:rounded-box {

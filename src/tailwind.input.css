@@ -112,6 +112,12 @@
 .input:focus{
   @apply outline-none;
 }
+
+/* override ZendForm's unwanted elements */
+#contactForm-element legend, #to-label, #to-element, #formID-label, #formID-element, #contactForm-label{
+  @apply hidden;
+}
+
 /* Typography */
 .prose {
   max-width: 100%;
