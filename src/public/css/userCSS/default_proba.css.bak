@@ -1,0 +1,6 @@
+/* this is the default css file that you write here in admin panel.
+You can change whatever you like, and if you do not like this
+html smooth behavior, simply remove it */
+html {
+  scroll-behavior: smooth;
+}

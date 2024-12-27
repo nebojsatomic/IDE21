@@ -17,7 +17,7 @@
 */
 ?>
 <!DOCTYPE html>
-<html class="min-h-dvh h-full" data-theme="nord">
+<html class="min-h-dvh h-full ease-in duration-800" data-theme="nord">
 <head>
   <meta name="keywords" content="<?php echo $this->meta_keywords;?>" />
   <meta name="description" content="<?php echo $this->meta_description;?>" />
@@ -105,6 +105,16 @@
     changeMenuColors();
     $('.theme-controller').change(function(e){
       changeMenuColors();
+    });
+    /* animate click on hero buttons */
+    $('.hero-content button').click(function(e){
+      let scrollTarget = document.getElementById($(e.target).closest('a').attr('href').replace('#',''));
+      scrollTarget.scrollIntoView({
+        block: 'start',
+        behavior: 'smooth',
+        inline: 'start'
+      });
+      return false;
     });
   </script>
 </body>
