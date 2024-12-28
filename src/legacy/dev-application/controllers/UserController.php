@@ -308,12 +308,12 @@ class UserController extends NetActionController
         $currUser = Zend_Registry::get('currentUser');
         if($currUser == "" || $currUser == "guest" ) {
             if($registrationEnabled == '1'){ $registerText = $translator->_("Register");}else{$registerText = "";}//if registration is enabled
-            $message = "<b>" . $translator->_("Welcome Guest") . '! &nbsp;</b><i><a href="' . $host . 'user/register">' .  $registerText . '</a></i>' . '<br /><i><a href="' . $host . 'user/password-reminder">' .  $translator->_("Password reminder") . '</a></i>';
+            $message = "<b>" . $translator->_("Welcome Guest") . '! &nbsp;</b><a href="' . $host . 'user/register">' .  $registerText . '</a>' . '<br /><a href="' . $host . 'user/password-reminder">' .  $translator->_("Password reminder") . '</a>';
             $form = self::userLoginForm();
 
         } else {
             $form = "";
-            $message = "<b>" . $translator->_("Welcome") . " " . $currUser . '! &nbsp;</b><i><a href="' . $host . 'user/logout">' . $translator->_("Logout") . '</a></i>' . '<br /><i><a href="' . $host . 'user/my-account">' .  $translator->_("My Account") . '</a></i>' ;
+            $message = "<b>" . $translator->_("Welcome") . " " . $currUser . '! &nbsp;</b><a href="' . $host . 'user/logout">' . $translator->_("Logout") . '</a>' . '<br /><a href="' . $host . 'user/my-account">' .  $translator->_("My Account") . '</a>' ;
         }
 
         $scriptName = "login.phtml";

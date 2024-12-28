@@ -83,8 +83,15 @@
 </head>
 <body id="body" class="overflow-hidden">
   <!-- top panel -->
-  <div id="blur-all" class="hidden absolute w-full h-full top-0 backdrop-blur-sm z-[999998] "></div>
-  <div id="creator-header-navbar" class="navbar bg-neutral min-h-16 h-16 relative z-[999997]">
+  <div id="blur-all" class="hidden absolute w-full h-full top-0 backdrop-blur-sm z-[999998]"></div>
+  <div class="grid place-content-center fixed -top-[0.5rem] left-2/4 rounded-full bg-neutral hover:bg-accent duration-200 z-[999999] size-6 border-2 border-primary">
+    <a id="panelToggle" class="help w-4 text-white ease-in duration-800" href="#" title="<?php echo $this->translate->_("Click to show/hide top panel");?>">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
+        <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5Z" clip-rule="evenodd" />
+      </svg>
+    </a>
+  </div>
+  <div id="creator-header-navbar" class="navbar bg-neutral min-h-16 h-16 relative z-[999997] ease-in duration-200">
     <div class="navbar-start flex gap-1 md:gap-2">
       <!--<div class="dropdown">
         <div tabindex="0" role="button" class="btn btn-sm btn-ghost btn-circle text-white">
@@ -132,7 +139,6 @@
       </div> -->
     </div>
     <div class="navbar-center hidden sm:flex text-base text-white font-semibold w-40 grid gap-2">
-      <!--<img alt="IDE21 Logo" src="/images/ide21logo.svg">-->
       <div class="truncate"><?php echo $this->loggedUserFullName; ?></div>
       <div> on: </div>
       <div><?php echo str_replace('Ver.', '', $this->version);?></div>
@@ -145,8 +151,8 @@
           </svg>
         </a>
       </div>
-      <div id="p_t_common" class="noAjaxEvent grid grid-cols-2 item-strech items-center h-6 text-white px-2">
-        <div class="col-span-2 grid-cols-2 grid justify-items-center gap-2">
+      <div id="p_t_common" class="noAjaxEvent grid grid-cols-2 item-strech items-center h-6 w-12 md:w-16 text-white md:px-2">
+        <div class="col-span-2 grid-cols-2 grid justify-items-center gap-1">
           <span><input id="pageDisplayer" class="noAjaxEvent help radio-sm" type="radio" name="p_g" value="pageEditing" checked="checked" title="<?php echo $this->translate->_("Page creating Mode");?>" /></span>
           <span><input  id="templateDisplayer" class="noAjaxEvent help radio-sm" type="radio" name="p_g" value="templateEditing" title="<?php echo $this->translate->_("Template creating Mode");?>" /></span>
         </div>
@@ -155,7 +161,7 @@
           <span id="p_t-label-template" class="hidden"><?php echo $this->translate->_("Template");?></span>
         </div>
       </div>
-      <div class="dropdown" style="z-index:9;">
+      <div class="dropdown relative left-1" style="z-index:9;">
         <div tabindex="0" role="button" class="btn btn-sm min-h-8 h-8 w-8 rounded-full">
           <svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg>
         </div>
@@ -172,7 +178,7 @@
           </li> -->
         </ul>
       </div>
-      <div id="logout" class="help btn btn-sm btn-ghost btn-circle text-white mx-2 cursor-pointer" title="<?php echo $this->translate->_("Click to logout");?>">
+      <div id="logout" class="help btn btn-sm btn-ghost btn-circle text-white md:mx-2 cursor-pointer" title="<?php echo $this->translate->_("Click to logout");?>">
         <a id="logout_a" class="a_logout" href="<?php echo $this->host;?>creator/logout" >
           <svg class="w-6 h-6 rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path fill-rule="evenodd" d="M16.5 3.75a1.5 1.5 0 0 1 1.5 1.5v13.5a1.5 1.5 0 0 1-1.5 1.5h-6a1.5 1.5 0 0 1-1.5-1.5V15a.75.75 0 0 0-1.5 0v3.75a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V5.25a3 3 0 0 0-3-3h-6a3 3 0 0 0-3 3V9A.75.75 0 1 0 9 9V5.25a1.5 1.5 0 0 1 1.5-1.5h6ZM5.78 8.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 0 0 0 1.06l3 3a.75.75 0 0 0 1.06-1.06l-1.72-1.72H15a.75.75 0 0 0 0-1.5H4.06l1.72-1.72a.75.75 0 0 0 0-1.06Z" clip-rule="evenodd" />

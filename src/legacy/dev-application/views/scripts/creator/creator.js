@@ -637,7 +637,7 @@ $(document).ready(function(){
   });
 
   //TURN ID ASSISTANT on/off
-  $('#tttoggle').attr('checked', false); // uncheck by default
+  $('#tttoggle').prop('checked', false); // uncheck by default
   $('#tttoggle').livequery('click', function(){
 
     if ($(this).prop("checked") == true) {
@@ -661,7 +661,7 @@ $(document).ready(function(){
           $('#dialogDiv_assistant').dialog('destroy');
           $('#dialogDiv_assistant').remove();
 
-          $('#tttoggle').attr('checked', false);
+          $('#tttoggle').prop('checked', false);
         }
         });
         $('#dialogDiv_assistant').show();
@@ -1686,8 +1686,15 @@ $("#delButton").livequery('click', function(){
   $('#objProperties').data("objid", "");
 
 });
-$('#previewButton').click(function(){
 
+$('#panelToggle').click(function(){
+  $('#creator-header-navbar').toggle();
+  if( $('#panelToggle svg').hasClass('rotate-180')) {
+    $('#panelToggle svg').removeClass('rotate-180');
+  } else {
+    $('#panelToggle svg').addClass('rotate-180');
+  }
+  return false;
 });
 
 //SHADOW
@@ -3528,7 +3535,7 @@ $('#ftpform').livequery(function(){
   });
 });
 
-$('#objList').livequery('click', function(){
+$('#objList').livequery('click', function(e){
   const val = $(this).val();
   $('#objIDshow').html(val);
 
@@ -3538,6 +3545,11 @@ $('#objList').livequery('click', function(){
   $('.selected-for-append').removeClass('selected-for-append');
   $('#'+ selectedObjID ).addClass('selected-for-append');
 
+  // do not apply daisyUI's theme-controller events on admin panel
+  const skipTheseElements = $('#'+ selectedObjID ).hasClass('theme-controller');
+  if(skipTheseElements) return;
+
+  // if not daisyUI theme-controller, proceed
   $('#'+ selectedObjID ).trigger('click');
   $('#'+ selectedObjID ).trigger('mouseover'); // triger refresh of classes in ID assistant
 });
