@@ -358,8 +358,8 @@
                   <div class="creatorDiv inline-flex gap-2 items-center"><input id="allLangCheckTemplate" class="checkbox-sm checkbox" type="checkbox" /><?php echo $this->translate->_("Apply to all languages");?></div>
                   <div id="DefaultTemplateChangerDiv" class="inline-flex gap-2 items-center"><input id="templateDefaultCB" class="checkbox-sm checkbox" type="checkbox" name="templateDefaultCB" /><?php echo $this->translate->_("Default Template");?></div>
 
-                  <a href="" id="exportTemplate" class="navLinks a_edit btn btn-secondary btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to export this template for use on another installation.");?>"><?php echo $this->translate->_("Export Template");?></a>
-                  <a href="" id="installTemplate" class="navLinks a_save btn btn-secondary btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to install exported template");?>"><?php echo $this->translate->_("Install Template");?></a>
+                  <a href="" id="exportTemplate" class="navLinks a_edit btn btn-secondary btn-sm md:btn-xs btn-disabled" title="<?php echo $this->translate->_("Click to export this template for use on another installation.");?>"><?php echo $this->translate->_("Export Template");?></a>
+                  <a href="" id="installTemplate" class="navLinks a_save btn btn-secondary btn-sm md:btn-xs btn-disabled" title="<?php echo $this->translate->_("Click to install exported template");?>"><?php echo $this->translate->_("Install Template");?></a>
                   <a href="" id="deleteTemplate" class="navLinks a_delete btn btn-sm btn-secondary btn-error" title="<?php echo $this->translate->_("Click to delete this template");?>"><?php echo $this->translate->_("Delete This Template");?></a>
                 </div>
               </div>
@@ -380,7 +380,8 @@
                 BodyBg:<input id="template_bodyBg" name="template_bodyBg" type="text" value="" class="input input-sm w-full mb-2" />
 
                 <a id="emptyCacheButton" class="navLinks a_emptyCache help btn btn-secondary btn-sm md:btn-xs mb-2" href="" title="<?php echo $this->translate->_("Click this to empty the cache if you have made changes that require cache to be cleaned!");?>"><?php echo $this->translate->_("Empty Cache");?> </a>
-                <a id="backupSiteButton" class="navLinks a_backup help btn btn-secondary btn-sm md:btn-xs mb-2" href="" title="<?php echo $this->translate->_("Click here to have backup of the site in a folder that is created for that purpose.If system command is disabled then it must be done through phpMyAdmin...");?>"><?php echo $this->translate->_("Backup Site");?> </a>
+
+                <!--<a id="backupSiteButton" class="navLinks a_backup help btn btn-secondary btn-sm md:btn-xs mb-2" href="" title="<?php echo $this->translate->_("Click here to have backup of the site in a folder that is created for that purpose.If system command is disabled then it must be done through phpMyAdmin...");?>"><?php echo $this->translate->_("Backup Site");?> </a> HIDE UNTIL FIXED -->
 
                 <!--<a id="generateCacheButton" class="navLinks a_generateCache" style="display:block" href="" >Generate Cache </a>-->
               </div>
