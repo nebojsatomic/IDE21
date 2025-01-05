@@ -126,3 +126,7 @@
   margin-top: initial;
   padding-inline-start: initial;
 }
+/* fix ace-editor cursor misplacement */
+#pageCSS-ace *, #pageJS-ace *, #objectHTML-ace * {
+  font: 0.8rem/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Source Code Pro', 'source-code-pro', monospace !important;
+}
