@@ -19,7 +19,6 @@
 require_once 'ViewController.php';
 require_once 'NeTFramework/NetActionController.php';
 require_once('Zend/File/Transfer/Adapter/Http.php');
-require_once('pclzip.lib.php');
 
 class PageController extends NetActionController
 {
@@ -928,7 +927,6 @@ class PageController extends NetActionController
             if (!$handle = fopen($filename, 'w+') ) {
                 $message = "Cannot open file ";
                 return;
-
             }
 
             // Write $somecontent to our opened file.
@@ -940,16 +938,43 @@ class PageController extends NetActionController
         }
 
         //create the zip archive
-
         $v_dir = $this->_nps . 'templates/' . $templateDir;
 
-        $archive = new PclZip( $templateName . '.zip');
-        $v_list = $archive->create($v_dir, PCLZIP_OPT_REMOVE_PATH, $v_dir, PCLZIP_OPT_ADD_PATH, $templateDir);
-        if (@$v_list == 0) {
-          die("Error : ".$archive->errorInfo(true));
+        $zip = new ZipArchive();
+
+        $archiveName = $templateName . '.zip';
+        $pathToFolder = $this->_nps . 'templates/';
+
+        if(file_exists($pathToFolder . $archiveName )) {
+            unlink ($pathToFolder . $archiveName );
         }
-        echo  $this->_translateCreator->_('Note that you should ship images with this package in a separate package if it is to be installed on another server.<br /><br />');
-        echo  $this->_translateCreator->_('Click here to download all revisions of this template') . ' <br /><br /><a target="_blank" href="' . $this->_host . $templateName . '.zip' . '">' . $res[0]['title'] . '</a><br />';
+
+        if ($zip->open($pathToFolder . $archiveName , ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE) != TRUE) {
+                die ("Could not open the file");
+        }
+
+        $files = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($v_dir),
+            RecursiveIteratorIterator::LEAVES_ONLY
+        );
+
+        foreach ($files as $file){
+            //Skip directories
+            if (!$file->isDir()){
+                //Get real and relative path
+                $filePath = $file->getRealPath();
+                $relativePath = substr($filePath, strlen($v_dir) + 1);
+
+                //Add file
+                $zip->addFile($filePath, $relativePath);
+            }
+        }
+
+        //close archive
+        $zip->close();
+
+        //echo  $this->_translateCreator->_('Note that you should ship images with this package in a separate package if it is to be installed on another server.<br /><br />');
+        echo  $this->_translateCreator->_('Click here to download all revisions of this template') . ' <br /><br /><a target="_blank" href="' . $this->_host . 'templates/' . $templateName . '.zip' . '">' . $res[0]['title'] . '</a><br />';
     }
 
     /**
