@@ -19,9 +19,6 @@ RUN useradd -ms /bin/bash ide21
 COPY --chown=ide21:ide21 ./src .
 
 USER ide21
-RUN ./composer.phar update
-RUN cp ./.env.example ./.env
-
 
 VOLUME /var/www/html
 
