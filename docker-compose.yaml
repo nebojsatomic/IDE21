@@ -12,7 +12,7 @@ services:
             #- ./src:/var/www/html # uncomment this if you want to use src folder inside running container, development use
             - 'ide21src:/var/www/html' #otherwise use named volume, for production use
         #user: ${CURRENT_UID}
-        command: /bin/bash -c "/var/www/html/laravel.sh"
+        command: /bin/bash -c "/var/www/html/startup.sh"
         networks:
             - cmside2
         depends_on:
