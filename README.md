@@ -13,11 +13,12 @@ This is the base idea, there are still some bugs and unfinished features, there 
 - Design templates in admin panel
 - create pages with the same principle, assign template to be used with the specific page
 - TailwindCSS - use classes to create designs
+- DaisyUI - use components and themes
 - create and display Menus
 - create and display Categories
 - use Modules ( form creation, user, search)
 - upload Images and use them in design
-- Multi User: *set ACL permissions on the pages
+- Multi User: set ACL permissions on the pages
 - Multi Language: add as many languages as you want
 - Write CSS and/or Javascript if you need to, every user can write his own
 - website administration is possible on a mobile device
