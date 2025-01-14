@@ -119,9 +119,8 @@
                 </select>
                 </div>
 
-                
+                <a href="" id="clearPage" class="navLinks a_clear noAjaxEvent btn btn-error btn-sm md:btn-xs mb-2" title="<?php echo $this->translate->_("Click to erase all objects");?>"><?php echo $this->translate->_("Clear");?></a>
                 <a href="" id="toggleVisibilityRowAnchor" class="navLinks a_content noAjaxEvent btn btn-secondary btn-sm md:btn-xs mb-2 " title="<?php echo $this->translate->_("Toggle visibility for style, tinymce and meta");?>"><?php echo $this->translate->_("Object Editors");?></a>
-                <a href="" id="clearPage" class="navLinks a_clear noAjaxEvent btn btn-secondary btn-sm md:btn-xs mb-2" title="<?php echo $this->translate->_("Click to erase all objects");?>"><?php echo $this->translate->_("Clear");?></a>
 
               </div>
               <div id="toggleVisibilityRow" class="grid gap-4" style="display:none">
@@ -147,8 +146,8 @@
                       </a>
                     </div>
                   </div>
-                  <textarea id="objPropertiesHtmlSelected" name="objPropertiesHtmlSelected" class="textarea min-h-32"></textarea>
-                  <a href="" id="applyHtml" class="navLinks noAjaxEvent btn btn-secondary btn-sm md:btn-xs mb-2 help" title="<?php echo $this->translate->_("Click to apply this HTML to the selected object");?>">Apply</a>
+                  <textarea id="objPropertiesHtmlSelected" name="objPropertiesHtmlSelected" class="hidden textarea min-h-32"></textarea>
+                  <div id="objectHTML-ace" class="w-full h-full min-h-32"></div>
                 </div>
 
                 <div class="">

@@ -1400,6 +1400,7 @@ $(".draggable").livequery('dblclick', function(e){
     $("#objPropertiesHtml").val( htmlValue );
 
     $('#objPropertiesHtmlSelected').val( outerHtmlValue);
+    editorHTML.setValue( outerHtmlValue);
 
   }
 
@@ -1473,6 +1474,7 @@ $("#objPropertiesHtml").livequery('change', function(){
 $("#objPropertiesHtmlSelected").livequery('change', function(){
   idObjekta = $('#objProperties').data("objid");
   $('#' + idObjekta).replaceWith( $(this).val() );
+  editorHTML.setValue( $("#objPropertiesHtmlSelected").val() );
 });
 
 $("#objPropertiesCSS").livequery('change', function(){

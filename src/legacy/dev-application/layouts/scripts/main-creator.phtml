@@ -206,11 +206,29 @@
   <script src="/ace/src-min/ace.js" type="text/javascript" charset="utf-8"></script>
   <script src="/ace/src-min/ext-language_tools.js"></script>
   <script>
+      var editorHTML = ace.edit("objectHTML-ace");
+      editorHTML.setTheme("ace/theme/chrome");
+      editorHTML.session.setMode("ace/mode/html");
+
+      editorHTML.setOptions({
+        wrap: true,
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: true
+      });
+      editorHTML.session.on('change', function(delta){
+        $('#objPropertiesHtmlSelected').val( editorHTML.getValue() );
+        setTimeout( function(){ // use timeout to wait for the selected object events completion
+          $('#' + $('#objIDshow').text()).replaceWith( editorHTML.getValue() );
+        }, 200 );
+      });
+
       var editorCSS = ace.edit("pageCSS-ace");
       editorCSS.setTheme("ace/theme/chrome");
       editorCSS.session.setMode("ace/mode/css");
 
       editorCSS.setOptions({
+        wrap: true,
         enableBasicAutocompletion: true,
         enableSnippets: true,
         enableLiveAutocompletion: true
@@ -221,6 +239,7 @@
       editorJS.session.setMode("ace/mode/javascript");
 
       editorJS.setOptions({
+        wrap: true,
         enableBasicAutocompletion: true,
         enableSnippets: true,
         enableLiveAutocompletion: true
