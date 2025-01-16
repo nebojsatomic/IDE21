@@ -125,7 +125,7 @@ function ajaxEvent(){
 message = "";
 function ajaxEventDone(message){
 
-  $('body').append('<div id="ajaxEventMessage" role="alert" class="fixed inset-0 w-72 h-24 mx-auto my-auto alert alert-success bg-accent text-accent-content"  style="display:none;opacity:0.9;z-index:999999;"><svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>' +  message + '</span></div>');
+  $('body').append('<div data-theme="nord" id="ajaxEventMessage" role="alert" class="fixed inset-0 w-72 h-24 mx-auto my-auto alert alert-success bg-accent text-accent-content"  style="display:none;opacity:0.9;z-index:999999;"><svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>' +  message + '</span></div>');
   $('#ajaxEventMessage').fadeIn(1000);
   setTimeout("$('#ajaxEventMessage').fadeOut()", 3000);
 }
@@ -488,6 +488,12 @@ $('.navbar, #contProperties').click( function(){
 });
 
 $(document).ready(function(){
+  $('#manageAllPages').livequery('click', function(){
+    $('#TB_window').attr('data-theme', 'nord');
+  });
+  $('.ui-dialog').livequery(function(){
+    $('.ui-dialog').attr('data-theme', 'nord');
+  });
   const simpleBar = new SimpleBar(document.getElementById('containerRadnePovrsine'));
   simpleBar.getScrollElement().addEventListener('scroll', function(){
     if( typeof $('.selected-for-append').offset() == 'undefined' ) return;
@@ -647,7 +653,7 @@ $(document).ready(function(){
 
       if($('#dialogDiv_assistant' ).length < 1 ){
 
-        $('body').append('<div class="dialogDiv bg-accent text-accent-content" id="dialogDiv_assistant" ><p>Select the object to see its classes</p></div>');
+        $('body').append('<div data-theme="nord" class="dialogDiv bg-accent text-accent-content" id="dialogDiv_assistant" ><p>Select the object to see its classes</p></div>');
         $('#tooltip').appendTo('#dialogDiv_assistant');
 
         $('#dialogDiv_assistant' ).dialog({modal: false, resizable: true, title: 'ID Assistant', closeOnEscape: false,
