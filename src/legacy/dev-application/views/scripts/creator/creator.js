@@ -3562,6 +3562,10 @@ $('#objList').livequery('click', function(e){
   $('#'+ selectedObjID ).trigger('mouseover'); // triger refresh of classes in ID assistant
 });
 
+$('#add-new-daisy').livequery('click', function(){
+  ajaxEventDone('THIS FEATURE WILL BE ADDED SOON.');
+});
+
 $('#movePointer').livequery('click', function(){
 
   if( !$('.selected-for-append').hasClass('movable')) {
