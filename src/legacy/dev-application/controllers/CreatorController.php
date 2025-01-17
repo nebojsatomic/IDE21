@@ -22,7 +22,6 @@ require_once 'ViewController.php';
 class CreatorController extends NetActionController
 {
 
-
     public function init()
     {
         //$this->_checkAccess();
@@ -33,27 +32,36 @@ class CreatorController extends NetActionController
         define("NET_PATH_SITE", $this->_nps);
         define("NET_PATH", $this->_np);
 
-    }
+        /* get themes from tailwind.config.js */
+        $taiwlindConf = file_get_contents($this->_nps . '../tailwind.config.js'); 
+        $tailwindConfArray = explode('themes:', $taiwlindConf);
+        $tailwindConfArray = explode('[', $tailwindConfArray[1]);
+        $tailwindConfArray = explode(']', $tailwindConfArray[1]);
+        $tailwindConfArray = explode(',',$tailwindConfArray[0]);
+        $daisyuiThemes = '';
 
+        foreach( $tailwindConfArray as $theme){
+            $unwanted = ['"', ' ', "'"];
+            $theme =  str_replace($unwanted, '', $theme);
 
-        public function countPageReq()
-        {
-				//require_once 'Zend/Session/Namespace.php';
-
-				$defaultNamespace = new Zend_Session_Namespace('Default');
-
-				if (isset($defaultNamespace->numberOfPageRequests)) {
-				    $defaultNamespace->numberOfPageRequests++; // this will increment for each page load.
-				} else {
-				    $defaultNamespace->numberOfPageRequests = 1; // first time
-				}
-
-				echo "Page requests this session: ", $defaultNamespace->numberOfPageRequests;
+            $daisyuiThemes .= '<li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-center" aria-label="' . ucfirst($theme) . '" value="' . $theme . '"/></li>';
         }
 
+        $this->view->daisyuiThemes = $daisyuiThemes;
+    }
 
+    public function countPageReq()
+    {
+        $defaultNamespace = new Zend_Session_Namespace('Default');
 
+        if (isset($defaultNamespace->numberOfPageRequests)) {
+            $defaultNamespace->numberOfPageRequests++;
+        } else {
+            $defaultNamespace->numberOfPageRequests = 1;
+        }
 
+        echo "Page requests this session: ", $defaultNamespace->numberOfPageRequests;
+    }
 
     public function indexAction()
     {
