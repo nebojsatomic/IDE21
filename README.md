@@ -67,11 +67,11 @@ Demo user:  proba
 
 Demo pass:  proba
 
-*  /adm can be changed to what ever path you want if you modify adminUrl variable inside src/dev-application/config/config.ini
+*  /adm can be changed to what ever path you want if you modify adminUrl variable inside src/legacy/dev-application/config/config.ini
 
 If you consider further use of IDE21, set your own configuration for the database in docker-compose.yaml, and config files inside dev-application, do not use this default configuration, naturally.
 
-If you want to develop, note that container uses Named volume by default, in order to be able to see your changes in the container instantly ( not rebuild the image ), you must set Host volume in docker-compose.yaml by uncommenting the line 12 and commenting the line 13, and afterwards access the 'web' container with docker exec and run ./laravel.sh.
+If you want to develop, note that container uses Named volume by default, in order to be able to see your changes in the container instantly ( not rebuild the image ), you should set Host volume in docker-compose.yaml by uncommenting the line 12 and commenting the line 13.
 
 DO NOT PUSH THE CHANGE YOU MADE IN docker-compose.yaml TO REMOTE BRANCH
 
@@ -92,6 +92,8 @@ This project needs volunteers in the form of designers, frontend developers, bac
 There is a lot to rewrite here, but it should not be impossible to create something new and exciting...
 
 * NOTE that only [verified](https://docs.github.com/en/authentication/managing-commit-signature-verification) commits will be accepted
+
+Any kind of support regarding no-code contributions like sharing on social media, creating posts or videos about using this project, or anything else that comes to mind, is more than welcome.
 
 # Translation
 
