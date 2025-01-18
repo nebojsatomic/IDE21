@@ -29,12 +29,15 @@ and more…
 # SCREENSHOTS
 MOBILE:
 
-<img src="https://github.com/user-attachments/assets/adf338b0-0b5a-4cf9-9d88-f2e182329aa6" width="320" />
+<img src="https://github.com/user-attachments/assets/9bdc8f6f-90b0-47d4-bf5c-58a64f0d601f" width="320" />
 
 DESKTOP:
 
-![IDE21-Desktop-1](https://github.com/user-attachments/assets/a8ee2d7d-674d-410d-be02-11b5f1616a98)
-![IDE21-Desktop-2](https://github.com/user-attachments/assets/bb9b3f70-5d67-479a-98e5-817a359db612)
+![retro_103051](https://github.com/user-attachments/assets/1b3a2bc9-fdff-4fb6-b3d3-18db868df3fc)
+
+![valentine_103057](https://github.com/user-attachments/assets/a81e4216-0bf3-40b4-bd9e-dcc83edc4078)
+
+![nord_103045](https://github.com/user-attachments/assets/ffa7229c-232e-4255-a1e6-20119ee13af6)
 
 # YOUTUBE CHANNEL
 
