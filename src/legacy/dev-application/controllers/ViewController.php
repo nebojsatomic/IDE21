@@ -783,7 +783,7 @@ class ViewController extends NetActionController
                 }
                 if (@strstr( "{" . $build_[0] . "}", "{adminurl}" )) {
 
-                        $outputDB = str_replace('{adminurl}', '<a href="' . NetActionController::$hostRW . NetActionController::$adminUrl . '" target="_blank">Admin (FF!/Safari/Chrome)</a>' , $outputDB);
+                        $outputDB = str_replace('{adminurl}', '<a href="' . NetActionController::$hostRW . NetActionController::$adminUrl . '" target="_blank">Admin</a>' , $outputDB);
                 }
                 // SEARCH HANDLE
                 if (@strstr( "{" . $build_[0] . "}", "{searchform}" )) {
