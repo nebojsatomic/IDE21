@@ -2668,7 +2668,6 @@ $('a.uniTableAdmin').livequery('click', function(e){
 
   if ($(this).hasClass("a_add") ){
 
-    //$('#addRowForm').remove();
     $('#dialogDiv').remove();
     $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
     dialog();
@@ -2691,11 +2690,13 @@ $('a.uniTableAdmin').livequery('click', function(e){
 
     let rowId = $(this).closest("tr").attr("id");
     let tableid =  $(this).attr('value');
+    let actionTitle = $(this).attr('title');
 
     $('#editRowForm').remove();
     $('#dialogDiv').remove();
     $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
     dialog();
+    $('#dialogDiv').dialog( "option", "title", actionTitle );
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     $.get(absoluteUrl + "tables/edit-row/tableid/" + tableid + "/rowid/" + rowId, function(data){
 
