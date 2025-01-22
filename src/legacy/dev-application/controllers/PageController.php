@@ -749,7 +749,6 @@ class PageController extends NetActionController
 
         $db->query("UPDATE IGNORE templates_$langCode SET title = ?, alias = ?, category = ?, output = ? WHERE id = ?", array($title, $alias, $categoryId, $output, $templateID));
 
-        //Ako je promena za sve jezike
         $changeTemplateInAllLangs = $values['applytoall'];//if update should affect all languages
 
         if($changeTemplateInAllLangs == "yes"){
@@ -763,6 +762,11 @@ class PageController extends NetActionController
         //clean the cache
         $this->_cachedPages->clean(Zend_Cache::CLEANING_MODE_ALL);
         $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);
+
+        if (!file_exists(NET_PATH . 'history/templates/' . $templateID )) {
+            mkdir(NET_PATH . 'history/templates/' . $templateID , 0755, true);
+        }
+        $saveOutput = file_put_contents(NET_PATH . 'history/templates/' . $templateID . '/' . $templateID . '.html',  $output );
     }
 
 
