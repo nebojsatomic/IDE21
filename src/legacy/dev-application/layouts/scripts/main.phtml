@@ -81,7 +81,7 @@
   <script type="text/javascript">
     /* add DaisyUI fixes */
     $('select').addClass('select-sm shadow-sm');
-    $('input').each(function(){
+    $('input[type="text"], input[type="password"], input[type="email"]').each(function(){
       $(this).addClass('input input-sm w-full shadow-sm').attr('placeholder', $(this).attr('name'));
     });
     $('input[type="submit"]').addClass('btn btn-secondary shadow-lg');

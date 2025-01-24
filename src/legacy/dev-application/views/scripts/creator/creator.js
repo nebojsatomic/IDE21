@@ -846,6 +846,9 @@ $(document).ready(function(){
 
   //Saving a new page
   $('#savePageNew').livequery('click', function(){
+
+    $('*[contenteditable="true"]').attr('contenteditable', 'false');
+
     boundCBval = $('#boundCB').val();
 
     if(boundCBval == 'on') {
@@ -897,6 +900,8 @@ $(document).ready(function(){
   applytoAllLangsTemplate = "no";
   //UPDATING A PAGE
   $('#saveThisPage').click(function(){
+
+    $('*[contenteditable="true"]').attr('contenteditable', 'false');
 
     boundCBval = $('#boundCB').val();
 
