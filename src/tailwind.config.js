@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["/var/www/html/legacy/dev-application/**/*.{php,phtml,js}", "/var/www/html/public/cacheAll/*"],
+  content: ["/var/www/html/legacy/dev-application/**/*.{html,php,phtml,js}"],
   theme: {
     extend: {},
   },

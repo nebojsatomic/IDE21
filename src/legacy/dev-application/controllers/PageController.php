@@ -87,6 +87,12 @@ class PageController extends NetActionController
         foreach ($langs as $lang) {
             $db->query("INSERT IGNORE INTO pages_$lang(userId, title, alias, category, template_id, output, description, keywords, unbounded) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)", array($this->_sesija->userId, $title, $alias, $categoryId, $defaultTemplateID[0]['id'], $output, $description, $keywords, '0'));
         }
+
+        // new page doesn't have an Id yet, and this is saved only to trigger tailwindcss rebuilding, once the new page is opened in the admin with its proper Id, this will be triggered by updateAction
+        if (!file_exists(NET_PATH . 'history/pages/save-new-page')) {
+            mkdir(NET_PATH . 'history/pages/save-new-page' , 0755, true);
+        }
+        $saveOutput = file_put_contents(NET_PATH . 'history/pages/save-new-page/new-page.html',  $output );
     }
 
     private function _saveCSS($css)
@@ -238,6 +244,11 @@ class PageController extends NetActionController
         //clean the cache
         $this->_cachedPages->clean(Zend_Cache::CLEANING_MODE_ALL);
         $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);
+
+        if (!file_exists(NET_PATH . 'history/pages/' . $pageID )) {
+            mkdir(NET_PATH . 'history/pages/' . $pageID , 0755, true);
+        }
+        $saveOutput = file_put_contents(NET_PATH . 'history/pages/' . $pageID . '/' . $pageID . '.html',  $output );
     }
 
 
@@ -710,6 +721,12 @@ class PageController extends NetActionController
 
             $db->query("INSERT IGNORE INTO templates_$lang(userId, title, alias, output) VALUES(?, ?, ?, ?)", array($this->_sesija->userId, $title, $alias, $output));
         }
+
+        // new template doesn't have an Id yet, and this is saved only to trigger tailwindcss rebuilding, once the new template is opened in the admin with its proper Id, this will be triggered by updateTemplateAction
+        if (!file_exists(NET_PATH . 'history/templates/save-new-template' )) {
+            mkdir(NET_PATH . 'history/templates/save-new-template', 0755, true);
+        }
+        $saveOutput = file_put_contents(NET_PATH . 'history/templates/save-new-template/new-template.html',  $output );
     }
 
     /**
@@ -749,7 +766,6 @@ class PageController extends NetActionController
 
         $db->query("UPDATE IGNORE templates_$langCode SET title = ?, alias = ?, category = ?, output = ? WHERE id = ?", array($title, $alias, $categoryId, $output, $templateID));
 
-        //Ako je promena za sve jezike
         $changeTemplateInAllLangs = $values['applytoall'];//if update should affect all languages
 
         if($changeTemplateInAllLangs == "yes"){
@@ -763,6 +779,11 @@ class PageController extends NetActionController
         //clean the cache
         $this->_cachedPages->clean(Zend_Cache::CLEANING_MODE_ALL);
         $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);
+
+        if (!file_exists(NET_PATH . 'history/templates/' . $templateID )) {
+            mkdir(NET_PATH . 'history/templates/' . $templateID , 0755, true);
+        }
+        $saveOutput = file_put_contents(NET_PATH . 'history/templates/' . $templateID . '/' . $templateID . '.html',  $output );
     }
 
 
