@@ -22,10 +22,8 @@
   <title>Creator Login</title>
   <link rel="shortcut icon" type="image/x-icon" href="/images/ide21logo.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-<!--<link href="/daisy/daisyui.full.min.css" rel="stylesheet" type="text/css" />-->
-<link href="/css/tailwind.output.css" rel="stylesheet" type="text/css" />
-<script src="/daisy/daisyui.tailwind.3.4.3.js"></script>
-  
+  <link href="/css/tailwind.output.css" rel="stylesheet" type="text/css" />
+  <script src="/daisy/daisyui.tailwind.3.4.3.js"></script>
 </head>
 <body >
   <div class="grid grid-cols-1 place-items-center h-dvh">
@@ -38,15 +36,13 @@
         </div>
       </div><!-- logo container -->
 
-      <div class="dropdown self-center w-full">
+      <div class="dropdown dropdown-hover self-center w-full">
         <div tabindex="0" role="button" class="btn btn-sm w-full">
-          Theme
+          Admin panel theme
           <svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg>
         </div>
-        <ul tabindex="0" class="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-full">
-          <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="System" value="default"/></li>
-          <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Nord" value="nord"/></li>
-          <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Retro" value="retro"/></li>
+        <ul tabindex="0" class="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-full text-accent-content">
+          <?php echo $this->daisyuiThemes; ?>
         </ul>
       </div>
       <?php
@@ -54,5 +50,16 @@
       ?>
     </div><!-- form container -->
   </div><!-- main container-->
+  <script src="/js/jquery/jquery-3.7.1.js"></script>
+  <script>
+    $(document).ready(function(){
+      let selectedDaisyTheme = localStorage.getItem('daisyAdminTheme');
+      $('input.theme-controller[value="' + selectedDaisyTheme + '"]').trigger('click');
+    });
+    $('input.theme-controller').on('click', function(e){
+      document.cookie = 'daisyAdminTheme=' + $(e.target).val() + ';  path=/'; // set cookie for admin panel theme
+      localStorage.setItem( 'daisyAdminTheme', $(e.target).val() );
+    });
+  </script>
 </body>
 </html>

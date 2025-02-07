@@ -48,6 +48,7 @@ class CreatorController extends NetActionController
         }
 
         $this->view->daisyuiThemes = $daisyuiThemes;
+        isset($_COOKIE['daisyAdminTheme']) ? $this->view->daisyAdminTheme = $_COOKIE['daisyAdminTheme'] : $this->view->daisyAdminTheme = 'nord';
     }
 
     public function countPageReq()

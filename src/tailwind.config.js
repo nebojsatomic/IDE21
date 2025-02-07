@@ -6,7 +6,7 @@ export default {
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
   daisyui: {
-    themes: ["nord", "retro", 'cyberpunk', 'valentine', 'aqua'],
+    themes: ["nord", "retro", 'cyberpunk', 'valentine'],
   },
 }
 
