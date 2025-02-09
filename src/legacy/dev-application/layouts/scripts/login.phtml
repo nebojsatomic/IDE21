@@ -41,7 +41,7 @@
           Admin panel theme
           <svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg>
         </div>
-        <ul tabindex="0" class="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-full text-accent-content">
+        <ul tabindex="0" class="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-full text-accent-content bottom-0">
           <?php echo $this->daisyuiThemes; ?>
         </ul>
       </div>
@@ -55,10 +55,37 @@
     $(document).ready(function(){
       let selectedDaisyTheme = localStorage.getItem('daisyAdminTheme');
       $('input.theme-controller[value="' + selectedDaisyTheme + '"]').trigger('click');
+
+      let selectedAdminLanguage = localStorage.getItem('adminLanguage');
+      $('input.select-language[value="' + selectedAdminLanguage + '"]').trigger('click');
     });
     $('input.theme-controller').on('click', function(e){
       document.cookie = 'daisyAdminTheme=' + $(e.target).val() + ';  path=/'; // set cookie for admin panel theme
       localStorage.setItem( 'daisyAdminTheme', $(e.target).val() );
+    });
+
+    // create select elements that have the same looks as dropdowns
+    $('select').each(function(k,v){
+      const currentSelectElement = $(v);
+      const currentSelectElementId = $(v).attr('id');
+      $(v).addClass('hidden');
+      const newSelectComponent = '<div id="new_' + $(v).attr('id') + '" class="ide21-select dropdown dropdown-hover self-center w-full"><div tabindex="0" role="button" class="btn btn-sm w-full"><span id="new-select-label_' + currentSelectElementId + '">Admin panel language</span><svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg></div></div>'
+      let newSelectOptions = '<ul tabindex="0" class="ide21-select-ul dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-full text-accent-content bottom-0">';
+
+      $(v).children('option').each(function(k1,v1){
+        newSelectOptions = newSelectOptions + '<li><input type="radio" name="theme-dropdown" class="select-language btn btn-sm btn-block btn-ghost justify-center" aria-label="' + $(v1).text()+ '" value="' + $(v1).val() + '"></li>';
+      })
+
+      $(v).after(newSelectComponent);
+      $('#' + 'new_' + $(v).attr('id') ).append(newSelectOptions + '</ul>');
+
+    });
+
+    $('.ide21-select-ul input').on('click', function(e){
+      $('#creatorLang').val( $(e.target).val() ).change();
+      $('.ide21-select.dropdown span').text($(e.target).attr('aria-label'));
+      localStorage.setItem( 'adminLanguage', $(e.target).val() );
+      $('.ide21-select-ul input').trigger('blur');
     });
   </script>
 </body>
