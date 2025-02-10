@@ -1,0 +1,26 @@
+<div>
+    <ul id="manage-daisy-themes">
+        <?php echo $this->daisyuiThemes;?>
+    </ul>
+    <div class="divider"></div>
+    <div class="grid grid-cols-4">
+        <div class="col-span-3">
+            <label for="add-new-daisy-input">Add new theme</label>
+            <input id="add-new-daisy-input" type="text" class="input input-sm mt-2 w-full" name="add-new-daisy-input" />
+        </div>
+        <div class="flex col-span-1 items-end">
+            <button class="btn btn-primary btn-sm w-full">Add</button>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <button class="btn btn-primary btn-sm w-full mt-2 mb-2">Save</button>
+</div>
+<script>
+    $('#manage-daisy-themes li').each(function(k,v){
+        $(v).attr( 'id', 'daisy-theme-li_' + k ).addClass('relative').append('<a id="daisy-theme-a_' + k + '" href="#" class="btn btn-xs btn-error absolute right-1 top-1 remove-theme">X</a>');
+    });
+
+    $('.remove-theme').on('click', function(e){
+        $(e.target).closest('li').remove();
+    });
+</script>

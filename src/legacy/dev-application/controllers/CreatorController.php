@@ -162,22 +162,28 @@ class CreatorController extends NetActionController
         //LOAD SETTINGS
         $settings = $this->renderToTable("settings", "id, settingName, description, value", $this->_translate->_("Add new Setting"), array('add' => '', 'edit' => '', 'delete' => 'creator/delete-setting/') );
         $this->view->settings = $settings;
+    }
 
+    public function addNewDaisyAction()
+    {
+        $this->_checkAccess();
 
+        //$taiwlindConf = file_get_contents($this->_nps . '../tailwind.config.js');
 
     }
+
     public function manageAllPagesAction()
     {
         $this->_checkAccess();
         // turn off layout and ViewRenderer
         $this->_helper->layout()->disableLayout();
-	      $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->viewRenderer->setNoRender();
         $settings = $this->renderToTableManagePages("pages_" . $this->_sesija->langAdmin, "id, title, alias, image, homepage, check_access, published", "Add new Page", array('add' => '', 'edit' => '', 'delete' => 'creator/delete-page/') );
         echo $settings;
     }
 
 
-     private function _backupCSS($css)
+    private function _backupCSS($css)
     {
     $filename = NET_PATH_SITE . 'css/userCSS/default_' . $this->_sesija->loggedUser . '.css.bak';
     $somecontent = $css;

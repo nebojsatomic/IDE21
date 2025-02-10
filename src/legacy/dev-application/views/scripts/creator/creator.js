@@ -3437,8 +3437,20 @@ $('#objList').livequery('click', function(e){
   $('#'+ selectedObjID ).trigger('mouseover'); // triger refresh of classes in ID assistant
 });
 
-$('#add-new-daisy').livequery('click', function(){
-  ajaxEventDone('THIS FEATURE WILL BE ADDED SOON.');
+$('a#add-new-daisy').livequery('click', function(e){
+  $('#dialogDiv').remove();
+
+  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
+  $('#dialogDiv').html($('#adminAjaxLoader').html());
+  dialog();
+  $.get(absoluteUrl + "creator/add-new-daisy", function(data) {
+    $('#dialogDiv').html(data);
+    $('#ajaxEventMask').remove();
+  });
+
+  $('#dialogDiv').dialog( 'option', 'title', $(e.currentTarget).prop('title') );
+  $('#dialogDiv').show('slow');
+
 });
 
 $('#movePointer').livequery('click', function(){
