@@ -9,18 +9,43 @@
             <input id="add-new-daisy-input" type="text" class="input input-sm mt-2 w-full" name="add-new-daisy-input" />
         </div>
         <div class="flex col-span-1 items-end">
-            <button class="btn btn-primary btn-sm w-full">Add</button>
+            <button id="add-daisy-theme" class="btn btn-primary btn-sm w-full">Add</button>
         </div>
     </div>
     <div class="divider"></div>
-    <button class="btn btn-primary btn-sm w-full mt-2 mb-2">Save</button>
+    <button id="save-daisy-themes" class="btn btn-primary btn-sm w-full mt-2 mb-2">Save</button>
 </div>
 <script>
     $('#manage-daisy-themes li').each(function(k,v){
         $(v).attr( 'id', 'daisy-theme-li_' + k ).addClass('relative').append('<a id="daisy-theme-a_' + k + '" href="#" class="btn btn-xs btn-error absolute right-1 top-1 remove-theme">X</a>');
     });
 
-    $('.remove-theme').on('click', function(e){
+    $('.remove-theme').livequery('click', function(e){
         $(e.target).closest('li').remove();
+    });
+
+    $('#add-daisy-theme').on('click', function(){
+        $('#manage-daisy-themes').append('<li id="daisy-theme-li_' + $('#manage-daisy-themes').children().length + '" class="relative"><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-center" aria-label="' + $('#add-new-daisy-input').val() + '" value="' + $('#add-new-daisy-input').val().toLowerCase() + '"><a id="daisy-theme-a_' + $('#manage-daisy-themes').children().length + '" href="#" class="btn btn-xs btn-error absolute right-1 top-1 remove-theme">X</a></li>');
+        $('#add-new-daisy-input').val('');
+    });
+
+    $('#save-daisy-themes').on('click', function(){
+        let themes = new Array();
+
+        $('#manage-daisy-themes').children().each(function(k,v){
+
+            themes.push($(v).find('input').val());
+        });
+
+        $.ajax({
+          method: "POST",
+          url: absoluteUrl + "creator/save-daisy-themes",
+          data: { themes: themes }
+        }).done(function( msg ) {
+
+            let dropdownToReplace = $('#manage-daisy-themes').html() + '<li><a id="add-new-daisy" class="navLinks help theme-controller btn btn-sm btn-block btn-ghost justify-center text-green-600" title="Manage DaisyUI themes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd"></path></svg></a></li>';
+            $('#daisyui-themes-changer').html( dropdownToReplace );
+            $('#daisyui-themes-changer').find('.remove-theme').remove();
+          });
     });
 </script>

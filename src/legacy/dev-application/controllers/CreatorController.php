@@ -172,6 +172,43 @@ class CreatorController extends NetActionController
 
     }
 
+    public function saveDaisyThemesAction()
+    {
+        $this->_checkAccess();
+        if ( !$this->_request->isPost() ) return;
+        $themes = $this->_request->getPost('themes');
+
+        // turn off layout and ViewRenderer
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+
+        $currentTaiwlindConf = file_get_contents($this->_nps . '../tailwind.config.js');
+
+        $filename = NET_PATH_SITE . '../tailwind.config.js';
+        $themesString = implode( '","', $themes );
+        $themesString = '"' . $themesString . '"';
+        $taiwlindConf = $currentTaiwlindConf;
+
+        $taiwlindConf = preg_replace('/themes:\s\[(.)*\]/', 'themes: [' .  $themesString . ']' , $taiwlindConf);
+
+        if (!$handle = fopen($filename, 'w+')) {
+            //$message = "Cannot open file ($filename)";
+            //return $message;
+            exit;
+        }
+
+        // Write to opened file.
+        if (fwrite($handle, $taiwlindConf) === FALSE) {
+            //$message = "Cannot write to file ($filename)";
+            //return $message;
+            exit;
+        }
+
+        //$message =  "Success, wrote tailwind configuration.";
+        //return $message;
+        fclose($handle);
+    }
+
     public function manageAllPagesAction()
     {
         $this->_checkAccess();
