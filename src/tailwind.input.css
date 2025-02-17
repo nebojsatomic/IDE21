@@ -62,7 +62,7 @@
 }
 /* this marks the specific div to be visible as the div where the new object is to be appended */
 
-#containerRadnePovrsine.full-width {
+#container-workspace.full-width {
   @apply sm:col-span-12 md:col-span-12 lg:col-span-12  !important;
 }
 

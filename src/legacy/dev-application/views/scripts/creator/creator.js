@@ -474,7 +474,7 @@ $(document).ready(function(){
   $('.ui-dialog').livequery(function(){
     $('.ui-dialog').attr('data-theme', daisyAdminTheme );
   });
-  const simpleBar = new SimpleBar(document.getElementById('containerRadnePovrsine'));
+  const simpleBar = new SimpleBar(document.getElementById('container-workspace'));
   simpleBar.getScrollElement().addEventListener('scroll', function(){
     if( typeof $('.selected-for-append').offset() == 'undefined' ) return;
 
@@ -712,6 +712,7 @@ $(document).ready(function(){
       const contProperties = document.querySelector('#contProperties');
       contProperties.classList.toggle('hidden');
       e.currentTarget.classList.toggle('-rotate-180');
+      document.querySelector('#container-workspace').classList.toggle('full-width');
   });
 
   $('#poA').click(function(){
