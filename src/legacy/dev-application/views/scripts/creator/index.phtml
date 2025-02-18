@@ -563,13 +563,11 @@
 
         <a id="insertImage" class="a_add marginBottom5 btn btn-sm md:btn-xs" style="display:none" title="<?php echo $this->translate->_("Click to insert this image");?>"><?php echo $this->translate->_("Insert this image");?> </a>
 
-        <a id="setBodyBgImage" class="a_add marginBottom5 btn btn-sm md:btn-xs" style="display:none" title="<?php echo $this->translate->_("Click to set background");?>"><?php echo $this->translate->_("Set background");?> </a>
-
         <div class="inline-flex gap-2 items-center">
-          <?php echo $this->translate->_("Put image(s) in the selected object");?> <input id="putImagesInThis" class="checkbox-sm checkbox" type="checkbox" /> into the
+          <!--<?php echo $this->translate->_("Put image(s) in the selected object");?> <input id="putImagesInThis" class="checkbox-sm checkbox" type="checkbox" /> into the-->
           <!--<?php echo $this->translate->_("Single Image");?><input id="putSingleImageInThis" type="checkbox" />-->
         </div>
-
+        <label for="bgSelect"><?php echo $this->translate->_("Set Background on:" );?></label>
         <select id="bgSelect" class="help select select-sm md:select-xs w-full" title="<?php echo $this->translate->_("For this to work, set appropriate classes to the objects, lowercase (HEADER = header) except for the BODY, body is always there." );?>"><option>BODY</option><option>HEADER</option><option>SHEET</option><option>LEFTCOLUMN</option><option>RIGHTCOLUMN</option><option>FOOTER</option><option selected="selected">SELECTED-OBJECT</option></select>
         
         <div class="inline-flex gap-2 items-center">
@@ -580,6 +578,9 @@
         <!--Image path:-->
         <div id="imagePathShow"></div>
         <div id="imageDetails"></div>
+
+        <a id="setBodyBgImage" class="a_add marginBottom5 btn btn-sm md:btn-xs" style="display:none" title="<?php echo $this->translate->_("Click to set background");?>"><?php echo $this->translate->_("Set background");?> </a>
+
       </div>
     </div>
   </div>

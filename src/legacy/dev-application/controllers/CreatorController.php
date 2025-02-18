@@ -388,19 +388,15 @@ class CreatorController extends NetActionController
     }
 
 
-
-
     /*
     * Displays menus form for assign to the page
     */
     private function _menuAssignForm()
     {
 
-
       	$db = Zend_Registry::get('db');
         $res = $db->fetchAll("SELECT menu_id, name FROM " . $this->_tblprefix . "menus");
 
-        $pageArray['select'] = "--Select--";
         foreach ($res as $result) {
             $pageArray[$result['menu_id']] = $result['name'];
 
@@ -670,10 +666,7 @@ class CreatorController extends NetActionController
       	$langCode = $this->_sesija->langAdmin;
 
         $res = $db->fetchAll("SELECT id, title, defaultTemplate FROM " . $this->_tblprefix . "templates_$langCode");
-        //$resTid = $db->fetchAll("SELECT template_id FROM pages WHERE defaultTemplate = '1'");
 
-        //$templateArray['select'] = "--Select--";
-        $templateArray[0] = $this->_translateCreator->_("--Select--");
         foreach ($res as $result) {
 
             $templateArray[$result['id']] = $result['title'];
@@ -1112,7 +1105,7 @@ class CreatorController extends NetActionController
              'elements' => array(
                 'id' => array('select', array(
                     'required' => true,
-                    'label' => '',
+                    'label' => $this->translator->_('Add new Language'),
                     'class' => 'select select-sm md:select-xs w-full',
                     'multioptions' => $languageCodes,
                 )),
@@ -1123,7 +1116,7 @@ class CreatorController extends NetActionController
                     'value' => 'Submit'
                 ))
               )));
-          $form->addDisplayGroup(array('id'),'add_lang',array('legend' => $this->translator->_('Add new Language') ));
+          $form->addDisplayGroup(array('id'),'add_lang');
 
 
           return $form;

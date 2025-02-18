@@ -974,6 +974,7 @@ $(document).ready(function(){
     $.get(absoluteUrl + "page/choose-page", function(data){
 
       $('#dialogDiv_' + openPageDialogUniqueId ).html( data);
+      drawDaisyDropdown($(data).find('select'));
 
     });
     $('#ajaxEventMask').remove();
@@ -1915,6 +1916,7 @@ $('#folderNames').livequery('change', function(){
   $.get(absoluteUrl + "images/show-images/fname/" + val , function(data){
 
     $('#imagesShow').html(data);
+    drawDaisyDropdown($(data).find('select'));
   });
 });
 
@@ -3736,7 +3738,7 @@ function drawDaisyDropdown(element){
   $('label[for="'+ currentSelectElementId +'"]').addClass('hidden');
   $(v).addClass('hidden');
   $('.ui-dialog-content').addClass('overflow-visible');
-  const newSelectComponent = '<div id="wrap_new_' + $(v).attr('id') + '" class="' + currentSelectElementDisplay + '"><div id="new_' + $(v).attr('id') + '" class="ide21-select dropdown dropdown-hover-disabled self-center w-full mt-2 mb-2"><div tabindex="0" role="button" class="btn btn-sm w-full"><span id="new-select-label_' + currentSelectElementId + '">' + currentSelectElementLabel + '</span><svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg></div></div>'
+  const newSelectComponent = '<div id="wrap_new_' + $(v).attr('id') + '" class="' + currentSelectElementDisplay + ' min-w-16"><div id="new_' + $(v).attr('id') + '" class="ide21-select dropdown dropdown-hover-disabled self-center w-full mt-2 mb-2"><div tabindex="0" role="button" class="btn btn-sm w-full"><span id="new-select-label_' + currentSelectElementId + '">' + currentSelectElementLabel + '</span><svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg></div></div>'
   let newSelectOptions = '<ul tabindex="0" class="ide21-select-ul dropdown-content z-[999] p-2 shadow-2xl bg-base-300 rounded-box w-full text-accent-content max-h-[30vh] overflow-auto">';
   if($(v).find('optgroup').length > 0 ) {
     $(v).find('optgroup').children('option').each(function(k1,v1){
@@ -3754,11 +3756,12 @@ function drawDaisyDropdown(element){
 
 
 $('select:not(".paginationStep, .hidden")').livequery(function(){
-  $(this).each(function(){
-    const selectToChange = $(this);
+  $(this).each(function(k,v){
+    const selectToChange = $(v);
     drawDaisyDropdown(selectToChange);
+
   });
-    $('#wrap_new_menuItemCategory, #wrap_new_menuItemPage, #wrap_new_menuItemModule').css('display', 'none');
+  $('#wrap_new_menuItemCategory, #wrap_new_menuItemPage, #wrap_new_menuItemModule').css('display', 'none');
 });
 
 
