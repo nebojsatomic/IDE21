@@ -114,12 +114,13 @@
             <div class="grid">  
               <div class="grid gap-2">
                 <div class="" >
+                  <label for="langName" class="hidden"><?php echo $this->translate->_("Template/Page language");?></label>
                   <?php echo $this->langChooserAdmin;?>
                 </div>
 
                 <div class="">
                   <div style="display:none"><?php echo $this->translate->_("Container");?><input id="objContainer" type="checkbox" /></div>
-                <?php echo $this->translate->_("Objects on this page");?>:
+                <label for="objList" class="hidden"><?php echo $this->translate->_("Objects on this page");?></label>
                 <select id="objList" size="8" class="help select select-sm md:select-xs min-h-32 text-primary-content w-full p-1 mb-2" title="<?php echo $this->translate->_("This is the list of all objects in this page/template");?><?php echo $this->translate->_(". Select the object to work on it."); ?>">
                 </select>
                 </div>
@@ -211,7 +212,7 @@
                 </div>
 
                 <div class="mt-4">
-                  <?php echo $this->translate->_("Type");?>:
+                  <label for="objType" class="hidden"><?php echo $this->translate->_("Selected object type");?></label>
 
                   <select id="objType" class="help select  select-sm md:select-xs mt-1 w-full"  description="<?php echo $this->translate->_("Choose the type of the selected object, after you do it, follow the instructions");?>">
                     <option class="Text" >Text</option>
@@ -596,7 +597,7 @@
           </a>
         </div>
         <div>
-          <div><?php echo $this->translate->_("Choose Object");?>:</div>
+          <label for="objListForCss" class="hidden"><?php echo $this->translate->_("Choose Object");?>:</label>
           <select id="objListForCss" class="select select-sm w-full" size="1"></select>
         <!--<?php echo $this->translate->_("Choose class");?>:
           <select id="eventListForCss" size="1"></select>-->
@@ -627,11 +628,11 @@
         </div>
         <div>
           <div>
-            <div><?php echo $this->translate->_("Choose Object");?>:</div>
+            <label for="objListForJs" class="hidden"><?php echo $this->translate->_("Choose Object");?>:</label>
             <select id="objListForJs" class="select select-sm md:select-xs w-full" size="1"></select>
           </div>
           <div class="grid gap-2">
-            <div><?php echo $this->translate->_("Choose event");?>:</div>
+            <label for="eventListForJs" class="hidden"><?php echo $this->translate->_("Choose event");?>:</label>
             <select id="eventListForJs" class="select select-sm md:select-xs w-full" size="1">
               <option>click</option>
               <option>dblclick</option>

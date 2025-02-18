@@ -246,12 +246,12 @@ class MenuController extends NetActionController
             $categoriesArray[$result['category_id']] = $result['name'];
         }
 
-        $pageArray[0] = $this->_translateCreator->_("--Select--");
+        //$pageArray[0] = $this->_translateCreator->_("--Select--");
         foreach ($pages as $result) {
             $pageArray[$result['id']] = $result['title'];
         }
 
-        $modulesArray[0] = $this->_translateCreator->_("--Select--");
+        //$modulesArray[0] = $this->_translateCreator->_("--Select--");
         foreach ($modules as $result) {
             $modulesArray[$result['moduleId']] = $result['moduleName'];
 
@@ -282,7 +282,7 @@ class MenuController extends NetActionController
 
                     'menuItemCategory' => array('select', array(
                         'required' => false,
-                        //'label' => 'Choose Page:',
+                        'label' => $this->_translateCreator->_('Category:'),
                         'style' => 'display:none;',
                         'multioptions' => $categoriesArray,
                         'class' => 'select select-sm md:select-xs w-full',
@@ -290,7 +290,7 @@ class MenuController extends NetActionController
                     )),
                     'menuItemPage' => array('select', array(
                         'required' => false,
-                        //'label' => 'Choose Page:',
+                        'label' => $this->_translateCreator->_('Page:'),
                         'style' => 'display:none;',
                         'multioptions' => $pageArray,
                         'class' => 'select select-sm md:select-xs w-full',
@@ -298,7 +298,7 @@ class MenuController extends NetActionController
                     )),
                     'menuItemModule' => array('select', array(
                         'required' => false,
-                        //'label' => 'Choose Module:',
+                        'label' => $this->_translateCreator->_('Module:'),
                         'style' => 'display:none;',
                         'multioptions' => $modulesArray,
                         'class' => 'select select-sm md:select-xs w-full',
@@ -331,14 +331,12 @@ class MenuController extends NetActionController
 
         $values = $this->_request->getParams();
         $catID = $values['catid'];
-        //$mID = $values['mid'];
-        //$formAddMenuItem = $this->_addMenuItemForm($mID, $catID);
-        //echo $formAddMenuItem;
+
         $q = $this->_db->fetchAll("SELECT id, title from pages_$langCode WHERE category = ?", array($catID) );
 
-        $optionString = '<option value="0" label="--Select--">--Select--</option>';
+        $optionString = '';
         foreach ($q as $result) {
-            //$pageArray[$result['id']] = $result['title'];
+
            $optionString .= '<option value="' . $result['id'] . '" label="' . $result['title'] . '">' .  $result['title'] . '</option>';
         }
         echo  $optionString;

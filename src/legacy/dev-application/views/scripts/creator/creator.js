@@ -2358,30 +2358,17 @@ $('#addMenuItemForm').livequery('change', function(){
 
   if(checkedValue == "page"){
 
-    $('#menuItemCategory').show();
-    $('#menuItemPage').show();
-    $('#menuItemModule').hide();
-    //uniform
-    $('#uniform-menuItemCategory').show();
-    $('#uniform-menuItemPage').show();
-    $('#uniform-menuItemModule').hide();
-    $('#uniform-addMenuItemSubmit').show();
+    $('#wrap_new_menuItemCategory, #wrap_new_menuItemPage').show();
+    //$('#wrap_new_menuItemPage').show();
+    $('#menuItemModule, #wrap_new_menuItemModule, label[for="menuItemModule"]').hide();
   }
   if(checkedValue == "module"){
 
-    $('#menuItemCategory').hide();
-    $('#menuItemPage').hide();
-    $('#menuItemModule').show();
+    $('#wrap_new_menuItemCategory, #wrap_new_menuItemPage, label[for="menuItemCategory"], label[for="menuItemPage"]').hide();
+    //$('#wrap_new_menuItemPage').hide();
+    $('#wrap_new_menuItemModule').show();
     if($('#menuItemModule').val() == '0'){
       $('#addMenuItemSubmit').hide();
-    }
-
-    //uniform
-    $('#uniform-menuItemCategory').hide();
-    $('#uniform-menuItemPage').hide();
-    $('#uniform-menuItemModule').show();
-    if($('#uniform-menuItemModule').val() == '0'){
-      $('#uniform-addMenuItemSubmit').hide();
     }
   }
 });
@@ -2394,6 +2381,7 @@ $('#menuItemCategory').livequery('change', function(){
     $('#menuItemPage').empty();
 
     $('#menuItemPage').html(data);
+    drawDaisyDropdown('#menuItemPage'); // redraw select - mutation observer not working on it, TODO
   });
 });
 
@@ -3730,4 +3718,92 @@ $('input[type="checkbox"]').livequery(function(){
 $('#enableModulesLink').click(function(){
   url = $(this).attr('href');
   $.get(url,function(data){alert(data) ; });
+});
+
+/* new select buttons -
+  from default browser select, make better looking
+  DaisyUI dropdown-like selects */
+
+function drawDaisyDropdown(element){
+  const v = element;
+
+  $('#wrap_new_' + $(v).attr('id')).remove(); //remove existing select element to create a new one with the same id
+  const currentSelectElement = $(v);
+  const currentSelectElementId = $(v).attr('id');
+  const currentSelectElementLabel = $('label[for="' + currentSelectElementId + '"]').text();
+  const currentSelectElementDisplay = 'display-' + currentSelectElement.css('display');
+
+  $('label[for="'+ currentSelectElementId +'"]').addClass('hidden');
+  $(v).addClass('hidden');
+  $('.ui-dialog-content').addClass('overflow-visible');
+  const newSelectComponent = '<div id="wrap_new_' + $(v).attr('id') + '" class="' + currentSelectElementDisplay + '"><div id="new_' + $(v).attr('id') + '" class="ide21-select dropdown dropdown-hover-disabled self-center w-full mt-2 mb-2"><div tabindex="0" role="button" class="btn btn-sm w-full"><span id="new-select-label_' + currentSelectElementId + '">' + currentSelectElementLabel + '</span><svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg></div></div>'
+  let newSelectOptions = '<ul tabindex="0" class="ide21-select-ul dropdown-content z-[999] p-2 shadow-2xl bg-base-300 rounded-box w-full text-accent-content max-h-[30vh] overflow-auto">';
+  if($(v).find('optgroup').length > 0 ) {
+    $(v).find('optgroup').children('option').each(function(k1,v1){
+      newSelectOptions = newSelectOptions + '<li><input type="radio" name="theme-dropdown" class="select-language btn btn-sm btn-block btn-ghost justify-center" aria-label="' + $(v1).text()+ '" value="' + $(v1).val() + '"></li>';
+    });
+  } else {
+    $(v).children('option').each(function(k1,v1){
+      newSelectOptions = newSelectOptions + '<li><input type="radio" name="theme-dropdown" class="select-language btn btn-sm btn-block btn-ghost justify-center" aria-label="' + $(v1).text()+ '" value="' + $(v1).val() + '"></li>';
+    });
+  }
+
+  $(v).after(newSelectComponent);
+  $('#' + 'new_' + $(v).attr('id') ).append(newSelectOptions + '</ul></div>');
+}
+
+
+$('select:not(".paginationStep, .hidden")').livequery(function(){
+  $(this).each(function(){
+    const selectToChange = $(this);
+    drawDaisyDropdown(selectToChange);
+  });
+    $('#wrap_new_menuItemCategory, #wrap_new_menuItemPage, #wrap_new_menuItemModule').css('display', 'none');
+});
+
+
+$(document).on('click', '.ide21-select-ul input', function(e){
+
+  const selectElementId = $(e.target).closest('div.ide21-select').attr('id').replace('new_', '');
+
+  $('#' + selectElementId).val( $(e.target).val() ).change();
+  if(selectElementId == 'objList') {
+    $('#' + selectElementId).find('option:selected').trigger('click');
+  }
+  $(e.target).closest('div.ide21-select').find('span').text($(e.target).attr('aria-label'));
+  localStorage.setItem( 'select-value_' + selectElementId, $(e.target).val() );
+  $('.ide21-select-ul input').trigger('blur');
+  $('label[for="'+ selectElementId +'"]').removeClass('hidden');
+});
+
+
+$(window).on('load', function(){
+
+  //Nodes that will be observed
+  const targetNodes = ['#objList', '#langName', '#objListForCss', '#objListForJs'];
+
+  const config = { attributes: true, childList: true, subtree: true };
+
+  const callback = Array();
+  const observer = Array();
+
+  $(targetNodes).each(function(k,v){
+
+    if($(v).length < 1) return;
+
+    callback[k] = (mutationList, observer) => {
+      for (const mutation of mutationList) {
+        if (mutation.type === "childList") {
+          drawDaisyDropdown($(v));
+        }
+        if (mutation.type === "subtree") {
+          drawDaisyDropdown($(v));
+        }
+      }
+    };
+
+    observer[k] = new MutationObserver(callback[k]);
+    observer[k].observe(document.querySelector(v), config);
+  });
+
 });
