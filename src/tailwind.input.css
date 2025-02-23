@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+select:not(.paginationStep) { display: none; }
 .btn-error {
   @apply text-neutral-content !important;
 }
