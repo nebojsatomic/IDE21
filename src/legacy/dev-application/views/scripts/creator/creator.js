@@ -33,11 +33,24 @@ const Creator = ( window.Creator = {
     }, true);
   },
 
+  handleSelectedAttribute : function( element, newSelectedValue ){
+
+    const selectElement = document.querySelector(element);
+    const selectElementSelected = selectElement.querySelector('option[selected="selected"]');
+    selectElementSelected.removeAttribute('selected', '');
+    const selectElementNewSelected = selectElement.querySelector('option[value="' + newSelectedValue + '"]');
+    selectElementNewSelected.setAttribute('selected', 'selected');
+
+    const dropdownElement = document.querySelector('#wrap_new_' + element.replace('#', ''));
+    dropdownElement.querySelector('input[value="' + newSelectedValue + '"]').setAttribute('checked', 'checked');
+  },
+
   /** functions for setting
    * styles of selected text
    */
 
   setBold : function(){
+
     const strong = document.createElement("strong");
     const selectedText = window.getSelection();
     const selectedTextRange = selectedText.getRangeAt(0);
@@ -45,6 +58,7 @@ const Creator = ( window.Creator = {
   },
 
   setItalic : function setItalic(){
+
     const italic = document.createElement("i");
     const selectedText = window.getSelection();
     const selectedTextRange = selectedText.getRangeAt(0);
@@ -52,6 +66,7 @@ const Creator = ( window.Creator = {
   },
 
   setUnderline : function setUnderline(){
+
     const span = document.createElement("span");
     const selectedText = window.getSelection();
     const selectedTextRange = selectedText.getRangeAt(0);
@@ -60,6 +75,7 @@ const Creator = ( window.Creator = {
   },
 
   setTextAlign : function(align){
+
     $('.selected-for-append').css('text-align', align);
   }
 
@@ -234,10 +250,10 @@ $('#ajaxEventMask').livequery('click', function(){
 function refreshControls(){
 
   $('#objListForCss').html($('#objList').html() );//css
-  $('#objListForCss').prepend('<option selected="selected"></option>');
+  //$('#objListForCss').prepend('<option selected="selected"></option>');
 
   $('#objListForJs').html($('#objList').html() );//js
-  $('#objListForJs').prepend('<option selected="selected"></option>');
+  //$('#objListForJs').prepend('<option selected="selected"></option>');
 
 }
 
@@ -418,6 +434,7 @@ function loadPage(idP){
     $('#pageKeywords').prop("value" , data.keywords);
     $('#templateID').html(data.template_id);
     $('#templateChanger').prop("value" , data.template_id);
+    Creator.handleSelectedAttribute('#templateChanger', data.template_id);
     $('#templateChanger').prev('span').text($('#templateChanger').find(":selected").text() );
     $('#pageTitle').prop("value", data.pageTitle);
 
@@ -489,6 +506,8 @@ $('#droppable *').livequery('click', function(e){
   }
 
   $('#objList').val( $(e.target).attr('id') ).change();
+  // $('#objList').find('option:selected').attr('selected', 'selected').attr('value', $(e.target).attr('id'));
+  // Creator.handleSelectedAttribute('#objList', $(e.target).attr('id'));
 
   $('#objIDshow').html($(e.target).attr('id'));
   $('#objProperties').data("objid", $(e.target).attr('id') );
@@ -1056,6 +1075,7 @@ $(document).ready(function(){
         $('#pageKeywords').prop("value" , data.keywords);
         $('#templateID').html(data.template_id);
         $('#templateChanger').prop("value" , data.template_id);
+        Creator.handleSelectedAttribute('#templateChanger', data.template_id);
         $('#templateChanger').prev('span').text($('#templateChanger').find(":selected").text() );
 
         $('#allowedRolesDiv').html( data.rolesAllowed );
@@ -1324,7 +1344,17 @@ $(".draggable").livequery('dblclick', function(e){
   $("#objPropertiesFontColor").closest('.clr-field').css({ color: fontColor });
 
   $("#objPropertiesBackgroundImage").val( bgImage );
-  $("#selected-object-position").val( position );
+  //$("#selected-object-position").val( position );
+  // object position css property
+  const selectedObjectPosition = document.querySelector('#selected-object-position');
+  const oldSelectedObjectPosition = selectedObjectPosition.querySelector('option[selected="selected"]');
+  oldSelectedObjectPosition.removeAttribute('selected', '');
+  const newSelectedObjectPosition = selectedObjectPosition.querySelector('option[value="' + position + '"]');
+  newSelectedObjectPosition.setAttribute('selected', 'selected');
+
+  $('#objList').find('option:selected').attr('selected', 'selected').attr('value', $(e.target).attr('id'));
+  Creator.handleSelectedAttribute('#objList', $(e.target).attr('id'));
+
   //objTheme
   $('#objTheme').val( themeClass);
   $('#objTheme').val(themeClass);
@@ -2855,7 +2885,7 @@ $('#langName').livequery('change', function(){
         $('#pageKeywords').prop("value" , data.keywords);
         $('#templateID').html(data.template_id);
         $('#templateChanger').prop("value" , data.template_id);
-
+        Creator.handleSelectedAttribute('#templateChanger', data.template_id);
         $('#templateChanger').prev('span').text($('#templateChanger').find(":selected").text() );
         $('#pageTitle').prop("value", data.pageTitle);
 
@@ -3721,10 +3751,10 @@ function drawDaisyDropdown(element){
   const currentSelectElementLabel = $('label[for="' + currentSelectElementId + '"]').text();
   const currentSelectElementDisplay = 'display-' + currentSelectElement.css('display');
 
-  $('label[for="'+ currentSelectElementId +'"]').addClass('hidden');
+  //$('label[for="'+ currentSelectElementId +'"]').addClass('hidden');
   $(v).addClass('hidden');
   $('.ui-dialog-content').addClass('overflow-visible');
-  const newSelectComponent = '<div id="wrap_new_' + $(v).attr('id') + '" class="' + currentSelectElementDisplay + ' ide21-select-wrapper min-w-16  mt-2 mb-2"><div id="new_' + $(v).attr('id') + '" class="ide21-select dropdown dropdown-hover self-center w-full"><div tabindex="0" role="button" class="btn btn-sm w-full"><span id="new-select-label_' + currentSelectElementId + '">' + currentSelectElementLabel + '</span><svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg></div></div>';
+  const newSelectComponent = '<div id="wrap_new_' + $(v).attr('id') + '" class="' + currentSelectElementDisplay + ' ide21-select-wrapper min-w-16 mb-2"><div id="new_' + $(v).attr('id') + '" class="ide21-select dropdown dropdown-hover self-center w-full"><div tabindex="0" role="button" class="btn btn-sm w-full"><span id="new-select-label_' + currentSelectElementId + '">' + currentSelectElementLabel + '</span><svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg></div></div>';
   let newSelectOptions = '<ul tabindex="0" class="ide21-select-ul dropdown-content z-[999] p-2 shadow-2xl bg-base-300 rounded-box w-full text-accent-content max-h-[30vh] overflow-auto">';
   if($(v).find('optgroup').length > 0 ) {
     $(v).find('optgroup').children('option').each(function(k1,v1){
@@ -3738,14 +3768,22 @@ function drawDaisyDropdown(element){
 
   $(v).after(newSelectComponent);
   $('#' + 'new_' + $(v).attr('id') ).append(newSelectOptions + '</ul></div>');
-}
 
+  /** if there is a selected attribute set, show its value in dropdown */
+  $(v).children('option').each(function(k1,v1){
+
+    if($(v1).attr('selected') === 'selected') {
+      $('#new-select-label_' + currentSelectElementId).text($(v1).text());
+      $('#new_' + $(v).attr('id')).find('input[value="' + $(v1).attr('value') + '"]').prop('checked', 'checked');
+    }
+  });
+
+}
 
 $('select:not(".paginationStep, .hidden")').livequery(function(){
   $(this).each(function(k,v){
     const selectToChange = $(v);
     drawDaisyDropdown(selectToChange);
-
   });
   $('#wrap_new_menuItemCategory, #wrap_new_menuItemPage, #wrap_new_menuItemModule').css('display', 'none');
 });
@@ -3762,14 +3800,14 @@ $(document).on('click', '.ide21-select-ul input', function(e){
   $(e.target).closest('div.ide21-select').find('span').text($(e.target).attr('aria-label'));
   localStorage.setItem( 'select-value_' + selectElementId, $(e.target).val() );
   $('.ide21-select-ul input').trigger('blur');
-  $('label[for="'+ selectElementId +'"]').removeClass('hidden');
+  //$('label[for="'+ selectElementId +'"]').removeClass('hidden');
 });
 
 
 $(window).on('load', function(){
 
   //Nodes that will be observed
-  const targetNodes = ['#objList', '#langName', '#objListForCss', '#objListForJs'];
+  const targetNodes = ['#objList', '#langName', '#objListForCss', '#objListForJs', "#selected-object-position", '#templateChanger'];
 
   const config = { attributes: true, childList: true, subtree: true };
 
@@ -3786,6 +3824,9 @@ $(window).on('load', function(){
           drawDaisyDropdown($(v));
         }
         if (mutation.type === "subtree") {
+          drawDaisyDropdown($(v));
+        }
+        if (mutation.type === "attributes") {
           drawDaisyDropdown($(v));
         }
       }
