@@ -36,13 +36,38 @@ const Creator = ( window.Creator = {
   handleSelectedAttribute : function( element, newSelectedValue ){
 
     const selectElement = document.querySelector(element);
+
+    document.querySelector('#wrap_new_' + element.replace('#', '')).querySelectorAll('input').forEach(function( v, k ){
+      v.removeAttribute('checked');
+    });
+
+    if( !selectElement.querySelector('option[selected="selected"]') ) {
+
+      selectElement.querySelectorAll('option').forEach( function( v, k ){
+
+        if( v.text === newSelectedValue ) {
+
+          v.setAttribute( 'selected', 'selected' );
+          v.setAttribute('value', newSelectedValue);
+        } else {
+
+          v.setAttribute('value', v.text);
+        }
+      });
+    }
+
     const selectElementSelected = selectElement.querySelector('option[selected="selected"]');
     selectElementSelected.removeAttribute('selected', '');
+
+    if( !selectElement.querySelector('option[value="' + newSelectedValue + '"]') ) return;
+
     const selectElementNewSelected = selectElement.querySelector('option[value="' + newSelectedValue + '"]');
     selectElementNewSelected.setAttribute('selected', 'selected');
 
     const dropdownElement = document.querySelector('#wrap_new_' + element.replace('#', ''));
+
     dropdownElement.querySelector('input[value="' + newSelectedValue + '"]').setAttribute('checked', 'checked');
+    dropdownElement.querySelector('#new-select-label_' + element.replace('#', '')).textContent = newSelectedValue;
   },
 
   /** functions for setting
@@ -1352,7 +1377,6 @@ $(".draggable").livequery('dblclick', function(e){
   const newSelectedObjectPosition = selectedObjectPosition.querySelector('option[value="' + position + '"]');
   newSelectedObjectPosition.setAttribute('selected', 'selected');
 
-  $('#objList').find('option:selected').attr('selected', 'selected').attr('value', $(e.target).attr('id'));
   Creator.handleSelectedAttribute('#objList', $(e.target).attr('id'));
 
   //objTheme
@@ -3830,7 +3854,7 @@ $(window).on('load', function(){
         }
         if (mutation.type === "attributes") {
 
-          if(v === '#templateChanger') drawDaisyDropdown($(v));
+          if(v === '#templateChanger' || v === '#selected-object-position') drawDaisyDropdown($(v));
         }
       }
     };
