@@ -1203,7 +1203,7 @@ class PageController extends NetActionController
 
         $res = $db->fetchAll("SELECT id, title FROM templates_$langCode WHERE userId = ?", array($this->_sesija->userId) );
 
-        $templateArray['select'] = "--Select--";
+        //$templateArray['select'] = "--Select--";
         foreach ($res as $result) {
             $templateArray[$result['id']] = $result['title'];
 

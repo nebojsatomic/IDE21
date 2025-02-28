@@ -76,7 +76,7 @@
 </form>
 
 <div class="grid grid-cols-12 relative">
-  <div id="containerRadnePovrsine" data-simplebar  data-scrollbar-min-size="15"  class="col-span-12 md:col-span-8 lg:col-span-9">
+  <div id="container-workspace" data-simplebar  data-scrollbar-min-size="15"  class="col-span-12 md:col-span-8 lg:col-span-9">
     <div id="droppable" class="w-full overflow-auto">
     </div>
     <div id="droppable_" class="w-full overflow-auto">
@@ -84,8 +84,8 @@
   </div>
 
   <div data-theme="<?php echo $this->daisyAdminTheme; ?>" id="toggleProperties"  class="help fixed -right-2 top-2/4 z-[999999] bg-neutral hover:bg-accent z-[999999] border-2 border-primary cursor-pointer btn btn-sm md:btn-xs btn-ghost btn-circle text-white" title="<?php echo $this->translate->_("Click to toggle properties box");?>">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 rotate-90">
-        <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5Z" clip-rule="evenodd"></path>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
       </svg>
   </div>
   <div data-theme="<?php echo $this->daisyAdminTheme; ?>" id="contProperties" class="absolute md:relative col-span-4 lg:col-span-3 w-full h-dvh top-0 right-0 md:pb-12 ease-in duration-400">
@@ -114,12 +114,13 @@
             <div class="grid">  
               <div class="grid gap-2">
                 <div class="" >
+                  <label for="langName" class="hidden"><?php echo $this->translate->_("Template/Page language");?></label>
                   <?php echo $this->langChooserAdmin;?>
                 </div>
 
                 <div class="">
                   <div style="display:none"><?php echo $this->translate->_("Container");?><input id="objContainer" type="checkbox" /></div>
-                <?php echo $this->translate->_("Objects on this page");?>:
+                <label for="objList" class="hidden"><?php echo $this->translate->_("Objects on this page");?></label>
                 <select id="objList" size="8" class="help select select-sm md:select-xs min-h-32 text-primary-content w-full p-1 mb-2" title="<?php echo $this->translate->_("This is the list of all objects in this page/template");?><?php echo $this->translate->_(". Select the object to work on it."); ?>">
                 </select>
                 </div>
@@ -211,7 +212,7 @@
                 </div>
 
                 <div class="mt-4">
-                  <?php echo $this->translate->_("Type");?>:
+                  <label for="objType" class="hidden"><?php echo $this->translate->_("Selected object type");?></label>
 
                   <select id="objType" class="help select  select-sm md:select-xs mt-1 w-full"  description="<?php echo $this->translate->_("Choose the type of the selected object, after you do it, follow the instructions");?>">
                     <option class="Text" >Text</option>
@@ -562,13 +563,11 @@
 
         <a id="insertImage" class="a_add marginBottom5 btn btn-sm md:btn-xs" style="display:none" title="<?php echo $this->translate->_("Click to insert this image");?>"><?php echo $this->translate->_("Insert this image");?> </a>
 
-        <a id="setBodyBgImage" class="a_add marginBottom5 btn btn-sm md:btn-xs" style="display:none" title="<?php echo $this->translate->_("Click to set background");?>"><?php echo $this->translate->_("Set background");?> </a>
-
         <div class="inline-flex gap-2 items-center">
-          <?php echo $this->translate->_("Put image(s) in the selected object");?> <input id="putImagesInThis" class="checkbox-sm checkbox" type="checkbox" /> into the
+          <!--<?php echo $this->translate->_("Put image(s) in the selected object");?> <input id="putImagesInThis" class="checkbox-sm checkbox" type="checkbox" /> into the-->
           <!--<?php echo $this->translate->_("Single Image");?><input id="putSingleImageInThis" type="checkbox" />-->
         </div>
-
+        <label for="bgSelect"><?php echo $this->translate->_("Set Background on:" );?></label>
         <select id="bgSelect" class="help select select-sm md:select-xs w-full" title="<?php echo $this->translate->_("For this to work, set appropriate classes to the objects, lowercase (HEADER = header) except for the BODY, body is always there." );?>"><option>BODY</option><option>HEADER</option><option>SHEET</option><option>LEFTCOLUMN</option><option>RIGHTCOLUMN</option><option>FOOTER</option><option selected="selected">SELECTED-OBJECT</option></select>
         
         <div class="inline-flex gap-2 items-center">
@@ -579,6 +578,9 @@
         <!--Image path:-->
         <div id="imagePathShow"></div>
         <div id="imageDetails"></div>
+
+        <a id="setBodyBgImage" class="a_add marginBottom5 btn btn-sm md:btn-xs" style="display:none" title="<?php echo $this->translate->_("Click to set background");?>"><?php echo $this->translate->_("Set background");?> </a>
+
       </div>
     </div>
   </div>
@@ -596,7 +598,7 @@
           </a>
         </div>
         <div>
-          <div><?php echo $this->translate->_("Choose Object");?>:</div>
+          <label for="objListForCss" class="hidden"><?php echo $this->translate->_("Choose Object");?>:</label>
           <select id="objListForCss" class="select select-sm w-full" size="1"></select>
         <!--<?php echo $this->translate->_("Choose class");?>:
           <select id="eventListForCss" size="1"></select>-->
@@ -627,11 +629,11 @@
         </div>
         <div>
           <div>
-            <div><?php echo $this->translate->_("Choose Object");?>:</div>
+            <label for="objListForJs" class="hidden"><?php echo $this->translate->_("Choose Object");?>:</label>
             <select id="objListForJs" class="select select-sm md:select-xs w-full" size="1"></select>
           </div>
           <div class="grid gap-2">
-            <div><?php echo $this->translate->_("Choose event");?>:</div>
+            <label for="eventListForJs" class="hidden"><?php echo $this->translate->_("Choose event");?>:</label>
             <select id="eventListForJs" class="select select-sm md:select-xs w-full" size="1">
               <option>click</option>
               <option>dblclick</option>
