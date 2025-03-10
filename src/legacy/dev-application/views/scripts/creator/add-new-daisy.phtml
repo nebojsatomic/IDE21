@@ -43,7 +43,7 @@
           data: { themes: themes }
         }).done(function( msg ) {
 
-            let dropdownToReplace = $('#manage-daisy-themes').html() + '<li><a id="add-new-daisy" class="navLinks help theme-controller btn btn-sm btn-block btn-ghost justify-center text-green-600" title="Manage DaisyUI themes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd"></path></svg></a></li>';
+            let dropdownToReplace = $('#manage-daisy-themes').html() + '<li><a id="add-new-daisy" class="navLinks help theme-controller btn btn-sm btn-block btn-ghost justify-center text-green-600" title="Manage DaisyUI themes v.<?php echo $this->daisyuiVersion; ?>"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd"></path></svg></a><div id="daisyui-version-cont" class="text-center"><span>DaisyUI</span> <span id="daisyui-version"><?php echo $this->daisyuiVersion; ?></span></div></li>';
             $('#daisyui-themes-changer').html( dropdownToReplace );
             $('#daisyui-themes-changer').find('.remove-theme').remove();
           });

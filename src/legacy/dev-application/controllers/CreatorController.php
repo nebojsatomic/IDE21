@@ -47,6 +47,12 @@ class CreatorController extends NetActionController
             $daisyuiThemes .= '<li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-center" aria-label="' . ucfirst($theme) . '" value="' . $theme . '"/></li>';
         }
 
+        /* get daisyui version from package.json */
+        $package_json = file_get_contents(NET_PATH . "/../../package.json");
+        $daisyui_version = json_decode($package_json);
+
+        $this->view->daisyuiVersion = str_replace('^', '', $daisyui_version->devDependencies->daisyui);
+
         $this->view->daisyuiThemes = $daisyuiThemes;
         isset($_COOKIE['daisyAdminTheme']) ? $this->view->daisyAdminTheme = $_COOKIE['daisyAdminTheme'] : $this->view->daisyAdminTheme = 'nord';
     }
