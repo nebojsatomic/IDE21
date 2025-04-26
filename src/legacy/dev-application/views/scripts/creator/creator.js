@@ -712,6 +712,7 @@ $(document).ready(function(){
 
   // add a new class to the object that ID assistant is pointing to
   $('#add-new-class').livequery('click', function(e){
+    //alert(e);
     $( '#' + $('#assistant-target-id').text()).addClass($('#add-new-class-input').val());
     $( '#' + $('#assistant-target-id').text()).trigger('mouseover');
   });
@@ -731,7 +732,7 @@ $(document).ready(function(){
         $('#tooltip').appendTo('#dialogDiv_assistant');
 
         $('#dialogDiv_assistant' ).dialog({modal: false, resizable: true, title: 'ID Assistant', closeOnEscape: false,
-          position: { my: "left top", at: "left bottom", of: '#objList' },
+          position: { my: "left top", at: "left top", of: '#wrap_new_objType' },
           width: $('#objList').outerWidth(),
           beforeClose: function(event, ui) {
           $('#tooltip').appendTo('body');
