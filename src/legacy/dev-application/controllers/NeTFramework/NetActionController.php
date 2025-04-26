@@ -335,6 +335,23 @@ class NetActionController extends Zend_Controller_Action
     }
 
     /**
+     *Get DaisyUI themes installed from tailwind.conf.js
+     *[temporary, should be rewritten, once upgraded to DaisyUI 5 it should be managed very differently]
+     *
+     */
+    public static function getTWConfArray(){
+
+        /* get themes from tailwind.config.js */
+        $taiwlindConf = file_get_contents(NET_PATH . '../../tailwind.config.js');
+        $tailwindConfArray = explode('themes:', $taiwlindConf);
+        $tailwindConfArray = explode('[', $tailwindConfArray[1]);
+        $tailwindConfArray = explode(']', $tailwindConfArray[1]);
+        $tailwindConfArray = explode(',',$tailwindConfArray[0]);
+
+        return $tailwindConfArray;
+    }
+
+    /**
      *Get all languages for inputing new pages or new templates
      *in db
      *
