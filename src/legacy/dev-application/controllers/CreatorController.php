@@ -32,15 +32,11 @@ class CreatorController extends NetActionController
         define("NET_PATH_SITE", $this->_nps);
         define("NET_PATH", $this->_np);
 
-        /* get themes from tailwind.config.js */
-        $taiwlindConf = file_get_contents($this->_nps . '../tailwind.config.js'); 
-        $tailwindConfArray = explode('themes:', $taiwlindConf);
-        $tailwindConfArray = explode('[', $tailwindConfArray[1]);
-        $tailwindConfArray = explode(']', $tailwindConfArray[1]);
-        $tailwindConfArray = explode(',',$tailwindConfArray[0]);
+        $tailwindConfArray = NetActionController::getTWConfArray();
+
         $daisyuiThemes = '';
 
-        foreach( $tailwindConfArray as $theme){
+        foreach( $tailwindConfArray as $theme){ // TODO: put this in a partial
             $unwanted = ['"', ' ', "'"];
             $theme =  str_replace($unwanted, '', $theme);
 

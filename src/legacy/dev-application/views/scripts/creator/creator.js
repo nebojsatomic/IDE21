@@ -705,21 +705,25 @@ $(document).ready(function(){
   });
   $('#add-new-class-input').livequery('keypress', function(e){
     if(e.which == 13) {
+      $('.tooltip-freeze').removeClass('tooltip-freeze');
       $('#add-new-class').trigger('click'); // add a new class by clicking on a button
       $('#add-new-class-input').focus();
+      $('.selected-for-append').addClass('tooltip-freeze');
     }
   });
 
   // add a new class to the object that ID assistant is pointing to
   $('#add-new-class').livequery('click', function(e){
+    $('.tooltip-freeze').removeClass('tooltip-freeze');
     $( '#' + $('#assistant-target-id').text()).addClass($('#add-new-class-input').val());
     $( '#' + $('#assistant-target-id').text()).trigger('mouseover');
+    $('.selected-for-append').addClass('tooltip-freeze');
   });
 
   //TURN ID ASSISTANT on/off
   $('#tttoggle').prop('checked', false); // uncheck by default
   $('#tttoggle').livequery('click', function(){
-
+    $('.tooltip-freeze').removeClass('tooltip-freeze');
     if ($(this).prop("checked") == true) {
       tooltipShow = 1;
       // dialog
@@ -731,7 +735,7 @@ $(document).ready(function(){
         $('#tooltip').appendTo('#dialogDiv_assistant');
 
         $('#dialogDiv_assistant' ).dialog({modal: false, resizable: true, title: 'ID Assistant', closeOnEscape: false,
-          position: { my: "left top", at: "left bottom", of: '#objList' },
+          position: { my: "left top", at: "left top", of: '#wrap_new_objType' },
           width: $('#objList').outerWidth(),
           beforeClose: function(event, ui) {
           $('#tooltip').appendTo('body');
@@ -917,7 +921,7 @@ $(document).ready(function(){
     $('#objList').append('<option>net_' + newObjId + '</option>');
 
     refreshControls();
-    $('#net_' + newObjId  ).css({left:$('#net_' + newObjId  ).position().left + 5, top:$('#net_' + newObjId  ).position().top +5 });
+    //$('#net_' + newObjId  ).css({left:$('#net_' + newObjId  ).position().left + 5, top:$('#net_' + newObjId  ).position().top +5 });
 
     $('#net_' + newObjId  ).dblclick();
     newIt++;

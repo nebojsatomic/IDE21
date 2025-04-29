@@ -313,6 +313,21 @@ class ViewController extends NetActionController
 
     }
 
+    public static function showDaisyThemeChooser(){
+
+        $themePath = NET_PATH . "widgets/";
+        $view = new Zend_View();
+        $view->addScriptPath($themePath . "templates/");
+
+        $viewArray['tailwindConfArray'] = NetActionController::getTWConfArray();
+
+        $view->assign($viewArray);
+        $scriptName = "daisyThemes.phtml";
+
+        $partialOutput = $view->render($scriptName);
+        return $partialOutput;
+
+    }
 
     public function changeLanguageAction()
     {
@@ -797,6 +812,10 @@ class ViewController extends NetActionController
 
                     $output = ViewController::showLanguageChooser($langsEnabled);
                     $outputDB = str_replace('{language:flags}', $output, $outputDB);
+                }
+                if(@strstr( "{" . $build_[0] . ":themes}" , "{daisyui:themes}")){
+                    $output = ViewController::showDaisyThemeChooser();
+                    $outputDB = str_replace('{daisyui:themes}', $output, $outputDB);
                 }
 
                 // MENU HANDLE
