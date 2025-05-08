@@ -3833,6 +3833,38 @@ $(document).on('click', '.ide21-select-ul input', function(e){
   //$('label[for="'+ selectElementId +'"]').removeClass('hidden');
 });
 
+/**
+ * Renaming the ObjectIDs,
+ * user can click on the ObjectID text in the properties side panel,
+ * and rename its id
+ * */
+$('#objIDshow').livequery('click', function(){
+
+  $('#objIDshow').prop('contenteditable', true); /* if contenteditable was set to false on some action, make it true again */
+});
+
+$('#objIDshow').livequery('blur', function(){
+
+  const currentSelectedObjectId = $('.selected-for-append').attr('id');
+  const changedSelectedObjectId = $('#objIDshow').text();
+
+  if(currentSelectedObjectId !== changedSelectedObjectId){
+
+    $('#' + currentSelectedObjectId).prop('id', changedSelectedObjectId);
+
+    $('#objList option:contains("' + currentSelectedObjectId + '")').prop('value', changedSelectedObjectId).text(changedSelectedObjectId);
+
+    $('#objListForCss option:contains("' + currentSelectedObjectId + '")').prop('value', changedSelectedObjectId).text(changedSelectedObjectId);
+
+    $('#objListForJs option:contains("' + currentSelectedObjectId + '")').prop('value', changedSelectedObjectId).text(changedSelectedObjectId);
+  }
+})
+
+/* disable right click in the admin area, we should have custom context menu with additional actions for the selected object */
+$('#container-workspace, #creator-header-navbar, #contProperties, #TB_ajaxContent').livequery('contextmenu', function(){
+  /* here should custom contextmenu be built */
+  return false;
+});
 
 $(window).on('load', function(){
 
