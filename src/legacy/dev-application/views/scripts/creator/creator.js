@@ -907,8 +907,14 @@ $(document).ready(function(){
     // AFTER selected object
     // first remove the olds ids for each element inside the cloned one
     const regexForIDs = /id=\"[\S]*\"/g;
+    const selectedObjectIdAttr = 'id="' +  $('#objIDshow').html() + '"';
 
-    const elementWithNewIDs = $('#' + $('#objIDshow').html() ).get(0).outerHTML.replace( regexForIDs , '').replace('selected-for-append', '');
+    const objectElementWithNewID = $('#' + $('#objIDshow').html() ).get(0).outerHTML.replace( selectedObjectIdAttr , 'id="net_' + newObjId + '"');
+
+    let elementWithNewIDs = $(objectElementWithNewID).get(0).outerHTML.replace( regexForIDs , '').replace('selected-for-append', '');
+    elementWithNewIDs = elementWithNewIDs.replace('<div', '<div id="net_' + newObjId + '" ');
+
+    //const elementWithNewIDs = $('#' + $('#objIDshow').html() ).get(0).outerHTML.replace( regexForIDs , '').replace('selected-for-append', '');
 
     $("\n" + elementWithNewIDs + "\n").insertAfter(droppableContainer);
     // insertAfter till here
@@ -3861,7 +3867,7 @@ $('#objIDshow').livequery('blur', function(){
 })
 
 /* disable right click in the admin area, we should have custom context menu with additional actions for the selected object */
-$('#container-workspace, #creator-header-navbar, #contProperties, #TB_ajaxContent').livequery('contextmenu', function(){
+$('#container-workspace, #creator-header-navbar, #contProperties, #TB_ajaxContent, .ui-dialog').livequery('contextmenu', function(){
   /* here should custom contextmenu be built */
   return false;
 });
