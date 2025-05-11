@@ -924,7 +924,7 @@ class PageController extends NetActionController
             }
             if($key == 'staticFiles') {
 
-               $fields .= '<' . $key . '>'  . '/css/themes.css;' .  '/css/default.css;'  . '/js/main2.js' . '</' . $key . '>' . "\n";
+               $fields .= '<' . $key . '>'  . '/css/default.css;'  . '/js/main2.js' . '</' . $key . '>' . "\n";
 
                continue;
             }

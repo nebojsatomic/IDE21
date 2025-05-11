@@ -181,8 +181,8 @@
                 
               </div>
 
-              <div class="font-black col-span-1"><?php echo $this->translate->_("ObjectID");?>:</div>
-              <div id="objIDshow" class="col-span-3"></div>
+              <div class="font-black col-span-1 content-center"><?php echo $this->translate->_("ObjectID");?>:</div>
+              <div id="objIDshow" class="help col-span-3 focus:bg-white py-1 px-2 rounded-md transition-all" title="<?php echo $this->translate->_("Click here to rename the ID to something logical.");?>" contenteditable="true"></div>
             </div>
 
 
@@ -230,18 +230,6 @@
                   </select>
                 </div>
 
-                <!--Disable theme changer for now, it should be replaced with Daisyui themes changer<div class="mt-4">
-                  <?php echo $this->translate->_("Theme");?>:
-                  <select id="objTheme" class="help select  select-sm md:select-xs mt-1 w-full" description="<?php echo $this->translate->_("Choose the theme for the selected object");?>">
-                    <option value="no">None</option>
-                    <option value="silver">Silver</option>
-                    <option value="green">Green</option>
-                    <option value="red">Red</option>
-                    <option value="blue">Blue</option>
-                    <option value="white">White</option>
-                    <option value="black">Black</option>
-                  </select>
-                </div>-->
               </div>
 
               <div class="grid grid-cols-4 h-96 items-strech justify-items-end">
