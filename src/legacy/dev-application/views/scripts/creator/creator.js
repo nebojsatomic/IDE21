@@ -70,6 +70,20 @@ const Creator = ( window.Creator = {
     dropdownElement.querySelector('#new-select-label_' + element.replace('#', '')).textContent = newSelectedValue;
   },
 
+  /* generate new or cloned object id */
+  generateObjectId : function(){
+
+    const now = new Date();
+    const hour        = now.getHours();
+    const minute      = now.getMinutes();
+    const second      = now.getSeconds();
+    const monthnumber = now.getMonth();
+    const monthday    = now.getDate();
+    const year        = now.getYear();
+
+    return "net_" + year + "_" + monthnumber+"_" + monthday+"_"+hour+"_"+ minute+"_" + second;
+  },
+
   /** functions for setting
    * styles of selected text
    */
@@ -833,15 +847,8 @@ $(document).ready(function(){
 
   //CREATING NEW OBJECT!
   $('#newItem').livequery('click', function(){
-    var now = new Date();
-    var hour        = now.getHours();
-    var minute      = now.getMinutes();
-    var second      = now.getSeconds();
-    var monthnumber = now.getMonth();
-    var monthday    = now.getDate();
-    var year        = now.getYear();
 
-    newObjId = year + "_" + monthnumber+"_" + monthday+"_"+hour+"_"+ minute+"_" + second;
+    const newObjId = Creator.generateObjectId();
 
     //IF THERE IS A SELECTED OBJECT, THEN INSERT AFTER IT, ELSE APPEND TO #droppable
     if ($('.selected-for-append').length > 0) {
@@ -849,27 +856,25 @@ $(document).ready(function(){
       droppableContainer = '.selected-for-append';
 
       // insert inside selected object - TODO
-      //$(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
 
       // insertAfter selected object
-      $("\n" + '<div class="draggable" id="net_'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n").insertAfter(droppableContainer);
+      $("\n" + '<div class="draggable" id="'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n").insertAfter(droppableContainer);
     } else {
 
       droppableContainer = "#droppable";
       // insert inside #droppable
-      $(droppableContainer).append("\n" + '<div class="draggable" id="net_'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
-
+      $(droppableContainer).append("\n" + '<div class="draggable" id="'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
     }
 
     //IF CONTAINER ON, THEN ADD class IN THE CURRENT OBJECT, ELSE the same
     if (objContainer == 1) {
       $(droppableContainer ).addClass("container");
-    } else {}
+    }
 
-    $('#objList').append('<option>net_' + newObjId + '</option>');
+    $('#objList').append('<option>' + newObjId + '</option>');
 
     refreshControls();
-    $('#net_' + newObjId  ).dblclick();
+    $('#' + newObjId  ).dblclick();
     newIt++;
     zIndexCounter++;
 
@@ -878,15 +883,8 @@ $(document).ready(function(){
 
   //CREATING CLONE OBJECTS!
   $('#cloneItem').livequery('click', function(){
-    var now = new Date();
-    var hour        = now.getHours();
-    var minute      = now.getMinutes();
-    var second      = now.getSeconds();
-    var monthnumber = now.getMonth();
-    var monthday    = now.getDate();
-    var year        = now.getYear();
 
-    newObjId = year + "_" + monthnumber+"_" + monthday+"_"+hour+"_"+ minute+"_" + second;
+    const newObjId = Creator.generateObjectId();
 
     //IF CONTAINER ON, THEN APPEND IN THE CURRENT OBJECT, ELSE in droppable
     if ($('.selected-for-append').length == 1) {
@@ -895,26 +893,17 @@ $(document).ready(function(){
       droppableContainer = "#droppable";
     }
 
-    /*if (objContainer == 1) {
-      droppableContainer = '#' + $('#objIDshow').html();
-    } else {
-      droppableContainer = "#droppable";
-    }*/
+    // INSIDE the selected object - TODO
 
-    // INSIDE selected object - todo
-    //$(droppableContainer).append("\n" + '<div class="draggable ' + $('#' + $('#objIDshow').html() ).attr('class') + '" id="net_'+newObjId+'" style="z-index:' + zIndexCounter + $('#' + $('#objIDshow').html() ).attr('style') + ';">' + $('#' + $('#objIDshow').html() ).html() + "\n" + '</div>'+ "\n");
-
-    // AFTER selected object
+    // AFTER the selected object
     // first remove the olds ids for each element inside the cloned one
     const regexForIDs = /id=\"[\S]*\"/g;
     const selectedObjectIdAttr = 'id="' +  $('#objIDshow').html() + '"';
 
-    const objectElementWithNewID = $('#' + $('#objIDshow').html() ).get(0).outerHTML.replace( selectedObjectIdAttr , 'id="net_' + newObjId + '"');
+    const objectElementWithNewID = $('#' + $('#objIDshow').html() ).get(0).outerHTML.replace( selectedObjectIdAttr , 'id="' + newObjId + '"');
 
     let elementWithNewIDs = $(objectElementWithNewID).get(0).outerHTML.replace( regexForIDs , '').replace('selected-for-append', '');
-    elementWithNewIDs = elementWithNewIDs.replace('<div', '<div id="net_' + newObjId + '" ');
-
-    //const elementWithNewIDs = $('#' + $('#objIDshow').html() ).get(0).outerHTML.replace( regexForIDs , '').replace('selected-for-append', '');
+    elementWithNewIDs = elementWithNewIDs.replace('<div', '<div id="' + newObjId + '" ');
 
     $("\n" + elementWithNewIDs + "\n").insertAfter(droppableContainer);
     // insertAfter till here
@@ -922,14 +911,13 @@ $(document).ready(function(){
     //IF CONTAINER ON, THEN ADD class IN THE CURRENT OBJECT, ELSE the same
     if (objContainer == 1) {
       $(droppableContainer ).addClass("container");
-    } else {}
+    }
 
-    $('#objList').append('<option>net_' + newObjId + '</option>');
+    $('#objList').append('<option>' + newObjId + '</option>');
 
     refreshControls();
-    //$('#net_' + newObjId  ).css({left:$('#net_' + newObjId  ).position().left + 5, top:$('#net_' + newObjId  ).position().top +5 });
 
-    $('#net_' + newObjId  ).dblclick();
+    $('#' + newObjId  ).dblclick();
     newIt++;
     zIndexCounter++;
 
