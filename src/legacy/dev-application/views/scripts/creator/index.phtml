@@ -177,7 +177,7 @@
 
               <div class="grid grid-cols-4 item-strech gap-2 my-2">
                 <div class="font-black col-span-1" ><?php echo $this->translate->_("Page ID");?>:</div>
-                <div id="pgID" class="col-span-3"><?php echo $this->pageId;?>
+                <div id="pgID" class="col-span-3 px-2"><?php echo $this->pageId;?>
                 
               </div>
 
@@ -546,15 +546,12 @@
 
       </div>
 
-      <div class="grid gap-2 content-start">
-        <a id="deleteImage" class="a_delete marginBottom5 btn btn-sm md:btn-xs btn-error" style="display:none" title="<?php echo $this->translate->_("Click to delete this image");?>"><?php echo $this->translate->_("Delete this image");?> </a>
+      <div id="image-actions-wrapper" class="grid gap-2 content-start" style="display:none">
 
-        <a id="insertImage" class="a_add marginBottom5 btn btn-sm md:btn-xs" style="display:none" title="<?php echo $this->translate->_("Click to insert this image");?>"><?php echo $this->translate->_("Insert this image");?> </a>
+        <a id="insertImage" class="a_add marginBottom5 btn btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to insert this image");?>"><?php echo $this->translate->_("Insert this image");?> </a>
 
-        <div class="inline-flex gap-2 items-center">
-          <!--<?php echo $this->translate->_("Put image(s) in the selected object");?> <input id="putImagesInThis" class="checkbox-sm checkbox" type="checkbox" /> into the-->
-          <!--<?php echo $this->translate->_("Single Image");?><input id="putSingleImageInThis" type="checkbox" />-->
-        </div>
+        <a id="replaceImage" class="a_add marginBottom5 btn btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to replace currently selected image with this image");?>"><?php echo $this->translate->_("Replace selected image");?> </a>
+
         <label for="bgSelect"><?php echo $this->translate->_("Set Background on:" );?></label>
         <select id="bgSelect" class="help select select-sm md:select-xs w-full" title="<?php echo $this->translate->_("For this to work, set appropriate classes to the objects, lowercase (HEADER = header) except for the BODY, body is always there." );?>"><option>BODY</option><option>HEADER</option><option>SHEET</option><option>LEFTCOLUMN</option><option>RIGHTCOLUMN</option><option>FOOTER</option><option selected="selected">SELECTED-OBJECT</option></select>
         
@@ -567,7 +564,9 @@
         <div id="imagePathShow"></div>
         <div id="imageDetails"></div>
 
-        <a id="setBodyBgImage" class="a_add marginBottom5 btn btn-sm md:btn-xs" style="display:none" title="<?php echo $this->translate->_("Click to set background");?>"><?php echo $this->translate->_("Set background");?> </a>
+        <a id="setBodyBgImage" class="a_add marginBottom5 btn btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to set background");?>"><?php echo $this->translate->_("Set background");?> </a>
+
+        <a id="deleteImage" class="a_delete marginBottom5 btn btn-sm md:btn-xs btn-error" title="<?php echo $this->translate->_("Click to delete this image");?>"><?php echo $this->translate->_("Delete this image");?> </a>
 
       </div>
     </div>
