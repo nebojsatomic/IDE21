@@ -2092,19 +2092,22 @@ $('#showFolderImages').livequery('change', function(){
   $.get(absoluteUrl + "images/show-image-details/fname/" + valFolder + "/imname/" + val , function(data){
 
     $('#imageDetails').html(data);
-    $('#deleteImage').show();
-    $('#insertImage').show();
-    $('#setBodyBgImage').show();
+    $('#image-actions-wrapper').show();
 
   });
 
 });
 //INSERT IMAGE;
 $('#insertImage').click(function(){
-  objectId = $('#objList').val();
-
+  const objectId = $('#objList').val();
   $('#' + objectId).append('<img src = "' + $('#imagePathShow').text() + '" />');
+});
+//REPLACE IMAGE;
+$('#replaceImage').click(function(){
+  const objectId = $('#objList').val();
 
+  $('#' + objectId).prop( 'src', $('#imagePathShow').text() );
+  // TODO: make refreshing the object html a global Creator function
 });
 //set as body bg;
 $('#setBodyBgImage').click(function(){
