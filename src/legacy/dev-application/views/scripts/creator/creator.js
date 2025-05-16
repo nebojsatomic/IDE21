@@ -116,10 +116,70 @@ const Creator = ( window.Creator = {
   setTextAlign : function(align){
 
     $('.selected-for-append').css('text-align', align);
+  },
+  /**
+   * For the time being, we will use
+   * Interactjs library for resizing
+   * and drag & drop
+   **/
+  enableObjectResize : function(el){
+    interact(el)
+    .resizable({
+      edges: { top: true, left: true, bottom: true, right: true },
+      listeners: {
+        move: function (event) {
+          let { x, y } = event.target.dataset
+
+          x = (parseFloat(x) || 0) + event.deltaRect.left
+          y = (parseFloat(y) || 0) + event.deltaRect.top
+
+          Object.assign(event.target.style, {
+            width: `${event.rect.width}px`,
+            height: `${event.rect.height}px`,
+            transform: `translate(${x}px, ${y}px)`
+          })
+
+          Object.assign(event.target.dataset, { x, y })
+        }
+      },
+      modifiers: [
+        interact.modifiers.restrict({
+          restriction: 'parent',
+          //endOnly: true
+        })
+      ]
+    });
+  },
+
+  enableObjectDragDrop : function(el){
+    const position = { x: 0, y: 0 }
+    interact(el)
+    .draggable({
+      listeners: {
+        start (event) {
+          console.log(event.type, event.target)
+        },
+        move (event) {
+          position.x += event.dx
+          position.y += event.dy
+
+          event.target.style.transform =
+            `translate(${position.x}px, ${position.y}px)`
+        },
+      },
+      modifiers: [
+        interact.modifiers.restrictRect({
+          restriction: 'parent',
+        })
+      ]
+    });
   }
 
 });
 
+/** enable resize and Drag&Drop for selected object */
+Creator.enableObjectResize('.selected-for-append');
+Creator.enableObjectDragDrop('.selected-for-append');
 
 /** main event listener
  * that should replace
@@ -939,7 +999,7 @@ $(document).ready(function(){
     if(boundCBval == 'on') {
       firstObjVal = $('#objList option:first').val();
       $('#' + firstObjVal).css("position", "relative");
-      $('#' + firstObjVal).css("min-height", $('#' + firstObjVal).height() + "px" );
+      //$('#' + firstObjVal).css("min-height", $('#' + firstObjVal).height() + "px" );
       $('#' + firstObjVal).css("height", "auto");
     }
     $(".draggable").each(function(){
@@ -994,7 +1054,7 @@ $(document).ready(function(){
       firstObjVal = $('#objList option:first').val();
 
       $('#' + firstObjVal).css("position", "relative");
-      $('#' + firstObjVal).css("min-height", $('#' + firstObjVal).height() + "px" );
+      //$('#' + firstObjVal).css("min-height", $('#' + firstObjVal).height() + "px" );
       $('#' + firstObjVal).css("height", "auto");
     }
 
