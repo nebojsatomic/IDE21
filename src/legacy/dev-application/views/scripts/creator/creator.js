@@ -125,7 +125,7 @@ const Creator = ( window.Creator = {
   enableObjectResize : function(el){
     interact(el)
     .resizable({
-      edges: { top: true, left: true, bottom: true, right: true },
+      edges: {  top: true, left: true, bottom: true, right: true },
       listeners: {
         move: function (event) {
           let { x, y } = event.target.dataset
@@ -133,25 +133,74 @@ const Creator = ( window.Creator = {
           x = (parseFloat(x) || 0) + event.deltaRect.left
           y = (parseFloat(y) || 0) + event.deltaRect.top
 
+          const workspaceWidth = document.querySelector('#droppable').getBoundingClientRect().width;
+          const widthPercentage = (event.client.x / workspaceWidth)*100;
+
+          const workspaceHeight = document.querySelector('#droppable').getBoundingClientRect().height;
+          const heightPercentage = (event.client.y / workspaceHeight)*100;
+
           Object.assign(event.target.style, {
-            width: `${event.rect.width}px`,
-            height: `${event.rect.height}px`,
-            transform: `translate(${x}px, ${y}px)`
+
+            width: `${widthPercentage}%`,
+            height: `${heightPercentage}%`,
+
+            // width: `${event.rect.width}px`,
+            // height: `${event.rect.height}px`,
+            //transform: `translate(${x}px, ${y}px)`
           })
 
           Object.assign(event.target.dataset, { x, y })
         }
       },
-      modifiers: [
-        interact.modifiers.restrict({
-          restriction: 'parent',
-          //endOnly: true
-        })
-      ]
+
     });
   },
 
   enableObjectDragDrop : function(el){
+
+    // enable draggables to be dropped into this
+    interact('.draggable, #droppable').dropzone({
+      // only accept elements matching this CSS selector
+      //accept: '#yes-drop',
+      // Require a 75% element overlap for a drop to be possible
+      //overlap: 0.75,
+
+      ondropactivate: function (event) {
+        // add active dropzone feedback
+        event.target.classList.add('drop-active')
+      },
+      ondragenter: function (event) {
+        const draggableElement = event.relatedTarget
+        const dropzoneElement = event.target
+
+        // feedback the possibility of a drop
+        dropzoneElement.classList.add('drop-target')
+        draggableElement.classList.add('can-drop')
+        //draggableElement.textContent = 'Dragged in'
+      },
+      ondragleave: function (event) {
+        // remove the drop feedback style
+        event.target.classList.remove('drop-target')
+        event.relatedTarget.classList.remove('can-drop')
+        //event.relatedTarget.textContent = 'Dragged out'
+      },
+      ondrop: function (event) {
+        event.target.append(event.relatedTarget);
+
+        if(event.target.getBoundingClientRect().height <  event.relatedTarget.getBoundingClientRect().height){
+          event.target.style.height = event.relatedTarget.getBoundingClientRect().height + 'px';
+        }
+
+        //event.relatedTarget.textContent = 'Dropped';
+      },
+      ondropdeactivate: function (event) {
+        // remove active dropzone feedback
+        event.target.classList.remove('drop-active')
+        event.target.classList.remove('drop-target')
+      }
+    });
+
+
     const position = { x: 0, y: 0 }
     interact(el)
     .draggable({
@@ -163,15 +212,18 @@ const Creator = ( window.Creator = {
           position.x += event.dx
           position.y += event.dy
 
-          event.target.style.transform =
-            `translate(${position.x}px, ${position.y}px)`
+          //event.target.style.left = position.x + 'px';
+          //event.target.style.top = position.y + 'px';
+
+          const workspaceWidth = document.querySelector('#droppable').getBoundingClientRect().width;
+          const workspaceHeight = document.querySelector('#droppable').getBoundingClientRect().height;
+          event.target.style.left = (position.x/workspaceWidth)*100 + '%';
+          event.target.style.top = (position.y/workspaceHeight)*100 + '%';
+
+          //event.target.style.transform =
+            //`translate(${position.x}px, ${position.y}px)`
         },
       },
-      modifiers: [
-        interact.modifiers.restrictRect({
-          restriction: 'parent',
-        })
-      ]
     });
   }
 
@@ -918,12 +970,12 @@ $(document).ready(function(){
       // insert inside selected object - TODO
 
       // insertAfter selected object
-      $("\n" + '<div class="draggable" id="'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n").insertAfter(droppableContainer);
+      $("\n" + '<div class="draggable" id="'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + 'NeT.Object ' + newObjId + "\n\t" + "\n" + '</div>'+ "\n").insertAfter(droppableContainer);
     } else {
 
       droppableContainer = "#droppable";
       // insert inside #droppable
-      $(droppableContainer).append("\n" + '<div class="draggable" id="'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
+      $(droppableContainer).append("\n" + '<div class="draggable" id="'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + 'NeT.Object ' + newObjId + "\n\t" + "\n" + '</div>'+ "\n");
     }
 
     //IF CONTAINER ON, THEN ADD class IN THE CURRENT OBJECT, ELSE the same
@@ -998,9 +1050,9 @@ $(document).ready(function(){
 
     if(boundCBval == 'on') {
       firstObjVal = $('#objList option:first').val();
-      $('#' + firstObjVal).css("position", "relative");
+      //$('#' + firstObjVal).css("position", "relative");
       //$('#' + firstObjVal).css("min-height", $('#' + firstObjVal).height() + "px" );
-      $('#' + firstObjVal).css("height", "auto");
+      //$('#' + firstObjVal).css("height", "auto");
     }
     $(".draggable").each(function(){
       $(this).removeClass("inactiveObject");
@@ -1053,9 +1105,9 @@ $(document).ready(function(){
     if(boundCBval == 'on') {
       firstObjVal = $('#objList option:first').val();
 
-      $('#' + firstObjVal).css("position", "relative");
+      //$('#' + firstObjVal).css("position", "relative");
       //$('#' + firstObjVal).css("min-height", $('#' + firstObjVal).height() + "px" );
-      $('#' + firstObjVal).css("height", "auto");
+      //$('#' + firstObjVal).css("height", "auto");
     }
 
     $(".draggable").each(function(){
