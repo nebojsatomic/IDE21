@@ -128,6 +128,10 @@ const Creator = ( window.Creator = {
       edges: {  top: true, left: true, bottom: true, right: true },
       listeners: {
         move: function (event) {
+          if(event.target.style.position != 'fixed' && event.target.style.position != 'absolute') {
+            console.log('You can only resize absolute or fixed objects for now.');
+            return false;
+          }
           let { x, y } = event.target.dataset
 
           x = (parseFloat(x) || 0) + event.deltaRect.left
@@ -160,10 +164,6 @@ const Creator = ( window.Creator = {
 
     // enable draggables to be dropped into this
     interact('.draggable, #droppable').dropzone({
-      // only accept elements matching this CSS selector
-      //accept: '#yes-drop',
-      // Require a 75% element overlap for a drop to be possible
-      //overlap: 0.75,
 
       ondropactivate: function (event) {
         // add active dropzone feedback
@@ -185,7 +185,18 @@ const Creator = ( window.Creator = {
         //event.relatedTarget.textContent = 'Dragged out'
       },
       ondrop: function (event) {
+        //console.log(event.relatedTarget.style.position);
+        if(event.relatedTarget.style.position != 'fixed' && event.relatedTarget.style.position != 'absolute') {
+          console.log('You can only drop absolute or fixed objects for now.');
+          return false;
+        }
         event.target.append(event.relatedTarget);
+        // setTimeout( function(){
+        //   document.querySelectorAll('.selected-for-append').forEach( function(el){
+        //     el.classList.remove('selected-for-append');
+        //   });
+        //   event.relatedTarget.classList.add('selected-for-append');
+        // }, 300 );
 
         if(event.target.getBoundingClientRect().height <  event.relatedTarget.getBoundingClientRect().height){
           event.target.style.height = event.relatedTarget.getBoundingClientRect().height + 'px';
@@ -206,11 +217,16 @@ const Creator = ( window.Creator = {
     .draggable({
       listeners: {
         start (event) {
-          console.log(event.type, event.target)
+          if(event.target.style.position != 'fixed' && event.target.style.position != 'absolute') {
+            console.log('You can only drop absolute or fixed objects for now.');
+            return false;
+          }
         },
         move (event) {
-          position.x += event.dx
-          position.y += event.dy
+          // position.x += event.dx
+          // position.y += event.dy
+          position.x = event.pageX
+          position.y = event.pageY
 
           //event.target.style.left = position.x + 'px';
           //event.target.style.top = position.y + 'px';
@@ -229,9 +245,9 @@ const Creator = ( window.Creator = {
 
 });
 
-/** enable resize and Drag&Drop for selected object */
-Creator.enableObjectResize('.selected-for-append');
-Creator.enableObjectDragDrop('.selected-for-append');
+/** enable resize and Drag&Drop for selected object, limit to these classes for now */
+Creator.enableObjectResize('.resizable-object');
+Creator.enableObjectDragDrop('.draggable-object');
 
 /** main event listener
  * that should replace
