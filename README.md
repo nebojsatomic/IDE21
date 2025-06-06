@@ -50,6 +50,9 @@ using IDE21 for website administration on a mobile phone:
 
 https://youtu.be/WZEZ3wNYZHg?feature=shared
 
+IDE21 introduction, 40 minutes video, in which you can see editing of the templates
+[![IDE21 design directly in your CMS](https://img.youtube.com/vi/FX7hTeB0nc4/0.jpg)](https://www.youtube.com/watch?v=FX7hTeB0nc4)
+
 
 # INSTALLATION OF THIS VERSION
 
