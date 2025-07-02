@@ -53,13 +53,13 @@ select:not(.paginationStep) { display: none; }
 
 /* with selecting the specific div inside template or page, user should be able to insert a new object directly into it */
 #droppable * {
-  @apply border border-dashed border-transparent !important;
+  /*@apply border border-dashed border-transparent !important;*/
 }
 #droppable *:hover {
-  @apply border border-dashed border-lime-800 !important;
+  @apply outline outline-[1px] outline-dashed -outline-offset-2 outline-accent;
 }
 #droppable *.selected-for-append {
-  @apply border border-dashed border-red-500 !important;
+  @apply outline outline-[4px] outline-dashed -outline-offset-4 outline-accent !important;
 }
 /* this marks the specific div to be visible as the div where the new object is to be appended */
 
