@@ -858,12 +858,12 @@ $(document).ready(function(){
       // insert inside selected object - TODO
 
       // insertAfter selected object
-      $("\n" + '<div class="draggable" id="'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n").insertAfter(droppableContainer);
+      $("\n" + '<div class="draggable" id="'+newObjId+'" style="z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n").insertAfter(droppableContainer);
     } else {
 
       droppableContainer = "#droppable";
       // insert inside #droppable
-      $(droppableContainer).append("\n" + '<div class="draggable" id="'+newObjId+'" style="border:1px dotted red;z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
+      $(droppableContainer).append("\n" + '<div class="draggable" id="'+newObjId+'" style="z-index:' + zIndexCounter + '">' + "\n\t" + '<p class="objContent">NeT.Object ' + newObjId + "\n\t" + '</p>' + "\n" + '</div>'+ "\n");
     }
 
     //IF CONTAINER ON, THEN ADD class IN THE CURRENT OBJECT, ELSE the same
@@ -944,7 +944,6 @@ $(document).ready(function(){
     }
     $(".draggable").each(function(){
       $(this).removeClass("inactiveObject");
-      $(this).css("border", "0");
 
       //if it is a menu write command
       /*if ($(this).attr("objtype") == "Menu"){
@@ -999,7 +998,7 @@ $(document).ready(function(){
     }
 
     $(".draggable").each(function(){
-      $(this).css("border", "0");
+
       $(this).removeClass("inactiveObject");
 
       //if it is a menu write command
@@ -1153,7 +1152,7 @@ $(document).ready(function(){
     $('*[contenteditable="true"]').attr('contenteditable', 'false');
 
     $(".draggable").each(function(){
-      $(this).css("border", "0");
+
       $(this).removeClass("inactiveObject");
       $(this).addClass("templateDiv");
       //if it is a menu write command
@@ -1194,7 +1193,6 @@ $(document).ready(function(){
     $('*[contenteditable="true"]').attr('contenteditable', 'false');
 
     $(".draggable:not('.templateDiv')").each(function(){
-      $(this).css("border", "0");
 
       $(this).removeClass("inactiveObject");
       $(this).addClass("templateDiv");
