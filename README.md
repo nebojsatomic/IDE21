@@ -1,9 +1,9 @@
 ![ide21logo](https://github.com/nebojsatomic/IDE21/assets/1038256/aaddf2a1-f4e9-435d-864e-68963a132859)
 
 # IDE21
-Restarting CMS-IDE project from 2013, now powered by Docker, which made the task of installing this software trivial. It needs a fat rewriting, since the technology used in it is ancient, Zend Framework 1...For use on local it could also serve as an experimental design tool which exports HTML...
+Restarting CMS-IDE project from 2013, now powered by Docker, which made the task of installing this software trivial. It needs a fat rewriting, since the technology used in it originally is Zend Framework 1, and now it should be translated to Laravel.
 
-The base idea of the software is to be able to design the website in the admin panel, and do it in visual way, having the CMS in the background which will take care of the functionality, while the front should be 100% customizable right there in the admin panel, and being able to change the looks very quickly to something quite different with a few clicks, but also can add CSS and JS on the fly...
+The base idea of the software is to be able to design the website in the admin panel, and do it in visual way, having the CMS in the background which will take care of the functionality, while the front should be 100% customizable right there in the admin panel, and being able to change the looks very quickly to something quite different with a few clicks, but also can add CSS and JS on the fly.
 
 Basically have the designer and the frontend developer in one person, from the admin panel.
 After that template is available for export, it can be uploaded to some other installation of IDE21, and the design which was created by the first admin on one domain can now be taken by another admin to work on it to improve it in his own way on another domain, which should enable quick creating of the new templates ( new designs ).
@@ -29,15 +29,17 @@ and more…
 # SCREENSHOTS
 MOBILE:
 
-<img src="https://github.com/user-attachments/assets/9bdc8f6f-90b0-47d4-bf5c-58a64f0d601f" width="320" />
+<img width="320" alt="IDE21 25.06 mobile, nord theme, open page" src="https://github.com/user-attachments/assets/1a323a3f-f3a4-496f-8e03-3efe51a13bec" />
 
 DESKTOP:
 
-![retro_103051](https://github.com/user-attachments/assets/1b3a2bc9-fdff-4fb6-b3d3-18db868df3fc)
 
-![valentine_103057](https://github.com/user-attachments/assets/a81e4216-0bf3-40b4-bd9e-dcc83edc4078)
+<img width="100%" alt="IDE21 25.06, Nord theme" src="https://github.com/user-attachments/assets/21c2b89d-8b1b-4ca7-abf6-4a75b9608997" />
 
-![nord_103045](https://github.com/user-attachments/assets/ffa7229c-232e-4255-a1e6-20119ee13af6)
+<img width="100%" alt="IDE21 25.06, Retro theme" src="https://github.com/user-attachments/assets/836ce83f-a53b-4845-93e5-7e636816782b" />
+
+<img width="100%" alt="IDE21 25.06, Valentine theme" src="https://github.com/user-attachments/assets/a3a6709f-48a5-462e-a897-7eb22224b1bd" />
+
 
 # YOUTUBE CHANNEL
 
