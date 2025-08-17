@@ -83,7 +83,7 @@
     </div>
   </div>
 
-  <div data-theme="<?php echo $this->daisyAdminTheme; ?>" id="toggleProperties"  class="help fixed -right-2 top-2/4 z-[999999] bg-neutral hover:bg-accent z-[999999] border-2 border-primary cursor-pointer btn btn-sm md:btn-xs btn-ghost btn-circle text-white" title="<?php echo $this->translate->_("Click to toggle properties box");?>">
+  <div data-theme="<?php echo $this->daisyAdminTheme; ?>" id="toggleProperties"  class="help fixed -right-2 top-2/4 z-[999999] bg-neutral hover:bg-accent z-[999999] border-2 border-primary cursor-pointer btn btn-sm btn-ghost btn-circle text-white" title="<?php echo $this->translate->_("Click to toggle properties box");?>">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
         <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
       </svg>
@@ -95,8 +95,8 @@
     </div>
 
     <div id="properties" class="w-full h-dvh overflow-auto">
-      <div id="rotate" class="ui-tabs pt-0 pb-44 md:pb-16 px-0 bg-primary text-primary-content shadow-lg rounded-none">
-        <ul id="tabs-navigation" class="tabs tabs-boxed ui-tabs-nav fixed grid grid-cols-3 bottom-0 md:sticky md:top-0 md:bottom-auto w-full h-28 bg-none bg-neutral border-0 rounded-none">
+      <div id="rotate" class="ui-tabs pt-0 pb-44 md:pb-16 px-0 bg-base-100 text-base-content shadow-lg rounded-none">
+        <ul id="tabs-navigation" class="tabs tabs-boxed ui-tabs-nav fixed grid grid-cols-3 bottom-0 md:sticky md:top-0 md:bottom-auto w-full bg-none bg-neutral border-0 rounded-none gap-1 p-1 place-items-center justify-items-stretch h-28">
           <li role="tab" class="help tab ui-tab-button  row-start-auto" description="<?php echo $this->translate->_("Contains properties of page and objects");?>"><a href="#fragment-1" id="poA" title="Object properties on a Page or a  Template"><span><?php echo $this->translate->_("Objects");?></span></a></li>
           <li role="tab"  class="help tab ui-tab-button  row-start-auto" description="<?php echo $this->translate->_("Contains Menu management");?>"><a href="#fragment-2" id="MenuA"><span><?php echo $this->translate->_("Menus");?></span></a></li>
           <li role="tab"  class="help tab ui-tab-button  row-start-auto" description="<?php echo $this->translate->_("Contains Categories management");?>"><a href="#fragment-3" id="CatA"><span><?php echo $this->translate->_("Categories");?></span></a></li>
@@ -125,16 +125,16 @@
                 </select>
                 </div>
 
-                <a href="" id="clearPage" class="navLinks a_clear noAjaxEvent btn btn-error btn-sm md:btn-xs mb-2" title="<?php echo $this->translate->_("Click to erase all objects");?>"><?php echo $this->translate->_("Clear");?></a>
-                <a href="" id="toggleVisibilityRowAnchor" class="navLinks a_content noAjaxEvent btn btn-secondary btn-sm md:btn-xs mb-2 " title="<?php echo $this->translate->_("Toggle visibility for style, tinymce and meta");?>"><?php echo $this->translate->_("Object Editors");?></a>
+                <a href="" id="clearPage" class="navLinks a_clear noAjaxEvent btn btn-error btn-sm mb-2" title="<?php echo $this->translate->_("Click to erase all objects");?>"><?php echo $this->translate->_("Clear");?></a>
+                <a href="" id="toggleVisibilityRowAnchor" class="navLinks a_content noAjaxEvent btn btn-secondary btn-sm mb-2 " title="<?php echo $this->translate->_("Toggle visibility for style, tinymce and meta");?>"><?php echo $this->translate->_("Object Editors");?></a>
 
               </div>
               <div id="toggleVisibilityRow" class="grid gap-4" style="display:none">
 
                 <div class="flex flex-col my-2">
                   <?php echo $this->translate->_("Style for this object");?>:
-                  <textarea id="objPropertiesCSS" name="objPropertiesCSS" class="help textarea" title="<?php echo $this->translate->_("Style for this object");?>"></textarea>
-                  <a href="" id="applyStyle" class="navLinks noAjaxEvent btn btn-secondary btn-sm md:btn-xs mb-2 help" title="<?php echo $this->translate->_("Click to apply this style to the selected object");?>">Apply</a>
+                  <textarea id="objPropertiesCSS" name="objPropertiesCSS" class="help textarea w-full" title="<?php echo $this->translate->_("Style for this object");?>"></textarea>
+                  <a href="" id="applyStyle" class="navLinks noAjaxEvent btn btn-secondary btn-sm mb-2 help" title="<?php echo $this->translate->_("Click to apply this style to the selected object");?>">Apply</a>
                 </div>
                 <!-- tinyMCE should be replaced -->
                 <div class="flex flex-col h-52 my-2 hidden">
@@ -160,14 +160,14 @@
                   <div id="descKeyDiv" class="">
                     <div class="flex flex-col my-2">
                       DESCRIPTION:
-                      <textarea id="pageDescription" name="pageDescription" class="help textarea h-40" title="<?php echo $this->translate->_("Here write the description for your page, which will make it Search Engine Optimized...");?>">
+                      <textarea id="pageDescription" name="pageDescription" class="help textarea h-40 w-full" title="<?php echo $this->translate->_("Here write the description for your page, which will make it Search Engine Optimized...");?>">
                         <?php echo $this->description;?>
                       </textarea>
                     </div>
 
                     <div class="flex flex-col my-2">
                       KEYWORDS:
-                      <textarea id="pageKeywords" name="pageKeywords"class="help textarea" title="<?php echo $this->translate->_("Here write the keywords for your page, which will make it Search Engine Optimized...");?>">
+                      <textarea id="pageKeywords" name="pageKeywords"class="help textarea w-full" title="<?php echo $this->translate->_("Here write the keywords for your page, which will make it Search Engine Optimized...");?>">
                         <?php echo $this->keywords;?>
                       </textarea>
                     </div>
@@ -189,21 +189,21 @@
             <div class="grid place-items-strech gap-4" >
               <div class="grid gap-y-2 content-start">
                 <div class="grid mt-1 gap-y-2 h-24">
-                  <div class="creatorDiv grid grid-cols-2 items-strech"><span class="cl"><?php echo $this->translate->_("ID Assistant");?></span><span><input id="tttoggle" type="checkbox"  class="checkbox-sm checkbox float-right" checked="false" /></span></div>
-                  <div class="creatorDiv grid grid-cols-2 items-strech"><span class="cl"><?php echo $this->translate->_("Show hidden");?>:</span><span><input id="showFooterCheck" name="showFooterCheck" type="checkbox" class="checkbox-sm checkbox float-right" /></span></div>
+                  <div class="creatorDiv grid grid-cols-2 items-strech"><span class="cl"><?php echo $this->translate->_("ID Assistant");?></span><span><input id="tttoggle" type="checkbox"  class="checkbox-sm bg-secondary checkbox float-right" checked="false" /></span></div>
+                  <div class="creatorDiv grid grid-cols-2 items-strech"><span class="cl"><?php echo $this->translate->_("Show hidden");?>:</span><span><input id="showFooterCheck" name="showFooterCheck" type="checkbox" class="checkbox-sm bg-secondary checkbox float-right" /></span></div>
                   <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("Shadow");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent currentTitle" id="aParamShadow" title="<?php echo $this->translate->_("Click to set shadow params");?>">
-                    <svg class="w-4 h-4 fill-current bg-secondary text-white rounded-full inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <svg class="w-4 h-4 fill-current text-base-content rounded-full inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M16.5 6a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v7.5a3 3 0 0 0 3 3v-6A4.5 4.5 0 0 1 10.5 6h6Z" />
                       <path d="M18 7.5a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-7.5a3 3 0 0 1-3-3v-7.5a3 3 0 0 1 3-3H18Z" />
                     </svg>
                     <div class="hidden">Shadow</div>
-                  </a><input id="shadowCheck" type="checkbox" class="checkbox-sm checkbox float-right"  /></span></div>
+                  </a><input id="shadowCheck" type="checkbox" class="checkbox-sm bg-secondary checkbox float-right"  /></span></div>
                   <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("Corner");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent currentTitle content-center h-6 inline-block" id="aParamCorner" title="<?php echo $this->translate->_("Click to set corner params");?>">
-                    <svg class="w-4 h-4 fill-current text-white rounded" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" >
+                    <svg class="w-4 h-4 fill-current text-base-content rounded" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" >
                       <path d="M6 3a3 3 0 0 0-3 3v1.5a.75.75 0 0 0 1.5 0V6A1.5 1.5 0 0 1 6 4.5h1.5a.75.75 0 0 0 0-1.5H6ZM16.5 3a.75.75 0 0 0 0 1.5H18A1.5 1.5 0 0 1 19.5 6v1.5a.75.75 0 0 0 1.5 0V6a3 3 0 0 0-3-3h-1.5ZM12 8.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5ZM4.5 16.5a.75.75 0 0 0-1.5 0V18a3 3 0 0 0 3 3h1.5a.75.75 0 0 0 0-1.5H6A1.5 1.5 0 0 1 4.5 18v-1.5ZM21 16.5a.75.75 0 0 0-1.5 0V18a1.5 1.5 0 0 1-1.5 1.5h-1.5a.75.75 0 0 0 0 1.5H18a3 3 0 0 0 3-3v-1.5Z" />
                     </svg>
                     <div class="hidden">Corner</div>
-                  </a><input id="cornerCheck" type="checkbox" class="checkbox-sm checkbox float-right"  /></span></div>
+                  </a><input id="cornerCheck" type="checkbox" class="checkbox-sm bg-secondary checkbox float-right"  /></span></div>
                 </div>
 
                 <div id="fontCont" style="display:none;">
@@ -257,34 +257,34 @@
 
                 <span class="w-full col-span-4 justify-self-start mt-2">
                   <div class="grid grid-cols-6 justify-items-center">
-                    <div id="toggleFontWeight" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-white" title="Click to toggle font-weight">
+                    <div id="toggleFontWeight" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-base-content" title="Click to toggle font-weight">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
                         <path fill-rule="evenodd" d="M5.246 3.744a.75.75 0 0 1 .75-.75h7.125a4.875 4.875 0 0 1 3.346 8.422 5.25 5.25 0 0 1-2.97 9.58h-7.5a.75.75 0 0 1-.75-.75V3.744Zm7.125 6.75a2.625 2.625 0 0 0 0-5.25H8.246v5.25h4.125Zm-4.125 2.251v6h4.5a3 3 0 0 0 0-6h-4.5Z" clip-rule="evenodd" />
                       </svg>
                     </div>
 
-                    <div id="toggleFontStyle" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-white" title="Click to toggle font-style">
+                    <div id="toggleFontStyle" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-base-content" title="Click to toggle font-style">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
                         <path fill-rule="evenodd" d="M10.497 3.744a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-3.275l-5.357 15.002h2.632a.75.75 0 1 1 0 1.5h-7.5a.75.75 0 1 1 0-1.5h3.275l5.357-15.002h-2.632a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
                       </svg>
                     </div>
 
-                    <div id="toggleUnderline" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-white" title="Click to toggle underline">
+                    <div id="toggleUnderline" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-base-content" title="Click to toggle underline">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
                         <path fill-rule="evenodd" d="M5.995 2.994a.75.75 0 0 1 .75.75v7.5a5.25 5.25 0 1 0 10.5 0v-7.5a.75.75 0 0 1 1.5 0v7.5a6.75 6.75 0 1 1-13.5 0v-7.5a.75.75 0 0 1 .75-.75Zm-3 17.252a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5h-16.5a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
                       </svg>
                     </div>
-                    <div id="toggleTextCenter" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-white" title="Click to toggle underline">
+                    <div id="toggleTextCenter" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-base-content" title="Click to toggle underline">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
                         <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
                       </svg>
                     </div>
-                    <div id="toggleTextLeft" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-white" title="Click to toggle underline">
+                    <div id="toggleTextLeft" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-base-content" title="Click to toggle underline">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
                         <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75H12a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
                       </svg>
                     </div>
-                    <div id="toggleTextRight" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-white" title="Click to toggle underline">
+                    <div id="toggleTextRight" class="help cursor-pointer btn btn-sm btn-ghost btn-circle text-base-content" title="Click to toggle underline">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
                         <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm8.25 5.25a.75.75 0 0 1 .75-.75h8.25a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
                       </svg>
@@ -301,29 +301,29 @@
               <div class="grid gap-2">
                 <a href="" id="newPage" class="navLinks a_new" style="display:none" title="<?php echo $this->translate->_("Click to create new page");?>"><?php echo $this->translate->_("New Page");?></a>
                 <a href="<?php echo $this->host;?>creator/manage-all-pages?height=450&width=900" id="manageAllPages" class="thickbox btn btn-secondary btn-sm mb-4" title="<?php echo $this->translate->_("Manage All Pages");?>"><b><?php echo $this->translate->_("Manage All Pages");?></b></a>
-                <a href="" id="openPage" class="navLinks a_open btn btn-secondary btn-sm md:btn-xs mb-2" title="<?php echo $this->translate->_("Click to open existing page");?>"><?php echo $this->translate->_("Open Page");?></a>
-                <a id="previewButton" class="a_preview help btn btn-secondary btn-sm md:btn-xs mb-2" target="_blank" href="" title="<?php echo $this->translate->_("Click this to go to the page and see how it looks!");?>"><?php echo $this->translate->_("View Page");?></a>
+                <a href="" id="openPage" class="navLinks a_open btn btn-secondary btn-sm mb-2" title="<?php echo $this->translate->_("Click to open existing page");?>"><?php echo $this->translate->_("Open Page");?></a>
+                <a id="previewButton" class="a_preview help btn btn-secondary btn-sm mb-2" target="_blank" href="" title="<?php echo $this->translate->_("Click this to go to the page and see how it looks!");?>"><?php echo $this->translate->_("View Page");?></a>
                 <div class="page-title"><?php echo $this->translate->_("Page Title");?>:<input id="pageTitle" class="input input-sm w-full" type="text" name="pageTitle" value="Page <?php echo $this->pageId;?>" /></div>
-                <a href="#" class="navLinks a_redraw noAjaxEvent btn btn-secondary btn-sm md:btn-xs mb-2" id="redraw" style="display:none;"><?php echo $this->translate->_("Redraw");?></a>
+                <a href="#" class="navLinks a_redraw noAjaxEvent btn btn-secondary btn-sm mb-2" id="redraw" style="display:none;"><?php echo $this->translate->_("Redraw");?></a>
                 <div id="pageEditing" class="grid gap-2">
-                  <a href="" id="saveThisPage" class="navLinks a_save btn btn-secondary btn-sm md:btn-xs mb-2" title="<?php echo $this->translate->_("Click to save work on this page");?>"><?php echo $this->translate->_("Save Page");?></a>
-                  <a href="" id="savePageNew" class="navLinks a_save_new btn btn-secondary btn-sm md:btn-xs mb-2" title="<?php echo $this->translate->_("Click to save this work as a new page");?>"><?php echo $this->translate->_("Save As New Page");?></a>
+                  <a href="" id="saveThisPage" class="navLinks a_save btn btn-secondary btn-sm mb-2" title="<?php echo $this->translate->_("Click to save work on this page");?>"><?php echo $this->translate->_("Save Page");?></a>
+                  <a href="" id="savePageNew" class="navLinks a_save_new btn btn-secondary btn-sm mb-2" title="<?php echo $this->translate->_("Click to save this work as a new page");?>"><?php echo $this->translate->_("Save As New Page");?></a>
 
                   <div class="w-full">
 
-                    <div class="creatorDiv inline-flex gap-2 items-center w-full"><input id="allLangCheck" type="checkbox" class="checkbox-sm checkbox" /><?php echo $this->translate->_("Apply to all languages");?></div>
+                    <div class="creatorDiv inline-flex gap-2 items-center w-full"><input id="allLangCheck" type="checkbox" class="checkbox-sm bg-secondary checkbox" /><?php echo $this->translate->_("Apply to all languages");?></div>
 
-                    <div id="restrictiveDiv" class="inline-flex gap-2 items-center w-full"><input id="restrictiveCB" type="checkbox" class="checkbox-sm checkbox"  /><?php echo $this->translate->_("Restrictive");?>
-                    <a href="" style="display:none" id="openPagePermisions" class="navLinks a_access btn btn-xs btn-secondary" title="<?php echo $this->translate->_("Click to set permissions for this page");?>"><?php echo $this->translate->_("Permissions");?></a>
+                    <div id="restrictiveDiv" class="inline-flex gap-2 items-center w-full"><input id="restrictiveCB" type="checkbox" class="checkbox-sm bg-secondary checkbox"  /><?php echo $this->translate->_("Restrictive");?>
+                    <a href="" style="display:none" id="openPagePermisions" class="navLinks a_access btn btn-sm btn-secondary" title="<?php echo $this->translate->_("Click to set permissions for this page");?>"><?php echo $this->translate->_("Permissions");?></a>
                     <div id="allowedRolesDiv" class="w-full p-2"></div>
                   </div>
 
                   <div id="boundDiv" class="inline-flex gap-2 items-center w-full">
-                    <input id="boundCB" type="checkbox" checked="checked" class="checkbox-sm checkbox" /><?php echo $this->translate->_("Relative to Content Area");?>
+                    <input id="boundCB" type="checkbox" checked="checked" class="checkbox-sm bg-secondary checkbox" /><?php echo $this->translate->_("Relative to Content Area");?>
                   </div>
 
                 </div>
-                <a href="" id="deletePage" class="navLinks a_delete btn btn-error btn-sm mt-2 text-content-secondary p-2 max-h-2" title="<?php echo $this->translate->_("Click to delete this page");?>"><?php echo $this->translate->_("Delete This Page");?></a>
+                <a href="" id="deletePage" class="navLinks a_delete btn btn-error btn-sm mt-2 p-2" title="<?php echo $this->translate->_("Click to delete this page");?>"><?php echo $this->translate->_("Delete This Page");?></a>
 
                 <div style="display:none;" class="font-black" ><?php echo $this->translate->_("Template ID");?>:</div> <div id="templateID" style="display:none;"><?php echo $this->templateId;?></div>
                 
@@ -345,15 +345,15 @@
                     <input id="templateTitle" type="text" name="templateTitle" value="<?php echo $this->templateName;?>" class="input input-bordered input-sm w-full" />
                   </div>
 
-                  <a href="" id="applyTemplate" class="navLinks a_edit btn btn-secondary btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to edit existing template");?>"><?php echo $this->translate->_("Edit template");?></a>
-                  <a href="" id="saveThisTemplate" class="navLinks a_save btn btn-secondary btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to save work on this template");?>"><?php echo $this->translate->_("Save Template");?></a>
-                  <a href="" id="saveAsTemplate" class="navLinks a_save_new btn btn-secondary btn-sm md:btn-xs"  title="<?php echo $this->translate->_("Click to save this work as template");?>"><?php echo $this->translate->_("Save As New Template");?></a>
-                  <div class="creatorDiv inline-flex gap-2 items-center"><input id="allLangCheckTemplate" class="checkbox-sm checkbox" type="checkbox" /><?php echo $this->translate->_("Apply to all languages");?></div>
-                  <div id="DefaultTemplateChangerDiv" class="inline-flex gap-2 items-center"><input id="templateDefaultCB" class="checkbox-sm checkbox" type="checkbox" name="templateDefaultCB" /><?php echo $this->translate->_("Default Template");?></div>
+                  <a href="" id="applyTemplate" class="navLinks a_edit btn btn-secondary btn-sm" title="<?php echo $this->translate->_("Click to edit existing template");?>"><?php echo $this->translate->_("Edit template");?></a>
+                  <a href="" id="saveThisTemplate" class="navLinks a_save btn btn-secondary btn-sm" title="<?php echo $this->translate->_("Click to save work on this template");?>"><?php echo $this->translate->_("Save Template");?></a>
+                  <a href="" id="saveAsTemplate" class="navLinks a_save_new btn btn-secondary btn-sm"  title="<?php echo $this->translate->_("Click to save this work as template");?>"><?php echo $this->translate->_("Save As New Template");?></a>
+                  <div class="creatorDiv inline-flex gap-2 items-center"><input id="allLangCheckTemplate" class="checkbox-sm bg-secondary checkbox" type="checkbox" /><?php echo $this->translate->_("Apply to all languages");?></div>
+                  <div id="DefaultTemplateChangerDiv" class="inline-flex gap-2 items-center"><input id="templateDefaultCB" class="checkbox-sm bg-secondary checkbox" type="checkbox" name="templateDefaultCB" /><?php echo $this->translate->_("Default Template");?></div>
 
-                  <a href="" id="exportTemplate" class="navLinks a_edit btn btn-secondary btn-sm md:btn-xs btn-disabled" title="<?php echo $this->translate->_("Click to export this template for use on another installation.");?>"><?php echo $this->translate->_("Export Template");?></a>
-                  <a href="" id="installTemplate" class="navLinks a_save btn btn-secondary btn-sm md:btn-xs btn-disabled" title="<?php echo $this->translate->_("Click to install exported template");?>"><?php echo $this->translate->_("Install Template");?></a>
-                  <a href="" id="deleteTemplate" class="navLinks a_delete btn btn-sm btn-secondary btn-error" title="<?php echo $this->translate->_("Click to delete this template");?>"><?php echo $this->translate->_("Delete This Template");?></a>
+                  <a href="" id="exportTemplate" class="navLinks a_edit btn btn-secondary btn-sm btn-disabled" title="<?php echo $this->translate->_("Click to export this template for use on another installation.");?>"><?php echo $this->translate->_("Export Template");?></a>
+                  <a href="" id="installTemplate" class="navLinks a_save btn btn-secondary btn-sm btn-disabled" title="<?php echo $this->translate->_("Click to install exported template");?>"><?php echo $this->translate->_("Install Template");?></a>
+                  <a href="" id="deleteTemplate" class="navLinks a_delete btn btn-sm btn-error" title="<?php echo $this->translate->_("Click to delete this template");?>"><?php echo $this->translate->_("Delete This Template");?></a>
                 </div>
               </div>
 
@@ -372,9 +372,9 @@
                 </div>
                 BodyBg:<input id="template_bodyBg" name="template_bodyBg" type="text" value="" class="input input-sm w-full mb-2" />
 
-                <a id="emptyCacheButton" class="navLinks a_emptyCache help btn btn-secondary btn-sm md:btn-xs mb-2" href="" title="<?php echo $this->translate->_("Click this to empty the cache if you have made changes that require cache to be cleaned!");?>"><?php echo $this->translate->_("Empty Cache");?> </a>
+                <a id="emptyCacheButton" class="navLinks a_emptyCache help btn btn-secondary btn-sm mb-2" href="" title="<?php echo $this->translate->_("Click this to empty the cache if you have made changes that require cache to be cleaned!");?>"><?php echo $this->translate->_("Empty Cache");?> </a>
 
-                <!--<a id="backupSiteButton" class="navLinks a_backup help btn btn-secondary btn-sm md:btn-xs mb-2" href="" title="<?php echo $this->translate->_("Click here to have backup of the site in a folder that is created for that purpose.If system command is disabled then it must be done through phpMyAdmin...");?>"><?php echo $this->translate->_("Backup Site");?> </a> HIDE UNTIL FIXED -->
+                <!--<a id="backupSiteButton" class="navLinks a_backup help btn btn-secondary btn-sm mb-2" href="" title="<?php echo $this->translate->_("Click here to have backup of the site in a folder that is created for that purpose.If system command is disabled then it must be done through phpMyAdmin...");?>"><?php echo $this->translate->_("Backup Site");?> </a> HIDE UNTIL FIXED -->
 
                 <!--<a id="generateCacheButton" class="navLinks a_generateCache" style="display:block" href="" >Generate Cache </a>-->
               </div>
@@ -392,7 +392,7 @@
           <div id="menuShow" class="grid gap-2 content-start">
 
             <div class="inline-flex items-center gap-2">
-              <?php echo $this->translate->_("Put in this object");?> <input id="putInThis" class="checkbox-sm checkbox" type="checkbox" />
+              <?php echo $this->translate->_("Put in this object");?> <input id="putInThis" class="checkbox-sm bg-secondary checkbox" type="checkbox" />
             </div>
 
             <div class="grid items-center gap-2">
@@ -411,9 +411,9 @@
               <div class="flex gap-2 mt-2"><span><?php echo $this->translate->_("Selected menu ID:");?></span><span id="chosen-menu-id"></span></div>
             </div>
             <div id="addMenuLinkDiv" class="grid gap-2">
-              <a id="addMenuLink" href="menu/add-menu" class="navLinks a_add btn btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to create new menu");?>"><?php echo $this->translate->_("Add a menu");?></a>
-              <a id="delMenuLink" href="menu/del-menu" class="navLinks a_delete btn btn-sm md:btn-xs btn-error" title="<?php echo $this->translate->_("Click to delete menu");?>"><?php echo $this->translate->_("Delete menu");?></a>
-              <a id="addMenuItemLink" href="menu/add-menu-item" class="navLinks a_add btn btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to add new menu item to this menu");?>"><?php echo $this->translate->_("Add a menu item");?></a>
+              <a id="addMenuLink" href="menu/add-menu" class="navLinks a_add btn btn-sm" title="<?php echo $this->translate->_("Click to create new menu");?>"><?php echo $this->translate->_("Add a menu");?></a>
+              <a id="delMenuLink" href="menu/del-menu" class="navLinks a_delete btn btn-sm btn-error" title="<?php echo $this->translate->_("Click to delete menu");?>"><?php echo $this->translate->_("Delete menu");?></a>
+              <a id="addMenuItemLink" href="menu/add-menu-item" class="navLinks a_add btn btn-sm" title="<?php echo $this->translate->_("Click to add new menu item to this menu");?>"><?php echo $this->translate->_("Add a menu item");?></a>
 
             </div>
 
@@ -421,7 +421,7 @@
           <div id="menuSelected" class="grid gap-2 content-start bg-neutral-content rounded min-h-20"></div>
           <div id="menuSelectedForm" class="grid gap-2 content-start">
             <a id="editMenuItem" style="display:none">Edit</a>
-            <a id="deleteMenuItem" class="a_delete btn btn-sm md:btn-xs btn-error" style="display:none" title="<?php echo $this->translate->_("Click to delete this menu item");?>"><?php echo $this->translate->_("Delete this item");?> </a>
+            <a id="deleteMenuItem" class="a_delete btn btn-sm btn-error" style="display:none" title="<?php echo $this->translate->_("Click to delete this menu item");?>"><?php echo $this->translate->_("Delete this item");?> </a>
             <div id="menuItemForm"></div>
           </div>
 
@@ -435,7 +435,7 @@
         <div id="categoryFormContainer" class="grid gap-4" >
           <div class="grid gap-2 content-start">
             <div>
-              <?php echo $this->translate->_("Put in this object");?> <input id="putCategoryInThis" class="checkbox-sm checkbox" type="checkbox" />
+              <?php echo $this->translate->_("Put in this object");?> <input id="putCategoryInThis" class="checkbox-sm bg-secondary checkbox" type="checkbox" />
             </div>
 
             <div id="categoryShow">
@@ -443,10 +443,10 @@
             </div>
 
             <div id="addCategoryLinkDiv" class="grid gap-2">
-              <a id="addCategoryLink" href="category/add-category" class="navLinks a_add btn btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to create new category");?>"><?php echo $this->translate->_("Add a category");?></a>
-              <a id="delCategoryLink" href="category/del-category" class="navLinks a_delete btn btn-sm md:btn-xs btn-error" title="<?php echo $this->translate->_("Click to delete selected category");?>"><?php echo $this->translate->_("Delete category");?></a>
-              <a id="addCategoryItemLink" href="category/add-category-item" class="navLinks a_add btn btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to add new category item to this category");?>"><?php echo $this->translate->_("Add a category item");?></a>
-              <a id="delCategoryItemLink" href="category/del-category-item" class="navLinks a_delete btn btn-sm md:btn-xs btn-error" title="<?php echo $this->translate->_("Click to remove this category item");?>"><?php echo $this->translate->_("Remove category item");?></a>
+              <a id="addCategoryLink" href="category/add-category" class="navLinks a_add btn btn-sm" title="<?php echo $this->translate->_("Click to create new category");?>"><?php echo $this->translate->_("Add a category");?></a>
+              <a id="delCategoryLink" href="category/del-category" class="navLinks a_delete btn btn-sm btn-error" title="<?php echo $this->translate->_("Click to delete selected category");?>"><?php echo $this->translate->_("Delete category");?></a>
+              <a id="addCategoryItemLink" href="category/add-category-item" class="navLinks a_add btn btn-sm" title="<?php echo $this->translate->_("Click to add new category item to this category");?>"><?php echo $this->translate->_("Add a category item");?></a>
+              <a id="delCategoryItemLink" href="category/del-category-item" class="navLinks a_delete btn btn-sm btn-error" title="<?php echo $this->translate->_("Click to remove this category item");?>"><?php echo $this->translate->_("Remove category item");?></a>
             </div>
 
           </div>
@@ -463,7 +463,7 @@
                   <dt><label for="catItems" class="optional"><?php echo $this->translate->_("Category Name Translation");?>:</label></dt>
                   <dd>
                     <input type="text" value="" name="cat_name_lng" class="input input-sm w-full"/>
-                    <input type="submit" value="<?php echo $this->translate->_("Save");?>" class="btn btn-sm md:btn-xs mt-2" />
+                    <input type="submit" value="<?php echo $this->translate->_("Save");?>" class="btn btn-sm mt-2" />
                   </dd></dl>
                 </form>
               </div>
@@ -485,7 +485,7 @@
 
         <!--Modules-->
         <div id="fragment-5">
-          <div id="fragment-5wrapper" class="cssjswrapp2 bg-primary">
+          <div id="fragment-5wrapper" class="cssjswrapp2 bg-base-100">
 
             <div id="modulesFormContainer" class="flex flex-col gap-2">
               <div class="w-8">
@@ -497,13 +497,13 @@
               </div>
 
               <div id="modulesShow">
-                <div style="display:none;"><?php echo $this->translate->_("Put in this object");?> <input id="putModulesInThis" class="checkbox-sm checkbox" type="checkbox" /></div>
+                <div style="display:none;"><?php echo $this->translate->_("Put in this object");?> <input id="putModulesInThis" class="checkbox-sm bg-secondary checkbox" type="checkbox" /></div>
 
                 <?php echo $this->formChooseModules;?>
               </div>
 
 
-              <div id="modulesSelected">
+              <div id="modulesSelected" class="text-secondary-content!">
               </div>
 
             <!--<div id="modulesSelectedForm" style="width:250px;float:right;">
@@ -519,8 +519,8 @@
         <!--<a id="installModulesLink" href="modules/install-module" class="navLinks a_add" title="<?php echo $this->translate->_("Click to install new module");?>">Install module</a>
         <a  id="delModulesLink" href="modules/del-module" class="navLinks a_delete" title="<?php echo $this->translate->_("Click to delete module");?>">Delete module</a>
         |-->
-        <a id="editModulesLink" href="modules/edit-module/id/" class="navLinks help a_edit btn btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to edit this module settings");?>"><?php echo $this->translate->_("Edit module");?></a>
-        <a id="enableModulesLink" href="modules/enable-all-modules" class="navLinks help a_add btn btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to enable all available modules.");?>"><?php echo $this->translate->_("Enable all modules");?></a>
+        <a id="editModulesLink" href="modules/edit-module/id/" class="navLinks help a_edit btn btn-sm" title="<?php echo $this->translate->_("Click to edit this module settings");?>"><?php echo $this->translate->_("Edit module");?></a>
+        <a id="enableModulesLink" href="modules/enable-all-modules" class="navLinks help a_add btn btn-sm" title="<?php echo $this->translate->_("Click to enable all available modules.");?>"><?php echo $this->translate->_("Enable all modules");?></a>
 
       </div>
 
@@ -537,9 +537,9 @@
           <?php echo $this->imagesFoldersForm;?>
         </div>
         <div id="addFolderLinkDiv" class="grid gap-2">
-          <a id="addFolderLink" href="images/add-folder" class="navLinks a_add btn btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to create new folder for the images");?>"><?php echo $this->translate->_("Add a folder");?></a>
-          <a id="delFolderLink" href="images/del-folder" class="navLinks a_delete btn btn-sm md:btn-xs btn-error" title="<?php echo $this->translate->_("Click to delete folder");?>"><?php echo $this->translate->_("Delete folder");?></a>
-          <a id="addImageLink" href="images/add-image" class="navLinks a_add btn btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to add new image to this folder");?>"><?php echo $this->translate->_("Add images");?></a>
+          <a id="addFolderLink" href="images/add-folder" class="navLinks a_add btn btn-sm" title="<?php echo $this->translate->_("Click to create new folder for the images");?>"><?php echo $this->translate->_("Add a folder");?></a>
+          <a id="delFolderLink" href="images/del-folder" class="navLinks a_delete btn btn-sm btn-error" title="<?php echo $this->translate->_("Click to delete folder");?>"><?php echo $this->translate->_("Delete folder");?></a>
+          <a id="addImageLink" href="images/add-image" class="navLinks a_add btn btn-sm" title="<?php echo $this->translate->_("Click to add new image to this folder");?>"><?php echo $this->translate->_("Add images");?></a>
         </div>
       </div>
       <div id="imagesShow" class="grid gap-2 content-start">
@@ -548,25 +548,25 @@
 
       <div id="image-actions-wrapper" class="grid gap-2 content-start" style="display:none">
 
-        <a id="insertImage" class="a_add marginBottom5 btn btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to insert this image");?>"><?php echo $this->translate->_("Insert this image");?> </a>
+        <a id="insertImage" class="a_add marginBottom5 btn btn-sm" title="<?php echo $this->translate->_("Click to insert this image");?>"><?php echo $this->translate->_("Insert this image");?> </a>
 
-        <a id="replaceImage" class="a_add marginBottom5 btn btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to replace currently selected image with this image");?>"><?php echo $this->translate->_("Replace selected image");?> </a>
+        <a id="replaceImage" class="a_add marginBottom5 btn btn-sm" title="<?php echo $this->translate->_("Click to replace currently selected image with this image");?>"><?php echo $this->translate->_("Replace selected image");?> </a>
 
         <label for="bgSelect"><?php echo $this->translate->_("Set Background on:" );?></label>
         <select id="bgSelect" class="help select select-sm md:select-xs w-full" title="<?php echo $this->translate->_("For this to work, set appropriate classes to the objects, lowercase (HEADER = header) except for the BODY, body is always there." );?>"><option>BODY</option><option>HEADER</option><option>SHEET</option><option>LEFTCOLUMN</option><option>RIGHTCOLUMN</option><option>FOOTER</option><option selected="selected">SELECTED-OBJECT</option></select>
         
         <div class="inline-flex gap-2 items-center">
-          <input type="checkbox" class="checkbox-sm checkbox" name="NR" value="repeat" id="NR" /> no-repeat
-          <input type="checkbox" class="checkbox-sm checkbox" name="fixedBg" value="fixed"  id="fixedBg" /> Fixed
+          <input type="checkbox" class="checkbox-sm bg-secondary checkbox" name="NR" value="repeat" id="NR" /> no-repeat
+          <input type="checkbox" class="checkbox-sm bg-secondary checkbox" name="fixedBg" value="fixed"  id="fixedBg" /> Fixed
         </div>
 
         <!--Image path:-->
         <div id="imagePathShow"></div>
         <div id="imageDetails"></div>
 
-        <a id="setBodyBgImage" class="a_add marginBottom5 btn btn-sm md:btn-xs" title="<?php echo $this->translate->_("Click to set background");?>"><?php echo $this->translate->_("Set background");?> </a>
+        <a id="setBodyBgImage" class="a_add marginBottom5 btn btn-sm" title="<?php echo $this->translate->_("Click to set background");?>"><?php echo $this->translate->_("Set background");?> </a>
 
-        <a id="deleteImage" class="a_delete marginBottom5 btn btn-sm md:btn-xs btn-error" title="<?php echo $this->translate->_("Click to delete this image");?>"><?php echo $this->translate->_("Delete this image");?> </a>
+        <a id="deleteImage" class="a_delete marginBottom5 btn btn-sm btn-error" title="<?php echo $this->translate->_("Click to delete this image");?>"><?php echo $this->translate->_("Delete this image");?> </a>
 
       </div>
     </div>
@@ -575,7 +575,7 @@
 
   <!--CSS-->
   <div id="fragment-7">
-    <div id="fragment-7wrapper" class="cssjswrapp bg-primary">
+    <div id="fragment-7wrapper" class="cssjswrapp bg-base-100">
       <div class="grid gap-2">
         <div class="w-8">
           <a href="#" class="help fsbutton w-8" id="fsbutton" title="<?php echo $this->translate->_("Click to toggle this area to fullscreen (in/out)");?>">
@@ -589,7 +589,7 @@
           <select id="objListForCss" class="select select-sm w-full" size="1"></select>
         <!--<?php echo $this->translate->_("Choose class");?>:
           <select id="eventListForCss" size="1"></select>-->
-          <a id="addCssCodeA" class="navLinks a_add noAjaxEvent btn btn-sm md:btn-xs mt-2"><?php echo $this->translate->_("Add Code");?></a>
+          <a id="addCssCodeA" class="navLinks a_add noAjaxEvent btn btn-sm mt-2"><?php echo $this->translate->_("Add Code");?></a>
 
         </div>
         <div class="grid">
@@ -597,7 +597,7 @@
             <?php echo $this->css;?>
           </textarea>
           <div id="pageCSS-ace" class="w-full h-full min-h-96"><?php echo $this->css;?></div>
-          <a id="saveCssCodeA" class="navLinks a_save btn btn-sm mt-4 btn-sm md:btn-xs md:mt-2"><?php echo $this->translate->_("Save This Code");?></a>
+          <a id="saveCssCodeA" class="navLinks a_save btn btn-sm mt-4 btn-sm md:mt-2"><?php echo $this->translate->_("Save This Code");?></a>
         </div>
       </div>
       </div>
@@ -606,7 +606,7 @@
 
     <!--JS-->
     <div id="fragment-8">
-      <div id="fragment-8wrapper" class="cssjswrapp bg-primary">
+      <div id="fragment-8wrapper" class="cssjswrapp bg-base-100">
         <div class="w-8">
           <a href="#" class="help fsbutton w-8" id="fsbutton2" title="<?php echo $this->translate->_("Click to toggle this area to fullscreen (in/out)");?>">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -628,7 +628,7 @@
               <option>mouseout</option>
             </select>
           </div>
-          <a id="addJsCodeA" class="navLinks a_add noAjaxEvent btn btn-sm md:btn-xs mt-2 mb-4"><?php echo $this->translate->_("Add Code");?></a>
+          <a id="addJsCodeA" class="navLinks a_add noAjaxEvent btn btn-sm mt-2 mb-4"><?php echo $this->translate->_("Add Code");?></a>
         </div>
 
         <div class="grid gap-2">
@@ -636,7 +636,7 @@
             <?php echo $this->js;?>
           </textarea>
           <div id="pageJS-ace" class="w-full min-h-96"><?php echo $this->js;?></div>
-          <a id="saveJsCodeA" class="navLinks a_save btn btn-sm md:btn-xs "><?php echo $this->translate->_("Save This Code");?></a>
+          <a id="saveJsCodeA" class="navLinks a_save btn btn-sm "><?php echo $this->translate->_("Save This Code");?></a>
         </div>
 
       </div>

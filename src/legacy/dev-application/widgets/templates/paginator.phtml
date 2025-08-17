@@ -24,9 +24,9 @@ $i=1;
     <div class="flex gap-2">
       <?php echo $this->translate("PAGE");?><span class="current"><?php echo $this->current;?></span>/<span class="total"><?php echo $this->pageCount;?></span>
     </div>
-    <div class="flex gap-2 bg-neutral-content  py-4 rounded">
+    <div class="flex gap-2 bg-secondary text-secondary-content  py-4 rounded">
       <!-- Previous page link -->
-      <a class="pagback arrows pag_a" href="<?php $this->host;?>creator/paginate-table/tid/<?php echo $this->params['tableId']; ?>/page/<?php echo $this->previous;?>"> <?php echo $this->translate('Back');?></a>
+      <a class="pagback arrows pag_a text-secondary-content!" href="<?php $this->host;?>creator/paginate-table/tid/<?php echo $this->params['tableId']; ?>/page/<?php echo $this->previous;?>"> <?php echo $this->translate('Back');?></a>
       <!-- Numbered page links -->
       <?php foreach ($this->pagesInRange as $page): ?>
         <?php echo '<!--' . $this->route . '-->';?>
@@ -41,7 +41,7 @@ $i=1;
       <?php endforeach; ?>
 
       <!-- Next page link -->
-      <a class="pagnext arrows pag_a" href="<?php $this->host;?>creator/paginate-table/tid/<?php echo $this->params['tableId']; ?>/page/<?php echo $this->next;?>" ><?php echo $this->translate('Next');?></a>
+      <a class="pagnext arrows pag_a text-secondary-content!" href="<?php $this->host;?>creator/paginate-table/tid/<?php echo $this->params['tableId']; ?>/page/<?php echo $this->next;?>" ><?php echo $this->translate('Next');?></a>
     </div>
   </div>
   <?php

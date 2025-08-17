@@ -19,29 +19,34 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="generator" content="NeT">
-  <title>Creator Login</title>
+  <title>IDE21 Creator Login</title>
   <link rel="shortcut icon" type="image/x-icon" href="/images/ide21logo.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+  <link href="/daisy/daisyui@5.css" rel="stylesheet" type="text/css" />
   <link href="/css/tailwind.output.css?rnd=<?php echo rand();?>" rel="stylesheet" type="text/css" />
-  <script src="/daisy/daisyui.tailwind.3.4.3.js"></script>
+  <link href="/daisy/daisyui@5.themes.css" rel="stylesheet" type="text/css" />
+  <script src="/daisy/tailwind.browser@4.js"></script>
+
 </head>
 <body >
   <div class="grid grid-cols-1 place-items-center h-dvh">
     
-    <div class="place-self-strech self-center bg-secondary p-10 md:m-8 min-w-64 w-full h-dvh md:w-auto md:h-auto content-center md:rounded-box text-primary-content drop-shadow-xl">
+    <div class="place-self-strech self-center bg-primary p-10 md:m-8 min-w-64 w-full h-dvh md:w-auto md:h-auto content-center md:rounded-box text-primary-content drop-shadow-xl">
       
       <div class="grid place-items-center place-self-strech mb-10 self-end min-w-64">
-        <div class="size-24">
+        <div class="size-24 text-center">
           <img src="/images/ide21logo.svg" height="100%" />
+          <p><?php echo $this->ide21Version; ?></p>
         </div>
       </div><!-- logo container -->
 
-      <div class="dropdown dropdown-hover self-center w-full">
+      <div class="dropdown dropdown-hover-disabled self-center w-full">
         <div tabindex="0" role="button" class="btn btn-sm w-full">
           Admin panel theme
           <svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg>
         </div>
-        <ul tabindex="0" class="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-full text-accent-content bottom-0">
+        <ul tabindex="0" class="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-full bg-secondary text-secondary-content bottom-8">
           <?php echo $this->daisyuiThemes; ?>
         </ul>
       </div>
@@ -69,8 +74,8 @@
       const currentSelectElement = $(v);
       const currentSelectElementId = $(v).attr('id');
       $(v).addClass('hidden');
-      const newSelectComponent = '<div id="new_' + $(v).attr('id') + '" class="ide21-select dropdown dropdown-hover self-center w-full"><div tabindex="0" role="button" class="btn btn-sm w-full"><span id="new-select-label_' + currentSelectElementId + '">Admin panel language</span><svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg></div></div>'
-      let newSelectOptions = '<ul tabindex="0" class="ide21-select-ul dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-full text-accent-content bottom-0">';
+      const newSelectComponent = '<div id="new_' + $(v).attr('id') + '" class="ide21-select dropdown dropdown-hover-disabled self-center w-full"><div tabindex="0" role="button" class="btn btn-sm w-full"><span id="new-select-label_' + currentSelectElementId + '">Admin panel language</span><svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg></div></div>'
+      let newSelectOptions = '<ul tabindex="0" class="ide21-select-ul dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-full bg-secondary text-secondary-content bottom-8">';
 
       $(v).children('option').each(function(k1,v1){
         newSelectOptions = newSelectOptions + '<li><input type="radio" name="theme-dropdown" class="select-language btn btn-sm btn-block btn-ghost justify-center" aria-label="' + $(v1).text()+ '" value="' + $(v1).val() + '"></li>';

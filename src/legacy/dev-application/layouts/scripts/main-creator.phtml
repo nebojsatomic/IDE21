@@ -33,19 +33,20 @@
   <link rel="stylesheet" href="/css/treeView/screen.css" type="text/css" />
   <!--lightBox-->
   <link rel="stylesheet" href="/css/lightbox/jquery.lightbox-0.5.css" type="text/css" />
-  <link rel="stylesheet" href="/css/lightbox/thickbox.css" type="text/css" media="screen" />
+  <!-- <link rel="stylesheet" href="/css/lightbox/thickbox.css" type="text/css" media="screen" /> -->
   <!--coloris-->
   <link rel="stylesheet" href="/coloris/coloris.min.css"/>
   <link rel="stylesheet" href="/css/default.css" type="text/css" /><!--CSS written in admin panel-->
   <link rel="stylesheet" href="/css/backend.css" type="text/css" /><!--CSS written for the admin panel-->
-  <link type="text/css" href="/css/jqUI/ui.all.css" rel="stylesheet" />
+  <!-- <link type="text/css" href="/css/jqUI/ui.all.css" rel="stylesheet" /> -->
   <link type="text/css" href="/css/defaultWidgets.css" rel="stylesheet" />
 
   <link rel="shortcut icon" type="image/x-icon" href="/images/ide21logo.svg">
 
-  <link href="/daisy/daisyui.full.min.css" rel="stylesheet" type="text/css" />
+  <link href="/daisy/daisyui@5.css" rel="stylesheet" type="text/css" />
   <link href="/css/tailwind.output.css?rnd=<?php echo rand();?>" rel="stylesheet" type="text/css" />
-  <script src="/daisy/daisyui.tailwind.3.4.3.js"></script>
+  <link href="/daisy/daisyui@5.themes.css" rel="stylesheet" type="text/css" />
+  <script src="/daisy/tailwind.browser@4.js"></script>
 
   <!-- native browser scrollbars are too thin on mobile -->
   <link rel="stylesheet" href="/simplebar/simplebar.css" />
@@ -89,7 +90,7 @@
       </svg>
     </a>
   </div>
-  <div data-theme="<?php echo $this->daisyAdminTheme; ?>" id="creator-header-navbar" class="navbar bg-neutral min-h-16 h-16 relative z-[999997] ease-in duration-200">
+  <div data-theme="<?php echo $this->daisyAdminTheme; ?>" id="creator-header-navbar" class="navbar bg-neutral min-h-16 h-16 relative z-[999997] ease-in duration-200 shadow-2xl">
     <div class="navbar-start flex gap-1 md:gap-2">
       <div id ="contPreview" class="hidden w-full h-auto absolute top-52 left-72 bg-white" style="z-index: 9999999;"></div><!-- z-index must be like this for now, since a lot of interaction with droppables relies on the order of elements, it should be rewritten to something more sensible, for all elements in the admin panel -->
       <div>
@@ -136,8 +137,8 @@
     <div class="navbar-end flex gap-2">
       <div id="p_t_common" class="noAjaxEvent grid grid-cols-2 item-strech items-center h-6 w-12 md:w-16 text-white md:px-2">
         <div class="col-span-2 grid-cols-2 grid justify-items-center gap-1">
-          <span><input id="pageDisplayer" class="noAjaxEvent help radio-sm" type="radio" name="p_g" value="pageEditing" checked="checked" title="<?php echo $this->translate->_("Page creating Mode");?>" /></span>
-          <span><input  id="templateDisplayer" class="noAjaxEvent help radio-sm" type="radio" name="p_g" value="templateEditing" title="<?php echo $this->translate->_("Template creating Mode");?>" /></span>
+          <span><input id="pageDisplayer" class="noAjaxEvent help radio" type="radio" name="p_g" value="pageEditing" checked="checked" title="<?php echo $this->translate->_("Page creating Mode");?>" /></span>
+          <span><input  id="templateDisplayer" class="noAjaxEvent help radio" type="radio" name="p_g" value="templateEditing" title="<?php echo $this->translate->_("Template creating Mode");?>" /></span>
         </div>
         <div id="p_t-label" class="text-white col-span-2 justify-items-between text-center">
           <span id="p_t-label-page" class="hidden"><?php echo $this->translate->_("Page");?></span>

@@ -2,34 +2,13 @@
 It must be replaced with it's tailwind counterpart.
 For now, on version 24.05, lets just leave it like this,
 and slowly remove the unnecessary parts bit by bit afterwards. */
-body {
-  /*min-width: 1280px;*/
-  font-size: 11px ;
-  font-family: Arial;
-}
-
-li {
-  font-size: 11px ;
-  font-family: Arial;
-}
-
-#rotate div.creatorDiv {
-  font-size: 12px;
-  font-family: Arial;
-}
 
 .draggable {
   cursor: pointer;
-  /*position: absolute;*/
   width: auto;
   height: auto;
   background: transparent;
   padding: 0px;
-}
-
-.draggable:hover {
-  /*cursor: move;*/
-  /*opacity: 0.95;*/
 }
 
 .container {
@@ -37,7 +16,6 @@ li {
 }
 
 .templateDiv {
-  /*position: absolute;*/
   z-index: 0;
 }
 
@@ -56,12 +34,8 @@ li {
 #rotate {
   min-height: 100vh;
   height:auto;
-  font: 12px normal Arial;
 }
 
-#rotate div {
-
-}
 
 #dialogDiv {
   display: none;
@@ -115,7 +89,6 @@ span.ui-button-text {
 
 #container-workspace {
   width: 100%;
-  /*height: auto;*/
   height: 100dvh;
   overflow-y: auto;
 }
@@ -284,41 +257,19 @@ span.ui-button-text {
   z-index: 999997;
 }
 
-#newItem:hover {
-
-}
-
-#logout:hover {
-
-}
-
-#delButton:hover {
-
-}
-
 #contPropertiesLeft {
   position: fixed;
   z-index: 199999; /* for now let it be the same as #contProperties */
 }
 
 #contProperties {
-  /*position: absolute;*/
   bottom: 0px;
   z-index: 199999;
   height: auto;
   min-height: 100px;
 }
 
-#contProperties * {
-  font-family: Arial;
-  /*font-size: 12px!important;*/
-}
-
 #contProperties #tabs-navigation {
-  /*padding: 0.25rem;*/
-  /*position: fixed;
-  bottom:0;*/
-  /*position: absolute;*/
   z-index: 9;
 }
 
@@ -329,28 +280,10 @@ span.ui-button-text {
   display: none;
 }
 
-#properties {
-
-}
-
 #footer {
   float: left;
   width: 100%;
   height: auto;
-}
-
-#tooltip {
-/*  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 999999;
-  height: auto;
-  min-height: 50px;
-  font-weight: bold;
-  font-size: 15px;
-  padding: 20px;
-  border: 1px solid #555555;
-  word-wrap: break-word;*/
 }
 
 #ajax-loader {
@@ -387,16 +320,6 @@ span.ui-button-text {
   padding-left: 25px;
   cursor: pointer;
   color: #555555;
-  font-family: Arial;
-  font-size: 12px;
-}
-
-.a_edit {
-
-}
-
-.a_add {
-
 }
 
 .a_generateCache {
@@ -405,46 +328,9 @@ span.ui-button-text {
   padding-left: 25px;
   cursor: pointer;
   color: #555555;
-  font-family: Arial;
-  font-size: 12px;
-}
-
-.a_access {
-
 }
 
 /*manage all pages style*/
-.a_published {
-
-}
-
-.a_unpublished {
-
-}
-
-.a_previewManage {
-
-}
-
-.a_deleteManage {
-
-}
-
-.a_chkAccess1 {
-
-}
-
-.a_chkAccess0 {
-
-}
-
-.deleteAll {
-
-}
-
-.a_clear {
-
-}
 
 .a_redraw {
   text-decoration: none;
@@ -456,47 +342,12 @@ span.ui-button-text {
   color: white
 }
 
-
-
-.a_refresh:hover {
-
-}
-
 .a_new:hover {
   text-decoration: none;
   background: transparent url(/images/interface/new.gif) no-repeat;
   padding-left: 25px;
   cursor: pointer;
   color: #3d4752 ;
-}
-
-.a_edit:hover {
-
-}
-
-.a_add:hover {
-
-}
-
-.a_generateCache:hover {
-
-}
-
-
-.a_access:hover {
-
-}
-
-.a_weightUp {
-
-}
-
-.a_weightDw {
-
-}
-
-.a_params {
-
 }
 
 .a_clear:hover {
@@ -522,23 +373,6 @@ span.ui-button-text {
 /*  border: 1px solid red;*/
 }
 
-.inactiveObject {
-/*  opacity: 0.2;
-  filter: alpha(opacity=20)*/
-}
-
-.universalTableAdmin {
-
-}
-
-.universalTableAdmin th {
-
-}
-
-.universalTableAdmin td {
-
-}
-
 #rotate div.expanderDiv {
   background: transparent url(/images/interface/expander.gif) no-repeat;
   cursor: pointer;
@@ -554,91 +388,10 @@ span.ui-button-text {
   cursor: pointer;
 }
 
-#rotate .fsbutton {
-
-}
-
-input {
-/*  border: 1px solid #cccccc;
-  background: #E6E6E6;*/
-  font-size: 12px;
-  font-family: Arial;
-}
-
-textarea {
-/*  background: #E6E6E6;
-  border: 1px solid #cccccc;*/
-  font-size: 12px;
-  font-family: Arial;
-}
-
-select {
-/*  background: #E6E6E6;
-  border: 1px solid #cccccc;
-  width: 150px;*/
-  font-size: 12px;
-  font-family: Arial;
-}
-
-input[type=checkbox] {
-/*  background: #E6E6E6;
-  border: 1px solid #cccccc;*/
-}
-
-#rotate input {
-
-}
-
-#rotate label {
-  font-size: 12px;
-  font-family: Arial;
-}
-
-#rotate div label {
-  font-size: 12px;
-  font-family: Arial;
-}
-
-#rotate div div {
-  font-size: 12px;
-  font-family: Arial;
-}
-
-#rotate div a {
-  font-size: 12px;
-  font-family: Arial;
-}
-
-#rotate textarea {
-/*  background: #E6E6E6;
-  border: 1px solid #cccccc;*/
-}
-
-#rotate select {
-  font-size: 12px;
-  font-family: Arial;
-}
-
-#rotate input[type=checkbox] {
-/*  background: #E6E6E6;
-  border: 1px solid #cccccc;*/
-}
-
-#rotate input[type=submit] {
-
-}
-
-#rotate input[type=submit]:hover {
-
-}
-
-input[type=submit]:hover {
-
-}
 
 .pagnext {
   text-decoration: none;
-  background: transparent url(/images/interface/a_next.png) no-repeat right;
+
   padding-right: 20px;
   cursor: pointer;
   color: #3d4752
@@ -646,7 +399,7 @@ input[type=submit]:hover {
 
 .pagback {
   text-decoration: none;
-  background: transparent url(/images/interface/a_previous.png) no-repeat;
+
   padding-left: 20px;
   cursor: pointer;
   color: #3d4752
@@ -671,18 +424,6 @@ div.selector span {
   padding-right: 0px !important;
   padding-left: 3px !important;
   margin-left: 0px;
-}
-
-.cssjswrapp {
-
-}
-
-.cssjswrapp2 {
-
-}
-
-#imagesContainer, #imageFoldersShow {
-
 }
 
 .ui-dialog .ui-dialog-titlebar-close span {

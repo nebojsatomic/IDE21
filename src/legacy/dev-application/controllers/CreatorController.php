@@ -48,6 +48,7 @@ class CreatorController extends NetActionController
         $daisyui_version = json_decode($package_json);
 
         $this->view->daisyuiVersion = str_replace('^', '', $daisyui_version->devDependencies->daisyui);
+        $this->view->ide21Version = $this->_version;
 
         $this->view->daisyuiThemes = $daisyuiThemes;
         isset($_COOKIE['daisyAdminTheme']) ? $this->view->daisyAdminTheme = $_COOKIE['daisyAdminTheme'] : $this->view->daisyAdminTheme = 'nord';
@@ -836,12 +837,12 @@ class CreatorController extends NetActionController
                 'elements' => array(
                     'username' => array('text', array(
                         'required' => true,
-						'class' => 'input input-bordered w-full max-w-x',
+						'class' => 'input input-bordered w-full max-w-x bg-neutral text-neutral-content',
                         'label' => 'Username:'
                     )),
                     'password' => array('password', array(
                         'required' => true,
-						'class' => 'input input-bordered w-full max-w-x',
+						'class' => 'input input-bordered w-full max-w-x bg-neutral text-neutral-content',
                         'label' => 'Password:',
                     )),
                 'creatorLang' => array('select', array(
@@ -854,7 +855,7 @@ class CreatorController extends NetActionController
 
                     'submit' => array('submit', array(
                         'label' => 'Login',
-						'class' => 'btn btn-primary w-full',
+						'class' => 'btn btn-secondary w-full',
                         'order' => 100,
                     ))
                 ),
@@ -1114,7 +1115,7 @@ class CreatorController extends NetActionController
 		          'submit' => array('submit', array(
                     'label' => 'Add',
                     'order' => 100,
-                    'class' => 'btn btn-xs btn-secondary w-full',
+                    'class' => 'btn btn-sm btn-secondary w-full',
                     'value' => 'Submit'
                 ))
               )));
@@ -1627,7 +1628,7 @@ class CreatorController extends NetActionController
 
 		          'submitB' => array('submit', array(
                     'label' => 'Save',
-                    'class' => 'btn btn-xs btn-secondary',
+                    'class' => 'btn btn-sm btn-secondary',
                     'order' => 100,
                     'value' => 'Submit'
                 ))

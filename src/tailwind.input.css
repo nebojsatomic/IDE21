@@ -1,10 +1,17 @@
-@tailwind base;
+/*@tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities;*/
+
+@import "tailwindcss";
+@plugin "daisyui";
+
+body {
+  @apply font-['Arial'] text-sm;
+}
 
 select:not(.paginationStep) { display: none; }
 .btn-error {
-  @apply text-neutral-content !important;
+  /*@apply text-neutral-content!;*/
 }
 /* override Thickbox values */
 #TB_ajaxContent {
@@ -22,10 +29,10 @@ select:not(.paginationStep) { display: none; }
   @apply text-white;
 }
 #TB_window a#close-manage-all-pages{
-  @apply btn-error text-neutral-content hover:text-white !important;
+  @apply btn-error! text-neutral-content! hover:text-white!;
 }
 #TB_title {
-  @apply grid bg-neutral-content  !important;
+  @apply grid bg-neutral-content!;
 }
 #TB_ajaxWindowTitle {
   @apply w-full shadow-lg text-center font-bold;
@@ -35,22 +42,42 @@ select:not(.paginationStep) { display: none; }
 }
 
 /* override jqueryui values */
+.ui-tabs-panel {
+  @apply p-4 text-sm;
+}
 .ui-tab-button {
-  @apply btn btn-sm btn-ghost bg-none bg-primary !important;
+  /*@apply btn! btn-sm! btn-ghost! bg-none! bg-primary!;*/
+   @apply btn! btn-sm! btn-ghost! ;
+  @apply p-0! grid place-items-stretch;
 }
 .ui-tab-button a {
-  @apply text-white !important;
+  /*@apply text-white!;*/
+  @apply grid w-full h-full content-center text-neutral-content text-base md:text-sm;
 }
 .ui-tab-button.ui-state-active {
-  @apply bg-none bg-secondary !important;
+  @apply bg-none! bg-secondary! text-secondary-content!;
+}
+.ui-tab-button.ui-state-hover {
+  @apply bg-none! bg-secondary! text-secondary-content!;
 }
 .ui-dialog-titlebar.ui-widget-header {
-  @apply bg-none bg-neutral-content border-0 !important;
+  @apply bg-none! bg-neutral-content! border-0!;
 }
 .ui-dialog {
-  @apply shadow-lg bg-neutral-content !important;
+  @apply shadow-lg! bg-neutral-content!;
 }
-
+.ui-dialog-titlebar {
+  @apply relative p-2 font-bold z-[999] cursor-move text-primary-content text-sm;
+}
+#dialogDiv, .dialogDiv {
+  @apply p-4;
+}
+.ui-dialog-titlebar-close {
+  @apply btn btn-error absolute top-0 right-0 w-4 h-4 text-white cursor-pointer;
+}
+.ui-icon-closethick::before {
+  @apply content-['x'];
+}
 /* with selecting the specific div inside template or page, user should be able to insert a new object directly into it */
 #droppable * {
   /*@apply border border-dashed border-transparent !important;*/
@@ -59,16 +86,16 @@ select:not(.paginationStep) { display: none; }
   @apply outline outline-[1px] outline-dashed -outline-offset-2 outline-accent;
 }
 #droppable *.selected-for-append {
-  @apply outline outline-[4px] outline-dashed -outline-offset-4 outline-accent !important;
+  @apply outline! outline-[4px]! outline-dashed! -outline-offset-4! outline-accent!;
 }
 /* this marks the specific div to be visible as the div where the new object is to be appended */
 
 #container-workspace.full-width {
-  @apply sm:col-span-12 md:col-span-12 lg:col-span-12  !important;
+  @apply sm:col-span-12! md:col-span-12! lg:col-span-12!;
 }
 
 .btn-search {
-  @apply btn btn-sm bg-accent absolute top-0 right-0 w-8 !important;
+  @apply btn btn-sm bg-accent absolute top-0 right-0 w-8!;
   background-image: url( '/images/search.svg' );
   @apply bg-center bg-no-repeat bg-contain;
 }
@@ -77,17 +104,17 @@ select:not(.paginationStep) { display: none; }
 }
 /* fullscreen elements adjust */
 .cssjswrapp.fs, .cssjswrapp2.fs, #selected-object-html-wrapper.fs {
-  @apply overflow-y-auto p-4 !important;
+  @apply overflow-y-auto! p-4!;
 }
 #selected-object-html-wrapper.fs textarea {
   @apply h-dvh;
 }
 /* override ui-autocomplete */
 .ui-autocomplete {
-  @apply bg-neutral-content text-lg font-semibold w-full h-auto max-h-96 px-4 left-0 overflow-auto !important;
+  @apply bg-neutral-content text-lg font-semibold w-full h-auto max-h-96 px-4 left-0 overflow-auto!;
 }
 .ui-autocomplete .ui-menu-item a {
-  @apply flex w-full px-2 text-lg border-0 font-semibold bg-transparent hover:font-semibold cursor-pointer !important;
+  @apply flex w-full px-2 text-lg border-0 font-semibold bg-transparent hover:font-semibold cursor-pointer!;
 }
 .ui-autocomplete .ui-menu-item a.ui-state-focus {
   background: transparent;
@@ -101,13 +128,13 @@ select:not(.paginationStep) { display: none; }
 }
 .treeview a {
   @apply relative px-2 rounded no-underline;
-  @apply hover:text-accent !important;
+  @apply hover:text-accent!;
 }
 .treeview a.selected {
   @apply bg-accent text-primary-content;
 }
 .treeview a.selected:hover {
-  @apply text-primary-content !important;
+  @apply text-primary-content!;
 }
 /* override borders */
 .input:focus{
