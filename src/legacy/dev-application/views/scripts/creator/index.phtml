@@ -95,7 +95,7 @@
     </div>
 
     <div id="properties" class="w-full h-dvh overflow-auto">
-      <div id="rotate" class="ui-tabs pt-0 pb-44 md:pb-16 px-0 bg-base-100 text-base-content shadow-lg rounded-none">
+      <div id="rotate" class="ui-tabs pt-0 pb-44 md:pb-16 px-0 bg-base-100 text-base-content shadow-lg rounded-none border-neutral border-l-1 border-r-1 border-solid">
         <ul id="tabs-navigation" class="tabs tabs-boxed ui-tabs-nav fixed grid grid-cols-3 bottom-0 md:sticky md:top-0 md:bottom-auto w-full bg-none bg-neutral border-0 rounded-none gap-1 p-1 place-items-center justify-items-stretch h-28">
           <li role="tab" class="help tab ui-tab-button  row-start-auto" description="<?php echo $this->translate->_("Contains properties of page and objects");?>"><a href="#fragment-1" id="poA" title="Object properties on a Page or a  Template"><span><?php echo $this->translate->_("Objects");?></span></a></li>
           <li role="tab"  class="help tab ui-tab-button  row-start-auto" description="<?php echo $this->translate->_("Contains Menu management");?>"><a href="#fragment-2" id="MenuA"><span><?php echo $this->translate->_("Menus");?></span></a></li>
@@ -389,18 +389,19 @@
 
       <div id="fragment-2">
         <div id="menuFormContainer" class="grid gap-4 min-h-96">
-          <div id="menuShow" class="grid gap-2 content-start">
+          <div id="menuShow" class="grid gap-8 content-start">
 
-            <div class="inline-flex items-center gap-2">
-              <?php echo $this->translate->_("Put in this object");?> <input id="putInThis" class="checkbox-sm bg-secondary checkbox" type="checkbox" />
+            <div class="grid grid-cols-2">
+              <span><?php echo $this->translate->_("Put in this object");?></span>
+              <span class="grid place-items-end"><input id="putInThis" class="checkbox-sm bg-secondary checkbox" type="checkbox" /></span>
             </div>
 
-            <div class="grid items-center gap-2">
+            <div class="grid items-center gap-4">
               <?php echo $this->translate->_("Display Type");?>:
-              <form id="menuDisplayType" class="inline-flex items-center gap-1">
-                <input class="radio-sm" type="radio" name="displaytype" value="" checked="checked">Horizontal
-                <input class="radio-sm" type="radio" name="displaytype" value=":vertical">Vertical
-                <input class="radio-sm" type="radio" name="displaytype" value=":tree">Tree
+              <form id="menuDisplayType" class="inline-flex items-center gap-2">
+                <input class="radio radio-sm" type="radio" name="displaytype" value="" checked="checked">Horizontal
+                <input class="radio radio-sm" type="radio" name="displaytype" value=":vertical">Vertical
+                <input class="radio radio-sm" type="radio" name="displaytype" value=":tree">Tree
                 <!-- SLIDE MENU DISPLAY DISABLED FOR NOW, TODO: MAKE IT WORK WITH DAISYUI OR SOMETHING ELSE -->
                 <!-- <input class="radio-sm" type="radio" name="displaytype" value=":slide">Slide -->
               </form>
@@ -433,9 +434,10 @@
 
       <div id="fragment-3">
         <div id="categoryFormContainer" class="grid gap-4" >
-          <div class="grid gap-2 content-start">
-            <div>
-              <?php echo $this->translate->_("Put in this object");?> <input id="putCategoryInThis" class="checkbox-sm bg-secondary checkbox" type="checkbox" />
+          <div class="grid gap-8 content-start">
+            <div class="grid grid-cols-2">
+              <span><?php echo $this->translate->_("Put in this object");?></span>
+              <span class="grid place-items-end"><input id="putCategoryInThis" class="checkbox-sm bg-secondary checkbox" type="checkbox" /></span>
             </div>
 
             <div id="categoryShow">

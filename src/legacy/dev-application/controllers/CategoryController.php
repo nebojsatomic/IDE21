@@ -134,7 +134,7 @@ class CategoryController extends NetActionController
                 'addMenuSubmit' => array('submit', array(
                     'order' => 100,
                     'label' => $this->_translateCreator->_('Add a category'),
-                    'class' => 'btn btn-xs btn-secondary w-full',
+                    'class' => 'btn btn-sm btn-secondary w-full',
                     'value' => $this->_translateCreator->_('Submit')
                 ))
 
@@ -202,7 +202,7 @@ class CategoryController extends NetActionController
                 'addCatItemSubmit' => array('submit', array(
                     'order' => 100,
                     'label' => $this->_translateCreator->_('Add a category item'),
-                    'class' => 'btn btn-xs btn-secondary w-full',
+                    'class' => 'btn btn-sm btn-secondary w-full',
                     'value' => 'Submit'
                 ))
 

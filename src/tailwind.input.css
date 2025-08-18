@@ -55,19 +55,23 @@ select:not(.paginationStep) { display: none; }
   @apply grid w-full h-full content-center text-neutral-content text-base md:text-sm;
 }
 .ui-tab-button.ui-state-active {
-  @apply bg-none! bg-secondary! text-secondary-content!;
+  @apply bg-none! bg-primary!;
+}
+.ui-tab-button.ui-state-active *, .ui-tab-button.ui-state-hover * {
+  @apply text-primary-content!;
 }
 .ui-tab-button.ui-state-hover {
-  @apply bg-none! bg-secondary! text-secondary-content!;
+  @apply bg-none! bg-primary!;
 }
 .ui-dialog-titlebar.ui-widget-header {
-  @apply bg-none! bg-neutral-content! border-0!;
+  @apply bg-none! bg-neutral! text-neutral-content! border-0!;
 }
 .ui-dialog {
-  @apply shadow-lg! bg-neutral-content!;
+  @apply shadow-lg! bg-base-100! border-0!;
 }
+
 .ui-dialog-titlebar {
-  @apply relative p-2 font-bold z-[999] cursor-move text-primary-content text-sm;
+  @apply relative p-2 font-bold z-[999] cursor-move bg-neutral text-neutral-content text-sm;
 }
 #dialogDiv, .dialogDiv {
   @apply p-4;

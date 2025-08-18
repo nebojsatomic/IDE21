@@ -264,7 +264,7 @@ function ajaxEvent(){
 message = "";
 function ajaxEventDone(message){
 
-  $('body').append('<div data-theme="' + daisyAdminTheme + '" id="ajaxEventMessage" role="alert" class="fixed inset-0 w-72 h-24 mx-auto my-auto alert alert-success bg-accent text-accent-content"  style="display:none;opacity:0.9;z-index:999999;"><svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>' +  message + '</span></div>');
+  $('body').append('<div data-theme="' + daisyAdminTheme + '" id="ajaxEventMessage" role="alert" class="fixed inset-0 w-72 h-24 mx-auto my-auto alert alert-info text-info-content"  style="display:none;opacity:0.9;z-index:999999;"><svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>' +  message + '</span></div>');
   $('#ajaxEventMessage').fadeIn(1000);
   setTimeout("$('#ajaxEventMessage').fadeOut()", 3000);
 }
@@ -688,7 +688,7 @@ $(document).ready(function(){
       });
 
       // create the part in ID assistenat that holds classes and their checkboxes
-      const objectClasses = '<div class="grid grid-cols-2 gap-2 bg-base p-2">' + objectClassesFields + '</div>';
+      const objectClasses = '<div class="grid grid-cols-2 gap-2 bg-base-100 p-2">' + objectClassesFields + '</div>';
 
       // Add New Class input field and button
       const addNewClass = '<div class="grid gap-2"><input id="add-new-class-input" type="text" class="input input-sm mt-2" /><button id="add-new-class" class="btn btn-sm bg-neutral text-neutral-content btn-ghost">Add</button></div>'
@@ -745,7 +745,7 @@ $(document).ready(function(){
 
       if($('#dialogDiv_assistant' ).length < 1 ){
 
-        $('body').append('<div data-theme="' + daisyAdminTheme + '" class="dialogDiv bg-accent text-accent-content" id="dialogDiv_assistant" ><p>Select the object to see its classes</p></div>');
+        $('body').append('<div data-theme="' + daisyAdminTheme + '" class="dialogDiv bg-base-100 text-base-content" id="dialogDiv_assistant" ><p>Select the object to see its classes</p></div>');
         $('#tooltip').appendTo('#dialogDiv_assistant');
 
         $('#dialogDiv_assistant' ).dialog({modal: false, resizable: true, title: 'ID Assistant', closeOnEscape: false,
@@ -1062,7 +1062,7 @@ $(document).ready(function(){
     const openPageDialogUniqueId = Date.now();
     $('#openPageForm').remove();
     $('.dialogDiv').remove();
-    $('body').append('<div class="dialogDiv bg-accent text-accent-content" id="dialogDiv_' + openPageDialogUniqueId + '" ></div>');
+    $('body').append('<div class="dialogDiv bg-base-100 text-base-content" id="dialogDiv_' + openPageDialogUniqueId + '" ></div>');
 
     $('#dialogDiv_' + openPageDialogUniqueId).html( $('#adminAjaxLoader').html() );
 
@@ -1236,7 +1236,7 @@ $(document).ready(function(){
   $('#applyTemplate').click(function(){
     $('#dialogDiv').remove();
 
-    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-base-100 text-base-content"></div>');
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     dialog();
     $.get(absoluteUrl + "page/choose-template", function(data){
@@ -1713,7 +1713,7 @@ $('#aParamCorner').livequery('click', function(){
   if($('#cornerCheck').prop('checked') ){
     ajaxEvent();
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-base-100 text-base-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     $.get(absoluteUrl + "creator/corner-params" , function(data){
@@ -1815,7 +1815,7 @@ $('#aParamShadow').livequery('click', function(){
   if($('#shadowCheck').prop('checked') ){
     ajaxEvent();
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-base-100 text-base-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     $.get(absoluteUrl + "creator/shadow-params" , function(data){
@@ -1953,7 +1953,7 @@ $('#addImageLink').livequery('click', function(){
   } else {
     ajaxEvent();
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-base-100 text-base-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -1978,7 +1978,7 @@ $('#addImageLink').livequery('click', function(){
 //Add FOLDER
 $('#addFolderLink').livequery('click', function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-base-100 text-base-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -2070,13 +2070,13 @@ $('#showFolderImages').livequery('change', function(){
   $('#imagePathShow').html(imagePath);
 
   if($( "#dialogDivImages" ).length == 0){
-    $('body').append('<div id="dialogDivImages" class="bg-accent text-accent-content w-full h-full"><div id="imageDetails"></div></div>');
+    $('body').append('<div id="dialogDivImages" class="bg-base-100 text-base-content w-full h-full"><div id="imageDetails"></div></div>');
     $( "#dialogDivImages" ).dialog({modal:false, resizable: true, position: ['center','center'], title:"Image Details" , maxHeight:$(window).height() });
     $('#imageDetails').appendTo($('#dialogDivImages') );
   }
   if($('#imageDetails').length == 0){
     $('#dialogDivImages').remove();
-    $('body').append('<div id="dialogDivImages" class="bg-accent text-accent-content w-full h-full"><div id="imageDetails"></div></div>');
+    $('body').append('<div id="dialogDivImages" class="bg-base-100 text-base-content w-full h-full"><div id="imageDetails"></div></div>');
     $( "#dialogDivImages" ).dialog({modal:false, resizable: true, position: ['center','center'], title:"Image Details" , maxHeight:$(window).height() });
     $('#dialogDivImages') .append('<div id="mageDetails"></div>');
   } else{
@@ -2239,7 +2239,7 @@ $('#categoryNameAssign').livequery('change', function(){
 //Add CATEGORY
 $('#addCategoryLink').livequery('click', function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-base-100 text-base-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -2283,7 +2283,7 @@ $('#addCategoryItemLink').livequery('click', function(){
   hrefVal = $(this).attr("href");
   if(selCategory != ""){
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-base-100 text-base-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
     $.get(absoluteUrl + hrefVal +"/catid/" + selCategory, function(data){
@@ -2393,7 +2393,7 @@ $('#chooseCategoryForm').change(function(){
 //Add A MENU
 $('#addMenuLink').livequery('click', function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-base-100 text-base-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -2444,7 +2444,7 @@ $('#chooseMenuForm').change(function(){
 //Add MENU ITEM
 $('#addMenuItemLink').livequery('click', function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-base-100 text-base-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   mid = $('#menuName').val();
@@ -2593,7 +2593,7 @@ $('#menuNameAssign').livequery('change', function(){
 
   menuSelected = $('#' + $(this).attr("id") + " option:selected").val();
   if (menuSelected != "select"){
-    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-base-100 text-base-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -2758,7 +2758,7 @@ $('a.uniTableAdmin').livequery('click', function(e){
   if ($(this).hasClass("a_add") ){
 
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-base-100 text-base-content"></div>');
     dialog();
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -2783,7 +2783,7 @@ $('a.uniTableAdmin').livequery('click', function(e){
 
     $('#editRowForm').remove();
     $('#dialogDiv').remove();
-    $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
+    $('body').append('<div id="dialogDiv" class="bg-base-100 text-base-content"></div>');
     dialog();
     $('#dialogDiv').dialog( "option", "title", actionTitle );
     $('#dialogDiv').html( $('#adminAjaxLoader').html() );
@@ -3111,7 +3111,7 @@ $('#restrictiveCB').livequery('click', function(){
 $('#openPagePermisions').livequery('click', function(){
   $('#permissionsForm').remove();
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-base-100 text-base-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   pageId = $('#pgID').html();
@@ -3377,7 +3377,7 @@ $('.setPermissionsAll').livequery('click',function(){
     }
   });
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content" style="z-index:999999 !important;"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-base-100 text-base-content" style="z-index:999999 !important;"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   $.get(absoluteUrl + "page/set-permissions/pids/" + ar , function(data) {
@@ -3398,7 +3398,7 @@ $('.exportToFTP').livequery('click',function(){
       ar.push($(this).attr('value'));
     }
   });
-  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content" style="z-index:9999999"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-base-100 text-base-content" style="z-index:9999999"></div>');
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   $.get(absoluteUrl + "exportsite/export-pages/pids/" + ar , function(data) {
     $('#dialogDiv').html(data);
@@ -3430,7 +3430,7 @@ $('#rotate select').each(function(){
 //editModules link - dealing with module settings
 $('#editModulesLink').livequery('click', function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-base-100 text-base-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   $('#dialogDiv').show();
@@ -3471,7 +3471,7 @@ $('#objList').livequery('click', function(e){
 $('a#add-new-daisy').livequery('click', function(e){
   $('#dialogDiv').remove();
 
-  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-base-100 text-base-content"></div>');
   $('#dialogDiv').html($('#adminAjaxLoader').html());
   dialog();
   $.get(absoluteUrl + "creator/add-new-daisy", function(data) {
@@ -3692,7 +3692,7 @@ fsButtonAll.addEventListener('click', function(e) {
 //Exporting a template for use on another server
 $('#exportTemplate').click(function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-base-100 text-base-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
@@ -3705,7 +3705,7 @@ $('#exportTemplate').click(function(){
 //Installing exported template
 $('#installTemplate').click(function(){
   $('#dialogDiv').remove();
-  $('body').append('<div id="dialogDiv" class="bg-accent text-accent-content"></div>');
+  $('body').append('<div id="dialogDiv" class="bg-base-100 text-base-content"></div>');
   dialog();
   $('#dialogDiv').html( $('#adminAjaxLoader').html() );
   // $('#dialogDiv').show();
@@ -3778,7 +3778,7 @@ function drawDaisyDropdown(element){
   $(v).addClass('hidden');
   $('.ui-dialog-content').addClass('overflow-visible');
   const newSelectComponent = '<div id="wrap_new_' + $(v).attr('id') + '" class="' + currentSelectElementDisplay + ' ide21-select-wrapper min-w-16 mb-2"><div id="new_' + $(v).attr('id') + '" class="ide21-select dropdown dropdown-hover-inactive self-center w-full"><div tabindex="0" role="button" class="btn btn-sm w-full"><span id="new-select-label_' + currentSelectElementId + '">' + currentSelectElementLabel + '</span><svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg></div></div>';
-  let newSelectOptions = '<ul tabindex="0" class="ide21-select-ul dropdown-content z-[999] p-2 shadow-2xl bg-base-300 rounded-box w-full text-accent-content max-h-[30vh] overflow-auto">';
+  let newSelectOptions = '<ul tabindex="0" class="ide21-select-ul dropdown-content z-[999] p-2 shadow-2xl bg-base-300 text-base-content rounded-box w-full max-h-[30vh] overflow-auto">';
   if($(v).find('optgroup').length > 0 ) {
     $(v).find('optgroup').children('option').each(function(k1,v1){
       newSelectOptions = newSelectOptions + '<li><input type="radio" name="theme-dropdown" class="select-language btn btn-sm btn-block btn-ghost justify-center" aria-label="' + $(v1).text()+ '" value="' + $(v1).val() + '"></li>';

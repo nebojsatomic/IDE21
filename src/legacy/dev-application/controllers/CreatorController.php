@@ -837,12 +837,12 @@ class CreatorController extends NetActionController
                 'elements' => array(
                     'username' => array('text', array(
                         'required' => true,
-						'class' => 'input input-bordered w-full max-w-x bg-neutral text-neutral-content',
+						'class' => 'input input-bordered w-full max-w-x bg-base-100 text-base-content',
                         'label' => 'Username:'
                     )),
                     'password' => array('password', array(
                         'required' => true,
-						'class' => 'input input-bordered w-full max-w-x bg-neutral text-neutral-content',
+						'class' => 'input input-bordered w-full max-w-x bg-base-100 text-base-content',
                         'label' => 'Password:',
                     )),
                 'creatorLang' => array('select', array(
