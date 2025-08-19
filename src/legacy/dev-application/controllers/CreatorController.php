@@ -855,7 +855,7 @@ class CreatorController extends NetActionController
 
                     'submit' => array('submit', array(
                         'label' => 'Login',
-						'class' => 'btn btn-secondary w-full',
+						'class' => 'btn btn-primary w-full',
                         'order' => 100,
                     ))
                 ),
