@@ -1071,7 +1071,7 @@ class PageController extends NetActionController
                             )),
                             'installTemplateSubmit' => array('submit', array(
                                 'order' => 100,
-                                'class' => 'btn btn-xs btn-secondary',
+                                'class' => 'btn btn-sm btn-secondary',
                                 'label' => $this->_translateCreator->_('Install'),
                                 'value' => $this->_translateCreator->_('Submit')
                             ))
@@ -1150,7 +1150,7 @@ class PageController extends NetActionController
                 )),
                 'uploadImageSubmit' => array('submit', array(
                     'order' => 100,
-                    'class' => 'btn btn-xs btn-secondary',
+                    'class' => 'btn btn-sm btn-secondary',
                     'label' => $this->_translateCreator->_('Upload'),
                     'value' => $this->_translateCreator->_('Submit')
                 ))
@@ -1296,7 +1296,7 @@ class PageController extends NetActionController
 
             'submitB' => array('submit', array(
                 'label' => $this->_translateCreator->_('Save'),
-                'class' => 'btn btn-xs btn-secondary w-full',
+                'class' => 'btn btn-sm btn-secondary w-full',
                 'order' => 100,
                 'value' => 'Submit'
             ))
@@ -1305,7 +1305,7 @@ class PageController extends NetActionController
         foreach($roles as $role){
             $roleName = new Zend_Form_Element_Checkbox('role_' . $role['name']);
             $roleName ->setLabel($role['name']);
-            $roleName->setAttrib('class', 'checkbox-sm');
+            $roleName->setAttrib('class', 'checkbox-sm checkbox');
 
             if($role['name'] == "administrator") {continue;}//admin is alowed everything
             $form->addElements(array($roleName ));

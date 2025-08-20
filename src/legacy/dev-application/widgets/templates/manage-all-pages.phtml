@@ -24,7 +24,7 @@ foreach ($this->cols as $col ) {
   $colone[] = $col['Field'];
 }
 ?>
-<div class="grid gap-2 w-full my-4">
+<div class="grid gap-2 w-full py-4">
   <!--<a href="<?php echo $this->actions['add'];?>" class="navLinks uniTableAdmin a_add" value="<?php echo $this->tableId;?>"><?php echo $this->addTitle;?></a>-->
   <select id="paginationStep_<?php echo $this->tableId;?>" class="paginationStep select select-xs w-20 justify-self-end">
     <option>-</option>
@@ -37,12 +37,10 @@ foreach ($this->cols as $col ) {
 <div class="grid gap-2 content-center md:my-4 overflow-auto">
   <div id="div_uta_<?php echo $this->tableId;?>" class="grid gap-2 w-full pagination-closest">
 
-    <!--<div class="expanderFullScr" value="uta_<?php echo $this->tableId;?>" style="width:17px;height:17px;float:right;border:0px solid #e7e7e7;-moz-border-radius:3px;margin:2px;"></div>
-      <div class="expanderDiv" value="uta_<?php echo $this->tableId;?>" style="width:17px;height:17px;float:right;border:0px solid #e7e7e7;-moz-border-radius:3px;margin:2px;"></div>-->
-      <table id="uta_<?php echo $this->tableId;?>" value="<?php echo $this->tableId;?>" class="universalTableAdmin bg-neutral-content text-center table-xs md:table" cellspacing="0"  >
+      <table id="uta_<?php echo $this->tableId;?>" value="<?php echo $this->tableId;?>" class="universalTableAdmin bg-base-300 text-base-content text-center table-xs md:table" cellspacing="0"  >
         <?php
         echo '<thead><tr>';
-        echo '<th><input type="checkbox" value="" id="chk_All_' . $this->tableId . '" class="chk_all checkbox-sm" /></th>';
+        echo '<th><input type="checkbox" value="" id="chk_All_' . $this->tableId . '" class="chk_all checkbox checkbox-sm" /></th>';
         foreach ($colone as $kolona) {
           echo '<th class="text-center">' . ucwords(str_replace("_", " ", $kolona) ) . '</th>';
         }
@@ -54,7 +52,7 @@ foreach ($this->cols as $col ) {
           foreach ($this->paginator as $data) {
             ?>    
             <tr id="<?php echo $data[$colone[0]]?>" class="utaNormal">
-              <td width="15px;"><input type="checkbox" value="<?php echo $data[$colone[0]]?>" id="chk_<?php echo $data[$colone[0]]?>" class="chk_page checkbox-sm" /></td>
+              <td width="15px;"><input type="checkbox" value="<?php echo $data[$colone[0]]?>" id="chk_<?php echo $data[$colone[0]]?>" class="chk_page checkbox checkbox-sm" /></td>
 
               <?php
               foreach ($colone as $kolona) {
@@ -108,12 +106,12 @@ foreach ($this->cols as $col ) {
 </div>
 <div class="flex items-strech my-2"><?php echo $this->translate->_("With selected");?>:</div>
 <div class="grid gap-1 grid-cols-1 sm:grid-cols-3 md:grid-cols-6 items-strech items-center justify-between">
-  <a href="" value="" class="deleteAll btn btn-sm md:btn-xs btn-ghost btn-primary bg-secondary"><?php echo $this->translate->_("Delete");?></a>
-  <a href="" value="" class="a_published publishAll btn btn-sm md:btn-xs btn-ghost btn-primary bg-secondary"><?php echo $this->translate->_("Publish");?> </a>
-  <a href="" value="" class="a_unpublished unpublishAll btn btn-sm md:btn-xs btn-ghost btn-primary bg-secondary"><?php echo $this->translate->_("Unpublish");?></a>
-  <a href="" value="" class="a_chkAccess1 restrictAll btn btn-sm md:btn-xs btn-ghost btn-primary bg-secondary"><?php echo $this->translate->_("Restrict");?></a>
-  <a href="" value="" class="a_chkAccess0 unrestrictAll btn btn-sm md:btn-xs btn-ghost btn-primary bg-secondary "><?php echo $this->translate->_("Un-restrict");?></a>
-  <a href="" value="" class="a_access setPermissionsAll btn btn-sm md:btn-xs btn-ghost btn-primary bg-secondary"><?php echo $this->translate->_("Set permissions");?></a>
+  <a href="" value="" class="deleteAll btn btn-sm md:btn-xs btn-secondary"><?php echo $this->translate->_("Delete");?></a>
+  <a href="" value="" class="a_published publishAll btn btn-sm md:btn-xs btn-secondary"><?php echo $this->translate->_("Publish");?> </a>
+  <a href="" value="" class="a_unpublished unpublishAll btn btn-sm md:btn-xs btn-secondary"><?php echo $this->translate->_("Unpublish");?></a>
+  <a href="" value="" class="a_chkAccess1 restrictAll btn btn-sm md:btn-xs btn-secondary"><?php echo $this->translate->_("Restrict");?></a>
+  <a href="" value="" class="a_chkAccess0 unrestrictAll btn btn-sm md:btn-xs btn-secondary"><?php echo $this->translate->_("Un-restrict");?></a>
+  <a href="" value="" class="a_access setPermissionsAll btn btn-sm md:btn-xs btn-secondary"><?php echo $this->translate->_("Set permissions");?></a>
 </div>
 
 <div class="close-butt-container grid">

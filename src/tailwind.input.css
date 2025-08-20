@@ -6,9 +6,7 @@ body {
 }
 
 select:not(.paginationStep) { display: none; }
-.btn-error {
-  /*@apply text-neutral-content!;*/
-}
+
 .btn:is(input[type="radio"]:checked) {
   @apply bg-primary! text-primary-content;
 }
@@ -16,28 +14,27 @@ select:not(.paginationStep) { display: none; }
   @apply rounded-none;
 }
 /* override Thickbox values */
+#TB_window {
+  @apply top-12 z-[999998];
+}
 #TB_ajaxContent {
-  @apply bg-primary pb-32;
+  @apply bg-base-200 p-4 pb-32 overflow-scroll;
   height: 100dvh !important; /* override values set with javascript from thickbox.js */
   width: 100% !important;
 }
-#TB_window a, #TB_window a:visited, #TB_window a:link {
-	@apply btn-primary text-base-content;
-}
-#TB_window a:hover {
+
+#TB_window td a:hover {
   @apply text-neutral;
 }
-#TB_window a.btn:hover {
-  @apply text-white;
-}
+
 #TB_window a#close-manage-all-pages{
-  @apply btn-error! text-neutral-content! hover:text-white!;
+  @apply btn-error!;
 }
 #TB_title {
-  @apply grid bg-neutral-content!;
+  @apply grid bg-neutral text-neutral-content!;
 }
 #TB_ajaxWindowTitle {
-  @apply w-full shadow-lg text-center font-bold;
+  @apply w-full shadow-lg text-center font-bold pt-2 pb-2;
 }
 #TB_closeAjaxWindow {
   @apply hidden;
@@ -48,22 +45,17 @@ select:not(.paginationStep) { display: none; }
   @apply p-4 text-sm;
 }
 .ui-tab-button {
-  /*@apply btn! btn-sm! btn-ghost! bg-none! bg-primary!;*/
-   @apply btn! btn-sm! btn-ghost! ;
+  @apply btn! btn-sm! btn-ghost!;
   @apply p-0! grid place-items-stretch;
 }
 .ui-tab-button a {
-  /*@apply text-white!;*/
   @apply grid w-full h-full content-center text-neutral-content text-base md:text-sm;
 }
 .ui-tab-button.ui-state-active {
   @apply bg-none! bg-primary!;
 }
-.ui-tab-button.ui-state-active *, .ui-tab-button.ui-state-hover * {
-  @apply text-primary-content!;
-}
-.ui-tab-button.ui-state-hover {
-  @apply bg-none! bg-primary!;
+.ui-tab-button.ui-state-active * {
+  @apply btn-primary! text-primary-content;
 }
 .ui-dialog-titlebar.ui-widget-header {
   @apply bg-none! bg-neutral! text-neutral-content! border-0!;
