@@ -398,10 +398,10 @@
 
             <div class="grid items-center gap-4">
               <?php echo $this->translate->_("Display Type");?>:
-              <form id="menuDisplayType" class="inline-flex items-center gap-2">
-                <input class="radio radio-sm" type="radio" name="displaytype" value="" checked="checked">Horizontal
-                <input class="radio radio-sm" type="radio" name="displaytype" value=":vertical">Vertical
-                <input class="radio radio-sm" type="radio" name="displaytype" value=":tree">Tree
+              <form id="menuDisplayType" class="grid grid-cols-3 gap-2 h-6 text-xs overflow-hidden">
+                <span><input class="radio radio-sm mr-2" type="radio" name="displaytype" value="" checked="checked">Horizontal</span>
+                <span><input class="radio radio-sm mr-2" type="radio" name="displaytype" value=":vertical">Vertical</span>
+                <span><input class="radio radio-sm mr-2" type="radio" name="displaytype" value=":tree">Tree</span>
                 <!-- SLIDE MENU DISPLAY DISABLED FOR NOW, TODO: MAKE IT WORK WITH DAISYUI OR SOMETHING ELSE -->
                 <!-- <input class="radio-sm" type="radio" name="displaytype" value=":slide">Slide -->
               </form>
@@ -411,15 +411,15 @@
               <?php echo $this->formChooseMenu;?>
               <div class="flex gap-2 mt-2"><span><?php echo $this->translate->_("Selected menu ID:");?></span><span id="chosen-menu-id"></span></div>
             </div>
-            <div id="addMenuLinkDiv" class="grid gap-2">
-              <a id="addMenuLink" href="menu/add-menu" class="navLinks a_add btn btn-sm" title="<?php echo $this->translate->_("Click to create new menu");?>"><?php echo $this->translate->_("Add a menu");?></a>
+            <div id="addMenuLinkDiv" class="grid gap-4">
+              <a id="addMenuLink" href="menu/add-menu" class="navLinks a_add btn btn-sm btn-secondary" title="<?php echo $this->translate->_("Click to create new menu");?>"><?php echo $this->translate->_("Add a menu");?></a>
               <a id="delMenuLink" href="menu/del-menu" class="navLinks a_delete btn btn-sm btn-error" title="<?php echo $this->translate->_("Click to delete menu");?>"><?php echo $this->translate->_("Delete menu");?></a>
-              <a id="addMenuItemLink" href="menu/add-menu-item" class="navLinks a_add btn btn-sm" title="<?php echo $this->translate->_("Click to add new menu item to this menu");?>"><?php echo $this->translate->_("Add a menu item");?></a>
+              <a id="addMenuItemLink" href="menu/add-menu-item" class="navLinks a_add btn btn-sm btn-secondary" title="<?php echo $this->translate->_("Click to add new menu item to this menu");?>"><?php echo $this->translate->_("Add a menu item");?></a>
 
             </div>
 
           </div>
-          <div id="menuSelected" class="grid gap-2 content-start bg-neutral-content rounded min-h-20"></div>
+          <div id="menuSelected" class="grid gap-2 content-start bg-base-300 text-base-content rounded min-h-20"></div>
           <div id="menuSelectedForm" class="grid gap-2 content-start">
             <a id="editMenuItem" style="display:none">Edit</a>
             <a id="deleteMenuItem" class="a_delete btn btn-sm btn-error" style="display:none" title="<?php echo $this->translate->_("Click to delete this menu item");?>"><?php echo $this->translate->_("Delete this item");?> </a>
@@ -444,10 +444,10 @@
               <?php echo $this->formChooseCategory;?>
             </div>
 
-            <div id="addCategoryLinkDiv" class="grid gap-2">
-              <a id="addCategoryLink" href="category/add-category" class="navLinks a_add btn btn-sm" title="<?php echo $this->translate->_("Click to create new category");?>"><?php echo $this->translate->_("Add a category");?></a>
+            <div id="addCategoryLinkDiv" class="grid gap-4">
+              <a id="addCategoryLink" href="category/add-category" class="navLinks a_add btn btn-sm btn-secondary" title="<?php echo $this->translate->_("Click to create new category");?>"><?php echo $this->translate->_("Add a category");?></a>
               <a id="delCategoryLink" href="category/del-category" class="navLinks a_delete btn btn-sm btn-error" title="<?php echo $this->translate->_("Click to delete selected category");?>"><?php echo $this->translate->_("Delete category");?></a>
-              <a id="addCategoryItemLink" href="category/add-category-item" class="navLinks a_add btn btn-sm" title="<?php echo $this->translate->_("Click to add new category item to this category");?>"><?php echo $this->translate->_("Add a category item");?></a>
+              <a id="addCategoryItemLink" href="category/add-category-item" class="navLinks a_add btn btn-sm btn-secondary" title="<?php echo $this->translate->_("Click to add new category item to this category");?>"><?php echo $this->translate->_("Add a category item");?></a>
               <a id="delCategoryItemLink" href="category/del-category-item" class="navLinks a_delete btn btn-sm btn-error" title="<?php echo $this->translate->_("Click to remove this category item");?>"><?php echo $this->translate->_("Remove category item");?></a>
             </div>
 
@@ -465,7 +465,7 @@
                   <dt><label for="catItems" class="optional"><?php echo $this->translate->_("Category Name Translation");?>:</label></dt>
                   <dd>
                     <input type="text" value="" name="cat_name_lng" class="input input-sm w-full"/>
-                    <input type="submit" value="<?php echo $this->translate->_("Save");?>" class="btn btn-sm mt-2" />
+                    <input type="submit" value="<?php echo $this->translate->_("Save");?>" class="btn btn-sm btn-primary mt-2 w-full" />
                   </dd></dl>
                 </form>
               </div>
@@ -538,21 +538,21 @@
         <div>
           <?php echo $this->imagesFoldersForm;?>
         </div>
-        <div id="addFolderLinkDiv" class="grid gap-2">
-          <a id="addFolderLink" href="images/add-folder" class="navLinks a_add btn btn-sm" title="<?php echo $this->translate->_("Click to create new folder for the images");?>"><?php echo $this->translate->_("Add a folder");?></a>
+        <div id="addFolderLinkDiv" class="grid gap-4">
+          <a id="addFolderLink" href="images/add-folder" class="navLinks a_add btn btn-sm btn-secondary" title="<?php echo $this->translate->_("Click to create new folder for the images");?>"><?php echo $this->translate->_("Add a folder");?></a>
           <a id="delFolderLink" href="images/del-folder" class="navLinks a_delete btn btn-sm btn-error" title="<?php echo $this->translate->_("Click to delete folder");?>"><?php echo $this->translate->_("Delete folder");?></a>
-          <a id="addImageLink" href="images/add-image" class="navLinks a_add btn btn-sm" title="<?php echo $this->translate->_("Click to add new image to this folder");?>"><?php echo $this->translate->_("Add images");?></a>
+          <a id="addImageLink" href="images/add-image" class="navLinks a_add btn btn-sm btn-secondary" title="<?php echo $this->translate->_("Click to add new image to this folder");?>"><?php echo $this->translate->_("Add images");?></a>
         </div>
       </div>
       <div id="imagesShow" class="grid gap-2 content-start">
 
       </div>
 
-      <div id="image-actions-wrapper" class="grid gap-2 content-start" style="display:none">
+      <div id="image-actions-wrapper" class="grid gap-4 content-start" style="display:none">
 
-        <a id="insertImage" class="a_add marginBottom5 btn btn-sm" title="<?php echo $this->translate->_("Click to insert this image");?>"><?php echo $this->translate->_("Insert this image");?> </a>
+        <a id="insertImage" class="a_add marginBottom5 btn btn-sm btn-secondary" title="<?php echo $this->translate->_("Click to insert this image");?>"><?php echo $this->translate->_("Insert this image");?> </a>
 
-        <a id="replaceImage" class="a_add marginBottom5 btn btn-sm" title="<?php echo $this->translate->_("Click to replace currently selected image with this image");?>"><?php echo $this->translate->_("Replace selected image");?> </a>
+        <a id="replaceImage" class="a_add marginBottom5 btn btn-sm btn-secondary" title="<?php echo $this->translate->_("Click to replace currently selected image with this image");?>"><?php echo $this->translate->_("Replace selected image");?> </a>
 
         <label for="bgSelect"><?php echo $this->translate->_("Set Background on:" );?></label>
         <select id="bgSelect" class="help select select-sm md:select-xs w-full" title="<?php echo $this->translate->_("For this to work, set appropriate classes to the objects, lowercase (HEADER = header) except for the BODY, body is always there." );?>"><option>BODY</option><option>HEADER</option><option>SHEET</option><option>LEFTCOLUMN</option><option>RIGHTCOLUMN</option><option>FOOTER</option><option selected="selected">SELECTED-OBJECT</option></select>
@@ -566,7 +566,7 @@
         <div id="imagePathShow"></div>
         <div id="imageDetails"></div>
 
-        <a id="setBodyBgImage" class="a_add marginBottom5 btn btn-sm" title="<?php echo $this->translate->_("Click to set background");?>"><?php echo $this->translate->_("Set background");?> </a>
+        <a id="setBodyBgImage" class="a_add marginBottom5 btn btn-sm btn-secondary" title="<?php echo $this->translate->_("Click to set background");?>"><?php echo $this->translate->_("Set background");?> </a>
 
         <a id="deleteImage" class="a_delete marginBottom5 btn btn-sm btn-error" title="<?php echo $this->translate->_("Click to delete this image");?>"><?php echo $this->translate->_("Delete this image");?> </a>
 
@@ -591,7 +591,7 @@
           <select id="objListForCss" class="select select-sm w-full" size="1"></select>
         <!--<?php echo $this->translate->_("Choose class");?>:
           <select id="eventListForCss" size="1"></select>-->
-          <a id="addCssCodeA" class="navLinks a_add noAjaxEvent btn btn-sm mt-2"><?php echo $this->translate->_("Add Code");?></a>
+          <a id="addCssCodeA" class="navLinks a_add noAjaxEvent btn btn-sm btn-secondary mt-2"><?php echo $this->translate->_("Add Code");?></a>
 
         </div>
         <div class="grid">
@@ -599,7 +599,7 @@
             <?php echo $this->css;?>
           </textarea>
           <div id="pageCSS-ace" class="w-full h-full min-h-96"><?php echo $this->css;?></div>
-          <a id="saveCssCodeA" class="navLinks a_save btn btn-sm mt-4 btn-sm md:mt-2"><?php echo $this->translate->_("Save This Code");?></a>
+          <a id="saveCssCodeA" class="navLinks a_save btn btn-sm btn-primary mt-4 md:mt-2"><?php echo $this->translate->_("Save This Code");?></a>
         </div>
       </div>
       </div>
@@ -630,7 +630,7 @@
               <option>mouseout</option>
             </select>
           </div>
-          <a id="addJsCodeA" class="navLinks a_add noAjaxEvent btn btn-sm mt-2 mb-4"><?php echo $this->translate->_("Add Code");?></a>
+          <a id="addJsCodeA" class="navLinks a_add noAjaxEvent btn btn-sm btn-secondary mt-2 mb-4"><?php echo $this->translate->_("Add Code");?></a>
         </div>
 
         <div class="grid gap-2">
@@ -638,7 +638,7 @@
             <?php echo $this->js;?>
           </textarea>
           <div id="pageJS-ace" class="w-full min-h-96"><?php echo $this->js;?></div>
-          <a id="saveJsCodeA" class="navLinks a_save btn btn-sm "><?php echo $this->translate->_("Save This Code");?></a>
+          <a id="saveJsCodeA" class="navLinks a_save btn btn-sm btn-primary"><?php echo $this->translate->_("Save This Code");?></a>
         </div>
 
       </div>

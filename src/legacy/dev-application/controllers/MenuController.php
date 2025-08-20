@@ -308,7 +308,7 @@ class MenuController extends NetActionController
                           'label' => $this->_translateCreator->_('Add'),
                           'order' => 100,
                           'value' => 'Submit',
-                          'class' => 'btn btn-xs btn-secondary w-full',
+                          'class' => 'btn btn-sm btn-secondary w-full',
                           'style' => "display:none;",
                       )),
                 ),
@@ -448,7 +448,7 @@ class MenuController extends NetActionController
                     )),
                     'editMenuItemSubmit' => array('submit', array(
                         'order' => 100,
-                        'class' => 'btn btn-xs text-primary',
+                        'class' => 'btn btn-sm btn-primary w-full',
                         'label' => $this->_translateCreator->_('Save'),
                         'value' => $this->_translateCreator->_('Submit')
                     ))
@@ -513,7 +513,7 @@ class MenuController extends NetActionController
                 )),
                 'addMenuSubmit' => array('submit', array(
                     'order' => 100,
-                    'class' => 'btn btn-xs btn-secondary w-full',
+                    'class' => 'btn btn-sm btn-secondary w-full',
                     'label' => $this->_translateCreator->_('Add a Menu'),
                     'value' => $this->_translateCreator->_('Submit')
                 ))

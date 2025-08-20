@@ -9,6 +9,12 @@ select:not(.paginationStep) { display: none; }
 .btn-error {
   /*@apply text-neutral-content!;*/
 }
+.btn:is(input[type="radio"]:checked) {
+  @apply bg-primary! text-primary-content;
+}
+.table {
+  @apply rounded-none;
+}
 /* override Thickbox values */
 #TB_ajaxContent {
   @apply bg-primary pb-32;
@@ -63,14 +69,14 @@ select:not(.paginationStep) { display: none; }
   @apply bg-none! bg-neutral! text-neutral-content! border-0!;
 }
 .ui-dialog {
-  @apply shadow-lg! bg-base-100! border-0!;
+  @apply shadow-lg! bg-base-100!;
 }
 
 .ui-dialog-titlebar {
   @apply relative p-2 font-bold z-[999] cursor-move bg-neutral text-neutral-content text-sm;
 }
 #dialogDiv, .dialogDiv {
-  @apply p-4;
+  @apply p-4 border-0!;
 }
 .ui-dialog-titlebar-close {
   @apply btn btn-error absolute top-0 right-0 w-4 h-4 text-white cursor-pointer;
@@ -131,10 +137,10 @@ select:not(.paginationStep) { display: none; }
   @apply hover:text-accent!;
 }
 .treeview a.selected {
-  @apply bg-accent text-primary-content;
+  @apply bg-accent! text-accent-content!;
 }
 .treeview a.selected:hover {
-  @apply text-primary-content!;
+  @apply text-accent!;
 }
 /* override borders */
 .input:focus{
