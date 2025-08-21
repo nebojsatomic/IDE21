@@ -52,11 +52,11 @@ select:not(.paginationStep) { display: none; }
   @apply p-4 text-sm;
 }
 .ui-tab-button {
-  @apply btn! btn-sm! btn-ghost!;
+  @apply btn! btn-sm! btn-neutral!;
   @apply p-0! grid place-items-stretch;
 }
 .ui-tab-button a {
-  @apply grid w-full h-full content-center text-neutral-content text-base md:text-sm;
+  @apply grid w-full h-full content-center text-neutral-content text-sm;
 }
 .ui-tab-button.ui-state-active {
   @apply bg-none! bg-primary!;
