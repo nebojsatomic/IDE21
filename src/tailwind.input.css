@@ -13,6 +13,13 @@ select:not(.paginationStep) { display: none; }
 .table {
   @apply rounded-none;
 }
+/* coloris */
+.clr-field {
+  @apply z-[1];
+}
+.clr-field button {
+  @apply z-[9];
+}
 /* override Thickbox values */
 #TB_window {
   @apply top-12 z-[999998];

@@ -241,8 +241,8 @@
                 <span class="cl col-span-3 justify-self-start">PosY:</span><span><input id="objPropertiesY" name="objPropertiesY"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
                 <span class="cl col-span-3 justify-self-start">Z-Index:</span><span><input id="objPropertiesZ" name="objPropertiesZ"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
 
-                <span class="cl col-span-3 justify-self-start">BgColor:</span><span><input id="objPropertiesBackground" name="objPropertiesBackground"class="input w-16 max-h-5 p-0" type="text" value="" data-coloris /></span>
-                <span class="cl col-span-3 justify-self-start">FontColor:</span><span><input id="objPropertiesFontColor" name="objPropertiesFontColor"class="input w-16 max-h-5 p-0" type="text" value="" data-coloris /></span>
+                <span class="cl col-span-3 justify-self-start">BgColor:</span><span><input id="objPropertiesBackground" name="objPropertiesBackground"class="input w-16 max-h-5 p-0" type="text" value="" readonly="readonly" data-coloris /></span>
+                <span class="cl col-span-3 justify-self-start">FontColor:</span><span><input id="objPropertiesFontColor" name="objPropertiesFontColor"class="input w-16 max-h-5 p-0" type="text" value="" readonly="readonly" data-coloris /></span>
 
                 <span class="cl col-span-3 justify-self-start">BgImage:</span><span><input id="objPropertiesBackgroundImage" name="objPropertiesBackgroundImage"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
                 <span class="cl col-span-3 justify-self-start">Position:</span><span>
@@ -516,13 +516,13 @@
         -->
       </div>
 
-
-      <div id="addModulesLinkDiv" >
+      <div class="divider"></div>
+      <div id="addModulesLinkDiv" class="grid gap-4">
         <!--<a id="installModulesLink" href="modules/install-module" class="navLinks a_add" title="<?php echo $this->translate->_("Click to install new module");?>">Install module</a>
         <a  id="delModulesLink" href="modules/del-module" class="navLinks a_delete" title="<?php echo $this->translate->_("Click to delete module");?>">Delete module</a>
         |-->
-        <a id="editModulesLink" href="modules/edit-module/id/" class="navLinks help a_edit btn btn-sm" title="<?php echo $this->translate->_("Click to edit this module settings");?>"><?php echo $this->translate->_("Edit module");?></a>
-        <a id="enableModulesLink" href="modules/enable-all-modules" class="navLinks help a_add btn btn-sm" title="<?php echo $this->translate->_("Click to enable all available modules.");?>"><?php echo $this->translate->_("Enable all modules");?></a>
+        <a id="editModulesLink" href="modules/edit-module/id/" class="navLinks help a_edit btn btn-sm btn-secondary" title="<?php echo $this->translate->_("Click to edit this module settings");?>"><?php echo $this->translate->_("Edit module");?></a>
+        <a id="enableModulesLink" href="modules/enable-all-modules" class="navLinks help a_add btn btn-sm btn-secondary" title="<?php echo $this->translate->_("Click to enable all available modules.");?>"><?php echo $this->translate->_("Enable all modules");?></a>
 
       </div>
 
