@@ -22,7 +22,7 @@ select:not(.paginationStep) { display: none; }
 }
 /* override Thickbox values */
 #TB_window {
-  @apply top-12 z-[999998];
+  @apply top-0 z-[999998];
 }
 #TB_ajaxContent {
   @apply bg-base-200 p-4 pb-32 overflow-scroll;
