@@ -22,6 +22,7 @@ select:not(.paginationStep) { display: none; }
 }
 /* override Thickbox values */
 #TB_window {
+  @apply opacity-100 transition-all duration-300 starting:translate-y-4 starting:opacity-0;
   @apply top-0 z-[999998];
 }
 #TB_ajaxContent {
@@ -34,9 +35,6 @@ select:not(.paginationStep) { display: none; }
   @apply text-neutral;
 }
 
-#TB_window a#close-manage-all-pages{
-  @apply btn-error!;
-}
 #TB_title {
   @apply grid bg-neutral text-neutral-content!;
 }
@@ -68,6 +66,7 @@ select:not(.paginationStep) { display: none; }
   @apply bg-none! bg-neutral! text-neutral-content! border-0!;
 }
 .ui-dialog {
+  @apply opacity-100 transition-all duration-500 starting:hidden starting:opacity-0
   @apply shadow-lg! bg-base-100!;
 }
 

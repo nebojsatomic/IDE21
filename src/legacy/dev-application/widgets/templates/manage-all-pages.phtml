@@ -105,7 +105,7 @@ foreach ($this->cols as $col ) {
   </div>
 </div>
 <div class="flex items-strech my-2"><?php echo $this->translate->_("With selected");?>:</div>
-<div class="grid gap-1 grid-cols-1 sm:grid-cols-3 md:grid-cols-6 items-strech items-center justify-between">
+<div class="grid gap-2 md:gap-1 grid-cols-1 sm:grid-cols-3 md:grid-cols-6 items-strech items-center justify-between">
   <a href="" value="" class="deleteAll btn btn-sm md:btn-xs btn-secondary"><?php echo $this->translate->_("Delete");?></a>
   <a href="" value="" class="a_published publishAll btn btn-sm md:btn-xs btn-secondary"><?php echo $this->translate->_("Publish");?> </a>
   <a href="" value="" class="a_unpublished unpublishAll btn btn-sm md:btn-xs btn-secondary"><?php echo $this->translate->_("Unpublish");?></a>
@@ -115,7 +115,7 @@ foreach ($this->cols as $col ) {
 </div>
 
 <div class="close-butt-container grid">
-  <a id="close-manage-all-pages" href="#" value="" class="btn btn-sm md:btn-xs md:w-40 md:justify-self-end relative right-0 mt-4"><?php echo $this->translate->_("Close");?></a>
+  <a id="close-manage-all-pages" href="#" value="" class="btn btn-xs size-5 btn-error rounded-full fixed top-2 right-2">X</a>
 </div>
 <?php
 } else {
