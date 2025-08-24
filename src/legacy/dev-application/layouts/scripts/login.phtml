@@ -46,7 +46,7 @@
           Admin panel theme
           <svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg>
         </div>
-        <ul tabindex="0" class="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 text-base-content rounded-box w-full bottom-8 max-h-44 overflow-scroll">
+        <ul tabindex="0" class="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 text-base-content rounded-box w-full bottom-8 max-h-44 overflow-y-auto">
           <?php echo $this->daisyuiThemes; ?>
         </ul>
       </div>
@@ -75,7 +75,7 @@
       const currentSelectElementId = $(v).attr('id');
       $(v).addClass('hidden');
       const newSelectComponent = '<div id="new_' + $(v).attr('id') + '" class="ide21-select dropdown dropdown-hover-disabled self-center w-full"><div tabindex="0" role="button" class="btn btn-sm bg-base-300 w-full"><span id="new-select-label_' + currentSelectElementId + '">Admin panel language</span><svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg></div></div>'
-      let newSelectOptions = '<ul tabindex="0" class="ide21-select-ul dropdown-content z-[1] p-2 shadow-2xl bg-base-300 text-base-content rounded-box w-full bottom-8 max-h-96 overflow-scroll">';
+      let newSelectOptions = '<ul tabindex="0" class="ide21-select-ul dropdown-content z-[1] p-2 shadow-2xl bg-base-300 text-base-content rounded-box w-full bottom-8 max-h-96 overflow-y-auto">';
 
       $(v).children('option').each(function(k1,v1){
         newSelectOptions = newSelectOptions + '<li><input type="radio" name="theme-dropdown" class="select-language btn btn-sm btn-block btn-ghost justify-center" aria-label="' + $(v1).text()+ '" value="' + $(v1).val() + '"></li>';
