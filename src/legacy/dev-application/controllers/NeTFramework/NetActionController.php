@@ -335,20 +335,24 @@ class NetActionController extends Zend_Controller_Action
     }
 
     /**
-     *Get DaisyUI themes installed from tailwind.conf.js
-     *[temporary, should be rewritten, once upgraded to DaisyUI 5 it should be managed very differently]
+     * Get DaisyUI themes installed from tailwind.input.css
      *
      */
     public static function getTWConfArray(){
 
-        /* get themes from tailwind.config.js */
-        $taiwlindConf = file_get_contents(NET_PATH . '../../tailwind.config.js');
-        $tailwindConfArray = explode('themes:', $taiwlindConf);
-        $tailwindConfArray = explode('[', $tailwindConfArray[1]);
-        $tailwindConfArray = explode(']', $tailwindConfArray[1]);
-        $tailwindConfArray = explode(',',$tailwindConfArray[0]);
+        /* get themes from tailwind.input.css */
+        $taiwlindConf = file_get_contents(NET_PATH . '../../tailwind.input.css');
 
-        return $tailwindConfArray;
+        if (preg_match("/themes:/", $taiwlindConf)) {
+            $stringToReplace = str_replace(" --default", "", $taiwlindConf); /** TODO: should be added as an option in the Manage DaisyUI Themes dialog, as well as --prefersdark */
+            $stringToReplace = str_replace(" --prefersdark", "", $stringToReplace);
+            $themes = preg_split("/themes:/", $stringToReplace);
+            $themes = preg_split("/;/", $themes[1]);
+            $themes = preg_split("/,/", $themes[0]);
+        } else {
+            $themes = array();
+        }
+        return $themes;
     }
 
     /**

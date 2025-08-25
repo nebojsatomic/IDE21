@@ -1,5 +1,8 @@
 @import "tailwindcss";
-@plugin "daisyui";
+
+@plugin "daisyui" {
+  themes: nord, retro, valentine, light, dark, dim, night;
+}
 
 body {
   @apply font-['Arial'] text-sm;
@@ -66,7 +69,7 @@ select:not(.paginationStep) { display: none; }
   @apply bg-none! bg-neutral! text-neutral-content! border-0!;
 }
 .ui-dialog {
-  @apply opacity-100 transition-opacity transition-top duration-150 starting:opacity-0;
+  @apply opacity-100 transition-opacity duration-150 starting:opacity-0;
   @apply shadow-lg! bg-base-100!;
 }
 

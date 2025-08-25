@@ -185,14 +185,12 @@ class CreatorController extends NetActionController
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
 
-        $currentTaiwlindConf = file_get_contents($this->_nps . '../tailwind.config.js');
+        $currentTaiwlindConf = file_get_contents($this->_nps . '../tailwind.input.css');
+        $filename = NET_PATH_SITE . '../tailwind.input.css';
+        $themesString = implode( ', ', $themes );
 
-        $filename = NET_PATH_SITE . '../tailwind.config.js';
-        $themesString = implode( '","', $themes );
-        $themesString = '"' . $themesString . '"';
         $taiwlindConf = $currentTaiwlindConf;
-
-        $taiwlindConf = preg_replace('/themes:\s\[(.)*\]/', 'themes: [' .  $themesString . ']' , $taiwlindConf);
+        $taiwlindConf = preg_replace('/themes:\s.*[;]/', 'themes: ' .  $themesString . ';' , $taiwlindConf);
 
         if (!$handle = fopen($filename, 'w+')) {
             //$message = "Cannot open file ($filename)";
