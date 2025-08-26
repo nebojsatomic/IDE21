@@ -79,8 +79,7 @@
 </head>
 <body id="body" class="overflow-hidden opacity-100 transition-opacity duration-500 starting:opacity-0">
   <!-- top panel -->
-  <div id="blur-all" class="hidden absolute w-full h-full top-0 backdrop-blur-sm z-[999998]"></div>
-  <div data-theme="<?php echo $this->daisyAdminTheme; ?>" class="grid place-content-center fixed -top-[0.5rem] left-2/4 rounded-full bg-neutral hover:bg-accent  z-[999998] btn btn-sm md:btn-xs btn-ghost btn-circle border-2 border-primary">
+  <div data-theme="<?php echo $this->daisyAdminTheme; ?>" class="grid place-content-center fixed -top-[0.5rem] inset-x-0 mx-auto rounded-full bg-neutral hover:bg-accent  z-[999998] btn btn-sm md:btn-xs btn-ghost btn-circle border-2 border-primary">
     <a id="panelToggle" class="help w-4 text-white" href="#" title="<?php echo $this->translate->_("Click to show/hide top panel");?>">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
         <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5Z" clip-rule="evenodd" />
@@ -168,7 +167,7 @@
     </div>
   </div>
   <!-- end top panel -->
-
+  <div id="blur-all" class="hidden opacity-100 transition-opacity duration-300 starting:opacity-0 absolute w-full h-full top-0 backdrop-blur-sm z-[999998]"></div>
   <div id="ajax-loader"></div>
   <div data-theme="<?php echo $this->daisyAdminTheme; ?>" id="dialogDiv" class="bg-primary text-primary-content"></div>
   <div id ="container">

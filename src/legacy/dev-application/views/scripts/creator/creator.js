@@ -237,7 +237,19 @@ $('#selected-object-position').change(function(){
  */
 
 function dialog(){
-  $( "#dialogDiv" ).dialog({modal:false, resizable: false, title:$('.currentTitle').text() });
+
+  $( "#dialogDiv" ).dialog({modal:false, resizable: false, title:$('.currentTitle').text(),position: { my: "top", at: "bottom", of: $('#creator-header-navbar') },
+    open: function(){
+      $('#blur-all').removeClass('hidden');
+    },
+    close: function( event, ui ) {
+      $('#blur-all').addClass('hidden');
+    }
+  });
+  $('#blur-all').on('click', function(){
+    $('#blur-all').addClass('hidden');
+    $( "#dialogDiv" ).dialog('destroy');
+  });
 }
 
 // change behaviour of edit object button from version 24.05: this button and some other buttons should appear above the currently selected object
@@ -267,6 +279,7 @@ function ajaxEventDone(message){
   $('body').append('<div data-theme="' + daisyAdminTheme + '" id="ajaxEventMessage" role="alert" class="fixed inset-0 w-72 h-24 mx-auto my-auto alert alert-info text-info-content"  style="display:none;opacity:0.9;z-index:999999;"><svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>' +  message + '</span></div>');
   $('#ajaxEventMessage').fadeIn(1000);
   setTimeout("$('#ajaxEventMessage').fadeOut()", 3000);
+  $('#blur-all').addClass('hidden');
 }
 
 function ajaxEmitMessage(emitMessage){
@@ -1062,11 +1075,14 @@ $(document).ready(function(){
     const openPageDialogUniqueId = Date.now();
     $('#openPageForm').remove();
     $('.dialogDiv').remove();
+    $('#blur-all').removeClass('hidden');
     $('body').append('<div class="dialogDiv bg-base-100 text-base-content" id="dialogDiv_' + openPageDialogUniqueId + '" ></div>');
 
     $('#dialogDiv_' + openPageDialogUniqueId).html( $('#adminAjaxLoader').html() );
 
-    $('#dialogDiv_'  + openPageDialogUniqueId ).dialog({modal:false, resizable: false, title:$('.currentTitle').text() });
+    $('#dialogDiv_'  + openPageDialogUniqueId ).dialog({modal:false, resizable: false, title:$('.currentTitle').text(), position: { my: "top", at: "bottom", of: $('#creator-header-navbar')}, close: function(){
+      $('#blur-all').addClass('hidden');
+    } });
     $.get(absoluteUrl + "page/choose-page", function(data){
 
       $('#dialogDiv_' + openPageDialogUniqueId ).html( data);
@@ -1136,6 +1152,7 @@ $(document).ready(function(){
       ajaxEventDone(lang.POpen);// remove the mask
       $('#dialogDiv_' + openPageDialogUniqueId).hide('slow').remove();// removing the dialog MUST
       document.cookie = 'pageSelectedId=' +  pgId + ';  path=/'; // temp
+      $('#blur-all').addClass('hidden');
     });
 
     //refreshControls();
@@ -1257,6 +1274,7 @@ $(document).ready(function(){
     $('#templateIDediting').html($(this).val());
     document.cookie = 'templateSelectedId=' + $(this).val() + ';  path=/'; //needs improvement
     $('#dialogDiv').hide('slow').remove();// removing dialog - MUST
+    $('#blur-all').addClass('hidden');
   });
 
   if(idForRem){
