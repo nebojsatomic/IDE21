@@ -248,7 +248,6 @@ function dialog(){
   });
   $('#blur-all').on('click', function(){
     $('#blur-all').addClass('hidden');
-    $( "#dialogDiv" ).dialog('destroy');
   });
 }
 
@@ -2735,7 +2734,7 @@ $('#pageDisplayer').click(function(){
   $('#assignPageToCategory').show();
   $('#assignPageMenuForm').show();
   $('#descKeyDiv').show();
-  $('body').css("background", "white");
+
   $('#p_t-label-page').removeClass('hidden');
   $('#p_t-label-template').addClass('hidden');
 
