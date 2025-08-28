@@ -31,21 +31,18 @@
   <!--treeView-->
   <link rel="stylesheet" href="/css/treeView/jquery.treeview.css" type="text/css" />
   <link rel="stylesheet" href="/css/treeView/screen.css" type="text/css" />
-  <!--lightBox-->
-  <link rel="stylesheet" href="/css/lightbox/jquery.lightbox-0.5.css" type="text/css" />
-  <link rel="stylesheet" href="/css/lightbox/thickbox.css" type="text/css" media="screen" />
   <!--coloris-->
   <link rel="stylesheet" href="/coloris/coloris.min.css"/>
   <link rel="stylesheet" href="/css/default.css" type="text/css" /><!--CSS written in admin panel-->
   <link rel="stylesheet" href="/css/backend.css" type="text/css" /><!--CSS written for the admin panel-->
-  <link type="text/css" href="/css/jqUI/ui.all.css" rel="stylesheet" />
   <link type="text/css" href="/css/defaultWidgets.css" rel="stylesheet" />
 
   <link rel="shortcut icon" type="image/x-icon" href="/images/ide21logo.svg">
 
-  <link href="/daisy/daisyui.full.min.css" rel="stylesheet" type="text/css" />
+  <link href="/daisy/daisyui@5.css" rel="stylesheet" type="text/css" />
+  <link href="/daisy/daisyui@5.themes.css" rel="stylesheet" type="text/css" />
   <link href="/css/tailwind.output.css?rnd=<?php echo rand();?>" rel="stylesheet" type="text/css" />
-  <script src="/daisy/daisyui.tailwind.3.4.3.js"></script>
+  <script src="/daisy/tailwind.browser@4.js"></script>
 
   <!-- native browser scrollbars are too thin on mobile -->
   <link rel="stylesheet" href="/simplebar/simplebar.css" />
@@ -79,17 +76,16 @@
   <script type="text/javascript" src="/js/jquery/thickbox.js"></script>
   <?php echo $this->headScript(); ?>
 </head>
-<body id="body" class="overflow-hidden">
+<body id="body" class="overflow-hidden opacity-100 transition-opacity duration-500 starting:opacity-0">
   <!-- top panel -->
-  <div id="blur-all" class="hidden absolute w-full h-full top-0 backdrop-blur-sm z-[999998]"></div>
-  <div data-theme="<?php echo $this->daisyAdminTheme; ?>" class="grid place-content-center fixed -top-[0.5rem] left-2/4 rounded-full bg-neutral hover:bg-accent  z-[999999] btn btn-sm md:btn-xs btn-ghost btn-circle border-2 border-primary">
+  <div data-theme="<?php echo $this->daisyAdminTheme; ?>" class="grid place-content-center fixed -top-[0.5rem] inset-x-0 mx-auto rounded-full bg-neutral hover:bg-accent  z-[999998] btn btn-sm md:btn-xs btn-ghost btn-circle border-2 border-primary">
     <a id="panelToggle" class="help w-4 text-white" href="#" title="<?php echo $this->translate->_("Click to show/hide top panel");?>">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
         <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5Z" clip-rule="evenodd" />
       </svg>
     </a>
   </div>
-  <div data-theme="<?php echo $this->daisyAdminTheme; ?>" id="creator-header-navbar" class="navbar bg-neutral min-h-16 h-16 relative z-[999997] ease-in duration-200">
+  <div data-theme="<?php echo $this->daisyAdminTheme; ?>" id="creator-header-navbar" class="navbar bg-neutral min-h-16 h-16 relative z-[999997] ease-in duration-200 shadow-2xl">
     <div class="navbar-start flex gap-1 md:gap-2">
       <div id ="contPreview" class="hidden w-full h-auto absolute top-52 left-72 bg-white" style="z-index: 9999999;"></div><!-- z-index must be like this for now, since a lot of interaction with droppables relies on the order of elements, it should be rewritten to something more sensible, for all elements in the admin panel -->
       <div>
@@ -136,8 +132,8 @@
     <div class="navbar-end flex gap-2">
       <div id="p_t_common" class="noAjaxEvent grid grid-cols-2 item-strech items-center h-6 w-12 md:w-16 text-white md:px-2">
         <div class="col-span-2 grid-cols-2 grid justify-items-center gap-1">
-          <span><input id="pageDisplayer" class="noAjaxEvent help radio-sm" type="radio" name="p_g" value="pageEditing" checked="checked" title="<?php echo $this->translate->_("Page creating Mode");?>" /></span>
-          <span><input  id="templateDisplayer" class="noAjaxEvent help radio-sm" type="radio" name="p_g" value="templateEditing" title="<?php echo $this->translate->_("Template creating Mode");?>" /></span>
+          <span><input id="pageDisplayer" class="noAjaxEvent help radio" type="radio" name="p_g" value="pageEditing" checked="checked" title="<?php echo $this->translate->_("Page creating Mode");?>" /></span>
+          <span><input  id="templateDisplayer" class="noAjaxEvent help radio" type="radio" name="p_g" value="templateEditing" title="<?php echo $this->translate->_("Template creating Mode");?>" /></span>
         </div>
         <div id="p_t-label" class="text-white col-span-2 justify-items-between text-center">
           <span id="p_t-label-page" class="hidden"><?php echo $this->translate->_("Page");?></span>
@@ -148,7 +144,7 @@
         <div tabindex="0" role="button" class="btn btn-sm min-h-8 h-8 w-8 rounded-full">
           <svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg>
         </div>
-        <ul id="daisyui-themes-changer" tabindex="0" class="dropdown-content z-[99] p-2 shadow-2xl bg-base-300 rounded-box w-auto">
+        <ul id="daisyui-themes-changer" tabindex="0" class="dropdown-content z-[99] p-2 shadow-2xl bg-base-300 rounded-box w-auto max-h-dvh overflow-y-auto">
           <?php echo $this->daisyuiThemes; ?>
           <li>
             <a id="add-new-daisy" class="navLinks help theme-controller btn btn-sm btn-block btn-ghost justify-center text-green-600" title="<?php echo $this->translate->_("Manage DaisyUI themes");?> <?php echo $this->daisyuiVersion; ?>">
@@ -170,7 +166,7 @@
     </div>
   </div>
   <!-- end top panel -->
-
+  <div id="blur-all" class="hidden opacity-100 transition-opacity duration-300 starting:opacity-0 absolute w-full h-full top-0 backdrop-blur-sm z-[999998]"></div>
   <div id="ajax-loader"></div>
   <div data-theme="<?php echo $this->daisyAdminTheme; ?>" id="dialogDiv" class="bg-primary text-primary-content"></div>
   <div id ="container">
@@ -186,44 +182,49 @@
   <script src="/ace/src-min/ace.js" type="text/javascript" charset="utf-8"></script>
   <script src="/ace/src-min/ext-language_tools.js"></script>
   <script>
-      var editorHTML = ace.edit("objectHTML-ace");
-      editorHTML.setTheme("ace/theme/chrome");
-      editorHTML.session.setMode("ace/mode/html");
+    /* disable virtual keyboard popup on focus Coloris */
+    Coloris({
+      focusInput: false
+    });
 
-      editorHTML.setOptions({
-        wrap: true,
-        enableBasicAutocompletion: true,
-        enableSnippets: true,
-        enableLiveAutocompletion: true
-      });
-      editorHTML.session.on('change', function(delta){
-        $('#objPropertiesHtmlSelected').val( editorHTML.getValue() );
+    var editorHTML = ace.edit("objectHTML-ace");
+    editorHTML.setTheme("ace/theme/chrome");
+    editorHTML.session.setMode("ace/mode/html");
+
+    editorHTML.setOptions({
+      wrap: true,
+      enableBasicAutocompletion: true,
+      enableSnippets: true,
+      enableLiveAutocompletion: true
+    });
+    editorHTML.session.on('change', function(delta){
+      $('#objPropertiesHtmlSelected').val( editorHTML.getValue() );
         setTimeout( function(){ // use timeout to wait for the selected object events completion
           $('#' + $('#objIDshow').text()).replaceWith( editorHTML.getValue() );
         }, 200 );
       });
 
-      var editorCSS = ace.edit("pageCSS-ace");
-      editorCSS.setTheme("ace/theme/chrome");
-      editorCSS.session.setMode("ace/mode/css");
+    var editorCSS = ace.edit("pageCSS-ace");
+    editorCSS.setTheme("ace/theme/chrome");
+    editorCSS.session.setMode("ace/mode/css");
 
-      editorCSS.setOptions({
-        wrap: true,
-        enableBasicAutocompletion: true,
-        enableSnippets: true,
-        enableLiveAutocompletion: true
-      });
+    editorCSS.setOptions({
+      wrap: true,
+      enableBasicAutocompletion: true,
+      enableSnippets: true,
+      enableLiveAutocompletion: true
+    });
 
-      var editorJS = ace.edit("pageJS-ace");
-      editorJS.setTheme("ace/theme/chrome");
-      editorJS.session.setMode("ace/mode/javascript");
+    var editorJS = ace.edit("pageJS-ace");
+    editorJS.setTheme("ace/theme/chrome");
+    editorJS.session.setMode("ace/mode/javascript");
 
-      editorJS.setOptions({
-        wrap: true,
-        enableBasicAutocompletion: true,
-        enableSnippets: true,
-        enableLiveAutocompletion: true
-      });
+    editorJS.setOptions({
+      wrap: true,
+      enableBasicAutocompletion: true,
+      enableSnippets: true,
+      enableLiveAutocompletion: true
+    });
   </script>
 </body>
 </html>

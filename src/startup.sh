@@ -15,6 +15,6 @@ source $HOME/.bashrc
 nvm install 22.11
 npm i
 
-npx tailwindcss -c /var/www/html/tailwind.config.js -i /var/www/html/tailwind.input.css -o /var/www/html/public/css/tailwind.output.css --watch=always &
+npx @tailwindcss/cli -c /var/www/html/tailwind.config.js -i /var/www/html/tailwind.input.css -o /var/www/html/public/css/tailwind.output.css --watch=always &
 
 apachectl -D FOREGROUND

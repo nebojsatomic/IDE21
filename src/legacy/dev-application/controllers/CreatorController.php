@@ -48,6 +48,7 @@ class CreatorController extends NetActionController
         $daisyui_version = json_decode($package_json);
 
         $this->view->daisyuiVersion = str_replace('^', '', $daisyui_version->devDependencies->daisyui);
+        $this->view->ide21Version = $this->_version;
 
         $this->view->daisyuiThemes = $daisyuiThemes;
         isset($_COOKIE['daisyAdminTheme']) ? $this->view->daisyAdminTheme = $_COOKIE['daisyAdminTheme'] : $this->view->daisyAdminTheme = 'nord';
@@ -184,14 +185,12 @@ class CreatorController extends NetActionController
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
 
-        $currentTaiwlindConf = file_get_contents($this->_nps . '../tailwind.config.js');
+        $currentTaiwlindConf = file_get_contents($this->_nps . '../tailwind.input.css');
+        $filename = NET_PATH_SITE . '../tailwind.input.css';
+        $themesString = implode( ', ', $themes );
 
-        $filename = NET_PATH_SITE . '../tailwind.config.js';
-        $themesString = implode( '","', $themes );
-        $themesString = '"' . $themesString . '"';
         $taiwlindConf = $currentTaiwlindConf;
-
-        $taiwlindConf = preg_replace('/themes:\s\[(.)*\]/', 'themes: [' .  $themesString . ']' , $taiwlindConf);
+        $taiwlindConf = preg_replace('/themes:\s.*[;]/', 'themes: ' .  $themesString . ';' , $taiwlindConf);
 
         if (!$handle = fopen($filename, 'w+')) {
             //$message = "Cannot open file ($filename)";
@@ -836,12 +835,12 @@ class CreatorController extends NetActionController
                 'elements' => array(
                     'username' => array('text', array(
                         'required' => true,
-						'class' => 'input input-bordered w-full max-w-x',
+						'class' => 'input input-bordered w-full max-w-x bg-base-100 text-base-content',
                         'label' => 'Username:'
                     )),
                     'password' => array('password', array(
                         'required' => true,
-						'class' => 'input input-bordered w-full max-w-x',
+						'class' => 'input input-bordered w-full max-w-x bg-base-100 text-base-content',
                         'label' => 'Password:',
                     )),
                 'creatorLang' => array('select', array(
@@ -1114,7 +1113,7 @@ class CreatorController extends NetActionController
 		          'submit' => array('submit', array(
                     'label' => 'Add',
                     'order' => 100,
-                    'class' => 'btn btn-xs btn-secondary w-full',
+                    'class' => 'btn btn-sm btn-secondary w-full',
                     'value' => 'Submit'
                 ))
               )));
@@ -1627,7 +1626,7 @@ class CreatorController extends NetActionController
 
 		          'submitB' => array('submit', array(
                     'label' => 'Save',
-                    'class' => 'btn btn-xs btn-secondary',
+                    'class' => 'btn btn-sm btn-secondary',
                     'order' => 100,
                     'value' => 'Submit'
                 ))
