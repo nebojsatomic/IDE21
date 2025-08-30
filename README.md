@@ -29,17 +29,14 @@ and more…
 # SCREENSHOTS
 MOBILE:
 
-<img width="320" alt="IDE21 25.06 mobile, nord theme, open page" src="https://github.com/user-attachments/assets/1a323a3f-f3a4-496f-8e03-3efe51a13bec" />
+<img width="100%" alt="IDE21 25.08, edit templates on mobile" src="https://github.com/user-attachments/assets/b7f48fc8-8562-472a-8830-1d7f7eac2325" />
 
 DESKTOP:
 
-
-<img width="100%" alt="IDE21 25.06, Nord theme" src="https://github.com/user-attachments/assets/21c2b89d-8b1b-4ca7-abf6-4a75b9608997" />
-
-<img width="100%" alt="IDE21 25.06, Retro theme" src="https://github.com/user-attachments/assets/836ce83f-a53b-4845-93e5-7e636816782b" />
-
-<img width="100%" alt="IDE21 25.06, Valentine theme" src="https://github.com/user-attachments/assets/a3a6709f-48a5-462e-a897-7eb22224b1bd" />
-
+<img width="100%" alt="IDE21 v25.08 Nord theme" src="https://github.com/user-attachments/assets/4843bb5e-0ca9-4bde-b865-2f13623d02a0" />
+<img width="100%" alt="IDE21 v25.08 Nord theme - Managing DaisyUI themes" src="https://github.com/user-attachments/assets/708efe6c-4c81-48be-9669-ad2ba3dbf357" />
+<img width="100%" alt="IDE21 v25.08 Valentine theme" src="https://github.com/user-attachments/assets/c685f5d9-4dfe-469f-b12d-f24127a0ea86" />
+<img width="100%" alt="IDE21 v25.08 Night theme" src="https://github.com/user-attachments/assets/aec580f2-484f-4f72-a37a-d5098e7a5180" />
 
 # YOUTUBE CHANNEL
 
