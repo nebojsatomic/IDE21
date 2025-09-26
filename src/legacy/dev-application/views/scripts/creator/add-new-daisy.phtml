@@ -5,15 +5,15 @@
     <div class="divider"></div>
     <div class="grid grid-cols-4 gap-2">
         <div class="col-span-3">
-            <label for="add-new-daisy-input">Add new predefined theme</label>
+            <label for="add-new-daisy-input"><?php echo $this->translate->_('Add new predefined theme');?></label>
             <input id="add-new-daisy-input" type="text" class="input input-sm mt-2 w-full" name="add-new-daisy-input" />
         </div>
         <div class="flex col-span-1 items-end">
-            <button id="add-daisy-theme" class="btn btn-primary btn-sm w-full">Add</button>
+            <button id="add-daisy-theme" class="btn btn-primary btn-sm w-full"><?php echo $this->translate->_('Add');?></button>
         </div>
     </div>
     <div class="divider"></div>
-    <button id="save-daisy-themes" class="btn btn-primary btn-sm w-full mt-2 mb-2">Save</button>
+    <button id="save-daisy-themes" class="btn btn-primary btn-sm w-full mt-2 mb-2"><?php echo $this->translate->_('Save');?></button>
 </div>
 <script>
     $('#manage-daisy-themes li').each(function(k,v){
