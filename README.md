@@ -1,5 +1,5 @@
-# IDE21
-![IDE21-github-banner](https://github.com/user-attachments/assets/99fcb7e3-cae0-44b0-96d6-5e275cc21f6e)
+# IDE21 - Design and develop in the CMS admin panel
+<img width="100%" alt="IDE21 25.08, Design and Develop in the CMS admin panel" src="https://github.com/user-attachments/assets/99fcb7e3-cae0-44b0-96d6-5e275cc21f6e" />
 
 Restarting CMS-IDE project from 2013, now powered by Docker, which made the task of installing this software trivial. It needs a fat rewriting, since the technology used in it originally is Zend Framework 1, and now it should be translated to Laravel.
 
