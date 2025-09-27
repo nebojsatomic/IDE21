@@ -1,6 +1,6 @@
-![ide21logo](https://github.com/nebojsatomic/IDE21/assets/1038256/aaddf2a1-f4e9-435d-864e-68963a132859)
+# IDE21 - Design and develop in the CMS admin panel
+<img width="100%" alt="IDE21 25.08, Design and Develop in the CMS admin panel" src="https://github.com/user-attachments/assets/99fcb7e3-cae0-44b0-96d6-5e275cc21f6e" />
 
-# IDE21
 Restarting CMS-IDE project from 2013, now powered by Docker, which made the task of installing this software trivial. It needs a fat rewriting, since the technology used in it originally is Zend Framework 1, and now it should be translated to Laravel.
 
 The base idea of the software is to be able to design the website in the admin panel, and do it in visual way, having the CMS in the background which will take care of the functionality, while the front should be 100% customizable right there in the admin panel, and being able to change the looks very quickly to something quite different with a few clicks, but also can add CSS and JS on the fly.
