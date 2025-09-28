@@ -1,6 +1,5 @@
 <?php
 return array(
-    "Prva" => "Erste Kategorie",
     "First Name" => "Vorname",
     "Last Name" => "Nachname" ,
     "First name" => "Vorname",
@@ -26,10 +25,6 @@ return array(
     "Value is required and can't be empty" => "Dieses Feld ist erforderlich und darf nicht leer sein",
     "You are not logged in!Please Login to see your account details!" => "Sie sind nicht angemeldet! Bitte Anmelden zu Ihrem Benutzerkonto Details zu sehen!",
     "Password reminder is sent to the provided email!" => "Passwort-Erinnerung ist abgesendet!",
-    "Lokacija" => "Ort",
-    "Cenovnik" => "Preise",
-    "Rezervacije" => "Reservation",
-    "Sve o nama" => "Über uns",
     "DESIGN  YOUR WEBSITES" => "DESIGN Ihren Websites",
     "DIRECTLY IN THE BROWSER!" => "direkt im Browser",
     "Manage your content with ease!" => "Verwalten Sie Ihre Inhalte mit Leichtigkeit",
