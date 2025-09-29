@@ -110,10 +110,12 @@ Any kind of support regarding no-code contributions like sharing on social media
 1. Fork this repository
 2. Create branch on your fork for translation, for example 'german' branch
 3. Create a new file in src/legacy/dev-application/languages/creator/  (if german than de.php - for other languages check what i18n locale you should use)
-4. You should see all the strings for creator admin panel in src/legacy/dev-application/languages/creator/sr.php, use them for your language.
-5. When creating a new translation, there is also a website front part: copy src/legacy/dev-application/languages/sr.php - contents of this file to src/legacy/dev-application/languages/YOUR_LANG_CODE.php and translate, and there is a  part that uses javascript files for translating some strings: src/public/js/language/creator/en.js should be copied to src/public/js/language/creator/YOUR_LANG_CODE.js and translated
+4. You should see all the strings for creator admin panel in src/legacy/dev-application/languages/creator/en.php, use them for your language.
+5. When creating a new translation, there is also a website front part: copy src/legacy/dev-application/languages/en.php - contents of this file to src/legacy/dev-application/languages/YOUR_LANG_CODE.php and translate, and there is a  part that uses javascript files for translating some strings: src/public/js/language/creator/en.js should be copied to src/public/js/language/creator/YOUR_LANG_CODE.js and translated
 6.  Commit the changes to your branch on your fork, and create a pull request
 
-* NOTE that only [verified](https://docs.github.com/en/authentication/managing-commit-signature-verification) commits will be accepted
+**If the language translation for your language already exists, it can have some missing translations, and those are generated in .php.missing file. You can also contribute there, by adding the missing translation strings, in the .php.missing file...**
+
+* NOTE that only [verified](https://docs.github.com/en/authentication/managing-commit-signature-verification) commits will be accepted ( if you edit directly in Github web interface the commits are signed and verified automatically )
 
 Anyone interested in contributing, or need help with installing, running or using it, contact me on [LinkedIn](https://www.linkedin.com/in/nebojsatomic/).
