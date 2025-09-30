@@ -8,8 +8,14 @@ There is a lot to rewrite here, but it should not be impossible to create someth
 1. Fork this repository
 2. Create branch on your fork for translation, for example 'german' branch
 3. Create a new file in src/legacy/dev-application/languages/creator/  (if german than de.php - for other languages check what i18n locale you should use)
-4. You should see all the strings for creator admin panel in src/legacy/dev-application/languages/creator/sr.php, use them for your language.
-5. Commit the changes to your branch on your fork, and create a pull request
+4. You should see all the strings for creator admin panel in src/legacy/dev-application/languages/creator/en.php, and for the website in src/legacy/dev-application/languages/en.php, use them for your language.
+5. Commit the changes to your branch on your fork, and create a pull request.
+
+Missing translations for those languages are generated in the *.php.missing files. To add the missing translations just insert your translation strings into their place in the .missing file.
+
+
+* NOTE that only [verified](https://docs.github.com/en/authentication/managing-commit-signature-verification) commits will be accepted ( if you edit directly in Github web interface the commits are signed and verified automatically )
+
 
 # Other types of contributing
 
