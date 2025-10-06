@@ -5,16 +5,16 @@
  * @category   Lng files
  * @package    IDE21
  *  Copyright (C) 2010-present  Nebojsa Tomic (nebojsatmc@gmail.com)
- *  
+ *
  *  This file is part of IDE21.
- *     
+ *
  *  IDE21 is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  *  THIS IS A GENERATED FILE THAT CONTAINS MISSING TRANSLATIONS
  *  ADD YOUR TRANSLATIONS HERE
- * 
+ *
  */
 ?>
 <?php
@@ -27,7 +27,7 @@ return array(
     "Module:" => "Modul",
     "Available menus" => "Verfügbare Menüs",
     "This page is set as homepage!" => "Diese Seite ist als Startseite gesetzt!",
-    "Note that you should ship images with this package in a separate package if it is to be installed on another server.<br /><br />" => "Beachte, dass du die Bilder mit diesem Paket in einem separaten Paket mitliefern solltest, wenn es auf einem anderen Server installiert werden soll.<br /><br />",
+    "Note that you should ship images with this package in a separate package if it is to be installed on another server.<br /><br />" => "Beachten Sie, dass Sie die Bilder mit diesem Paket in einem separaten Paket bereitstellen sollten, wenn es auf einem anderen Server installiert werden soll.<br /><br />",
     "Click here to download all revisions of this template" => "Hier klicken, um alle Revisionen dieses Templates herunterzuladen",
     "Install" => "Installieren",
     "Browse a template" => "Nach einem Template suchen",
@@ -40,7 +40,7 @@ return array(
     "Drag & Drop items from toolbox to create objects on the page" => "Per Drag & Drop Elemente aus der Werkzeugkiste ziehen, um Objekte auf der Seite zu erstellen",
     "Template/Page language" => "Template/Seiten-Sprache",
     "Container" => "Container",
-    ". Select the object to work on it." => ". Wähle das Objekt aus, um daran zu arbeiten.",
+    ". Select the object to work on it." => ". Wählen Sie das Objekt aus, um daran zu arbeiten.",
     "Click to apply this style to the selected object" => "Klicken, um Stil auf das ausgewählte Objekt anzuwenden",
     "HTML of this object" => "HTML des Objekts",
     "Click here to rename the ID to something logical." => "Hier klicken, um die ID in etwas Logisches umzubenennen.",
@@ -48,17 +48,17 @@ return array(
     "Border" => "Rahmen",
     "New Page" => "Neue Seite",
     "Redraw" => "Neu zeichnen",
-    "Click to export this template for use on another installation." => "Klicken, um Template für die Verwendung in einer anderen Installation zu exportieren.",
+    "Click to export this template for use on another installation." => "Klicken, um das Template für die Verwendung in einer anderen Installation zu exportieren.",
     "Click to install exported template" => "Klicken, um ein exportiertes Template zu installieren",
     "Selected menu ID:" => "Ausgewählte Menü-ID:",
     "Delete this category item" => "Kategorieeintrag löschen",
-    "Click to toggle this area to fullscreen (in/out)" => "Klicken, um Bereich in den Vollbildmodus umzuschalten (an/aus)",
+    "Click to toggle this area to fullscreen (in/out)" => "Klicken, um den Bereich in den Vollbildmodus umzuschalten (an/aus)",
     "Click to enable all available modules." => "Klicken, um alle verfügbaren Module zu aktivieren.",
     "Click to insert this image" => "Klicken, um Bild einzufügen",
     "Insert this image" => "Bild einfügen",
     "Click to replace currently selected image with this image" => "Klicken, um das aktuell ausgewählte Bild durch Bild zu ersetzen",
     "Replace selected image" => "Ausgewähltes Bild ersetzen",
-    "Click to set background" => "Klicke um den Hintergrund zu setzen",
+    "Click to set background" => "Klicken, um den Hintergrund zu setzen",
     "Set background" => "Hintergrund festlegen",
     "Delete this image" => "Bild löschen",
     "Choose class" => "Klasse auswählen",
@@ -68,6 +68,6 @@ return array(
     "Manage DaisyUI themes" => "DaisyUI-Themes verwalten",
     "Uncategorized" => "Unkategorisiert",
     "Choose gallery:" => "Galerie wählen:",
-    "Select the template for this page" => "Template für Seite auswählen",
+    "Select the template for this page" => "Template für die Seite auswählen",
     "Only superadministrator can delete this!" => "Nur der Superadministrator kann dies löschen!",
 );
