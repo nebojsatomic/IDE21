@@ -1,8 +1,6 @@
-version: '3'
 services:
     web: &web
         build: .
-        #image: registry.gitlab.com/nebojsatomic/ide21:demo
         image: web
         #pull_policy: always
         ports:
@@ -18,15 +16,14 @@ services:
         depends_on:
             - mysqldb
     mysqldb:
-        #image: 'mysql:5.6'
         image: 'mariadb:10.9.4'
         ports:
             - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
-            MYSQL_ROOT_PASSWORD: 'nebojsa'
-            MYSQL_DATABASE: 'cms_ide'
-            MYSQL_USER: 'root'
-            MYSQL_PASSWORD: 'nebojsa'
+            MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+            MYSQL_DATABASE: '${MYSQL_DATABASE}'
+            MYSQL_USER: '${MYSQL_USER}'
+            MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
             #MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
         volumes:
             - ./data:/var/lib/mysql
