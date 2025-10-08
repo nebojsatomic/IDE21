@@ -82,8 +82,10 @@ Demo pass:  proba
 If you consider further use of IDE21, set your own configuration for the database in docker-compose.yaml, and config files inside dev-application, do not use this default configuration, naturally.
 
 If you want to develop, note that container uses Named volume by default. In order to be able to see your changes in the container instantly ( not rebuild the image ), you should uncomment Host volume and comment the Named volume in docker-compose.yaml:
-`            #- ./src:/var/www/html # UNCOMMENT this if you want to use Host src folder inside running container - for development use`
-`            - 'ide21src:/var/www/html' # otherwise use Named volume - for production use`
+
+`#- ./src:/var/www/html # UNCOMMENT this if you want to use Host src folder inside running container - for development use`
+
+`- 'ide21src:/var/www/html' # otherwise use Named volume - for production use`
 
 DO NOT PUSH THE CHANGES YOU MADE IN docker-compose.yaml TO REMOTE BRANCH
 
