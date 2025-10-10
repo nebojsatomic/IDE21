@@ -36,3 +36,6 @@ lang.FolderAdded = "फोल्डर जोड़ा गया!";
 lang.FileUploaded = "फाइल अपलोड की गई!";
 lang.CatNameTr = "श्रेणी नाम अनुवाद";
 lang.TemplateInstalled = "टेम्प्लेट स्थापित!";
+lang.IdAssistantDialogTitle = "ID/कक्षा सहायक";
+lang.IdAssistantInitialContent = "ऑब्जेक्ट की कक्षाएँ देखने के लिए उसे चुनें।";
+lang.Add = "जोड़ें";

@@ -36,3 +36,6 @@ lang.FolderAdded = "Folder Added!";
 lang.FileUploaded = "File uploaded!";
 lang.CatNameTr = "Category Name Translation";
 lang.TemplateInstalled = "Template Installed!";
+lang.IdAssistantDialogTitle = "ID/Classes assistant";
+lang.IdAssistantInitialContent = "Select the object to see its classes.";
+lang.Add = "Add";

@@ -35,5 +35,7 @@ lang.AYSdelPag = "Jeste li sigurni da želite da obrišete ove strane?";
 lang.FolderAdded = "Folder je dodat!";
 lang.FileUploaded = "Fajl je uploadovan!";
 lang.CatNameTr = "Prevod imena kategorije";
-
 lang.TemplateInstalled = "Templejt je instaliran!";
+lang.IdAssistantDialogTitle = "ID/Class asistent";
+lang.IdAssistantInitialContent = "Izaberite objekat da biste videli njegove klase.";
+lang.Add = "Dodaj";

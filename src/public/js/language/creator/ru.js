@@ -34,6 +34,8 @@ lang.Changing	 = "Изменить ...";
 lang.AYSdelPag	 = "Вы уверены, что хотите удалить эти страницы?";
 lang.FolderAdded	 = "Файл добавлено!";
 lang.FileUploaded	 = "Файл загрузили!";
-lang.CatNameTr	 = "Название Перевод Категория";
-
-lang.TemplateInstalled = "Template Installed!";
+lang.CatNameTr = "Название Перевод Категория";
+lang.TemplateInstalled = "Шаблон установлен!";
+lang.IdAssistantDialogTitle = "ID/Классы помощника";
+lang.IdAssistantInitialContent = "Выберите объект, чтобы увидеть его классы.";
+lang.Add = "Добавить";

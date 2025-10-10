@@ -36,3 +36,6 @@ lang.FolderAdded = "Kansio on lisätty";
 lang.FileUploaded = "Tiedosto on siirretty palvelimeen";
 lang.CatNameTr = "Luokan nimen käännös";
 lang.TemplateInstalled = "Mallipohja on asennettu";
+lang.IdAssistantDialogTitle = "ID/Luokat-avustaja";
+lang.IdAssistantInitialContent = "Valitse objekti nähdäksesi sen luokat.";
+lang.Add = "Lisää";
