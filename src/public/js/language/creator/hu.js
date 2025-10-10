@@ -35,5 +35,7 @@ lang.AYSdelPag	 = "Biztos benne, hogy törölni szeretné ezeket az oldalakat?";
 lang.FolderAdded	 = "Record hozzá!";
 lang.FileUploaded	 = "File letöltés!";
 lang.CatNameTr	 = "Fordítás Kategória neve";
-
 lang.TemplateInstalled = "Template Installed!";
+lang.IdAssistantDialogTitle = "Azonosító/Osztályok asszisztens";
+lang.IdAssistantInitialContent = "Válassza ki az objektumot az osztályainak megtekintéséhez."
+lang.Add = "Hozzáadás";

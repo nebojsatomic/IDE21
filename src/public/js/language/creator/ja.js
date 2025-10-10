@@ -35,5 +35,7 @@ lang.AYSdelPag	 = "あなたはあなたがこれらのページを削除しま�
 lang.FolderAdded	 = "フォルダを追加しました！";
 lang.FileUploaded	 = "ファイルがアップロード！";
 lang.CatNameTr	 = "翻訳カテゴリー名";
-
-lang.TemplateInstalled = "Template Installed!";
+lang.TemplateInstalled = "テンプレートがインストールされました！";
+lang.IdAssistantDialogTitle = "ID/クラスアシスタント";
+lang.IdAssistantInitialContent = "オブジェクトを選択してそのクラスを確認してください。";
+lang.Add = "追加";

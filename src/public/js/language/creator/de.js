@@ -1,6 +1,6 @@
 var lang = new Object();
 
-lang.Loading	 = "laden ...";
+lang.Loading	 = "";
 lang.Working	 = "arbeiten ...";
 lang.AYS	 = "Sind Sie sicher?";
 lang.Done	 = "Fertig!";
@@ -35,5 +35,7 @@ lang.AYSdelPag	 = "Sind Sie sicher, dass Sie diese Seite löschen wollen?";
 lang.FolderAdded	 = "Ordner hinzugefügt!";
 lang.FileUploaded	 = "Datei heruntergeladen!";
 lang.CatNameTr	 = "Übersetzung der Kategorie-Name";
-
 lang.TemplateInstalled = "Vorlage installiert!";
+lang.IdAssistantDialogTitle = "ID/Klassen-Assistent";
+lang.IdAssistantInitialContent = "Wählen Sie das Objekt aus, um seine Klassen anzuzeigen.";
+lang.Add = "Hinzufügen";

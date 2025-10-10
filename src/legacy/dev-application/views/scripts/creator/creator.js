@@ -703,10 +703,10 @@ $(document).ready(function(){
       const objectClasses = '<div class="grid grid-cols-2 gap-2 bg-base-100 p-2">' + objectClassesFields + '</div>';
 
       // Add New Class input field and button
-      const addNewClass = '<div class="grid gap-2"><input id="add-new-class-input" type="text" class="input input-sm mt-2" /><button id="add-new-class" class="btn btn-sm bg-neutral text-neutral-content btn-ghost">Add</button></div>'
+      const addNewClass = '<div class="grid gap-2"><input id="add-new-class-input" type="text" class="input input-sm w-full mt-2" /><button id="add-new-class" class="btn btn-sm bg-neutral text-neutral-content btn-ghost">' + lang.Add + '</button></div>'
 
       // finaly put it all together
-      $('#tooltip').html( '<div id="assistant-target-id" class="text-normal font-semibold">' + $(e.target).attr("id") + '</div>' + objectClasses + addNewClass );
+      $('#tooltip').html( '<div class="mb-2 bg-neutral text-neutral-content px-2 rounded"><span>ID: </span><span id="assistant-target-id" class="text-normal font-semibold">' + $(e.target).attr("id") + '</span></div>' + objectClasses + addNewClass );
 
       $('#tooltip').appendTo('#dialogDiv_assistant');
 
@@ -757,10 +757,10 @@ $(document).ready(function(){
 
       if($('#dialogDiv_assistant' ).length < 1 ){
 
-        $('body').append('<div data-theme="' + daisyAdminTheme + '" class="dialogDiv bg-base-100 text-base-content" id="dialogDiv_assistant" ><p>Select the object to see its classes</p></div>');
+        $('body').append('<div data-theme="' + daisyAdminTheme + '" class="dialogDiv bg-base-100 text-base-content" id="dialogDiv_assistant" ><div class="mb-4">' + lang.IdAssistantInitialContent + '</div></div>');
         $('#tooltip').appendTo('#dialogDiv_assistant');
 
-        $('#dialogDiv_assistant' ).dialog({modal: false, resizable: true, title: 'ID Assistant', closeOnEscape: false,
+        $('#dialogDiv_assistant' ).dialog({modal: false, resizable: true, title: lang.IdAssistantDialogTitle, closeOnEscape: false,
           position: { my: "left top", at: "left top", of: '#wrap_new_objType' },
           width: $('#objList').outerWidth(),
           beforeClose: function(event, ui) {

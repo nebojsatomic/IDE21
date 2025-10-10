@@ -35,5 +35,7 @@ lang.AYSdelPag	 = "¿Está seguro que desea eliminar estas páginas?";
 lang.FolderAdded	 = "Registro añadido!";
 lang.FileUploaded	 = "Subida de archivos!";
 lang.CatNameTr	 = "Traducción Nombre Categoría";
-
-lang.TemplateInstalled = "Template Installed!";
+lang.TemplateInstalled = "¡Plantilla instalada!";
+lang.IdAssistantDialogTitle = "Asistente de ID/Clases";
+lang.IdAssistantInitialContent = "Seleccione el objeto para ver sus clases.";
+lang.Add = "Añadir";
