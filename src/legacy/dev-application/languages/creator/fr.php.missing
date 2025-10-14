@@ -19,7 +19,7 @@
 ?>
 <?php
 return array(
-   "Add new predefined theme" => "Ajouter un nouveau thème prédéfini",
+"Add new predefined theme" => "Ajouter un nouveau thème prédéfini",
 "Click to edit currently selected object in WYSIWYG" => "Cliquez pour modifier l’objet actuellement sélectionné dans le mode WYSIWYG",
 "Click to MARK currently selected object for moving outside its parent" => "Cliquez pour MARQUER l’objet actuellement sélectionné afin de le déplacer en dehors de son parent",
 "Click to move the previously MARKED object into the currently selected object which will become its new parent" => "Cliquez pour déplacer l’objet précédemment MARQUÉ dans l’objet actuellement sélectionné, qui deviendra son nouveau parent",
