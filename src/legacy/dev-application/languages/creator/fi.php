@@ -312,4 +312,5 @@ return array(
     "Click here to download all revisions of this template" => "Lataa kaikki mallipohjan versiot napsauttamalla tätä",
     "Install" => "Asenna",
     "Browse a template" => "Valitse mallipohja selaamalla",
+    "Pagination step ( default 10 )" => "Sivutusväli ( oletus 10 )",
 );

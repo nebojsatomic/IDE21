@@ -247,4 +247,5 @@ return array(
     "Menu item" => "Menüpont",
     "edited!" => "szerkesztett!",
     "This Page is deleted!" => "Ez az oldal törölve!",
+    "Pagination step ( default 10 )" => "Oldalszámozási lépés (alapértelmezett 10)",
 );

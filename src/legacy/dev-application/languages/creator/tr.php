@@ -306,4 +306,5 @@ return array(
     "Click here to download all revisions of this template" => "Bu şablonun tüm revizyonlarını indirmek için buraya tıklayın",
     "Install" => "Yükle",
     "Browse a template" => "Şablonlara gözat",
+    "Pagination step ( default 10 )" => "Sayfalama adımı (varsayılan 10)",
 );

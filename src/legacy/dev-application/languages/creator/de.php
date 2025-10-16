@@ -306,4 +306,5 @@ return array(
     "Choose gallery:" => "Galerie wählen:",
     "Select the template for this page" => "Template für die Seite auswählen",
     "Only superadministrator can delete this!" => "Nur der Superadministrator kann dies löschen!",
+    "Pagination step ( default 10 )" => "Paginierungsschritt ( Standardwert 10 )",
 );
