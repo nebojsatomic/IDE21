@@ -311,4 +311,5 @@ return array(
     "Click here to download all revisions of this template" => "Clique aqui para baixar todas as revisões deste modelo",
     "Install" => "Instalar",
     "Browse a template" => "Procurar um modelo",
+    "Pagination step ( default 10 )" => "Etapa de paginação (padrão 10)",
 );

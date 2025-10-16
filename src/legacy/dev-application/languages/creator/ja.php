@@ -247,4 +247,5 @@ return array(
     "Menu item" => "メニュー項目",
     "edited!" => "編集！",
     "This Page is deleted!" => "このページは削除されます！",
+    "Pagination step ( default 10 )" => "ページ区切りステップ（デフォルト10）",
 );

@@ -306,4 +306,5 @@ return array(
     "Click here to download all revisions of this template" => "इस टेम्पलेट के सभी संशोधनों को डाउनलोड करने के लिए यहां क्लिक करें",
     "Install" => "स्थापित करें",
     "Browse a template" => "टेम्पलेट विचरण करें",
+    "Pagination step ( default 10 )" => "पृष्ठांकन चरण (डिफ़ॉल्ट 10)",
 );

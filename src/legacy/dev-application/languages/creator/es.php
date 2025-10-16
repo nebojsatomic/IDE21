@@ -309,4 +309,5 @@ return array (
     "Click here to download all revisions of this template" => "Haga clic aquí para descargar todas las revisiones de esta plantilla",
     "Install" => "Instalar",
     "Browse a template" => "Explorar una plantilla",
+    "Pagination step ( default 10 )" => "Paso de paginación (predeterminado 10)",
 );

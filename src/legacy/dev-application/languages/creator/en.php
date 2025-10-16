@@ -306,4 +306,5 @@ return array(
     "Click here to download all revisions of this template" => "Click here to download all revisions of this template",
     "Install" => "Install",
     "Browse a template" => "Browse a template",
+    "Pagination step ( default 10 )" => "Pagination step ( default 10 )",
 );

@@ -247,4 +247,5 @@ return array (
     "Menu item" => "Voce di menu",
     "edited!" => "a cura!",
     "This Page is deleted!" => "Questa pagina è cancellato!",
+    "Pagination step ( default 10 )" => "Passo di paginazione (predefinito 10)",
 );

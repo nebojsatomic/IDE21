@@ -306,4 +306,5 @@ return array(
     "Click here to download all revisions of this template" => "Klikni za download svih revizija ovog templejta",
     "Install" => "Instaliraj",
     "Browse a template" => "Potraži templejt",
+    "Pagination step ( default 10 )" => "Korak paginacije ( početno 10 )",
 );

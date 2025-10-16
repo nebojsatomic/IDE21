@@ -247,4 +247,5 @@ return array(
     "Menu item" => "Пункт меню",
     "edited!" => "редактировать!",
     "This Page is deleted!" => "Эта страница удалена!",
+    "Pagination step ( default 10 )" => "Шаг пагинации (по умолчанию 10)",
 );
