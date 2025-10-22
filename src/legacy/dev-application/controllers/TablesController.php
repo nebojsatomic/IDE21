@@ -162,7 +162,7 @@ class TablesController extends NetActionController
         }
 
            $elements['submitbut'] = array('submit', array(
-                    'label' => 'Submit',
+                    'label' => $this->_translateCreator->_('Submit'),
                     'class' => 'btn btn-sm btn-secondary w-full',
                     'order' => 100
                     ));

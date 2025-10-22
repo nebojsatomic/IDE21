@@ -56,6 +56,7 @@ class CategoryController extends NetActionController
         $this->_helper->layout()->disableLayout();
         $langAdmin = $this->_sesija->langAdmin;
         $translator = Zend_Registry::get('Zend_Translate');
+        $this->view->translate = $this->_translateCreator;
 
         $values = $this->_request->getParams();
       	$cid = $values['catid'];
