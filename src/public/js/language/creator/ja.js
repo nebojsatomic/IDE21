@@ -39,3 +39,5 @@ lang.TemplateInstalled = "テンプレートがインストールされました
 lang.IdAssistantDialogTitle = "ID/クラスアシスタント";
 lang.IdAssistantInitialContent = "オブジェクトを選択してクラスを確認してください。";
 lang.Add = "追加";
+lang.ImageDetails = "画像の詳細";
+lang.EnterDetails = "詳細を入力してください";

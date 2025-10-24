@@ -39,3 +39,5 @@ lang.TemplateInstalled = "Template Installed!";
 lang.IdAssistantDialogTitle = "ID/Classes assistant";
 lang.IdAssistantInitialContent = "Select the object to see its classes.";
 lang.Add = "Add";
+lang.ImageDetails = "Image details";
+lang.EnterDetails = "Enter details";
