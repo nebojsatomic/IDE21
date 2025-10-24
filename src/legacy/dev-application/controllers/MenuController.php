@@ -617,20 +617,19 @@ class MenuController extends NetActionController
                     'menuItemNameDisplayed' => array('text', array(
                         'required' => true,
                         'label' => $this->_translateCreator->_('Set Title'),
-                        'style' => 'width:200px;',
+                        'class' => 'input input-sm w-full text-primary mt-2',
                     )),
 
                     'menuItemName' => array('select', array(
                         'required' => false,
                         'label' => $this->_translateCreator->_('Parent(Just click on the menu)'),
-                        'style' => 'width:200px;',
                         'size' => '1',
                         'multioptions' => $pageArray,
                     )),
                     'menuItemDescriptionDisplayed' => array('textarea', array(
                         'required' => false,
                         'label' => $this->_translateCreator->_('Set Description'),
-                        'style' => 'width:200px;height:120px;',
+                        'class' => 'textarea w-full h-40',
                     )),
                     'menuId' => array('hidden', array(
                         'value' => $menuId
@@ -641,7 +640,8 @@ class MenuController extends NetActionController
                     'addMenuItemSubmit2' => array('submit', array(
                         'order' => 100,
                         'label' => $this->_translateCreator->_('Add Menu Item'),
-                        'value' => $this->_translateCreator->_('Submit')
+                        'value' => $this->_translateCreator->_('Submit'),
+                        'class' => "btn btn-sm btn-primary w-full mb-4"
                     ))
 
             )));

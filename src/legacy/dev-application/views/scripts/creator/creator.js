@@ -2088,13 +2088,13 @@ $('#showFolderImages').livequery('change', function(){
 
   if($( "#dialogDivImages" ).length == 0){
     $('body').append('<div id="dialogDivImages" class="bg-base-100 text-base-content w-full h-full"><div id="imageDetails"></div></div>');
-    $( "#dialogDivImages" ).dialog({modal:false, resizable: true, position: ['center','center'], title:"Image Details" , maxHeight:$(window).height() });
+    $( "#dialogDivImages" ).dialog({modal:false, resizable: true, position: ['center','center'], title: lang.ImageDetails, maxHeight:$(window).height() });
     $('#imageDetails').appendTo($('#dialogDivImages') );
   }
   if($('#imageDetails').length == 0){
     $('#dialogDivImages').remove();
     $('body').append('<div id="dialogDivImages" class="bg-base-100 text-base-content w-full h-full"><div id="imageDetails"></div></div>');
-    $( "#dialogDivImages" ).dialog({modal:false, resizable: true, position: ['center','center'], title:"Image Details" , maxHeight:$(window).height() });
+    $( "#dialogDivImages" ).dialog({modal:false, resizable: true, position: ['center','center'], title: lang.ImageDetails, maxHeight:$(window).height() });
     $('#dialogDivImages') .append('<div id="mageDetails"></div>');
   } else{
     $('#dialogDivImages').dialog('open');
@@ -2601,6 +2601,7 @@ $('#delMenuLink ').livequery('click', function(){
 
 //ON ASSIGN THIS PAGE TO MENU
 $('#menuNameAssign').livequery('change', function(){
+  $('#dialogDiv').remove();
   ajaxEvent();
   menu = "";
   selMenu = $('#' + $(this).attr("id") + " option:selected").val();//selected menu
@@ -2612,7 +2613,6 @@ $('#menuNameAssign').livequery('change', function(){
   if (menuSelected != "select"){
     $('body').append('<div id="dialogDiv" class="bg-base-100 text-base-content"></div>');
     dialog();
-    $('#dialogDiv').html( $('#adminAjaxLoader').html() );
 
     //GETTING  THE MENU TREE
     $.post(absoluteUrl + "view/render-tv/creatorAct/true/var/" + "{" + tvCommand + "}", function(data){
@@ -2796,7 +2796,7 @@ $('a.uniTableAdmin').livequery('click', function(e){
 
     let rowId = $(this).closest("tr").attr("id");
     let tableid =  $(this).attr('value');
-    let actionTitle = $(this).attr('title');
+    let actionTitle = lang.EnterDetails;
 
     $('#editRowForm').remove();
     $('#dialogDiv').remove();

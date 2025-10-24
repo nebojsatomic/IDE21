@@ -134,7 +134,7 @@
                 <div class="flex flex-col my-2">
                   <?php echo $this->translate->_("Style for this object");?>:
                   <textarea id="objPropertiesCSS" name="objPropertiesCSS" class="help textarea w-full" title="<?php echo $this->translate->_("Style for this object");?>"></textarea>
-                  <a href="" id="applyStyle" class="navLinks noAjaxEvent btn btn-secondary btn-sm mb-2 help" title="<?php echo $this->translate->_("Click to apply this style to the selected object");?>">Apply</a>
+                  <a href="" id="applyStyle" class="navLinks noAjaxEvent btn btn-secondary btn-sm mb-2 help" title="<?php echo $this->translate->_("Click to apply this style to the selected object");?>"><?php echo $this->translate->_("Apply"); ?></a>
                 </div>
                 <!-- tinyMCE should be replaced -->
                 <div class="flex flex-col h-52 my-2 hidden">
@@ -196,13 +196,13 @@
                       <path d="M16.5 6a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v7.5a3 3 0 0 0 3 3v-6A4.5 4.5 0 0 1 10.5 6h6Z" />
                       <path d="M18 7.5a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-7.5a3 3 0 0 1-3-3v-7.5a3 3 0 0 1 3-3H18Z" />
                     </svg>
-                    <div class="hidden">Shadow</div>
+                    <div class="hidden"><?php echo $this->translate->_("Shadow");?></div>
                   </a><input id="shadowCheck" type="checkbox" class="checkbox-sm bg-secondary checkbox float-right"  /></span></div>
                   <div class="creatorDiv grid grid-cols-4 items-strech"><span class="cl col-span-3"><?php echo $this->translate->_("Corner");?></span><span> <a href="" class="navLinks help a_params noAjaxEvent currentTitle content-center h-6 inline-block" id="aParamCorner" title="<?php echo $this->translate->_("Click to set corner params");?>">
                     <svg class="w-4 h-4 fill-current text-base-content rounded" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" >
                       <path d="M6 3a3 3 0 0 0-3 3v1.5a.75.75 0 0 0 1.5 0V6A1.5 1.5 0 0 1 6 4.5h1.5a.75.75 0 0 0 0-1.5H6ZM16.5 3a.75.75 0 0 0 0 1.5H18A1.5 1.5 0 0 1 19.5 6v1.5a.75.75 0 0 0 1.5 0V6a3 3 0 0 0-3-3h-1.5ZM12 8.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5ZM4.5 16.5a.75.75 0 0 0-1.5 0V18a3 3 0 0 0 3 3h1.5a.75.75 0 0 0 0-1.5H6A1.5 1.5 0 0 1 4.5 18v-1.5ZM21 16.5a.75.75 0 0 0-1.5 0V18a1.5 1.5 0 0 1-1.5 1.5h-1.5a.75.75 0 0 0 0 1.5H18a3 3 0 0 0 3-3v-1.5Z" />
                     </svg>
-                    <div class="hidden">Corner</div>
+                    <div class="hidden"><?php echo $this->translate->_("Corner");?></div>
                   </a><input id="cornerCheck" type="checkbox" class="checkbox-sm bg-secondary checkbox float-right"  /></span></div>
                 </div>
 
@@ -237,15 +237,15 @@
                 <span class="cl col-span-3 justify-self-start"><?php echo $this->translate->_("Height");?>:</span><span><input id="objPropertiesHeight" name="objPropertiesHeight"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
                 <span class="cl col-span-3 justify-self-start"><?php echo $this->translate->_("Border");?>:</span><span><input id="objPropertiesBorder" name="objPropertiesBorder"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
 
-                <span class="cl col-span-3 justify-self-start">PosX:</span><span><input id="objPropertiesX" name="objPropertiesX"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
-                <span class="cl col-span-3 justify-self-start">PosY:</span><span><input id="objPropertiesY" name="objPropertiesY"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
-                <span class="cl col-span-3 justify-self-start">Z-Index:</span><span><input id="objPropertiesZ" name="objPropertiesZ"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
+                <span class="cl col-span-3 justify-self-start"><?php echo $this->translate->_("Position X:"); ?></span><span><input id="objPropertiesX" name="objPropertiesX"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
+                <span class="cl col-span-3 justify-self-start"><?php echo $this->translate->_("Position Y:"); ?></span><span><input id="objPropertiesY" name="objPropertiesY"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
+                <span class="cl col-span-3 justify-self-start"><?php echo $this->translate->_("Z-index:"); ?></span><span><input id="objPropertiesZ" name="objPropertiesZ"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
 
-                <span class="cl col-span-3 justify-self-start">BgColor:</span><span><input id="objPropertiesBackground" name="objPropertiesBackground"class="input w-16 max-h-5 p-0" type="text" value="" readonly="readonly" data-coloris /></span>
-                <span class="cl col-span-3 justify-self-start">FontColor:</span><span><input id="objPropertiesFontColor" name="objPropertiesFontColor"class="input w-16 max-h-5 p-0" type="text" value="" readonly="readonly" data-coloris /></span>
+                <span class="cl col-span-3 justify-self-start"><?php echo $this->translate->_("Background color:"); ?></span><span><input id="objPropertiesBackground" name="objPropertiesBackground"class="input w-16 max-h-5 p-0" type="text" value="" readonly="readonly" data-coloris /></span>
+                <span class="cl col-span-3 justify-self-start"><?php echo $this->translate->_("Font color:"); ?></span><span><input id="objPropertiesFontColor" name="objPropertiesFontColor"class="input w-16 max-h-5 p-0" type="text" value="" readonly="readonly" data-coloris /></span>
 
-                <span class="cl col-span-3 justify-self-start">BgImage:</span><span><input id="objPropertiesBackgroundImage" name="objPropertiesBackgroundImage"class="input w-16 max-h-5 p-0" type="text" value="" /></span>
-                <span class="cl col-span-3 justify-self-start">Position:</span><span>
+                <!--<span class="cl col-span-3 justify-self-start"><?php echo $this->translate->_("Background image:"); ?></span><span><input id="objPropertiesBackgroundImage" name="objPropertiesBackgroundImage"class="input w-16 max-h-5 p-0" type="text" value="" /></span>-->
+                <span class="cl col-span-3 justify-self-start h-8"><?php echo $this->translate->_("Position type:"); ?></span><span>
                   <select name="selected-object-position" id="selected-object-position" class="help select select-xs w-16" title="Set the position of the selected object." size="1">
                       <option value="static" selected="selected">Static</option>
                       <option value="relative">Relative</option>
@@ -370,7 +370,7 @@
                   <div>BodyH:<input id="bodyHeight" name="bodyHeight" type="text" value="" /></div>
 
                 </div>
-                BodyBg:<input id="template_bodyBg" name="template_bodyBg" type="text" value="" class="input input-sm w-full mb-2" />
+                <?php echo $this->translate->_("Body background:"); ?><input id="template_bodyBg" name="template_bodyBg" type="text" value="" class="input input-sm w-full mb-2" />
 
                 <a id="emptyCacheButton" class="navLinks a_emptyCache help btn btn-secondary btn-sm mb-2" href="" title="<?php echo $this->translate->_("Click this to empty the cache if you have made changes that require cache to be cleaned!");?>"><?php echo $this->translate->_("Empty Cache");?> </a>
 
@@ -399,9 +399,9 @@
             <div class="grid items-center gap-4">
               <?php echo $this->translate->_("Display Type");?>:
               <form id="menuDisplayType" class="grid grid-cols-3 gap-2 h-6 text-xs overflow-hidden">
-                <span><input class="radio radio-sm mr-2" type="radio" name="displaytype" value="" checked="checked">Horizontal</span>
-                <span><input class="radio radio-sm mr-2" type="radio" name="displaytype" value=":vertical">Vertical</span>
-                <span><input class="radio radio-sm mr-2" type="radio" name="displaytype" value=":tree">Tree</span>
+                <span><input class="radio radio-sm mr-2" type="radio" name="displaytype" value="" checked="checked"><?php echo $this->translate->_("Horizontal"); ?></span>
+                <span><input class="radio radio-sm mr-2" type="radio" name="displaytype" value=":vertical"><?php echo $this->translate->_("Vertical"); ?></span>
+                <span><input class="radio radio-sm mr-2" type="radio" name="displaytype" value=":tree"><?php echo $this->translate->_("Tree"); ?></span>
                 <!-- SLIDE MENU DISPLAY DISABLED FOR NOW, TODO: MAKE IT WORK WITH DAISYUI OR SOMETHING ELSE -->
                 <!-- <input class="radio-sm" type="radio" name="displaytype" value=":slide">Slide -->
               </form>
