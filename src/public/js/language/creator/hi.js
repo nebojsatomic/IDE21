@@ -39,3 +39,5 @@ lang.TemplateInstalled = "टेम्प्लेट स्थापित!";
 lang.IdAssistantDialogTitle = "ID/कक्षा सहायक";
 lang.IdAssistantInitialContent = "ऑब्जेक्ट की कक्षाएँ देखने के लिए उसे चुनें।";
 lang.Add = "जोड़ें";
+lang.ImageDetails = "इमेज विवरण";
+lang.EnterDetails = "विवरण दर्ज करें";

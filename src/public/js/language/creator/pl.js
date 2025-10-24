@@ -39,3 +39,5 @@ lang.TemplateInstalled = "Szablon zainstalowany!";
 lang.IdAssistantDialogTitle = "Asystent ID/Klas";
 lang.IdAssistantInitialContent = "Wybierz obiekt, aby zobaczyć jego klasy.";
 lang.Add = "Dodaj";
+lang.ImageDetails = "Szczegóły obrazu";
+lang.EnterDetails = "Wprowadź szczegóły";
