@@ -5,20 +5,20 @@
  * @category   Layouts
  * @package    IDE21
  *  Copyright (C) 2010-present  Nebojsa Tomic (nebojsatmc@gmail.com)
- *  
+ *
  *  This file is part of IDE21.
- *     
+ *
  *  IDE21 is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * 
- * 
+ *
+ *
  */
  ?>
- <div id="cornerPropDiv" class="grid gap-2 items-center">
+<div id="cornerPropDiv" class="grid gap-2 items-center">
   <div>
-    Corner style:
+    <?php echo $this->translate->_("Corner style");?>:
     <select id="chooseCornerStyle" class="select select-xs w-full">
       <option>round</option>
       <option>dog</option>
@@ -35,7 +35,7 @@
     </select>
   </div>
   <div>
-    Corner orientation:
+    <?php echo $this->translate->_("Corner orientation");?>:
     <select id="chooseCornerOrientation" class="select select-xs w-full">
       <option></option>
       <option>top</option>
@@ -43,12 +43,12 @@
     </select>
   </div>
   <div>
-    Radius(px):<input id="cornerParamRadius" class="input input-sm w-full" type="text"> 
+    <?php echo $this->translate->_("Radius");?>:<input id="cornerParamRadius" class="input input-sm w-full" type="text">
   </div>
   <div>
-    Container BG:<input id="cornerParamBg" readonly="readonly" data-coloris class="input input-sm w-full" type="text">
+    <?php echo $this->translate->_("Container background");?>:<input id="cornerParamBg" readonly="readonly" data-coloris class="input input-sm w-full" type="text">
   </div>
-  <div class="">
-    <input id="cornerParamButton" class="btn btn-xs btn-secondary w-full" type="submit" value="Apply">
+  <div class="mt-2">
+    <input id="cornerParamButton" class="btn btn-sm btn-secondary w-full" type="submit" value="<?php echo $this->translate->_("Apply");?>">
   </div>
 </div>

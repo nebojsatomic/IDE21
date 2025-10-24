@@ -39,3 +39,5 @@ lang.TemplateInstalled = "Şablon yüklendi!";
 lang.IdAssistantDialogTitle = "ID/Sınıf yardımcısı";
 lang.IdAssistantInitialContent = "Bir obje seçin, sınıf bilgisi burada görünecek.";
 lang.Add = "Ekle";
+lang.ImageDetails = "Görüntü ayrıntıları";
+lang.EnterDetails = "Ayrıntıları girin";

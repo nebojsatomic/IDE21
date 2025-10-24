@@ -39,3 +39,5 @@ lang.TemplateInstalled = "Templejt je instaliran!";
 lang.IdAssistantDialogTitle = "ID/Class asistent";
 lang.IdAssistantInitialContent = "Izaberite objekat da biste videli njegove klase.";
 lang.Add = "Dodaj";
+lang.ImageDetails = "Slika detaljno";
+lang.EnterDetails = "Unesi podatke";

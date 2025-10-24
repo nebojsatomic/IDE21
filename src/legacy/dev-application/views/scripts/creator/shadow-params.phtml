@@ -5,23 +5,23 @@
  * @category   Layouts
  * @package    IDE21
  *  Copyright (C) 2010-present  Nebojsa Tomic (nebojsatmc@gmail.com)
- *  
+ *
  *  This file is part of IDE21.
- *     
+ *
  *  IDE21 is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * 
- * 
+ *
+ *
  */
- ?>
+?>
 <div class="grid grid-cols-2 gap-2 items-center">
-  Left: <input id="shdwLeft" class="input input-sm" size="1" value="4" type="text">
-  Top: <input  id="shdwTop" class="input input-sm" size="1" value="4" type="text">
-  Blur: <input id="shdwBlur" class="input input-sm" size="1" value="2" type="text">
-  Opacity: <input id="shdwOpacity" class="input input-sm" size="2" value="0.5" type="text">
-  Color: <input id="shdwColor" readonly="readonly" data-coloris class="input input-sm" size="6" value="black" type="text">
+  <?php echo $this->translate->_("Left");?>: <input id="shdwLeft" class="input input-sm" size="1" value="4" type="text">
+  <?php echo $this->translate->_("Top");?>: <input  id="shdwTop" class="input input-sm" size="1" value="4" type="text">
+  <?php echo $this->translate->_("Blur");?>: <input id="shdwBlur" class="input input-sm" size="1" value="2" type="text">
+  <?php echo $this->translate->_("Opacity");?>: <input id="shdwOpacity" class="input input-sm" size="2" value="0.5" type="text">
+  <?php echo $this->translate->_("Color");?>: <input id="shdwColor" readonly="readonly" data-coloris class="input input-sm" size="6" value="black" type="text">
 
-  <input  id="shadowParamButton" class="btn btn-xs btn-secondary col-span-2" value="Apply" type="button">
+  <input  id="shadowParamButton" class="btn btn-sm btn-secondary col-span-2 mt-2" value="<?php echo $this->translate->_("Apply");?>" type="button">
 </div>

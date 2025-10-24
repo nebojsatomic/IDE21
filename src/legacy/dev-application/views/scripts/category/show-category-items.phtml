@@ -5,25 +5,24 @@
  * @category   Layouts
  * @package    IDE21
  *  Copyright (C) 2010-present  Nebojsa Tomic (nebojsatmc@gmail.com)
- *  
+ *
  *  This file is part of IDE21.
- *     
+ *
  *  IDE21 is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * 
- * 
+ *
+ *
  */
  ?>
 <?php
 echo $this->form;
 ?>
 <script type="text/javascript">
-
-$('#CatNameDivContainer').html('<form id="catNameForm" enctype="application/x-www-form-urlencoded" action="<?php echo $this->host;?>category/rename-cat/cid/<?php echo $this->cid;?>/" method="post"><dl class="zend_form"><dt><label for="catItems" class="optional">' + lang.CatNameTr + ':</label></dt><dd><input type="text" value="<?php echo $this->catName;?>" name="cat_name_lng" class="input input-sm w-full" /><input type="submit" value="Save" class="btn btn-xs mt-2" /></dd></dl></form>');
-$('#catNameForm').ajaxForm(function(data){
+    $('#CatNameDivContainer').html('<form id="catNameForm" enctype="application/x-www-form-urlencoded" action="<?php echo $this->host;?>category/rename-cat/cid/<?php echo $this->cid;?>/" method="post"><dl class="zend_form"><dt><label for="catItems" class="optional">' + lang.CatNameTr + ':</label></dt><dd><input type="text" value="<?php echo $this->catName;?>" name="cat_name_lng" class="input input-sm w-full" /><input type="submit" value="<?php echo $this->translate->_("Save");?>" class="btn btn-sm btn-primary mt-2 w-full" /></dd></dl></form>');
+    $('#catNameForm').ajaxForm(function(data){
         ajaxEmitMessage(data);
         setTimeout("clickMask()", 1000); //closing all 
-});
+    });
 </script>

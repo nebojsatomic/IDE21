@@ -39,3 +39,5 @@ lang.TemplateInstalled = "Mallipohja on asennettu";
 lang.IdAssistantDialogTitle = "ID/Luokat-avustaja";
 lang.IdAssistantInitialContent = "Valitse objekti nähdäksesi sen luokat.";
 lang.Add = "Lisää";
+lang.ImageDetails = "Kuvan tiedot";
+lang.EnterDetails = "Anna tiedot";
