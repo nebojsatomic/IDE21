@@ -54,7 +54,7 @@ class NetActionController extends Zend_Controller_Action
     protected $_cacheEnabled = 1;
     protected $_commentsAuto = 1;//should comments be auto added to each page or manual(0) - if there is no value from settings table, this is used
     protected $_insideContentArea = true;//if objects should be absolute(false), or inside the content area only(true)
-    protected $_version = "Ver. 25.09";
+    protected $_version = "Ver. 25.10";
     protected $_translateCreator;
     protected $_translate = null;
     protected $translator = null;
