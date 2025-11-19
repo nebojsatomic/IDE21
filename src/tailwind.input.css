@@ -119,10 +119,10 @@ select:not(.paginationStep) { display: none; }
 }
 /* override ui-autocomplete */
 .ui-autocomplete {
-  @apply bg-neutral-content text-lg font-semibold w-full h-auto max-h-96 px-4 left-0 overflow-auto!;
+  @apply bg-base-200 text-lg font-semibold h-auto max-h-96 !left-0 overflow-auto!;
 }
 .ui-autocomplete .ui-menu-item a {
-  @apply flex w-full px-2 text-lg border-0 font-semibold bg-transparent hover:font-semibold cursor-pointer!;
+  @apply flex w-full pl-4 text-lg border-0 font-semibold bg-transparent hover:font-semibold cursor-pointer!;
 }
 .ui-autocomplete .ui-menu-item a.ui-state-focus {
   background: transparent;
