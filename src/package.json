@@ -10,9 +10,9 @@
         "axios": "^1.10.0",
         "form-data": "^4.0.4",
         "daisyui": "^5.0.50",
-        "laravel-vite-plugin": "^1.0",
-        "tailwindcss": "^4.1",
-        "@tailwindcss/cli": "^4.1",
-        "vite": "^6.4.1"
+        "laravel-vite-plugin": "^2.1.0",
+        "tailwindcss": "^4.2.1",
+        "@tailwindcss/cli": "^4.2.1",
+        "vite": "^7.3.1"
     }
 }

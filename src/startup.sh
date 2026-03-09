@@ -12,7 +12,7 @@ export NVM_DIR="$HOME/.nvm"
 
 source $HOME/.bashrc
 
-nvm install 22.11
+nvm install 22.12
 npm i
 
 npx @tailwindcss/cli -c /var/www/html/tailwind.config.js -i /var/www/html/tailwind.input.css -o /var/www/html/public/css/tailwind.output.css --watch=always &
