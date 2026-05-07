@@ -8,14 +8,16 @@ class CreateMenusTable extends Migration
 {
     public function up()
     {
-        Schema::create('menus', function (Blueprint $table) {
-            $table->id('menu_id');
-            $table->integer('projectId')->default(1);
-            $table->string('name', 60)->nullable();
-            $table->text('description')->nullable();
-            $table->tinyInteger('check_access')->nullable();
-            $table->integer('block_id');
-        });
+        if (!Schema::hasTable('menus')) {
+            Schema::create('menus', function (Blueprint $table) {
+                $table->id('menu_id');
+                $table->integer('projectId')->default(1);
+                $table->string('name', 60)->nullable();
+                $table->text('description')->nullable();
+                $table->tinyInteger('check_access')->nullable();
+                $table->integer('block_id');
+            });
+        }
     }
 
     public function down()
