@@ -20,14 +20,14 @@ services:
         ports:
             - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
-            MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
-            MYSQL_DATABASE: '${MYSQL_DATABASE}'
-            MYSQL_USER: '${MYSQL_USER}'
-            MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
-            #MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+            MARIADB_ROOT_PASSWORD: '${MARIADB_ROOT_PASSWORD:-nebojsa}'
+            MARIADB_DATABASE: '${MARIADB_DATABASE:-cms_ide}'
+            MARIADB_USER: '${MARIADB_USER:-ide21_user}'
+            MARIADB_PASSWORD: '${MARIADB_PASSWORD:-nebojsa}'
+            #MARIADB_ALLOW_EMPTY_PASSWORD: 'yes'
         volumes:
             - ./data:/var/lib/mysql
-            #- '${MYSQL_DATA_PATH:-./data}:/var/lib/mysql'
+            #- '${MARIADB_DATA_PATH:-./data}:/var/lib/mysql'
         networks:
             - cmside2
 networks:
