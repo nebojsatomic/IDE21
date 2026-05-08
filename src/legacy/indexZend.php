@@ -91,11 +91,43 @@ $rootPath . '/dev-application/controllers/NeTFramework' . PATH_SEPARATOR .
 $rootPath . '/dev-application/config' . PATH_SEPARATOR .
 get_include_path() . PATH_SEPARATOR );
 
+/** Load application configuration ini file */
+require_once 'Zend/Config/Ini.php';
+$config = new Zend_Config_Ini('config.ini', $_SERVER['HTTP_HOST']);
+
 //SESSION STARTING
 require_once 'Zend/Session.php';
 require_once 'Zend/Session/Namespace.php';
 /*TRANSLATION*/
 require_once 'Zend/Translate.php';
+
+// Set up the database save handler for Zend
+require_once 'Zend/Session/SaveHandler/DbTable.php';
+
+$dbAdapter = Zend_Db::factory($config->database->adapter, $config->database->params->toArray());
+
+/* should be using Laravel config in the future */
+// $laravelDbConfig = config('database.connections.mysql');
+
+// $dbAdapter = Zend_Db::factory( $config->database->adapter, [
+//     'host'     => $laravelDbConfig['host'],
+//     'username' => $laravelDbConfig['username'],
+//     'password' => $laravelDbConfig['password'],
+//     'dbname'   => $laravelDbConfig['database'],
+//     'charset'  => 'utf8'
+// ]);
+
+Zend_Db_Table_Abstract::setDefaultAdapter($dbAdapter);
+
+
+$saveHandler = new Zend_Session_SaveHandler_DbTable([
+    'name'           => 'sessions',
+    'primary'        => 'id',            // Primary key
+    'modifiedColumn' => 'last_activity', // Last activity column
+    'dataColumn'     => 'payload',       // Data column
+    'lifetimeColumn' => 'lifetime'       // Lifetime column
+]);
+Zend_Session::setSaveHandler($saveHandler);
 
 Zend_Session::start();
 
@@ -107,9 +139,6 @@ require_once 'Zend/Controller/Action.php';
 require_once 'NeTFramework/NetActionController.php';
 require_once 'NeTFramework/NetUtility.php';
 
-/** Load application configuration ini file */
-require_once 'Zend/Config/Ini.php';
-$config = new Zend_Config_Ini('config.ini', $_SERVER['HTTP_HOST']);
 
 /** Setup database */
 require_once 'Zend/Form.php';
