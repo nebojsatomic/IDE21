@@ -25,6 +25,8 @@ class VerifyCsrfToken extends Middleware
         'user/*',
         'search',
         'forms',
-        'public/*'
+        'public/*',
+        'adm/*',
+        'adm/'
     ];
 }

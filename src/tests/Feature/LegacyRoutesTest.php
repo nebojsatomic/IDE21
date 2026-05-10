@@ -16,20 +16,32 @@ class LegacyRoutesTest extends TestCase
     protected function getAuthenticatedCookies()
     {
         if (self::$cookies === null) {
-            $response = Http::asForm()
-                ->withoutVerifying()
-                ->post('https://localhost/adm/login', [
-                    'username' => 'proba',
-                    'password' => 'proba',
-                    'loginsubmit' => 'Login'
-                ]);
+            // Try both URLs and both submit button names
+            $loginUrls = ['https://localhost/adm', 'https://localhost/adm/login'];
             
-            // Map the CookieJar to a simple array for Laravel's withCookies to avoid Guzzle errors
-            $cookieArray = [];
-            foreach ($response->cookies() as $cookie) {
-                $cookieArray[$cookie->getName()] = $cookie->getValue();
+            foreach ($loginUrls as $url) {
+                $response = Http::asForm()
+                    ->withoutVerifying()
+                    ->post($url, [
+                        'username' => 'proba',
+                        'password' => 'proba',
+                        'creatorLang' => 'en',
+                        'submit' => 'Login',
+                        'loginsubmit' => 'Login'
+                    ]);
+
+                // If it redirects (302) or returns the dashboard (200 with specific text), it's a success
+                if ($response->status() === 302 || ($response->status() === 200 && str_contains($response->body(), 'IDE21 - Ver.'))) {
+                    $cookieArray = [];
+                    foreach ($response->cookies() as $cookie) {
+                        $cookieArray[$cookie->getName()] = $cookie->getValue();
+                    }
+                    self::$cookies = $cookieArray;
+                    return self::$cookies;
+                }
             }
-            self::$cookies = $cookieArray;
+
+            throw new \Exception("Legacy login failed. Status: " . $response->status() . ". Body snippet: " . substr($response->body(), 0, 500));
         }
 
         return self::$cookies;
@@ -54,8 +66,7 @@ class LegacyRoutesTest extends TestCase
 
     public static function legacyRoutesProvider(): array
     {
-        // All the routes present in the legacy ZF1 app
-        /**
+        /*
         $routes = [
             'category/add-category', 'category/add-category-item', 'category/del-category', 'category/del-category-item',
             'category/index', 'category/rename-cat', 'category/show-category-items', 'comments/admin',
@@ -82,15 +93,14 @@ class LegacyRoutesTest extends TestCase
             'tables/add-row', 'tables/delete-row', 'tables/edit-row', 'tables/index', 'tables/xmltables',
             'user/account-activation', 'user/admin', 'user/admin-add-user', 'user/change-password', 'user/index',
             'user/login', 'user/logout', 'user/my-account', 'user/password-reminder', 'user/register',
-            'view/bind-view-css', 'view/bind-view-js', 'view/change-language'
+            'view/bind-view-css', 'view/bind-view-js', 'view/change-language', 'view/index', 'view/render-tv'
         ];
-
         */
 
-        // The ones that we test
         $routes = [
             'pages/43', 'page/choose-page/43', 'adm/', 'creator/save-daisy-themes', 'creator/add-language/ba', 'creator/manage-all-pages', 'user/logout'
         ];
+
         $data = [];
         foreach ($routes as $route) {
             [$controller, $action] = explode('/', $route);
@@ -108,8 +118,7 @@ class LegacyRoutesTest extends TestCase
             // Map Controller/Action to URL
             $url = '';
             if ($controller === 'creator') {
-                //$url = '/adm';
-                $url = '/' . $controller;
+                $url = '/adm';
                 if ($action !== 'index') {
                     $url .= '/' . $action;
                 }
