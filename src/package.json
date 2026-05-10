@@ -7,7 +7,7 @@
     },
     "devDependencies": {
         "@tailwindcss/typography": "^0.5.15",
-        "axios": "^1.10.0",
+        "axios": "^1.15.2",
         "form-data": "^4.0.4",
         "daisyui": "^5.0.50",
         "laravel-vite-plugin": "^2.1.0",
